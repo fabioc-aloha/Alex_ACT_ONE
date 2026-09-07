@@ -75,33 +75,69 @@ function detectMcp() {
     return { servers: rows, root: MCP_RUNTIME, allPresent: rows.every((r) => r.present) };
 }
 
+// Resolve the executable rather than passing shell:true with arguments,
+// which triggers Node DEP0190 and concatenates args unescaped.
+function resolveCopilotBin() {
+    if (process.platform !== 'win32') return 'copilot';
+    const which = spawnSync('where.exe', ['copilot'], { encoding: 'utf8' });
+    if (which.status !== 0 || !which.stdout) return null;
+    const candidates = which.stdout.split(/\r?\n/).filter(Boolean).map((l) => l.trim());
+    return candidates.find((c) => /\.(cmd|exe|bat)$/i.test(c)) || candidates[0];
+}
+
+function candidateStores() {
+    const seen = new Set();
+    const out = [];
+    for (const p of [process.env.COPILOT_HOME, path.join(os.homedir(), '.copilot')]) {
+        if (!p) continue;
+        const abs = path.resolve(p);
+        const key = process.platform === 'win32' ? abs.toLowerCase() : abs;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        out.push(abs);
+    }
+    return out;
+}
+
 /**
- * Plugin visibility depends on which store the host points at: `copilot plugin
- * list` reads COPILOT_HOME when set, otherwise ~/.copilot. Different apps set
- * different stores, so the store is reported alongside the result. Without it a
- * reader cannot tell "not installed" from "installed somewhere else".
+ * Plugin visibility is store-dependent: `copilot plugin list` reads COPILOT_HOME
+ * when set, otherwise ~/.copilot. Hosts disagree about which store they load
+ * from. Scout sets COPILOT_HOME to its own directory while still loading plugins
+ * installed under ~/.copilot, so reading only the COPILOT_HOME store reports
+ * zero plugins on a machine that has them all.
+ *
+ * Every candidate store is therefore read and the results unioned. Per-store
+ * counts are reported so "not installed anywhere" stays distinguishable from
+ * "installed in the store this host does not point at".
  */
 function detectPlugins() {
-    const store = process.env.COPILOT_HOME || path.join(os.homedir(), '.copilot');
-    // Resolve the executable rather than passing shell:true with arguments,
-    // which triggers Node DEP0190 and concatenates args unescaped.
-    let bin = 'copilot';
-    if (process.platform === 'win32') {
-        const which = spawnSync('where.exe', ['copilot'], { encoding: 'utf8' });
-        if (which.status !== 0 || !which.stdout) return { store, available: false, installed: new Set() };
-        const candidates = which.stdout.split(/\r?\n/).filter(Boolean).map((l) => l.trim());
-        bin = candidates.find((c) => /\.(cmd|exe|bat)$/i.test(c)) || candidates[0];
-    }
-    const probe = spawnSync(bin, ['plugin', 'list'], { encoding: 'utf8' });
-    if (probe.status !== 0 || !probe.stdout) {
-        return { store, available: false, installed: new Set() };
-    }
+    const bin = resolveCopilotBin();
+    const stores = [];
     const installed = new Set();
-    for (const line of probe.stdout.split(/\r?\n/)) {
-        const m = line.match(/^\s*[•*-]\s*([a-z0-9-]+)/i);
-        if (m) installed.add(m[1].toLowerCase());
+    if (!bin) return { stores, available: false, installed };
+
+    let anyRead = false;
+    for (const store of candidateStores()) {
+        const probe = spawnSync(bin, ['plugin', 'list'], {
+            encoding: 'utf8',
+            env: { ...process.env, COPILOT_HOME: store },
+        });
+        if (probe.status !== 0 || !probe.stdout) {
+            stores.push({ path: store, available: false, count: 0 });
+            continue;
+        }
+        anyRead = true;
+        let count = 0;
+        for (const line of probe.stdout.split(/\r?\n/)) {
+            const m = line.match(/^\s*[•*-]\s*([a-z0-9-]+)/i);
+            if (m) {
+                installed.add(m[1].toLowerCase());
+                count += 1;
+            }
+        }
+        stores.push({ path: store, available: true, count });
     }
-    return { store, available: true, installed };
+    return { stores, available: anyRead, installed };
 }
 
 const rows = detect();
@@ -117,7 +153,7 @@ if (JSON_OUT) {
             entries: group.entries.map((e) => ({ ...e, installed: plugins.installed.has(e.name.toLowerCase()) })),
         };
     }
-    console.log(JSON.stringify({ platform: platformKey(), tools: rows, mcp, plugins: { store: plugins.store, detected: plugins.available, groups: pluginReport } }, null, 2));
+    console.log(JSON.stringify({ platform: platformKey(), tools: rows, mcp, plugins: { stores: plugins.stores, detected: plugins.available, groups: pluginReport } }, null, 2));
     process.exit(0);
 }
 
@@ -165,9 +201,14 @@ for (const group of Object.values(PLUGINS)) {
 if (!plugins.available) {
     console.log('\n  Could not read the plugin list, so the counts above may be wrong.');
 } else {
-    console.log(`\n  Plugin store read: ${plugins.store}`);
-    console.log('  Apps can point at different stores, so a plugin installed for one');
-    console.log('  app may not appear here.');
+    console.log(`\n  Plugin store${plugins.stores.length > 1 ? 's' : ''} read:`);
+    for (const s of plugins.stores) {
+        const detail = s.available ? `${s.count} plugin${s.count === 1 ? '' : 's'}` : 'unreadable';
+        console.log(`    ${s.path}  (${detail})`);
+    }
+    if (plugins.stores.length > 1) {
+        console.log('  Hosts point at different stores, so all are read and combined.');
+    }
 }
 
 const missingRequired = byTier('required').filter((r) => !r.present).length;

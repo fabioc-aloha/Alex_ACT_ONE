@@ -41,7 +41,7 @@ The default brand config ships these six categories. A project that customizes t
      --title "Project Name" \
      --subtitle "One-line value statement" \
      --watermark DOCS \
-   --out assets/banner-readme.svg
+     --out assets/banner-readme.svg
    ```
 
 6. **Embed in markdown**:
