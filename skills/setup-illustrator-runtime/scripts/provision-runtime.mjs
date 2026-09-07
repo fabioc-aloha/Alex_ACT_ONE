@@ -5,7 +5,7 @@ import { homedir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { spawnCommand } from '../../../../scripts/process-launch.mjs';
+import { spawnCommand } from '../../../scripts/process-launch.mjs';
 
 const PINNED_PACKAGES = [
   { name: 'flint-chart-mcp', version: '0.5.1' },
