@@ -27,14 +27,19 @@ Add `--json` for a machine-readable version.
 
 ## What Is Optional
 
-Nothing outside Node is required to use this package. The report separates two
-kinds of gap because they cost different things:
+Nothing outside Node is required to use this package. "Required" is always
+relative to a capability, so the report sorts every item into three tiers:
 
-| Gap | Effect |
-| --- | --- |
-| A missing tool (Pandoc, Mermaid CLI) | Blocks the skills that call it. The rest are unaffected |
-| A missing MCP server | Blocks charts, image generation, and browser verification |
-| A missing plugin | Blocks nothing. Plugins add capability this package does not claim |
+| Tier | Meaning | Members |
+| --- | --- | --- |
+| **Required** | The skills that call it cannot run without it | Pandoc (7 converters), Pillow (annotate-screenshot), the MCP servers (charts, image generation, browser verification) |
+| **Recommended** | Those skills run and produce less | Mermaid CLI (diagrams stay unrendered), svgexport (no PNG export), jszip (Word loses table formatting) |
+| **Add-on** | Blocks nothing. Adds capability this package does not have | Visual companions, Microsoft ecosystem plugins |
+
+The distinction matters when reporting to a user. A missing Pandoc means seven
+skills are unavailable and should be named. A missing jszip means one output is
+plainer. A missing add-on means nothing at all, and telling someone to install
+one to "fix" a problem is wrong.
 
 Plugin installation is not handled here. `install-visual-companions` and
 `setup-enterprise` own those flows because they carry the marketplace
@@ -46,6 +51,15 @@ Plugin counts depend on which store the host reads. `copilot plugin list`
 follows `COPILOT_HOME` when set and `~/.copilot` otherwise, and different apps
 set different stores, so a plugin installed for one app may not appear for
 another. The report prints the store it read for that reason.
+
+### One add-on is closer to a dependency
+
+`replicate-imagery` describes itself as a thin router and delegates its
+substantive prompting guidance to Replicate's upstream skills, installed with
+`npx skills add replicate/skills`. It still runs without them: model selection,
+cost awareness, brand alignment, and the routing decision are all here. But the
+prompt craft it points at is not. Treat it as an add-on that the skill leans on
+harder than the rest.
 
 ## Install With Consent
 
@@ -112,7 +126,8 @@ them. Private runtime state must never run ahead of reviewed source.
 | --- | --- |
 | Install a system package without asking | Print the command; let the user run it |
 | Tell a user the plugin is broken because one tool is missing | Name the affected skills only. The rest still work |
-| Present optional plugins as requirements | Nothing outside Node is required. A missing plugin blocks nothing |
+| Present optional plugins as requirements | Nothing outside Node is required. A missing add-on blocks nothing |
+| Report a missing enhancement as a failure | Say what the output loses, not that the skill is broken |
 | Install a plugin from here | Route to `install-visual-companions` or `setup-enterprise`, which own the consent gates and caveats |
 | Detect a corporate network and inject a registry | npm configuration is the authority, not network location |
 | Run `npm install -g` for MCP servers | Global binaries collide; these stay plugin-private |

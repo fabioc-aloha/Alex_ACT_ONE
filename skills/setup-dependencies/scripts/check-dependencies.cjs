@@ -61,7 +61,7 @@ function detect() {
         if (tool.kind === 'npm-module') present = moduleResolvable(key);
         else if (tool.kind === 'python-module') present = pythonModulePresent(tool.importName || key);
         else present = onPath(key);
-        rows.push({ key, label: tool.label, kind: tool.kind, required: tool.required, present, unlocks: tool.unlocks, install: tool.install[platformKey()] });
+        rows.push({ key, label: tool.label, kind: tool.kind, tier: tool.tier, present, unlocks: tool.unlocks, install: tool.install[platformKey()] });
     }
     return rows;
 }
@@ -118,24 +118,37 @@ if (JSON_OUT) {
 }
 
 console.log(`Dependency check  (${PLATFORM_LABEL})\n`);
-console.log('Most of this plugin needs nothing beyond Node. These are the extras.\n');
+console.log('Nothing below is needed to use this package. Most of it runs on Node');
+console.log('alone. Each item is required, or not, for the specific skills that\ncall it.\n');
 
-const pad = Math.max(...rows.map((r) => r.label.length)) + 2;
-for (const r of rows) {
-    const mark = r.present ? 'ok     ' : (r.required ? 'MISSING' : 'absent ');
-    console.log(`  ${mark} ${r.label.padEnd(pad)} ${r.present ? '' : r.unlocks}`);
+const pad = Math.max(...rows.map((r) => r.label.length), 'MCP servers'.length) + 2;
+
+// Grouped by tier so the difference is visible in the report, not just encoded
+// in the data. A flat list makes a missing Pandoc look like a missing jszip,
+// and those cost very different things.
+const required = rows.filter((r) => r.tier === 'required');
+const enhances = rows.filter((r) => r.tier === 'enhances');
+
+console.log('REQUIRED for the skills that use them');
+console.log('  Without these, those skills cannot run.\n');
+for (const r of required) {
+    console.log(`  ${r.present ? 'ok     ' : 'MISSING'} ${r.label.padEnd(pad)} ${r.present ? '' : r.unlocks}`);
 }
-console.log(`  ${mcp.provisioned ? 'ok     ' : 'absent '} ${'MCP servers'.padEnd(pad)} ${mcp.provisioned ? '' : 'charts, image generation, and browser verification'}`);
+console.log(`  ${mcp.provisioned ? 'ok     ' : 'MISSING'} ${'MCP servers'.padEnd(pad)} ${mcp.provisioned ? '' : 'charts, image generation, and browser verification'}`);
+
+console.log('\nRECOMMENDED enhancements');
+console.log('  The skills work without these and produce less.\n');
+for (const r of enhances) {
+    console.log(`  ${r.present ? 'ok     ' : 'absent '} ${r.label.padEnd(pad)} ${r.present ? '' : r.unlocks}`);
+}
 
 const missingTools = rows.filter((r) => !r.present);
 
-// Plugins are reported separately from tools because the distinction matters:
-// a missing tool blocks a skill, a missing plugin blocks nothing at all.
-console.log('\nOptional plugins. Nothing here is required — every skill in this');
-console.log('package works without them.\n');
+console.log('\nADD-ONS (separate plugins)');
+console.log('  These block nothing. They add capability this package does not have.\n');
 for (const group of Object.values(PLUGINS)) {
     const have = group.entries.filter((e) => plugins.installed.has(e.name.toLowerCase())).length;
-    console.log(`  ${String(have).padStart(2)}/${group.entries.length}  ${group.label}`);
+    console.log(`  ${String(have).padStart(2)}/${group.entries.length}     ${group.label}`);
     console.log(`         adds: ${group.adds}`);
     console.log(`         install via: /alex-act-one ${group.owner}`);
 }
@@ -147,9 +160,13 @@ if (!plugins.available) {
     console.log('  app may not appear here.');
 }
 
+const missingRequired = required.filter((r) => !r.present).length + (mcp.provisioned ? 0 : 1);
 if (missingTools.length === 0 && mcp.provisioned) {
-    console.log('\nEverything required is present. No action needed.');
+    console.log('\nEverything is present. No action needed.');
     process.exit(0);
+}
+if (missingRequired === 0) {
+    console.log('\nNothing required is missing. The items below are enhancements.');
 }
 
 console.log('\nTo install what is missing:\n');
