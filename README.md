@@ -293,6 +293,32 @@ manager on your behalf.
 If you skip this entirely, every skill that needs one of these will tell you
 exactly which tool it wants and how to install it, at the moment you need it.
 
+## Tests
+
+```text
+node --test
+```
+
+Nineteen structural checks, about two seconds, no dependencies and no
+`package.json` — the package claims to run on Node alone, and a suite that
+needed a framework would undercut that.
+
+They assert the things this README states: that every MCP server starts and
+reports its pinned version, that the manifest and the files on disk agree in
+both directions, that each skill and instruction carries the frontmatter its
+host reads, and that no relative link is dead.
+
+The checks that need a provisioned runtime skip rather than fail when
+`setup-dependencies` has not been run, so a clean checkout does not report red
+for a step it was never asked to perform.
+
+They exist because of a specific defect. The launcher guarded
+`@playwright/mcp` at 0.0.78 while the reviewed pin and the installed runtime
+were both 0.0.80, so the server could not start on any host — and
+`check-dependencies` reported it healthy throughout, because it reads the pin
+table rather than the launcher. Each test was confirmed by reintroducing the
+fault it guards against and watching it fail.
+
 ## What Is Next
 
 See the [roadmap](ROADMAP.md).

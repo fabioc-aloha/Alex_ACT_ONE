@@ -14,6 +14,8 @@ What is working now, what is being built, and what is deliberately out of scope.
   through one preview-first command that backs up and merges
 - Every external npm package is pinned to an exact version, and one command
   reports when a pin has fallen behind
+- `node --test` checks the structural claims above, including that each pinned
+  server actually starts and reports the version it was pinned to
 
 Uninstalling the plugin leaves the provisioned MCP servers on disk on purpose,
 so reinstalling does not download them again. Nothing else is left behind.
