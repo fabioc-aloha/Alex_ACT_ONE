@@ -75,8 +75,8 @@ activation in each app where you want the behavior.
 | VS Code with GitHub Copilot Chat | `/alex-act-one bootstrap-core` |
 | Microsoft Scout | Ask for the `bootstrap-core` skill, or invoke it by name from the skill list |
 
-Activation previews all 17 files and waits for your approval before writing
-anything. Running it again reports no changes.
+Activation previews all 17 instruction files and waits for your approval before
+writing anything. Running it again reports no changes.
 
 To check where a given app writes them, run activation without approving. It
 prints the exact target directory first.

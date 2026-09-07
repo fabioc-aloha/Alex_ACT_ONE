@@ -12,7 +12,7 @@ specialized detail in on-demand skill resources.
 
 ## Measure Before Editing
 
-Run your project's brain-QA muscles first (Alex ACT ships two — `scripts/brain-qa.cjs` for structural checks + `scripts/brain-semantic-qa.cjs` for semantic checks):
+Run your project's brain-QA muscles first, if it ships them. A project with structural and semantic brain checks usually exposes them as:
 
 ```pwsh
 node scripts/brain-qa.cjs --json
@@ -57,12 +57,11 @@ strong removal candidate.
 2. Rank candidates by load frequency, duplication, and stale-contract risk.
 3. Change one ownership cluster at a time.
 4. Rerun the same focused checks after each cluster.
-5. Run the full brain gate before finishing (if your project ships one; Alex ACT uses):
+5. Run the full brain gate before finishing, if your project ships one:
 
    ```pwsh
    node scripts/brain-qa.cjs
    node scripts/brain-semantic-qa.cjs
-   node --test scripts/test-brain-semantic-qa.cjs scripts/test-coherence-check.cjs scripts/test-fleet-inventory.cjs
    ```
 
 6. Report artifact-count and high-frequency-line deltas. Do not claim token

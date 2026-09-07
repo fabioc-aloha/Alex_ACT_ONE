@@ -334,8 +334,8 @@
         "name": "worldview",
         "path": "instructions/worldview.instructions.md",
         "install_to": ".github/instructions/worldview.instructions.md",
-        "role": "ethical reasoning framework — 5 moral foundations (Care/Fairness/Loyalty/Authority/Sanctity), constitutional principles, harm refusal, decision boundaries, Tenet IV check on ethics itself",
-        "applyTo": "**/*ethic*,**/*moral*,**/*privacy*,**/*harm*,**/*bias*,**/*responsible*,**/*consent*"
+        "role": "unconditional harm-refusal list, ethical decision boundaries, and the Tenet IV check applied to ethics itself; the moral-foundations framework and decision process live in the ethical-reasoning skill",
+        "applyTo": "**"
       },
       {
         "name": "no-deferred-debt",
