@@ -65,8 +65,8 @@ Before the Materiality Gate, before any of the seven disciplines, before any sol
 Run **at least one** of the eight step-back checks before committing to a solution:
 
 1. **Restate** — write the problem in one sentence in your own words. If you can't, ask.
-2. **Generalise** — what is this a special case of?
-3. **Specialise** — what's the simplest concrete instance?
+2. **Generalize** — what is this a special case of?
+3. **Specialize** — what's the simplest concrete instance?
 4. **Invert** — what would make this worse?
 5. **Five Whys** — why is this a problem? And why is _that_ a problem? (×5)
 6. **Pre-mortem** — imagine it's done and didn't work; what went wrong?

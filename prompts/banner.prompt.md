@@ -59,7 +59,7 @@ The default Alex brand config ships these six categories. Heirs that customize t
 - **Watermark whitelist is enforced.** The active brand config's `watermarks[]` array is the whitelist; custom watermarks are rejected. If you need a new category, edit `.github/config/banner-brand.json` (project-scoped) rather than the script.
 - **Brand override**: pass `--brand-config path/to/other.json` for a one-off, or commit a project-specific `.github/config/banner-brand.json`.
 - **No PNG conversion.** The script outputs SVG only. Convert to PNG with `npx svgexport` if needed (separate workflow).
-- **Pastel-color variants live in the Mall.** If you need a non-Edition aesthetic (e.g. `document-banner-pastel`), install from the Plugin Mall — don't shoehorn this script.
+- **Pastel-color variants live in the Mall.** If you need a different aesthetic (e.g. `document-banner-pastel`), install from the Plugin Mall — don't shoehorn this script.
 
 ## Would Revise If
 

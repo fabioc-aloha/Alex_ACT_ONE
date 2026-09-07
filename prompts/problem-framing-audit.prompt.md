@@ -1,5 +1,5 @@
 ---
-description: "Audit the framing of a problem before solving — restate, generalise, specialise, invert, ask why, pre-mortem, check stakeholders, surface alternative framings"
+description: "Audit the framing of a problem before solving — restate, generalize, specialize, invert, ask why, pre-mortem, check stakeholders, surface alternative framings"
 lastReviewed: 2026-05-26
 ---
 
@@ -23,8 +23,8 @@ If the generic skill tool is unavailable for the plugin-shipped skill, read the 
 
 1. **Restate** the problem in one sentence in your own words. If you can't, ask one sharp clarifying question.
 2. **Run at least one** of the eight step-back checks (don't run all eight — pick the highest-leverage for this problem):
-   - **Generalise** — what is this a special case of?
-   - **Specialise** — what's the simplest concrete instance?
+   - **Generalize** — what is this a special case of?
+   - **Specialize** — what's the simplest concrete instance?
    - **Invert** — what would make this worse? what's the failure mode?
    - **Five Whys** — surface the cause-frame underneath the symptom-frame
    - **Pre-mortem** — imagine it's done and didn't work; what went wrong?

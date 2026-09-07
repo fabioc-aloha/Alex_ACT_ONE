@@ -81,7 +81,7 @@ Three rules that hold regardless of the operation:
 
 ## Tag-Move-Forward (Pre-Push Only)
 
-When a small follow-on change lands after a release tag but **before the tag is pushed**, move the tag forward rather than cutting a redundant patch release. Two requirements: (1) the tag must not yet exist on `origin`, (2) the follow-on belongs in the same release narrative (typo, doc fix, orphan removal — not new behaviour).
+When a small follow-on change lands after a release tag but **before the tag is pushed**, move the tag forward rather than cutting a redundant patch release. Two requirements: (1) the tag must not yet exist on `origin`, (2) the follow-on belongs in the same release narrative (typo, doc fix, orphan removal — not new behavior).
 
 ```bash
 # Verify tag is local-only first

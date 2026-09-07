@@ -63,4 +63,4 @@ Silent passes need no marker — only fire markers when the audit produced somet
 
 ## Skill Reference
 
-Full step-back protocol (8 checks: restate, generalise, specialise, invert, why, pre-mortem, stakeholder, frame audit) in the `problem-framing-audit` skill. This instruction is the always-on gate; the skill is the detailed body.
+Full step-back protocol (8 checks: restate, generalize, specialize, invert, why, pre-mortem, stakeholder, frame audit) in the `problem-framing-audit` skill. This instruction is the always-on gate; the skill is the detailed body.

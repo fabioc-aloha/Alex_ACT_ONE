@@ -26,7 +26,7 @@ Also apply this skill to **your own** output when writing user-facing prose — 
 **Composes with — not replaces — other prose disciplines:**
 
 - A prose-authoring worker agent (like `markdown-author` in projects that ship one) typically carries a short banned-vocabulary filter (`delve`, `myriad`, `tapestry`, `seamlessly`, `leverage`, etc.) and a quick audit that fires on every markdown task. Humanizer is the **deeper, on-demand pass** — 29 patterns with before/after examples, voice calibration, and an iterative draft-audit-final loop.
-- Some project brains ban em-dashes outright in shipped prose (Alex ACT itself does, per Steward's Cardinal Rule 2). Humanizer Pattern 14 documents the _reason_ (em-dash overuse is a well-known AI tell), useful when humanizing third-party text that already contains them.
+- Some project brains ban em-dashes outright in shipped prose (Alex ACT itself does). Humanizer Pattern 14 documents the _reason_ (em-dash overuse is a well-known AI tell), useful when humanizing third-party text that already contains them.
 
 ## How to apply it
 
@@ -500,7 +500,7 @@ Avoiding AI patterns is only half the job. Sterile, voiceless writing is just as
 
 **Problem:** LLMs use em dashes (—) more than humans, mimicking "punchy" sales writing. In practice, most of these can be rewritten more cleanly with commas, periods, or parentheses.
 
-> **Note for Edition heirs:** Cardinal Rule 2 in the heir brain bans em-dashes in shipped prose outright. This pattern is relevant when humanizing _third-party_ text that already contains em-dashes, or when reviewing why heir-authored prose felt AI-flavored before the rule was internalized.
+> **Note:** Alex ACT bans em-dashes in shipped prose outright. This pattern is relevant when humanizing _third-party_ text that already contains em-dashes, or when reviewing why heir-authored prose felt AI-flavored before the rule was internalized.
 
 **Before:**
 
@@ -769,7 +769,7 @@ A Copywriter Mode worked example is in [`examples/copywriter-mode-example.md`](e
 - [meditation](../meditation/SKILL.md) — when a humanizer pass surfaces a recurring AI tell in your own output, that's the signal a discipline addition might be earned; route through meditation
 - [communication-craft](../communication-craft/SKILL.md) — use for audience-lead _structure_ (So-What/What/Now-What, stakes-calibrated feedback voice); use Copywriter Mode above for sentence-level language _fit_ (idiom/tone/register/ambiguity/grammar) within an already-established structure — the two compose on the same document
 - `audience-copy-review` instruction — the always-on gate that decides when Copywriter Mode fires without being asked
-- Some project brains ban em-dashes outright in shipped prose (see for example Steward's Cardinal Rule 2 in `.github/copilot-instructions.md`); Pattern 14 above documents the underlying reason
+- Some project brains ban em-dashes outright in shipped prose (Alex ACT does, in its repository guidance); Pattern 14 above documents the underlying reason
 
 ## Would Revise If
 

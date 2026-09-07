@@ -1,6 +1,6 @@
 ---
 name: problem-framing-audit
-description: Step-back protocol — restate, generalise, specialise, invert, ask why, pre-mortem, check stakeholders, and audit framings before solving
+description: Step-back protocol — restate, generalize, specialize, invert, ask why, pre-mortem, check stakeholders, and audit framings before solving
 lastReviewed: 2026-07-28
 ---
 
@@ -35,8 +35,8 @@ Eight checks. The discipline is **not** to run all eight on every problem — it
 | # | Check | Activation question | Source |
 |---|---|---|---|
 | **1. Restate** | Can I write the problem in one sentence in my own words? | If I can't, I don't understand it yet. Ask. | Polya 1945 — *What is the unknown?* |
-| **2. Generalise** | What is this a special case of? | Naming the general class often reveals existing solutions and prior art. | Polya 1945 |
-| **3. Specialise** | What's the simplest concrete instance? | If the simplest case is already hard, the general case is the wrong target. | Polya 1945 |
+| **2. Generalize** | What is this a special case of? | Naming the general class often reveals existing solutions and prior art. | Polya 1945 |
+| **3. Specialize** | What's the simplest concrete instance? | If the simplest case is already hard, the general case is the wrong target. | Polya 1945 |
 | **4. Invert** | What would make this worse? What would I do if I wanted to fail? | Inversion exposes hidden constraints. | Munger / Jacobi |
 | **5. Five Whys** | Why is this a problem? And why is *that* a problem? Repeat 5×. | Surfaces the cause-frame underneath the symptom-frame. | Toyota / Ohno |
 | **6. Pre-mortem** | Imagine we're done and it didn't work — what went wrong? | Reduces overconfidence by ~30% in field studies. | Klein 2007 |
@@ -45,7 +45,7 @@ Eight checks. The discipline is **not** to run all eight on every problem — it
 
 ## The Symptom → Cause Move
 
-The most common type-III error: the user names a *symptom* and I optimise for it. The audit's job is to surface the *cause* underneath.
+The most common type-III error: the user names a *symptom* and I optimize for it. The audit's job is to surface the *cause* underneath.
 
 | Symptom-frame (what user said) | Cause-frame (what audit surfaces) | Right move |
 |---|---|---|
@@ -53,7 +53,7 @@ The most common type-III error: the user names a *symptom* and I optimise for it
 | "Fix this flaky test" | The test is correct; the system has a real race condition | Fix the race, not the test |
 | "Make the build less noisy" | The warnings are real — system is leaking handles | Fix the leaks; the noise was the diagnostic |
 | "Why does this query take 2 minutes?" | Query is fine; it returns 47M rows the UI then renders | Fix the contract, not the query |
-| "Add a workaround for this API quirk" | The "quirk" is the API enforcing a real constraint | Honour the constraint, not work around it |
+| "Add a workaround for this API quirk" | The "quirk" is the API enforcing a real constraint | Honor the constraint, not work around it |
 | "Make our skill load faster" | The skill is fine; it's loaded on every request when it should load once | Move the load gate, not the skill body |
 
 In each row, the symptom-frame produces a working but pointless solution. The cause-frame produces the right one.

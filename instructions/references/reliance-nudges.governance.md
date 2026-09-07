@@ -2,7 +2,7 @@
 
 ## Always-On Rationale
 
-Over-reliance signals (prompt roulette, zero verification, instant high-stakes acceptance) appear in any conversation regardless of domain. The detection table must fire every turn so nudges land before the user commits; scoping to file patterns would miss the dominant signals (rapid retries, fast acceptance) that have no file artefact.
+Over-reliance signals (prompt roulette, zero verification, instant high-stakes acceptance) appear in any conversation regardless of domain. The detection table must fire every turn so nudges land before the user commits; scoping to file patterns would miss the dominant signals (rapid retries, fast acceptance) that have no file artifact.
 
 ## Related
 

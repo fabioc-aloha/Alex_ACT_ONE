@@ -33,7 +33,7 @@ Applied to curation work: accepting a bad skill is reversible (revert next patch
 
 | Level | Curation Impact |
 |-------|-----------------|
-| **High** | Breaks heir upgrades, violates Cardinal Rule, token budget breach |
+| **High** | Breaks heir upgrades, violates a governing project rule, token budget breach |
 | **Medium** | Quality gap ships to heirs, coherence drift, stale reference |
 | **Low** | Cosmetic issue, suboptimal wording, minor inconsistency |
 
