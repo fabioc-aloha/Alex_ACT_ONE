@@ -95,8 +95,8 @@ function expectedFiles() {
     const names = fs.readdirSync(SOURCE_ROOT)
         .filter((name) => name.endsWith('.instructions.md'))
         .sort();
-    if (names.length !== 15 || !names.every(safeInstructionName)) {
-        throw new Error(`expected 15 canonical instructions, found ${names.length}`);
+    if (!names.every(safeInstructionName)) {
+        throw new Error('canonical instruction source contains an unsafe instruction filename');
     }
     const manifest = readJson(MANIFEST_PATH);
     if (!Array.isArray(manifest?.assets?.instructions)) {
@@ -118,10 +118,32 @@ function expectedFiles() {
         }
         return `${entry.name}.instructions.md`;
     }).sort();
-    if (declaredNames.length !== 15
-        || new Set(declaredNames).size !== declaredNames.length
-        || JSON.stringify(declaredNames) !== JSON.stringify(names)) {
-        throw new Error('manifest instruction inventory differs from canonical sources');
+
+    // The manifest declares what this package ships; the source directory must
+    // match it exactly. That equality is the guard. An earlier version also
+    // asserted a literal count of 15, which added nothing the equality check
+    // did not already cover and broke the package's own workflow: compile-brain
+    // and meditation exist to author instructions, so following ONE's guidance
+    // made activation throw `expected 15 canonical instructions, found 16` even
+    // when the manifest and the directory agreed perfectly.
+    if (declaredNames.length === 0) {
+        throw new Error('manifest declares no instructions');
+    }
+    if (new Set(declaredNames).size !== declaredNames.length) {
+        throw new Error('manifest instruction inventory contains duplicates');
+    }
+    if (JSON.stringify(declaredNames) !== JSON.stringify(names)) {
+        // Naming both sides turns "something is wrong" into a fix. The usual
+        // cause is a new instruction added to one place but not the other.
+        const declared = new Set(declaredNames);
+        const onDisk = new Set(names);
+        const missingFromDisk = declaredNames.filter((n) => !onDisk.has(n));
+        const missingFromManifest = names.filter((n) => !declared.has(n));
+        const detail = [
+            missingFromDisk.length ? `declared but not on disk: ${missingFromDisk.join(', ')}` : '',
+            missingFromManifest.length ? `on disk but not declared: ${missingFromManifest.join(', ')}` : '',
+        ].filter(Boolean).join('; ');
+        throw new Error(`manifest instruction inventory differs from canonical sources (${detail})`);
     }
     return names.map((sourceName) => ({
         name: `alex-act-${sourceName}`,

@@ -144,7 +144,7 @@ Getting the plugin and its dependencies working.
 
 | Skill | What it does | Needs |
 | --- | --- | --- |
-| `bootstrap-core` | Activates, verifies, repairs, or removes this plugin's 15 user-scope runtime instructions from canonical installed… | — |
+| `bootstrap-core` | Activates, verifies, repairs, or removes this plugin's user-scope runtime instructions from canonical installed… | — |
 | `bootstrap-project` | Previews and applies this plugin's repository scaffold, portable workspace QoL settings, and project Copilot… | — |
 | `setup-dependencies` | Check which optional dependencies this plugin can use, report what each missing one costs, and install them with… | — |
 | `platform-awareness` | VS Code Copilot platform changes affecting how tools are used: deferred-tool categories with example search… | — |
@@ -163,9 +163,9 @@ surfaces are not automatic in the same way, and this table says which are.
 
 | Where you use Copilot | Skills | Instructions | Slash commands | MCP servers |
 | --- | --- | --- | --- | --- |
-| Copilot CLI | 59 | 15, after activation | 15 | 3, from the manifest |
-| VS Code with GitHub Copilot Chat | 59 | 15, after activation | 15 | 3, from the manifest |
-| Microsoft Scout | 59 | 15, after activation | **None** | 3, after registration |
+| Copilot CLI | All | All, after activation | All | All, from the manifest |
+| VS Code with GitHub Copilot Chat | All | All, after activation | All | All, from the manifest |
+| Microsoft Scout | All | All, after activation | **None** | All, after registration |
 | GitHub Copilot app | Not yet tested | Not yet tested | Not yet tested | Not yet tested |
 
 Two Scout-specific notes, both verified 2026-09-07:
@@ -195,14 +195,14 @@ copilot plugin install fabioc-aloha/Alex_ACT_ONE
 
 Use that exact form. Copilot names the installed folder after whatever you type,
 and that name becomes the prefix on every skill. Installing from the full
-`https://github.com/...` URL works, but makes all 59 skill names longer for no
+`https://github.com/...` URL works, but makes every skill name longer for no
 benefit.
 
 Copilot prints a deprecation notice about installing from a repository. That is
 expected and the install still works. It is the reason a Mall listing is the
 next thing on the [roadmap](ROADMAP.md).
 
-All 59 skills are now available in Copilot CLI, VS Code, and Microsoft Scout.
+Every skill is now available in Copilot CLI, VS Code, and Microsoft Scout.
 There is one copy on disk and every app reads it.
 
 ### 2. Turn on the always-on instructions, once in each app
@@ -218,7 +218,7 @@ activation in each app where you want the behavior.
 | VS Code with GitHub Copilot Chat | `/alex-act-one bootstrap-core` |
 | Microsoft Scout | Ask for the `bootstrap-core` skill, or invoke it by name from the skill list |
 
-Activation previews all 15 instruction files and waits for your approval before
+Activation previews every instruction file and waits for your approval before
 writing anything. Running it again reports no changes.
 
 To check where a given app writes them, run activation without approving. It
@@ -255,7 +255,7 @@ missing, which looks like a broken package rather than an unregistered one.
 
 ### Optional: extra tools for a few skills
 
-Most of this plugin needs nothing but Node. Forty-eight of the 59 skills run
+Most of this plugin needs nothing but Node. The large majority of its skills run
 with no external tools at all, and nothing below is needed to start.
 
 | If you want to... | You also need | Get it |
@@ -299,25 +299,24 @@ exactly which tool it wants and how to install it, at the moment you need it.
 node --test
 ```
 
-Nineteen structural checks, about two seconds, no dependencies and no
+A few dozen structural checks, a couple of seconds, no dependencies and no
 `package.json` — the package claims to run on Node alone, and a suite that
 needed a framework would undercut that.
 
 They assert the things this README states: that every MCP server starts and
-reports its pinned version, that the manifest and the files on disk agree in
-both directions, that each skill and instruction carries the frontmatter its
-host reads, and that no relative link is dead.
+reports its pinned version, that activation runs and plans exactly what the
+manifest declares, that the manifest and the files on disk agree in both
+directions, that each skill and instruction carries the frontmatter its host
+reads, that the counts quoted above are real, and that no relative link is dead.
 
 The checks that need a provisioned runtime skip rather than fail when
 `setup-dependencies` has not been run, so a clean checkout does not report red
 for a step it was never asked to perform.
 
-They exist because of a specific defect. The launcher guarded
-`@playwright/mcp` at 0.0.78 while the reviewed pin and the installed runtime
-were both 0.0.80, so the server could not start on any host — and
-`check-dependencies` reported it healthy throughout, because it reads the pin
-table rather than the launcher. Each test was confirmed by reintroducing the
-fault it guards against and watching it fail.
+They exist because of specific defects, each of which passed unnoticed until
+something ran the code rather than reading about it. Release steps and the
+failures that motivated them are in the
+[release checklist](RELEASE-CHECKLIST.md).
 
 ## What Is Next
 

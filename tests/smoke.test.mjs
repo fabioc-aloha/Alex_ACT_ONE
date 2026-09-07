@@ -215,6 +215,83 @@ describe('markdown links', () => {
     });
 });
 
+describe('documented counts', () => {
+    // Counts in prose have no compiler behind them, so most of this package's
+    // documentation avoids them: "every skill" and "All / None" say the same
+    // thing and cannot go stale. Where a count genuinely informs a reader
+    // deciding whether to install, it stays — and this test is the price of
+    // keeping it.
+    const truth = () => ({
+        skills: manifest.assets.skills.length,
+        instructions: manifest.assets.instructions.length,
+        commands: manifest.assets.prompts.length,
+        servers: Object.keys(pluginJson.mcpServers || {}).length,
+    });
+
+    const patterns = {
+        skills: /(\d+)\s+skills/g,
+        instructions: /(\d+)\s+always-on instructions/g,
+        commands: /(\d+)\s+slash commands/g,
+        servers: /(\d+)\s+MCP servers/g,
+    };
+
+    for (const doc of ['README.md', 'ROADMAP.md']) {
+        test(`${doc} quotes the real counts`, () => {
+            // Historical notes legitimately cite a number that was true at the
+            // time ("retiring one command left 16 slash commands in four
+            // places"). Those live in blockquotes, which are skipped.
+            const text = read(doc)
+                .split(/\r?\n/)
+                .filter((line) => !line.trimStart().startsWith('>'))
+                .join('\n');
+            const actual = truth();
+
+            for (const [kind, pattern] of Object.entries(patterns)) {
+                for (const [phrase, found] of text.matchAll(pattern)) {
+                    assert.equal(
+                        Number(found),
+                        actual[kind],
+                        `${doc} says "${phrase.trim()}" but there are ${actual[kind]}`,
+                    );
+                }
+            }
+        });
+    }
+});
+
+describe('activation', () => {
+    // The smoke suite previously checked structure without ever running the
+    // activation path, and a defect hid in exactly that gap: bootstrap-core
+    // hardcoded a count of 15 instructions, so adding a sixteenth — the thing
+    // compile-brain and meditation exist to do — made activation throw while
+    // every structural test stayed green. Running it is the only check that
+    // would have caught that.
+    const BOOTSTRAP = join(ROOT, 'skills', 'bootstrap-core', 'scripts', 'bootstrap-core.cjs');
+
+    /** Preview only. Without --apply nothing is written to any profile. */
+    const preview = () => JSON.parse(execFileSync(process.execPath, [BOOTSTRAP], {
+        encoding: 'utf8',
+        timeout: 60000,
+    }));
+
+    test('previews without error and writes nothing', () => {
+        const plan = preview();
+        assert.equal(plan.apply, false, 'a bare invocation must not apply');
+        assert.equal(plan.mode, 'activate');
+    });
+
+    test('plans exactly the instructions the manifest declares', () => {
+        // Ties activation to the manifest rather than to any fixed number, so
+        // the suite keeps working as the package grows.
+        const plan = preview();
+        const declared = manifest.assets.instructions.length;
+        assert.equal(plan.files.length, declared,
+            'activation plans a different number of files than the manifest declares');
+        assert.equal(plan.expectedFiles, declared,
+            'the plan reports a different expected count than the manifest declares');
+    });
+});
+
 describe('provisioned runtime', () => {
     // These need `setup-dependencies` to have run, so they skip rather than fail
     // where it has not — a clean checkout should not report a red suite for a
