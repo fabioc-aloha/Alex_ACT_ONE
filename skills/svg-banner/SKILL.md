@@ -83,7 +83,8 @@ Schema:
 
 ### Default: Alex ACT brand
 
-Steward ships `.github/config/banner-brand.json` with the Alex ACT brand as the default. Heirs that inherit from Steward baseline without editing the config get Alex-branded banners out of the box, matching the historical behavior of the pre-2026-07-29 `alex-banner-generation` skill.
+If a project has no `.github/config/banner-brand.json`, the script falls back to
+a built-in Alex ACT brand, so banners work before any configuration exists.
 
 ### Overriding for your own brand
 
