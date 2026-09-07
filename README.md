@@ -2,9 +2,9 @@
 
 ![Alex ACT ONE](assets/banner.svg)
 
-A single plugin that gives GitHub Copilot a working method: how to think through
-a problem, how to write code and prose that hold up, and how to produce documents
-and charts worth sending to someone.
+A skills pack for GitHub Copilot. It covers how to think through a problem, how
+to write code and prose that hold up, and how to produce documents and charts
+worth sending to someone.
 
 Install it once at the user level. Copilot CLI, VS Code, and Microsoft Scout all
 read the same installation.
@@ -37,15 +37,15 @@ a session learned into something reusable.
 
 ## Where It Works
 
-| Surface | Status |
+| Where you use Copilot | Status |
 | --- | --- |
 | Copilot CLI | Verified |
 | VS Code with GitHub Copilot Chat | Verified |
 | Microsoft Scout | Verified |
 | GitHub Copilot app | Not yet tested |
 
-Skills sit at the package root, so each surface finds them directly. No bridge,
-no symbolic links, and no second plugin store to keep in sync.
+Skills sit at the package root, so each app finds them directly. No bridge, no
+symbolic links, and no second plugin store to keep in sync.
 
 ## Install
 

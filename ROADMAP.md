@@ -46,7 +46,7 @@ enabled without a deliberate choice.
 
 ## How To Read This
 
-A capability is listed as working only after it has been run on the surface in
+A capability is listed as working only after it has been run in the app in
 question. Anything not yet verified says so, including when that is
 inconvenient. If something here is stale or wrong, the compatibility table in
 the [README](README.md) is the one to trust, because it is checked more often.
