@@ -1,0 +1,60 @@
+{
+  "name": "alex-act-one",
+  "version": "0.1.0",
+  "description": "ONE Alex ACT. A single-install runtime carrying the Alex ACT constellation: epistemic discipline, critical thinking, engineering craft, visual authoring, document conversion, brain compilation, and AI provider planning. Installs once at user level and is read by Copilot CLI, VS Code with GitHub Copilot Chat, and Microsoft Scout.",
+  "keywords": [
+    "alex-act",
+    "critical-thinking",
+    "epistemic-discipline",
+    "problem-framing",
+    "visual-authoring",
+    "document-conversion"
+  ],
+  "category": "foundation",
+  "author": {
+    "name": "Fabio Correa",
+    "url": "https://github.com/fabioc-aloha"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fabioc-aloha/Alex_ACT_ONE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fabioc-aloha/Alex_ACT_ONE.git"
+  },
+  "skills": "skills",
+  "commands": "prompts",
+  "mcpServers": {
+    "flint": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "skills/setup-illustrator-runtime/scripts/runtime-launcher.mjs",
+        "flint"
+      ]
+    },
+    "replicate": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "skills/setup-illustrator-runtime/scripts/runtime-launcher.mjs",
+        "replicate"
+      ],
+      "env": {
+        "REPLICATE_API_TOKEN": "${env:REPLICATE_API_TOKEN}"
+      }
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "skills/setup-illustrator-runtime/scripts/runtime-launcher.mjs",
+        "playwright",
+        "--headless",
+        "--isolated",
+        "--browser",
+        "msedge",
+        "--allow-unrestricted-file-access"
+      ]
+    }
+  }
+}

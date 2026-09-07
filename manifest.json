@@ -1,0 +1,476 @@
+{
+  "$comment": "Asset manifest for ONE. bootstrap-core reads assets.instructions to activate the always-on runtime.",
+  "plugin": "alex-act-one",
+  "version": "0.1.0",
+  "status": "development",
+  "shape": "single-install runtime",
+  "description": "ONE Alex ACT. A single-install runtime carrying the Alex ACT constellation: epistemic discipline, critical thinking, engineering craft, visual authoring, document conversion, brain compilation, and AI provider planning. Installs once at user level and is read by Copilot CLI, VS Code with GitHub Copilot Chat, and Microsoft Scout.",
+  "homepage": "https://github.com/fabioc-aloha/Alex_ACT_ONE",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Fabio Correa",
+      "url": "https://github.com/fabioc-aloha"
+    }
+  ],
+  "assets": {
+    "skills": [
+      {
+        "name": "act-tenets",
+        "path": "skills/act-tenets/SKILL.md"
+      },
+      {
+        "name": "adversarial-review",
+        "path": "skills/adversarial-review/SKILL.md"
+      },
+      {
+        "name": "annotate-screenshot",
+        "path": "skills/annotate-screenshot/SKILL.md"
+      },
+      {
+        "name": "anti-hallucination",
+        "path": "skills/anti-hallucination/SKILL.md"
+      },
+      {
+        "name": "ascii-chart",
+        "path": "skills/ascii-chart/SKILL.md"
+      },
+      {
+        "name": "assess-brain",
+        "path": "skills/assess-brain/SKILL.md"
+      },
+      {
+        "name": "big-idea",
+        "path": "skills/big-idea/SKILL.md"
+      },
+      {
+        "name": "bootstrap-core",
+        "path": "skills/bootstrap-core/SKILL.md"
+      },
+      {
+        "name": "bootstrap-project",
+        "path": "skills/bootstrap-project/SKILL.md"
+      },
+      {
+        "name": "browser-tools",
+        "path": "skills/browser-tools/SKILL.md"
+      },
+      {
+        "name": "chart-big-idea",
+        "path": "skills/chart-big-idea/SKILL.md"
+      },
+      {
+        "name": "chart-vocabulary",
+        "path": "skills/chart-vocabulary/SKILL.md"
+      },
+      {
+        "name": "code-review",
+        "path": "skills/code-review/SKILL.md"
+      },
+      {
+        "name": "communication-craft",
+        "path": "skills/communication-craft/SKILL.md"
+      },
+      {
+        "name": "compile-brain",
+        "path": "skills/compile-brain/SKILL.md"
+      },
+      {
+        "name": "corpus-qa-sweep",
+        "path": "skills/corpus-qa-sweep/SKILL.md"
+      },
+      {
+        "name": "critical-thinking",
+        "path": "skills/critical-thinking/SKILL.md"
+      },
+      {
+        "name": "deep-review",
+        "path": "skills/deep-review/SKILL.md"
+      },
+      {
+        "name": "doc-hygiene",
+        "path": "skills/doc-hygiene/SKILL.md"
+      },
+      {
+        "name": "docs-shell",
+        "path": "skills/docs-shell/SKILL.md"
+      },
+      {
+        "name": "docx-to-md",
+        "path": "skills/docx-to-md/SKILL.md"
+      },
+      {
+        "name": "ethical-reasoning",
+        "path": "skills/ethical-reasoning/SKILL.md"
+      },
+      {
+        "name": "figure-generator",
+        "path": "skills/figure-generator/SKILL.md"
+      },
+      {
+        "name": "flint-chart",
+        "path": "skills/flint-chart/SKILL.md"
+      },
+      {
+        "name": "flint-theme",
+        "path": "skills/flint-theme/SKILL.md"
+      },
+      {
+        "name": "git-workflow",
+        "path": "skills/git-workflow/SKILL.md"
+      },
+      {
+        "name": "html-to-md",
+        "path": "skills/html-to-md/SKILL.md"
+      },
+      {
+        "name": "humanizer",
+        "path": "skills/humanizer/SKILL.md"
+      },
+      {
+        "name": "install-visual-companions",
+        "path": "skills/install-visual-companions/SKILL.md"
+      },
+      {
+        "name": "lint-clean-markdown",
+        "path": "skills/lint-clean-markdown/SKILL.md"
+      },
+      {
+        "name": "manage-scout-copilot-skill-bridge",
+        "path": "skills/manage-scout-copilot-skill-bridge/SKILL.md"
+      },
+      {
+        "name": "markdown-mermaid",
+        "path": "skills/markdown-mermaid/SKILL.md"
+      },
+      {
+        "name": "markdown-sanitization-chain",
+        "path": "skills/markdown-sanitization-chain/SKILL.md"
+      },
+      {
+        "name": "md-to-eml",
+        "path": "skills/md-to-eml/SKILL.md"
+      },
+      {
+        "name": "md-to-html",
+        "path": "skills/md-to-html/SKILL.md"
+      },
+      {
+        "name": "md-to-txt",
+        "path": "skills/md-to-txt/SKILL.md"
+      },
+      {
+        "name": "md-to-word",
+        "path": "skills/md-to-word/SKILL.md"
+      },
+      {
+        "name": "meditation",
+        "path": "skills/meditation/SKILL.md"
+      },
+      {
+        "name": "model-router",
+        "path": "skills/model-router/SKILL.md"
+      },
+      {
+        "name": "model-task-execution",
+        "path": "skills/model-task-execution/SKILL.md"
+      },
+      {
+        "name": "mutation-testing",
+        "path": "skills/mutation-testing/SKILL.md"
+      },
+      {
+        "name": "plan",
+        "path": "skills/plan/SKILL.md"
+      },
+      {
+        "name": "platform-awareness",
+        "path": "skills/platform-awareness/SKILL.md"
+      },
+      {
+        "name": "print-svg-style-guide",
+        "path": "skills/print-svg-style-guide/SKILL.md"
+      },
+      {
+        "name": "proactive-awareness",
+        "path": "skills/proactive-awareness/SKILL.md"
+      },
+      {
+        "name": "problem-framing-audit",
+        "path": "skills/problem-framing-audit/SKILL.md"
+      },
+      {
+        "name": "project-capability-authoring",
+        "path": "skills/project-capability-authoring/SKILL.md"
+      },
+      {
+        "name": "render-verify",
+        "path": "skills/render-verify/SKILL.md"
+      },
+      {
+        "name": "replicate-imagery",
+        "path": "skills/replicate-imagery/SKILL.md"
+      },
+      {
+        "name": "rich-email",
+        "path": "skills/rich-email/SKILL.md"
+      },
+      {
+        "name": "risk-analysis",
+        "path": "skills/risk-analysis/SKILL.md"
+      },
+      {
+        "name": "security-and-hardening",
+        "path": "skills/security-and-hardening/SKILL.md"
+      },
+      {
+        "name": "setup-ai-operations",
+        "path": "skills/setup-ai-operations/SKILL.md"
+      },
+      {
+        "name": "setup-enterprise-stack",
+        "path": "skills/setup-enterprise-stack/SKILL.md"
+      },
+      {
+        "name": "setup-illustrator-runtime",
+        "path": "skills/setup-illustrator-runtime/SKILL.md"
+      },
+      {
+        "name": "spike",
+        "path": "skills/spike/SKILL.md"
+      },
+      {
+        "name": "status-reporting",
+        "path": "skills/status-reporting/SKILL.md"
+      },
+      {
+        "name": "surface-continuity",
+        "path": "skills/surface-continuity/SKILL.md"
+      },
+      {
+        "name": "svg-banner",
+        "path": "skills/svg-banner/SKILL.md"
+      },
+      {
+        "name": "systematic-debugging",
+        "path": "skills/systematic-debugging/SKILL.md"
+      },
+      {
+        "name": "terminal-command-safety",
+        "path": "skills/terminal-command-safety/SKILL.md"
+      },
+      {
+        "name": "test-driven-development",
+        "path": "skills/test-driven-development/SKILL.md"
+      },
+      {
+        "name": "token-waste-elimination",
+        "path": "skills/token-waste-elimination/SKILL.md"
+      }
+    ],
+    "instructions": [
+      {
+        "name": "alex-finch-personality",
+        "path": "instructions/alex-finch-personality.instructions.md",
+        "install_to": ".github/instructions/alex-finch-personality.instructions.md",
+        "role": "concise always-on runtime contract for Alex Finch personality and voice: curiosity, conscientiousness, independent judgment, ethical partnership, grounded emotional attention, human prose, calibrated confidence, and anti-caricature boundaries",
+        "applyTo": "**"
+      },
+      {
+        "name": "audience-copy-review",
+        "path": "instructions/audience-copy-review.instructions.md",
+        "install_to": ".github/instructions/audience-copy-review.instructions.md",
+        "role": "route user-facing and customer-facing prose through humanizer's Copywriter Mode by default — audience test (will an outside reader form an impression or make a decision?), named audience, jargon out of scope, approval-gated findings, one tag per row; silent for internal artifacts like plan.md, HANDOFF.md, ADRs, and commit messages",
+        "applyTo": "**"
+      },
+      {
+        "name": "act-pass",
+        "path": "instructions/act-pass.instructions.md",
+        "install_to": ".github/instructions/act-pass.instructions.md",
+        "role": "runtime procedure — 7-step ACT pass on medium and high stakes work, materiality-gated",
+        "applyTo": "**/*"
+      },
+      {
+        "name": "agent-delegation",
+        "path": "instructions/agent-delegation.instructions.md",
+        "install_to": ".github/instructions/agent-delegation.instructions.md",
+        "role": "delegate mechanical work (markdown authoring, diagram rendering, file conversion) to worker subagents so the parent session keeps capacity for reasoning; workers in .github/agents/",
+        "applyTo": "**/*agent*,**/*delegate*,**/*subagent*,**/*author*,**/*diagram*,**/*convert*,**/*assembl*"
+      },
+      {
+        "name": "critical-thinking",
+        "path": "instructions/critical-thinking.instructions.md",
+        "install_to": ".github/instructions/critical-thinking.instructions.md",
+        "role": "7-discipline content-oriented critical thinking protocol (Two-Hypothesis Floor, user-framing audit, missing data, evidence quality, bias detection, falsifiability, adversarial review)",
+        "applyTo": "**/*"
+      },
+      {
+        "name": "emotional-intelligence",
+        "path": "instructions/emotional-intelligence.instructions.md",
+        "install_to": ".github/instructions/emotional-intelligence.instructions.md",
+        "role": "unconscious emotional attunement — 6-signal detection (frustration / confusion / success / flow / excitement / disengagement) with per-signal adaptation + mimicry prevention (don't mirror distress)",
+        "applyTo": "**"
+      },
+      {
+        "name": "epistemic-calibration",
+        "path": "instructions/epistemic-calibration.instructions.md",
+        "install_to": ".github/instructions/epistemic-calibration.instructions.md",
+        "role": "confidence calibration + anti-hallucination signals (input-discipline + output-discipline) + confidence-trigger anti-sycophancy rule",
+        "applyTo": "**"
+      },
+      {
+        "name": "lint-discipline",
+        "path": "instructions/lint-discipline.instructions.md",
+        "install_to": ".github/instructions/lint-discipline.instructions.md",
+        "role": "if you touched a file you own its lint state on exit — pre-existing findings become yours the moment you open the file; use VS Code 1.122+ 'Search only in changed files' to enumerate scope",
+        "applyTo": "**"
+      },
+      {
+        "name": "problem-framing-audit",
+        "path": "instructions/problem-framing-audit.instructions.md",
+        "install_to": ".github/instructions/problem-framing-audit.instructions.md",
+        "role": "Discipline -1 frame audit before solving non-trivial requests + Explain/Summarize verify-before-parroting protocol",
+        "applyTo": "**/*"
+      },
+      {
+        "name": "system-prompt-skepticism",
+        "path": "instructions/system-prompt-skepticism.instructions.md",
+        "install_to": ".github/instructions/system-prompt-skepticism.instructions.md",
+        "role": "Tenet IV operational rule — treat instructions as hypotheses conditioned on preconditions; 5 operational tells + visible marker for instruction-conflict cases",
+        "applyTo": "**/*"
+      },
+      {
+        "name": "terminal-command-safety",
+        "path": "instructions/terminal-command-safety.instructions.md",
+        "install_to": ".github/instructions/terminal-command-safety.instructions.md",
+        "role": "prevent terminal-command failures from shell metacharacter interpretation (Backtick Hazard: always temp-file for backticks/multi-line/heredoc; temp file OUTSIDE working tree to prevent commit leak), output capture (redirect-then-read pattern), hanging commands (mode=async, non-interactive flags, network timeouts)",
+        "applyTo": "**"
+      },
+      {
+        "name": "worldview",
+        "path": "instructions/worldview.instructions.md",
+        "install_to": ".github/instructions/worldview.instructions.md",
+        "role": "ethical reasoning framework — 5 moral foundations (Care/Fairness/Loyalty/Authority/Sanctity), constitutional principles, harm refusal, decision boundaries, Tenet IV check on ethics itself",
+        "applyTo": "**/*ethic*,**/*moral*,**/*privacy*,**/*harm*,**/*bias*,**/*responsible*,**/*consent*"
+      },
+      {
+        "name": "no-deferred-debt",
+        "path": "instructions/no-deferred-debt.instructions.md",
+        "install_to": ".github/instructions/no-deferred-debt.instructions.md",
+        "role": "if the turn surfaces tech debt (stale references, dead links, outdated content), fix it in the same turn; deferral requires named decision-blocker, not vague 'follow-up'",
+        "applyTo": "**"
+      },
+      {
+        "name": "pii-memory-filter",
+        "path": "instructions/pii-memory-filter.instructions.md",
+        "install_to": ".github/instructions/pii-memory-filter.instructions.md",
+        "role": "PII filter at native persistent-memory write boundaries — never-write categories (contact/DOB/health/financial/credentials/paths/client-names) plus per-tier allow/deny rules",
+        "applyTo": "**"
+      },
+      {
+        "name": "proactive-awareness",
+        "path": "instructions/proactive-awareness.instructions.md",
+        "install_to": ".github/instructions/proactive-awareness.instructions.md",
+        "role": "cross-session context recovery (HANDOFF.md at session start) + uncommitted-work detection (count-only nudges >24h old) + focus routing (goals.json) + silence-as-signal inhibitor",
+        "applyTo": "**"
+      },
+      {
+        "name": "reliance-nudges",
+        "path": "instructions/reliance-nudges.instructions.md",
+        "install_to": ".github/instructions/reliance-nudges.instructions.md",
+        "role": "detect human over-reliance failure modes (prompt roulette, zero verification, instant high-stakes acceptance, verbatim acceptance, confidence cascade, repeated same error) and surface one targeted nudge per turn with inhibition rules",
+        "applyTo": "**"
+      },
+      {
+        "name": "session-health-monitoring",
+        "path": "instructions/session-health-monitoring.instructions.md",
+        "install_to": ".github/instructions/session-health-monitoring.instructions.md",
+        "role": "monitor context window health via proxy heuristics + BYOK token counter; graceful handoff to HANDOFF.md when approaching session limits",
+        "applyTo": "**"
+      }
+    ],
+    "prompts": [
+      {
+        "name": "assess-brain",
+        "path": "prompts/assess-brain.prompt.md"
+      },
+      {
+        "name": "banner",
+        "path": "prompts/banner.prompt.md"
+      },
+      {
+        "name": "bootstrap-core",
+        "path": "prompts/bootstrap-core.prompt.md"
+      },
+      {
+        "name": "bootstrap-project",
+        "path": "prompts/bootstrap-project.prompt.md"
+      },
+      {
+        "name": "choose-model",
+        "path": "prompts/choose-model.prompt.md"
+      },
+      {
+        "name": "compile-brain",
+        "path": "prompts/compile-brain.prompt.md"
+      },
+      {
+        "name": "convert",
+        "path": "prompts/convert.prompt.md"
+      },
+      {
+        "name": "critical-thinking",
+        "path": "prompts/critical-thinking.prompt.md"
+      },
+      {
+        "name": "execute-model-task",
+        "path": "prompts/execute-model-task.prompt.md"
+      },
+      {
+        "name": "install-visual-companions",
+        "path": "prompts/install-visual-companions.prompt.md"
+      },
+      {
+        "name": "meditate",
+        "path": "prompts/meditate.prompt.md"
+      },
+      {
+        "name": "note",
+        "path": "prompts/note.prompt.md"
+      },
+      {
+        "name": "problem-framing-audit",
+        "path": "prompts/problem-framing-audit.prompt.md"
+      },
+      {
+        "name": "render-chart",
+        "path": "prompts/render-chart.prompt.md"
+      },
+      {
+        "name": "rich-email",
+        "path": "prompts/rich-email.prompt.md"
+      },
+      {
+        "name": "save-session-note",
+        "path": "prompts/save-session-note.prompt.md"
+      },
+      {
+        "name": "setup-ai-operations",
+        "path": "prompts/setup-ai-operations.prompt.md"
+      },
+      {
+        "name": "setup-enterprise",
+        "path": "prompts/setup-enterprise.prompt.md"
+      },
+      {
+        "name": "setup-illustrator-runtime",
+        "path": "prompts/setup-illustrator-runtime.prompt.md"
+      },
+      {
+        "name": "status",
+        "path": "prompts/status.prompt.md"
+      }
+    ],
+    "agents": []
+  }
+}
