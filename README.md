@@ -33,7 +33,7 @@ banners, then check that what rendered says what you meant.
 write project-specific skills from work you keep repeating, and consolidate what
 a session learned into something reusable.
 
-59 skills, 15 always-on instructions, 16 slash commands, and 3 MCP servers.
+59 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers.
 Not every surface reaches every app — see [Where It Works](#where-it-works).
 
 ## The Skills
@@ -163,17 +163,17 @@ surfaces are not automatic in the same way, and this table says which are.
 
 | Where you use Copilot | Skills | Instructions | Slash commands | MCP servers |
 | --- | --- | --- | --- | --- |
-| Copilot CLI | 59 | 15, after activation | 16 | 3, from the manifest |
-| VS Code with GitHub Copilot Chat | 59 | 15, after activation | 16 | 3, from the manifest |
+| Copilot CLI | 59 | 15, after activation | 15 | 3, from the manifest |
+| VS Code with GitHub Copilot Chat | 59 | 15, after activation | 15 | 3, from the manifest |
 | Microsoft Scout | 59 | 15, after activation | **None** | 3, after registration |
 | GitHub Copilot app | Not yet tested | Not yet tested | Not yet tested | Not yet tested |
 
 Two Scout-specific notes, both verified 2026-09-07:
 
 - **Slash commands do not reach Scout.** It has no command surface for plugin
-  prompts. Fifteen of the sixteen have an equivalent skill you can ask for by
-  name, so little is lost in practice — but the commands themselves are absent
-  rather than merely undocumented.
+  prompts. Every command has an equivalent skill you can ask for by name, so
+  nothing is lost in capability — but the commands themselves are absent rather
+  than merely undocumented.
 - **MCP servers need one extra step.** CLI and VS Code read `plugin.json`
   directly. Scout keeps its own registry and ignores that manifest, so the
   servers must be registered once with

@@ -5,7 +5,7 @@ What is working now, what is being built, and what is deliberately out of scope.
 ## Working Today
 
 - One install from source reaches Copilot CLI, VS Code, and Microsoft Scout
-- 59 skills load on all three; 16 slash commands load on CLI and VS Code
+- 59 skills load on all three; 15 slash commands load on CLI and VS Code
 - Always-on instructions activate through a preview-first command that asks
   before writing to your profile
 - Activation can be undone. Removal returns each profile to its prior state and
@@ -32,7 +32,7 @@ registry rather than reading the plugin manifest. A single activation that
 reached every app and every surface would make the install genuinely one move.
 
 **Slash commands on Microsoft Scout.** Scout has no command surface for plugin
-prompts, so the 16 commands do not reach it. Fifteen have an equivalent skill
+prompts, so the 15 commands do not reach it. Each one has an equivalent skill
 that can be asked for by name, which is why this is a gap rather than a blocker.
 It needs a change on Scout's side, so it is listed here to be tracked, not
 promised.

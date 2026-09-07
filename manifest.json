@@ -409,10 +409,6 @@
         "path": "prompts/rich-email.prompt.md"
       },
       {
-        "name": "save-session-note",
-        "path": "prompts/save-session-note.prompt.md"
-      },
-      {
         "name": "setup-enterprise",
         "path": "prompts/setup-enterprise.prompt.md"
       },
