@@ -10,9 +10,9 @@ Emit the paste-ready `enabledPlugins` + `extraKnownMarketplaces` block for the f
 
 ## When to fire
 
-- Heir asks to enable the Microsoft ecosystem — "set up Azure + Fabric + Power BI + M365 for Copilot"
-- Heir invokes `/alex-act-one setup-enterprise`
-- Heir asks what block goes into `~/.copilot/settings.json` for the public Microsoft plugins
+- The user asks to enable the Microsoft ecosystem — "set up Azure + Fabric + Power BI + M365 for Copilot"
+- The user invokes `/alex-act-one setup-enterprise`
+- The user asks what block goes into `~/.copilot/settings.json` for the public Microsoft plugins
 - Auditing or repairing a workspace where some of them are missing, disabled, or stale
 
 ## The plugins
@@ -24,23 +24,35 @@ Emit the paste-ready `enabledPlugins` + `extraKnownMarketplaces` block for the f
 | `powerbi-authoring` | `fabric-collection` | github: `microsoft/skills-for-fabric` | Power BI report design + authoring + planning + management |
 | `microsoft-365-agents-toolkit` | `copilot-plugins` (default) | (built-in) | Declarative agent authoring, Teams app dev, UI widget dev |
 
-`copilot-plugins` is the built-in Copilot marketplace and does not need explicit registration. `azure-skills` and `fabric-collection` are additional marketplaces the heir must register in `extraKnownMarketplaces` before enabling their plugins.
+`copilot-plugins` is the built-in Copilot marketplace and does not need explicit registration. `azure-skills` and `fabric-collection` are additional marketplaces the user must register in `extraKnownMarketplaces` before enabling their plugins.
+
+### Verify names before emitting, under the right account
+
+`copilot plugin marketplace browse` returns different results depending on which
+GitHub account is active. A corporate account sees internal marketplace entries
+that a personal account does not, so the same command can report a plugin as
+absent purely because of who is signed in.
+
+Check `gh auth status` first. If the user has more than one account, verify
+against the one whose tenant the plugins belong to. A "not found" under the
+wrong account is not evidence the plugin was retired, and acting on it would
+remove a working entry.
 
 ## Prerequisites
 
-Before running any install command, verify the heir has:
+Before running any install command, verify the user has:
 
-- **Copilot CLI**: `copilot --version` >= 1.0.75. If missing, direct the heir to <https://github.com/github/copilot-cli> for installation.
+- **Copilot CLI**: `copilot --version` >= 1.0.75. If missing, direct the user to <https://github.com/github/copilot-cli> for installation.
 - **Azure subscription**: required to actually invoke `azure@azure-skills` skills against real resources. The plugin registers without a subscription, but skill invocations against `az` will fail without one.
 - **Fabric workspace**: required for `fabric-skills` to reach a live capacity. Registration and skill loading do not require a workspace.
 - **Power BI license**: `powerbi-authoring@fabric-collection` requires either a Power BI Pro or Premium Per User license for authoring against real workspaces.
 - **Microsoft 365 tenant**: required for `microsoft-365-agents-toolkit@copilot-plugins` when publishing agents; not required for local scaffolding.
 
-Missing prerequisites do not block registration; they surface at first skill invocation. Warn the heir but do not refuse to emit the block.
+Missing prerequisites do not block registration; they surface at first skill invocation. Warn the user but do not refuse to emit the block.
 
 ## Emit block
 
-Produce this block as an emitable, paste-ready JSON snippet. Do not modify the heir's `~/.copilot/settings.json` without explicit consent (see Install flow below).
+Produce this block as an emitable, paste-ready JSON snippet. Do not modify the user's `~/.copilot/settings.json` without explicit consent (see Install flow below).
 
 ### Emit-only safety boundary
 
@@ -68,7 +80,7 @@ registrations. Return the block and guidance directly.
 }
 ```
 
-The block enables all seven. Heirs edit their local `enabledPlugins` after paste to drop plugins they do not need — for example, a heir on Azure only can remove the six Fabric / Power BI / M365 entries.
+The block enables all four. Edit the local `enabledPlugins` after pasting to drop plugins they do not need — for example, a user on Azure only can remove the Fabric, Power BI, and M365 entries.
 
 ## Scope decision (do this first)
 
@@ -76,18 +88,18 @@ Before any of the three modes below, decide the target scope:
 
 | Scope | Target file | Use when |
 |---|---|---|
-| **Repo (default)** | `.github/copilot/settings.json` in the current workspace | The heir is set up on a project that touches Azure / Fabric / Power BI / M365. These plugins load only in this workspace; other projects stay lean. File gets committed — teammates inherit the setup on clone. |
-| **User (opt-in via `--user`)** | `~/.copilot/settings.json` on the current machine | The heir uses the Microsoft ecosystem across most or all of their projects and wants the plugins loaded in every workspace. |
+| **Repo (default)** | `.github/copilot/settings.json` in the current workspace | the user is set up on a project that touches Azure / Fabric / Power BI / M365. These plugins load only in this workspace; other projects stay lean. File gets committed — teammates inherit the setup on clone. |
+| **User (opt-in via `--user`)** | `~/.copilot/settings.json` on the current machine | the user uses the Microsoft ecosystem across most or all of their projects and wants the plugins loaded in every workspace. |
 
-Default is repo scope. These are project-specific tools (Azure = Azure projects; Fabric = Fabric projects; etc.); loading them at user scope means every non-Microsoft workspace pays the context cost for skills the heir will never invoke there.
+Default is repo scope. These are project-specific tools (Azure = Azure projects; Fabric = Fabric projects; etc.); loading them at user scope means every non-Microsoft workspace pays the context cost for skills the user will never invoke there.
 
-The rule: *"Am I this? → user scope. Am I working on this? → repo scope."* The seven target plugins answer the second question, not the first.
+The rule: *"Am I this? → user scope. Am I working on this? → repo scope."* These target plugins answer the second question, not the first.
 
-Ask the heir which scope, or accept an explicit `--user` flag. Default to repo when unspecified.
+Ask the user which scope, or accept an explicit `--user` flag. Default to repo when unspecified.
 
 ## Install flow
 
-Three modes. Ask the heir which they want; default to (1). Every mode uses the scope decided above.
+Three modes. Ask the user which they want; default to (1). Every mode uses the scope decided above.
 
 ### 1. Emit only (default, safe)
 
@@ -97,11 +109,11 @@ Print the JSON block above with instructions targeted at the chosen scope:
 >
 > **User scope (`--user` opt-in)**: Paste this block into `~/.copilot/settings.json` on this machine. If the file already has keys, merge. The block will apply to every workspace you open on this machine.
 
-No filesystem write. No CLI invocation. Heir owns the paste + install.
+No filesystem write. No CLI invocation. user owns the paste + install.
 
 ### 2. Consent-gated auto-install
 
-Only after explicit "yes, install them" from the heir. Merge the block into the target file per the chosen scope:
+Only after explicit "yes, install them" from the user. Merge the block into the target file per the chosen scope:
 
 ```powershell
 # Repo scope (default): merge into <workspace>/.github/copilot/settings.json
@@ -115,7 +127,7 @@ copilot plugin install powerbi-authoring@fabric-collection
 copilot plugin install microsoft-365-agents-toolkit@copilot-plugins
 ```
 
-Additive settings merge: if the target file already has an `enabledPlugins` map with unrelated entries, preserve them. If it already has entries for one of them, warn but do not overwrite unless the heir also asked to reset.
+Additive settings merge: if the target file already has an `enabledPlugins` map with unrelated entries, preserve them. If it already has entries for one of them, warn but do not overwrite unless the user also asked to reset.
 
 **Marketplaces register at user scope regardless of the enabledPlugins scope choice.** The `marketplace add` commands write to `~/.copilot/settings.json` `extraKnownMarketplaces` — that is where the CLI reads marketplace registration from. Only the `enabledPlugins` map moves between user and repo scope in this skill.
 
@@ -129,17 +141,17 @@ Read the current settings file at the chosen scope. Under `--user`, read `~/.cop
 | `fabric-skills@copilot-plugins` | yes/no | yes/no | (built-in) | `install` / `enable-only` / `move-scope` / `nothing` |
 | ... | | | | |
 
-The "other scope" column surfaces heirs who accidentally enabled at user scope when repo scope was intended (or vice versa). Do not modify anything. Report only. Heir decides what to do with the audit.
+The "other scope" column surfaces Users who accidentally enabled at user scope when repo scope was intended (or vice versa). Do not modify anything. Report only. user decides what to do with the audit.
 
 ## Safety rules
 
-- **Never** overwrite a settings file (repo OR user) without explicit consent from the heir.
-- **Never** disable a plugin the heir did not ask to disable — merge, don't replace.
+- **Never** overwrite a settings file (repo OR user) without explicit consent from the user.
+- **Never** disable a plugin the user did not ask to disable — merge, don't replace.
 - **Never** install plugins from marketplaces outside the two named (`microsoft/azure-skills`, `microsoft/skills-for-fabric`). Any expansion needs a separate proposal.
-- **Never** silently pick user scope. Default is repo. Only switch to user on explicit `--user` request from the heir.
-- **Do** warn if the heir already has `enabledPlugins` entries at *either* scope that conflict with these (for example, a pre-existing `fabric-skills@my-fork` at repo scope with the target `fabric-skills@copilot-plugins` at user scope would produce a plugin-name collision the CLI resolves via last-write-wins).
+- **Never** silently pick user scope. Default is repo. Only switch to user on explicit `--user` request from the user.
+- **Do** warn if the user already has `enabledPlugins` entries at *either* scope that conflict with these (for example, a pre-existing `fabric-skills@my-fork` at repo scope with the target `fabric-skills@copilot-plugins` at user scope would produce a plugin-name collision the CLI resolves via last-write-wins).
 - **Do** verify the CLI version before offering install mode; refuse to proceed if the CLI is too old (missing the marketplace-add subcommand).
-- **Do** remind the heir that the repo file gets committed — teammates will inherit the setup on next `git pull`.
+- **Do** remind the user that the repo file gets committed — teammates will inherit the setup on next `git pull`.
 
 ## Anti-patterns
 
@@ -149,7 +161,7 @@ The "other scope" column surfaces heirs who accidentally enabled at user scope w
 | Overwrite an existing settings file | Merge; preserve unrelated keys |
 | Default to user scope silently | Default is repo scope per PLUGIN-INTEGRATION § 2; user scope requires explicit `--user` |
 | Skip the scope-decision step | Every invocation must decide scope before offering modes |
-| Install a subset without telling the heir which the block excluded | List every plugin the heir will get and every one the block does not enable |
+| Install a subset without telling the user which the block excluded | List every plugin the user will get and every one the block does not enable |
 | Skip prerequisite check | Missing subscriptions do not block registration but do block real skill use — always warn |
 | Include Microsoft-internal plugins (WorkIQ, `org-report`, Agency framework) | Those are internal-only and out of scope; this skill covers the public ecosystem |
 
@@ -163,10 +175,10 @@ The "other scope" column surfaces heirs who accidentally enabled at user scope w
 
 Sunset or revise this skill by **2027-01-30** (6 months) if any of the following fires:
 
-- Any target plugin is renamed, moved, or deprecated upstream, making the emitted block stale. This fired once: the persona-axis Fabric bundles were retired into `fabric-skills` and the skill kept emitting all three for months. Verify each name with `copilot plugin marketplace browse` before emitting.
-- Microsoft ships a new plugin in the same ecosystem that heirs consistently install alongside these seven (block is incomplete).
+- Any target plugin is renamed, moved, or deprecated upstream, making the emitted block stale. This fired once: the persona-axis Fabric bundles were retired into `fabric-skills` and the skill kept emitting all three for months. Verify each name with `copilot plugin marketplace browse` before emitting, under the account whose tenant owns the marketplace.
+- Microsoft ships a new plugin in the same ecosystem that users consistently install alongside these (block is incomplete).
 - The `copilot plugin marketplace add` CLI syntax changes (install flow is broken on emit).
-- Two or more heirs report the auto-install mode overwriting unrelated settings (safety rule failed).
+- Two or more Users report the auto-install mode overwriting unrelated settings (safety rule failed).
 
 Track outcomes in the maintaining repo's curation log.
 
