@@ -11,7 +11,7 @@ lastReviewed: 2026-07-28
 
 Distill the central claim before authoring any summary-shaped output. Every hero subtitle, commit subject, PR title, ADR title, slide title, executive summary, and skill description should carry a Big Idea: a testable thesis that answers _"what changes for the reader?"_, not an enumeration of what's inside the artifact.
 
-Generalized from `chart-big-idea` in the [flint-chart-plugin](https://github.com/fabioc-aloha/flint-chart-plugin), which specializes this discipline for chart authoring. This skill covers everything else.
+Generalized from [`chart-big-idea`](../chart-big-idea/SKILL.md), which specializes this discipline for chart authoring. This skill covers everything else.
 
 ## When to Fire
 
@@ -155,7 +155,7 @@ From the 2026-07-28 hero-copy sweep on this repo. Note the shape: before is enum
 
 ## Related
 
-- `chart-big-idea` in the [flint-chart-plugin](https://github.com/fabioc-aloha/flint-chart-plugin) — chart specialization. Both skills share the same six-step arc with offset numbering: chart-big-idea Step 0 (read context) → this skill's Step 1; chart-big-idea Steps 1-4 → this skill's Steps 2-5; chart-big-idea Step 5 emits a Chart Brief while this skill's Step 6 emits prose.
+- [`chart-big-idea`](../chart-big-idea/SKILL.md) — chart specialization. Both skills share the same six-step arc with offset numbering: chart-big-idea Step 0 (read context) → this skill's Step 1; chart-big-idea Steps 1-4 → this skill's Steps 2-5; chart-big-idea Step 5 emits a Chart Brief while this skill's Step 6 emits prose.
 - Skill descriptions ARE Big Ideas — the frontmatter `description` field's "what + when" is the thesis + trigger of the skill's Big Idea.
 - [communication-craft](../communication-craft/SKILL.md) — sibling skill for feedback, audience, and elicitation. Communication craft frames the whole message; Big Idea frames only the headline.
 - [humanizer](../humanizer/SKILL.md) — the 29-pattern AI-tell catalog and voice replacements. Big Idea authoring routes through humanizer for the AI-tell check before emit.
