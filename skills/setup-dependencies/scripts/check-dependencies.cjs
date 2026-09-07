@@ -46,10 +46,21 @@ function moduleResolvable(name) {
     try { require.resolve(path.join(MCP_RUNTIME, 'node_modules', name)); return true; } catch { return false; }
 }
 
+function pythonModulePresent(name) {
+    for (const py of ['python', 'python3']) {
+        const probe = spawnSync(py, ['-c', `import ${name}`], { stdio: 'ignore' });
+        if (probe.status === 0) return true;
+    }
+    return false;
+}
+
 function detect() {
     const rows = [];
     for (const [key, tool] of Object.entries(TOOLS)) {
-        const present = tool.kind === 'npm-module' ? moduleResolvable(key) : onPath(key);
+        let present;
+        if (tool.kind === 'npm-module') present = moduleResolvable(key);
+        else if (tool.kind === 'python-module') present = pythonModulePresent(tool.importName || key);
+        else present = onPath(key);
         rows.push({ key, label: tool.label, kind: tool.kind, required: tool.required, present, unlocks: tool.unlocks, install: tool.install[platformKey()] });
     }
     return rows;
@@ -92,7 +103,7 @@ if (!mcp.provisioned) {
 
 if (!APPLY) {
     console.log('\nPreview only. Nothing was installed or changed.');
-    console.log('Re-run with --apply to install the npm-based items automatically.');
+    console.log('Re-run with --apply to install the package-manager items automatically.');
     console.log('System packages still need their own command above, which cannot run without your consent.');
     process.exit(0);
 }
@@ -109,10 +120,12 @@ let installed = 0;
 let failed = 0;
 for (const r of missingTools.filter((x) => x.kind !== 'system')) {
     console.log(`\ninstalling: ${r.label}`);
-    const args = r.kind === 'npm-global'
-        ? ['install', '-g', r.install.split(' ').pop()]
-        : ['install', '--prefix', MCP_RUNTIME, '--no-audit', '--no-fund', r.key];
-    const res = spawnSync('npm', args, { stdio: 'inherit', shell: process.platform === 'win32' });
+    let cmd = 'npm';
+    let args;
+    if (r.kind === 'npm-global') args = ['install', '-g', r.install.split(' ').pop()];
+    else if (r.kind === 'python-module') { cmd = 'pip'; args = ['install', r.key]; }
+    else args = ['install', '--prefix', MCP_RUNTIME, '--no-audit', '--no-fund', r.key];
+    const res = spawnSync(cmd, args, { stdio: 'inherit', shell: process.platform === 'win32' });
     if (res.status === 0) installed += 1;
     else { failed += 1; console.error(`FAILED: ${r.label}`); }
 }

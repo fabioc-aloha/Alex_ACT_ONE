@@ -62,6 +62,21 @@ const TOOLS = {
             linux: 'npm install jszip',
         },
     },
+    Pillow: {
+        label: 'Pillow',
+        kind: 'python-module',
+        required: false,
+        // The package is Pillow; the module it provides is PIL. Probing the
+        // package name reports a false negative on a machine that has it.
+        importName: 'PIL',
+        unlocks: 'annotating screenshots and images this plugin did not render',
+        probe: null,
+        install: {
+            win32: 'pip install Pillow',
+            darwin: 'pip install Pillow',
+            linux: 'pip install Pillow',
+        },
+    },
 };
 
 function platformKey() {
