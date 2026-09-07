@@ -28,7 +28,7 @@
       "type": "stdio",
       "command": "node",
       "args": [
-        "skills/setup-illustrator-runtime/scripts/runtime-launcher.mjs",
+        "skills/setup-dependencies/scripts/runtime-launcher.mjs",
         "flint"
       ]
     },
@@ -36,7 +36,7 @@
       "type": "stdio",
       "command": "node",
       "args": [
-        "skills/setup-illustrator-runtime/scripts/runtime-launcher.mjs",
+        "skills/setup-dependencies/scripts/runtime-launcher.mjs",
         "replicate"
       ],
       "env": {
@@ -47,7 +47,7 @@
       "type": "stdio",
       "command": "node",
       "args": [
-        "skills/setup-illustrator-runtime/scripts/runtime-launcher.mjs",
+        "skills/setup-dependencies/scripts/runtime-launcher.mjs",
         "playwright",
         "--headless",
         "--isolated",

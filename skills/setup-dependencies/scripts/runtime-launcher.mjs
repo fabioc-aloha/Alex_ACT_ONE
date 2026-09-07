@@ -34,12 +34,12 @@ if (!config) {
 const { expectedVersion, packagePath, target } = config;
 if (!existsSync(target)) {
   console.error(`MCP runtime is not provisioned: ${target}`);
-  console.error('Run /alex-act-one setup-illustrator-runtime.');
+  console.error('Run /alex-act-one setup-dependencies.');
   process.exit(3);
 }
 if (!existsSync(packagePath)) {
   console.error(`MCP runtime package metadata is missing: ${packagePath}`);
-  console.error('Run /alex-act-one setup-illustrator-runtime.');
+  console.error('Run /alex-act-one setup-dependencies.');
   process.exit(3);
 }
 
@@ -52,7 +52,7 @@ try {
 }
 if (installedVersion !== expectedVersion) {
   console.error(`MCP runtime version mismatch for ${route}: expected ${expectedVersion}, found ${installedVersion || '(missing)'}.`);
-  console.error('Run /alex-act-one setup-illustrator-runtime.');
+  console.error('Run /alex-act-one setup-dependencies.');
   process.exit(4);
 }
 

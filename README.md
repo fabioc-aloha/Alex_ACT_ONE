@@ -92,6 +92,31 @@ prints the exact target directory first.
 Step 1 alone is a complete, working install. Step 2 adds the always-on
 behavior, and skipping it costs you nothing else.
 
+### 3. Optional: extra tools for a few skills
+
+Most of this plugin needs nothing but Node. Forty-three of the 58 skills run
+with no external tools at all, and nothing below is needed to start.
+
+| If you want to... | You also need | Get it |
+| --- | --- | --- |
+| Convert documents (Word, HTML, email, plain text) | Pandoc | `winget install JohnMacFarlane.Pandoc`, `brew install pandoc`, or `apt install pandoc` |
+| Render Mermaid diagrams into Word or HTML output | Mermaid CLI | `npm install -g @mermaid-js/mermaid-cli` |
+| Export SVG banners and figures as PNG | svgexport | `npm install -g svgexport` |
+| Render charts, generate images, or verify output in a browser | Three MCP servers | `/alex-act-one setup-dependencies` |
+
+To see what you already have and what any gap costs you:
+
+```text
+/alex-act-one setup-dependencies
+```
+
+It reports what is present, what is missing, and what each missing piece
+unlocks. It installs nothing without asking, and it never runs a system package
+manager on your behalf.
+
+If you skip this entirely, every skill that needs one of these will tell you
+exactly which tool it wants and how to install it, at the moment you need it.
+
 ## What Is Next
 
 See the [roadmap](ROADMAP.md).

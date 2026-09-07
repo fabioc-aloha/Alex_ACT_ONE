@@ -22,7 +22,7 @@ Theme Lab iteration, and visual verification.
    page content into the theme.
 3. **Load Flint's version-matched grammar.** Read `flint://theme-skill` or invoke
    `author_flint_theme`. When neither MCP surface is available, stop and route
-   through `setup-illustrator-runtime`; do not invent ThemeSpec keys from memory.
+   through `setup-dependencies`; do not invent ThemeSpec keys from memory.
 4. **Author the smallest coherent spec.** Return one bare ThemeSpec JSON object,
    not `{ "theme_spec": ... }` and not a complete ChartAssemblyInput. Prefer a
    preset or narrow `extends` override when its compiler behavior fits. Use a

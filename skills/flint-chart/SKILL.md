@@ -101,7 +101,7 @@ authoring a spec no one can render.
        "flint": {
          "type": "stdio",
          "command": "node",
-         "args": ["skills/setup-illustrator-runtime/scripts/runtime-launcher.mjs", "flint"],
+         "args": ["skills/setup-dependencies/scripts/runtime-launcher.mjs", "flint"],
        },
      },
    }
@@ -109,7 +109,7 @@ authoring a spec no one can render.
 
    - `"type": "stdio"` is optional in some hosts but always declare it —
      omitting it makes transport-related failures harder to diagnose.
-   - Run `setup-illustrator-runtime` once after install or update. It previews
+   - Run `setup-dependencies` once after install or update. It previews
      npm's configured registry and exact package set before asking to apply.
    - Runtime calls `node <private-runtime>/launch.mjs flint`; it starts no npm
      or npx process. Missing private state routes back to setup.
@@ -209,7 +209,7 @@ First decide which workflow the user is asking for:
 For MCP clients, the server uses an exact cache-first package:
 
 ```bash
-node "skills/setup-illustrator-runtime/scripts/runtime-launcher.mjs" flint
+node "skills/setup-dependencies/scripts/runtime-launcher.mjs" flint
 ```
 
 For JavaScript or TypeScript projects, use the approved project dependency

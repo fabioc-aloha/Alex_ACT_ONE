@@ -305,7 +305,7 @@ verified.
 first; if it can open the artifact and return a screenshot to you, you do not
 need this server. Measured against `@playwright/mcp@0.0.78`:
 
-Run `setup-illustrator-runtime` once after installing or updating Illustrator.
+Run `setup-dependencies` once after installing or updating Illustrator.
 Its `--check-updates` mode compares the reviewed Playwright pin with the stable
 dist-tag; a newer version still requires a browser-compatibility pass before the
 source pin changes.
@@ -317,7 +317,7 @@ source pin changes.
       "type": "stdio",
       "command": "node",
       "args": [
-        "skills/setup-illustrator-runtime/scripts/runtime-launcher.mjs",
+        "skills/setup-dependencies/scripts/runtime-launcher.mjs",
         "playwright",
         "--headless",
         "--isolated",

@@ -3,6 +3,7 @@
 
 const path = require('node:path');
 const { execFileSync, spawnSync } = require('node:child_process');
+const { remedyFor } = require('./dependencies.cjs');
 
 function envKeyForTool(tool) {
     return `ACT_TOOL_${String(tool).replace(/[^a-zA-Z0-9]/g, '_').toUpperCase()}`;
@@ -16,7 +17,7 @@ function resolveWindowsTool(tool) {
     if (windowsResolveCache.has(tool)) return windowsResolveCache.get(tool);
     const probe = spawnSync('where.exe', [tool], { encoding: 'utf8' });
     if (probe.status !== 0 || !probe.stdout) {
-        throw new Error(`Tool not found in PATH: ${tool}`);
+        throw new Error(remedyFor(tool));
     }
     // Prefer .cmd/.exe/.bat over .ps1 so execFileSync can spawn without a PowerShell host.
     const candidates = probe.stdout.split(/\r?\n/).filter(Boolean).map((line) => line.trim());
@@ -31,7 +32,16 @@ function runTool(tool, args, options = {}) {
         return execFileSync(process.execPath, [overrideScript, ...args], options);
     }
     const isWindows = process.platform === 'win32';
-    if (!isWindows) return execFileSync(tool, args, options);
+    if (!isWindows) {
+        try {
+            return execFileSync(tool, args, options);
+        } catch (error) {
+            // ENOENT means the binary is absent; anything else is a real failure
+            // from a tool that did run, and must surface unchanged.
+            if (error && error.code === 'ENOENT') throw new Error(remedyFor(tool));
+            throw error;
+        }
+    }
     // Resolve the absolute .cmd/.exe path so we can drop `shell: true` and avoid the
     // Node DEP0190 argument-concatenation vulnerability with user-supplied paths.
     const resolved = resolveWindowsTool(tool);

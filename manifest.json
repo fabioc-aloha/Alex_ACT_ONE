@@ -216,8 +216,8 @@
         "path": "skills/setup-enterprise-stack/SKILL.md"
       },
       {
-        "name": "setup-illustrator-runtime",
-        "path": "skills/setup-illustrator-runtime/SKILL.md"
+        "name": "setup-dependencies",
+        "path": "skills/setup-dependencies/SKILL.md"
       },
       {
         "name": "spike",
@@ -413,8 +413,8 @@
         "path": "prompts/setup-enterprise.prompt.md"
       },
       {
-        "name": "setup-illustrator-runtime",
-        "path": "prompts/setup-illustrator-runtime.prompt.md"
+        "name": "setup-dependencies",
+        "path": "prompts/setup-dependencies.prompt.md"
       },
       {
         "name": "status",
