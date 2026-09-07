@@ -27,7 +27,7 @@ Either way: reload the browser. No build, no restart.
   ```
 
 - **Per-doc emoji icon** — add `"icon": "🏠"` (single emoji character) to a doc entry in the manifest. Rendered at 22px in the sticky page-title header. Empty or absent collapses cleanly.
-- **Big Idea in the hero** — `hero.subtitle` is the doc's one-sentence thesis. Authored per the [big-idea skill](https://github.com/fabioc-aloha/Alex_ACT_Core). The optional `hero.description` is metadata preserved in the manifest but not rendered by default.
+- **Big Idea in the hero** — `hero.subtitle` is the doc's one-sentence thesis. Authored per the big-idea skill. The optional `hero.description` is metadata preserved in the manifest but not rendered by default.
 - **QuickJumps** — add entries to `areas[N].quickJumps[]` to surface shortcuts in the topnav-right. Two shapes:
 
   ```json
@@ -83,4 +83,4 @@ flowchart TD
 
 Use the bundled [adoption guide](ADOPTION.md) for fresh-copy, upgrade, path, origin, and validation checklists.
 
-Full field-by-field reference for the manifest schema, theme system, path rewriting, optional features, and troubleshooting lives at the [docs-shell reference](https://github.com/fabioc-aloha/Alex_ACT_Illustrator_Plugin/blob/main/docs/shell/README.md).
+Full field-by-field reference for the manifest schema, theme system, path rewriting, optional features, and troubleshooting lives at the docs-shell skill reference that ships with the plugin.

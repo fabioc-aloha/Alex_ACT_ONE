@@ -226,7 +226,7 @@ because Flint's generic documentation uses a zero-install example.
 ## Rendered Evidence
 
 The checked-in
-[Heart with Axes demo](https://github.com/fabioc-aloha/Alex_ACT_Illustrator_Plugin/blob/main/demos/heart-with-axes/report.html)
+a worked demo report
 was reviewed over HTTP on 2026-08-17. Its accessibility tree exposes the Vega
 visualization, both semantic axes, quadrant labels, and every plotted archetype.
 It is a direct Vega-Lite SVG demonstration, not a Flint MCP

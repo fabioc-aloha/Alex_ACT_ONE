@@ -18,7 +18,7 @@ const CHECK_UPDATES = process.argv.includes('--check-updates');
 const rootArgIndex = process.argv.indexOf('--runtime-root');
 const RUNTIME_ROOT = rootArgIndex >= 0
   ? resolve(process.argv[rootArgIndex + 1] ?? '')
-  : join(homedir(), '.copilot', 'plugin-data', 'alex-act-illustrator-plugin', 'runtime');
+  : join(homedir(), '.copilot', 'plugin-data', 'alex-act-one', 'runtime');
 const consumed = new Set(['--apply', '--check-updates']);
 if (rootArgIndex >= 0) {
   consumed.add('--runtime-root');
@@ -123,7 +123,7 @@ try {
     });
   }
 
-  console.log('\nProvisioned direct runtime. Reload the host, then run node scripts/verify-install.mjs.');
+  console.log('\nProvisioned direct runtime. Reload the host, then start a new session so the MCP servers pick up the runtime.');
 } catch (error) {
   console.error(`FAIL  ${error.message}`);
   process.exit(1);

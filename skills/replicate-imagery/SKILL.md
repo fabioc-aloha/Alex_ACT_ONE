@@ -15,8 +15,8 @@ You want to add a visual artifact to a doc / book / report and none of these fit
 | Artifact                                            | Not this skill — use instead                                        |
 | --------------------------------------------------- | ------------------------------------------------------------------- |
 | Data chart (bar, line, scatter, distribution, KPI)  | [`flint-chart`](../flint-chart/SKILL.md)                            |
-| Technical / architectural / flow diagram            | `markdown-mermaid` (Alex_ACT_Steward baseline)                      |
-| Brand banner (hero header for a doc)                | `svg-banner` (Alex_ACT_Steward baseline)                            |
+| Technical / architectural / flow diagram            | [`markdown-mermaid`](../markdown-mermaid/SKILL.md)                      |
+| Brand banner (hero header for a doc)                | [`svg-banner`](../svg-banner/SKILL.md)                            |
 | Deterministic hand-authored figure (dataset-backed) | [`figure-generator`](../figure-generator/SKILL.md)                  |
 | Print-quality book figure with typography grammar   | [`print-svg-style-guide`](../print-svg-style-guide/SKILL.md)        |
 
@@ -91,11 +91,11 @@ Model list evolves fast. If a recommendation here is stale, the upstream `find-m
 
 ## Brand alignment
 
-For illustrations that should feel on-brand with the Alex ACT constellation, weave color hex codes from the constellation's [`brand-palette.json`](https://github.com/fabioc-aloha/Alex_ACT_Core/blob/main/.github/config/brand-palette.json) into the prompt. Example:
+For illustrations that should feel on-brand, weave color hex codes from your project's `.github/config/brand-palette.json` into the prompt. Example:
 
 > "A minimalist illustration of a person coding at a desk, dominant color emerald `#10b981` with deep slate `#0f172a` accents, cyan `#06b6d4` highlight on the monitor, clean vector style, no text."
 
-Per-project brands: use that project's own `brand-palette.json` (heirs override — see this plugin's README `Brand palette` section for the swatch and configuration key mapping).
+Per-project brands: each project overrides the palette in its own `.github/config/brand-palette.json`.
 
 Best model choices for brand-consistent output:
 

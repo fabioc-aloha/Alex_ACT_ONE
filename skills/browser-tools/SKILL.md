@@ -116,7 +116,7 @@ The internal browser accepts `file:///` URLs directly AND runs `fetch()` calls a
 open_browser_page({ url: "file:///c:/Development/<repo>/<path>/index.html" });
 ```
 
-**Empirically verified 2026-07-26** against Alex_ACT_Steward's docs shell at `file:///c:/Development/Alex_ACT_Steward/docs/index.html`:
+**Empirically verified 2026-07-26** against a documentation shell served from disk:
 
 | Behavior                                        | Result                                                                   |
 | ----------------------------------------------- | ------------------------------------------------------------------------ |
@@ -126,7 +126,7 @@ open_browser_page({ url: "file:///c:/Development/<repo>/<path>/index.html" });
 | `fetch('00-about.md')` succeeds under file://   | Yes — article body rendered from the source markdown                     |
 | `screenshot_page` captures the rendered output  | Yes — full page including hero, TOC, article, TOC scroll-spy             |
 
-**Also verified 2026-07-26** for image / media files (`file:///c:/Development/Alex_ACT_Steward/constellation/branding/assets/banner-steward.svg`):
+**Also verified 2026-07-26** for image and media files opened straight from disk:
 
 | Format     | Renders natively via file:// | Notes                                                                                                                |
 | ---------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------------- |
@@ -142,7 +142,7 @@ Use this whenever you'd otherwise reach for a local HTTP server or an image-prev
 
 - Rendered `docs/index.html` after a shell edit
 - Standalone `report.html` from a markdown-to-html converter
-- SVG banners, diagrams, generated charts (author-side visual work ships in the `Alex_ACT_Illustrator_Plugin`)
+- SVG banners, diagrams, generated charts
 - PNG/JPG screenshots or captures from other tools
 - Any HTML that consumes local `.json` / `.md` / `.svg` via `fetch()`
 - A PDF that a converter just emitted, to confirm layout

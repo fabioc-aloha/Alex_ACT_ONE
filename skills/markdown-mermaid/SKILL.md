@@ -121,7 +121,7 @@ Runtime fitting removes wasted viewport space; it does not repair an over-dense 
 | Timeline / roadmap               | Mermaid gantt (but see fragility above) | Native but fragile                   |
 | Free-form / whiteboard           | Excalidraw (external)                   | LLM cannot generate; user draws      |
 | Data / metrics                   | flint-chart plugin                      | Real chart rendering, not diagram    |
-| Brand / hero banner              | `Alex_ACT_Illustrator_Plugin` svg-banner | Not a diagram; different domain      |
+| Brand / hero banner              | [`svg-banner`](../svg-banner/SKILL.md)   | Not a diagram; different domain      |
 
 For Mermaid alternatives (D2, PlantUML, Graphviz, WaveDrom) with syntax examples and VS Code extension setup, see [`references/tool-ecosystem.md`](references/tool-ecosystem.md).
 

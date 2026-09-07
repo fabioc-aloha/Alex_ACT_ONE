@@ -5,8 +5,8 @@ import { existsSync, readFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 
-const runtimeRoot = process.env.ALEX_ACT_ILLUSTRATOR_RUNTIME_ROOT
-  || join(homedir(), '.copilot', 'plugin-data', 'alex-act-illustrator-plugin', 'runtime');
+const runtimeRoot = process.env.ALEX_ACT_ONE_RUNTIME_ROOT
+  || join(homedir(), '.copilot', 'plugin-data', 'alex-act-one', 'runtime');
 const routes = {
   flint: {
     expectedVersion: '0.5.1',
@@ -28,18 +28,18 @@ const [route, ...args] = process.argv.slice(2);
 const config = routes[route];
 
 if (!config) {
-  console.error(`Unknown Illustrator runtime route: ${route || '(missing)'}`);
+  console.error(`Unknown MCP runtime route: ${route || '(missing)'}`);
   process.exit(2);
 }
 const { expectedVersion, packagePath, target } = config;
 if (!existsSync(target)) {
-  console.error(`Illustrator runtime is not provisioned: ${target}`);
-  console.error('Run /alex-act-illustrator-plugin setup-illustrator-runtime.');
+  console.error(`MCP runtime is not provisioned: ${target}`);
+  console.error('Run /alex-act-one setup-illustrator-runtime.');
   process.exit(3);
 }
 if (!existsSync(packagePath)) {
-  console.error(`Illustrator runtime package metadata is missing: ${packagePath}`);
-  console.error('Run /alex-act-illustrator-plugin setup-illustrator-runtime.');
+  console.error(`MCP runtime package metadata is missing: ${packagePath}`);
+  console.error('Run /alex-act-one setup-illustrator-runtime.');
   process.exit(3);
 }
 
@@ -47,12 +47,12 @@ let installedVersion;
 try {
   installedVersion = JSON.parse(readFileSync(packagePath, 'utf8')).version;
 } catch (error) {
-  console.error(`Illustrator runtime package metadata is invalid: ${error.message}`);
+  console.error(`MCP runtime package metadata is invalid: ${error.message}`);
   process.exit(3);
 }
 if (installedVersion !== expectedVersion) {
-  console.error(`Illustrator runtime version mismatch for ${route}: expected ${expectedVersion}, found ${installedVersion || '(missing)'}.`);
-  console.error('Run /alex-act-illustrator-plugin setup-illustrator-runtime.');
+  console.error(`MCP runtime version mismatch for ${route}: expected ${expectedVersion}, found ${installedVersion || '(missing)'}.`);
+  console.error('Run /alex-act-one setup-illustrator-runtime.');
   process.exit(4);
 }
 
@@ -66,7 +66,7 @@ for (const signal of ['SIGINT', 'SIGTERM']) {
   process.on(signal, () => child.kill(signal));
 }
 child.on('error', (error) => {
-  console.error(`Illustrator runtime launch failed: ${error.message}`);
+  console.error(`MCP runtime launch failed: ${error.message}`);
   process.exit(1);
 });
 child.on('exit', (code, signal) => {

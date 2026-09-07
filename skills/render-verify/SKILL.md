@@ -290,8 +290,8 @@ data, visible labels, aria description, tooltip, caption, and any
 evidence-boundary text.
 
 Composes with the `mutation-testing` skill, which applies the same idea to a
-test harness. Adapted from the Executable Example Contract in the
-`visual-storytelling` skill of [`fabioc-aloha/Alex_ACT_Visual_Storytelling`](https://github.com/fabioc-aloha/Alex_ACT_Visual_Storytelling).
+test harness. Adapted from the Executable Example Contract in an earlier
+visual-storytelling curriculum, absorbed into this plugin.
 
 ## Step 5 — report honestly
 

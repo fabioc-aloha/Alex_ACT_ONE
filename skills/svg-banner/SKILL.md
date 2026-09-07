@@ -16,7 +16,7 @@ Renamed on 2026-07-29 from `alex-banner-generation` — same design, same script
 - A branded section header for a documentation site
 - A visual identity stamp for a doc shared externally
 
-> **Looking for a lighter, hand-authored variant?** The Mall ships [`document-banner-pastel`](https://github.com/fabioc-aloha/Alex_Skill_Mall/blob/main/plugins/media-graphics/document-banner-pastel/SKILL.md) — pastel 1200×240 banners with content-specific iconography (tracks / hub-and-spokes / mockup / badge / symbol). Use that pattern for branding, education, or audience-facing docs; use this skill for technical artifacts that need brand-stamped consistency.
+> **Looking for a lighter, hand-authored variant?** Pastel 1200×240 banners with content-specific iconography (tracks, hub-and-spokes, mockup, badge, symbol) suit branding, education, or audience-facing docs. Use this skill for technical artifacts that need brand-stamped consistency.
 
 ## The design (fixed across brands)
 
@@ -37,7 +37,7 @@ Every banner obeys this layout. Only the brand config (colors, mark, labels, wat
 
 Title cap: **32 chars**. Subtitle cap: **80 chars**. Longer inputs are rejected by the script — reflow or abbreviate.
 
-Related design grammar: the illustrator plugin's [`print-svg-style-guide`](https://github.com/fabioc-aloha/Alex_ACT_Illustrator_Plugin/blob/main/skills/print-svg-style-guide/SKILL.md) covers print-quality figure typography, semantic palette, and composition idioms for book / report figures. Banners are screen-first and share the palette-semantic-role discipline but not the print-legibility gates.
+Related design grammar: [`print-svg-style-guide`](../print-svg-style-guide/SKILL.md) covers print-quality figure typography, semantic palette, and composition idioms for book / report figures. Banners are screen-first and share the palette-semantic-role discipline but not the print-legibility gates.
 
 ## Brand configuration
 

@@ -129,7 +129,7 @@ A mutation-testing pass is complete when:
 
 ## Origin
 
-Codified 2026-05-31 after meta-testing the Alex_ACT_Extension static-fetch test harness (commit `4163f67`). The protocol caught two real coverage gaps (symlink-cycle protection and depth-cap enforcement in `lib/fs-utils.js`) that platform-skipped tests had been silently hiding. Applied a second time to the Alex_ACT_Edition test harness (commit `b8de5a5`) where it caught two more gaps (local/ filter on skills and instructions in `build-edition-manifest.cjs`). 12 of 12 caught after gap-closing — the protocol is the reason the final harnesses are trustworthy.
+Codified 2026-05-31 after meta-testing a static-fetch test harness (commit `4163f67`). The protocol caught two real coverage gaps (symlink-cycle protection and depth-cap enforcement in `lib/fs-utils.js`) that platform-skipped tests had been silently hiding. Applied a second time to another test harness, where it caught two more gaps (local/ filter on skills and instructions in `build-edition-manifest.cjs`). 12 of 12 caught after gap-closing — the protocol is the reason the final harnesses are trustworthy.
 
 ## Related
 

@@ -52,11 +52,10 @@ greeting instruction from another plugin or any user-authored file. A valid
 legacy mixed receipt is evidence for preserving matching bytes, not authority to
 rewrite or delete another plugin's state.
 
-For compatibility with receipts written before this plugin absorbed the
-constellation, the receipt still records `alex-act-core` as `bootstrappedBy` and
-as each entry's `owner`. The filename is current; the identifier inside is not.
-Changing it invalidates every receipt already on disk, so it waits for a
-migration path.
+For compatibility with receipts written by earlier versions, the receipt still
+records `alex-act-core` as `bootstrappedBy` and as each entry's `owner`. The
+filename is current; the identifier inside is not. Changing it invalidates every
+receipt already on disk, so it waits for a migration path.
 
 ## Repair And Idempotency
 

@@ -1,34 +1,33 @@
 ---
 name: install-visual-companions
-description: "Offer to install eight marketplace plugins that compose visual-authoring workflows around Illustrator (chart rendering, screenshot verification, whiteboard iteration, PR annotation). Consent-gated, per-plugin — never bundled without explicit heir approval. Use when the heir asks to enable visual-workflow tooling, or when the illustrator's chart / figure / print-SVG authoring produces artifacts that need runtime verification (multimodal vision loop). Companion to install-constellation in alex-act-core."
-lastReviewed: 2026-08-14
+description: "Offer to install eight marketplace plugins that extend visual-authoring workflows: chart rendering, screenshot verification, whiteboard iteration, and PR annotation. Consent-gated, one plugin at a time, never bundled without explicit approval. Use when the user asks to enable visual-workflow tooling, or when chart, figure, or print-SVG authoring produces artifacts that need runtime verification."
+lastReviewed: 2026-09-07
 ---
 
 # install-visual-companions
 
-Eight marketplace plugins compose to deliver visual-authoring workflows around Illustrator: chart rendering, screenshot verification, whiteboard iteration, PR annotation, and the vision loop that closes what looks like a runtime-capability gap via composition rather than net-new authorship.
+Eight marketplace plugins extend this plugin's visual authoring: chart rendering, screenshot verification, whiteboard iteration, PR annotation, and the vision loop that closes an apparent runtime-capability gap through composition rather than new authorship.
 
-**None are part of this plugin's baseline install** — heirs opt in per workload, one at a time. The mechanical `copilot plugin install / marketplace add` commands and their safety rules are documented in the frozen Core repository's [`plugin-management`](https://github.com/fabioc-aloha/Alex_ACT_Core/blob/main/.github/skills/plugin-management/SKILL.md) skill, which this plugin does not bundle. Read it there; do not assume it is installed.
+**None ship with this plugin.** Install them one at a time, per workload, with explicit consent. Plugin names surfaced by description-match are inferred, not verified, so confirm each one against `copilot plugin marketplace browse` before installing.
 
 ## When to fire
 
-- Heir asks: "install visual companions" / "add screenshot tooling" / "enable chart-rendering plugins" / "install eyeball" / "install the vision loop"
-- Heir invokes `/alex-act-one install-visual-companions`
-- Heir's declared workload involves any of:
+- The user asks: "install visual companions" / "add screenshot tooling" / "enable chart-rendering plugins" / "install eyeball" / "install the vision loop"
+- The user invokes `/alex-act-one install-visual-companions`
+- The user's declared workload involves any of:
   - Chart authoring, data storytelling, or dashboard rendering
   - Report / document generation that needs visual verification
   - PR review workflows with screenshots or annotations
   - Iterative chart design where seeing the render matters
-- Illustrator's `render-verify` skill flags a claim that would benefit from screenshot audit
+- The `render-verify` skill flags a claim that would benefit from a screenshot audit
 
 ## When NOT to fire
 
 - Pure-code work, non-visual data pipelines, backend / infra without UI — the companions add zero cost when not installed but non-trivial install-time friction when installed
-- The heir hasn't installed Illustrator yet — install Core + Illustrator first; visual companions layer on top
 
 ## The eight companion plugins
 
-Discovered and verified via the Steward GH-APP-SUPPORT feedback loop (private governance record) (4-round A/B test on user's brain, 2026-07-31; ledger row `[GH-APP-FEEDBACK]` closure). Ownership moved from `alex-act-core`'s `install-constellation` Step 7 to this skill in Illustrator v0.6.0 (2026-08-01) so the visual-workflow shelf lives with the visual-authoring plugin that anchors it.
+Verified across four rounds of live install testing in 2026. The round-4 column records what was actually exercised.
 
 | Plugin | Marketplace | Purpose | Round-4 verified? |
 |---|---|---|---|
@@ -41,10 +40,9 @@ Discovered and verified via the Steward GH-APP-SUPPORT feedback loop (private go
 | `visual-artifact-qa` | `alex-mall` | Render-time verification (visual output that passes static checks can still fail to render) | ✅ |
 | `visual-pr` | `awesome-copilot` | PR screenshot + annotation embed workflow | ⚪ Skills-only, needs real PR to exercise |
 
-> `storytelling-requirements` was the ninth companion until 2026-08-18. Its
-> plugin was retired under Alex ACT Steward ADR-039 and its framing role is now
-> owned in-plugin by [`chart-big-idea`](../chart-big-idea/SKILL.md), so it needs
-> no install.
+> `storytelling-requirements` was a ninth companion until 2026. Its framing
+> role now ships here as [`chart-big-idea`](../chart-big-idea/SKILL.md), so it
+> needs no install.
 
 ## Vision loop composition
 
@@ -62,7 +60,7 @@ Composes end-to-end with zero conflicts. Closes what looks like a runtime-capabi
 ## Expert storytelling stages
 
 These are task-triggered options, not one required bundle. Check availability
-before routing; a missing companion is healthy and does not make Illustrator
+before routing; a missing companion is healthy and does not make this plugin
 incomplete.
 
 | Storytelling moment | Optional companion | Role |
@@ -89,7 +87,7 @@ Default to no action if the heir says "skip" or does not respond. Never install 
 
 ### Step 2 — Verify each exists in its marketplace
 
-Anti-hallucination discipline per the frozen Core repository's [`plugin-management`](https://github.com/fabioc-aloha/Alex_ACT_Core/blob/main/.github/skills/plugin-management/SKILL.md) skill § Safety rules. Marketplaces evolve, and plugin names discovered via description-match are LLM-inferred — must be verified before install.
+Marketplaces change, and plugin names surfaced by description-match are inferred rather than verified. Confirm each name against a marketplace browse before installing.
 
 For each plugin the heir named:
 
@@ -173,21 +171,15 @@ Print a summary:
 
 ## Composes with
 
-- [`render-verify`](../render-verify/SKILL.md) — Illustrator's own visual-output audit skill; the vision loop extends this with cross-plugin composition
+- [`render-verify`](../render-verify/SKILL.md) — this plugin's own visual-output audit skill; the vision loop extends it with cross-plugin composition
 - [`chart-big-idea`](../chart-big-idea/SKILL.md) — owns the framing gate at the input side of the vision loop since 2026-08-18, replacing the retired `storytelling-requirements` companion
-- The frozen Core repository's [`plugin-management`](https://github.com/fabioc-aloha/Alex_ACT_Core/blob/main/.github/skills/plugin-management/SKILL.md) — the mechanical plugin operations and Safety rules this skill relies on, not bundled here
 
 ## Falsifiability
 
 This skill is decorative if by 2026-11-01 (90 days):
 
-- Heirs never invoke `/alex-act-one install-visual-companions` and always install companions ad-hoc
+- Users never invoke `/alex-act-one install-visual-companions` and always install companions ad-hoc
 - The 8-plugin catalog goes stale (a plugin is retired or moved to a different marketplace) and is not refreshed
-- The vision-loop composition pattern proves brittle in practice (Round 4 verified it on 2026-07-31, but sustained use may surface issues)
-- The move from Core Step 7 to Illustrator produces reader confusion about where the install offer lives — heirs keep asking Core to install visual companions
+- The vision-loop composition pattern proves brittle in sustained use
 
-Track outcomes in Steward's curation-log (private governance record) tagged `[INSTALL-VISUAL-COMPANIONS]`.
-
-## Origin
-
-Ownership moved from `alex-act-core`'s `install-constellation` Step 7 to this skill in Illustrator v0.6.0 (2026-08-01) per Fabio directive: *"The visual companions should be bundled with the illustrator."* Reverses the 2026-07-31 Option A (route-only) decision in Steward's illustrator/plan.md (private governance record) because "visual-workflow ownership belongs with the visual-authoring plugin" is a stronger fit than "constellation-installer offers all downstream companions".
+Track outcomes in your project's own curation or decision log.

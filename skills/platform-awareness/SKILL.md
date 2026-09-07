@@ -73,7 +73,7 @@ Do not hardcode tool names from `availableDeferredTools` without loading them vi
 The SKILL.md `description` field has three consumers and the slash-picker tooltip is the least important of them:
 
 1. **Agent skill discovery (primary)** — every session loads SKILL.md descriptions into the `<skills>` block; this is how the parent agent decides whether to invoke the skill
-2. **Brain QA enforcement** — where a brain-qa script exists (Alex_ACT_Steward ships one as `scripts/brain-qa.cjs`), it hard-fails on missing/empty description
+2. **Brain QA enforcement** — where a project ships a brain-QA script, it typically hard-fails on a missing or empty description
 3. **Chat picker tooltip** — the surface visible to humans
 
 **Keep Agent Skills enabled, but disable the experimental generic resolver.**

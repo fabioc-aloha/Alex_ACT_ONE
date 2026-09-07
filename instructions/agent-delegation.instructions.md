@@ -20,7 +20,7 @@ Delegation is useful only when a matching worker is **currently loaded** in the 
 
 Workers are `.agent.md` files discovered from any of the Copilot agent locations (`~/.copilot/agents/`, `<workspace>/.github/agents/`, plugin `agents/` directories). Use `list_agents` (when available) or scan the runtime's agent set to see what is loaded.
 
-Common worker patterns heirs may install (for example via `Alex_ACT_Steward/.github/agents/` or the illustrator plugin):
+Common worker patterns a project may install:
 
 | Worker SA | Take this when the task is... |
 | --- | --- |

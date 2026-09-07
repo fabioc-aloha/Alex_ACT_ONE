@@ -139,8 +139,8 @@ If a claim is not computable, replace it with an evidence boundary that names
 the missing input. Do not estimate silently, and do not let the chart imply a
 number the data never contained.
 
-Adapted from the Claim Computability Gate in the `storytelling-requirements`
-skill of [`fabioc-aloha/Alex_ACT_Visual_Storytelling`](https://github.com/fabioc-aloha/Alex_ACT_Visual_Storytelling).
+Adapted from the Claim Computability Gate in an earlier visual-storytelling
+curriculum, absorbed into this plugin.
 
 ## Step 2: Story arc
 

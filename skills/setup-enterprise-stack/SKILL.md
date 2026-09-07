@@ -1,12 +1,12 @@
 ---
 name: setup-enterprise-stack
-description: "Emit and (with consent) install the Copilot CLI settings block for the public Microsoft ecosystem — Azure, Fabric (consumption/skills/operations/authoring), Power BI, and Microsoft 365 Agents Toolkit. Defaults to **repo scope** (`.github/copilot/settings.json`) per constellation PLUGIN-INTEGRATION § 2 — these are project-specific tools; a Python data-analysis workspace does not need Azure skills loaded. `--user` opt-in for heirs who want the plugins available in every workspace. Use when a heir on any Microsoft-subscribed tenant wants the seven public plugins enabled for the current project, or when auditing / repairing the Microsoft ecosystem enablement in a workspace or user profile."
+description: "Emit and (with consent) install the Copilot CLI settings block for the public Microsoft ecosystem — Azure, Fabric (consumption/skills/operations/authoring), Power BI, and Microsoft 365 Agents Toolkit. Defaults to **repo scope** (`.github/copilot/settings.json`) because these are project-specific tools; a Python data-analysis workspace does not need Azure skills loaded. Use `--user` to make the plugins available in every workspace. Use when someone on a Microsoft-subscribed tenant wants the seven public plugins enabled for the current project, or when auditing / repairing the Microsoft ecosystem enablement in a workspace or user profile."
 lastReviewed: 2026-08-02
 ---
 
 # Setup Enterprise Stack
 
-Emit the paste-ready `enabledPlugins` + `extraKnownMarketplaces` block for the seven public Microsoft ecosystem plugins any Microsoft-subscribed tenant can use, and optionally install them after explicit user consent. **Defaults to repo scope** — the seven plugins are project-specific per Steward's constellation `PLUGIN-INTEGRATION.md` § 2.
+Emit the paste-ready `enabledPlugins` + `extraKnownMarketplaces` block for the seven public Microsoft ecosystem plugins any Microsoft-subscribed tenant can use, and optionally install them after explicit user consent. **Defaults to repo scope** — the seven plugins are project-specific.
 
 ## When to fire
 
@@ -87,7 +87,7 @@ Before any of the three modes below, decide the target scope:
 
 Default is repo scope. The seven plugins are project-specific tools (Azure = Azure projects; Fabric = Fabric projects; etc.); loading them at user scope means every non-Microsoft workspace pays the context cost for skills the heir will never invoke there.
 
-The rule per Steward's `constellation/PLUGIN-INTEGRATION.md` § 2: *"Am I this? → user scope. Am I working on this? → repo scope."* The seven target plugins answer the second question, not the first.
+The rule: *"Am I this? → user scope. Am I working on this? → repo scope."* The seven target plugins answer the second question, not the first.
 
 Ask the heir which scope, or accept an explicit `--user` flag. Default to repo when unspecified.
 
@@ -160,13 +160,13 @@ The "other scope" column surfaces heirs who accidentally enabled at user scope w
 | Skip the scope-decision step | Every invocation must decide scope before offering modes |
 | Install a subset without telling the heir which the block excluded | List every plugin the heir will get and every one the block does not enable |
 | Skip prerequisite check | Missing subscriptions do not block registration but do block real skill use — always warn |
-| Include Microsoft-internal plugins (WorkIQ, `org-report`, Agency framework) | Those live in the sibling `alex-act-msft` plugin — this skill is public-ecosystem only |
+| Include Microsoft-internal plugins (WorkIQ, `org-report`, Agency framework) | Those are internal-only and out of scope; this skill covers the public ecosystem |
 
 ## Composes with
 
 - The always-on discipline baseline and the visual-authoring skills ship in this
   same package, so nothing extra is needed for them
-- `alex-act-msft` — Microsoft-internal siblings (WorkIQ, Agency framework, `org-report`); only useful inside Microsoft's corporate network
+- Microsoft-internal tooling (WorkIQ, Agency framework, `org-report`) is separate and only useful inside Microsoft's corporate network
 
 ## Falsifiability
 
@@ -182,5 +182,5 @@ Track outcomes in the maintaining repo's curation log.
 ## Related
 
 - [`/alex-act-one setup-enterprise`](../../prompts/setup-enterprise.prompt.md) — namespaced slash-command entry point
-- `alex-act-msft`'s `setup-msft-stack` skill — sibling for internal-only plugins
+
 - Steward's user-brain inventory § 184 — source spec for this block
