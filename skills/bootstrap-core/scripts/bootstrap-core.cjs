@@ -108,8 +108,12 @@ function expectedFiles() {
             || typeof entry.install_to !== 'string') {
             throw new Error('Core manifest instruction entry is invalid');
         }
-        const expectedPath = `.github/instructions/${entry.name}.instructions.md`;
-        if (entry.path !== expectedPath || entry.install_to !== expectedPath) {
+        // ONE keeps instruction sources at instructions/ in the package root and
+        // installs them to the user's .github/instructions/, so source and target
+        // paths differ here where Core's were identical.
+        const expectedPath = `instructions/${entry.name}.instructions.md`;
+        const expectedInstallTo = `.github/instructions/${entry.name}.instructions.md`;
+        if (entry.path !== expectedPath || entry.install_to !== expectedInstallTo) {
             throw new Error(`Core manifest instruction path is invalid for ${entry.name}`);
         }
         return `${entry.name}.instructions.md`;
