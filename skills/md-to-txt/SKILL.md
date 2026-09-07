@@ -46,7 +46,7 @@ Override via flags above.
 
 ## Related
 
-- Markdown linting — pre-flight the source with the project's linter or Core's `lint-clean-markdown` skill
+- Markdown linting — pre-flight the source with the project's linter or the `lint-clean-markdown` skill
 - [md-to-word](../md-to-word/SKILL.md) — for formatted output
 
 ## Would Revise If

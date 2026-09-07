@@ -47,7 +47,7 @@ node skills/html-to-md/scripts/html-to-md.cjs page.html page.md
 ## Related
 
 - [docx-to-md](../docx-to-md/SKILL.md) — Word source
-- Markdown linting — clean up the result with the project's linter or Core's `lint-clean-markdown` skill
+- Markdown linting — clean up the result with the project's linter or the `lint-clean-markdown` skill
 
 ## Would Revise If
 

@@ -228,7 +228,7 @@ For high-fidelity diagrams, pre-render to PNG and include as images.
 
 - [md-to-html](../md-to-html/SKILL.md) - sister converter for web page output
 - [md-to-word](../md-to-word/SKILL.md) - sister converter for Word document output
-- Markdown linting - validate the source with the project's linter or Core's `lint-clean-markdown` skill
+- Markdown linting - validate the source with the project's linter or the `lint-clean-markdown` skill
 
 ---
 

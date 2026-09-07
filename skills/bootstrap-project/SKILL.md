@@ -1,12 +1,12 @@
 ---
 name: bootstrap-project
-description: "Previews and applies Core's repository scaffold, portable workspace QoL settings, and project Copilot settings while preserving project-owned files. Use for new repositories, missing AGENTS/HANDOFF/episodic files, or project .vscode setup."
+description: "Previews and applies this plugin's repository scaffold, portable workspace QoL settings, and project Copilot settings while preserving project-owned files. Use for new repositories, missing AGENTS/HANDOFF/episodic files, or project .vscode setup."
 lastReviewed: 2026-08-18
 ---
 
 # Bootstrap Project
 
-Set up one repository with Core's project-local guidance and a portable VS Code
+Set up one repository with this plugin's project-local guidance and a portable VS Code
 workspace baseline. The baseline covers editor, diff, Markdown, file/search,
 terminal, and Git QoL preferences. Its PowerShell profile keys are
 Windows-scoped and are ignored on macOS, where the system default shell
@@ -47,7 +47,7 @@ The minimal scaffold is `AGENTS.md`, thin Claude/Gemini adapters, `HANDOFF.md`,
 
 | Anti-pattern | Correction |
 | --- | --- |
-| Run this through optional Manager | Core owns required project setup |
+| Route this through another plugin | This plugin owns required project setup |
 | Replace custom project settings | Add only missing baseline entries |
 | Configure a project Markdown stylesheet | Use VS Code's user-level defaults instead |
 | Configure shared continuity | Keep work in repository continuity until a separately approved capability exists |

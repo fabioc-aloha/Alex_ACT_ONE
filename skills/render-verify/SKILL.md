@@ -289,7 +289,7 @@ Check every surface carrying the value, not only the plotted marks: embedded
 data, visible labels, aria description, tooltip, caption, and any
 evidence-boundary text.
 
-Composes with Core's `mutation-testing` skill, which applies the same idea to a
+Composes with the `mutation-testing` skill, which applies the same idea to a
 test harness. Adapted from the Executable Example Contract in the
 `visual-storytelling` skill of [`fabioc-aloha/Alex_ACT_Visual_Storytelling`](https://github.com/fabioc-aloha/Alex_ACT_Visual_Storytelling).
 

@@ -222,7 +222,7 @@ Get-ChildItem docs/*.md | ForEach-Object {
 
 - [md-to-word](../md-to-word/SKILL.md) - sister converter for Word output
 - Mermaid authoring - use a Mermaid-capable skill; when Core is installed, its `markdown-mermaid` skill provides diagram guidance
-- Markdown linting - validate the source with the project's linter or Core's `lint-clean-markdown` skill
+- Markdown linting - validate the source with the project's linter or the `lint-clean-markdown` skill
 
 ---
 

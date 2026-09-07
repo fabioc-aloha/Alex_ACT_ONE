@@ -1,5 +1,5 @@
 ---
-description: "Preview and apply Core's minimal repository guidance and project VS Code settings. Use for new projects or project-scaffold repair."
+description: "Preview and apply this plugin's minimal repository guidance and project VS Code settings. Use for new projects or project-scaffold repair."
 lastReviewed: 2026-08-15
 ---
 

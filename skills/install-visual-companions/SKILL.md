@@ -8,7 +8,7 @@ lastReviewed: 2026-08-14
 
 Eight marketplace plugins compose to deliver visual-authoring workflows around Illustrator: chart rendering, screenshot verification, whiteboard iteration, PR annotation, and the vision loop that closes what looks like a runtime-capability gap via composition rather than net-new authorship.
 
-**None are part of Illustrator's baseline install** — heirs opt in per workload, one at a time. Delegate to Core's [`plugin-management`](https://github.com/fabioc-aloha/Alex_ACT_Core/blob/main/.github/skills/plugin-management/SKILL.md) skill for the mechanical `copilot plugin install / marketplace add` commands and safety rules.
+**None are part of this plugin's baseline install** — heirs opt in per workload, one at a time. The mechanical `copilot plugin install / marketplace add` commands and their safety rules are documented in the frozen Core repository's [`plugin-management`](https://github.com/fabioc-aloha/Alex_ACT_Core/blob/main/.github/skills/plugin-management/SKILL.md) skill, which this plugin does not bundle. Read it there; do not assume it is installed.
 
 ## When to fire
 
@@ -89,7 +89,7 @@ Default to no action if the heir says "skip" or does not respond. Never install 
 
 ### Step 2 — Verify each exists in its marketplace
 
-Anti-hallucination discipline per Core's [`plugin-management`](https://github.com/fabioc-aloha/Alex_ACT_Core/blob/main/.github/skills/plugin-management/SKILL.md) skill § Safety rules. Marketplaces evolve, and plugin names discovered via description-match are LLM-inferred — must be verified before install.
+Anti-hallucination discipline per the frozen Core repository's [`plugin-management`](https://github.com/fabioc-aloha/Alex_ACT_Core/blob/main/.github/skills/plugin-management/SKILL.md) skill § Safety rules. Marketplaces evolve, and plugin names discovered via description-match are LLM-inferred — must be verified before install.
 
 For each plugin the heir named:
 
@@ -166,7 +166,7 @@ Print a summary:
 | Anti-pattern | Correction |
 |---|---|
 | Bundle all 8 without asking | Consent-gated, per-plugin. The 8 are heir-workload-dependent. |
-| Install without verifying marketplace-browse | Per Core's `plugin-management` Safety rule — plugin names can be LLM-hallucinated. Verify first. |
+| Install without verifying marketplace-browse | Per the `plugin-management` Safety rule — plugin names can be LLM-hallucinated. Verify first. |
 | Skip the caveats step | Chromium download + Python Playwright + OneDrive-redirect trip most heirs on first use. Print them proactively. |
 | Install into `.github/copilot/settings.json` at repo scope | Visual companions are heir-scoped tools, not project-scoped. User scope only. |
 | Offer visual companions to a heir doing pure backend work | Zero-cost when not installed, but not free. Only offer when the workload calls for them. |
@@ -175,8 +175,7 @@ Print a summary:
 
 - [`render-verify`](../render-verify/SKILL.md) — Illustrator's own visual-output audit skill; the vision loop extends this with cross-plugin composition
 - [`chart-big-idea`](../chart-big-idea/SKILL.md) — owns the framing gate at the input side of the vision loop since 2026-08-18, replacing the retired `storytelling-requirements` companion
-- Core's [`install-constellation`](https://github.com/fabioc-aloha/Alex_ACT_Core/blob/main/.github/skills/install-constellation/SKILL.md) — installs the four constellation plugins; this skill installs the visual companions after Illustrator is available
-- Core's [`plugin-management`](https://github.com/fabioc-aloha/Alex_ACT_Core/blob/main/.github/skills/plugin-management/SKILL.md) — delegated for all mechanical plugin operations + Safety rules
+- The frozen Core repository's [`plugin-management`](https://github.com/fabioc-aloha/Alex_ACT_Core/blob/main/.github/skills/plugin-management/SKILL.md) — the mechanical plugin operations and Safety rules this skill relies on, not bundled here
 
 ## Falsifiability
 

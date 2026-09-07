@@ -82,7 +82,7 @@ function parseArgs(args) {
             if (value === '--target-instructions') options.targetSource = 'explicit';
         } else throw new Error(`unknown argument: ${value}`);
     }
-    if (!options.coreVersion) throw new Error('Core version is unavailable');
+    if (!options.coreVersion) throw new Error('plugin version is unavailable');
     options.targetInstructions = path.resolve(options.targetInstructions);
     if (options.workspaceInstructions) {
         options.workspaceInstructions = path.resolve(options.workspaceInstructions);
@@ -91,22 +91,22 @@ function parseArgs(args) {
 }
 
 function expectedFiles() {
-    if (!fs.existsSync(SOURCE_ROOT)) throw new Error('canonical Core instruction source is missing');
+    if (!fs.existsSync(SOURCE_ROOT)) throw new Error('canonical instruction source is missing');
     const names = fs.readdirSync(SOURCE_ROOT)
         .filter((name) => name.endsWith('.instructions.md'))
         .sort();
     if (names.length !== 17 || !names.every(safeInstructionName)) {
-        throw new Error(`expected 17 canonical Core instructions, found ${names.length}`);
+        throw new Error(`expected 17 canonical instructions, found ${names.length}`);
     }
     const manifest = readJson(MANIFEST_PATH);
     if (!Array.isArray(manifest?.assets?.instructions)) {
-        throw new Error('Core manifest instruction inventory is missing');
+        throw new Error('manifest instruction inventory is missing');
     }
     const declaredNames = manifest.assets.instructions.map((entry) => {
         if (!entry || typeof entry.name !== 'string'
             || typeof entry.path !== 'string'
             || typeof entry.install_to !== 'string') {
-            throw new Error('Core manifest instruction entry is invalid');
+            throw new Error('manifest instruction entry is invalid');
         }
         // ONE keeps instruction sources at instructions/ in the package root and
         // installs them to the user's .github/instructions/, so source and target
@@ -114,14 +114,14 @@ function expectedFiles() {
         const expectedPath = `instructions/${entry.name}.instructions.md`;
         const expectedInstallTo = `.github/instructions/${entry.name}.instructions.md`;
         if (entry.path !== expectedPath || entry.install_to !== expectedInstallTo) {
-            throw new Error(`Core manifest instruction path is invalid for ${entry.name}`);
+            throw new Error(`manifest instruction path is invalid for ${entry.name}`);
         }
         return `${entry.name}.instructions.md`;
     }).sort();
     if (declaredNames.length !== 17
         || new Set(declaredNames).size !== declaredNames.length
         || JSON.stringify(declaredNames) !== JSON.stringify(names)) {
-        throw new Error('Core manifest instruction inventory differs from canonical sources');
+        throw new Error('manifest instruction inventory differs from canonical sources');
     }
     return names.map((sourceName) => ({
         name: `alex-act-${sourceName}`,
@@ -161,7 +161,7 @@ function validatedOwnedReceipt(receipt, files) {
         || receipt.bootstrappedBy !== 'alex-act-core'
         || !Array.isArray(receipt.files)
         || receipt.files.length !== files.length) {
-        throw new Error('Core bootstrap receipt is invalid');
+        throw new Error('bootstrap receipt is invalid');
     }
     const expected = new Map(files.map((file) => [file.name, normalizedReceiptFile(file)]));
     const names = new Set();
@@ -173,7 +173,7 @@ function validatedOwnedReceipt(receipt, files) {
             || entry.sourceRelativePath !== source.sourceRelativePath
             || typeof entry.sha256 !== 'string'
             || !/^[a-f0-9]{64}$/.test(entry.sha256)) {
-            throw new Error('Core bootstrap receipt contains unsafe or unowned entries');
+            throw new Error('bootstrap receipt contains unsafe or unowned entries');
         }
         names.add(entry.name);
     }
@@ -296,7 +296,7 @@ function applyPlan(plan, options) {
             .map((entry) => entry.name);
         const receiptRemoved = !fs.existsSync(plan._receiptPath);
         if (preservedModified.length > 0 && receiptRemoved) {
-            throw new Error('Core receipt must remain while modified owned files are preserved');
+            throw new Error('receipt must remain while modified owned files are preserved');
         }
         plan.verification = {
             removed: plan.files.filter((entry) => entry.action === 'remove').length,
@@ -328,7 +328,7 @@ function applyPlan(plan, options) {
     }
     const verifiedReceipt = readJson(plan._receiptPath);
     if (!receiptCurrent(verifiedReceipt, options, plan._files)) {
-        throw new Error('Core receipt verification failed after apply');
+        throw new Error('receipt verification failed after apply');
     }
     plan.verification = {
         destinationHashes: plan._files.length,
