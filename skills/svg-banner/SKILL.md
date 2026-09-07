@@ -1,6 +1,6 @@
 ---
 name: "svg-banner"
-description: "Generate 1200x320 SVG banners for READMEs, plans, notes, and release artifacts. Ships with a pluggable brand config: default is the Alex ACT brand (slate-900 background, emerald-teal-cyan accent, x-loop mark, ACT/EDITION/DOCS/RELEASE/PLAN/NOTE watermarks). Heirs override the config for their own brand. Use when a document needs a hero banner, a section header, or brand-stamped consistency at the top of a markdown file."
+description: "Generate 1200x320 SVG banners for READMEs, plans, notes, and release artifacts, using a pluggable brand config that any project can override. Use when a document needs a hero banner, a section header, or brand-stamped consistency at the top of a markdown file."
 lastReviewed: 2026-07-29
 ---
 

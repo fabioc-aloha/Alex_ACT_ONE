@@ -35,6 +35,7 @@ Separate signal from noise. For each candidate pattern, ask: *"Is this already c
 | If pattern is... | Create / update |
 |---|---|
 | Reusable project workflow or deterministic task | `project-capability-authoring` (local skill or validated script) |
+| Reusable behavior worth carrying across projects | Skill (`skills/<name>/SKILL.md`) |
 | Always-on behavior or rule | Instruction (`.github/instructions/<name>.instructions.md`) |
 | Repeatable workflow / slash command | Prompt (`.github/prompts/<name>.prompt.md`) |
 | Shared library imported by other scripts | Library module (`scripts/shared/<name>.cjs`) |
@@ -44,18 +45,32 @@ Separate signal from noise. For each candidate pattern, ask: *"Is this already c
 | Cross-session handoff (next session needs to know) | Repo file (`HANDOFF.md` at repo root) — NOT session memory |
 | Cross-project reusable knowledge | Reviewed local candidate pending a separately approved capability |
 | Cross-surface delegated work | Explicit local handoff |
+| Secret, credential, or raw private source | Nowhere. These do not enter continuity records at all |
 
-This routing runs when meditation is invoked. Core no longer guarantees
-automatic capture of every correction, preference, repeated pattern, or
-significant decision. Native host memory may capture some signals, but that is
-platform behavior rather than an Alex-owned deterministic trigger. An explicit
-request to meditate is consent to evaluate candidates, not consent to write
-project files or persistent memory.
+Do not create a repository-root `MEMORY.md`. Native host memory, `.github/episodic/`
+for durable project summaries, and root `HANDOFF.md` for active state are the
+supported placements, and they are the normal contract rather than a fallback.
+
+This routing runs when meditation is invoked. Automatic capture of every
+correction, preference, repeated pattern, or significant decision is not
+guaranteed. Native host memory may capture some signals, but that is platform
+behavior, not a deterministic trigger. An explicit request to meditate is
+consent to evaluate candidates, not consent to write project files or
+persistent memory.
 
 Never publish automatically from a meditation, `HANDOFF.md`, or
 `.github/episodic/`. Show the minimized knowledge candidate, apply the
 universal PII guard, and keep it local until a separately approved capability
 owns sharing it.
+
+### Cross-project work stays explicit
+
+There is no default message bus, heartbeat, knowledge base, or cross-host
+transport. Do not invent a shared folder protocol, poll another host, or assume
+a local handoff is deliverable elsewhere. Preserve the work in the repository
+and get explicit approval before introducing any cross-project capability.
+Project names, raw transcripts, user paths, credentials, and client details do
+not become reusable knowledge.
 
 ### 3. Write
 

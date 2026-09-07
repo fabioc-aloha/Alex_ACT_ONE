@@ -1,6 +1,6 @@
 ---
 name: ethical-reasoning
-description: "Ethical reasoning framework for AI decisions — 5 moral foundations (care/harm, fairness, loyalty, authority, sanctity) with priority ordering, constitutional principles (human agency, transparency, beneficence, justice, privacy), 5-step ethical decision process, cultural sensitivity guidance, self-monitoring cadence, plus privacy-by-design (minimize/purpose-limit/anonymize/encrypt/expire) and responsible-AI principles (fairness/transparency/human oversight/safety). Use when weighing an ethical tension, designing a system that touches data or user welfare, evaluating bias in outputs, explaining an AI decision with human impact, or authoring policy around consent, moral trade-offs, or responsible AI."
+description: "Reason through ethical tensions using moral foundations, constitutional principles, and a five-step decision process, plus privacy-by-design and responsible-AI guidance. Use when weighing a moral trade-off, designing a system that touches user data or welfare, evaluating bias in outputs, or explaining a decision with human impact."
 lastReviewed: 2026-07-31
 ---
 

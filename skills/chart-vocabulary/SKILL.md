@@ -1,6 +1,6 @@
 ---
 name: chart-vocabulary
-description: "Reference catalog of chart types organized by seven communication goals (comparison, change-over-time, proportion, distribution, relationship, flow, deviation), plus a CSAR evaluation loop for AI-generated chart choices, override decision table, 5-visual rule for dashboard density, living gallery pointers (FT Visual Vocabulary, Data-to-Viz, Data Viz Catalog, Vega-Lite examples, Storytelling with Data), and a 6-step selection algorithm. Use when picking a chart type, evaluating an AI-suggested chart, reviewing chart choices for story-intent alignment, sanity-checking a dashboard's density, or explaining chart taxonomy to a heir."
+description: "Catalog of chart types organized by seven communication goals (comparison, change over time, proportion, distribution, relationship, flow, deviation), with a selection algorithm, an evaluation loop for AI-suggested charts, and density limits for dashboards. Use when picking a chart type, sanity-checking a suggested one, or reviewing whether a chart matches its story intent."
 lastReviewed: 2026-08-14
 ---
 

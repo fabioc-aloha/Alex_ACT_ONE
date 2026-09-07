@@ -1,14 +1,14 @@
 ---
 name: proactive-awareness
-description: "Applies cross-session context recovery, uncommitted-work detection, and focus routing after the resident instruction decides proactive behavior is appropriate. Use when continuity, worktree state, or active goals may change the response."
-lastReviewed: 2026-08-18
+description: "Applies cross-session context recovery, uncommitted-work detection, and focus routing once proactive behavior has been judged appropriate. Use when continuity, worktree state, or active goals may change the response."
+lastReviewed: 2026-09-07
 ---
 
 # Proactive Awareness
 
-The resident instruction decides whether proactive behavior is appropriate and
-keeps the silence and frustration inhibition floors. Use this skill only after
-that decision to apply PA1, PA2, or PA4.
+Whether to surface what you notice is decided by the Inhibition Rules in the
+`reliance-nudges` instruction, which holds the silence and frustration floors.
+Use this skill once that decision is made, to apply PA1, PA2, or PA4.
 
 ## Cross-Session Context Recovery (PA1)
 

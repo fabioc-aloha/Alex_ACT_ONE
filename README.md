@@ -33,7 +33,7 @@ banners, then check that what rendered says what you meant.
 write project-specific skills from work you keep repeating, and consolidate what
 a session learned into something reusable.
 
-59 skills, 15 always-on instructions, and 16 slash commands.
+58 skills, 15 always-on instructions, and 16 slash commands.
 
 ## Where It Works
 
@@ -59,7 +59,7 @@ From source, until the Mall listing is published:
 copilot plugin install fabioc-aloha/Alex_ACT_ONE
 ```
 
-All 59 skills are now available in Copilot CLI, VS Code, and Microsoft Scout.
+All 58 skills are now available in Copilot CLI, VS Code, and Microsoft Scout.
 There is one copy on disk and every app reads it.
 
 ### 2. Turn on the always-on instructions, once in each app

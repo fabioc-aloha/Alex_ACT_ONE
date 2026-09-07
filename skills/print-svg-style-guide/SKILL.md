@@ -1,6 +1,6 @@
 ---
 name: print-svg-style-guide
-description: "Author print-quality SVG figures for books, reports, and exec-facing documents. Ships the canvas + typography grammar (viewBoxes, print-legibility floor with math, type hierarchy, font stack, data-print-role markers, text-fits ladder), a Tailwind-grounded semantic palette (Blue = correct, Red = critique, Green = approval, Amber triple-duty, Grays scaffolding), and four structural composition idioms (BEFORE/AFTER paired panels with badges, numbered critique callouts, family-band abstracts, 5-Visual Rule dashboards). Use when authoring SVG figures for print, when reviewing a figure for print legibility, or when picking colors for a figure whose colors will carry meaning across a book or report."
+description: "Author print-quality SVG figures for books, reports, and exec-facing documents: canvas and typography grammar with a legibility floor, a semantic color palette where color carries meaning, and four composition idioms. Use when authoring or reviewing a figure destined for paper or PDF, or when picking colors that must read consistently across a document."
 lastReviewed: 2026-07-29
 ---
 
