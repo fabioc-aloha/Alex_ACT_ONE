@@ -63,7 +63,7 @@ A current bootstrap requires:
 
 1. Exactly 15 canonical source instructions.
 2. A schema-v2 receipt carrying the installed plugin version.
-3. Seventeen disjoint receipt entries, one per instruction.
+3. One disjoint receipt entry per instruction.
 4. Source, destination, and receipt SHA-256 parity.
 
 Equal versions do not hide byte drift. A second preview after apply must report

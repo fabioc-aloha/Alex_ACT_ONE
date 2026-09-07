@@ -92,7 +92,7 @@ or npx.
 | Pinned package | Tier | Role |
 | --- | --- | --- |
 | `flint-chart-mcp@0.5.1` | Required | Chart rendering, ThemeSpec discovery, version-matched authoring resources. No fallback |
-| `@playwright/mcp@0.0.78` | Recommended | Browser verification. `render-verify` also works with the host's own browser tools |
+| `@playwright/mcp@0.0.80` | Recommended | Browser verification. `render-verify` also works with the host's own browser tools |
 | `replicate-mcp@0.9.0` | Add-on | AI image generation. Also needs `REPLICATE_API_TOKEN` and a paid account |
 
 Provisioning installs all three; there is no per-server flag. That is fine for
