@@ -85,6 +85,37 @@ const TOOLS = {
     },
 };
 
+/**
+ * The three pinned MCP servers, tiered individually. They are provisioned
+ * together by one command but they are not equally important, and a single
+ * "MCP servers" row hid that: without Flint the chart skills cannot render at
+ * all, while Playwright has a documented fallback and Replicate needs a paid
+ * account before it does anything.
+ */
+const MCP_SERVERS = {
+    flint: {
+        label: 'Flint (charts)',
+        package: 'flint-chart-mcp',
+        version: '0.5.1',
+        tier: 'required',
+        unlocks: 'flint-chart and flint-theme. Without it they cannot render anything, and there is no fallback',
+    },
+    playwright: {
+        label: 'Playwright (browser)',
+        package: '@playwright/mcp',
+        version: '0.0.78',
+        tier: 'enhances',
+        unlocks: 'browser verification for render-verify, which also works with the host\'s own browser tools',
+    },
+    replicate: {
+        label: 'Replicate (images)',
+        package: 'replicate-mcp',
+        version: '0.9.0',
+        tier: 'addon',
+        unlocks: 'AI image generation. Also needs a REPLICATE_API_TOKEN and a paid account',
+    },
+};
+
 function platformKey() {
     if (process.platform === 'win32') return 'win32';
     if (process.platform === 'darwin') return 'darwin';
@@ -161,4 +192,4 @@ function remedyFor(toolName) {
     ].join('\n');
 }
 
-module.exports = { TOOLS, PLUGINS, platformKey, remedyFor };
+module.exports = { TOOLS, MCP_SERVERS, PLUGINS, platformKey, remedyFor };

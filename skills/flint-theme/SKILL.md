@@ -7,7 +7,7 @@ lastReviewed: 2026-08-21
 # Flint Theme
 
 Create a reusable visual system without changing what a chart means. Flint owns
-the ThemeSpec grammar. Illustrator owns intent framing, safe evidence handling,
+the ThemeSpec grammar. This package owns intent framing, safe evidence handling,
 Theme Lab iteration, and visual verification.
 
 ## Workflow

@@ -23,14 +23,13 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 
-const { TOOLS, PLUGINS, platformKey } = require('../../../scripts/shared/dependencies.cjs');
+const { TOOLS, MCP_SERVERS, PLUGINS, platformKey } = require('../../../scripts/shared/dependencies.cjs');
 
 const APPLY = process.argv.includes('--apply');
 const JSON_OUT = process.argv.includes('--json');
 const PLATFORM_LABEL = { win32: 'Windows', darwin: 'macOS', linux: 'Linux' }[platformKey()];
 
 const MCP_RUNTIME = path.join(os.homedir(), '.copilot', 'plugin-data', 'alex-act-one', 'runtime');
-const MCP_PACKAGES = ['flint-chart-mcp', 'replicate-mcp', path.join('@playwright', 'mcp')];
 
 function onPath(bin) {
     const probe = process.platform === 'win32'
@@ -67,8 +66,13 @@ function detect() {
 }
 
 function detectMcp() {
-    const missing = MCP_PACKAGES.filter((p) => !fs.existsSync(path.join(MCP_RUNTIME, 'node_modules', p)));
-    return { provisioned: missing.length === 0, missing, root: MCP_RUNTIME };
+    const rows = [];
+    for (const [key, srv] of Object.entries(MCP_SERVERS)) {
+        // The package name may contain a scope, which is a real subdirectory.
+        const dir = path.join(MCP_RUNTIME, 'node_modules', ...srv.package.split('/'));
+        rows.push({ key, ...srv, present: fs.existsSync(dir) });
+    }
+    return { servers: rows, root: MCP_RUNTIME, allPresent: rows.every((r) => r.present) };
 }
 
 /**
@@ -121,31 +125,37 @@ console.log(`Dependency check  (${PLATFORM_LABEL})\n`);
 console.log('Nothing below is needed to use this package. Most of it runs on Node');
 console.log('alone. Each item is required, or not, for the specific skills that\ncall it.\n');
 
-const pad = Math.max(...rows.map((r) => r.label.length), 'MCP servers'.length) + 2;
+const pad = Math.max(...rows.map((r) => r.label.length), ...mcp.servers.map((s) => s.label.length)) + 2;
 
 // Grouped by tier so the difference is visible in the report, not just encoded
 // in the data. A flat list makes a missing Pandoc look like a missing jszip,
-// and those cost very different things.
-const required = rows.filter((r) => r.tier === 'required');
-const enhances = rows.filter((r) => r.tier === 'enhances');
+// and those cost very different things. MCP servers are merged into the same
+// tiers rather than listed as one block, because Flint is required for charts
+// while Playwright has a fallback and Replicate needs a paid account.
+const byTier = (t) => [
+    ...rows.filter((r) => r.tier === t),
+    ...mcp.servers.filter((s) => s.tier === t),
+];
+
+const line = (r, missingMark) => `  ${r.present ? 'ok     ' : missingMark} ${r.label.padEnd(pad)} ${r.present ? '' : r.unlocks}`;
 
 console.log('REQUIRED for the skills that use them');
 console.log('  Without these, those skills cannot run.\n');
-for (const r of required) {
-    console.log(`  ${r.present ? 'ok     ' : 'MISSING'} ${r.label.padEnd(pad)} ${r.present ? '' : r.unlocks}`);
-}
-console.log(`  ${mcp.provisioned ? 'ok     ' : 'MISSING'} ${'MCP servers'.padEnd(pad)} ${mcp.provisioned ? '' : 'charts, image generation, and browser verification'}`);
+for (const r of byTier('required')) console.log(line(r, 'MISSING'));
 
 console.log('\nRECOMMENDED enhancements');
 console.log('  The skills work without these and produce less.\n');
-for (const r of enhances) {
-    console.log(`  ${r.present ? 'ok     ' : 'absent '} ${r.label.padEnd(pad)} ${r.present ? '' : r.unlocks}`);
-}
+for (const r of byTier('enhances')) console.log(line(r, 'absent '));
+
+const addonTools = byTier('addon');
 
 const missingTools = rows.filter((r) => !r.present);
+const missingMcp = mcp.servers.filter((s) => !s.present);
 
-console.log('\nADD-ONS (separate plugins)');
-console.log('  These block nothing. They add capability this package does not have.\n');
+console.log('\nADD-ONS');
+console.log('  These block nothing. They add capability the package does not have.\n');
+for (const r of addonTools) console.log(line(r, 'absent '));
+if (addonTools.length) console.log('');
 for (const group of Object.values(PLUGINS)) {
     const have = group.entries.filter((e) => plugins.installed.has(e.name.toLowerCase())).length;
     console.log(`  ${String(have).padStart(2)}/${group.entries.length}     ${group.label}`);
@@ -160,19 +170,20 @@ if (!plugins.available) {
     console.log('  app may not appear here.');
 }
 
-const missingRequired = required.filter((r) => !r.present).length + (mcp.provisioned ? 0 : 1);
-if (missingTools.length === 0 && mcp.provisioned) {
+const missingRequired = byTier('required').filter((r) => !r.present).length;
+if (missingTools.length === 0 && missingMcp.length === 0) {
     console.log('\nEverything is present. No action needed.');
     process.exit(0);
 }
 if (missingRequired === 0) {
-    console.log('\nNothing required is missing. The items below are enhancements.');
+    console.log('\nNothing required is missing. The items below are enhancements or add-ons.');
 }
 
 console.log('\nTo install what is missing:\n');
 for (const r of missingTools) console.log(`  ${r.install}`);
-if (!mcp.provisioned) {
+if (missingMcp.length) {
     console.log(`  node <this-skill>/scripts/provision-runtime.mjs --apply`);
+    console.log(`      provisions all three servers together: ${missingMcp.map((s) => s.label).join(', ')} missing`);
 }
 
 if (!APPLY) {
@@ -207,5 +218,5 @@ for (const r of missingTools.filter((x) => x.kind !== 'system')) {
 const systemLeft = missingTools.filter((x) => x.kind === 'system');
 console.log(`\ninstalled: ${installed}   failed: ${failed}   needs your package manager: ${systemLeft.length}`);
 for (const r of systemLeft) console.log(`  ${r.install}`);
-if (!mcp.provisioned) console.log(`  node <this-skill>/scripts/provision-runtime.mjs --apply`);
+if (missingMcp.length) console.log(`  node <this-skill>/scripts/provision-runtime.mjs --apply`);
 process.exit(failed > 0 ? 1 : 0);

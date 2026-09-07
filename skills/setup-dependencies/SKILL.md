@@ -32,9 +32,16 @@ relative to a capability, so the report sorts every item into three tiers:
 
 | Tier | Meaning | Members |
 | --- | --- | --- |
-| **Required** | The skills that call it cannot run without it | Pandoc (7 converters), Pillow (annotate-screenshot), the MCP servers (charts, image generation, browser verification) |
-| **Recommended** | Those skills run and produce less | Mermaid CLI (diagrams stay unrendered), svgexport (no PNG export), jszip (Word loses table formatting) |
-| **Add-on** | Blocks nothing. Adds capability this package does not have | Visual companions, Microsoft ecosystem plugins |
+| **Required** | The skills that call it cannot run without it | Pandoc (7 converters), Pillow (annotate-screenshot), Flint MCP (chart rendering) |
+| **Recommended** | Those skills run and produce less | Mermaid CLI (diagrams stay unrendered), svgexport (no PNG export), jszip (Word loses table formatting), Playwright MCP (`render-verify` falls back to the host's browser tools) |
+| **Add-on** | Blocks nothing. Adds capability this package does not have | Replicate MCP (also needs a paid token), visual companions, Microsoft ecosystem plugins |
+
+The three MCP servers are provisioned by one command but they are not equally
+important, and the report tiers them separately. Flint is the only one whose
+absence stops a skill outright: `flint-chart` and `flint-theme` call its tools
+throughout and have no fallback. Playwright has one, documented in
+`render-verify`'s own description. Replicate needs a paid account before it does
+anything at all.
 
 The distinction matters when reporting to a user. A missing Pandoc means seven
 skills are unavailable and should be named. A missing jszip means one output is
@@ -78,15 +85,18 @@ node <this-skill>/scripts/check-dependencies.cjs --apply
 
 ## MCP Servers
 
-Three pinned servers back the chart, image, and browser-verification skills.
-They install into plugin-private state and are launched by a direct Node shim,
-never by npm or npx.
+Three pinned servers, provisioned together but tiered differently. They install
+into plugin-private state and are launched by a direct Node shim, never by npm
+or npx.
 
-| Pinned package | Role |
-| --- | --- |
-| `flint-chart-mcp@0.5.1` | Chart rendering, ThemeSpec discovery, version-matched authoring resources |
-| `replicate-mcp@0.9.0` | AI image generation. Also needs `REPLICATE_API_TOKEN` |
-| `@playwright/mcp@0.0.78` | Browser verification of rendered output |
+| Pinned package | Tier | Role |
+| --- | --- | --- |
+| `flint-chart-mcp@0.5.1` | Required | Chart rendering, ThemeSpec discovery, version-matched authoring resources. No fallback |
+| `@playwright/mcp@0.0.78` | Recommended | Browser verification. `render-verify` also works with the host's own browser tools |
+| `replicate-mcp@0.9.0` | Add-on | AI image generation. Also needs `REPLICATE_API_TOKEN` and a paid account |
+
+Provisioning installs all three; there is no per-server flag. That is fine for
+disk, and the launcher only starts a server when a skill actually calls it.
 
 Procedure:
 
