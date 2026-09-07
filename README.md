@@ -1,5 +1,7 @@
 # ONE Alex ACT
 
+![ONE Alex ACT](assets/banner.svg)
+
 A single plugin that gives GitHub Copilot a working method: how to think through
 a problem, how to write code and prose that hold up, and how to produce documents
 and charts worth sending to someone.
