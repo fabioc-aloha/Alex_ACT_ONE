@@ -23,7 +23,7 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 
-const { TOOLS, platformKey } = require('../../../scripts/shared/dependencies.cjs');
+const { TOOLS, PLUGINS, platformKey } = require('../../../scripts/shared/dependencies.cjs');
 
 const APPLY = process.argv.includes('--apply');
 const JSON_OUT = process.argv.includes('--json');
@@ -71,11 +71,49 @@ function detectMcp() {
     return { provisioned: missing.length === 0, missing, root: MCP_RUNTIME };
 }
 
+/**
+ * Plugin visibility depends on which store the host points at: `copilot plugin
+ * list` reads COPILOT_HOME when set, otherwise ~/.copilot. Different apps set
+ * different stores, so the store is reported alongside the result. Without it a
+ * reader cannot tell "not installed" from "installed somewhere else".
+ */
+function detectPlugins() {
+    const store = process.env.COPILOT_HOME || path.join(os.homedir(), '.copilot');
+    // Resolve the executable rather than passing shell:true with arguments,
+    // which triggers Node DEP0190 and concatenates args unescaped.
+    let bin = 'copilot';
+    if (process.platform === 'win32') {
+        const which = spawnSync('where.exe', ['copilot'], { encoding: 'utf8' });
+        if (which.status !== 0 || !which.stdout) return { store, available: false, installed: new Set() };
+        const candidates = which.stdout.split(/\r?\n/).filter(Boolean).map((l) => l.trim());
+        bin = candidates.find((c) => /\.(cmd|exe|bat)$/i.test(c)) || candidates[0];
+    }
+    const probe = spawnSync(bin, ['plugin', 'list'], { encoding: 'utf8' });
+    if (probe.status !== 0 || !probe.stdout) {
+        return { store, available: false, installed: new Set() };
+    }
+    const installed = new Set();
+    for (const line of probe.stdout.split(/\r?\n/)) {
+        const m = line.match(/^\s*[•*-]\s*([a-z0-9-]+)/i);
+        if (m) installed.add(m[1].toLowerCase());
+    }
+    return { store, available: true, installed };
+}
+
 const rows = detect();
 const mcp = detectMcp();
+const plugins = detectPlugins();
 
 if (JSON_OUT) {
-    console.log(JSON.stringify({ platform: platformKey(), tools: rows, mcp }, null, 2));
+    const pluginReport = {};
+    for (const [key, group] of Object.entries(PLUGINS)) {
+        pluginReport[key] = {
+            label: group.label,
+            owner: group.owner,
+            entries: group.entries.map((e) => ({ ...e, installed: plugins.installed.has(e.name.toLowerCase()) })),
+        };
+    }
+    console.log(JSON.stringify({ platform: platformKey(), tools: rows, mcp, plugins: { store: plugins.store, detected: plugins.available, groups: pluginReport } }, null, 2));
     process.exit(0);
 }
 
@@ -90,8 +128,27 @@ for (const r of rows) {
 console.log(`  ${mcp.provisioned ? 'ok     ' : 'absent '} ${'MCP servers'.padEnd(pad)} ${mcp.provisioned ? '' : 'charts, image generation, and browser verification'}`);
 
 const missingTools = rows.filter((r) => !r.present);
+
+// Plugins are reported separately from tools because the distinction matters:
+// a missing tool blocks a skill, a missing plugin blocks nothing at all.
+console.log('\nOptional plugins. Nothing here is required — every skill in this');
+console.log('package works without them.\n');
+for (const group of Object.values(PLUGINS)) {
+    const have = group.entries.filter((e) => plugins.installed.has(e.name.toLowerCase())).length;
+    console.log(`  ${String(have).padStart(2)}/${group.entries.length}  ${group.label}`);
+    console.log(`         adds: ${group.adds}`);
+    console.log(`         install via: /alex-act-one ${group.owner}`);
+}
+if (!plugins.available) {
+    console.log('\n  Could not read the plugin list, so the counts above may be wrong.');
+} else {
+    console.log(`\n  Plugin store read: ${plugins.store}`);
+    console.log('  Apps can point at different stores, so a plugin installed for one');
+    console.log('  app may not appear here.');
+}
+
 if (missingTools.length === 0 && mcp.provisioned) {
-    console.log('\nEverything is present. No action needed.');
+    console.log('\nEverything required is present. No action needed.');
     process.exit(0);
 }
 

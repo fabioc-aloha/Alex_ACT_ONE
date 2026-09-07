@@ -20,10 +20,32 @@ Nothing here installs without consent. A dependency check is read-only.
 node <this-skill>/scripts/check-dependencies.cjs
 ```
 
-The report lists every optional dependency, whether it is present, and what a
-missing one costs in plain terms. It writes nothing.
+The report covers three things: external tools, the MCP servers, and the
+optional plugins that extend this package. It writes nothing.
 
 Add `--json` for a machine-readable version.
+
+## What Is Optional
+
+Nothing outside Node is required to use this package. The report separates two
+kinds of gap because they cost different things:
+
+| Gap | Effect |
+| --- | --- |
+| A missing tool (Pandoc, Mermaid CLI) | Blocks the skills that call it. The rest are unaffected |
+| A missing MCP server | Blocks charts, image generation, and browser verification |
+| A missing plugin | Blocks nothing. Plugins add capability this package does not claim |
+
+Plugin installation is not handled here. `install-visual-companions` and
+`setup-enterprise` own those flows because they carry the marketplace
+registration, the consent gates, and the post-install caveats — several
+companions pull roughly 100 MB of Chromium each. This skill reports the state so
+one command shows the whole picture; it does not duplicate their install logic.
+
+Plugin counts depend on which store the host reads. `copilot plugin list`
+follows `COPILOT_HOME` when set and `~/.copilot` otherwise, and different apps
+set different stores, so a plugin installed for one app may not appear for
+another. The report prints the store it read for that reason.
 
 ## Install With Consent
 
@@ -77,6 +99,7 @@ them. Private runtime state must never run ahead of reviewed source.
 | Signal | Action |
 | --- | --- |
 | A skill reports a missing tool | Run the dependency check; it names the install command for the current platform |
+| A plugin shows as missing but the user installed it | Check the store line in the report. Apps read different stores; the plugin may be installed for a different one |
 | Registry is unexpected | Stop. Correct npm configuration outside this skill, then preview again |
 | Provisioning fails | Report npm's error without adding a registry override |
 | Runtime reports missing private state | Run the provisioner again; do not substitute npx |
@@ -89,6 +112,8 @@ them. Private runtime state must never run ahead of reviewed source.
 | --- | --- |
 | Install a system package without asking | Print the command; let the user run it |
 | Tell a user the plugin is broken because one tool is missing | Name the affected skills only. The rest still work |
+| Present optional plugins as requirements | Nothing outside Node is required. A missing plugin blocks nothing |
+| Install a plugin from here | Route to `install-visual-companions` or `setup-enterprise`, which own the consent gates and caveats |
 | Detect a corporate network and inject a registry | npm configuration is the authority, not network location |
 | Run `npm install -g` for MCP servers | Global binaries collide; these stay plugin-private |
 | Apply before showing the registry and package set | Preview first, then obtain explicit consent |
