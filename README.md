@@ -49,22 +49,48 @@ symbolic links, and no second plugin store to keep in sync.
 
 ## Install
 
+Two steps. The first runs once per machine. The second runs once per app.
+
+### 1. Install the plugin
+
 From source, until the Mall listing is published:
 
 ```powershell
 copilot plugin install fabioc-aloha/Alex_ACT_ONE
 ```
 
-Skills and commands are available immediately. To turn on the always-on
-instructions:
+All 59 skills are now available in Copilot CLI, VS Code, and Microsoft Scout.
+There is one copy on disk and every app reads it.
 
-```text
-/alex-act-one bootstrap-core
-```
+### 2. Turn on the always-on instructions, once in each app
 
-Activation is a separate step because instructions are written into your user
-profile rather than loaded from the plugin. It previews every file and waits for
-your approval before writing anything.
+Skills wait until something calls them. Instructions are different: they shape
+every response, so they are written into the profile of the app you are using
+rather than loaded from the plugin. Each app keeps its own profile, so run
+activation in each app where you want the behavior.
+
+| App | What to run |
+| --- | --- |
+| Copilot CLI | `/alex-act-one bootstrap-core` |
+| VS Code with GitHub Copilot Chat | `/alex-act-one bootstrap-core` |
+| Microsoft Scout | Ask for the `bootstrap-core` skill, or invoke it by name from the skill list |
+
+Activation previews all 17 files and waits for your approval before writing
+anything. Running it again reports no changes.
+
+To check where a given app writes them, run activation without approving. It
+prints the exact target directory first.
+
+### What you get after each step
+
+| After | Skills available | Instructions active |
+| --- | --- | --- |
+| Step 1 | Every app | None |
+| Step 2 in one app | Every app | That app only |
+| Step 2 in each app you use | Every app | Every app you ran it in |
+
+Step 1 alone is a complete, working install. Step 2 adds the always-on
+behavior, and skipping it costs you nothing else.
 
 ## What Is Next
 
