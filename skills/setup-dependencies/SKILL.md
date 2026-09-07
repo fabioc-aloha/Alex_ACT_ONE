@@ -111,6 +111,61 @@ Procedure:
 The provisioner installs nothing globally and never passes `--registry` or edits
 `.npmrc`. Whatever registry the user has configured is the one it uses.
 
+## Registering The Servers With Microsoft Scout
+
+Provisioning puts the servers on disk. Registering tells a host they exist.
+Copilot CLI and VS Code do the second step themselves by reading `plugin.json`
+→ `mcpServers`. **Scout does not.** It keeps its own registry at
+`~/.scout/m-mcp-servers.json` and ignores the plugin manifest, so on Scout every
+skill loads while every server it calls is missing. That reads as a broken
+package rather than an unregistered one, which is why this step is explicit.
+
+```text
+node <this-skill>/scripts/register-scout-mcp.mjs
+```
+
+Previews by default: it prints the plugin root it resolved, the registry path,
+and one line per server. `--apply` writes, backing the existing registry up to a
+timestamped `.bak-alex-act-one-*` file first.
+
+| Outcome | Meaning |
+| --- | --- |
+| `add` | Not registered yet; will be written |
+| `unchanged` | Already registered with exactly this config |
+| `conflict` | Registered with a different config. Left alone unless `--force` |
+| `skip` | Scout ships a built-in under that name, or a required env var is unset |
+
+Two translation details this script exists to handle, both silent failures if
+done by hand:
+
+- Scout wraps the launch spec in `config` and expects `type: "command"`. The
+  manifest's flat `type: "stdio"` is not the same shape.
+- Scout resolves nothing relative to the plugin. Manifest args carry
+  package-relative script paths and must be made absolute.
+
+Scout must be **fully restarted** afterwards — not just given a new
+conversation. It handshakes servers at startup and populates each `tools` array
+from that handshake; an empty array is the correct on-disk state before the
+first launch.
+
+The registration points at whichever plugin copy the script was run from. Run it
+from the installed package, not a working checkout, unless the intent is to test
+uncommitted changes.
+
+`replicate` is skipped when `REPLICATE_API_TOKEN` is unset. Registering a server
+that cannot authenticate trades a clear "not configured" message for an opaque
+auth failure at call time.
+
+### Why `alex-playwright` and not `playwright`
+
+Scout ships a built-in browser server already named `playwright`, so the package
+registers its own under `alex-playwright`. This is not cosmetic. Scout's
+built-in **blocks the `file:` protocol**, which is the case `render-verify`
+centres on — inspecting an HTML, SVG, or PNG artifact just written to disk. The
+package's server carries `--allow-unrestricted-file-access` and can open it. The
+distinct name lets both coexist: the host's for ordinary web pages, this one for
+local artifacts.
+
 ## Checking For MCP Updates
 
 Run `provision-runtime.mjs --check-updates`. It compares each exact pin against
@@ -128,6 +183,8 @@ them. Private runtime state must never run ahead of reviewed source.
 | Provisioning fails | Report npm's error without adding a registry override |
 | Runtime reports missing private state | Run the provisioner again; do not substitute npx |
 | Runtime reports a version mismatch | Re-provision from the reviewed source version; never launch stale state |
+| Skills load on Scout but their MCP tools are absent | Provisioning and registration are separate. Run `register-scout-mcp.mjs`, then restart Scout fully |
+| Scout still shows no new tools after registering | Confirm the restart was a full quit, not a new conversation. Then check the registry entry uses `type: "command"` inside `config`, with absolute arg paths |
 | `--check-updates` reports a stable update | Compatibility review before changing the pin |
 
 ## Anti-Patterns
@@ -142,6 +199,9 @@ them. Private runtime state must never run ahead of reviewed source.
 | Detect a corporate network and inject a registry | npm configuration is the authority, not network location |
 | Run `npm install -g` for MCP servers | Global binaries collide; these stay plugin-private |
 | Apply before showing the registry and package set | Preview first, then obtain explicit consent |
+| Assume provisioning made the servers usable everywhere | CLI and VS Code read the manifest; Scout needs explicit registration |
+| Overwrite Scout's registry wholesale | Merge additively and back up first — it holds the user's other servers |
+| Register a server whose credential is unset | Skip it and say so. An opaque auth failure is worse than a clear omission |
 | Auto-install a newer stable version found by the audit | Compatibility first, then source update and release |
 
 ## Would Revise If

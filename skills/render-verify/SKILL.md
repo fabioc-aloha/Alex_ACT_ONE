@@ -1,6 +1,6 @@
 ---
 name: render-verify
-description: "Verify a rendered visual artifact actually says what it was supposed to say — open it, read its console errors, walk a failure catalog, and check it against the claim it was meant to carry. Works on charts, generated HTML reports, SVG, dashboards, diagrams, and any other output meant to be looked at. Use after render_chart, after a Vega-Lite create_chart_view, after editing a post-Flint Vega-Lite spec, and before committing any generated HTML/SVG/PNG. Satisfied by the host's built-in browser tools or by the optional playwright MCP server."
+description: "Verify a rendered visual artifact actually says what it was supposed to say — open it, read its console errors, walk a failure catalog, and check it against the claim it was meant to carry. Works on charts, generated HTML reports, SVG, dashboards, diagrams, and any other output meant to be looked at. Use after render_chart, after a Vega-Lite create_chart_view, after editing a post-Flint Vega-Lite spec, and before committing any generated HTML/SVG/PNG. Satisfied by the host's built-in browser tools or by the optional alex-playwright MCP server."
 lastReviewed: 2026-08-14
 ---
 
@@ -141,18 +141,29 @@ job the host already does.**
 
 1. **The host's own browser capability — always try this first.** If your tool
    inventory contains anything that opens a page and returns a screenshot or a
-   page snapshot _to you_, use it. In VS Code Copilot these are the built-in
-   browser tools; they open `file://` with no flags, no browser download, and no
-   configuration, and they were verified against this plugin's own demo. This
-   rung costs nothing and has no security trade-off.
-2. **The optional `playwright` MCP server — fallback.** Use when rung 1 is
-   absent, or when rung 1 lacks console-error access and the defect you are
-   chasing needs a cause rather than a symptom. **On a terminal-only agent such
-   as GitHub Copilot CLI there is no rung 1 at all** — it has no browser, so
-   this rung is the primary path, not the fallback. See _Playwright MCP setup_
-   below. It carries real costs: a browser must already be installed, `file://`
-   needs `--allow-unrestricted-file-access`, and it writes artifacts into the
-   working directory.
+   page snapshot _to you_, use it. This rung costs nothing and has no security
+   trade-off. **What it covers depends on the host, and the difference decides
+   whether rung 2 is needed at all:**
+
+   | Host                 | Native browser  | Opens `file://`                    | Rung 2 needed for local artifacts |
+   | -------------------- | --------------- | ---------------------------------- | --------------------------------- |
+   | VS Code Copilot      | Built-in tools  | **Yes**, no flags, no downloads    | No — rung 1 is sufficient         |
+   | Microsoft Scout      | Built-in server | **No** — `file:` protocol blocked  | **Yes**                           |
+   | GitHub Copilot CLI   | None            | N/A                                | **Yes** — rung 2 is the only path |
+
+   The VS Code row was verified against this plugin's own demo. The Scout row was
+   verified 2026-09-07: `browser_navigate` to a local `.html` returns
+   `Access to "file:" protocol is blocked`. Do not assume a host that _has_ a
+   browser can open local files with it.
+
+2. **The optional `alex-playwright` MCP server — fallback, or the only path.**
+   Use when rung 1 is absent, when rung 1 cannot open `file://` and the artifact
+   is local, or when rung 1 lacks console-error access and the defect you are
+   chasing needs a cause rather than a symptom. Per the table above that is
+   **CLI always, Scout for local artifacts, and VS Code rarely**. See
+   _Playwright MCP setup_ below. It carries real costs: a browser must already be
+   installed, `file://` needs `--allow-unrestricted-file-access`, and it writes
+   artifacts into the working directory.
 3. **The human.** Ask the user to open the artifact and describe what they see,
    or give them a specific checklist item to confirm. This is a legitimate
    outcome, not a failure — but it must be _stated_.
@@ -303,17 +314,24 @@ verified.
 
 **Fallback only — rung 2 of Step 1.** Try the host's own browser capability
 first; if it can open the artifact and return a screenshot to you, you do not
-need this server. Measured against `@playwright/mcp@0.0.78`:
+need this server. Check the per-host table in Step 1 before assuming that:
+a host with a browser may still block `file://`. Measured against
+`@playwright/mcp@0.0.80`:
 
 Run `setup-dependencies` once after installing or updating Illustrator.
 Its `--check-updates` mode compares the reviewed Playwright pin with the stable
 dist-tag; a newer version still requires a browser-compatibility pass before the
 source pin changes.
 
+The server key is **`alex-playwright`**, not `playwright`. Some hosts — Microsoft
+Scout among them — already ship a built-in server under the bare name, and a
+collision silently shadows one of the two. The distinct key lets both coexist:
+the host's for ordinary web pages, this one for `file://` artifacts.
+
 ```json
 {
   "servers": {
-    "playwright": {
+    "alex-playwright": {
       "type": "stdio",
       "command": "node",
       "args": [

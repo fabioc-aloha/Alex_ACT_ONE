@@ -5,11 +5,13 @@ What is working now, what is being built, and what is deliberately out of scope.
 ## Working Today
 
 - One install from source reaches Copilot CLI, VS Code, and Microsoft Scout
-- 59 skills and 16 slash commands load on all three
+- 59 skills load on all three; 16 slash commands load on CLI and VS Code
 - Always-on instructions activate through a preview-first command that asks
   before writing to your profile
 - Activation can be undone. Removal returns each profile to its prior state and
   keeps any instruction file you edited yourself
+- The three MCP servers register automatically on CLI and VS Code, and on Scout
+  through one preview-first command that backs up and merges
 - Every external npm package is pinned to an exact version, and one command
   reports when a pin has fallen behind
 
@@ -24,8 +26,16 @@ Copilot now warns that installing from a repository is deprecated, so this has
 moved from a convenience to the eventual only supported route.
 
 **One activation instead of one per app.** Today the always-on instructions are
-written into each app's profile, so turning them on is a per-app step. A single
-activation that reaches every app would make the install genuinely one move.
+written into each app's profile, so turning them on is a per-app step. Microsoft
+Scout adds a second one-off step for the MCP servers, because it keeps its own
+registry rather than reading the plugin manifest. A single activation that
+reached every app and every surface would make the install genuinely one move.
+
+**Slash commands on Microsoft Scout.** Scout has no command surface for plugin
+prompts, so the 16 commands do not reach it. Fifteen have an equivalent skill
+that can be asked for by name, which is why this is a gap rather than a blocker.
+It needs a change on Scout's side, so it is listed here to be tracked, not
+promised.
 
 **Confirm the GitHub Copilot app.** It is a stated target and it is untested.
 Until someone runs it there, the compatibility table says so.

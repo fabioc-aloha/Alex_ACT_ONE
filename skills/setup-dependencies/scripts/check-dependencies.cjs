@@ -110,32 +110,77 @@ function candidateStores() {
  * counts are reported so "not installed anywhere" stays distinguishable from
  * "installed in the store this host does not point at".
  */
+/**
+ * `copilot plugin list` reports only the CLI's own `installed-plugins/` layout.
+ * Scout installs through a marketplace instead and keeps its packages under
+ * `cache/marketplaces/`, which that command does not look at — so a store
+ * holding a full set of Scout plugins reports zero. Counting the marketplace
+ * directory as well keeps the per-store line describing what is actually there.
+ */
+function marketplacePlugins(store) {
+    const dir = path.join(store, 'cache', 'marketplaces');
+    const names = new Set();
+    let entries;
+    try {
+        entries = fs.readdirSync(dir, { withFileTypes: true });
+    } catch {
+        return names;
+    }
+    for (const entry of entries) {
+        if (!entry.isDirectory()) continue;
+        // A marketplace folder is a plugin only if it carries a manifest, and the
+        // manifest's own `name` is the identity `copilot plugin list` prints.
+        // Deriving it from the folder instead would yield `alex_act_one` where
+        // the CLI says `alex-act-one`, and the union would count one plugin twice.
+        const manifest = path.join(dir, entry.name, 'plugin.json');
+        try {
+            const name = JSON.parse(fs.readFileSync(manifest, 'utf8')).name;
+            if (name) names.add(String(name).toLowerCase());
+        } catch {
+            // No manifest, or unreadable: not a usable plugin, so not counted.
+        }
+    }
+    return names;
+}
+
 function detectPlugins() {
     const bin = resolveCopilotBin();
     const stores = [];
     const installed = new Set();
-    if (!bin) return { stores, available: false, installed };
 
     let anyRead = false;
     for (const store of candidateStores()) {
+        const fromMarketplace = marketplacePlugins(store);
+        for (const name of fromMarketplace) installed.add(name);
+
+        if (!bin) {
+            // Without the CLI binary the marketplace scan is still meaningful.
+            if (fromMarketplace.size) anyRead = true;
+            stores.push({ path: store, available: fromMarketplace.size > 0, count: fromMarketplace.size });
+            continue;
+        }
+
         const probe = spawnSync(bin, ['plugin', 'list'], {
             encoding: 'utf8',
             env: { ...process.env, COPILOT_HOME: store },
         });
         if (probe.status !== 0 || !probe.stdout) {
-            stores.push({ path: store, available: false, count: 0 });
+            stores.push({ path: store, available: fromMarketplace.size > 0, count: fromMarketplace.size });
+            if (fromMarketplace.size) anyRead = true;
             continue;
         }
         anyRead = true;
-        let count = 0;
+        const listed = new Set();
         for (const line of probe.stdout.split(/\r?\n/)) {
             const m = line.match(/^\s*[•*-]\s*([a-z0-9-]+)/i);
             if (m) {
                 installed.add(m[1].toLowerCase());
-                count += 1;
+                listed.add(m[1].toLowerCase());
             }
         }
-        stores.push({ path: store, available: true, count });
+        // Union, not sum: a plugin present in both layouts is one plugin.
+        for (const name of fromMarketplace) listed.add(name);
+        stores.push({ path: store, available: true, count: listed.size });
     }
     return { stores, available: anyRead, installed };
 }

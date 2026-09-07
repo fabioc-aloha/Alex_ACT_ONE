@@ -33,7 +33,8 @@ banners, then check that what rendered says what you meant.
 write project-specific skills from work you keep repeating, and consolidate what
 a session learned into something reusable.
 
-59 skills, 15 always-on instructions, and 16 slash commands.
+59 skills, 15 always-on instructions, 16 slash commands, and 3 MCP servers.
+Not every surface reaches every app — see [Where It Works](#where-it-works).
 
 ## The Skills
 
@@ -156,15 +157,28 @@ Getting the plugin and its dependencies working.
 
 ## Where It Works
 
-| Where you use Copilot | Status |
-| --- | --- |
-| Copilot CLI | Verified |
-| VS Code with GitHub Copilot Chat | Verified |
-| Microsoft Scout | Verified |
-| GitHub Copilot app | Not yet tested |
-
 Skills sit at the package root, so each app finds them directly. No bridge, no
-symbolic links, and no second plugin store to keep in sync.
+symbolic links, and no second plugin store to keep in sync. The other three
+surfaces are not automatic in the same way, and this table says which are.
+
+| Where you use Copilot | Skills | Instructions | Slash commands | MCP servers |
+| --- | --- | --- | --- | --- |
+| Copilot CLI | 59 | 15, after activation | 16 | 3, from the manifest |
+| VS Code with GitHub Copilot Chat | 59 | 15, after activation | 16 | 3, from the manifest |
+| Microsoft Scout | 59 | 15, after activation | **None** | 3, after registration |
+| GitHub Copilot app | Not yet tested | Not yet tested | Not yet tested | Not yet tested |
+
+Two Scout-specific notes, both verified 2026-09-07:
+
+- **Slash commands do not reach Scout.** It has no command surface for plugin
+  prompts. Fifteen of the sixteen have an equivalent skill you can ask for by
+  name, so little is lost in practice — but the commands themselves are absent
+  rather than merely undocumented.
+- **MCP servers need one extra step.** CLI and VS Code read `plugin.json`
+  directly. Scout keeps its own registry and ignores that manifest, so the
+  servers must be registered once with
+  `/alex-act-one setup-dependencies`. Skipping it leaves every skill loaded and
+  every server it calls missing.
 
 ## Install
 
@@ -221,6 +235,24 @@ prints the exact target directory first.
 Step 1 alone is a complete, working install. Step 2 adds the always-on
 behavior, and skipping it costs you nothing else.
 
+### On Microsoft Scout, register the MCP servers
+
+Only on Scout, and only if you want charts, browser verification, or image
+generation. Copilot CLI and VS Code read the servers from `plugin.json` and need
+nothing extra; Scout keeps its own registry and ignores that manifest.
+
+```text
+/alex-act-one setup-dependencies
+```
+
+Ask it to register the servers with Scout. It previews the exact registry path
+and one line per server, backs up your existing registry, and merges rather than
+replaces — your other servers are untouched. Restart Scout fully afterwards, not
+just in a new conversation.
+
+Without this step every skill still loads, but the tools those skills call are
+missing, which looks like a broken package rather than an unregistered one.
+
 ### Optional: extra tools for a few skills
 
 Most of this plugin needs nothing but Node. Forty-eight of the 59 skills run
@@ -233,13 +265,20 @@ with no external tools at all, and nothing below is needed to start.
 | Export SVG banners and figures as PNG | svgexport | `npm install -g svgexport@0.4.2` |
 | Annotate a screenshot | Pillow | `pip install Pillow` |
 | Render charts | Flint MCP server | `/alex-act-one setup-dependencies` |
-| Check rendered output in a browser | Playwright MCP server, or your host's own browser tools | `/alex-act-one setup-dependencies` |
+| Check rendered output in a browser | The `alex-playwright` MCP server, or your host's own browser tools | `/alex-act-one setup-dependencies` |
 | Generate images with AI | Replicate MCP server, plus a paid account and API token | `/alex-act-one setup-dependencies` |
 
 The three MCP servers are not equally important. Only Flint is required for the
 skill that uses it: without it, chart rendering cannot run and there is no
 substitute. Playwright has one — several hosts provide their own browser tools —
 and Replicate adds a capability rather than unblocking one.
+
+That fallback has a limit worth knowing before you rely on it. A host can have a
+browser and still refuse to open `file://`, which is the case that matters for
+checking an artifact you just wrote to disk. VS Code opens local files with no
+flags; Scout's built-in browser blocks them; Copilot CLI has no browser at all.
+The package registers its own server as `alex-playwright` — a distinct name, so
+it sits alongside a host's built-in rather than shadowing it.
 
 To see what you already have and what any gap costs you:
 

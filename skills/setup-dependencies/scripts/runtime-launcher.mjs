@@ -14,7 +14,7 @@ const routes = {
     target: join(runtimeRoot, 'node_modules', 'flint-chart-mcp', 'dist', 'cli.js'),
   },
   playwright: {
-    expectedVersion: '0.0.78',
+    expectedVersion: '0.0.80',
     packagePath: join(runtimeRoot, 'node_modules', '@playwright', 'mcp', 'package.json'),
     target: join(runtimeRoot, 'node_modules', '@playwright', 'mcp', 'cli.js'),
   },

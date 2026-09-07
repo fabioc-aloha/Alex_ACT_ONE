@@ -43,7 +43,7 @@
         "REPLICATE_API_TOKEN": "${env:REPLICATE_API_TOKEN}"
       }
     },
-    "playwright": {
+    "alex-playwright": {
       "type": "stdio",
       "command": "node",
       "args": [
