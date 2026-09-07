@@ -1,17 +1,17 @@
 ---
 description: "Save session state for handoff in repo-root HANDOFF.md"
-lastReviewed: 2026-08-05
+lastReviewed: 2026-09-07
 ---
 
 # Save Session Note
 
 Capture a short observation, reminder, or open thread in repo-root `HANDOFF.md` so pending actions stay visible to the user across sessions.
 
-This prompt is self-contained. If the generic skill tool is unavailable, continue with the numbered steps; do not report Core as missing.
+This prompt is self-contained. If the generic skill tool is unavailable, continue with the numbered steps; do not report the capability as missing.
 
 ## Steps
 
-1. **Get the note from the user** — one or two sentences. If they didn't include one in the request, ask: "What should I capture?"
+1. **Get the note from the user** — one or two sentences. If the request already contains the note text, skip the question and write it directly. Otherwise ask: "What should I capture?"
 2. **Resolve repo root**:
    - If in a git repo, use the top-level root.
    - If not in a git repo, use the current workspace root.

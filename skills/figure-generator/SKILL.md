@@ -6,7 +6,7 @@ lastReviewed: 2026-07-29
 
 # Figure generator discipline
 
-Deterministic figure production for books, reports, and any artifact where a figure's numbers have to survive re-generation and stay auditable. Distilled from a shipped book — Fabio Correa's *The Defensible Decision*, 53 figures across 14 chapters, every generator hand-authored, every dataset published — via Alex_DDA's `dd-book-illustrator` skill.
+Deterministic figure production for books, reports, and any artifact where a figure's numbers have to survive re-generation and stay auditable. Distilled from a shipped book: 53 figures across 14 chapters, every generator hand-authored, every dataset published.
 
 The engineering side of the illustration workflow. [`print-svg-style-guide`](../print-svg-style-guide/SKILL.md) governs how figures LOOK; this skill governs how they get MADE, VERSIONED, and AUDITED.
 
@@ -245,4 +245,4 @@ Before hoisting, the figure count typically lives scattered across three or four
 
 Track outcomes in your project's own curation or decision log.
 
-Adapted from *The Defensible Decision* (Fabio Correa) via the `dd-book-illustrator` skill in Alex_DDA. The generator pattern, contract-test discipline, and dataset-inversion procedure are book-tested across 53 shipped figures.
+The generator pattern, contract-test discipline, and dataset-inversion procedure are book-tested across 53 shipped figures.

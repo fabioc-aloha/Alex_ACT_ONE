@@ -52,7 +52,7 @@ Applied to curation work: accepting a bad skill is reversible (revert next patch
 | Low × Low | Ship immediately, log in curation-log |
 | Any Medium | Ship with trimmed ACT pass visible in curation-log |
 | Any High | Full ACT pass, write ADR, require explicit approval |
-| High × High | Surface as ADR + direct Fabio conversation before acting |
+| High × High | Surface as an ADR and raise it directly with the owner before acting |
 
 ## Risk Register (Running)
 

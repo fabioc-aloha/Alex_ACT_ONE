@@ -7,10 +7,9 @@ lastReviewed: 2026-08-05
 
 Produce a terse, read-only orientation report for the current project.
 
-This prompt is self-contained. Do not invoke the generic skill tool for
-`status-reporting`; execute the numbered steps directly. A skill-tool inventory
-that omits plugin skills is not evidence that Core or its status capability is
-missing.
+This prompt is self-contained: execute the numbered steps directly. If the
+generic skill tool does not list `status-reporting`, that is not evidence the
+skill is missing — plugin-shipped skills are not always in its inventory.
 
 ## Steps
 
@@ -18,7 +17,7 @@ missing.
 2. **Git state**: Report uncommitted file count and the latest commit subject.
 3. **Continuity**: Read `HANDOFF.md` if present; summarize `In progress`, pending queue,
    and resume point. Do not re-litigate closed decisions.
-4. **Brain health**: If your project ships brain-QA muscles (Alex ACT uses):
+4. **Brain health**: If the project ships brain-QA scripts, run them. A project with structural and semantic brain checks usually exposes them as:
 
    ```pwsh
    node scripts/brain-qa.cjs

@@ -123,7 +123,7 @@ Replicate charges per prediction. Approximate costs for image generation as of 2
 | `recraft-ai/recraft-v3`            | ~$0.04                  |
 | Video models                       | ~$0.10-$5.00 per second |
 
-Fabio's Karpathy_Loop testing (2026-07-27 user memory) spent ~$1.83 across an iteration session with multiple stock media generations. Individual illustrations are cheap; volume adds up.
+A measured iteration session with multiple stock media generations cost roughly $1.83. Individual illustrations are cheap; volume adds up.
 
 Set a spending cap at [replicate.com/account/billing](https://replicate.com/account/billing) if runaway costs are a concern.
 

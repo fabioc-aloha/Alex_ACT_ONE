@@ -69,7 +69,7 @@ If none apply, the figure does not earn its place. Restate the claim as a senten
 
 **Deletion test**: if the surrounding prose reads fine when the figure is removed, the figure is decorative. If the prose has to be substantially rewritten to compensate, the figure was doing real work.
 
-Adapted from _The Defensible Decision_ (Fabio Correa, Ch 5) via the `dd-book-illustrator` skill in Alex_DDA.
+Adapted from a published decision-analysis book's figure-authoring practice.
 
 ## Step 1: The Big Idea (one sentence)
 
@@ -231,7 +231,7 @@ When a figure teaches by showing failure (a flawed chart the reader is asked to 
 
 Paired BEFORE/AFTER figures are the exception: the AFTER panel already reveals the argument, so the title can name it directly.
 
-Adapted from _The Defensible Decision_ (Fabio Correa, Ch 5-6) via the `dd-book-illustrator` skill in Alex_DDA.
+Adapted from a published decision-analysis book's figure-authoring practice.
 
 ## Step 5: Write the Chart Brief and hand off
 

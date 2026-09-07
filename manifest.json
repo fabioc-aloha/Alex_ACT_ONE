@@ -397,10 +397,6 @@
         "path": "prompts/meditate.prompt.md"
       },
       {
-        "name": "note",
-        "path": "prompts/note.prompt.md"
-      },
-      {
         "name": "problem-framing-audit",
         "path": "prompts/problem-framing-audit.prompt.md"
       },

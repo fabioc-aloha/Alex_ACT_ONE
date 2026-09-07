@@ -1,5 +1,5 @@
 ---
-description: "Audit Illustrator's stable MCP versions, preview and install exact reviewed pins through npm's configured registry, then verify direct Node launches. Use when checking for updates, after installing or updating Illustrator, or when private runtime state is missing."
+description: "Audit the stable MCP server versions this plugin pins, preview and install them through npm's configured registry, then verify direct Node launches. Use when checking for updates, after installing or updating the plugin, or when the local runtime is missing."
 lastReviewed: 2026-08-10
 ---
 
@@ -17,4 +17,4 @@ Steps:
 6. Ask for explicit consent before `--apply`.
 7. Apply only after consent, then run the verifier and report each MCP result.
 
-Would revise by **2026-11-10** if this prompt bypasses preview or setup remains undiscoverable after an Illustrator install.
+Would revise by **2026-12-07** if this prompt bypasses preview, or if setup remains undiscoverable after installing the plugin.

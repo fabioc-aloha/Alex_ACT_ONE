@@ -6,7 +6,7 @@ lastReviewed: 2026-07-29
 
 # Print-quality SVG style guide
 
-Rules for print-quality SVG figures in books, reports, and exec-facing HTML. Distilled from a shipped book — Fabio Correa's *The Defensible Decision*, 53 figures across 14 chapters at print size 7×10in, figure width 4.39in — via Alex_DDA's `dd-book-illustrator` skill. Portable to any figure that will land on paper or a PDF.
+Rules for print-quality SVG figures in books, reports, and exec-facing HTML. Distilled from a shipped book: 53 figures across 14 chapters at print size 7×10in, figure width 4.39in. Portable to any figure that will land on paper or a PDF.
 
 Complements the big-idea family: `big-idea` and `chart-big-idea` decide what the figure ARGUES; this skill decides how it LOOKS. `flint-chart`'s publication config preset pins the Vega-Lite config that emits charts obeying these rules. `figure-generator` provides the engineering discipline that emits SVGs conforming to this guide.
 
@@ -274,4 +274,4 @@ The floor formula, palette, or composition idioms have failed if any of the foll
 
 Track outcomes in your project's own curation or decision log.
 
-Adapted from *The Defensible Decision* (Fabio Correa) via the `dd-book-illustrator` skill in Alex_DDA. The floor math, palette semantics, and composition idioms are book-tested across 53 shipped figures and 368 pages.
+The floor math, palette semantics, and composition idioms are book-tested across 53 shipped figures and 368 pages.

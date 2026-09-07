@@ -457,8 +457,7 @@ For the engineering discipline that emits SVGs conforming to that guide
 contract tests, dataset inversion), see the
 [`figure-generator`](../figure-generator/SKILL.md) skill.
 
-Adapted from _The Defensible Decision_ (Fabio Correa) via the
-`dd-book-illustrator` skill in Alex_DDA.
+Adapted from a published decision-analysis book's figure-authoring practice.
 
 ## Attribution
 

@@ -114,7 +114,7 @@ Priority order when the prose is wrong:
 3. **Only correct fix changes what the passage argues**: stop and ask.
 4. **Wording awkward but numbers right**: out of scope for this skill.
 
-Adapted from _The Defensible Decision_ (Fabio Correa) via the `dd-book-illustrator` skill in Alex_DDA.
+Adapted from a published decision-analysis book's figure-authoring practice.
 
 ## Step 1 — pick a verification capability
 

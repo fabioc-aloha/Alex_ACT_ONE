@@ -33,7 +33,7 @@ banners, then check that what rendered says what you meant.
 write project-specific skills from work you keep repeating, and consolidate what
 a session learned into something reusable.
 
-59 skills, 15 always-on instructions, and 17 slash commands.
+59 skills, 15 always-on instructions, and 16 slash commands.
 
 ## Where It Works
 

@@ -17,7 +17,7 @@ Skill: [svg-banner](../skills/svg-banner/SKILL.md). Script: `skills/svg-banner/s
 
 ## Watermark Categories (from active brand config)
 
-The default Alex brand config ships these six categories. Heirs that customize the brand config swap this whitelist for their own vocabulary.
+The default brand config ships these six categories. A project that customizes the brand config swaps this list for its own vocabulary.
 
 | Watermark | Use For                                     |
 | --------- | ------------------------------------------- |
@@ -32,7 +32,7 @@ The default Alex brand config ships these six categories. Heirs that customize t
 
 1. **Pick the title** — ≤ 32 characters. Keep it punchy. Project name or doc category usually wins.
 2. **Pick the subtitle** — ≤ 80 characters. One-line value statement (what the doc is FOR, not what it contains).
-3. **Pick the watermark** from the table above (or from a heir-customized `banner-brand.json`). If unsure, pick `DOCS`.
+3. **Pick the watermark** from the table above (or from a project-customized `banner-brand.json`). If unsure, pick `DOCS`.
 4. **Choose output path** (default: `assets/banner-<slug>.svg`). Slug derived from title if omitted.
 5. **Run**:
 

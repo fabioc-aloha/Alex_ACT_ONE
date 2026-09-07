@@ -175,5 +175,5 @@ Track in your project's audit trail (Alex ACT itself tracks in `operations/ledge
 ## Would Revise If
 
 - The skill proves out (≥3 invocations across ≥2 non-hero-copy domains by **2026-10-28**, no drift in the chart-plugin relationship) → **earn promotion**: refactor `chart-big-idea` upstream to depend on this skill as its four-step foundation, so the specialization relationship becomes structural rather than documentary
-- Fabio flags ≥3 authored Big Ideas as overreach or mis-claim within the falsification window → the skill's discipline is calibrated wrong; add stronger _"honest to what the artifact delivers"_ language and re-test
+- The user flags 3 or more authored Big Ideas as overreach or mis-claim within the falsification window → the skill's discipline is calibrated wrong; add stronger _"honest to what the artifact delivers"_ language and re-test
 - A domain surfaces where step 3 (story arc) doesn't map cleanly to the five listed arcs → extend the table with the missing arc, or reduce to arcs-are-optional guidance
