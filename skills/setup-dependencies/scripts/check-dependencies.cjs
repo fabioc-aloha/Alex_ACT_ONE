@@ -40,7 +40,10 @@ function onPath(bin) {
 }
 
 function moduleResolvable(name) {
-    try { require.resolve(name); return true; } catch { return false; }
+    try { require.resolve(name); return true; } catch { /* fall through */ }
+    // Also check the plugin-data runtime, which is where --apply installs local
+    // modules and where the consuming skills look for them.
+    try { require.resolve(path.join(MCP_RUNTIME, 'node_modules', name)); return true; } catch { return false; }
 }
 
 function detect() {
@@ -97,13 +100,18 @@ if (!APPLY) {
 // --apply installs only what npm can do without a system package manager.
 // Installing a system package silently is a surprise change to the machine,
 // so those stay a printed command the user chooses to run.
+//
+// Local modules go into the plugin-data runtime, the same place the MCP
+// servers live. A bare `npm install` would land in whatever directory the user
+// happened to invoke from, which the consuming skill then cannot find — an
+// install that does not fix the problem is worse than no install.
 let installed = 0;
 let failed = 0;
 for (const r of missingTools.filter((x) => x.kind !== 'system')) {
     console.log(`\ninstalling: ${r.label}`);
     const args = r.kind === 'npm-global'
         ? ['install', '-g', r.install.split(' ').pop()]
-        : ['install', r.key];
+        : ['install', '--prefix', MCP_RUNTIME, '--no-audit', '--no-fund', r.key];
     const res = spawnSync('npm', args, { stdio: 'inherit', shell: process.platform === 'win32' });
     if (res.status === 0) installed += 1;
     else { failed += 1; console.error(`FAILED: ${r.label}`); }

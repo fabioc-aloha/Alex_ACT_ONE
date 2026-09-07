@@ -69,8 +69,11 @@ let JSZip;
 try {
   JSZip = require('jszip');
 } catch {
-  // Fallback: search common locations relative to the heir repo
+  // Fallback: search known locations. plugin-data comes first because that is
+  // where setup-dependencies installs it, and it survives plugin updates.
   const fallbackPaths = [
+    path.join(os.homedir(), '.copilot', 'plugin-data', 'alex-act-one', 'runtime', 'node_modules', 'jszip'),
+    path.join(__dirname, '..', '..', '..', 'node_modules', 'jszip'), // plugin root
     path.join(__dirname, '..', '..', 'node_modules', 'jszip'),       // heir/node_modules
     path.join(__dirname, 'node_modules', 'jszip'),                   // skill/node_modules
     path.join(process.cwd(), 'node_modules', 'jszip'),               // cwd/node_modules
@@ -80,7 +83,7 @@ try {
   }
   if (!JSZip) {
     console.error('WARNING: jszip not found. Post-processing (formatting, centering) will be limited.');
-    console.error('  Install in your heir: npm install jszip');
+    console.error('  Install it with: /alex-act-one setup-dependencies');
   }
 }
 
