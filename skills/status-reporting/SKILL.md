@@ -225,10 +225,10 @@ Pull information from:
 ### Quick Status Commands
 
 ```
-/alex-act-core status              → Generate session status
-/alex-act-core status weekly       → Weekly team update
-/alex-act-core status exec         → Executive summary
-/alex-act-core status email [name] → Stakeholder email draft
+/alex-act-one status              → Generate session status
+/alex-act-one status weekly       → Weekly team update
+/alex-act-one status exec         → Executive summary
+/alex-act-one status email [name] → Stakeholder email draft
 ```
 
 ## Integration Points

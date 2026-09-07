@@ -11,7 +11,7 @@ Emit the paste-ready `enabledPlugins` + `extraKnownMarketplaces` block for the s
 ## When to fire
 
 - Heir asks to enable the Microsoft ecosystem — "set up Azure + Fabric + Power BI + M365 for Copilot"
-- Heir invokes `/alex-act-enterprise setup-enterprise`
+- Heir invokes `/alex-act-one setup-enterprise`
 - Heir asks what block goes into `~/.copilot/settings.json` for the public Microsoft plugins
 - Auditing or repairing a workspace where some of the seven are missing / disabled / stale
 
@@ -181,6 +181,6 @@ Track outcomes in the maintaining repo's curation log.
 
 ## Related
 
-- [`/alex-act-enterprise setup-enterprise`](../../prompts/setup-enterprise.prompt.md) — namespaced slash-command entry point
+- [`/alex-act-one setup-enterprise`](../../prompts/setup-enterprise.prompt.md) — namespaced slash-command entry point
 - `alex-act-msft`'s `setup-msft-stack` skill — sibling for internal-only plugins
 - Steward's user-brain inventory § 184 — source spec for this block

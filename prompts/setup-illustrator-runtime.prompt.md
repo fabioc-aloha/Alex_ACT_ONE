@@ -3,7 +3,7 @@ description: "Audit Illustrator's stable MCP versions, preview and install exact
 lastReviewed: 2026-08-10
 ---
 
-# /alex-act-illustrator-plugin setup-illustrator-runtime
+# /alex-act-one setup-illustrator-runtime
 
 Use the `setup-illustrator-runtime` skill to establish direct MCP runtime readiness.
 

@@ -3,7 +3,7 @@ description: "Orchestrates expert visual storytelling over Flint: frame the clai
 lastReviewed: 2026-08-15
 ---
 
-# /alex-act-illustrator-plugin render-chart
+# /alex-act-one render-chart
 
 Follow these steps in order. Skip any step that the user's request has already answered.
 
