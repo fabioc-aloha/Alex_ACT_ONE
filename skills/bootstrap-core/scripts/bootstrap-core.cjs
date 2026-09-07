@@ -156,21 +156,37 @@ function receiptCurrent(receipt, options, files) {
     });
 }
 
-function validatedOwnedReceipt(receipt, files) {
+/**
+ * Validates the receipt before acting on the files it claims.
+ *
+ * `forRemoval` relaxes two checks, and only those two. A receipt written when
+ * the package shipped more instructions than it does now is still a valid
+ * record of what this plugin wrote, and those extra files are exactly what
+ * removal exists to clean up. Requiring the count to match the current package
+ * made removal impossible after any instruction was retired, which stranded the
+ * orphans permanently and had no security benefit: the guard that matters is
+ * the per-file hash comparison in buildPlan, which preserves anything the user
+ * has since modified.
+ *
+ * Everything else still applies in both modes: schema, owner, name safety, hash
+ * format, and no duplicates.
+ */
+function validatedOwnedReceipt(receipt, files, forRemoval = false) {
     if (!receipt || receipt.schemaVersion !== 2
         || receipt.bootstrappedBy !== 'alex-act-core'
         || !Array.isArray(receipt.files)
-        || receipt.files.length !== files.length) {
+        || (!forRemoval && receipt.files.length !== files.length)) {
         throw new Error('bootstrap receipt is invalid');
     }
     const expected = new Map(files.map((file) => [file.name, normalizedReceiptFile(file)]));
     const names = new Set();
     for (const entry of receipt.files) {
         const source = expected.get(entry?.name);
-        if (!source || names.has(entry.name)
+        const orphaned = forRemoval && !source;
+        if ((!source && !orphaned) || names.has(entry.name)
             || !safeInstructionName(entry.name)
             || entry.owner !== 'alex-act-core'
-            || entry.sourceRelativePath !== source.sourceRelativePath
+            || (source && entry.sourceRelativePath !== source.sourceRelativePath)
             || typeof entry.sha256 !== 'string'
             || !/^[a-f0-9]{64}$/.test(entry.sha256)) {
             throw new Error('bootstrap receipt contains unsafe or unowned entries');
@@ -217,12 +233,17 @@ function buildPlan(options) {
     const receiptPath = path.join(options.targetInstructions, RECEIPT_NAME);
     const receipt = readJson(receiptPath);
     if (options.remove) {
-        const owned = receipt ? validatedOwnedReceipt(receipt, files) : [];
+        const owned = receipt ? validatedOwnedReceipt(receipt, files, true) : [];
+        const current = new Set(files.map((f) => f.name));
         const actions = owned.map((entry) => {
             const destination = path.join(options.targetInstructions, entry.name);
-            if (!fs.existsSync(destination)) return { name: entry.name, action: 'absent' };
+            // An entry the package no longer ships is still ours to remove, and
+            // saying so makes the cleanup visible rather than silent.
+            const orphaned = !current.has(entry.name);
+            if (!fs.existsSync(destination)) return { name: entry.name, action: 'absent', orphaned };
             return {
                 name: entry.name,
+                orphaned,
                 action: sha256(fs.readFileSync(destination)) === entry.sha256
                     ? 'remove'
                     : 'preserve-modified',
@@ -251,6 +272,16 @@ function buildPlan(options) {
             sha256: sourceHash,
         };
     });
+    // Instructions this receipt owns that the package no longer ships. Activate
+    // does not delete them, because that is removal's job and deleting during an
+    // upgrade would be a surprise. But leaving them unmentioned is how a retired
+    // instruction stays active in a profile forever.
+    const current = new Set(files.map((f) => f.name));
+    const orphaned = Array.isArray(receipt?.files)
+        ? receipt.files
+            .map((e) => e?.name)
+            .filter((n) => n && !current.has(n) && fs.existsSync(path.join(options.targetInstructions, n)))
+        : [];
     return {
         schemaVersion: 1,
         apply: options.apply,
@@ -260,6 +291,7 @@ function buildPlan(options) {
         targetSource: options.targetSource,
         expectedFiles: files.length,
         files: actions,
+        orphaned,
         receipt: {
             action: receiptCurrent(receipt, options, files)
                 ? 'preserve'
