@@ -9,15 +9,15 @@ lastReviewed: 2026-05-26
 
 Convert a document to another format.
 
-If the generic skill tool is unavailable for a plugin-shipped converter, resolve the installed `alex-act-document-tools` root and read the matching `.github/skills/<format>/SKILL.md` directly. Do not declare the converter absent when its installed file exists.
+If the generic skill tool is unavailable for a converter, resolve the installed `alex-act-one` root and read the matching `skills/<format>/SKILL.md` directly. Do not declare the converter absent when its installed file exists.
 
 ## Steps
 
 1. **Detect formats**: Identify the source file and target format from the user's request. If ambiguous, ask.
-2. **Load format skill**: Read the matching skill from `.github/skills/<format>/SKILL.md` for format-specific rules and options.
+2. **Load format skill**: Read the matching skill from `skills/<format>/SKILL.md` for format-specific rules and options.
 3. **Run script**: Execute the conversion script with the user's options:
    ```
-   node .github/skills/<format>/scripts/<format>.cjs <source> [output] [options]
+   node skills/<format>/scripts/<format>.cjs <source> [output] [options]
    ```
 4. **Validate**: Confirm the output exists, is non-empty, and opens in the appropriate viewer. Use converter diagnostics for format-specific failures.
 5. **Report**: Show the output path, file size, and any diagnostics.

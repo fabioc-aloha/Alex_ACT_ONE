@@ -41,7 +41,7 @@ action, overlap report, and current Core version. Ask:
 > Activate these 17 Core instructions for every workspace on this machine?
 
 After an explicit yes, rerun the same command with `--apply`. The script writes
-only changed files, writes `.alex-act-core-bootstrap.json` atomically when its
+only changed files, writes `.alex-act-one-bootstrap.json` atomically when its
 content needs creation or refresh, and verifies every destination and the
 receipt against canonical sources. A no-op apply preserves receipt bytes.
 

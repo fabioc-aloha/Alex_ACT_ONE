@@ -20,7 +20,7 @@ This is the cheapest delivery method: zero dependencies, zero tokens spent on SV
 
 ## When NOT to Use
 
-- The audience expects graphical output (install `alex-act-illustrator-plugin`)
+- The audience expects graphical output (use the `flint-chart` or `print-svg-style-guide` skills instead)
 - Charts require color encoding for meaning (ASCII is monochrome)
 - More than 80 columns of data (wrapping breaks the layout)
 - Interactive filtering or drill-through is required

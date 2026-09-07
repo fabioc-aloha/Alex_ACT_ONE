@@ -164,8 +164,8 @@ The "other scope" column surfaces heirs who accidentally enabled at user scope w
 
 ## Composes with
 
-- `alex-act-core` — the always-on discipline baseline every heir installs first
-- `alex-act-illustrator-plugin` — visual authoring; often paired with Fabric-driven data storytelling
+- The always-on discipline baseline and the visual-authoring skills ship in this
+  same package, so nothing extra is needed for them
 - `alex-act-msft` — Microsoft-internal siblings (WorkIQ, Agency framework, `org-report`); only useful inside Microsoft's corporate network
 
 ## Falsifiability
