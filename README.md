@@ -1,6 +1,6 @@
-# ONE Alex ACT
+# Alex ACT ONE
 
-![ONE Alex ACT](assets/banner.svg)
+![Alex ACT ONE](assets/banner.svg)
 
 A single plugin that gives GitHub Copilot a working method: how to think through
 a problem, how to write code and prose that hold up, and how to produce documents

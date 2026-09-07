@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320" role="img" aria-label="ONE Alex ACT: A working method for GitHub Copilot, on every surface">
-  <title>ONE Alex ACT</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" width="1200" height="320" role="img" aria-label="Alex ACT ONE: A working method for GitHub Copilot, on every surface">
+  <title>Alex ACT ONE</title>
   <desc>A working method for GitHub Copilot, on every surface</desc>
 
   <defs>
@@ -32,7 +32,7 @@
 
   <!-- Title -->
   <text x="40" y="178" font-family="Segoe UI, Helvetica, Arial, sans-serif"
-      font-size="56" font-weight="700" fill="#f1f5f9" letter-spacing="0">ONE Alex ACT</text>
+      font-size="56" font-weight="700" fill="#f1f5f9" letter-spacing="0">Alex ACT ONE</text>
 
   <!-- Subtitle -->
   <text x="40" y="224" font-family="Segoe UI, Helvetica, Arial, sans-serif"

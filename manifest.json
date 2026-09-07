@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "status": "development",
   "shape": "single-install runtime",
-  "description": "ONE Alex ACT. A single-install runtime carrying the Alex ACT constellation: epistemic discipline, critical thinking, engineering craft, visual authoring, document conversion, brain compilation, and AI provider planning. Installs once at user level and is read by Copilot CLI, VS Code with GitHub Copilot Chat, and Microsoft Scout.",
+  "description": "Alex ACT ONE. A single-install runtime for GitHub Copilot covering critical thinking and problem framing, engineering craft, prose and documentation, document conversion, visual authoring, and agent brain authoring. Installs once at user level and is read by Copilot CLI, VS Code with GitHub Copilot Chat, and Microsoft Scout.",
   "homepage": "https://github.com/fabioc-aloha/Alex_ACT_ONE",
   "license": "MIT",
   "authors": [

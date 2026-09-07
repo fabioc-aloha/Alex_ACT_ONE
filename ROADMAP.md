@@ -11,8 +11,8 @@ What is working now, what is being built, and what is deliberately out of scope.
 
 ## Next
 
-**Install from the Mall.** A published listing so that installing ONE is a
-single command with no repository path, and updates arrive the usual way.
+**Install from the Mall.** A published listing so that installing Alex ACT ONE
+is a single command with no repository path, and updates arrive the usual way.
 
 **Confirm the GitHub Copilot app.** It is a stated target and it is untested.
 Until someone runs it there, the compatibility table says so.
