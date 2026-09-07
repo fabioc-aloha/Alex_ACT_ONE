@@ -32,7 +32,7 @@
  *
  * Requirements:
  *   - Node.js 24+
- *   - pandoc (Windows: winget install pandoc | macOS: brew install pandoc | Linux: apt install pandoc)
+ *   - pandoc (run /alex-act-one setup-dependencies to check and install)
  *   - mermaid-cli (optional, for --mermaid-png)
  * @currency 2026-04-20
  */

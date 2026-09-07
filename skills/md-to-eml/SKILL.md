@@ -169,7 +169,7 @@ For high-fidelity diagrams, pre-render to PNG and include as images.
 
 | Problem | Cause | Solution |
 |---------|-------|----------|
-| "pandoc not found" | pandoc not installed | `winget install pandoc` |
+| "pandoc not found" | pandoc not installed | Run `/alex-act-one setup-dependencies` |
 | Images not showing | CID not supported | Use `--inline-images` flag |
 | Formatting broken | Client strips styles | Use simpler formatting |
 | Large file size | Too many images | Link images instead of embedding |
@@ -193,7 +193,7 @@ For high-fidelity diagrams, pre-render to PNG and include as images.
 
 - Node.js 24+
 - pandoc (for Markdown to HTML conversion)
-- Shared runtime: `.github/scripts/shared/tool-runner.cjs`, `markdown-preprocessor.cjs`, and `mermaid-pipeline.cjs`
+- Shared runtime: `scripts/shared/tool-runner.cjs`, `dependencies.cjs`, `markdown-preprocessor.cjs`, and `mermaid-pipeline.cjs`
 
 ---
 

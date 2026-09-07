@@ -189,7 +189,7 @@ Get-ChildItem *.docx | ForEach-Object {
 
 | Problem | Cause | Solution |
 |---------|-------|----------|
-| "pandoc not found" | pandoc not installed | `winget install pandoc` |
+| "pandoc not found" | pandoc not installed | Run `/alex-act-one setup-dependencies` |
 | Images missing | Extraction failed | Check images/ folder, re-run |
 | Tables misaligned | Complex table structure | Manual cleanup may be needed |
 | Headings start at H3 | Original doc structure | Use `--fix-headings` |
@@ -213,7 +213,7 @@ Get-ChildItem *.docx | ForEach-Object {
 ## Requirements
 
 - Node.js 24+
-- pandoc (`winget install pandoc`)
+- pandoc — run `/alex-act-one setup-dependencies` to check and install
 
 ---
 

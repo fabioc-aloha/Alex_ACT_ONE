@@ -175,8 +175,8 @@ Get-ChildItem docs/*.md | ForEach-Object {
 
 | Problem | Cause | Solution |
 |---------|-------|----------|
-| "pandoc not found" | pandoc not installed | `winget install pandoc` |
-| Mermaid not rendering | mmdc not installed | `npm install -g @mermaid-js/mermaid-cli` or use fallback |
+| "pandoc not found" | pandoc not installed | Run `/alex-act-one setup-dependencies` |
+| Mermaid not rendering | mmdc not installed | Run `/alex-act-one setup-dependencies`, or use the fallback |
 | Images missing | Relative paths broken | Use `--embed-images` (default) |
 | Output too wide on print | Style preset issue | Use academic style for print |
 | Special characters garbled | Encoding issue | Ensure source is UTF-8 |
@@ -188,7 +188,7 @@ Get-ChildItem docs/*.md | ForEach-Object {
 ## Requirements
 
 - Node.js 24+
-- pandoc (`winget install pandoc`)
+- pandoc — run `/alex-act-one setup-dependencies` to check and install
 - mermaid-cli (optional, only for `--mermaid-png`)
 
 ---

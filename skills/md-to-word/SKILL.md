@@ -116,31 +116,24 @@ node skills/md-to-word/scripts/md-to-word.cjs docs/plan.md --keep-temp
 
 ### Prerequisites
 
-| Tool | Install (macOS) | Install (Windows) | Purpose |
-|------|-----------------|-------------------|---------|
-| **Node.js 24+** | `brew install node` | `winget install OpenJS.NodeJS.LTS` | Script runtime |
-| **pandoc** | `brew install pandoc` | `winget install JohnMacFarlane.Pandoc` | Markdown to Word |
-| **mermaid-cli** | `npm install -g @mermaid-js/mermaid-cli` | same | Mermaid to PNG |
-| **jszip** | `npm install jszip` | `npm install jszip` | OOXML post-processing |
-| **svgexport** | `npm install -g svgexport` | same | SVG to PNG (optional) |
+| Tool | Purpose | Required? |
+|------|---------|-----------|
+| **Node.js 24+** | Script runtime | Yes |
+| **pandoc** | Markdown to Word | Yes |
+| **mermaid-cli** | Mermaid diagrams to PNG | Only for diagrams |
+| **jszip** | OOXML post-processing (table formatting, image centering) | No — degrades |
+| **svgexport** | SVG to PNG | No |
 
-### Quick Install (All Dependencies)
+To check what is present and install what is missing:
 
-**macOS**
-
-```bash
-brew install pandoc
-npm install -g @mermaid-js/mermaid-cli svgexport
-npm install jszip
+```text
+/alex-act-one setup-dependencies
 ```
 
-**Windows**
-
-```powershell
-winget install JohnMacFarlane.Pandoc
-npm install -g @mermaid-js/mermaid-cli svgexport
-npm install jszip
-```
+That command owns the install instructions for every platform, so they exist in
+one place and cannot drift from what the scripts actually look for. Running a
+conversion without a required tool also prints the exact command for your
+platform at the moment you need it.
 
 ---
 
@@ -192,7 +185,7 @@ SVG files are automatically detected and converted to PNG for Word compatibility
 ![Architecture](<your-diagram>.png){width=5.8in}
 ```
 
-**Requirements**: `svgexport` (`npm install -g svgexport`)
+**Requirements**: `svgexport` — run `/alex-act-one setup-dependencies` to check and install
 
 **Best practices for SVG sources**:
 
@@ -335,9 +328,9 @@ Paragraphs starting with "Table N" or "Figure N":
 
 | Issue | Cause | Fix |
 |-------|-------|-----|
-| "mmdc not found" | mermaid-cli not installed | `npm install -g @mermaid-js/mermaid-cli` |
-| "pandoc not found" | pandoc not in PATH | `winget install JohnMacFarlane.Pandoc` (restart terminal) |
-| "svgexport not found" | svgexport not installed | `npm install -g svgexport` |
+| "mmdc not found" | mermaid-cli not installed | Run `/alex-act-one setup-dependencies` |
+| "pandoc not found" | pandoc not in PATH | Run `/alex-act-one setup-dependencies`, then restart the terminal |
+| "svgexport not found" | svgexport not installed | Run `/alex-act-one setup-dependencies` |
 | Tables not styled | jszip not available | Set `NODE_PATH` to extension node_modules |
 | Diagrams too small | Outdated script | Update to v5.3.0+ |
 | Images overflow | Complex diagram | Use `--debug` and check PNG dimensions |
@@ -447,8 +440,8 @@ node skills/md-to-word/scripts/md-to-word.cjs spec.md --watch
 ## For Other Projects
 
 1. Copy `skills/md-to-word/scripts/md-to-word.cjs` to the same relative path in the target project.
-2. Copy `tool-runner.cjs`, `markdown-preprocessor.cjs`, and `mermaid-pipeline.cjs` to `.github/scripts/shared/`.
-3. Install prerequisites: `npm install jszip` and install Pandoc; Mermaid CLI and svgexport are optional format helpers.
+2. Copy `tool-runner.cjs`, `dependencies.cjs`, `markdown-preprocessor.cjs`, and `mermaid-pipeline.cjs` to `scripts/shared/`, keeping that relative layout so the script's imports resolve.
+3. Install prerequisites: Pandoc is required; jszip, Mermaid CLI, and svgexport are optional format helpers. The copied `tool-runner` still prints the install command for any missing tool.
 4. Run: `node skills/md-to-word/scripts/md-to-word.cjs your-doc.md`.
 
 ---
