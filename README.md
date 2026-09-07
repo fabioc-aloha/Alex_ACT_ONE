@@ -1,80 +1,73 @@
 # ONE Alex ACT
 
-Install once. Get ACT on every surface.
+A single plugin that gives GitHub Copilot a working method: how to think through
+a problem, how to write code and prose that hold up, and how to produce documents
+and charts worth sending to someone.
 
-**Status:** In development. Not yet published to the Mall.
+Install it once at the user level. Copilot CLI, VS Code, and Microsoft Scout all
+read the same installation.
 
-## What This Is
+**Status:** In development. Not yet published to the Alex ACT Mall.
 
-ONE carries the Alex ACT constellation in a single plugin: epistemic discipline,
-critical thinking, engineering craft, visual authoring, document conversion,
-brain compilation, and AI provider planning.
+## What You Can Do With It
 
-| Component | Count |
+**Think before building.** Frame the real problem, weigh competing explanations,
+name what would prove you wrong, and check a decision against its risks before
+committing to it.
+
+**Write code that survives review.** Test-first workflows, root-cause debugging,
+security hardening, adversarial code review from three opposing perspectives, and
+safe Git practice with recovery paths.
+
+**Produce prose people finish reading.** Strip AI writing patterns, find the one
+sentence a document is actually making, adapt a draft for a named audience, and
+write Markdown that passes lint on the first attempt.
+
+**Turn drafts into deliverables.** Convert between Markdown, Word, HTML, plain
+text, and formatted email. Build charts, diagrams, print-quality figures, and
+banners, then check that what rendered says what you meant.
+
+**Improve the agent itself.** Audit which instructions earn their context cost,
+write project-specific skills from work you keep repeating, and consolidate what
+a session learned into something reusable.
+
+59 skills, 17 always-on instructions, and 17 slash commands.
+
+## Where It Works
+
+| Surface | Status |
 | --- | --- |
-| Skills | 59 |
-| Always-on instructions | 17 |
-| Slash commands | 17 |
+| Copilot CLI | Verified |
+| VS Code with GitHub Copilot Chat | Verified |
+| Microsoft Scout | Verified |
+| GitHub Copilot app | Not yet tested |
 
-Excluded from the first release:
-
-- **AI Operations** (`model-router`, `model-task-execution`, `setup-ai-operations`).
-  It is the only component requiring paid third-party accounts and API tokens,
-  and the only one that can spend money. It serves neither of ONE's two goals.
-- **The Scout skill bridge.** ONE exists so that no bridge is needed, and the
-  bridge's junctions actively break `copilot plugin install`.
-- **The private MSFT plugin**, because ONE is intended for Mall distribution.
-
-## Why It Exists
-
-A working ACT setup currently takes nine steps across two plugin stores, and two
-of them are traps. `alex-act-core` can sit installed and enabled for days while
-providing nothing, because Microsoft Scout reads a different directory than the
-one `COPILOT_HOME` points at. The failure is silent.
-
-ONE replaces that with one install and one activation step.
-
-## Surfaces
-
-| Surface | How it reads ONE |
-| --- | --- |
-| Copilot CLI | Native plugin discovery |
-| VS Code + GitHub Copilot Chat | Native plugin discovery |
-| Microsoft Scout | Directory scan of the user-level plugin store |
-| GitHub Copilot app | Untested — not yet verified on a machine with the app installed |
-
-ONE ships skills at the package root so that every one of these surfaces finds
-them without a bridge, a junction, or a second store.
+Skills sit at the package root, so each surface finds them directly. No bridge,
+no symbolic links, and no second plugin store to keep in sync.
 
 ## Install
 
-Not yet available from the Mall. To try the current source:
+From source, until the Mall listing is published:
 
 ```powershell
 copilot plugin install fabioc-aloha/Alex_ACT_ONE
 ```
 
-Then activate the always-on instructions:
+Skills and commands are available immediately. To turn on the always-on
+instructions:
 
 ```text
 /alex-act-one bootstrap-core
 ```
 
-Instructions are not installable through the plugin manifest, so activation is a
-separate, consented step. It previews every file before writing anything.
+Activation is a separate step because instructions are written into your user
+profile rather than loaded from the plugin. It previews every file and waits for
+your approval before writing anything.
 
-## What Is Not Here Yet
+## What Is Next
 
-- Mall publication
-- Verification on the GitHub Copilot app
-- The shared knowledge base and evidence ledger currently owned by
-  `Alex_ACT_Scout`
-- AI provider planning and execution (see the exclusions above)
-- Any claim that the existing constellation plugins are superseded
+See the [roadmap](ROADMAP.md).
 
 ## License
 
 MIT. See [LICENSE](LICENSE).
-
-Component sources are the Alex ACT constellation repositories, all MIT licensed
-and authored by the same maintainer.
