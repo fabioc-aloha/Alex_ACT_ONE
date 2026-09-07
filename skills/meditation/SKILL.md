@@ -170,7 +170,7 @@ Cadence is per-project. Adapt or skip based on the work rhythm. Meditation as a 
 ## Related
 
 - [/meditate prompt](../../prompts/meditate.prompt.md) — slash-command entry
-- [proactive-awareness.instructions.md](../../instructions/proactive-awareness.instructions.md) — session-boundary context recovery and repository handoffs
+- [session-health-monitoring.instructions.md](../../instructions/session-health-monitoring.instructions.md) — session-boundary context recovery and repository handoffs
 
 ## Falsifiability
 

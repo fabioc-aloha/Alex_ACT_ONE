@@ -33,7 +33,7 @@ banners, then check that what rendered says what you meant.
 write project-specific skills from work you keep repeating, and consolidate what
 a session learned into something reusable.
 
-59 skills, 17 always-on instructions, and 17 slash commands.
+59 skills, 15 always-on instructions, and 17 slash commands.
 
 ## Where It Works
 
@@ -75,7 +75,7 @@ activation in each app where you want the behavior.
 | VS Code with GitHub Copilot Chat | `/alex-act-one bootstrap-core` |
 | Microsoft Scout | Ask for the `bootstrap-core` skill, or invoke it by name from the skill list |
 
-Activation previews all 17 instruction files and waits for your approval before
+Activation previews all 15 instruction files and waits for your approval before
 writing anything. Running it again reports no changes.
 
 To check where a given app writes them, run activation without approving. It

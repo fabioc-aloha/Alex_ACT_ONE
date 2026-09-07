@@ -99,7 +99,7 @@ spikes/
 
 **Avoid** unless the spike specifically requires it: complex package management, build tools/bundlers, Docker, env files, config systems. Hardcode everything — it's a spike.
 
-**Parallel comparison spikes (002a / 002b) — delegate.** When two approaches can run in parallel and both need real engineering (not 10-line prototypes), fan out to worker subagents (see `agent-delegation.instructions.md` if present in the heir workspace). Each subagent returns its own verdict; you write the head-to-head.
+**Parallel comparison spikes (002a / 002b) — delegate.** When two approaches can run in parallel and both need real engineering (not 10-line prototypes), fan out to worker subagents if the session has any loaded. Each subagent returns its own verdict; you write the head-to-head.
 
 ### 5. Verdict
 

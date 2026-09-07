@@ -180,12 +180,12 @@
         "path": "skills/print-svg-style-guide/SKILL.md"
       },
       {
-        "name": "proactive-awareness",
-        "path": "skills/proactive-awareness/SKILL.md"
-      },
-      {
         "name": "problem-framing-audit",
         "path": "skills/problem-framing-audit/SKILL.md"
+      },
+      {
+        "name": "proactive-awareness",
+        "path": "skills/proactive-awareness/SKILL.md"
       },
       {
         "name": "project-capability-authoring",
@@ -275,13 +275,6 @@
         "applyTo": "**/*"
       },
       {
-        "name": "agent-delegation",
-        "path": "instructions/agent-delegation.instructions.md",
-        "install_to": ".github/instructions/agent-delegation.instructions.md",
-        "role": "delegate mechanical work (markdown authoring, diagram rendering, file conversion) to worker subagents so the parent session keeps capacity for reasoning; workers in .github/agents/",
-        "applyTo": "**/*agent*,**/*delegate*,**/*subagent*,**/*author*,**/*diagram*,**/*convert*,**/*assembl*"
-      },
-      {
         "name": "critical-thinking",
         "path": "instructions/critical-thinking.instructions.md",
         "install_to": ".github/instructions/critical-thinking.instructions.md",
@@ -349,13 +342,6 @@
         "path": "instructions/pii-memory-filter.instructions.md",
         "install_to": ".github/instructions/pii-memory-filter.instructions.md",
         "role": "PII filter at native persistent-memory write boundaries — never-write categories (contact/DOB/health/financial/credentials/paths/client-names) plus per-tier allow/deny rules",
-        "applyTo": "**"
-      },
-      {
-        "name": "proactive-awareness",
-        "path": "instructions/proactive-awareness.instructions.md",
-        "install_to": ".github/instructions/proactive-awareness.instructions.md",
-        "role": "cross-session context recovery (HANDOFF.md at session start) + uncommitted-work detection (count-only nudges >24h old) + focus routing (goals.json) + silence-as-signal inhibitor",
         "applyTo": "**"
       },
       {

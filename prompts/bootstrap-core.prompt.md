@@ -1,5 +1,5 @@
 ---
-description: "Preview, activate, verify, repair, or remove this plugin's 17 user-scope runtime instructions. Use after installing or updating Alex ACT ONE, or when Alex ACT identity and always-on reasoning behavior are inactive."
+description: "Preview, activate, verify, repair, or remove this plugin's 15 user-scope runtime instructions. Use after installing or updating Alex ACT ONE, or when Alex ACT identity and always-on reasoning behavior are inactive."
 lastReviewed: 2026-09-07
 ---
 
@@ -12,7 +12,7 @@ lastReviewed: 2026-09-07
    workspace overlap report.
 4. Ask for explicit activation or repair consent.
 5. After consent, rerun the exact command with `--apply`.
-6. Verify all 17 destination hashes and the receipt. A no-op apply must preserve
+6. Verify all 15 destination hashes and the receipt. A no-op apply must preserve
    receipt bytes.
 7. Report legacy mixed-receipt evidence without modifying instructions owned by
    another plugin's receipt.

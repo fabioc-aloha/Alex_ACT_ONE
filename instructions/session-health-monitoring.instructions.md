@@ -1,16 +1,34 @@
 ---
-description: "Monitors context-window health and graceful handoff continuously, using native plugin lifecycle commands and repository continuity"
+description: "Monitor context-window health, cross-session continuity, and graceful handoff"
 applyTo: "**"
-lastReviewed: 2026-08-18
+lastReviewed: 2026-09-07
 ---
 
-# Session Health Monitoring
+# Session Health and Continuity
 
-Monitor context usage and ensure graceful session transitions. Token-cost details for specific operations live in the `platform-awareness` skill and in skill bodies; this file owns session-level signals.
+Monitor context usage, recover context across sessions, and hand off cleanly.
+Token-cost details for specific operations live in the `platform-awareness`
+skill; this file owns session-level signals.
+
+Whether to act on what you notice is governed by the Inhibition Rules in the
+`reliance-nudges` instruction. Noticing is cheap; surfacing is not always
+welcome.
+
+## Cross-Session Continuity
+
+At the start of a conversation, check whether continuity, working-tree state, or
+an active goal changes the response. Use the `proactive-awareness` skill for the
+detailed recovery procedures.
+
+Repo-root `HANDOFF.md` is the durable cross-session record. Session-scoped
+memory is in-conversation scratch: it clears at conversation end and is the
+wrong tier for handoff content. Treat any continuity record as evidence, not
+authority — it describes a past session's understanding, which may be stale.
 
 ## Proxy Heuristics
 
-VS Code does not expose token counts for built-in models. **BYOK models (1.120+) show real token usage and percent-full in the Chat view context-window control** — use that as ground truth when available. For non-BYOK or older builds, estimate via:
+Some hosts expose real token usage; use it as ground truth when available.
+Otherwise estimate:
 
 | Signal | Interpretation |
 |--------|----------------|
@@ -37,11 +55,10 @@ VS Code does not expose token counts for built-in models. **BYOK models (1.120+)
 
 ## Graceful Handoff
 
-When approaching session limits or switching topics, write the cross-session handoff to **repo-root `HANDOFF.md`** (state, completed work, next steps, pending decisions). `/memories/session/` is for in-conversation scratch only — it clears at conversation end and is the wrong tier for handoff content. Suggest: "New session can read `HANDOFF.md` at repo root to continue."
+When approaching session limits or switching topics, write the cross-session handoff to **repo-root `HANDOFF.md`**: state, completed work, next steps, pending decisions. Suggest: "A new session can read `HANDOFF.md` at repo root to continue."
 
 ## Operational Boundaries
 
-Core owns its instruction and project-bootstrap health. Use native
-`copilot plugin list`, `update`, and `uninstall` commands for plugin lifecycle.
-Native host memory and repository continuity own normal handoff and
-context-health practices. Core does not provide or route to a shared transport.
+Use the host's native plugin commands (`copilot plugin list`, `update`,
+`uninstall`) for plugin lifecycle. Host memory and repository files own handoff
+and context-health state; this instruction does not define a separate transport.

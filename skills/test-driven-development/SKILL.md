@@ -294,9 +294,9 @@ Can't check all boxes? You skipped TDD. Start over.
 
 ## Integration With Other Skills
 
-### With agent-delegation
+### With delegated work
 
-When dispatching a worker subagent (per [agent-delegation](../../instructions/agent-delegation.instructions.md)), enforce TDD in the goal:
+When dispatching a worker subagent, enforce TDD in the goal:
 
 > "Implement [feature] using strict TDD. Follow test-driven-development skill: write failing test FIRST, run to verify failure, write minimal code to pass, run to verify pass, refactor if needed, commit. Project test command: `pytest tests/ -q`."
 
@@ -330,7 +330,6 @@ No exceptions without the user's explicit permission.
 - [plan](../plan/SKILL.md) — every plan task should embed RED-GREEN-REFACTOR
 - [spike](../spike/SKILL.md) — TDD exception lane for throwaway feasibility experiments
 - [code-review](../code-review/SKILL.md) — post-write companion; TDD is pre-write, code-review is the review gate
-- [agent-delegation](../../instructions/agent-delegation.instructions.md) — enforce TDD on delegated work via the goal prompt
 
 ## Would Revise If
 

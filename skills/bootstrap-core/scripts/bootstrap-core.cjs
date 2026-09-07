@@ -95,8 +95,8 @@ function expectedFiles() {
     const names = fs.readdirSync(SOURCE_ROOT)
         .filter((name) => name.endsWith('.instructions.md'))
         .sort();
-    if (names.length !== 17 || !names.every(safeInstructionName)) {
-        throw new Error(`expected 17 canonical instructions, found ${names.length}`);
+    if (names.length !== 15 || !names.every(safeInstructionName)) {
+        throw new Error(`expected 15 canonical instructions, found ${names.length}`);
     }
     const manifest = readJson(MANIFEST_PATH);
     if (!Array.isArray(manifest?.assets?.instructions)) {
@@ -118,7 +118,7 @@ function expectedFiles() {
         }
         return `${entry.name}.instructions.md`;
     }).sort();
-    if (declaredNames.length !== 17
+    if (declaredNames.length !== 15
         || new Set(declaredNames).size !== declaredNames.length
         || JSON.stringify(declaredNames) !== JSON.stringify(names)) {
         throw new Error('manifest instruction inventory differs from canonical sources');

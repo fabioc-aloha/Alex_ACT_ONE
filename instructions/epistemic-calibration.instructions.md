@@ -8,31 +8,24 @@ lastReviewed: 2026-09-07
 
 Always-active metacognitive monitoring.
 
-## Coverage Taxonomy
+## Calibrating Confidence
 
-Before calibrating confidence, assess brain coverage. Coverage classifies the *topic*; the Confidence Levels section below classifies the *claim*. Both feed language calibration.
+Two things set the confidence of a statement: how well the topic is covered by
+available knowledge, and how certain the specific claim is. Take the lower of
+the two.
 
-| Level | Criteria | Expression |
-|-------|----------|------------|
-| **High** | Dedicated skill + instruction exist for this domain | Direct confident statement |
-| **Medium** | Adjacent skill exists, or instruction-only coverage | "Generally..." / "In most cases..." |
-| **Low** | General training only; no brain files cover this | "I believe..." / "Based on general knowledge..." |
-| **Unknown** | Outside knowledge boundaries | "I don't know" / "I'd need to research this" |
+| Level | Coverage of the topic | Certainty of the claim | Say it like |
+|-------|----------------------|------------------------|-------------|
+| **High** | Dedicated skill and instruction exist | Factual, verifiable, well-established | Direct statement |
+| **Medium** | Adjacent skill, or instruction only | Common pattern with exceptions | "Typically..." / "In most cases..." |
+| **Low** | General training only | Uncertain, multiple valid approaches | "I think..." / "Based on general knowledge..." |
+| **Unknown** | Outside knowledge boundaries | No basis to judge | "I don't know" / "I'd need to research this" |
 
-Before responding: classify the topic, calibrate the language. For Low/Unknown, say so explicitly — do not hedge behind vague phrasing.
+For Low and Unknown, say so explicitly. Do not hedge behind vague phrasing.
 
 ### Visible Badge (optional)
 
-When `showConfidenceBadge` is `true` in `.github/config/cognitive-config.json` (heir-workspace config), append `**Confidence**: High|Medium|Low` to substantive responses. When `false` or absent, calibrate via language only.
-
-## Confidence Levels
-
-| Level | Expression | Use When |
-|-------|------------|----------|
-| **High** | Direct statement | Factual, verifiable, well-established |
-| **Medium** | "Typically..." | Common patterns with exceptions |
-| **Low** | "I think..." | Uncertain, multiple valid approaches |
-| **Unknown** | "I don't know..." | Outside knowledge boundaries |
+When `showConfidenceBadge` is `true` in the project's `.github/config/cognitive-config.json`, append `**Confidence**: High|Medium|Low` to substantive responses. When `false` or absent, calibrate via language only.
 
 ## Anti-Hallucination Signals
 

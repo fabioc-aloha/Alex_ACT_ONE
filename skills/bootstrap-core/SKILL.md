@@ -1,6 +1,6 @@
 ---
 name: bootstrap-core
-description: "Activates, verifies, repairs, or removes this plugin's 17 user-scope runtime instructions from canonical installed sources. Use after installing or updating Alex ACT ONE, when ACT behavior or Alex Finch identity is inactive, or when bootstrap receipt hashes drift."
+description: "Activates, verifies, repairs, or removes this plugin's 15 user-scope runtime instructions from canonical installed sources. Use after installing or updating Alex ACT ONE, when ACT behavior or Alex Finch identity is inactive, or when bootstrap receipt hashes drift."
 lastReviewed: 2026-09-07
 ---
 
@@ -8,7 +8,7 @@ lastReviewed: 2026-09-07
 
 Activate the plugin's own runtime with nothing else installed. Copilot plugins
 expose skills and commands but do not load `.instructions.md` files as plugin
-components. This skill copies only the 17 canonical instruction sources and
+components. This skill copies only the 15 canonical instruction sources and
 their receipt to the active user instruction location after explicit consent.
 
 ## Preview First
@@ -19,7 +19,7 @@ Run the bundled script without `--apply`:
 node <this-skill>/scripts/bootstrap-core.cjs
 ```
 
-The preview resolves exactly 17 canonical sources from the installed plugin
+The preview resolves exactly 15 canonical sources from the installed plugin
 root, verifies exact parity with the plugin manifest's instruction inventory,
 calculates source and destination hashes, reports the resolved distribution
 target and its source, reports create, replace, or preserve actions, includes
@@ -40,7 +40,7 @@ Instructions activate per app, not per machine. Each app that sets its own
 Show the resolved target, its source, exact file actions, user scope, receipt
 action, overlap report, and installed plugin version. Ask:
 
-> Activate these 17 instructions for every workspace on this machine?
+> Activate these 15 instructions for every workspace on this machine?
 
 After an explicit yes, rerun the same command with `--apply`. The script writes
 only changed files, writes `.alex-act-one-bootstrap.json` atomically when its
@@ -61,7 +61,7 @@ receipt already on disk, so it waits for a migration path.
 
 A current bootstrap requires:
 
-1. Exactly 17 canonical source instructions.
+1. Exactly 15 canonical source instructions.
 2. A schema-v2 receipt carrying the installed plugin version.
 3. Seventeen disjoint receipt entries, one per instruction.
 4. Source, destination, and receipt SHA-256 parity.
@@ -76,7 +76,7 @@ adding `--apply`. The script removes only receipt-owned destinations whose
 current hashes still match the receipt. Modified or unowned files are preserved
 and reported. Receipt entries must match the manifest-backed ownership set
 exactly; unsafe, duplicate, foreign, or malformed entries fail closed before
-path resolution. Clean removal verifies all 17 deletions and removes the
+path resolution. Clean removal verifies all 15 deletions and removes the
 receipt. Modified owned bytes and their receipt remain as recovery evidence.
 Files owned by another plugin's receipt are never removed.
 
@@ -103,6 +103,6 @@ Files owned by another plugin's receipt are never removed.
 
 ## Would Revise If
 
-Revise by **2026-12-07** if this plugin alone cannot activate all 17 sources, a
+Revise by **2026-12-07** if this plugin alone cannot activate all 15 sources, a
 preview mutates state, a receipt claims a file it does not own, source
 resolution fails in a delivered plugin, or removal deletes modified bytes.
