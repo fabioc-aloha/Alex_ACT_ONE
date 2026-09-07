@@ -39,7 +39,7 @@ a session learned into something reusable.
 
 Grouped by what you are trying to do. The **Needs** column lists anything beyond
 Node — most skills need nothing, and a skill only appears there if it genuinely
-cannot run without that dependency. See [Optional extras](#3-optional-extra-tools-for-a-few-skills)
+cannot run without that dependency. See [Optional extras](#optional-extra-tools-for-a-few-skills)
 for how to get them.
 
 <!-- BEGIN GENERATED SKILL TABLE -->
@@ -168,7 +168,8 @@ symbolic links, and no second plugin store to keep in sync.
 
 ## Install
 
-Two steps. The first runs once per machine. The second runs once per app.
+Two steps. The first runs once per machine, the second once per app. A third
+section covers optional tools; none are needed to get started.
 
 ### 1. Install the plugin
 
@@ -177,6 +178,15 @@ From source, until the Mall listing is published:
 ```powershell
 copilot plugin install fabioc-aloha/Alex_ACT_ONE
 ```
+
+Use that exact form. Copilot names the installed folder after whatever you type,
+and that name becomes the prefix on every skill. Installing from the full
+`https://github.com/...` URL works, but makes all 59 skill names longer for no
+benefit.
+
+Copilot prints a deprecation notice about installing from a repository. That is
+expected and the install still works. It is the reason a Mall listing is the
+next thing on the [roadmap](ROADMAP.md).
 
 All 59 skills are now available in Copilot CLI, VS Code, and Microsoft Scout.
 There is one copy on disk and every app reads it.
@@ -211,9 +221,9 @@ prints the exact target directory first.
 Step 1 alone is a complete, working install. Step 2 adds the always-on
 behavior, and skipping it costs you nothing else.
 
-### 3. Optional: extra tools for a few skills
+### Optional: extra tools for a few skills
 
-Most of this plugin needs nothing but Node. Forty-three of the 59 skills run
+Most of this plugin needs nothing but Node. Forty-eight of the 59 skills run
 with no external tools at all, and nothing below is needed to start.
 
 | If you want to... | You also need | Get it |
@@ -221,7 +231,15 @@ with no external tools at all, and nothing below is needed to start.
 | Convert documents (Word, HTML, email, plain text) | Pandoc | `winget install JohnMacFarlane.Pandoc`, `brew install pandoc`, or `apt install pandoc` |
 | Render Mermaid diagrams into Word or HTML output | Mermaid CLI | `npm install -g @mermaid-js/mermaid-cli@11.16.0` |
 | Export SVG banners and figures as PNG | svgexport | `npm install -g svgexport@0.4.2` |
-| Render charts, generate images, or verify output in a browser | Three MCP servers | `/alex-act-one setup-dependencies` |
+| Annotate a screenshot | Pillow | `pip install Pillow` |
+| Render charts | Flint MCP server | `/alex-act-one setup-dependencies` |
+| Check rendered output in a browser | Playwright MCP server, or your host's own browser tools | `/alex-act-one setup-dependencies` |
+| Generate images with AI | Replicate MCP server, plus a paid account and API token | `/alex-act-one setup-dependencies` |
+
+The three MCP servers are not equally important. Only Flint is required for the
+skill that uses it: without it, chart rendering cannot run and there is no
+substitute. Playwright has one — several hosts provide their own browser tools —
+and Replicate adds a capability rather than unblocking one.
 
 To see what you already have and what any gap costs you:
 

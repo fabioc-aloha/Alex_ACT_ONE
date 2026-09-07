@@ -8,11 +8,20 @@ What is working now, what is being built, and what is deliberately out of scope.
 - 59 skills and 16 slash commands load on all three
 - Always-on instructions activate through a preview-first command that asks
   before writing to your profile
+- Activation can be undone. Removal returns each profile to its prior state and
+  keeps any instruction file you edited yourself
+- Every external npm package is pinned to an exact version, and one command
+  reports when a pin has fallen behind
+
+Uninstalling the plugin leaves the provisioned MCP servers on disk on purpose,
+so reinstalling does not download them again. Nothing else is left behind.
 
 ## Next
 
 **Install from the Mall.** A published listing so that installing Alex ACT ONE
 is a single command with no repository path, and updates arrive the usual way.
+Copilot now warns that installing from a repository is deprecated, so this has
+moved from a convenience to the eventual only supported route.
 
 **One activation instead of one per app.** Today the always-on instructions are
 written into each app's profile, so turning them on is a per-app step. A single
@@ -21,12 +30,9 @@ activation that reaches every app would make the install genuinely one move.
 **Confirm the GitHub Copilot app.** It is a stated target and it is untested.
 Until someone runs it there, the compatibility table says so.
 
-**Removal that leaves nothing behind.** Uninstalling should return a profile to
-exactly its prior state, including the instructions that activation wrote.
-
 **Documentation you can follow without asking.** Setup, a short example of when
-each group of skills earns its keep, and troubleshooting for the cases people
-actually hit.
+each group of skills is worth reaching for, and troubleshooting for the cases
+people actually hit.
 
 ## Later
 
