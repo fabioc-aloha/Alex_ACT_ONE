@@ -1,6 +1,18 @@
 # ONE Alex ACT — Plan
 
-**Drafted:** 2026-09-06 · **Owner:** Fabio Correa · **Status:** Draft for review
+**Drafted:** 2026-09-06 · **Owner:** Fabio Correa · **Status:** In progress
+
+## Progress
+
+| Date | Result |
+| --- | --- |
+| 2026-09-06 | Repository created at `fabioc-aloha/Alex_ACT_ONE`, private. 59 skills, 17 always-on instructions, 17 slash commands adopted from the six public constellation plugins. AI Operations and the Scout skill bridge scoped out. |
+| 2026-09-06 | **Design proven.** ONE installs from source and Microsoft Scout auto-discovers all skills with zero bridge junctions. Registered skill count moved from 61 to 82. |
+| 2026-09-06 | Instruction activation previewed successfully: 17 instructions resolve against `~/.copilot/instructions`. Not yet applied. |
+
+Open: Mall publication, VS Code verification with ONE installed, applying the
+instruction bootstrap, and deciding whether the now-redundant constellation
+plugins are uninstalled locally.
 
 ## The Claim
 
@@ -68,15 +80,16 @@ Decide this before writing any code. It determines the package shape.
 
 ## First Release: Definition of Done
 
+- [x] Skills load in Copilot CLI — 59 skills installed from source
+- [x] Skills load in Microsoft Scout with no bridge doctor run — auto-discovered
 - [ ] `copilot plugin install one@alex-mall` succeeds from a clean profile
-- [ ] Skills and instructions load in Copilot CLI
-- [ ] Skills and instructions load in VS Code + Copilot Chat
-- [ ] Skills load in Scout with no bridge doctor run
+- [ ] Skills and instructions load in VS Code + Copilot Chat with ONE installed
+- [ ] Instructions activate through `bootstrap-core` — previewed, not applied
 - [ ] A user who has never seen this repository can follow the README and reach
       a working setup
 - [ ] Removing ONE returns the profile to its prior state
 
-Six checkboxes. Each is verifiable in an afternoon. If a checkbox cannot be
+Seven checkboxes. Each is verifiable in an afternoon. If a checkbox cannot be
 checked, the release does not ship.
 
 ## Explicitly Not in the First Release
