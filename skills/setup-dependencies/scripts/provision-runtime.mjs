@@ -6,11 +6,21 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { spawnCommand } from '../../../scripts/process-launch.mjs';
+import deps from '../../../scripts/shared/dependencies.cjs';
 
-const PINNED_PACKAGES = [
-  { name: 'flint-chart-mcp', version: '0.5.1' },
-  { name: 'replicate-mcp', version: '0.9.0' },
-  { name: '@playwright/mcp', version: '0.0.78' },
+// Read from the shared registry rather than restating the pins. Two copies of
+// the same three versions drift silently, and the copy a reader trusts is
+// whichever they happened to open.
+const PINNED_PACKAGES = Object.values(deps.MCP_SERVERS).map(({ package: name, version }) => ({ name, version }));
+
+// The update audit covers every npm pin this package states, not just the MCP
+// servers. A pinned tool goes stale the same way a pinned server does, and a
+// pin nothing watches is a version claim that quietly stops being true.
+const AUDIT_TARGETS = [
+  ...PINNED_PACKAGES,
+  ...Object.values(deps.TOOLS)
+    .filter((t) => t.version && (t.kind === 'npm-global' || t.kind === 'npm-module'))
+    .map((t) => ({ name: t.package, version: t.version })),
 ];
 const PACKAGES = PINNED_PACKAGES.map(({ name, version }) => `${name}@${version}`);
 const APPLY = process.argv.includes('--apply');
@@ -78,7 +88,7 @@ try {
   if (CHECK_UPDATES) {
     console.log('\nstable version audit:');
     let updates = 0;
-    for (const pinned of PINNED_PACKAGES) {
+    for (const pinned of AUDIT_TARGETS) {
       const result = await run('npm', [
         'view',
         pinned.name,
@@ -95,7 +105,7 @@ try {
       console.log(`  ${current ? 'current' : 'UPDATE '} ${pinned.name}: ${pinned.version} -> ${latest}`);
     }
     console.log(updates === 0
-      ? '\nAll bundled MCP pins match their stable dist-tags.'
+      ? '\nAll npm pins match their stable dist-tags.'
       : `\n${updates} stable update(s) require compatibility review before changing source pins.`);
     process.exit(0);
   }

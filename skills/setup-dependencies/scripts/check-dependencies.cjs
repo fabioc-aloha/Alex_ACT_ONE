@@ -23,7 +23,7 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 
-const { TOOLS, MCP_SERVERS, PLUGINS, platformKey } = require('../../../scripts/shared/dependencies.cjs');
+const { TOOLS, MCP_SERVERS, PLUGINS, platformKey, specOf, installMap } = require('../../../scripts/shared/dependencies.cjs');
 
 const APPLY = process.argv.includes('--apply');
 const JSON_OUT = process.argv.includes('--json');
@@ -60,7 +60,7 @@ function detect() {
         if (tool.kind === 'npm-module') present = moduleResolvable(key);
         else if (tool.kind === 'python-module') present = pythonModulePresent(tool.importName || key);
         else present = onPath(key);
-        rows.push({ key, label: tool.label, kind: tool.kind, tier: tool.tier, present, unlocks: tool.unlocks, install: tool.install[platformKey()] });
+        rows.push({ key, label: tool.label, kind: tool.kind, tier: tool.tier, present, unlocks: tool.unlocks, install: installMap(tool)[platformKey()], spec: specOf(tool) });
     }
     return rows;
 }
@@ -248,9 +248,9 @@ for (const r of missingTools.filter((x) => x.kind !== 'system')) {
     console.log(`\ninstalling: ${r.label}`);
     let cmd = 'npm';
     let args;
-    if (r.kind === 'npm-global') args = ['install', '-g', r.install.split(' ').pop()];
-    else if (r.kind === 'python-module') { cmd = 'pip'; args = ['install', r.key]; }
-    else args = ['install', '--prefix', MCP_RUNTIME, '--no-audit', '--no-fund', r.key];
+    if (r.kind === 'npm-global') args = ['install', '-g', r.spec];
+    else if (r.kind === 'python-module') { cmd = 'pip'; args = ['install', r.spec]; }
+    else args = ['install', '--prefix', MCP_RUNTIME, '--no-audit', '--no-fund', r.spec];
     const res = spawnSync(cmd, args, { stdio: 'inherit', shell: process.platform === 'win32' });
     if (res.status === 0) installed += 1;
     else { failed += 1; console.error(`FAILED: ${r.label}`); }

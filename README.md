@@ -219,8 +219,8 @@ with no external tools at all, and nothing below is needed to start.
 | If you want to... | You also need | Get it |
 | --- | --- | --- |
 | Convert documents (Word, HTML, email, plain text) | Pandoc | `winget install JohnMacFarlane.Pandoc`, `brew install pandoc`, or `apt install pandoc` |
-| Render Mermaid diagrams into Word or HTML output | Mermaid CLI | `npm install -g @mermaid-js/mermaid-cli` |
-| Export SVG banners and figures as PNG | svgexport | `npm install -g svgexport` |
+| Render Mermaid diagrams into Word or HTML output | Mermaid CLI | `npm install -g @mermaid-js/mermaid-cli@11.16.0` |
+| Export SVG banners and figures as PNG | svgexport | `npm install -g svgexport@0.4.2` |
 | Render charts, generate images, or verify output in a browser | Three MCP servers | `/alex-act-one setup-dependencies` |
 
 To see what you already have and what any gap costs you:

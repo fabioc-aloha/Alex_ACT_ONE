@@ -36,52 +36,39 @@ const TOOLS = {
         label: 'Mermaid CLI',
         kind: 'npm-global',
         tier: 'enhances',
+        package: '@mermaid-js/mermaid-cli',
+        version: '11.16.0',
         unlocks: 'Mermaid diagrams rendered as images. Conversions still succeed without it',
         probe: ['mmdc', ['--version']],
-        install: {
-            win32: 'npm install -g @mermaid-js/mermaid-cli',
-            darwin: 'npm install -g @mermaid-js/mermaid-cli',
-            linux: 'npm install -g @mermaid-js/mermaid-cli',
-        },
     },
     svgexport: {
         label: 'svgexport',
         kind: 'npm-global',
         tier: 'enhances',
+        package: 'svgexport',
+        version: '0.4.2',
         unlocks: 'PNG export of SVG banners and figures. SVG output is unaffected',
         probe: ['svgexport', []],
-        install: {
-            win32: 'npm install -g svgexport',
-            darwin: 'npm install -g svgexport',
-            linux: 'npm install -g svgexport',
-        },
     },
     jszip: {
         label: 'jszip',
         kind: 'npm-module',
         tier: 'enhances',
+        package: 'jszip',
+        version: '3.10.1',
         unlocks: 'Word table formatting and image centering. The .docx is still produced without it',
         probe: null,
-        install: {
-            win32: 'npm install jszip',
-            darwin: 'npm install jszip',
-            linux: 'npm install jszip',
-        },
     },
     Pillow: {
         label: 'Pillow',
         kind: 'python-module',
         tier: 'required',
+        package: 'Pillow',
         // The package is Pillow; the module it provides is PIL. Probing the
         // package name reports a false negative on a machine that has it.
         importName: 'PIL',
         unlocks: 'annotate-screenshot. Without it that skill cannot run',
         probe: null,
-        install: {
-            win32: 'pip install Pillow',
-            darwin: 'pip install Pillow',
-            linux: 'pip install Pillow',
-        },
     },
 };
 
@@ -103,7 +90,7 @@ const MCP_SERVERS = {
     playwright: {
         label: 'Playwright (browser)',
         package: '@playwright/mcp',
-        version: '0.0.78',
+        version: '0.0.80',
         tier: 'enhances',
         unlocks: 'browser verification for render-verify, which also works with the host\'s own browser tools',
     },
@@ -165,6 +152,33 @@ const PLUGINS = {
 };
 
 /**
+ * The install spec for a tool, carrying its pin when it has one. Written once
+ * per tool: a pin repeated across a per-platform map is three copies that can
+ * disagree, and the disagreement is invisible until a user on one platform gets
+ * a different version than the docs promise.
+ */
+function specOf(tool) {
+    if (!tool.package) return null;
+    return tool.version ? `${tool.package}@${tool.version}` : tool.package;
+}
+
+/**
+ * Per-platform install commands. npm and pip invocations are identical across
+ * platforms, so they are derived rather than stored. Only tools whose command
+ * genuinely differs by platform (system package managers) carry an explicit
+ * `install` map.
+ */
+function installMap(tool) {
+    if (tool.install) return tool.install;
+    const spec = specOf(tool);
+    const cmd = tool.kind === 'npm-global' ? `npm install -g ${spec}`
+        : tool.kind === 'npm-module' ? `npm install ${spec}`
+            : tool.kind === 'python-module' ? `pip install ${spec}`
+                : null;
+    return cmd ? { win32: cmd, darwin: cmd, linux: cmd } : {};
+}
+
+/**
  * A remedy a user can act on: what broke, what it costs, how to fix it, and
  * where the guided path is. Naming the blast radius matters — without it a
  * reader assumes the whole plugin is broken.
@@ -172,8 +186,9 @@ const PLUGINS = {
 function remedyFor(toolName) {
     const tool = TOOLS[toolName];
     if (!tool) return `Tool not found in PATH: ${toolName}`;
-    const cmd = tool.install[platformKey()];
-    const others = Object.entries(tool.install)
+    const map = installMap(tool);
+    const cmd = map[platformKey()];
+    const others = Object.entries(map)
         .filter(([k]) => k !== platformKey())
         .map(([k, v]) => `  ${({ win32: 'Windows', darwin: 'macOS', linux: 'Linux' })[k]}: ${v}`)
         .join('\n');
@@ -192,4 +207,4 @@ function remedyFor(toolName) {
     ].join('\n');
 }
 
-module.exports = { TOOLS, MCP_SERVERS, PLUGINS, platformKey, remedyFor };
+module.exports = { TOOLS, MCP_SERVERS, PLUGINS, platformKey, remedyFor, specOf, installMap };
