@@ -60,6 +60,10 @@
         "path": "skills/chart-big-idea/SKILL.md"
       },
       {
+        "name": "chart-interpretation",
+        "path": "skills/chart-interpretation/SKILL.md"
+      },
+      {
         "name": "chart-vocabulary",
         "path": "skills/chart-vocabulary/SKILL.md"
       },
