@@ -299,7 +299,7 @@
         "name": "epistemic-calibration",
         "path": "instructions/epistemic-calibration.instructions.md",
         "install_to": ".github/instructions/epistemic-calibration.instructions.md",
-        "role": "confidence calibration + anti-hallucination signals (input-discipline + output-discipline) + confidence-trigger anti-sycophancy rule",
+        "role": "confidence calibration + anti-hallucination signals (input-discipline + output-discipline, including completion claims and enumerate-before-fixing) + confidence-trigger anti-sycophancy rule",
         "applyTo": "**"
       },
       {
