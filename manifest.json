@@ -136,10 +136,6 @@
         "path": "skills/lint-clean-markdown/SKILL.md"
       },
       {
-        "name": "manage-scout-copilot-skill-bridge",
-        "path": "skills/manage-scout-copilot-skill-bridge/SKILL.md"
-      },
-      {
         "name": "markdown-mermaid",
         "path": "skills/markdown-mermaid/SKILL.md"
       },
@@ -166,14 +162,6 @@
       {
         "name": "meditation",
         "path": "skills/meditation/SKILL.md"
-      },
-      {
-        "name": "model-router",
-        "path": "skills/model-router/SKILL.md"
-      },
-      {
-        "name": "model-task-execution",
-        "path": "skills/model-task-execution/SKILL.md"
       },
       {
         "name": "mutation-testing",
@@ -222,10 +210,6 @@
       {
         "name": "security-and-hardening",
         "path": "skills/security-and-hardening/SKILL.md"
-      },
-      {
-        "name": "setup-ai-operations",
-        "path": "skills/setup-ai-operations/SKILL.md"
       },
       {
         "name": "setup-enterprise-stack",
@@ -407,10 +391,6 @@
         "path": "prompts/bootstrap-project.prompt.md"
       },
       {
-        "name": "choose-model",
-        "path": "prompts/choose-model.prompt.md"
-      },
-      {
         "name": "compile-brain",
         "path": "prompts/compile-brain.prompt.md"
       },
@@ -421,10 +401,6 @@
       {
         "name": "critical-thinking",
         "path": "prompts/critical-thinking.prompt.md"
-      },
-      {
-        "name": "execute-model-task",
-        "path": "prompts/execute-model-task.prompt.md"
       },
       {
         "name": "install-visual-companions",
@@ -453,10 +429,6 @@
       {
         "name": "save-session-note",
         "path": "prompts/save-session-note.prompt.md"
-      },
-      {
-        "name": "setup-ai-operations",
-        "path": "prompts/setup-ai-operations.prompt.md"
       },
       {
         "name": "setup-enterprise",

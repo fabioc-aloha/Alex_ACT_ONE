@@ -12,9 +12,18 @@ brain compilation, and AI provider planning.
 
 | Component | Count |
 | --- | --- |
-| Skills | 63 |
+| Skills | 59 |
 | Always-on instructions | 17 |
-| Slash commands | 20 |
+| Slash commands | 17 |
+
+Excluded from the first release:
+
+- **AI Operations** (`model-router`, `model-task-execution`, `setup-ai-operations`).
+  It is the only component requiring paid third-party accounts and API tokens,
+  and the only one that can spend money. It serves neither of ONE's two goals.
+- **The Scout skill bridge.** ONE exists so that no bridge is needed, and the
+  bridge's junctions actively break `copilot plugin install`.
+- **The private MSFT plugin**, because ONE is intended for Mall distribution.
 
 ## Why It Exists
 
@@ -60,6 +69,7 @@ separate, consented step. It previews every file before writing anything.
 - Verification on the GitHub Copilot app
 - The shared knowledge base and evidence ledger currently owned by
   `Alex_ACT_Scout`
+- AI provider planning and execution (see the exclusions above)
 - Any claim that the existing constellation plugins are superseded
 
 ## License
