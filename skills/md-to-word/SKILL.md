@@ -160,7 +160,7 @@ platform at the moment you need it.
 
 | Preset | Body Font | Heading Style | Use Case |
 |--------|-----------|---------------|----------|
-| **professional** | Segoe UI 10.5pt | Microsoft blue (#0078D4) | Business documents, specs, reports |
+| **professional** | Aptos 11pt | Aptos Display, navy and teal hierarchy | Business documents, specs, reports |
 | **academic** | Times New Roman 12pt | Black, double-spaced | Dissertations, papers, theses |
 | **course** | Calibri 11pt | Virginia Tech burgundy | Course materials, syllabi |
 | **creative** | Georgia 11pt | Slate blue | Blog posts, narratives |
@@ -295,9 +295,9 @@ Centered page numbers in the footer, gray text (9pt).
 
 ### Heading Hierarchy
 
-- H1: Brand color, underline, 360/120 twip spacing
-- H2: Secondary color, 280/80 twip spacing
-- H3: Tertiary color, 240/80 twip spacing
+- H1: Aptos Display 24pt, navy, bold, 360/120 twip spacing
+- H2: Aptos Display 16pt, teal, bold, 280/120 twip spacing
+- H3: Aptos Display 14pt, blue, bold, 240/80 twip spacing
 - All headings: keepNext + keepLines (no orphans)
 
 ### Code Blocks

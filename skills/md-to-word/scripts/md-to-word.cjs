@@ -269,8 +269,9 @@ function formatTables(xml) {
   // Full-width table
   const autoWidthXml =
     '<w:tblW xmlns:w="' + W_NS + '" w:type="pct" w:w="5000"/>';
-  const autoLayoutXml =
-    '<w:tblLayout xmlns:w="' + W_NS + '" w:type="autofit"/>';
+  // Omit tblLayout so Word can size columns to the available page width.
+  // Explicit fixed layouts make evidence tables unnecessarily difficult to read.
+  const autoLayoutXml = '';
 
   // Process each table
   xml = xml.replace(/<w:tbl\b[^>]*>([\s\S]*?)<\/w:tbl>/g, (tableMatch) => {
@@ -387,10 +388,10 @@ function centerImages(xml) {
 function formatHeadings(xml, style) {
   const preset = STYLE_PRESETS[style] || STYLE_PRESETS.professional;
   const headingStyles = {
-    'Heading1': { color: preset.h1Color, spaceBefore: 360, spaceAfter: 120 },
-    'Heading2': { color: preset.h2Color, spaceBefore: 280, spaceAfter: 80 },
-    'Heading3': { color: preset.h3Color, spaceBefore: 240, spaceAfter: 80 },
-    'Heading4': { color: preset.h4Color, spaceBefore: 200, spaceAfter: 60 },
+    'Heading1': { color: preset.h1Color, font: preset.headingFont, size: 48, spaceBefore: 360, spaceAfter: 120 },
+    'Heading2': { color: preset.h2Color, font: preset.headingFont, size: 32, spaceBefore: 280, spaceAfter: 120 },
+    'Heading3': { color: preset.h3Color, font: preset.headingFont, size: 28, spaceBefore: 240, spaceAfter: 80 },
+    'Heading4': { color: preset.h4Color, font: preset.headingFont, size: 24, spaceBefore: 200, spaceAfter: 60 },
   };
 
   return xml.replace(/<w:p\b[^>]*>([\s\S]*?)<\/w:p>/g, (pMatch, pInner) => {
@@ -416,11 +417,20 @@ function formatHeadings(xml, style) {
       });
     }
 
-    // Set heading color on runs
+    // Apply the full heading treatment to every run. Pandoc often emits a
+    // bare w:r for headings, so replacing existing run properties alone does
+    // not reliably carry the configured typography into the generated DOCX.
     pMatch = pMatch.replace(/<w:rPr>([\s\S]*?)<\/w:rPr>/g, (rprMatch, rprInner) => {
-      let c = rprInner.replace(/<w:color[^/]*\/>/g, '');
-      return `<w:rPr>${c}<w:color w:val="${cfg.color}"/></w:rPr>`;
+      let c = rprInner
+        .replace(/<w:rFonts[^/]*\/>/g, '')
+        .replace(/<w:b[^/]*\/>/g, '')
+        .replace(/<w:color[^/]*\/>/g, '')
+        .replace(/<w:sz[^/]*\/>/g, '')
+        .replace(/<w:szCs[^/]*\/>/g, '');
+      return `<w:rPr>${c}<w:rFonts w:ascii="${cfg.font}" w:hAnsi="${cfg.font}"/><w:b/><w:color w:val="${cfg.color}"/><w:sz w:val="${cfg.size}"/><w:szCs w:val="${cfg.size}"/></w:rPr>`;
     });
+    const headingRunProperties = `<w:rPr><w:rFonts w:ascii="${cfg.font}" w:hAnsi="${cfg.font}"/><w:b/><w:color w:val="${cfg.color}"/><w:sz w:val="${cfg.size}"/><w:szCs w:val="${cfg.size}"/></w:rPr>`;
+    pMatch = pMatch.replace(/<w:r>((?:(?!<w:rPr)[\s\S])*?<w:t)/g, `<w:r>${headingRunProperties}<w:t`);
 
     return pMatch;
   });
@@ -815,25 +825,25 @@ async function postProcessDocx(docxPath, options) {
 // ---------------------------------------------------------------------------
 const STYLE_PRESETS = {
   professional: {
-    bodyFont: 'Segoe UI', bodySize: '21', headingColor: '0078D4',
+    bodyFont: 'Aptos', headingFont: 'Aptos Display', bodySize: '22', headingColor: '0B1F33',
     lineHeight: '312', bodyColor: '1F2328',
-    h1Color: '0078D4', h2Color: '2B579A', h3Color: '3B3B3B', h4Color: '555555',
+    h1Color: '0B1F33', h2Color: '0B4F6C', h3Color: '156082', h4Color: '3B3B3B',
     margins: { top: '1440', right: '1440', bottom: '1440', left: '1440' }
   },
   academic: {
-    bodyFont: 'Times New Roman', bodySize: '24', headingColor: '1A1A2E',
+    bodyFont: 'Times New Roman', headingFont: 'Times New Roman', bodySize: '24', headingColor: '1A1A2E',
     lineHeight: '480', bodyColor: '000000',
     h1Color: '1A1A2E', h2Color: '2D2D44', h3Color: '3B3B3B', h4Color: '555555',
     margins: { top: '1440', right: '1440', bottom: '1440', left: '1440' }
   },
   course: {
-    bodyFont: 'Calibri', bodySize: '22', headingColor: '861F41',
+    bodyFont: 'Calibri', headingFont: 'Calibri', bodySize: '22', headingColor: '861F41',
     lineHeight: '360', bodyColor: '333333',
     h1Color: '861F41', h2Color: 'E87722', h3Color: '3B3B3B', h4Color: '555555',
     margins: { top: '1296', right: '1152', bottom: '1296', left: '1152' }
   },
   creative: {
-    bodyFont: 'Georgia', bodySize: '22', headingColor: '2C3E50',
+    bodyFont: 'Georgia', headingFont: 'Georgia', bodySize: '22', headingColor: '2C3E50',
     lineHeight: '336', bodyColor: '2C3E50',
     h1Color: '2C3E50', h2Color: '8E44AD', h3Color: '2980B9', h4Color: '555555',
     margins: { top: '1440', right: '1584', bottom: '1440', left: '1584' }
