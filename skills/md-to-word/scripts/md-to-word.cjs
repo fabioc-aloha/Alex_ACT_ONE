@@ -1365,7 +1365,14 @@ async function main() {
   }
 }
 
-main().catch(err => {
-  console.error(`FATAL: ${err.message || err}`);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch(err => {
+    console.error(`FATAL: ${err.message || err}`);
+    process.exit(1);
+  });
+}
+
+module.exports = {
+  formatHeadings,
+  formatTables,
+};
