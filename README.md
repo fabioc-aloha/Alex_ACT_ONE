@@ -36,6 +36,9 @@ a session learned into something reusable.
 59 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers.
 Not every surface reaches every app — see [Where It Works](#where-it-works).
 
+Large package by design: one install brings all of it, so expect noticeably
+more files on disk and a longer first sync than a single-purpose plugin.
+
 ## The Skills
 
 Grouped by what you are trying to do. The **Needs** column lists anything beyond
