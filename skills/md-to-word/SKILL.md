@@ -413,7 +413,7 @@ node skills/md-to-word/scripts/md-to-word.cjs spec.md --watch
 # Generate Word docs as build artifacts
 - name: Generate Word Documents
   run: |
-    npm install -g @mermaid-js/mermaid-cli@11.16.0 svgexport@0.4.2
+    npm install -g @mermaid-js/mermaid-cli@11.17.0 svgexport@0.4.2
     node skills/md-to-word/scripts/md-to-word.cjs docs/spec.md --toc --cover
 
 - name: Upload artifacts

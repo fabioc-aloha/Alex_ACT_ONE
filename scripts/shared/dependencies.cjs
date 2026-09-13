@@ -37,7 +37,7 @@ const TOOLS = {
         kind: 'npm-global',
         tier: 'enhances',
         package: '@mermaid-js/mermaid-cli',
-        version: '11.16.0',
+        version: '11.17.0',
         unlocks: 'Mermaid diagrams rendered as images. Conversions still succeed without it',
         probe: ['mmdc', ['--version']],
     },
