@@ -1,7 +1,7 @@
 ---
 name: humanizer
-description: Use when the user wants to humanize, de-AI, de-slop, or un-ChatGPT a piece of text — strip AI-isms and add real voice — or wants a copywriter pass that reviews existing copy for a named audience (e.g., non-native English readers) using an idiom/tone/register/ambiguity/grammar taxonomy and an approval-gated before/after table workflow. Scans for 29 documented AI-writing patterns (Wikipedia's "Signs of AI writing") and produces a draft → self-audit → final rewrite. Optional voice-calibration from a user-provided writing sample. Adapted from Hermes Agent / blader/humanizer.
-lastReviewed: 2026-09-03
+description: Use when the user wants to humanize, de-AI, de-slop, or un-ChatGPT a piece of text — strip AI-isms and add real voice — or wants a copywriter pass that reviews existing copy for a named audience (e.g., non-native English readers) using an idiom/tone/register/ambiguity/grammar/naturalness taxonomy and an approval-gated before/after table workflow. Scans for 29 documented AI-writing patterns (Wikipedia's "Signs of AI writing") and produces a draft → self-audit → final rewrite. Optional voice-calibration from a user-provided writing sample. Adapted from Hermes Agent / blader/humanizer.
+lastReviewed: 2026-09-13
 ---
 
 # Humanizer: AI-Tell Removal and Audience Copy Review
@@ -90,14 +90,14 @@ by default:
 - **Domain literacy** (acronyms, internal terminology, jargon the audience already knows from
   working in the field) — usually **out of scope**. Flagging every acronym on a page written by
   and for domain experts creates noise the user will immediately reject.
-- **Language nuance** (idiom, tone, register, ambiguity, grammar) — the actual target. This is
+- **Language nuance** (idiom, tone, register, ambiguity, grammar, naturalness) — the actual target. This is
   copy that would be understood differently, or not at all, by a careful reader in a professional
   but non-native-English context, regardless of how well they know the subject matter.
 
 If unsure which applies, ask once, early, before producing findings — don't assume
 acronym-expansion is wanted by default; a domain-expert audience usually doesn't need it.
 
-### The five-tag taxonomy
+### The six-tag taxonomy
 
 Tag every finding with exactly one of these, so the _kind_ of concern is explicit, not just the
 fix:
@@ -109,6 +109,7 @@ fix:
 | `[register]` | Casual or conversational wording sitting next to formal language in the same passage. |
 | `[ambiguity]` | A word or phrase with a plausible second meaning that isn't the intended one ("bandwidth," "running," "one room"). |
 | `[grammar]` | A sentence whose construction — not its vocabulary — could slow a careful reader down (a clipped dash standing in for a missing clause, an unusual verb formation). |
+| `[naturalness]` | Grammatically valid wording that a fluent editor would not normally choose: awkward negation, noun piles, strained contrasts, unnatural word order, or a title that reads like a diagnostic label rather than a claim. |
 
 ### Workflow: hero first, approval-gated, one page at a time
 
@@ -126,6 +127,12 @@ fix:
    **before/after table** before the rest of the page. These carry the most weight and the highest
    visibility (page `<title>`, meta description, H1) — get them right, and get explicit sign-off,
    before touching supporting content.
+   Read every title, subtitle, heading, label, and short card line aloud as a standalone sentence
+   fragment. Grammar is not enough: ask whether a fluent editor would naturally say it, whether
+   its negation makes the reader decode what the subject is _not_ before learning what it _is_,
+   and whether the heading states the section's claim rather than naming an implementation
+   distinction. Tag awkward but unambiguous constructions as `[naturalness]` instead of forcing
+   them into `[grammar]` or `[ambiguity]`.
 4. **One approval per table.** Never apply a finding the user hasn't explicitly approved. A table
    with unapproved rows is a proposal, not a change.
 5. **Recurring phrases are a single decision, not N decisions.** If a phrase repeats across many
@@ -181,12 +188,13 @@ normal outcome, not a failure. The rejection rate is a health signal: **zero rej
 list is too narrow** to be doing real work, and **near-total rejection means it is too noisy** to
 be worth running. A quarter rejected is a working list.
 
-**Phase 2 — close read.** Read every sentence and judge comprehension. Do not work down the Phase
-1 list; read the prose. For each passage: does every phrase mean its literal words, and is any
-figurative sense recoverable from context? Could a sentence be parsed a second way? Does the
-register hold? Does the construction force a re-read? Does any reference assume a national
-background? Resolve every Phase 1 candidate explicitly — accept it as a finding or record why it
-was rejected.
+**Phase 2 — close read.** Read every sentence and judge comprehension and naturalness. Do not work
+down the Phase 1 list; read the prose. For each passage: does every phrase mean its literal words,
+and is any figurative sense recoverable from context? Could a sentence be parsed a second way?
+Does the register hold? Would a fluent editor choose this phrasing without prompting? Does the
+construction force a re-read? Do headings and titles sound natural when detached from the
+paragraph below? Does any reference assume a national background? Resolve every Phase 1 candidate
+explicitly — accept it as a finding or record why it was rejected.
 
 **Mark each finding with its origin** — surfaced by the sweep, or found only by reading. Without
 that, the workflow cannot be audited and the rejection rate cannot be read.
@@ -777,7 +785,7 @@ A Copywriter Mode worked example is in [`examples/copywriter-mode-example.md`](e
 - **Date-based**: 2026-09-07 (90 days from adoption). If by then `humanizer` is invoked but consistently overrides heir voice in ways the heir reverts ≥3 times, the Voice Calibration section is failing — either tighten the calibration discipline or rebalance toward voice-preserving rewrites.
 - **Counter-evidence**: if a heir reports that the 29-pattern catalog flags legitimate stylistic choices (e.g., humor that uses Rule of Three intentionally) as AI tells ≥3 times in a quarter, the patterns are too aggressive — add explicit "false positive" carve-outs.
 - **Copywriter Mode, event-based**: if a heir reports Copywriter Mode flagging domain acronyms or jargon as findings ≥2 times despite the Scope section above, tighten the "confirm scope first" instruction — the mode is drifting back into acronym-expansion territory it was explicitly narrowed away from.
-- **Copywriter Mode, counter-evidence**: if a heir reports the taxonomy tags being applied inconsistently (the same finding tagged differently across sessions) ≥3 times, the five-tag definitions need sharper examples, not more tags.
+- **Copywriter Mode, counter-evidence**: if a heir reports the taxonomy tags being applied inconsistently (the same finding tagged differently across sessions) ≥3 times, the six-tag definitions need sharper examples, not more tags.
 - **Copywriter Mode, counter-evidence**: if a heir reports the hero-first staging feels slower than a single full-page table on short pages, add an explicit "skip hero-first staging for pages under N words" exception rather than dropping the staged approach for every page.
 - **Copywriter Mode, three-phase review**: if a project's harvested pattern list stops producing new Phase 1 catches across three consecutive reviews while Phase 2 keeps finding novel items, harvesting is not compounding as designed — the findings are ordinary-word second senses rather than fixed phrases, and the sweep should be scoped down to typography and register rather than grown.
 - **Copywriter Mode, ensembling**: if repeated close reads over the same corpus with an identical brief converge on substantially the same findings across three separate corpora, sampling variance is smaller than assumed and the ensembling recommendation is over-engineering — drop back to a single pass plus the sweep. Conversely, if a controlled N-run trial shows the union still growing at five runs, the guidance understates how many passes high-stakes copy needs.
@@ -786,6 +794,6 @@ A Copywriter Mode worked example is in [`examples/copywriter-mode-example.md`](e
 
 This skill is adapted from [Hermes Agent's port](https://github.com/NousResearch/hermes-agent) of [blader/humanizer](https://github.com/blader/humanizer) (MIT licensed), which is itself based on [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), maintained by WikiProject AI Cleanup. The patterns documented there come from observations of thousands of instances of AI-generated text on Wikipedia.
 
-Original author: Siqi Chen ([@blader](https://github.com/blader)). Source upstream: <https://github.com/blader/humanizer> (version 2.5.1). The 29 patterns, personality/soul section, and full worked example are preserved verbatim from the source. Adapted for Edition with neutral tool references (workspace read/edit) replacing Hermes-native tool names (`read_file`, `patch`, `write_file`), composition notes with `markdown-author` agent and Cardinal Rule 2, and ACT-shape frontmatter + `## Would Revise If` falsifier. Original MIT license preserved upstream. **Copywriter Mode** (the five-tag taxonomy, hero-first approval-gated workflow, and before/after table format) is an Alex ACT addition, not part of the upstream `blader/humanizer` port — derived from a real audience-language-review engagement, then genericized.
+Original author: Siqi Chen ([@blader](https://github.com/blader)). Source upstream: <https://github.com/blader/humanizer> (version 2.5.1). The 29 patterns, personality/soul section, and full worked example are preserved verbatim from the source. Adapted for Edition with neutral tool references (workspace read/edit) replacing Hermes-native tool names (`read_file`, `patch`, `write_file`), composition notes with `markdown-author` agent and Cardinal Rule 2, and ACT-shape frontmatter + `## Would Revise If` falsifier. Original MIT license preserved upstream. **Copywriter Mode** (the six-tag taxonomy, hero-first approval-gated workflow, and before/after table format) is an Alex ACT addition, not part of the upstream `blader/humanizer` port — derived from a real audience-language-review engagement, then genericized.
 
 Key insight from Wikipedia: "LLMs use statistical algorithms to guess what should come next. The result tends toward the most statistically likely result that applies to the widest variety of cases."

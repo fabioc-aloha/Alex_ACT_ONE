@@ -10,7 +10,7 @@ project's actual content.
   context. They already know the product's own domain vocabulary and acronyms — that is
   explicitly out of scope for this pass.
 - **Surface:** the homepage hero (eyebrow, `<title>`, meta description, H1, tagline, lede).
-- **Goal:** flag language nuance only — idiom, tone, register, ambiguity, grammar — not jargon.
+- **Goal:** flag language nuance only — idiom, tone, register, ambiguity, grammar, naturalness — not jargon.
 
 ## Step 1: read-only pass, tag every finding
 
@@ -18,7 +18,7 @@ Reading the hero copy below:
 
 > **Eyebrow:** DEPLOY TOOLKIT
 > **`<title>`:** Ship it, don't sweat it — Deploy Toolkit
-> **H1:** One dashboard for every release
+> **H1:** A release is not a deployment
 > **Tagline:** We've got your back when a deploy goes sideways.
 > **Lede:** No more babysitting a rollout at 2am. This tool has your six from commit to
 > production, so your team can ship fast and still sleep at night.
@@ -28,6 +28,7 @@ Reading the hero copy below:
 | Element | Current | Proposed | Why |
 | --- | --- | --- | --- |
 | Page `<title>` | "Ship it, don't sweat it — Deploy Toolkit" | "Deploy with confidence — Deploy Toolkit" | `[idiom]` "Ship it, don't sweat it" is two stacked colloquialisms in a browser tab title; the plain version keeps the reassurance without the idiom. |
+| H1 | "A release is not a deployment" | "Release and deployment are different jobs" | `[naturalness]` The original is grammatical but frames the distinction through negation. The replacement states the point directly when read without the supporting paragraph. |
 | Tagline | "We've got your back when a deploy goes sideways." | "This tool helps you recover quickly when a deploy fails." | `[idiom]` "got your back" and "goes sideways" are both figurative; neither maps cleanly to its literal words. |
 | Lede, sentence 1 | "No more babysitting a rollout at 2am." | "You no longer need to manually monitor a rollout at 2am." | `[register]` "babysitting" is overly casual next to the rest of the page's professional tone. |
 | Lede, sentence 2 | "This tool has your six from commit to production, so your team can ship fast and still sleep at night." | "This tool tracks every step from commit to production, so your team can move quickly without losing sleep over it." | `[idiom]` "has your six" is military slang unlikely to be recognized. "ship fast and still sleep at night" is kept as a plain paraphrase rather than removed outright, since the underlying meaning (speed without losing rest) is not itself idiomatic. |
@@ -37,11 +38,11 @@ and an `[idiom]` concern in its second. Stacking both tags into a single "Why" c
 the user to accept or reject both together.
 
 This is where the workflow stops — nothing below gets applied until the user approves each row.
-In this fictional example, assume all four rows are approved before continuing.
+In this fictional example, assume all five rows are approved before continuing.
 
 ## Step 3: after approval, verify, then move to the next scope
 
-- Apply the four approved changes.
+- Apply the five approved changes.
 - Re-render or re-read the actual page (not just the diff) to confirm each change landed as
   written — a change that looks right in a diff can still render wrong if a template variable or
   truncation rule clips it.
