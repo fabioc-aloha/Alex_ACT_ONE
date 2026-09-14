@@ -6,10 +6,11 @@ A skills pack for GitHub Copilot. It covers how to think through a problem, how
 to write code and prose that hold up, and how to produce documents and charts
 worth sending to someone.
 
-Install it once at the user level. Copilot CLI, VS Code, and Microsoft Scout all
-read the same installation.
+Install it once at the user level. Copilot CLI, VS Code, Microsoft Scout, and
+the GitHub Copilot app all read the same installation.
 
-**Status:** In development. Not yet published to the Alex ACT Mall.
+**Status:** Published in the Alex ACT Mall at v0.2.0. GitHub Copilot app
+compatibility was tested on 2026-09-13.
 
 ## What You Can Do With Alex ACT ONE
 
@@ -224,7 +225,16 @@ surfaces are not automatic in the same way, and this table says which are.
 | Copilot CLI | All | All, after activation | All | All, from the manifest |
 | VS Code with GitHub Copilot Chat | All | All, after activation | All | All, from the manifest |
 | Microsoft Scout | All | All, after activation | **None** | All, after registration |
-| GitHub Copilot app | Not yet tested | Not yet tested | Not yet tested | Not yet tested |
+| GitHub Copilot app | All, discovered and invoked | All, active after activation | All, exposed | Registered; Flint and Playwright verified; Replicate requires an API token |
+
+The GitHub Copilot app test on 2026-09-13 found all 15 instructions active and
+at hash parity with the installed v0.2.0 sources. The app discovered the skill
+catalog and prompt aliases; `bootstrap-core`, `platform-awareness`,
+`proactive-awareness`, and `humanizer` were invoked. Playwright listed the
+active browser tabs, and Flint validated a Vega-Lite chart with no warnings or
+errors. Replicate reached its MCP server but returned `401 Unauthenticated`
+because this app did not have a Replicate API token. Individual skills and
+slash commands were not exhaustively invoked.
 
 Two Scout-specific notes, both verified 2026-09-07:
 
@@ -245,23 +255,25 @@ section covers optional tools; none are needed to get started.
 
 ### 1. Install the plugin
 
-From source, until the Mall listing is published:
+From the Alex ACT Mall:
+
+```powershell
+copilot plugin install alex-act-one@alex-mall
+```
+
+The Mall entry tracks the reviewed release and keeps the installed name stable.
+
+Installing from source remains available:
 
 ```powershell
 copilot plugin install fabioc-aloha/Alex_ACT_ONE
 ```
 
-Use that exact form. Copilot names the installed folder after whatever you type,
-and that name becomes the prefix on every skill. Installing from the full
-`https://github.com/...` URL works, but makes every skill name longer for no
-benefit.
+Copilot prints a deprecation notice for repository installs. The install still
+works, but the Mall command is preferred.
 
-Copilot prints a deprecation notice about installing from a repository. That is
-expected and the install still works. It is the reason a Mall listing is the
-next thing on the [roadmap](ROADMAP.md).
-
-Every skill is now available in Copilot CLI, VS Code, and Microsoft Scout.
-There is one copy on disk and every app reads it.
+Every skill is now available in Copilot CLI, VS Code, Microsoft Scout, and the
+GitHub Copilot app. There is one copy on disk and every app reads it.
 
 ### 2. Turn on the always-on instructions, once in each app
 
@@ -275,6 +287,7 @@ activation in each app where you want the behavior.
 | Copilot CLI | `/alex-act-one bootstrap-core` |
 | VS Code with GitHub Copilot Chat | `/alex-act-one bootstrap-core` |
 | Microsoft Scout | Ask for the `bootstrap-core` skill, or invoke it by name from the skill list |
+| GitHub Copilot app | Ask for the `bootstrap-core` skill, or invoke it by name from the skill list |
 
 Activation previews every instruction file and waits for your approval before
 writing anything. Running it again reports no changes.
