@@ -11,7 +11,7 @@ read the same installation.
 
 **Status:** In development. Not yet published to the Alex ACT Mall.
 
-## What You Can Do With It
+## What You Can Do With Alex ACT ONE
 
 **Think before building.** Frame the real problem, weigh competing explanations,
 name what would prove you wrong, and check a decision against its risks before
@@ -33,8 +33,8 @@ banners, then check that what rendered says what you meant.
 write project-specific skills from work you keep repeating, and consolidate what
 a session learned into something reusable.
 
-59 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers.
-Not every surface reaches every app — see [Where It Works](#where-it-works).
+60 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers.
+Not every surface reaches every app — see [Where Alex ACT ONE Works](#where-alex-act-one-works).
 
 Large package by design: one install brings all of it, so expect noticeably
 more files on disk and a longer first sync than a single-purpose plugin.
@@ -140,6 +140,7 @@ Auditing, extending, and consolidating the agent.
 | `project-capability-authoring` | Create tested project-local skills and scripts from demonstrated repeated work | — |
 | `token-waste-elimination` | Audit active brain artifacts for context cost, duplicated guidance, oversized routing files, and stale metadata | — |
 | `proactive-awareness` | Applies cross-session context recovery, uncommitted-work detection, and focus routing once proactive behavior has… | — |
+| `evaluate-before-adopting` | Decide whether a plugin or skill from a catalog is worth installing | — |
 
 ### Setup and platform
 
@@ -158,7 +159,61 @@ Getting the plugin and its dependencies working.
 
 <!-- END GENERATED SKILL TABLE -->
 
-## Where It Works
+### The skill that checks the other skills
+
+Every other skill here assumes it belongs on your machine. This one asks whether
+it does.
+
+Plugin catalogs score the **source** — who published it, how recently the
+repository was updated, whether the license is clear. None of that says the
+plugin is correct, and nothing in a typical publishing pipeline reads the
+content: scanning indexes what exists, packaging validates structure, and no step
+compiles a code sample or follows a link.
+
+So a plugin can sit in the highest trust band and still tell you to install a
+package that does not exist. That is not hypothetical. One such plugin — top
+band, first-party, the strongest candidate in a 4,266-plugin catalog — claimed a
+NuGet package that returns zero registry results, an SDK API that was never
+published, and a cited file absent from the entire source repository. One
+registry query was enough to catch the package.
+
+[`evaluate-before-adopting`](skills/evaluate-before-adopting/SKILL.md) does that
+checking, by reading the content rather than measuring the repository around it.
+
+It reads the artifact the way your agent will — as instructions that run with your
+tools, your files, and your credentials — and looks for directives aimed at the
+agent, exfiltration paths, destructive defaults, and unpinned installs. Roughly
+one skill in five ships actual scripts, so it reads those too, and checks what
+they do against what the description says they do. It resolves which copy you
+have when several stores carry the same name, verifies the checkable specifics
+against registries and SDK documentation, follows every reference, weighs what
+the freshness stamp actually covers, and judges whether it fits where you are
+putting it.
+
+Safe to run, correct, and worth relying on are three separate questions. A trust
+score answers none of them.
+
+The usual path installs first and asks later:
+
+```bash
+copilot plugin install copilot-sdk@alex-mall
+```
+
+That runs someone else's code on your machine on the strength of a description.
+This reads it first:
+
+```text
+Evaluate copilot-sdk@alex-mall before I install it.
+```
+
+Any marketplace works, not only this one. Name whatever plugin you were about to
+install and the skill goes and looks at it.
+
+Use it when adoption is hard to reverse or far-reaching — a runtime every project
+loads, a plugin that will hold credentials. Skip it for a per-project install you
+can remove in a second. Judge by what it costs to be wrong.
+
+## Where Alex ACT ONE Works
 
 Skills sit at the package root, so each app finds them directly. No bridge, no
 symbolic links, and no second plugin store to keep in sync. The other three
@@ -281,7 +336,7 @@ browser and still refuse to open `file://`, which is the case that matters for
 checking an artifact you just wrote to disk. VS Code opens local files with no
 flags; Scout's built-in browser blocks them; Copilot CLI has no browser at all.
 The package registers its own server as `alex-playwright` — a distinct name, so
-it sits alongside a host's built-in rather than shadowing it.
+it sits alongside a host's built-in browser tools rather than shadowing them.
 
 To see what you already have and what any gap costs you:
 

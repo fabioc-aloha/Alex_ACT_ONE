@@ -5,7 +5,7 @@ What is working now, what is being built, and what is deliberately out of scope.
 ## Working Today
 
 - One install from source reaches Copilot CLI, VS Code, and Microsoft Scout
-- 59 skills load on all three; every slash command loads on CLI and VS Code
+- 60 skills load on all three; every slash command loads on CLI and VS Code
 - Always-on instructions activate through a preview-first command that asks
   before writing to your profile
 - Activation can be undone. Removal returns each profile to its prior state and

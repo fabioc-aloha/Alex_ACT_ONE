@@ -108,6 +108,10 @@
         "path": "skills/ethical-reasoning/SKILL.md"
       },
       {
+        "name": "evaluate-before-adopting",
+        "path": "skills/evaluate-before-adopting/SKILL.md"
+      },
+      {
         "name": "figure-generator",
         "path": "skills/figure-generator/SKILL.md"
       },
@@ -184,12 +188,12 @@
         "path": "skills/print-svg-style-guide/SKILL.md"
       },
       {
-        "name": "problem-framing-audit",
-        "path": "skills/problem-framing-audit/SKILL.md"
-      },
-      {
         "name": "proactive-awareness",
         "path": "skills/proactive-awareness/SKILL.md"
+      },
+      {
+        "name": "problem-framing-audit",
+        "path": "skills/problem-framing-audit/SKILL.md"
       },
       {
         "name": "project-capability-authoring",
@@ -216,12 +220,12 @@
         "path": "skills/security-and-hardening/SKILL.md"
       },
       {
-        "name": "setup-enterprise-stack",
-        "path": "skills/setup-enterprise-stack/SKILL.md"
-      },
-      {
         "name": "setup-dependencies",
         "path": "skills/setup-dependencies/SKILL.md"
+      },
+      {
+        "name": "setup-enterprise-stack",
+        "path": "skills/setup-enterprise-stack/SKILL.md"
       },
       {
         "name": "spike",
