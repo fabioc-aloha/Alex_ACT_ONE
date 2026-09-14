@@ -259,6 +259,49 @@ describe('documented counts', () => {
     }
 });
 
+describe('Microsoft Scout setup guidance', () => {
+    const readme = read('README.md');
+    const roadmap = read('ROADMAP.md');
+    const scoutSetup = readme.match(
+        /### On Microsoft Scout, register the MCP servers([\s\S]*?)### Optional: extra tools/,
+    )?.[1] || '';
+
+    test('uses skills and bundled scripts instead of unavailable slash commands', () => {
+        assert.ok(scoutSetup, 'could not find the Microsoft Scout setup section');
+        assert.doesNotMatch(
+            scoutSetup,
+            /\/alex-act-one\s+/,
+            'Scout has no plugin slash-command surface',
+        );
+        assert.match(scoutSetup, /setup-dependencies/);
+        assert.match(scoutSetup, /register-scout-mcp\.mjs/);
+    });
+
+    test('package metadata and roadmap do not overstate automatic setup', () => {
+        assert.doesNotMatch(pluginJson.description, /single-install/i);
+        assert.doesNotMatch(roadmap, /GitHub Copilot app[^.\n]*untested/i);
+        assert.match(roadmap, /plugin-root check/i);
+    });
+
+    test('makes duplicate plugin roots and restart requirements checkable', () => {
+        assert.match(scoutSetup, /plugin root/i);
+        assert.match(scoutSetup, /fully quit(?: and restart)? Scout/i);
+    });
+
+    test('names every Flint tool expected after Scout restarts', () => {
+        for (const tool of [
+            'compile_chart',
+            'create_chart_view',
+            'list_chart_types',
+            'list_themes',
+            'render_chart',
+            'validate_chart',
+        ]) {
+            assert.match(scoutSetup, new RegExp(`\\b${tool}\\b`), `missing Flint tool ${tool}`);
+        }
+    });
+});
+
 describe('activation', () => {
     // The smoke suite previously checked structure without ever running the
     // activation path, and a defect hid in exactly that gap: bootstrap-core
