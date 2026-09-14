@@ -1,7 +1,7 @@
 ---
 description: "Route user-facing and customer-facing prose through humanizer's Copywriter Mode by default — audience-fit review before it ships, silent for internal artifacts"
 applyTo: "**"
-lastReviewed: 2026-09-03
+lastReviewed: 2026-09-13
 ---
 
 # Audience Copy Review
@@ -36,9 +36,9 @@ Two clarifiers, because the boundary is where this rule fails:
 
 ## What Firing Means
 
-Apply humanizer's **Copywriter Mode** — the five-tag taxonomy (`[idiom]`, `[tone]`, `[register]`,
-`[ambiguity]`, `[grammar]`), hero-first ordering, and the before/after table. Load the skill for
-the full workflow; the always-on obligations are:
+Apply humanizer's **Copywriter Mode** — the six-tag taxonomy (`[idiom]`, `[tone]`, `[register]`,
+`[ambiguity]`, `[grammar]`, `[naturalness]`), hero-first ordering, and the before/after table.
+Load the skill for the full workflow; the always-on obligations are:
 
 1. **Name the audience** before reviewing. "General reader" is a real answer; an unnamed audience
    is not, and produces unfocused findings.
@@ -46,7 +46,10 @@ the full workflow; the always-on obligations are:
    audience does not need its own vocabulary expanded, and over-flagging trains rejection.
 3. **Nothing applies without approval.** Findings are a proposal. This holds even when I authored
    the text myself in the same turn — especially then, since self-approval defeats the gate.
-4. **One tag per row.** An element with two concerns splits into two rows, so each can be accepted
+4. **Titles and headings must sound natural in isolation.** Grammatical correctness does not
+   rescue awkward negation, noun piles, diagnostic labels, or word order a fluent editor would
+   not normally choose.
+5. **One tag per row.** An element with two concerns splits into two rows, so each can be accepted
    or rejected on its own.
 
 ## When I Am the Author
