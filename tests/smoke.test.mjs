@@ -283,6 +283,14 @@ describe('Microsoft Scout setup guidance', () => {
         assert.match(roadmap, /plugin-root check/i);
     });
 
+    test('documents the Copilot CLI plugin as Scout shared source', () => {
+        assert.match(readme, /Scout should use the Copilot CLI installation/i);
+        assert.match(readme, /~[\\/]?\.copilot/);
+        assert.doesNotMatch(readme, /Scout can retain another version/i);
+        assert.match(pluginJson.description, /Copilot CLI user store/i);
+        assert.match(roadmap, /shared Copilot CLI store/i);
+    });
+
     test('makes duplicate plugin roots and restart requirements checkable', () => {
         assert.match(scoutSetup, /plugin root/i);
         assert.match(scoutSetup, /fully quit(?: and restart)? Scout/i);

@@ -7,9 +7,10 @@ to write code and prose that hold up, and how to produce documents and charts
 worth sending to someone.
 
 Install it at the user level. Copilot CLI, VS Code, Microsoft Scout, and the
-GitHub Copilot app can use the same installed copy, but activation remains
-per-app and Scout requires separate MCP registration. If an app can see more
-than one plugin store, confirm which version it loaded before setup.
+GitHub Copilot app can use the same installed copy. Scout should use the
+Copilot CLI installation under `~/.copilot`, not a duplicate under
+`~/.scout/copilot`. Activation remains per-app, and Scout requires separate MCP
+registration.
 
 **Status:** Published in the Alex ACT Mall at v0.2.0. GitHub Copilot app
 compatibility was tested on 2026-09-13.
@@ -218,10 +219,11 @@ can remove in a second. Judge by what it costs to be wrong.
 
 ## Where Alex ACT ONE Works
 
-Skills sit at the package root, so an app can load them directly from the copy
-it resolves. Apps can resolve different plugin stores, so verify the loaded
-root and version before activation or Scout MCP registration. The other three
-surfaces are not automatic in the same way, and this table says which are.
+Skills sit at the package root, so each app can load them directly. Scout can
+use the plugin installed for Copilot CLI under `~/.copilot`; a Scout-local ONE
+copy is duplicate state and can drift independently. Verify the loaded root and
+version before activation or Scout MCP registration. The other three surfaces
+are not automatic in the same way, and this table says which are.
 
 | Where you use Copilot | Skills | Instructions | Slash commands | MCP servers |
 | --- | --- | --- | --- | --- |
@@ -245,9 +247,10 @@ Scout-specific notes, last verified 2026-09-13:
   prompts. Every command has an equivalent skill you can ask for by name, so
   nothing is lost in capability — but the commands themselves are absent rather
   than merely undocumented.
-- **Scout can serve a different installed copy.** A test found two copies at
-  different versions with no warning from the app. Before activation or MCP
-  registration, confirm the loaded skill path and version.
+- **Scout should use the Copilot CLI installation.** A test found a stale
+  Scout-local `v0.1.0` alongside the current `v0.2.0` Mall installation under
+  `~/.copilot`. The duplicate was removed. Before activation or MCP
+  registration, confirm Scout loaded the shared path and version.
 - **MCP servers need one extra step.** CLI and VS Code read `plugin.json`
   directly. Scout keeps its own registry and ignores that manifest, so the
   servers must be registered from the loaded `setup-dependencies` skill.
@@ -278,9 +281,9 @@ Copilot prints a deprecation notice for repository installs. The install still
 works, but the Mall command is preferred.
 
 Every skill is available in Copilot CLI, VS Code, Microsoft Scout, and the
-GitHub Copilot app when that app resolves the intended installed copy. Scout
-can retain another version in a different store without warning, so check its
-loaded path before continuing.
+GitHub Copilot app from the user-level installation. Scout should reuse the
+Copilot CLI plugin under `~/.copilot`; do not maintain a second ONE installation
+under `~/.scout/copilot`.
 
 ### 2. Turn on the always-on instructions, once in each app
 
