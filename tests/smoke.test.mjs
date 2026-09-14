@@ -11,7 +11,7 @@
  * because `check-dependencies` inspects the pin table rather than the launcher,
  * and so reported "Playwright ok" throughout.
  *
- * Run: node --test tests/
+ * Run: node --test
  *
  * No dependencies and no package.json: the package's claim is that it runs on
  * Node alone, and a test suite that needed a framework would undercut it.
