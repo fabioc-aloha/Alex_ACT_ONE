@@ -9,8 +9,8 @@ worth sending to someone.
 Install it at the user level. Copilot CLI, VS Code, Microsoft Scout, and the
 GitHub Copilot app can use the same installed copy. Scout should use the
 Copilot CLI installation under `~/.copilot`, not a duplicate under
-`~/.scout/copilot`. Activation remains per-app, and Scout requires separate MCP
-registration.
+`~/.scout/copilot`, after enabling **Load Copilot CLI skills** in Scout's UI.
+Activation remains per-app, and Scout requires separate MCP registration.
 
 **Status:** Published in the Alex ACT Mall at v0.2.0. GitHub Copilot app
 compatibility was tested on 2026-09-13.
@@ -229,7 +229,7 @@ are not automatic in the same way, and this table says which are.
 | --- | --- | --- | --- | --- |
 | Copilot CLI | All | All, after activation | All | All, from the manifest |
 | VS Code with GitHub Copilot Chat | All | All, after activation | All | All, from the manifest |
-| Microsoft Scout | All | All, after activation | **None** | All, after registration |
+| Microsoft Scout | All, after enabling **Load Copilot CLI skills** | All, after activation | **None** | All, after registration |
 | GitHub Copilot app | All, discovered and invoked | All, active after activation | All, exposed | Registered; Flint and Playwright verified; Replicate requires an API token |
 
 The GitHub Copilot app test on 2026-09-13 found all 15 instructions active and
@@ -249,8 +249,9 @@ Scout-specific notes, last verified 2026-09-13:
   than merely undocumented.
 - **Scout should use the Copilot CLI installation.** A test found a stale
   Scout-local `v0.1.0` alongside the current `v0.2.0` Mall installation under
-  `~/.copilot`. The duplicate was removed. Before activation or MCP
-  registration, confirm Scout loaded the shared path and version.
+  `~/.copilot`. The duplicate was removed. Enable **Load Copilot CLI skills**
+  in Scout's UI, then confirm Scout loaded the shared path and version before
+  activation or MCP registration.
 - **MCP servers need one extra step.** CLI and VS Code read `plugin.json`
   directly. Scout keeps its own registry and ignores that manifest, so the
   servers must be registered from the loaded `setup-dependencies` skill.
@@ -283,7 +284,8 @@ works, but the Mall command is preferred.
 Every skill is available in Copilot CLI, VS Code, Microsoft Scout, and the
 GitHub Copilot app from the user-level installation. Scout should reuse the
 Copilot CLI plugin under `~/.copilot`; do not maintain a second ONE installation
-under `~/.scout/copilot`.
+under `~/.scout/copilot`. Enable **Load Copilot CLI skills** in Scout's UI so it
+discovers the shared plugin.
 
 ### 2. Turn on the always-on instructions, once in each app
 

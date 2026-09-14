@@ -5,8 +5,8 @@ What is working now, what is being built, and what is deliberately out of scope.
 ## Working Today
 
 - One payload in the shared Copilot CLI store can serve Copilot CLI, VS Code,
-  Microsoft Scout, and the GitHub Copilot app; a Scout-local install is an
-  unnecessary duplicate that can drift
+  Microsoft Scout, and the GitHub Copilot app. Scout must enable **Load Copilot
+  CLI skills**; a Scout-local install is an unnecessary duplicate that can drift
 - 60 skills load on all four; every slash command loads on CLI, VS Code, and the
   GitHub Copilot app
 - Always-on instructions activate through a preview-first command that asks

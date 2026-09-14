@@ -285,6 +285,7 @@ describe('Microsoft Scout setup guidance', () => {
 
     test('documents the Copilot CLI plugin as Scout shared source', () => {
         assert.match(readme, /Scout should use the Copilot CLI installation/i);
+        assert.match(readme, /Load Copilot CLI skills/);
         assert.match(readme, /~[\\/]?\.copilot/);
         assert.doesNotMatch(readme, /Scout can retain another version/i);
         assert.match(pluginJson.description, /Copilot CLI user store/i);
