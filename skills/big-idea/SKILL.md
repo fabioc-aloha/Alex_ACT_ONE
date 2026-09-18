@@ -1,7 +1,7 @@
 ---
 name: big-idea
-description: "Distill the central claim before authoring any summary-shaped output: hero copy, commit-message subject, PR title, ADR title, slide title, executive summary, skill description, abstract. Length is format-dependent (1 sentence for titles, up to a short paragraph for complex theses), tested against the Saint-Exupéry rule (remove sentences until removing another would break the claim). Chart summaries use the specialized chart-big-idea skill in the flint-chart-plugin."
-lastReviewed: 2026-07-28
+description: "Distill the central claim before authoring any summary-shaped output: hero copy, commit-message subject, PR title, ADR title, slide title, executive summary, skill description, abstract. Length is format-dependent (1 sentence for titles, up to a short paragraph for complex theses), tested against the Saint-Exupéry rule (remove sentences until removing another would break the claim). Chart summaries use the bundled chart-big-idea skill."
+lastReviewed: 2026-09-18
 ---
 
 # Big Idea
@@ -33,7 +33,7 @@ Generalized from [`chart-big-idea`](../chart-big-idea/SKILL.md), which specializ
 - **Bullet lists inside a doc** — each bullet doesn't need its own thesis. The section header carries the Big Idea if any bullet does.
 - **Code comments** — unless the comment IS a thesis (rare — most code comments explain _how_, not _why anything changes_).
 - **README intro paragraphs** — those get to be longer than one sentence. Use Big Idea for the README's title tagline, not its opening paragraph.
-- **Chart summaries** — use `chart-big-idea` in the flint-chart-plugin instead. That skill's step 5 emits a Chart Brief; this skill's step 5 emits prose.
+- **Chart summaries** — use the bundled `chart-big-idea` skill instead. That skill's step 5 emits a Chart Brief; this skill's step 5 emits prose.
 
 ## The four-step distill (plus emit)
 

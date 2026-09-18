@@ -11,9 +11,18 @@ managers, prompts, agents, MCP servers, or hooks.
 
 ## Run The Assessment
 
+Resolve `<plugin-root>` to the installed ONE package, or the explicitly selected
+canonical checkout. The [bundled analyzer](../../scripts/assess-brain.cjs) is
+relative to this skill's actual location, not the assessed project's working
+directory. Resolve the command to an absolute path before running it.
+
 ```powershell
-node scripts/assess-brain.cjs --root <target-root>
+node "<plugin-root>\scripts\assess-brain.cjs" --root "<target-root>"
 ```
+
+Never substitute a target-owned script with the same name for the bundled
+analyzer. If the bundled executable is missing, report that packaging defect
+and stop; do not run target code as a fallback.
 
 Use `--out <path>` only when the output path is outside the target root. Read
 the JSON report before suggesting any changes.

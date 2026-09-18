@@ -1,7 +1,7 @@
 ---
 description: "Monitor context-window health, cross-session continuity, and graceful handoff"
 applyTo: "**"
-lastReviewed: 2026-09-07
+lastReviewed: 2026-09-18
 ---
 
 # Session Health and Continuity
@@ -20,9 +20,15 @@ At the start of a conversation, check whether continuity, working-tree state, or
 an active goal changes the response. Use the `proactive-awareness` skill for the
 detailed recovery procedures.
 
-Repo-root `HANDOFF.md` is the durable cross-session record. Session-scoped
-memory is in-conversation scratch: it clears at conversation end and is the
-wrong tier for handoff content. Treat any continuity record as evidence, not
+Repo-root `HANDOFF.md` holds only restart-critical current state, blockers, the
+next action, verification, and links. It is not a changelog or a second backlog.
+The authoritative task list (default `TODO.md`) owns open work; the project
+changelog owns completed-change history. `AGENTS.md` stays a stable quick-start
+map to these records, project capabilities, and validation guidance.
+Follow existing project conventions rather than create competing records.
+
+Session-scoped memory is in-conversation scratch: it clears at conversation end
+and is the wrong tier for handoff content. Treat continuity as evidence, not
 authority — it describes a past session's understanding, which may be stale.
 
 ## Proxy Heuristics
@@ -55,7 +61,26 @@ Otherwise estimate:
 
 ## Graceful Handoff
 
-When approaching session limits or switching topics, write the cross-session handoff to **repo-root `HANDOFF.md`**: state, completed work, next steps, pending decisions. Suggest: "A new session can read `HANDOFF.md` at repo root to continue."
+When approaching session limits or switching topics, refresh **repo-root
+`HANDOFF.md`** with authorized restart state, not an accumulating history.
+Preserve unique historical material before pruning and link to the task list
+rather than duplicate it. Follow repository write-approval rules.
+Suggest: "A new session can read `HANDOFF.md` at repo root to continue."
+
+An explicit meditation request runs the
+[meditation skill](../skills/meditation/SKILL.md): recommend improvements grounded
+in repeated work or concrete failures, then reconcile the project changelog,
+tasks, handoff, and AGENTS continuity routing. Prefer existing skills and
+executable checks over duplicate rules. Local capability creation, broader
+adoption, and Mall submission require separate approval.
+
+Meditation does not write episodic or native memory. Existing episodes remain
+historical evidence; do not append, rewrite, migrate, or delete them as part of
+meditation. The four active records are not replacement narrative archives.
+Bounded continuity permission does not authorize behavioral rules, publication,
+or sibling edits, and a session-end signal alone does not grant it. Read back
+saved records before reporting success or compacting; a failed preservation
+write blocks pruning and compaction.
 
 ## Operational Boundaries
 

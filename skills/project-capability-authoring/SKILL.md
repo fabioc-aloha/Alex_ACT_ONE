@@ -1,7 +1,7 @@
 ---
 name: project-capability-authoring
 description: "Create tested project-local skills and scripts from demonstrated repeated work. Use after meditation or when a project workflow recurs and manual execution has caused inconsistency."
-lastReviewed: 2026-08-15
+lastReviewed: 2026-09-18
 ---
 
 # Project Capability Authoring
@@ -48,10 +48,16 @@ or a personal preference.
 
 ## Memory Boundary
 
-Meditation may separately recommend user memory, repository memory, a handoff,
-or a chronicle. Do not write any persistent memory from this skill. A memory
-write requires the relevant explicit user request or approval and must pass the
-PII filter.
+Meditation handles the project's AGENTS, HANDOFF, task list, and changelog;
+it does not write episodic or native memory. This skill owns only separately
+approved local capabilities. Do not create a chronicle or memory record as an
+authoring receipt; report evidence through the project's existing change and
+validation records.
+
+Broadly reusable or Mall-worthy candidates remain recommendations for separate
+review. Local authoring approval does not authorize global installation,
+marketplace submission, or edits to another repository. Apply the PII filter
+before including any project evidence in a proposed reusable capability.
 
 ## Anti-Patterns
 

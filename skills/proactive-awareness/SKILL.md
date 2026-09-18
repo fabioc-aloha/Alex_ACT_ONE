@@ -1,7 +1,7 @@
 ---
 name: proactive-awareness
 description: "Applies cross-session context recovery, uncommitted-work detection, and focus routing once proactive behavior has been judged appropriate. Use when continuity, worktree state, or active goals may change the response."
-lastReviewed: 2026-09-07
+lastReviewed: 2026-09-18
 ---
 
 # Proactive Awareness
@@ -14,19 +14,29 @@ Use this skill once that decision is made, to apply PA1, PA2, or PA4.
 
 At the start of every relevant conversation:
 
-1. **Check repo-root `HANDOFF.md`** — the canonical human-readable project handoff. If present, scan for current state, in-progress items, and next actions.
-2. **Check session memory** — Read `/memories/session/` as a secondary signal. Session memory is by-design ephemeral and clears at conversation end; any handoff content here is a lower-tier signal than `HANDOFF.md`. Scan titles and status fields if present.
-3. **Check dream reports (if available)** — If `.github/quality/dream-report.json` exists, note the last dream date and any issues. Skip silently if absent — not every project ships a dream pipeline.
-4. **Summarize briefly** — If relevant prior context exists (from `HANDOFF.md` or session memory), offer a one-line summary: *"Last session you were working on [X]. Want to continue?"*
+1. **Check repo-root `HANDOFF.md`** — the canonical project handoff. If present,
+   read current state, blockers, next action, and verification; tolerate older
+   section names without assuming they contain the full backlog.
+2. **Check the authoritative task list** linked from handoff or `AGENTS.md`.
+   Otherwise read root `TODO.md` if present. Use relevant pending work to inform
+   recovery, not to force old tasks onto a new request. If handoff is missing,
+   tasks can still establish unfinished work; note the missing restart context.
+3. **Check session memory** — Read `/memories/session/` as a secondary signal. Session memory is by-design ephemeral and clears at conversation end; any handoff content here is a lower-tier signal than `HANDOFF.md`. Scan titles and status fields if present.
+4. **Check dream reports (if available)** — If `.github/quality/dream-report.json` exists, note the last dream date and any issues. Skip silently if absent — not every project ships a dream pipeline.
+5. **Summarize briefly** — If relevant prior context exists in handoff, the task
+   list, or session memory, offer a one-line recovery summary subject to the
+   inhibition rules. These checks are read-only; do not rewrite continuity
+   records or create episodic/native memory as part of recovery.
 
 ### When to Surface Context
 
 | Signal | Action |
 | --- | --- |
 | `HANDOFF.md` present with recent content | Mention proactively |
+| Authoritative task list has work relevant to this request | Use it to inform recovery; do not repeat the whole backlog |
 | Session memory file with `Status: Active` | Mention proactively (secondary signal) |
 | Session memory file with `Status: Concluded` | Skip — already wrapped up |
-| No `HANDOFF.md`, no session memory files | Start fresh, no mention |
+| No handoff, authoritative task list, or session memory | Start fresh, no mention |
 | Dream report shows issues (if dream pipeline present) | Mention if relevant to current request |
 
 ### When NOT to Surface

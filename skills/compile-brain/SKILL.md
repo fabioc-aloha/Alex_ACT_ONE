@@ -212,17 +212,22 @@ the two into a single rewrite.
 
 ## Platform Adoption
 
-The source includes a portable scaffold command for supported platforms. Preview
-the intended locations first:
+ONE includes a portable scaffold command for supported platforms. Resolve
+`<plugin-root>` to the installed ONE package or explicitly selected canonical
+checkout, not the adopter's working directory. A standalone copied skill does
+not include this tool; locate the original package before using this optional
+workflow. Preview the intended locations first:
 
 ```powershell
-node scripts/scaffold-platform.cjs --platform <platform> --target <target-root>
+node "<plugin-root>\scripts\scaffold-platform.cjs" --platform <platform> --target "<target-root>"
 ```
 
 Run again with `--apply` only after the user approves the displayed files.
 Use `--platform all` only when the user explicitly wants every supported
 adapter. The command refuses to overwrite existing files unless `--force` is
-also specified.
+also specified. It preflights all destinations and refuses symbolic links,
+junctions, or incompatible destination types before writing. Forced replacement
+does not change other files hard-linked to an existing destination.
 
 ## Brain Contract Mode
 

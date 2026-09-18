@@ -1,17 +1,25 @@
 ---
 description: "Orchestrates expert visual storytelling over Flint: frame the claim, inspect data, explore familiar and expressive treatments over one semantic truth layer, select or author a theme, render, compare, iterate, and verify. Use for open-ended chart and data-story requests; preserves fast paths for diagnostic charts, fully formed specs, and explicit treatments."
-lastReviewed: 2026-08-15
+lastReviewed: 2026-09-18
 ---
 
 # /alex-act-one render-chart
 
 Follow these steps in order. Skip any step that the user's request has already answered.
 
-1. **Load the `chart-big-idea` skill** and produce a Chart Brief. Look in `.github/skills/local/chart-big-idea/SKILL.md` first (heir-installed), then `skills/chart-big-idea/SKILL.md` (baseline). Follow its numbered steps: **Step 0** (read the surrounding docs / prose / ticket / section heading for an existing Big Idea before asking the user anything), Step 1 (draft or elicit the Big Idea — use the 3-question ladder one question at a time if Step 0 didn't surface it), Steps 2–5 (story arc, audience, style stance, Brief). Classify the intent as **explanatory, exploratory, or persuasive**, and record a **theme / tone stance**. **Ask the user the TRADITIONAL vs INNOVATIVE style-stance question explicitly** unless they've already stated a preference. The output is the compact Chart Brief block that Steps 3-6 below consume as their constraint.
+For each skill below, use a project override at
+`.github/skills/local/<name>/SKILL.md` when one exists. Otherwise use the host's
+skill tool to load the named bundled skill. If that tool cannot expose it, read
+the explicit bundled link relative to this prompt in the installed ONE package,
+not relative to the adopter's working directory. An adopter does not need a
+local `skills/` tree. Confirm both the tool lookup and the actual installed
+file before reporting a missing capability or recommending installation.
+
+1. **Load [chart-big-idea](../skills/chart-big-idea/SKILL.md)** and produce a Chart Brief using the resolution rule above. Follow its numbered steps: **Step 0** (read the surrounding docs / prose / ticket / section heading for an existing Big Idea before asking the user anything), Step 1 (draft or elicit the Big Idea — use the 3-question ladder one question at a time if Step 0 didn't surface it), Steps 2–5 (story arc, audience, style stance, Brief). Classify the intent as **explanatory, exploratory, or persuasive**, and record a **theme / tone stance**. **Ask the user the TRADITIONAL vs INNOVATIVE style-stance question explicitly** unless they've already stated a preference. The output is the compact Chart Brief block that Steps 3-6 below consume as their constraint.
 
    Skip only if the user provided a fully-formed spec, is iterating style/color on an already-chosen chart, or is doing purely exploratory data profiling — see the skill's "When to invoke" section.
 
-2. **Load the `flint-chart` skill.** Look in `.github/skills/local/flint-chart/SKILL.md` first (heir-installed), then `skills/flint-chart/SKILL.md` (baseline). If neither is present, tell the user to install the plugin and stop.
+2. **Load [flint-chart](../skills/flint-chart/SKILL.md)** using the same resolution rule. If it is genuinely unavailable after checking the installed package, report the exact missing capability and stop.
 
 3. **Understand the data.** If the user attached a file, read the first ~20 rows to see column names, types, and cardinality. If not, ask for a sample, file path, or paste. Do not chart blind — the skill's "Sanity-read the values first" rule applies.
 
@@ -23,7 +31,7 @@ Follow these steps in order. Skip any step that the user's request has already a
 
 7. **Render and compare.** For a Vega-Lite candidate, default to `create_chart_view` (interactive SVG panel with customization sidebar) when the host supports MCP App UI. For ECharts or Chart.js, use `render_chart` or `compile_chart`: both Vega-Lite and ECharts can render PNG/SVG, while Chart.js renders PNG only. ThemeSpec realizes only in Vega-Lite. Render both serious candidates when feasible, then compare first focal point, reading order, message hierarchy, context, accessibility, and study cost against the Brief. Use `validate_chart` first if you're unsure a spec is well-formed. Use `compile_chart` when the user wants backend-native JSON.
 
-8. **Verify and iterate — look at what you rendered.** Load the `render-verify` skill (`.github/skills/local/render-verify/SKILL.md` first, then `skills/render-verify/SKILL.md`). Use the host's built-in browser tools if it has them and they can open the artifact; otherwise the optional `alex-playwright` MCP server. Read console errors _before_ judging the picture, then walk the skill's chart and storytelling checks. Repair visible defects and re-render the smallest responsible layer. Check that the selected picture carries the Brief's Big Idea without relying on surrounding prose to explain what the visual failed to show.
+8. **Verify and iterate — look at what you rendered.** Load [render-verify](../skills/render-verify/SKILL.md) using the same resolution rule. Use the host's built-in browser tools if it has them and they can open the artifact; otherwise the optional `alex-playwright` MCP server. Read console errors _before_ judging the picture, then walk the skill's chart and storytelling checks. Repair visible defects and re-render the smallest responsible layer. Check that the selected picture carries the Brief's Big Idea without relying on surrounding prose to explain what the visual failed to show.
 
    **Mandatory** after any post-Flint Vega-Lite edit and before committing generated HTML/SVG/PNG. If you have no way to look at the result, say so in Step 9 rather than implying it was checked.
 

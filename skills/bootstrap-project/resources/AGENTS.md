@@ -3,7 +3,17 @@
 <!-- alex-act-continuity:start -->
 ## Continuity
 
-Use `HANDOFF.md` for active execution state and `.github/episodic/` for durable
-project-specific session summaries. Keep cross-project work in an explicit
-handoff until a separately approved capability owns it.
+Read `HANDOFF.md` for current state, blockers, verification, and the next action.
+Use the project's authoritative task list (default `TODO.md`) for open work and
+the project changelog (default `CHANGELOG.md`) for completed-change history.
+Follow these routes when the records exist; meditation creates missing
+continuity records only when authorized and consistent with project conventions.
+
+Keep this file a stable quick start. Handoff is not a changelog or a duplicate
+backlog. Preserve history before pruning active records, and keep unresolved
+tasks until evidence or an explicit decision closes them. Meditation recommends
+skills or automation for demonstrated needs; authoring, broader adoption, and
+Mall submission require separate approval. It does not write episodic or native
+memory. Existing episodes are historical evidence, not active guidance.
+Cross-project work stays explicit until separately authorized.
 <!-- alex-act-continuity:end -->

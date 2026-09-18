@@ -134,7 +134,7 @@ Auditing, extending, and consolidating the agent.
 
 | Skill | What it does | Needs |
 | --- | --- | --- |
-| `meditation` | Consolidate session learning into permanent architecture — extract patterns into skills, instructions, prompts,… | — |
+| `meditation` | Review session outcomes, recommend reusable skills or automation, and reconcile project guidance, handoff, tasks,… | — |
 | `compile-brain` | Create or improve a Markdown instruction, skill, prompt, or agent from an explicitly selected file or… | — |
 | `assess-brain` | Assess active Markdown brain files in a local AI agent project or plugin source without changing it | — |
 | `project-capability-authoring` | Create tested project-local skills and scripts from demonstrated repeated work | — |

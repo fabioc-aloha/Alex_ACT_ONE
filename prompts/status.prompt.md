@@ -1,6 +1,6 @@
 ---
 description: "Report the current project's repository state, recent work, brain QA health (if applicable), and pending handoff items. Use for session orientation or an on-demand project checkpoint."
-lastReviewed: 2026-08-05
+lastReviewed: 2026-09-18
 ---
 
 # Status
@@ -15,8 +15,14 @@ skill is missing — plugin-shipped skills are not always in its inventory.
 
 1. **Identity**: Confirm which project this is and read the active branch (`git branch --show-current`).
 2. **Git state**: Report uncommitted file count and the latest commit subject.
-3. **Continuity**: Read `HANDOFF.md` if present; summarize `In progress`, pending queue,
-   and resume point. Do not re-litigate closed decisions.
+3. **Continuity**: Read `HANDOFF.md` if present for current state, blockers,
+   next action, and verification. Read the authoritative task list linked from
+   handoff or `AGENTS.md`; otherwise use root `TODO.md` if present. Report
+   relevant pending work without assuming a backlog lives in handoff. Follow
+   existing project conventions and tolerate older section names. If the
+   handoff is absent but tasks exist, report those with the missing restart
+   context noted; do not infer there is no work. Keep this read-only and do not
+   re-litigate closed decisions or create an episodic record.
 4. **Brain health**: If the project ships brain-QA scripts, run them. A project with structural and semantic brain checks usually exposes them as:
 
    ```pwsh
