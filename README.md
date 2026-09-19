@@ -307,6 +307,14 @@ activation in each app where you want the behavior.
 | Microsoft Scout | Ask for the `bootstrap-core` skill, or invoke it by name from the skill list |
 | GitHub Copilot app | Ask for the `bootstrap-core` skill, or invoke it by name from the skill list |
 
+When a host's setup requirements are unclear, start with its no-write readiness
+report. It names the activation target and the steps that only the host can
+complete; it does not turn on instructions or claim the host observed them.
+
+```text
+node <this-skill>/scripts/host-readiness.cjs --host scout
+```
+
 Activation previews every instruction file and waits for your approval before
 writing anything. Running it again reports no changes.
 

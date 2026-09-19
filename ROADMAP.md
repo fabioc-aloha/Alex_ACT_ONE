@@ -31,11 +31,11 @@ is a single command with no repository path, and updates arrive the usual way.
 Copilot now warns that installing from a repository is deprecated, so this has
 moved from a convenience to the eventual only supported route.
 
-**One activation instead of one per app.** Today the always-on instructions are
-written into each app's profile, so turning them on is a per-app step. Microsoft
-Scout adds a second one-off step for the MCP servers, because it keeps its own
-registry rather than reading the plugin manifest. A single activation that
-reached every app and every surface would make the install genuinely one move.
+**One host activation readiness report.** Always-on instructions still activate
+per app, and Microsoft Scout keeps its own MCP registry and discovery setting.
+One no-write report will present the selected host's target, required action,
+and evidence boundary without claiming it can activate, restart, or observe
+every host.
 
 **Slash commands on Microsoft Scout.** Scout has no command surface for plugin
 prompts, so none of them reach it. Each one has an equivalent skill

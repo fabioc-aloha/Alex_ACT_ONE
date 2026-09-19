@@ -1,7 +1,7 @@
 ---
 name: bootstrap-core
 description: "Activates, verifies, repairs, or removes this plugin's user-scope runtime instructions from canonical installed sources. Use after installing or updating Alex ACT ONE, when ACT behavior or Alex Finch identity is inactive, or when bootstrap receipt hashes drift."
-lastReviewed: 2026-09-07
+lastReviewed: 2026-09-19
 ---
 
 # Bootstrap Core
@@ -35,6 +35,27 @@ possible workspace overlap before applying user-scope instructions.
 
 Instructions activate per app, not per machine. Each app that sets its own
 `COPILOT_HOME` gets its own target, so activation runs once per app.
+
+## Host Readiness
+
+Start with a host-specific readiness report when the activation steps are
+unclear:
+
+```text
+node <this-skill>/scripts/host-readiness.cjs --host scout
+node <this-skill>/scripts/host-readiness.cjs --host scout --json
+```
+
+Supported hosts are `copilot-cli`, `vscode`, `github-copilot-app`, and `scout`.
+The report runs the bootstrap preview for the selected target and names what
+still belongs to that host. It writes no instructions or MCP registry entries,
+does not enable UI settings, and cannot prove a host has restarted or observed
+the activation.
+
+For Scout, the report also previews its separate MCP registration and names the
+required **Load Copilot CLI skills** setting and full restart. Review the
+existing bootstrap and registrar previews, then run each `--apply` command
+separately after consent.
 
 ## Apply After Consent
 

@@ -262,6 +262,7 @@ describe('documented counts', () => {
 describe('Microsoft Scout setup guidance', () => {
     const readme = read('README.md');
     const roadmap = read('ROADMAP.md');
+    const bootstrapSkill = read('skills', 'bootstrap-core', 'SKILL.md');
     const scoutSetup = readme.match(
         /### On Microsoft Scout, register the MCP servers([\s\S]*?)### Optional: extra tools/,
     )?.[1] || '';
@@ -281,6 +282,15 @@ describe('Microsoft Scout setup guidance', () => {
         assert.doesNotMatch(pluginJson.description, /single-install/i);
         assert.doesNotMatch(roadmap, /GitHub Copilot app[^.\n]*untested/i);
         assert.match(roadmap, /plugin-root check/i);
+        assert.match(roadmap, /host activation readiness/i);
+        assert.doesNotMatch(roadmap, /One activation instead of one per app/);
+    });
+
+    test('documents host readiness without promising observed activation', () => {
+        assert.match(readme, /host-readiness\.cjs/);
+        assert.match(bootstrapSkill, /Host Readiness/);
+        assert.match(bootstrapSkill, /writes no instructions or MCP registry entries/i);
+        assert.match(bootstrapSkill, /cannot prove a host has restarted or observed/i);
     });
 
     test('documents the Copilot CLI plugin as Scout shared source', () => {
