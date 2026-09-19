@@ -27,37 +27,75 @@ A green test suite tells you the tests passed. It does not tell you whether the 
 
 For each load-bearing branch / guard / constant in the module:
 
-1. **Apply a one-character defect** that flips the behavior (invert a comparison, change a numeric literal, replace a guard with `if (false)`)
-2. **Run the suite** — `npm test` or whatever your canonical entry point is
-3. **Expect ≥ 1 failure.** If the suite still passes, that branch has no real coverage
-4. **Revert the defect** before applying the next one
-5. **Record the result** — caught / survived / precondition-not-found
+1. **Copy the project or a supported test fixture to a temporary location.**
+   The mutation target must be inside that copy, never the working tree.
+2. **Apply a one-character defect** that flips the behavior (invert a comparison, change a numeric literal, replace a guard with `if (false)`)
+3. **Run the suite against the copy** — `npm test` or the project's canonical
+   entry point, with any required root override targeting the copy.
+4. **Expect ≥ 1 failure.** If the suite still passes, that branch has no real coverage.
+5. **Discard the copy** before applying the next mutation.
+6. **Record the result** — caught / survived / precondition-not-found.
 
-## PowerShell harness (zero deps)
+The source files must remain unchanged. A mutation run that requires restoring a
+working-tree file is already too risky: an interrupted process, a failed write,
+or another tool reading the file can leave a real defect behind.
+
+## Isolated Mutation Harness
 
 ```pwsh
 function Test-Mutation {
-    param($file, $find, $replace, $name)
-    $orig = Get-Content $file -Raw
-    if (-not $orig.Contains($find)) { "[$name] PRECONDITION-NOT-FOUND"; return }
-    $mut = $orig.Replace($find, $replace)
-    Set-Content -Path $file -Value $mut -NoNewline
-    $out = npm test 2>&1
-    Set-Content -Path $file -Value $orig -NoNewline   # always restore
-    $failMatch = ($out | Select-String -Pattern "fail (\d+)" | Select-Object -Last 1)
-    if ($failMatch -and $failMatch.Matches[0].Groups[1].Value -ne '0') {
-        "[$name] CAUGHT  (fail=$($failMatch.Matches[0].Groups[1].Value))"
-    } else {
-        "[$name] *** SURVIVED ***"
+    param(
+        [string]$ProjectRoot,
+        [string]$RelativePath,
+        [string]$Find,
+        [string]$Replace,
+        [string]$Name,
+        [scriptblock]$RunTests
+    )
+
+    $sandbox = Join-Path ([System.IO.Path]::GetTempPath()) ("mutation-" + [guid]::NewGuid())
+    try {
+        New-Item -ItemType Directory -Force -Path $sandbox | Out-Null
+        Copy-Item -LiteralPath $ProjectRoot -Destination (Join-Path $sandbox 'project') -Recurse
+        $copyRoot = Join-Path $sandbox 'project'
+        $target = Join-Path $copyRoot $RelativePath
+        $original = Get-Content -LiteralPath $target -Raw
+        if (-not $original.Contains($Find)) { "[$Name] PRECONDITION-NOT-FOUND"; return }
+
+        Set-Content -LiteralPath $target -Value $original.Replace($Find, $Replace) -NoNewline
+        $exitCode = & $RunTests $copyRoot
+        if ($exitCode -ne 0) { "[$Name] CAUGHT" } else { "[$Name] *** SURVIVED ***" }
+    } finally {
+        Remove-Item -LiteralPath $sandbox -Recurse -Force -ErrorAction SilentlyContinue
     }
 }
 
-# Apply a battery of mutations in one shot.
-Test-Mutation 'lib/semver.js' 'if (pa.major !== pb.major)' 'if (pa.major === pb.major)' 'M2 major-equality inverted'
-Test-Mutation 'lib/edition-install.js' 'marker_schema_version: 2' 'marker_schema_version: 1' 'M5 marker schema version wrong'
+# The test command receives the disposable project root. Adapt its root override
+# or fixture option to your project; do not silently fall back to the real root.
+$runTests = {
+    param($copyRoot)
+    Push-Location $copyRoot
+    try { npm test; return $LASTEXITCODE } finally { Pop-Location }
+}
+
+Test-Mutation $PWD 'lib/semver.js' 'if (pa.major !== pb.major)' 'if (pa.major === pb.major)' 'M2 major-equality inverted' $runTests
 ```
 
-The function always restores the file (even on failure), so a Ctrl+C mid-batch is safe.
+For a small validator, a purpose-built temporary fixture is often cheaper than
+copying the whole project. Steward's ONE-check suite uses that pattern: it
+generates disposable fixtures and temporary validator copies, then asserts the
+working validators' bytes remain unchanged.
+
+## Counter-Test Detection Rules
+
+A detector needs two proofs. First, inject the live defect it exists to catch
+into an isolated active artifact and assert that it reports a failure. Then add
+the innocent case that previously caused a false positive and assert silence.
+
+For example, a rule against a retired process must flag a new active route that
+revives the process, while allowing historical prose that says the process was
+retired. A counter-test for a detection rule keeps a correct historical record
+from looking like the defect itself.
 
 ## High-value mutation patterns
 
@@ -109,7 +147,8 @@ A mutation-testing pass is complete when:
 - Every named branch in the production module has a mutation entry in your run log
 - Every survivor was either closed by a new test or explicitly accepted with a reason (e.g., "behavior is internal-only, no public contract")
 - The total mutations-caught ratio is recorded (e.g., "15 of 16 mutations caught; M8 deferred")
-- The final state has the source file BIT-IDENTICAL to before the run (your harness always restores)
+- The working tree's source files remain unchanged throughout the run, and the
+    temporary copy is removed after each mutation
 
 ## Anti-patterns
 
@@ -117,13 +156,12 @@ A mutation-testing pass is complete when:
 | --- | --- |
 | Running mutations on throwaway code | Use the protocol on production modules with real consumers; throwaway code is throwaway |
 | Reading "coverage 100%" as "tests are good" | Coverage is a necessary but insufficient signal; mutation tells you whether the assertion was meaningful |
-| Skipping the restore step | The harness must always restore — a bug-restore on commit will ship the mutation |
-| Manually running 20 mutations one at a time | Use the batch function above; it handles restore + result aggregation |
+| Mutating a live source file then restoring it | Use a temporary copy; restore logic cannot protect an interrupted live mutation |
+| Manually running 20 mutations one at a time | Use the isolated harness above; it handles copy disposal + result aggregation |
 | Treating a SURVIVED mutation as a test-quality problem alone | Often it surfaces a production-code design problem (dead export, untestable branch) |
 
 ## Falsifiability — would revise if
 
-- Date-based: 2026-08-31 (90 days from authorship). If by then no shipped commit cites this skill as the source of a found defect, revisit whether the protocol is being run.
 - Event-based: if a formal mutation-testing tool (Stryker, mutmut) is adopted in CI, this skill becomes documentation for the manual fallback only; trim the protocol section accordingly.
 - Counter-evidence: if applying the protocol consistently catches zero mutations on three consecutive new test files, either the tests are unusually rigorous (good — note it) or the mutation set is too shallow (revise the "high-value patterns" table).
 

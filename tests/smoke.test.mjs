@@ -155,6 +155,25 @@ describe('Compile Brain customization boundary', () => {
         assert.match(compileBrain, /\.github\/skills\/.*SKILL\.md/);
         assert.match(compileBrain, /\.github\/instructions\/.*\.instructions\.md/);
     });
+
+    test('checks whether a process exists before renaming it', () => {
+        assert.match(compileBrain, /## Rename or Retire/);
+        assert.match(compileBrain, /verify that the\s+process\s+still exists/i);
+        assert.match(compileBrain, /retire it rather than rename\s+it/i);
+    });
+});
+
+describe('Mutation testing isolation', () => {
+    const mutationTesting = read('skills', 'mutation-testing', 'SKILL.md');
+
+    test('mutates an isolated copy and counter-tests detection rules', () => {
+        assert.match(mutationTesting, /## Isolated Mutation Harness/);
+        assert.match(mutationTesting, /temporary copy/i);
+        assert.match(mutationTesting, /source files must remain unchanged/i);
+        assert.match(mutationTesting, /counter-test.*detection rule/i);
+        assert.doesNotMatch(mutationTesting, /Set-Content -Path \$file -Value \$mut/);
+        assert.doesNotMatch(mutationTesting, /Ctrl\+C mid-batch is safe/);
+    });
 });
 
 describe('manifest matches disk', () => {
