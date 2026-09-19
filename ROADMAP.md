@@ -4,14 +4,17 @@ What is working now, what is being built, and what is deliberately out of scope.
 
 ## Working Today
 
-- One install from source reaches Copilot CLI, VS Code, and Microsoft Scout
-- 60 skills load on all three; every slash command loads on CLI and VS Code
+- One payload in the shared Copilot CLI store can serve Copilot CLI, VS Code,
+  Microsoft Scout, and the GitHub Copilot app. Scout must enable **Load Copilot
+  CLI skills**; a Scout-local install is an unnecessary duplicate that can drift
+- 60 skills load on all four; every slash command loads on CLI, VS Code, and the
+  GitHub Copilot app
 - Always-on instructions activate through a preview-first command that asks
   before writing to your profile
 - Activation can be undone. Removal returns each profile to its prior state and
   keeps any instruction file you edited yourself
-- The three MCP servers register automatically on CLI and VS Code, and on Scout
-  through one preview-first command that backs up and merges
+- The three MCP servers register automatically on CLI and VS Code. Scout needs a
+  preview, a plugin-root check, explicit registration, and a full restart
 - Every external npm package is pinned to an exact version, and one command
   reports when a pin has fallen behind
 - `node --test` checks the structural claims above, including that each pinned
@@ -40,8 +43,9 @@ that can be asked for by name, which is why this is a gap rather than a blocker.
 It needs a change on Scout's side, so it is listed here to be tracked, not
 promised.
 
-**Confirm the GitHub Copilot app.** It is a stated target and it is untested.
-Until someone runs it there, the compatibility table says so.
+**Automate host compatibility evidence.** The GitHub Copilot app and Scout have
+both been tested, but their evidence is manual. A repeatable host-level check
+would catch store resolution, activation, and tool-handshake regressions.
 
 **Documentation you can follow without asking.** Setup, a short example of when
 each group of skills is worth reaching for, and troubleshooting for the cases

@@ -11,7 +11,7 @@
  * because `check-dependencies` inspects the pin table rather than the launcher,
  * and so reported "Playwright ok" throughout.
  *
- * Run: node --test tests/
+ * Run: node --test
  *
  * No dependencies and no package.json: the package's claim is that it runs on
  * Node alone, and a test suite that needed a framework would undercut it.
@@ -257,6 +257,58 @@ describe('documented counts', () => {
             }
         });
     }
+});
+
+describe('Microsoft Scout setup guidance', () => {
+    const readme = read('README.md');
+    const roadmap = read('ROADMAP.md');
+    const scoutSetup = readme.match(
+        /### On Microsoft Scout, register the MCP servers([\s\S]*?)### Optional: extra tools/,
+    )?.[1] || '';
+
+    test('uses skills and bundled scripts instead of unavailable slash commands', () => {
+        assert.ok(scoutSetup, 'could not find the Microsoft Scout setup section');
+        assert.doesNotMatch(
+            scoutSetup,
+            /\/alex-act-one\s+/,
+            'Scout has no plugin slash-command surface',
+        );
+        assert.match(scoutSetup, /setup-dependencies/);
+        assert.match(scoutSetup, /register-scout-mcp\.mjs/);
+    });
+
+    test('package metadata and roadmap do not overstate automatic setup', () => {
+        assert.doesNotMatch(pluginJson.description, /single-install/i);
+        assert.doesNotMatch(roadmap, /GitHub Copilot app[^.\n]*untested/i);
+        assert.match(roadmap, /plugin-root check/i);
+    });
+
+    test('documents the Copilot CLI plugin as Scout shared source', () => {
+        assert.match(readme, /Scout should use the Copilot CLI installation/i);
+        assert.match(readme, /Load Copilot CLI skills/);
+        assert.match(readme, /~[\\/]?\.copilot/);
+        assert.doesNotMatch(readme, /Scout can retain another version/i);
+        assert.match(pluginJson.description, /Copilot CLI user store/i);
+        assert.match(roadmap, /shared Copilot CLI store/i);
+    });
+
+    test('makes duplicate plugin roots and restart requirements checkable', () => {
+        assert.match(scoutSetup, /plugin root/i);
+        assert.match(scoutSetup, /fully quit(?: and restart)? Scout/i);
+    });
+
+    test('names every Flint tool expected after Scout restarts', () => {
+        for (const tool of [
+            'compile_chart',
+            'create_chart_view',
+            'list_chart_types',
+            'list_themes',
+            'render_chart',
+            'validate_chart',
+        ]) {
+            assert.match(scoutSetup, new RegExp(`\\b${tool}\\b`), `missing Flint tool ${tool}`);
+        }
+    });
 });
 
 describe('activation', () => {

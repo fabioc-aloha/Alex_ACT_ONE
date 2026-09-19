@@ -17,7 +17,7 @@
   <rect x="0" y="0" width="6" height="320" fill="url(#accent)"/>
 
   <!-- Ghost watermark -->
-  <text x="1180" y="286" font-family="Segoe UI, Helvetica, Arial, sans-serif"
+  <text x="1150" y="286" font-family="Segoe UI, Helvetica, Arial, sans-serif"
         font-size="100" font-weight="800" fill="#f1f5f9" opacity="0.10" text-anchor="end">ACT</text>
 
   <!-- Brand mark -->

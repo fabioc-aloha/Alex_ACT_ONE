@@ -1,7 +1,7 @@
 {
   "$comment": "Asset manifest for ONE. bootstrap-core reads assets.instructions to activate the always-on runtime.",
   "plugin": "alex-act-one",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "status": "development",
   "shape": "single-install runtime",
   "description": "Alex ACT ONE. A single-install runtime for GitHub Copilot covering critical thinking and problem framing, engineering craft, prose and documentation, document conversion, visual authoring, and agent brain authoring. Installs once at user level and is read by Copilot CLI, VS Code with GitHub Copilot Chat, and Microsoft Scout.",

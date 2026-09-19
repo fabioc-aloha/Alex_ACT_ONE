@@ -6,10 +6,14 @@ A skills pack for GitHub Copilot. It covers how to think through a problem, how
 to write code and prose that hold up, and how to produce documents and charts
 worth sending to someone.
 
-Install it once at the user level. Copilot CLI, VS Code, and Microsoft Scout all
-read the same installation.
+Install it at the user level. Copilot CLI, VS Code, Microsoft Scout, and the
+GitHub Copilot app can use the same installed copy. Scout should use the
+Copilot CLI installation under `~/.copilot`, not a duplicate under
+`~/.scout/copilot`, after enabling **Load Copilot CLI skills** in Scout's UI.
+Activation remains per-app, and Scout requires separate MCP registration.
 
-**Status:** In development. Not yet published to the Alex ACT Mall.
+**Status:** Published in the Alex ACT Mall at v0.3.0. GitHub Copilot app
+compatibility was tested on 2026-09-13.
 
 ## What You Can Do With Alex ACT ONE
 
@@ -215,40 +219,48 @@ can remove in a second. Judge by what it costs to be wrong.
 
 ## Where Alex ACT ONE Works
 
-Skills sit at the package root, so each app finds them directly. No bridge, no
-symbolic links, and no second plugin store to keep in sync. The other three
-surfaces are not automatic in the same way, and this table says which are.
+Skills sit at the package root, so each app can load them directly. Scout can
+use the plugin installed for Copilot CLI under `~/.copilot`; a Scout-local ONE
+copy is duplicate state and can drift independently. Verify the loaded root and
+version before activation or Scout MCP registration. The other three surfaces
+are not automatic in the same way, and this table says which are.
 
 | Where you use Copilot | Skills | Instructions | Slash commands | MCP servers |
 | --- | --- | --- | --- | --- |
 | Copilot CLI | All | All, after activation | All | All, from the manifest |
 | VS Code with GitHub Copilot Chat | All | All, after activation | All | All, from the manifest |
-| Microsoft Scout | All | All, after activation | **None** | All, after registration |
-| GitHub Copilot app | Not yet tested | Not yet tested | Not yet tested | Not yet tested |
+| Microsoft Scout | All, after enabling **Load Copilot CLI skills** | All, after activation | **None** | All, after registration |
+| GitHub Copilot app | All, discovered and invoked | All, active after activation | All, exposed | Registered; Flint and Playwright verified; Replicate requires an API token |
+
+The GitHub Copilot app test on 2026-09-13 found all 15 instructions active and
+at hash parity with the installed v0.2.0 sources. The app discovered the skill
+catalog and prompt aliases; `bootstrap-core`, `platform-awareness`,
+`proactive-awareness`, and `humanizer` were invoked. Playwright listed the
+active browser tabs, and Flint validated a Vega-Lite chart with no warnings or
+errors. Replicate reached its MCP server but returned `401 Unauthenticated`
+because this app did not have a Replicate API token. Individual skills and
+slash commands were not exhaustively invoked.
 
 The Scout row was re-checked on 2026-09-13 inside a live session: all 60 skills
 surfaced, all 15 instructions were active in context, none of the 15 slash
 commands were reachable, and both registered MCP servers answered a protocol
 handshake — 6 tools from Flint, 24 from Playwright.
 
-Three Scout-specific notes:
+Scout-specific notes, last verified 2026-09-13:
 
 - **Slash commands do not reach Scout.** It has no command surface for plugin
   prompts. Every command has an equivalent skill you can ask for by name, so
   nothing is lost in capability — but the commands themselves are absent rather
   than merely undocumented.
+- **Scout should use the Copilot CLI installation.** A test found a stale
+  Scout-local `v0.1.0` alongside the current `v0.2.0` Mall installation under
+  `~/.copilot`. The duplicate was removed. Enable **Load Copilot CLI skills**
+  in Scout's UI, then confirm Scout loaded the shared path and version before
+  activation or MCP registration.
 - **MCP servers need one extra step.** CLI and VS Code read `plugin.json`
   directly. Scout keeps its own registry and ignores that manifest, so the
-  servers must be registered once with
-  `/alex-act-one setup-dependencies`. Skipping it leaves every skill loaded and
-  every server it calls missing.
-- **Register from the copy Scout is actually serving.** Scout can keep a Copilot
-  home separate from the CLI's, so two installed copies of this package may sit
-  at different versions on one machine. Registration writes absolute paths, so
-  running it against the wrong copy points the servers at stale code that still
-  starts — an outdated server rather than an obviously missing one, which is far
-  harder to spot. Register from the copy whose skills Scout is loading, and
-  register again after every upgrade.
+  servers must be registered from the loaded `setup-dependencies` skill.
+  Skipping it leaves every skill loaded and every server it calls missing.
 
 ## Install
 
@@ -258,26 +270,28 @@ those tools are needed to get started.
 
 ### 1. Install the plugin
 
-From source, until the Mall listing is published:
+From the Alex ACT Mall:
+
+```powershell
+copilot plugin install alex-act-one@alex-mall
+```
+
+The Mall entry tracks the reviewed release and keeps the installed name stable.
+
+Installing from source remains available:
 
 ```powershell
 copilot plugin install fabioc-aloha/Alex_ACT_ONE
 ```
 
-Use that exact form. Copilot names the installed folder after whatever you type,
-and that name becomes the prefix on every skill. Installing from the full
-`https://github.com/...` URL works, but makes every skill name longer for no
-benefit.
+Copilot prints a deprecation notice for repository installs. The install still
+works, but the Mall command is preferred.
 
-Copilot prints a deprecation notice about installing from a repository. That is
-expected and the install still works. It is the reason a Mall listing is the
-next thing on the [roadmap](ROADMAP.md).
-
-Every skill is now available in Copilot CLI, VS Code, and Microsoft Scout. They
-normally share one copy on disk. Scout is the exception worth knowing about: it
-can keep a Copilot home of its own, so a terminal install and the copy Scout
-loads are not always the same folder. [Extra steps on Microsoft
-Scout](#extra-steps-on-microsoft-scout) covers how to check.
+Every skill is available in Copilot CLI, VS Code, Microsoft Scout, and the
+GitHub Copilot app from the user-level installation. Scout should reuse the
+Copilot CLI plugin under `~/.copilot`; do not maintain a second ONE installation
+under `~/.scout/copilot`. Enable **Load Copilot CLI skills** in Scout's UI so it
+discovers the shared plugin.
 
 ### 2. Turn on the always-on instructions, once in each app
 
@@ -291,6 +305,7 @@ activation in each app where you want the behavior.
 | Copilot CLI | `/alex-act-one bootstrap-core` |
 | VS Code with GitHub Copilot Chat | `/alex-act-one bootstrap-core` |
 | Microsoft Scout | Ask for the `bootstrap-core` skill, or invoke it by name from the skill list |
+| GitHub Copilot app | Ask for the `bootstrap-core` skill, or invoke it by name from the skill list |
 
 Activation previews every instruction file and waits for your approval before
 writing anything. Running it again reports no changes.
@@ -309,79 +324,51 @@ prints the exact target directory first.
 Step 1 alone is a complete, working install. Step 2 adds the always-on
 behavior, and skipping it costs you nothing else.
 
-### Extra steps on Microsoft Scout
+### On Microsoft Scout, register the MCP servers
 
-Scout differs from the other apps in three ways: it has no slash commands, it
-keeps its own MCP registry, and it may read a different plugin folder than the
-one a terminal install wrote to. Work through these in order.
+Only on Scout, and only if you want charts, browser verification, or image
+generation. Copilot CLI and VS Code read the servers from `plugin.json` and need
+nothing extra; Scout keeps its own registry and ignores that manifest.
 
-#### Find the copy Scout is serving
-
-Two copies at different versions can sit on one machine without either app
-complaining, so establish which one Scout loads before changing anything else.
-Ask it:
+Ask Scout for the `setup-dependencies` skill by name. Slash commands do not
+exist on this surface. From the skill copy Scout loaded, run the registration
+preview:
 
 ```text
-Load the setup-dependencies skill and tell me which folder it came from.
+node <this-skill>/scripts/register-scout-mcp.mjs
 ```
 
-The path it reports is the copy Scout serves. Use that path for everything
-below. If it is older than the one you just installed, reinstall from within
-Scout before continuing — otherwise the later steps configure a package Scout
-never reads.
+The preview prints its resolved plugin root, the Scout registry path, and one
+line per server. Confirm that plugin root is the same copy and version Scout
+served above. If it is not, stop rather than registering servers from the wrong
+version.
 
-#### Turn on the instructions
-
-Scout has no command surface for plugin prompts, so `/alex-act-one bootstrap-core`
-does not exist there. Ask for the skill by name instead:
+After reviewing the preview, apply it:
 
 ```text
-Run the bootstrap-core skill.
+node <this-skill>/scripts/register-scout-mcp.mjs --apply
 ```
 
-It previews every instruction file and waits for your approval before writing.
-Run it again any time; if nothing has drifted it reports no changes.
+The script backs up the existing registry and merges rather than replaces, so
+other servers remain untouched. Fully quit and restart Scout afterwards. A new
+conversation is not enough because tools are discovered during the launch
+handshake.
 
-#### Register the MCP servers
+Confirm that Flint exposes all six expected tools:
 
-Only needed if you want charts, browser verification, or image generation.
-Copilot CLI and VS Code read the servers from `plugin.json` and need nothing
-extra. Scout ignores that manifest and keeps its own registry, so the servers
-have to be registered explicitly:
-
-```text
-Run the setup-dependencies skill and register the MCP servers with Scout.
-```
-
-It previews first: the plugin root it resolved, the registry path, and one line
-per server. **Check the plugin root against the path you found above.**
-Registration writes absolute paths, so running it from an old copy pins the
-servers to stale code — they still start, which makes an outdated server much
-harder to notice than a missing one. It backs the existing registry up before
-writing and merges rather than replaces, so your other servers are untouched.
+- `compile_chart`
+- `create_chart_view`
+- `list_chart_types`
+- `list_themes`
+- `render_chart`
+- `validate_chart`
 
 `replicate` is skipped unless `REPLICATE_API_TOKEN` is set in the environment.
 That is deliberate: a clear omission now beats an opaque authentication failure
 at call time.
 
-#### Restart Scout completely
-
-Quit the application. A new conversation is not enough — Scout starts MCP
-servers at launch and learns their tools from that one handshake.
-
-#### Confirm it worked
-
-```text
-List the Flint chart tools you can call.
-```
-
-Six should come back: `render_chart`, `compile_chart`, `validate_chart`,
-`list_chart_types`, `list_themes`, and `create_chart_view`. If none do, either
-the restart was not a full quit or the registration ran against a different copy
-than the one Scout loads.
-
-Skipping registration leaves every skill loaded and every tool those skills call
-missing, which reads as a broken package rather than an unregistered one.
+Without this step every skill still loads, but the tools those skills call are
+missing, which looks like a broken package rather than an unregistered one.
 
 ### Optional: extra tools for a few skills
 
@@ -394,9 +381,9 @@ with no external tools at all, and nothing below is needed to start.
 | Render Mermaid diagrams into Word or HTML output | Mermaid CLI | `npm install -g @mermaid-js/mermaid-cli@11.17.0` |
 | Export SVG banners and figures as PNG | svgexport | `npm install -g svgexport@0.4.2` |
 | Annotate a screenshot | Pillow | `pip install Pillow` |
-| Render charts | Flint MCP server | `/alex-act-one setup-dependencies` |
-| Check rendered output in a browser | The `alex-playwright` MCP server, or your host's own browser tools | `/alex-act-one setup-dependencies` |
-| Generate images with AI | Replicate MCP server, plus a paid account and API token | `/alex-act-one setup-dependencies` |
+| Render charts | Flint MCP server | Ask for the `setup-dependencies` skill |
+| Check rendered output in a browser | The `alex-playwright` MCP server, or your host's own browser tools | Ask for the `setup-dependencies` skill |
+| Generate images with AI | Replicate MCP server, plus a paid account and API token | Ask for the `setup-dependencies` skill |
 
 The three MCP servers are not equally important. Only Flint is required for the
 skill that uses it: without it, chart rendering cannot run and there is no
@@ -410,11 +397,9 @@ flags; Scout's built-in browser blocks them; Copilot CLI has no browser at all.
 The package registers its own server as `alex-playwright` — a distinct name, so
 it sits alongside a host's built-in browser tools rather than shadowing them.
 
-To see what you already have and what any gap costs you:
-
-```text
-/alex-act-one setup-dependencies
-```
+To see what you already have and what any gap costs you, ask for the
+`setup-dependencies` skill by name. Copilot CLI and VS Code also expose it as
+`/alex-act-one setup-dependencies`.
 
 It reports what is present, what is missing, and what each missing piece
 unlocks. It installs nothing without asking, and it never runs a system package
