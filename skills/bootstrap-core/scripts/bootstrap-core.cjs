@@ -14,6 +14,8 @@ const SOURCE_ROOT = path.join(CORE_ROOT, 'instructions');
 const MANIFEST_PATH = path.join(CORE_ROOT, 'manifest.json');
 const RECEIPT_NAME = '.alex-act-one-bootstrap.json';
 const LEGACY_RECEIPT_NAME = '.alex-act-bootstrap.json';
+const RECEIPT_OWNER = 'alex-act-one';
+const LEGACY_RECEIPT_OWNER = 'alex-act-core';
 
 function sha256(value) {
     return crypto.createHash('sha256').update(value).digest('hex');
@@ -147,10 +149,22 @@ function expectedFiles() {
     }
     return names.map((sourceName) => ({
         name: `alex-act-${sourceName}`,
-        owner: 'alex-act-core',
-        sourceRelativePath: `.github/instructions/${sourceName}`,
+        owner: RECEIPT_OWNER,
+        sourceRelativePath: `instructions/${sourceName}`,
         bytes: fs.readFileSync(path.join(SOURCE_ROOT, sourceName)),
     }));
+}
+
+function legacySourceRelativePath(file) {
+    return `.github/instructions/${file.name.replace(/^alex-act-/, '')}`;
+}
+
+function isOwnedReceiptEntry(entry, source, legacy) {
+    return legacy
+        ? entry.owner === LEGACY_RECEIPT_OWNER
+            && entry.sourceRelativePath === legacySourceRelativePath(source)
+        : entry.owner === RECEIPT_OWNER
+            && entry.sourceRelativePath === source.sourceRelativePath;
 }
 
 function normalizedReceiptFile(file) {
@@ -164,7 +178,7 @@ function normalizedReceiptFile(file) {
 
 function receiptCurrent(receipt, options, files) {
     if (!receipt || receipt.schemaVersion !== 2
-        || receipt.bootstrappedBy !== 'alex-act-core'
+        || receipt.bootstrappedBy !== RECEIPT_OWNER
         || receipt.coreVersion !== options.coreVersion
         || !Array.isArray(receipt.files) || receipt.files.length !== files.length) return false;
     const expected = new Map(files.map((file) => [file.name, normalizedReceiptFile(file)]));
@@ -172,7 +186,7 @@ function receiptCurrent(receipt, options, files) {
     if (names.size !== files.length) return false;
     return receipt.files.every((entry) => {
         const source = expected.get(entry.name);
-        return source && entry.owner === 'alex-act-core'
+        return source && entry.owner === RECEIPT_OWNER
             && entry.sourceRelativePath === source.sourceRelativePath
             && entry.sha256 === source.sha256;
     });
@@ -195,11 +209,12 @@ function receiptCurrent(receipt, options, files) {
  */
 function validatedOwnedReceipt(receipt, files, forRemoval = false) {
     if (!receipt || receipt.schemaVersion !== 2
-        || receipt.bootstrappedBy !== 'alex-act-core'
+        || ![RECEIPT_OWNER, LEGACY_RECEIPT_OWNER].includes(receipt.bootstrappedBy)
         || !Array.isArray(receipt.files)
         || (!forRemoval && receipt.files.length !== files.length)) {
         throw new Error('bootstrap receipt is invalid');
     }
+    const legacy = receipt.bootstrappedBy === LEGACY_RECEIPT_OWNER;
     const expected = new Map(files.map((file) => [file.name, normalizedReceiptFile(file)]));
     const names = new Set();
     for (const entry of receipt.files) {
@@ -207,8 +222,7 @@ function validatedOwnedReceipt(receipt, files, forRemoval = false) {
         const orphaned = forRemoval && !source;
         if ((!source && !orphaned) || names.has(entry.name)
             || !safeInstructionName(entry.name)
-            || entry.owner !== 'alex-act-core'
-            || (source && entry.sourceRelativePath !== source.sourceRelativePath)
+            || (source && !isOwnedReceiptEntry(entry, source, legacy))
             || typeof entry.sha256 !== 'string'
             || !/^[a-f0-9]{64}$/.test(entry.sha256)) {
             throw new Error('bootstrap receipt contains unsafe or unowned entries');
@@ -226,7 +240,7 @@ function legacyEvidence(file) {
         : { name: entry.name, owner: entry.owner || null });
     return {
         present: true,
-        coreEntries: entries.filter((entry) => entry.owner === 'alex-act-core'
+        coreEntries: entries.filter((entry) => entry.owner === LEGACY_RECEIPT_OWNER
             || (entry.owner === null && entry.name !== 'alex-act-greeting-checkin.instructions.md')).length,
         managerEntries: entries.filter((entry) => entry.owner === 'alex-act-manager'
             || entry.name === 'alex-act-greeting-checkin.instructions.md').length,
@@ -368,7 +382,7 @@ function applyPlan(plan, options) {
     if (plan.receipt.action !== 'preserve') {
         const receipt = {
             schemaVersion: 2,
-            bootstrappedBy: 'alex-act-core',
+            bootstrappedBy: RECEIPT_OWNER,
             coreVersion: options.coreVersion,
             timestamp: new Date().toISOString(),
             files: plan._files.map(normalizedReceiptFile),

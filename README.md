@@ -12,8 +12,9 @@ Copilot CLI installation under `~/.copilot`, not a duplicate under
 `~/.scout/copilot`, after enabling **Load Copilot CLI skills** in Scout's UI.
 Activation remains per-app, and Scout requires separate MCP registration.
 
-**Status:** Published in the Alex ACT Mall at v0.3.0. GitHub Copilot app
-compatibility was tested on 2026-09-13.
+**Status:** Published in the Alex ACT Mall at v0.3.0. Source v0.3.1 is
+prepared for release. GitHub Copilot app compatibility was tested on
+2026-09-13.
 
 ## What You Can Do With Alex ACT ONE
 

@@ -8,6 +8,7 @@ import { spawnSync } from 'node:child_process';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const READINESS = join(ROOT, 'skills', 'bootstrap-core', 'scripts', 'host-readiness.cjs');
+const BOOTSTRAP = join(ROOT, 'skills', 'bootstrap-core', 'scripts', 'bootstrap-core.cjs');
 
 function files(root) {
     if (!readdirSync(root, { withFileTypes: true })) return [];
@@ -40,6 +41,16 @@ function run(args, env = {}) {
     });
     assert.ifError(result.error);
     return { ...result, output: result.stdout + result.stderr };
+}
+
+function bootstrap(args) {
+    const result = spawnSync(process.execPath, [BOOTSTRAP, ...args], {
+        encoding: 'utf8',
+        timeout: 30000,
+    });
+    assert.ifError(result.error);
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+    return JSON.parse(result.stdout);
 }
 
 test('rejects an unknown host without writing', (t) => {
@@ -98,4 +109,55 @@ test('reports an absent Scout registry without pretending activation succeeded',
     const report = JSON.parse(result.stdout);
     assert.equal(report.mcpRegistration.state, 'scout-not-installed');
     assert.equal(report.instructionActivation.observedByHost, false);
+});
+
+test('migrates a legacy Core receipt to ONE ownership without rewriting instructions', (t) => {
+    const { instructions } = fixture(t);
+    const receiptPath = join(instructions, '.alex-act-one-bootstrap.json');
+
+    bootstrap(['--apply', '--target-instructions', instructions]);
+    const legacyReceipt = JSON.parse(readFileSync(receiptPath, 'utf8'));
+    legacyReceipt.bootstrappedBy = 'alex-act-core';
+    for (const entry of legacyReceipt.files) {
+        entry.owner = 'alex-act-core';
+        entry.sourceRelativePath = entry.sourceRelativePath.replace(/^instructions\//, '.github/instructions/');
+    }
+    writeFileSync(receiptPath, `${JSON.stringify(legacyReceipt, null, 2)}\n`);
+    const before = files(instructions);
+
+    bootstrap(['--apply', '--target-instructions', instructions]);
+    const migrated = JSON.parse(readFileSync(receiptPath, 'utf8'));
+
+    assert.equal(migrated.bootstrappedBy, 'alex-act-one');
+    assert.ok(migrated.files.every((entry) => entry.owner === 'alex-act-one'));
+    assert.ok(migrated.files.every((entry) => entry.sourceRelativePath.startsWith('instructions/')));
+    assert.deepEqual(
+        files(instructions).filter(([name]) => name !== '.alex-act-one-bootstrap.json'),
+        before.filter(([name]) => name !== '.alex-act-one-bootstrap.json'),
+    );
+    assert.equal(
+        bootstrap(['--remove', '--target-instructions', instructions]).receipt.action,
+        'remove-when-clean',
+    );
+});
+
+test('rejects a mixed Core and ONE receipt during migration', (t) => {
+    const { instructions } = fixture(t);
+    const receiptPath = join(instructions, '.alex-act-one-bootstrap.json');
+
+    bootstrap(['--apply', '--target-instructions', instructions]);
+    const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'));
+    receipt.bootstrappedBy = 'alex-act-core';
+    receipt.files[0].owner = 'alex-act-core';
+    receipt.files[0].sourceRelativePath = receipt.files[0].sourceRelativePath
+        .replace(/^instructions\//, '.github/instructions/');
+    writeFileSync(receiptPath, `${JSON.stringify(receipt, null, 2)}\n`);
+
+    const result = spawnSync(process.execPath, [BOOTSTRAP, '--remove', '--target-instructions', instructions], {
+        encoding: 'utf8',
+        timeout: 30000,
+    });
+
+    assert.notEqual(result.status, 0, result.stdout + result.stderr);
+    assert.match(result.stdout + result.stderr, /unsafe or unowned entries/i);
 });
