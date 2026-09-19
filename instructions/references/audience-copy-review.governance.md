@@ -10,7 +10,7 @@ moment I write them.
 
 ## Related
 
-- `humanizer` skill, Copywriter Mode section — the five-tag taxonomy, hero-first ordering, and
+- `humanizer` skill, Copywriter Mode section — the six-tag taxonomy, hero-first ordering, and
   before/after table workflow this instruction routes to
 - `communication-craft` skill — audience-lead structure (So-What/What/Now-What); this instruction
   governs sentence-level language fit inside an already-chosen structure

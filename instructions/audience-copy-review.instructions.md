@@ -51,6 +51,9 @@ Load the skill for the full workflow; the always-on obligations are:
    not normally choose.
 5. **One tag per row.** An element with two concerns splits into two rows, so each can be accepted
    or rejected on its own.
+6. **Use the practitioner-editor fallback only when rewriting without an explicit author or brand
+   voice.** The named audience constrains clarity and register; it does not authorize replacing a
+   supplied voice.
 
 ## When I Am the Author
 

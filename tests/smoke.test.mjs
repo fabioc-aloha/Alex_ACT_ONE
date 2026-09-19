@@ -123,6 +123,40 @@ describe('plugin.json', () => {
     });
 });
 
+describe('Humanizer voice fallback', () => {
+    const humanizer = read('skills', 'humanizer', 'SKILL.md');
+    const audienceReview = read('instructions', 'audience-copy-review.instructions.md');
+    const governance = read('instructions', 'references', 'audience-copy-review.governance.md');
+
+    test('uses the practitioner-editor fallback without overriding an explicit voice', () => {
+        assert.match(humanizer, /## Practitioner-Editor Default/);
+        assert.match(humanizer, /explicit author or brand voice/i);
+        assert.match(humanizer, /concrete observation or example before\s+abstraction/i);
+        assert.doesNotMatch(humanizer, /Let some mess in\./);
+        assert.doesNotMatch(humanizer, /I genuinely don't know how to feel about this/);
+    });
+
+    test('routes default Copywriter rewrites through the practitioner-editor fallback', () => {
+        assert.match(audienceReview, /practitioner-editor fallback/i);
+    });
+
+    test('keeps the governance reference aligned to the six-tag taxonomy', () => {
+        assert.match(governance, /six-tag taxonomy/i);
+    });
+});
+
+describe('Compile Brain customization boundary', () => {
+    const compileBrain = read('skills', 'compile-brain', 'SKILL.md');
+
+    test('keeps installed skills canonical and routes project customizations locally', () => {
+        assert.match(compileBrain, /installed user-scope skill/i);
+        assert.match(compileBrain, /workspace-local skill or instruction/i);
+        assert.match(compileBrain, /do not rely on a duplicate name to override/i);
+        assert.match(compileBrain, /\.github\/skills\/.*SKILL\.md/);
+        assert.match(compileBrain, /\.github\/instructions\/.*\.instructions\.md/);
+    });
+});
+
 describe('manifest matches disk', () => {
     const onDisk = {
         skills: () => readdirSync(join(ROOT, 'skills'), { withFileTypes: true })
