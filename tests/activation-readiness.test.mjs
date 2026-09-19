@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -160,4 +160,28 @@ test('rejects a mixed Core and ONE receipt during migration', (t) => {
 
     assert.notEqual(result.status, 0, result.stdout + result.stderr);
     assert.match(result.stdout + result.stderr, /unsafe or unowned entries/i);
+});
+
+test('applies, removes, and idempotently reapplies every declared instruction', (t) => {
+    const { instructions } = fixture(t);
+
+    const firstApply = bootstrap(['--apply', '--target-instructions', instructions]);
+    const firstReceipt = JSON.parse(readFileSync(join(instructions, '.alex-act-one-bootstrap.json'), 'utf8'));
+    assert.equal(firstApply.verification.destinationHashes, firstApply.expectedFiles);
+    assert.equal(firstReceipt.files.length, firstApply.expectedFiles);
+    assert.ok(firstReceipt.files.every((entry) => existsSync(join(instructions, entry.name))));
+
+    const removal = bootstrap(['--remove', '--apply', '--target-instructions', instructions]);
+    assert.equal(removal.verification.removed, firstApply.expectedFiles);
+    assert.equal(removal.verification.receiptRemoved, true);
+    assert.equal(existsSync(join(instructions, '.alex-act-one-bootstrap.json')), false);
+    assert.ok(firstReceipt.files.every((entry) => !existsSync(join(instructions, entry.name))));
+
+    const secondApply = bootstrap(['--apply', '--target-instructions', instructions]);
+    const beforeRepeat = files(instructions);
+    const repeatApply = bootstrap(['--apply', '--target-instructions', instructions]);
+    assert.ok(repeatApply.files.every((entry) => entry.action === 'preserve'));
+    assert.equal(repeatApply.receipt.action, 'preserve');
+    assert.deepEqual(files(instructions), beforeRepeat);
+    assert.equal(secondApply.expectedFiles, firstApply.expectedFiles);
 });
