@@ -12,9 +12,10 @@ Copilot CLI installation under `~/.copilot`, not a duplicate under
 `~/.scout/copilot`, after enabling **Load Copilot CLI skills** in Scout's UI.
 Activation remains per-app, and Scout requires separate MCP registration.
 
-**Status:** Published in the Alex ACT Mall. The release identity is declared in
-`plugin.json` and `manifest.json`. GitHub Copilot app compatibility was tested
-on 2026-09-13.
+**Current release:** `v0.3.6`, published in the Alex ACT Mall. The 2026-09-13
+GitHub Copilot app test covered `v0.2.0`; it is a host baseline, not evidence
+that `v0.3.5` is active in that app. `plugin.json` and `manifest.json` declare
+the source release identity.
 
 ## What You Can Do With Alex ACT ONE
 
@@ -164,7 +165,7 @@ Getting the plugin and its dependencies working.
 
 <!-- END GENERATED SKILL TABLE -->
 
-### The skill that checks the other skills
+### Check a plugin before installing it
 
 Every other skill here assumes it belongs on your machine. This one asks whether
 it does.
@@ -176,11 +177,10 @@ content: scanning indexes what exists, packaging validates structure, and no ste
 compiles a code sample or follows a link.
 
 So a plugin can sit in the highest trust band and still tell you to install a
-package that does not exist. That is not hypothetical. One such plugin — top
-band, first-party, the strongest candidate in a 4,266-plugin catalog — claimed a
-NuGet package that returns zero registry results, an SDK API that was never
-published, and a cited file absent from the entire source repository. One
-registry query was enough to catch the package.
+package that does not exist. That is not hypothetical. One top-band,
+first-party plugin claimed a NuGet package that returns zero registry results,
+an SDK API that was never published, and a cited file absent from the entire
+source repository. One registry query was enough to catch the package.
 
 [`evaluate-before-adopting`](skills/evaluate-before-adopting/SKILL.md) does that
 checking, by reading the content rather than measuring the repository around it.
@@ -204,8 +204,8 @@ The usual path installs first and asks later:
 copilot plugin install copilot-sdk@alex-mall
 ```
 
-That runs someone else's code on your machine on the strength of a description.
-This reads it first:
+That gives a package access to your agent environment on the strength of a
+description. This reads it first:
 
 ```text
 Evaluate copilot-sdk@alex-mall before I install it.
@@ -214,9 +214,10 @@ Evaluate copilot-sdk@alex-mall before I install it.
 Any marketplace works, not only this one. Name whatever plugin you were about to
 install and the skill goes and looks at it.
 
-Use it when adoption is hard to reverse or far-reaching — a runtime every project
-loads, a plugin that will hold credentials. Skip it for a per-project install you
-can remove in a second. Judge by what it costs to be wrong.
+Use it before an install that is hard to reverse or far-reaching: a runtime
+every project loads or a plugin that will hold credentials. Skip it for a
+per-project install you can remove in a second. Judge by what it costs to be
+wrong.
 
 ## Where Alex ACT ONE Works
 
@@ -231,19 +232,20 @@ are not automatic in the same way, and this table says which are.
 | Copilot CLI | All | All, after activation | All | All, from the manifest |
 | VS Code with GitHub Copilot Chat | All | All, after activation | All | All, from the manifest |
 | Microsoft Scout | All, after enabling **Load Copilot CLI skills** | All, after activation | **None** | All, after registration |
-| GitHub Copilot app | All, discovered and invoked | All, active after activation | All, exposed | Registered; Flint and Playwright verified; Replicate requires an API token |
+| GitHub Copilot app | All, discovered and invoked | All, active after activation | All, exposed | Registered; Flint and Playwright verified in the `v0.2.0` baseline; Replicate requires an API token |
 
 The GitHub Copilot app test on 2026-09-13 found all 15 instructions active and
-at hash parity with the installed v0.2.0 sources. The app discovered the skill
+at hash parity with the installed `v0.2.0` sources. The app discovered the skill
 catalog and prompt aliases; `bootstrap-core`, `platform-awareness`,
 `proactive-awareness`, and `humanizer` were invoked. Playwright listed the
 active browser tabs, and Flint validated a Vega-Lite chart with no warnings or
 errors. Replicate reached its MCP server but returned `401 Unauthenticated`
 because this app did not have a Replicate API token. Individual skills and
-slash commands were not exhaustively invoked.
+slash commands were not exhaustively invoked. This is historical host evidence,
+not a `v0.3.5` activation claim.
 
-The Scout row was re-checked on 2026-09-13 inside a live session: all 60 skills
-surfaced, all 15 instructions were active in context, none of the 15 slash
+The Scout row was re-checked against `v0.2.0` on 2026-09-13 inside a live session:
+all 60 skills surfaced, all 15 instructions were active in context, none of the 15 slash
 commands were reachable, and both registered MCP servers answered a protocol
 handshake — 6 tools from Flint, 24 from Playwright.
 
@@ -254,7 +256,7 @@ Scout-specific notes, last verified 2026-09-13:
   nothing is lost in capability — but the commands themselves are absent rather
   than merely undocumented.
 - **Scout should use the Copilot CLI installation.** A test found a stale
-  Scout-local `v0.1.0` alongside the current `v0.2.0` Mall installation under
+  Scout-local `v0.1.0` alongside the then-current `v0.2.0` Mall installation under
   `~/.copilot`. The duplicate was removed. Enable **Load Copilot CLI skills**
   in Scout's UI, then confirm Scout loaded the shared path and version before
   activation or MCP registration.
@@ -423,9 +425,8 @@ exactly which tool it wants and how to install it, at the moment you need it.
 node --test
 ```
 
-A few dozen structural checks, a couple of seconds, no dependencies and no
-`package.json` — the package claims to run on Node alone, and a suite that
-needed a framework would undercut that.
+The suite runs on Node alone: no package manager, no test framework, and no
+`package.json` required. That matches the package's installation claim.
 
 They assert the things this README states: that every MCP server starts and
 reports its pinned version, that activation runs and plans exactly what the

@@ -27,9 +27,10 @@ node skills/bootstrap-core/scripts/bootstrap-core.cjs
 ```
 
 Exit 0, `apply: false`, and `expectedFiles` equal to the manifest's instruction
-count. The suite asserts this, but run it once by hand before a release: it
-writes to the user's profile, and it is the one path where being wrong is
-visible to everyone who installs.
+count. The suite asserts this, but run it once by hand before a release. With no
+arguments, it is a no-write preview; `apply: false` is part of the result.
+The preview exposes the instruction set that a later consented apply would
+write to a user's profile.
 
 > Added 2026-09-07. `bootstrap-core` hardcoded a count of 15 instructions, so
 > adding a sixteenth — exactly what `compile-brain` and `meditation` exist to do
@@ -114,6 +115,20 @@ git fetch origin && git rev-list --count HEAD..origin/main
 ```
 
 Clean tree, zero commits behind. Then push.
+
+## 9. After Mall delivery, verify a real installation
+
+Close any host that may lock the installed package, then run this from the
+release checkout:
+
+```powershell
+.\reinstall-and-check.ps1
+```
+
+The script reinstalls `alex-act-one@alex-mall`, verifies the plugin inventory
+and installed manifest, applies the canonical instructions, and checks the
+receipt's ownership, version, and instruction entries. It proves installed
+bytes and receipt state, not that a host observed activation after restart.
 
 ## What is deliberately not here
 
