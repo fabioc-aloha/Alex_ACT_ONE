@@ -2,6 +2,7 @@
 param(
     [string]$Plugin = 'alex-act-one',
     [string]$Marketplace = 'alex-mall',
+    [string]$MarketplaceSource = 'fabioc-aloha/Alex_Skill_Mall',
     [string]$ExpectedVersion = (Get-Content -LiteralPath (Join-Path $PSScriptRoot 'plugin.json') -Raw | ConvertFrom-Json).version,
     [string]$CopilotHome = (Join-Path $HOME '.copilot'),
     [string]$CopilotCommand = 'copilot',
@@ -40,10 +41,35 @@ function Get-InstalledPlugin {
     return $null
 }
 
+function Get-RegisteredMarketplace {
+    $raw = (Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'marketplace', 'list', '--json')) -join "`n"
+    $marketplaces = @($raw | ConvertFrom-Json)
+    $matches = @($marketplaces | Where-Object { $_.name -eq $Marketplace })
+    if ($matches.Count -gt 1) {
+        throw "Multiple registered marketplaces match $Marketplace. Resolve the duplicate before reinstalling."
+    }
+    if ($matches.Count -eq 1) {
+        return $matches[0]
+    }
+    return $null
+}
+
 foreach ($command in @($CopilotCommand, $NodeCommand)) {
     if (-not (Get-Command $command -ErrorAction SilentlyContinue)) {
         throw "Required command is unavailable: $command"
     }
+}
+
+$registeredMarketplace = Get-RegisteredMarketplace
+if (-not $registeredMarketplace) {
+    Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'marketplace', 'add', $MarketplaceSource) | Out-Null
+    $registeredMarketplace = Get-RegisteredMarketplace
+}
+if (-not $registeredMarketplace) {
+    throw "Marketplace registration completed but $Marketplace is absent from the Copilot marketplace inventory."
+}
+if ($registeredMarketplace.source -cne "GitHub: $MarketplaceSource") {
+    throw "Marketplace source does not match the expected source for ${Marketplace}: $($registeredMarketplace.source)."
 }
 
 $initial = Get-InstalledPlugin

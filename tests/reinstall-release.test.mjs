@@ -21,6 +21,7 @@ test('reinstalls the released plugin and applies bootstrap migration', (t) => {
     const copilotHome = join(root, '.copilot');
     const installedRoot = join(copilotHome, 'installed-plugins', 'alex-mall', 'alex-act-one');
     const statePath = join(root, 'plugins.json');
+    const marketplaceStatePath = join(root, 'marketplaces.json');
     const bootstrapLog = join(root, 'bootstrap.log');
     const copilot = join(root, 'copilot.ps1');
     const node = join(root, 'node.ps1');
@@ -31,14 +32,25 @@ test('reinstalls the released plugin and applies bootstrap migration', (t) => {
     writeFileSync(statePath, JSON.stringify([{
         name: 'alex-act-one', marketplace: 'alex-mall', version: '0.3.0', enabled: true, source: 'installed',
     }]));
+    writeFileSync(marketplaceStatePath, '[]');
     writePowerShell(copilot, `
 param([Parameter(ValueFromRemainingArguments = $true)][string[]]$Arguments)
 $statePath = $env:FAKE_STATE_PATH
+$marketplaceStatePath = $env:FAKE_MARKETPLACE_STATE_PATH
 $installedRoot = $env:FAKE_INSTALLED_ROOT
 $state = Get-Content -LiteralPath $statePath -Raw | ConvertFrom-Json
+$marketplaces = @(Get-Content -LiteralPath $marketplaceStatePath -Raw | ConvertFrom-Json)
 $command = $Arguments -join ' '
 if ($command -eq 'plugin list --json') {
   $state | ConvertTo-Json -Compress
+  exit 0
+}
+if ($command -eq 'plugin marketplace list --json') {
+  ConvertTo-Json -InputObject $marketplaces -Compress
+  exit 0
+}
+if ($command -eq 'plugin marketplace add fabioc-aloha/Alex_Skill_Mall') {
+  @(@{ name = 'alex-mall'; source = 'GitHub: fabioc-aloha/Alex_Skill_Mall'; isDefault = $false }) | ConvertTo-Json -Compress | Set-Content -LiteralPath $marketplaceStatePath
   exit 0
 }
 if ($command -eq 'plugin uninstall alex-act-one@alex-mall') {
@@ -83,6 +95,7 @@ exit 0
         env: {
             ...process.env,
             FAKE_STATE_PATH: statePath,
+            FAKE_MARKETPLACE_STATE_PATH: marketplaceStatePath,
             FAKE_INSTALLED_ROOT: installedRoot,
             FAKE_BOOTSTRAP_LOG: bootstrapLog,
         },
@@ -92,10 +105,15 @@ exit 0
     const installed = JSON.parse(readFileSync(join(installedRoot, 'plugin.json'), 'utf8'));
     const parsedPlugins = JSON.parse(readFileSync(statePath, 'utf8'));
     const plugins = Array.isArray(parsedPlugins) ? parsedPlugins : [parsedPlugins];
+    const parsedMarketplaces = JSON.parse(readFileSync(marketplaceStatePath, 'utf8'));
+    const marketplaces = Array.isArray(parsedMarketplaces) ? parsedMarketplaces : [parsedMarketplaces];
     const bootstrapArgs = JSON.parse(readFileSync(bootstrapLog, 'utf8'));
     assert.equal(installed.version, VERSION);
     assert.deepEqual(plugins, [{
         name: 'alex-act-one', marketplace: 'alex-mall', version: VERSION, enabled: true, source: 'installed',
+    }]);
+    assert.deepEqual(marketplaces, [{
+        name: 'alex-mall', source: 'GitHub: fabioc-aloha/Alex_Skill_Mall', isDefault: false,
     }]);
     assert.ok(bootstrapArgs.includes('--apply'));
     assert.ok(bootstrapArgs.some((argument) => argument.endsWith('bootstrap-core.cjs')));
