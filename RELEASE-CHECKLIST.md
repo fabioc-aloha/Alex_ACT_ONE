@@ -107,7 +107,24 @@ test because it reads as coverage.
 > Added 2026-09-07 alongside the first suite. Four mutations were run; each was
 > caught by the test that should have caught it.
 
-## 8. The tree is clean and the push is a fast-forward
+## 8. Check the humanizer source when the skill changes
+
+If the release changes [`skills/humanizer/SKILL.md`](skills/humanizer/SKILL.md),
+compare it with the current
+[Wikipedia guide](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)
+before release. Check the skill's last comparison and next due date, and
+record what changed or that no catalog change was needed. The skill requires
+a manual check at least every 30 days and before a humanizer release; this
+is not an unattended job. If the guide cannot be checked, stop the release
+rather than claim the catalog is current.
+
+When the new humanizer routes ship, remove or update the README's
+source-checkout notice so it describes the published release accurately.
+
+> Added 2026-10-16. The Wikipedia-derived catalog needed a source refresh;
+> a prior review date alone does not establish release-time freshness.
+
+## 9. The tree is clean and the push is a fast-forward
 
 ```text
 git status --short
@@ -116,7 +133,7 @@ git fetch origin && git rev-list --count HEAD..origin/main
 
 Clean tree, zero commits behind. Then push.
 
-## 9. After Mall delivery, verify a real installation
+## 10. After Mall delivery, verify a real installation
 
 Close any host that may lock the installed package, then run this from the
 release checkout:

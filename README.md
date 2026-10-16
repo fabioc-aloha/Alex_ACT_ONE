@@ -12,9 +12,9 @@ Copilot CLI installation under `~/.copilot`, not a duplicate under
 `~/.scout/copilot`, after enabling **Load Copilot CLI skills** in Scout's UI.
 Activation remains per-app, and Scout requires separate MCP registration.
 
-**Current release:** `v0.3.6`, published in the Alex ACT Mall. The 2026-09-13
+**Current release:** `v0.4.0`, published in the Alex ACT Mall. The 2026-09-13
 GitHub Copilot app test covered `v0.2.0`; it is a host baseline, not evidence
-that `v0.3.5` is active in that app. `plugin.json` and `manifest.json` declare
+that `v0.4.0` is active in that app. `plugin.json` and `manifest.json` declare
 the source release identity.
 
 ## What You Can Do With Alex ACT ONE
@@ -164,6 +164,17 @@ Getting the plugin and its dependencies working.
 | `setup-enterprise-stack` | Emit and (with consent) install the Copilot CLI settings block for the public Microsoft ecosystem: Azure, Fabric,… | — |
 
 <!-- END GENERATED SKILL TABLE -->
+
+### Check a draft or rewrite it
+
+Ask "Audit this draft for AI tells; don't edit it" for a read-only report with
+locations, reasons, and optional recasts. Ask "Humanize this draft" for a
+rewrite. Ask "Review this for [audience]" for a before/after proposal that
+waits for your approval.
+
+Supply your house terms or a preferred voice. The [humanizer](skills/humanizer/SKILL.md)
+keeps deliberate vocabulary and treats AI-writing patterns as editing cues,
+not proof of authorship.
 
 ### Check a plugin before installing it
 
