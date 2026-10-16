@@ -1,12 +1,20 @@
 ---
 name: humanizer
-description: Use when the user wants to humanize, de-AI, de-slop, or un-ChatGPT a piece of text — strip AI-isms and add real voice — or wants a copywriter pass that reviews existing copy for a named audience (e.g., non-native English readers) using an idiom/tone/register/ambiguity/grammar/naturalness taxonomy and an approval-gated before/after table workflow. Scans for 29 documented AI-writing patterns (Wikipedia's "Signs of AI writing") and produces a draft → self-audit → final rewrite. Optional voice-calibration from a user-provided writing sample. Adapted from Hermes Agent / blader/humanizer.
-lastReviewed: 2026-09-13
+description: Use when the user wants to humanize, de-AI, de-slop, or un-ChatGPT a piece of text — review AI-associated patterns and add real voice — or wants a copywriter pass that reviews existing copy for a named audience (e.g., non-native English readers) using an idiom/tone/register/ambiguity/grammar/naturalness taxonomy and an approval-gated before/after table workflow. Uses a contextual catalog informed by Wikipedia's "Signs of AI writing" and produces a draft → self-audit → final rewrite. Optional voice-calibration from a user-provided writing sample. Adapted from Hermes Agent / blader/humanizer.
+lastReviewed: 2026-10-16
 ---
 
 # Humanizer: AI-Tell Removal and Audience Copy Review
 
-Two modes for two different problems. **AI-tell removal** identifies and strips signs of AI-generated text to make writing sound natural and human, based on Wikipedia's "Signs of AI writing" guide (maintained by WikiProject AI Cleanup), derived from observations of thousands of AI-generated text instances. **Copywriter Mode** reviews existing, human-written copy for how well it lands with a specific named audience — the source text may contain no AI tells at all.
+Two modes for two different problems. **AI-tell removal** reviews text for recurring patterns associated with LLM output, using Wikipedia's "Signs of AI writing" guide (maintained by WikiProject AI Cleanup) as one source. These patterns are contextual clues, not proof of AI authorship. Revise a passage only when a specific cue makes it less accurate, clear, or true to the intended voice. **Copywriter Mode** reviews existing, human-written copy for how well it lands with a specific named audience — the source text may contain no AI tells at all.
+
+## Source and False-Positive Boundary
+
+Wikipedia's guide cautions against relying on detection tools or stylistic judgment alone. It distinguishes current cues from ineffective indicators, historical indicators, and signs of human writing. Use this catalog to improve the prose, not to decide who wrote it.
+
+- A single word, punctuation mark, grammatical feature, polished style, formal register, mixed register, bland tone, transition, or missing citation does not establish AI authorship. Check for a specific, repeated, or structurally meaningful problem in context.
+- Some entries below are weak or historical cues. In particular, em-dash overuse, stock knowledge-cutoff disclaimers, and synonym cycling are not reliable signatures of current models. Revise them only when they harm clarity, accuracy, or the intended style.
+- The source also covers Wikipedia markup and citation errors, edit summaries, maintenance templates, user pages, and encyclopedic section structures. Those are outside general prose humanization; check them only when the task is specifically Wikipedia editing. Citation accuracy belongs to fact-checking, not style diagnosis.
 
 **Key insight:** LLMs use statistical algorithms to guess what should come next. The result tends toward the most statistically likely completion, which is how the telltale patterns below get baked in.
 
@@ -25,7 +33,7 @@ Also apply this skill to **your own** output when writing user-facing prose — 
 
 **Composes with — not replaces — other prose disciplines:**
 
-- A prose-authoring worker agent (like `markdown-author` in projects that ship one) typically carries a short banned-vocabulary filter (`delve`, `myriad`, `tapestry`, `seamlessly`, `leverage`, etc.) and a quick audit that fires on every markdown task. Humanizer is the **deeper, on-demand pass** — 29 patterns with before/after examples, voice calibration, and an iterative draft-audit-final loop.
+- A prose-authoring worker agent (like `markdown-author` in projects that ship one) typically carries a short banned-vocabulary filter (`delve`, `myriad`, `tapestry`, `seamlessly`, `leverage`, etc.) and a quick audit that fires on every markdown task. Humanizer is the **deeper, on-demand pass** — a catalog of contextual patterns with before/after examples, voice calibration, and an iterative draft-audit-final loop.
 - Some project brains ban em-dashes outright in shipped prose (Alex ACT itself does). Humanizer Pattern 14 documents the _reason_ (em-dash overuse is a well-known AI tell), useful when humanizing third-party text that already contains them.
 
 ## How to apply it
@@ -42,12 +50,12 @@ Always show the rewrite to the user. For file edits, show a diff or the changed 
 
 When given text to humanize:
 
-1. **Identify AI patterns** — scan for the 29 patterns listed below.
-2. **Rewrite problematic sections** — replace AI-isms with natural alternatives.
+1. **Identify candidate patterns** — scan the catalog below and review each cue in context. A phrase or structure alone is not a finding or evidence of authorship.
+2. **Rewrite supported findings** — revise only passages where a specific cue weakens accuracy, clarity, or the author's intended voice.
 3. **Preserve meaning** — keep the core message intact.
 4. **Maintain voice** — match the intended tone (formal, casual, technical, etc.). If a voice sample was provided, match it specifically.
 5. **Apply the right voice** — don't just remove bad patterns. Match an explicit author or brand voice when supplied; otherwise use the Practitioner-Editor Default below.
-6. **Do a final anti-AI pass** — ask yourself: "What makes the below so obviously AI generated?" Answer briefly with any remaining tells, then revise one more time.
+6. **Do a final pattern pass** — ask: "Which specific catalog cues, if any, still make this passage generic or formulaic?" Name only supported findings; do not invent a tell. Revise again only when a real issue remains.
 
 ## Voice Calibration (optional)
 
@@ -374,9 +382,9 @@ engineering audience) is in
 
 ### 5. Vague Attributions and Weasel Words
 
-**Words to watch:** Industry reports, Observers have cited, Experts argue, Some critics argue, several sources/publications (when few cited)
+**Words to watch:** Industry reports, Observers have cited, Experts argue, Some critics argue, several sources/publications (when few are cited), widely interpreted or researchers agree (when the cited evidence is narrower)
 
-**Problem:** AI chatbots attribute opinions to vague authorities without specific sources.
+**Problem:** AI chatbots attribute opinions to vague authorities without specific sources, or present one or two sources as a broad consensus.
 
 **Before:**
 
@@ -399,6 +407,40 @@ engineering audience) is in
 **After:**
 
 > Traffic congestion increased after 2015 when three new IT parks opened. The municipal corporation began a stormwater drainage project in 2022 to address recurring floods.
+
+### Supplemental pattern: Vague Expressions of Connection or Association
+
+**Words to watch:** in connection with/to, connected with/to, in association with, associated with
+
+**Problem:** These phrases can obscure what the relationship actually is, especially when a writer could name a documented role, action, membership, or direct link instead.
+
+**Before:**
+
+> The group was associated with local education initiatives: its 2024 report says it funded an adult-literacy program and a school-library project.
+
+**After:**
+
+> The group funded an adult-literacy program and a school-library project, according to its 2024 report.
+
+Treat these as cues, not banned phrases. "Associated with" may be the most accurate wording when the source itself establishes only a broad or uncertain relationship. Do not invent a more specific connection.
+
+### Supplemental pattern: Unfilled Templates and Placeholders
+
+**Signs to watch:** bracketed fill-in instructions, `{name}`-style fields, `YYYY-XX-XX` dates, or instructions to paste a URL or source
+
+**Problem:** A draft may retain a template prompt or placeholder that should have been completed, removed, or presented as an intentional template.
+
+**Before:**
+
+> The team plans to launch in [month] and will offer [describe the feature].
+
+**After:**
+
+> Fill those fields from the approved brief; if it does not specify them, remove or qualify the claim.
+
+Check the document's purpose first. Placeholders are appropriate in templates and examples; do not replace them with invented details.
+
+**Source-scope note:** Wikipedia's current guide also flags formulaic headings such as "Awards and recognition." This is an encyclopedic-structure cue, not a general prose rule; use it only when the genre and surrounding text make the pattern relevant.
 
 ## LANGUAGE AND GRAMMAR PATTERNS
 
@@ -466,7 +508,7 @@ engineering audience) is in
 
 ### 11. Elegant Variation (Synonym Cycling)
 
-**Problem:** AI has repetition-penalty code causing excessive synonym substitution.
+**Problem:** Older LLM text sometimes varies terms to avoid repetition, which can make references hard to follow. Wikipedia now treats this as a historical indicator, not a reliable signature of current models. Do not flag ordinary variation.
 
 **Before:**
 
@@ -504,7 +546,7 @@ engineering audience) is in
 
 ### 14. Em Dash Overuse
 
-**Problem:** LLMs use em dashes (—) more than humans, mimicking "punchy" sales writing. In practice, most of these can be rewritten more cleanly with commas, periods, or parentheses.
+**Problem:** Earlier LLM text often overused em dashes (—), but Wikipedia's current guide treats this as a historical indicator. A dash alone is not a finding. Revise only when the punctuation hurts clarity or conflicts with the intended style.
 
 > **Note:** Alex ACT bans em-dashes in shipped prose outright. This pattern is relevant when humanizing _third-party_ text that already contains em-dashes, or when reviewing why heir-authored prose felt AI-flavored before the rule was internalized.
 
@@ -570,15 +612,15 @@ engineering audience) is in
 
 ### 19. Curly Quotation Marks
 
-**Problem:** ChatGPT uses curly quotes ("...") instead of straight quotes ("...").
+**Scope:** The Wikipedia guide notes that some chatbots use curly quotation marks, but also cautions that curly quotes are common in human-written, professionally typeset work. Neither curly quotes nor mixed quote styles establish authorship. Change them only when the destination's typography rules require it.
 
-**Before:**
+**Before (for a publication that requires straight quotes):**
 
-> He said "the project is on track" but others disagreed.
+> The button reads “Save changes.”
 
 **After:**
 
-> He said "the project is on track" but others disagreed.
+> The button reads "Save changes."
 
 ## COMMUNICATION PATTERNS
 
@@ -596,19 +638,19 @@ engineering audience) is in
 
 > The French Revolution began in 1789 when financial crisis and food shortages led to widespread unrest.
 
-### 21. Knowledge-Cutoff Disclaimers
+### 21. Knowledge-Cutoff and Source-Limit Disclaimers
 
-**Words to watch:** as of [date], Up to my last training update, While specific details are limited/scarce..., based on available information...
+**Words to watch:** as of [date], Up to my last training update, While specific details are limited/scarce..., not widely documented in available sources, based on available information, and claims that a source should be treated as X rather than Y
 
-**Problem:** AI disclaimers about incomplete information get left in text.
+**Problem:** Stock knowledge-cutoff disclaimers are a historical cue. A current concern is an unsupported claim that information is unavailable, followed by speculation about what it "likely" means. A genuine limit in the evidence is not itself a tell; state it plainly and do not fill the gap with a guess.
 
 **Before:**
 
-> While specific details about the company's founding are not extensively documented in readily available sources, it appears to have been established sometime in the 1990s.
+> The supplied handbook does not give a publication date. It was probably released around 2002 because the formatting looks old.
 
 **After:**
 
-> The company was founded in 1994, according to its registration documents.
+> The supplied handbook does not state its publication date.
 
 ### 22. Sycophantic/Servile Tone
 
@@ -659,19 +701,17 @@ engineering audience) is in
 
 > The company plans to open two more locations next year.
 
-### 26. Hyphenated Word Pair Overuse
+### 26. Hyphenated Compounds (Not an AI-Tell)
 
-**Words to watch:** third-party, cross-functional, client-facing, data-driven, decision-making, well-known, high-quality, real-time, long-term, end-to-end
+**Scope:** This upstream catalog item is not a pattern in Wikipedia's current guide. Consistent hyphenation is not evidence of AI authorship. Follow the destination's style guide and preserve hyphens when they clarify a compound modifier.
 
-**Problem:** AI hyphenates common word pairs with perfect consistency. Humans rarely hyphenate these uniformly, and when they do, it's inconsistent. Less common or technical compound modifiers are fine to hyphenate.
+**Before (when the compound modifies a noun):**
 
-**Before:**
-
-> The cross-functional team delivered a high-quality, data-driven report on our client-facing tools. Their decision-making process was well-known for being thorough and detail-oriented.
+> The team delivered a high quality report.
 
 **After:**
 
-> The cross functional team delivered a high quality, data driven report on our client facing tools. Their decision making process was known for being thorough and detail oriented.
+> The team delivered a high-quality report.
 
 ### 27. Persuasive Authority Tropes
 
@@ -763,7 +803,7 @@ section, and stop for explicit approval before applying anything.
 
 ## Full Example
 
-End-to-end demonstration of the draft → self-audit → final rewrite loop is in [`examples/full-example.md`](examples/full-example.md). Read it once on first invocation to see how all 29 patterns compound in a single piece of AI-flavored prose and how the iterative pass strips them out.
+End-to-end demonstration of the draft → self-audit → final rewrite loop is in [`examples/full-example.md`](examples/full-example.md). Read it once on first invocation to see how the original 29 baseline patterns compound in a single piece of AI-flavored prose and how the iterative pass strips them out.
 
 A Copywriter Mode worked example is in [`examples/copywriter-mode-example.md`](examples/copywriter-mode-example.md).
 
@@ -781,7 +821,7 @@ A Copywriter Mode worked example is in [`examples/copywriter-mode-example.md`](e
 
 - **Event-based**: zero observed invocations across the fleet within 90 days — sunset (skill is decorative on top of `markdown-author`'s always-on prose discipline). Sink to Mall rather than removing entirely so heirs who write a lot of public-facing prose can install on demand.
 - **Date-based**: 2026-09-07 (90 days from adoption). If by then `humanizer` is invoked but consistently overrides heir voice in ways the heir reverts ≥3 times, the Voice Calibration section is failing — either tighten the calibration discipline or rebalance toward voice-preserving rewrites.
-- **Counter-evidence**: if a heir reports that the 29-pattern catalog flags legitimate stylistic choices (e.g., humor that uses Rule of Three intentionally) as AI tells ≥3 times in a quarter, the patterns are too aggressive — add explicit "false positive" carve-outs.
+- **Counter-evidence**: if a heir reports that the pattern catalog flags legitimate stylistic choices (e.g., humor that uses Rule of Three intentionally) as AI tells ≥3 times in a quarter, the patterns are too aggressive — add explicit "false positive" carve-outs.
 - **Copywriter Mode, event-based**: if a heir reports Copywriter Mode flagging domain acronyms or jargon as findings ≥2 times despite the Scope section above, tighten the "confirm scope first" instruction — the mode is drifting back into acronym-expansion territory it was explicitly narrowed away from.
 - **Copywriter Mode, counter-evidence**: if a heir reports the taxonomy tags being applied inconsistently (the same finding tagged differently across sessions) ≥3 times, the six-tag definitions need sharper examples, not more tags.
 - **Copywriter Mode, counter-evidence**: if a heir reports the hero-first staging feels slower than a single full-page table on short pages, add an explicit "skip hero-first staging for pages under N words" exception rather than dropping the staged approach for every page.
@@ -792,6 +832,8 @@ A Copywriter Mode worked example is in [`examples/copywriter-mode-example.md`](e
 
 This skill is adapted from [Hermes Agent's port](https://github.com/NousResearch/hermes-agent) of [blader/humanizer](https://github.com/blader/humanizer) (MIT licensed), which is itself based on [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), maintained by WikiProject AI Cleanup. The patterns documented there come from observations of thousands of instances of AI-generated text on Wikipedia.
 
-Original author: Siqi Chen ([@blader](https://github.com/blader)). Source upstream: <https://github.com/blader/humanizer> (version 2.5.1). The 29 patterns, personality/soul section, and full worked example are preserved verbatim from the source. Adapted for Edition with neutral tool references (workspace read/edit) replacing Hermes-native tool names (`read_file`, `patch`, `write_file`), composition notes with `markdown-author` agent and Cardinal Rule 2, and ACT-shape frontmatter + `## Would Revise If` falsifier. Original MIT license preserved upstream. **Copywriter Mode** (the six-tag taxonomy, hero-first approval-gated workflow, and before/after table format) is an Alex ACT addition, not part of the upstream `blader/humanizer` port — derived from a real audience-language-review engagement, then genericized.
+Original author: Siqi Chen ([@blader](https://github.com/blader)). Source upstream: <https://github.com/blader/humanizer> (version 2.5.1). The original 29-pattern numbering, personality/soul section, and full worked example are retained from that source, with contextual corrections to patterns 19 and 26; supplemental connection/association and placeholder patterns and source-scope notes reflect comparisons with the current Wikipedia guide. Adapted for Edition with neutral tool references (workspace read/edit) replacing Hermes-native tool names (`read_file`, `patch`, `write_file`), composition notes with `markdown-author` agent and Cardinal Rule 2, and ACT-shape frontmatter + `## Would Revise If` falsifier. Original MIT license preserved upstream. **Copywriter Mode** (the six-tag taxonomy, hero-first approval-gated workflow, and before/after table format) is an Alex ACT addition, not part of the upstream `blader/humanizer` port — derived from a real audience-language-review engagement, then genericized.
+
+The source page changes over time. Its categories are editorial clues from Wikipedia, not a complete or validated detector for other genres. The current guide includes caveats about detection, signs of human writing, ineffective and historical indicators, and Wikipedia-specific markup and editorial artifacts. Before a humanizer release and at least once every 30 days, manually compare the current article's sections and guidance against this catalog: merge overlap, propose only portable and actionable updates through the applicable approval process, retain relevant false-positive and historical cautions, and keep source-specific structures scoped to their genre. On an invocation after the next due date, check the article before claiming this catalog is current; if the page cannot be reached, say the check is overdue rather than treating the old review as current. Record the date and next due date for every completed comparison, including a no-change result; do not reset `lastReviewed` without a semantic review. A skill cannot schedule unattended checks. Last source comparison: 2026-10-16. Next due: 2026-11-15.
 
 Key insight from Wikipedia: "LLMs use statistical algorithms to guess what should come next. The result tends toward the most statistically likely result that applies to the widest variety of cases."
