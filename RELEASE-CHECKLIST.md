@@ -142,10 +142,87 @@ release checkout:
 .\reinstall-and-check.ps1
 ```
 
-The script reinstalls `alex-act-one@alex-mall`, verifies the plugin inventory
+Before reinstalling, the script checks ONE's public marketplace routes:
+`alex-mall`, `awesome-copilot`, `copilot-plugins`, `azure-skills`, and
+`fabric-collection`. It registers missing entries at user scope using the
+expected GitHub sources, preserves existing matching/default registrations,
+and stops on duplicates, source mismatches, or failed registration.
+Registration may access the network and change user configuration; it does
+not install optional plugins or alter private/local marketplaces.
+The release-script regression tests exercise both PowerShell 7 and Windows
+PowerShell 5.1 on Windows, including inventories with unrelated entries.
+
+The script then reinstalls `alex-act-one@alex-mall`, verifies the plugin inventory
 and installed manifest, applies the canonical instructions, and checks the
 receipt's ownership, version, and instruction entries. It proves installed
 bytes and receipt state, not that a host observed activation after restart.
+
+Optional npm dependencies have a separate, preview-first installer:
+
+```powershell
+.\install-optional-dependencies.ps1
+.\install-optional-dependencies.ps1 -Apply
+```
+
+It reads the shared version pins and uses the configured npm registry.
+Flint, Playwright, and JSZip go into ONE's private runtime; Mermaid CLI and
+svgexport use the npm global prefix. Replicate is excluded by default;
+companion plugins, Pandoc, and Pillow are not installed. Browser downloads
+may occur during installation.
+All pins are checked before installation; registry or policy failures stop
+the script without registry changes or policy overrides. A failed install
+may leave partial package state. Success verifies installed versions and
+the pinned MCP launchers; reload the host afterward.
+
+The installer also verifies real Mermaid-to-SVG and SVG-to-PNG output in
+temporary files. If npm blocks Puppeteer's lifecycle scripts, the packages
+can be installed while their required browser binaries remain absent;
+the installer must fail renderer readiness rather than report success.
+Warnings from successful npm commands remain visible as text, not PowerShell
+error records. Do not enable lifecycle scripts globally to hide the warning.
+
+To check an existing installation without reinstalling or querying package
+availability, use:
+
+```powershell
+.\install-optional-dependencies.ps1 -VerifyOnly
+```
+
+Browser acquisition is a separate decision because Puppeteer downloads
+browsers outside the npm feed. The pinned svgexport package also uses an old,
+deprecated Puppeteer browser build; review that before allowing a download.
+
+To include the shared pinned Replicate MCP package in the private runtime,
+add `-IncludeReplicate` to preview, apply, or verification:
+
+```powershell
+.\install-optional-dependencies.ps1 -IncludeReplicate
+.\install-optional-dependencies.ps1 -Apply -IncludeReplicate
+.\install-optional-dependencies.ps1 -VerifyOnly -IncludeReplicate
+```
+
+Combine this with `-RegistryTarballPrefix` when needed by the configured proxy.
+Installation verifies Replicate's package and launcher version only. Actual
+image generation requires `REPLICATE_API_TOKEN` and a paid account; the
+installer does not read or store credentials or make paid API calls.
+The existing renderer-readiness checks and browser-download restrictions
+are unchanged.
+
+With npm 12, a proxy that advertises a different tarball host can trigger
+`EALLOWREMOTE` even when the exact package version is available.
+For the Microsoft proxy feed prefix verified on 2026-10-16, explicitly route
+those URLs back through the configured proxy:
+
+```powershell
+.\install-optional-dependencies.ps1 -RegistryTarballPrefix 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/'
+# Review the preview, then repeat with -Apply.
+```
+
+This uses npm's per-install `replace-registry-host` URL-prefix routing. It
+does not change the configured registry, npmrc, or `allow-remote` policy,
+and does not fetch directly from the backend to evade the proxy's delay.
+Use only the backend prefix advertised by the approved proxy; if it changes,
+verify the replacement rather than enabling arbitrary remote URLs.
 
 ## What is deliberately not here
 

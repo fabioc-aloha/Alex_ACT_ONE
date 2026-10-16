@@ -28,7 +28,7 @@ function Invoke-ExternalCommand {
 
 function Get-InstalledPlugin {
     $raw = (Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'list', '--json')) -join "`n"
-    $plugins = @($raw | ConvertFrom-Json)
+    $plugins = @(($raw | ConvertFrom-Json))
     $matches = @($plugins | Where-Object {
         $_.name -eq $Plugin -and $_.marketplace -eq $Marketplace
     })
@@ -42,11 +42,13 @@ function Get-InstalledPlugin {
 }
 
 function Get-RegisteredMarketplace {
+    param([Parameter(Mandatory)] [string]$Name)
+
     $raw = (Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'marketplace', 'list', '--json')) -join "`n"
-    $marketplaces = @($raw | ConvertFrom-Json)
-    $matches = @($marketplaces | Where-Object { $_.name -eq $Marketplace })
+    $marketplaces = @(($raw | ConvertFrom-Json))
+    $matches = @($marketplaces | Where-Object { $_.name -eq $Name })
     if ($matches.Count -gt 1) {
-        throw "Multiple registered marketplaces match $Marketplace. Resolve the duplicate before reinstalling."
+        throw "Multiple registered marketplaces match $Name. Resolve the duplicate before reinstalling."
     }
     if ($matches.Count -eq 1) {
         return $matches[0]
@@ -60,16 +62,36 @@ foreach ($command in @($CopilotCommand, $NodeCommand)) {
     }
 }
 
-$registeredMarketplace = Get-RegisteredMarketplace
-if (-not $registeredMarketplace) {
-    Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'marketplace', 'add', $MarketplaceSource) | Out-Null
-    $registeredMarketplace = Get-RegisteredMarketplace
+$requiredMarketplaces = @(
+    @{ Name = $Marketplace; Source = $MarketplaceSource }
+    @{ Name = 'awesome-copilot'; Source = 'github/awesome-copilot' }
+    @{ Name = 'copilot-plugins'; Source = 'github/copilot-plugins' }
+    @{ Name = 'azure-skills'; Source = 'microsoft/azure-skills' }
+    @{ Name = 'fabric-collection'; Source = 'microsoft/skills-for-fabric' }
+)
+$seenMarketplaces = @{}
+foreach ($required in $requiredMarketplaces) {
+    if ($seenMarketplaces.ContainsKey($required.Name) -and $seenMarketplaces[$required.Name] -cne $required.Source) {
+        throw "Conflicting required sources for marketplace $($required.Name)."
+    }
+    $seenMarketplaces[$required.Name] = $required.Source
+    $registeredMarketplace = Get-RegisteredMarketplace -Name $required.Name
+    if ($registeredMarketplace -and $registeredMarketplace.source -cne "GitHub: $($required.Source)") {
+        throw "Marketplace source does not match the expected source for $($required.Name): $($registeredMarketplace.source)."
+    }
 }
-if (-not $registeredMarketplace) {
-    throw "Marketplace registration completed but $Marketplace is absent from the Copilot marketplace inventory."
-}
-if ($registeredMarketplace.source -cne "GitHub: $MarketplaceSource") {
-    throw "Marketplace source does not match the expected source for ${Marketplace}: $($registeredMarketplace.source)."
+foreach ($name in $seenMarketplaces.Keys) {
+    $registeredMarketplace = Get-RegisteredMarketplace -Name $name
+    if (-not $registeredMarketplace) {
+        Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'marketplace', 'add', $seenMarketplaces[$name]) | Out-Null
+        $registeredMarketplace = Get-RegisteredMarketplace -Name $name
+    }
+    if (-not $registeredMarketplace) {
+        throw "Marketplace registration completed but $name is absent from the Copilot marketplace inventory."
+    }
+    if ($registeredMarketplace.source -cne "GitHub: $($seenMarketplaces[$name])") {
+        throw "Marketplace source does not match the expected source for ${name}: $($registeredMarketplace.source)."
+    }
 }
 
 $initial = Get-InstalledPlugin

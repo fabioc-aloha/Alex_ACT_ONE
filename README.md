@@ -12,9 +12,9 @@ Copilot CLI installation under `~/.copilot`, not a duplicate under
 `~/.scout/copilot`, after enabling **Load Copilot CLI skills** in Scout's UI.
 Activation remains per-app, and Scout requires separate MCP registration.
 
-**Current release:** `v0.4.0`, published in the Alex ACT Mall. The 2026-09-13
+**Current release:** `v0.5.0`, published in the Alex ACT Mall. The 2026-09-13
 GitHub Copilot app test covered `v0.2.0`; it is a host baseline, not evidence
-that `v0.4.0` is active in that app. `plugin.json` and `manifest.json` declare
+that `v0.5.0` is active in that app. `plugin.json` and `manifest.json` declare
 the source release identity.
 
 ## What You Can Do With Alex ACT ONE
@@ -429,6 +429,85 @@ manager on your behalf.
 
 If you skip this entirely, every skill that needs one of these will tell you
 exactly which tool it wants and how to install it, at the moment you need it.
+
+### Scripts for reinstalling and optional setup
+
+Run these scripts from the repository checkout. The optional installer and
+expanded marketplace checks ship in `v0.5.0`.
+
+#### Reinstall and verify ONE
+
+Close hosts that may lock the installed plugin before running
+[`reinstall-and-check.ps1`](reinstall-and-check.ps1):
+
+```powershell
+.\reinstall-and-check.ps1
+```
+
+This is not a preview. It registers missing public marketplaces (`alex-mall`,
+`awesome-copilot`, `copilot-plugins`, `azure-skills`, and `fabric-collection`),
+rejects conflicting sources, and reinstalls ONE from the Mall's release tag,
+not the working checkout. It verifies the installed version and applies the
+canonical instructions to the default Copilot profile, checking their
+bootstrap receipt afterward. It does not install optional plugins or prove
+that a host has observed activation after restart.
+
+#### Install or check optional dependencies
+
+[`install-optional-dependencies.ps1`](install-optional-dependencies.ps1)
+previews by default. Review its package list, configured registry, and
+installation paths before applying:
+
+```powershell
+.\install-optional-dependencies.ps1
+.\install-optional-dependencies.ps1 -Apply
+```
+
+The installer reads the shared version pins. Flint, Playwright, and JSZip go
+into ONE's private runtime; Mermaid CLI and svgexport use npm's global prefix.
+It leaves the registry and npm policy unchanged and does not install
+companion plugins or system packages.
+
+Replicate is optional. Add `-IncludeReplicate` to preview or apply to include
+its pinned MCP package. Image generation separately requires a paid account
+and `REPLICATE_API_TOKEN`; the script does not read or store credentials or
+make paid API calls.
+
+```powershell
+.\install-optional-dependencies.ps1 -IncludeReplicate
+.\install-optional-dependencies.ps1 -Apply -IncludeReplicate
+```
+
+Check existing package versions, MCP launchers, and actual Mermaid/SVG-to-PNG
+rendering without reinstalling:
+
+```powershell
+.\install-optional-dependencies.ps1 -VerifyOnly
+# Include Replicate in verification only if you selected it for installation.
+.\install-optional-dependencies.ps1 -VerifyOnly -IncludeReplicate
+```
+
+With npm 12, the Microsoft proxy can advertise tarball URLs on a different
+Microsoft host and trigger `EALLOWREMOTE`. For the verified feed prefix below,
+route those URLs back through your configured proxy. Preview first, then
+repeat with `-Apply`; add `-IncludeReplicate` if wanted.
+
+```powershell
+$feed = 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/'
+.\install-optional-dependencies.ps1 -RegistryTarballPrefix $feed
+.\install-optional-dependencies.ps1 -Apply -RegistryTarballPrefix $feed
+```
+
+This routing does not switch registries or relax `allow-remote`. A failed
+install may leave partial package state. If npm blocks Puppeteer's browser
+setup scripts, package installation can succeed while rendering still fails.
+The readiness check reports that failure rather than claiming success.
+Browser setup is a separate decision: its downloads do not use the npm feed,
+and svgexport's pinned dependency requests an old, deprecated browser build.
+Do not enable lifecycle scripts globally to suppress the warning.
+
+See the [release checklist](RELEASE-CHECKLIST.md) for the verification steps
+and installation boundaries.
 
 ## Tests
 

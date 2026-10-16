@@ -413,10 +413,9 @@ describe('provisioned runtime', () => {
     // step it was never asked to perform.
     const runtimeRoot = process.env.ALEX_ACT_ONE_RUNTIME_ROOT
         || join(homedir(), '.copilot', 'plugin-data', 'alex-act-one', 'runtime');
-    const provisioned = existsSync(join(runtimeRoot, 'node_modules'));
-    const skip = provisioned ? false : 'runtime not provisioned';
-
     for (const [route, spec] of Object.entries(MCP_SERVERS)) {
+        const installed = existsSync(join(runtimeRoot, 'node_modules', spec.package, 'package.json'));
+        const skip = installed ? false : `${spec.package} not provisioned`;
         test(`${route} starts and reports ${spec.version}`, { skip }, () => {
             // Exit 0 alone would pass while the launcher ran the wrong version.
             // Asserting the reported version closes that gap.
@@ -429,7 +428,7 @@ describe('provisioned runtime', () => {
         });
     }
 
-    test('an unknown route fails loudly', { skip }, () => {
+    test('an unknown route fails loudly', () => {
         assert.throws(
             () => execFileSync(process.execPath, [join(ROOT, LAUNCHER_REL), 'no-such-route'], { encoding: 'utf8' }),
             /Unknown MCP runtime route/,
