@@ -87,7 +87,7 @@ of allowing user-supplied event attributes through DOMPurify.
 - [ ] Markdown parser runs first
 - [ ] DOMPurify runs before DOM insertion
 - [ ] Diagram renderer runs after sanitization
-- [ ] No raw `innerHTML` without sanitization anywhere in the surface
+- [ ] No raw `innerHTML` without sanitization anywhere in the surface. Run `scripts/lint-innerhtml.cjs` (in this skill's `scripts/` directory) over the surface sources; it enumerates every `innerHTML`/`outerHTML` assignment and flags any value that is not `DOMPurify.sanitize(...)` output
 - [ ] Tested with `<img src=x onerror=alert(1)>` payload
 
 ## Related
@@ -98,6 +98,6 @@ of allowing user-supplied event attributes through DOMPurify.
 
 ## Would Revise If
 
-Revisit the repaired configuration by **2026-09-19** or sooner if DOMPurify or marked.js
+Revisit the repaired configuration if DOMPurify or marked.js
 changes the documented chain behavior, an event attribute or unsafe URL survives the tested
 configuration, or Mermaid's post-sanitization output introduces executable user content.

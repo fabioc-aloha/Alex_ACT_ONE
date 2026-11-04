@@ -71,6 +71,5 @@ before including any project evidence in a proposed reusable capability.
 
 ## Would Revise If
 
-Revisit by **2026-11-15** if real meditations produce no demonstrated reusable
-workflow, authors repeatedly choose the wrong local placement, or generated
-capabilities fail their focused validation more than once.
+Revisit if real meditations produce no demonstrated reusable
+workflow, or authors repeatedly choose the wrong local placement.

@@ -144,11 +144,9 @@ Set a spending cap at [replicate.com/account/billing](https://replicate.com/acco
 
 ## Falsifiability
 
-Revisit by **2026-10-30** (90 days) or sooner if:
+Revisit if:
 
-- The recommended model list is stale (≥3 models retired or superseded by newer versions)
 - The upstream `replicate/skills` bundle changes structure such that the composition callouts here point at moved content
 - Heirs consistently reach for this skill for artifact types the routing table above says NOT to use (indicates the boundary is unclear)
 - Cost estimates in the table are off by >2x versus real Replicate pricing at 2026-10 recheck
 - The `replicate-mcp` npm package moves, renames, or changes invocation shape
-- Zero heir uses the skill in the observation window (parking-lot candidate — the plugin scope was wrong to activate)

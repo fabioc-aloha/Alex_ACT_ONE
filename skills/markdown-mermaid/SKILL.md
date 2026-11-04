@@ -44,7 +44,7 @@ To override the palette for a project, edit `.github/config/brand-palette.json` 
 
 ## Semantic classDef vocabulary
 
-Apply `:::<class>` to every node. Semantic roles ship with the default config:
+Apply `:::<class>` to every node, and verify it with this skill's bundled lint rather than by eye: `node scripts/check-mermaid-classes.mjs <file.md>` flags every flowchart node definition or edge endpoint that carries no class. Semantic roles ship with the default config:
 
 | Class        | Role                              | Example                 |
 | ------------ | --------------------------------- | ----------------------- |
@@ -96,7 +96,7 @@ A[Line one\nLine two]:::blue
 Author the source so the diagram has a readable natural shape before relying on a renderer:
 
 - Prefer `TD` for sequential flows with several steps or multi-line labels.
-- Split diagrams wider than 4:1 unless horizontal comparison is the point.
+- Split diagrams whose rendered aspect ratio exceeds 4:1 unless horizontal comparison is the point. Measure the ratio from the rendered SVG's `viewBox` (width ÷ height, after the docs-shell crop below), never by eye: `node scripts/check-mermaid-classes.mjs --svg <rendered.svg>` prints the ratio and fails above 4:1.
 - Keep labels short enough that a node communicates one idea.
 - Do not combine `width: 100%` with a fixed or capped SVG height. That creates a page-wide viewport with a small graph centered inside it.
 
@@ -144,10 +144,8 @@ Bulk content lives in `references/` — loaded on demand:
 
 ## Falsifiability
 
-Revisit by **2026-10-30** (90 days) or sooner if any of the following fires:
+Revise if any of the following fires:
 
-- Diagrams authored per this skill fail to render in GitHub or VS Code preview ≥3 times in a quarter (skill guidance out of date)
 - The mode-fragility warnings stop applying because Mermaid.js fixed the underlying parser bugs (check mermaid.js changelog)
-- A heir configures a brand override in `.github/config/brand-palette.json` and reports the config schema is too tight (missing a field they need) ≥2 times in a quarter
 - The default palette + built-in fallback (if we add one to a future renderer helper) drift out of sync
 - The trim itself was wrong: diagrams start rendering without the palette because the skill body was doing more work than it looked (the always-loaded palette section carried the discipline; the config-pointer doesn't)

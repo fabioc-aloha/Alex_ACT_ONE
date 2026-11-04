@@ -172,9 +172,8 @@ Print a summary:
 
 ## Falsifiability
 
-This skill is decorative if by 2026-11-01 (90 days):
+This skill is decorative if:
 
-- Users never invoke `/alex-act-one install-visual-companions` and always install companions ad-hoc
 - The 8-plugin catalog goes stale (a plugin is retired or moved to a different marketplace) and is not refreshed
 - The vision-loop composition pattern proves brittle in sustained use
 

@@ -49,10 +49,16 @@ At the start of every relevant conversation:
 
 When starting a session or after completing a task that touched files:
 
-1. **Check git status** — Look for staged but uncommitted changes, or modified tracked files.
-2. **Privacy**: Surface file *count* only, not file names or paths, in nudges.
-3. **Threshold**: Only alert if uncommitted changes are >24 hours old (based on file modification time).
-4. **Nudge format**: *"You have N uncommitted changes from [timeframe]. Want to review and commit?"*
+1. **Count the changes with a command, not by eye**: staged and unstaged counts come from git, quoted as returned:
+   - bash: `git diff --cached --name-only | wc -l` (staged) and `git diff --name-only | wc -l` (modified, unstaged)
+   - PowerShell: `(git diff --cached --name-only | Measure-Object -Line).Lines` and `(git diff --name-only | Measure-Object -Line).Lines`
+2. **Get the age of the oldest change the same way**: the modification time of the oldest changed file, from a command:
+   - bash: `git diff --cached --name-only | xargs -d '\n' stat -c %Y 2>/dev/null | sort -n | head -1` (oldest staged file, epoch seconds; age = now − that value; use `git diff --name-only` in place of `--cached` for unstaged)
+   - PowerShell: `git diff --cached --name-only | ForEach-Object { Get-Item $_ } | Sort-Object LastWriteTime | Select-Object -First 1 -ExpandProperty LastWriteTime`
+   - Quote the count and the age from these outputs in any nudge. Never estimate either by scanning the status listing yourself.
+3. **Privacy**: Surface file *count* only, not file names or paths, in nudges.
+4. **Threshold**: Only alert if uncommitted changes are >24 hours old (based on file modification time).
+5. **Nudge format**: *"You have N uncommitted changes from [timeframe]. Want to review and commit?"*
 
 ### Detection Rules
 
@@ -86,6 +92,6 @@ Read `.github/config/goals.json` for the user's active focus (heir-authored; abs
 
 ## Would Revise If
 
-Revisit by **2026-11-18** if the detailed procedure fails to load after the
+Revisit if the detailed procedure fails to load after the
 resident route, a continuity nudge interrupts flow despite the inhibitory gate,
 or a handoff response uses session memory instead of `HANDOFF.md`.

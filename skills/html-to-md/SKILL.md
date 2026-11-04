@@ -51,4 +51,4 @@ node skills/html-to-md/scripts/html-to-md.cjs page.html page.md
 
 ## Would Revise If
 
-Revisit this skill by **2026-11-06** or sooner if Pandoc changes html-to-md flag semantics, local image extraction fails on a supported source, or remote image download becomes a required capability rather than an explicit non-feature.
+Revisit this skill if Pandoc changes html-to-md flag semantics, local image extraction fails on a supported source, or remote image download becomes a required capability rather than an explicit non-feature.

@@ -272,7 +272,7 @@ If you catch yourself doing any of these, delete the code and restart with TDD:
 
 Before marking work complete:
 
-- [ ] Every new function/method has a test
+- [ ] Every new function/method has a test, evidenced by the coverage tool's per-function report (e.g., `pytest --cov --cov-report=term-missing`, `nyc report`, `go tool cover -func=cover.out`), not by eyeballing the test files
 - [ ] Watched each test fail before implementing
 - [ ] Each test failed for expected reason (feature missing, not typo)
 - [ ] Wrote minimal code to pass each test
@@ -333,8 +333,7 @@ No exceptions without the user's explicit permission.
 
 ## Would Revise If
 
-- **Event-based**: ≥3 heir feedback files flagging the Iron Law as obstruction within 90 days; OR zero RED-GREEN-REFACTOR cycle citations in heir commits by 2026-09-07 (skill is decorative — heirs ignore it). First trigger sinks to Mall (still installable on demand) rather than removing entirely.
-- **Date-based**: 2026-09-07 (90 days from adoption). If the "When to Use" carve-outs (throwaway prototypes, generated code, configuration files) consistently mis-classify heir work and produce friction, broaden the carve-outs explicitly.
+- If the "When to Use" carve-outs (throwaway prototypes, generated code, configuration files) consistently mis-classify heir work and produce friction, broaden the carve-outs explicitly.
 - **Counter-evidence**: if a heir reports that TDD enforcement caused a real regression (test-first led to a worse design that test-after would have caught), document the case and revise the Iron Law's absoluteness.
 
 ## Attribution

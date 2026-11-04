@@ -64,9 +64,6 @@ Maintained in your project's audit trail (Alex ACT itself uses `operations/ledge
 
 ## Would Revise If
 
-Revise by **2026-08-26** (90 days) or sooner if any of the following fires:
+Revise if any of the following fires:
 
-- The risk matrix produces no differentiation (everything routes to "Ship with note") across 10+ curation decisions in a quarter
 - A curation decision that scored Low×Low ships and produces fleet-breaking impact ≥1 time (impact calibration too lax)
-- A High×High decision is over-routed to ADR when a trimmed pass would have sufficed ≥3 times in a quarter (rigor calibration too tight)
-- The Likelihood/Impact tables drift from observed reality (most "High Likelihood" rows turn out Low) ≥3 times in a quarter

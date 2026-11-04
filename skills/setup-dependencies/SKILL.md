@@ -206,7 +206,6 @@ them. Private runtime state must never run ahead of reviewed source.
 
 ## Would Revise If
 
-Revise by **2026-12-07** if a supported host cannot launch the private runtime
-directly, if a direct launch starts npm or npx, if the dependency report and the
-error messages skills emit ever disagree, or if two users complete setup and
-still receive unexplained missing-dependency failures.
+Revise if a supported host cannot launch the private runtime
+directly, if a direct launch starts npm or npx, or if the dependency report and the
+error messages skills emit ever disagree.

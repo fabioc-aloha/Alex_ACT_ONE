@@ -298,12 +298,7 @@ when the chart travels without the surrounding prose.
 
 ## Would Revise If
 
-Revise this skill by 2026-10-22 (90 days) or sooner if any of the following fires:
+Revise this skill if any of the following fires:
 
-- The Brief format is skipped in ≥3 consecutive `/render-chart` invocations because it's too heavy for the common case → tighten to 3 fields.
-- The TRADITIONAL/INNOVATIVE binary produces user confusion in ≥2 sessions (users say "I don't know, you pick") → replace the ask with an inferred default per audience, keep the binary as an override.
-- The Step 4 crosstab produces a chartType that `flint-chart` §0.4 can't render more than once per quarter → the crosstab is out of sync with Flint coverage and needs a refresh pass.
 - Cole Nussbaumer Knaflic publishes a materially revised Big Idea framing that supersedes the three-part rule used here.
-- The Step 1 intent check never changes an outcome across ~10 invocations → it is ceremony; fold it back into the elicitation ladder's first question.
 - Users invoke this skill to frame **non-chart** artifacts often enough that Steps 2/4/5 are routinely skipped → the general half (Steps 0/1/3) has outgrown the chart-specific half, and it should be split into its own skill rather than scope-noted.
-- Step 1.5 marks every claim Computable across ~10 invocations without ever forcing an evidence boundary → the gate is ceremony for this audience; cut it to the denominator rule alone.

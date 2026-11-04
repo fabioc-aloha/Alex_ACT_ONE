@@ -336,6 +336,6 @@ DRY, YAGNI, TDD
 
 ## Would Revise If
 
-Revisit by **2026-11-15** if plans still cause unauthorized mutations, task
+Revisit if plans still cause unauthorized mutations, task
 granularity makes verification impractical, or users repeatedly need a
 different planning format for multi-repository work.

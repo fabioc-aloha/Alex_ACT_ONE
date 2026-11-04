@@ -136,11 +136,13 @@ When two approaches answer the same question (002a / 002b), build them **back to
 |---|---|---|
 | Extraction quality | 9/10 structured | 7/10 table-only |
 | Setup complexity | npm install, 1 line | pip + ghostscript |
-| Perf on 100-page PDF | 3s | 18s |
+| Perf on 100-page PDF | 3s (median of 5 runs) | 18s (median of 5 runs) |
 | Handles rotated text | no | yes |
 
 **Winner:** pdfjs for our use case. Camelot if we need table-first extraction later.
 ```
+
+**Perf numbers come from a timed harness, not a single run.** Wrap the operation in a timer, run it at least 3 times on the same input, and report the median together with the run count, as in the table above. A timing from one uninstrumented run, or an estimate, does not go in the table. Quality scores (9/10 and the like) stay judgment calls; timings do not.
 
 ## Frontier mode (picking what to spike next)
 
@@ -168,9 +170,7 @@ Propose 2-4 candidates as Given/When/Then. Let the user pick.
 
 ## Would Revise If
 
-- **Event-based**: zero `spikes/` directories created across the fleet within 90 days; OR all spike verdicts are PARTIAL/INVALIDATED with no VALIDATED instances (skill is being used but the decompose step is mis-sized — questions too ambitious). Sunset or revise the decompose-step guidance.
-- **Date-based**: 2026-09-07 (90 days from adoption). If by then `spike` is invoked but heirs report the decomposition step (2-5 feasibility questions) consistently feels too heavy for their work shape, simplify the table-driven approach.
-- **Counter-evidence**: if spikes graduate to production (the "throwaway" discipline is violated ≥3 times), tighten the "disposable by design" framing or carve out a "spike-to-production" sibling skill.
+- **Event-based**: heirs report the decomposition step (2-5 feasibility questions) consistently feels too heavy for their work shape, simplify the table-driven approach.
 
 ## Attribution
 

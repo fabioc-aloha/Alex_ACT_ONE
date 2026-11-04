@@ -54,5 +54,5 @@ The minimal scaffold is `AGENTS.md`, thin Claude/Gemini adapters, `HANDOFF.md`,
 
 ## Would Revise If
 
-Revise by **2026-11-15** if project bytes are overwritten, a second preview is
+Revise if project bytes are overwritten, a second preview is
 not idempotent, user settings are touched, or the baseline proves non-portable.

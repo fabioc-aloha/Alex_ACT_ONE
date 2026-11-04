@@ -88,6 +88,5 @@ Continuously evaluate output against these principles. When detecting potential 
 ## Would Revise If
 
 - The 5 foundations produce no measurable framing effect in observed ethical decisions over a quarter
-- The 5-step decision process is bypassed for expedience ≥3 times in observed high-stakes ethical decisions
 - Privacy by Design or Responsible AI principles are cited in code review without being operationalized at actual decision points
 - Cultural context renders specific principles inapplicable across the heir fleet's deployment regions

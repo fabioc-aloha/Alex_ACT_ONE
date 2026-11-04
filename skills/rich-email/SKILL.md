@@ -38,7 +38,7 @@ node skills/rich-email/scripts/open-rich-outlook-draft.cjs `
   "$env:TEMP\message.eml" --validate-only
 ```
 
-6. Inspect the validation output and decoded HTML. Confirm recipients, subject, readable headings, compact tables, correct links, no raw Markdown, no signoff, and no secrets.
+6. Inspect the validation output and decoded HTML. Read the Content Rules thresholds from the validator output, not by eye: `subjectChars` must be under 60, and `bodyWords` over 250 means the message needs the executive-summary callout. Confirm recipients, subject, readable headings, compact tables, correct links, no raw Markdown, no signoff, and no secrets.
 7. On Windows with New Outlook installed, open the unsent draft:
 
 ```powershell
@@ -82,4 +82,4 @@ git status --short
 
 ## Would Revise If
 
-Revisit by **2026-11-11** if multipart email is required by two real workflows, New Outlook cannot be opened reliably on supported Windows hosts, any draft is sent without explicit authorization, or the capability proves unrelated to Document Tools ownership.
+Revisit if New Outlook cannot be opened reliably on supported Windows hosts, any draft is sent without explicit authorization, or the capability proves unrelated to Document Tools ownership.

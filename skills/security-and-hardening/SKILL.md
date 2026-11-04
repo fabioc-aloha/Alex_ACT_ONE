@@ -376,10 +376,9 @@ After implementing security-relevant code:
 
 ## Would Revise If
 
-Revise by **2026-08-26 (90 days)** or sooner if any of the following fires:
+Revise if any of the following fires:
 
 - TypeScript-heavy examples confuse heirs working in Python/Rust/Go (the language-agnostic claim breaks down in practice — port snippets or split per-language references)
 - The Three-Tier Boundary System (Always Do / Ask First / Never Do) gets bypassed in observed heir security work without surfacing as a problem (the tiers are wrong shape)
 - OWASP Top 10 reorganizes such that the numbered subsections (Injection, Broken Authentication, etc.) become misleading
 - Dependency audit framing (`npm audit` decision tree) becomes stale as package ecosystems evolve
-- 90 days pass with zero observed invocations of the skill (it's decorative)

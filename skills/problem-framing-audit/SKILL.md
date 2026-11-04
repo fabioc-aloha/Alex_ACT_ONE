@@ -81,14 +81,6 @@ Markers are not boilerplate — they fire only when the audit produces something
 | Skip audit because "it's obvious" | "Obvious" is exactly when frames are most often wrong | If you feel certain, run the audit anyway — that certainty is the signal |
 | Ask 8 clarifying questions back-to-back | Audit becomes interrogation | One sharp question is better than 8 generic ones; pick the highest-leverage check |
 
-## Falsifiability Test
-
-Track the next 20 non-trivial sessions in which this skill activates. In what percentage did the audit surface a framing different from the user's literal request?
-
-- **Target**: ≥ 20% (Russo & Schoemaker's data suggests cause-frames differ from symptom-frames ~30–40% of the time; 20% is a conservative pass)
-- **If 0%**: the audit is decorative. Either the activation rule is too narrow or the audit is rubber-stamping. Retire or rebuild.
-- **If 100%**: the audit is over-firing. The activation rule is too broad. Tighten triggers.
-
 ## Integration
 
 | Surface | How frame-audit attaches |

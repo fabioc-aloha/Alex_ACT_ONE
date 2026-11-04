@@ -180,10 +180,7 @@ Do not ship PNGs unless required — they double the asset weight and can drift 
 
 ## Falsifiability
 
-Revisit this skill by **2026-10-29** (90 days) or sooner if any of the following fires:
+Revisit this skill if any of the following fires:
 
-- Banners shipped via this skill are aesthetically rejected by the user ≥3 times in a quarter
-- The SVG pipeline renders incorrectly in >10% of target environments (GitHub, VS Code preview, browsers) over any 30-day window
 - A heir configures a brand override and reports the config schema is too tight or too loose (missing fields they need, or fields they never use) ≥2 times in a quarter
-- Users request customization the skill forbids (custom dimensions, layout, or typography) ≥3 times in a quarter — signal the "fork rather than parametrize" boundary is wrong
 - The default Alex brand config drifts from the built-in fallback in the script (two sources of truth in disagreement) — one of them wins on the next audit

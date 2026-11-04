@@ -170,6 +170,8 @@ Executive dashboards that work follow this constraint:
 
 > **No more than 5 visuals per page.** Each visual answers a different question. If you need more, you need a second page, not a denser layout.
 
+**Count the visuals, do not eyeball them, when the page is machine-readable.** For an HTML or docs-shell dashboard, count chart containers per page from the DOM or the page manifest and assert the count is ≤5. In the browser console: `document.querySelectorAll('canvas, svg, .chart, .chart-container, [data-chart]').length` (narrow the selector to the page's chart-container convention so decorative SVGs do not inflate the count). A screenshot scanned by eye is not a count.
+
 | Slot | Role | Typical chart |
 | --- | --- | --- |
 | 1-3 | **KPI cards** | Card, gauge, or sparkline |
@@ -247,12 +249,8 @@ FT Visual Vocabulary, Data-to-Viz, Data Viz Catalog, Vega-Lite examples, and Sto
 
 ## Would Revise If
 
-Revisit by 2026-10-30 (90 days) or sooner if:
+Revisit if:
 
-- ≥3 chart types in Module 1 are reported as miscategorised or missing a "best when / avoid when" pair
-- The CSAR override decision table produces the wrong verdict for a real chart choice ≥2 times in observation
 - The 5-visual rule is contradicted by a working dashboard that ships more visuals without density complaints (rule too strict)
 - One of the five galleries in Module 4 retires or moves; the URL check fails
 - A heir installs `chart-vocabulary` and `visual-vocabulary` from the Mall on the same brain and reports confusion about which is canonical (the absorption story isn't landing)
-- The selection tree in Module 5 sends a heir to the wrong plugin skill ≥2 times (routing miscalibrated)
-- Zero heirs invoke this skill in the 90-day window (decoration, not load-bearing)

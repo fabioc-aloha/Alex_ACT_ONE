@@ -191,7 +191,6 @@ for structured chart reading:
 
 ## Would Revise If
 
-Revise by **2026-12-07** if interpretations consistently state what a chart *is*
-rather than what it *means*, if Module 4's deception list misses a pattern found
-in the wild more than twice, or if the confidence ratings in Module 7 prove
-uncalibrated against later verification of the underlying data.
+Revise if interpretations consistently state what a chart *is* rather than
+what it *means*, or if the confidence ratings in Module 7 prove uncalibrated
+against later verification of the underlying data.

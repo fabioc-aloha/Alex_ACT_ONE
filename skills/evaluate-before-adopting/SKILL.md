@@ -224,5 +224,3 @@ should not have to rediscover it, and the source's maintainer may want to know.
   3 to 6 shrink to reading its report.
 - Adopters report running this on trivial installs and treating it as ceremony,
   which would mean the materiality gate at the top needs to be firmer.
-- Three consecutive evaluations find nothing, on artifacts later found defective,
-  which would mean the checks are aimed at the wrong things.

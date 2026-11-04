@@ -98,6 +98,6 @@ signal.
 
 ## Would Revise If
 
-Revise if the categories table goes stale (VS Code adds new deferred tool families not listed), if the search-query patterns produce zero results for tools that `availableDeferredTools` lists as present, if the platform-changes table drifts more than 2 VS Code releases behind current, or if VS Code renames `github.copilot.chat.skillTool.enabled`.
+Revise if the categories table goes stale (VS Code adds new deferred tool families not listed), if the search-query patterns produce zero results for tools that `availableDeferredTools` lists as present, if the platform-changes table drifts more than 2 VS Code releases behind current, or if VS Code renames `github.copilot.chat.skillTool.enabled`. Measure the drift, do not subtract versions by hand: run `node skills/platform-awareness/scripts/check-release-drift.mjs`: it parses the table's highest release, reads the current stable release from the VS Code update feed, and reports the gap (exit 1 when the gap exceeds 2).
 
 **Skill resolver section falsifier**: revise by 2026-11-03 or sooner if VS Code renames or removes `github.copilot.chat.skillTool.enabled`, closes microsoft/vscode#314772, or an enabled plugin skill succeeds through the generic `skill` tool in a clean Agent mode session. First observed contradiction wins.
