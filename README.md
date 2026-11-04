@@ -2,20 +2,39 @@
 
 ![Alex ACT ONE](assets/banner.svg)
 
-A skills pack for GitHub Copilot. It covers how to think through a problem, how
-to write code and prose that hold up, and how to produce documents and charts
-worth sending to someone.
+**Your coding agent is fast, confident, and too often wrong. Give it a discipline.**
 
-Install it at the user level. Copilot CLI, VS Code, Microsoft Scout, and the
-GitHub Copilot app can use the same installed copy. Scout should use the
-Copilot CLI installation under `~/.copilot`, not a duplicate under
-`~/.scout/copilot`, after enabling **Load Copilot CLI skills** in Scout's UI.
-Activation remains per-app, and Scout requires separate MCP registration.
+Alex ACT ONE is a pack of 60 skills for GitHub Copilot that changes how the agent works: frame the problem before solving it, look for evidence against its first answer, check a plan against its risks, and verify what it produced before calling it done.
 
-**Current release:** `v0.5.0`, published in the Alex ACT Mall. The 2026-09-13
-GitHub Copilot app test covered `v0.2.0`; it is a host baseline, not evidence
-that `v0.5.0` is active in that app. `plugin.json` and `manifest.json` declare
-the source release identity.
+**See the difference:** the same loaded prompt, "Our dashboard takes 8 seconds to load. Rust rewrite, or Redis caching?", handled two ways. Try it yourself with [the evaluation guide](docs/launch/evaluation-guide.md).
+
+|  | Without Alex ACT ONE | With Alex ACT ONE |
+|---|---|---|
+| First move | Jumps straight to an answer | Stops and checks the question first |
+| The answer | Picks Rust or Redis, and sounds sure | Asks where the 8 seconds are actually spent |
+| Evidence | Does not ask for any | Says what to measure, and what result would change the answer |
+| Confidence | Sounds certain either way | Marks what is known, reported, estimated, or guessed |
+| The result | A plan, handed over as final | The work gets checked before it ships |
+
+## Quick install
+
+Install the plugin once, at the user level:
+
+```powershell
+copilot plugin install alex-act-one@alex-mall
+```
+
+Then, in each app where you want the always-on behavior, run:
+
+```text
+/alex-act-one bootstrap-core
+```
+
+One installed copy serves Copilot CLI, VS Code, Microsoft Scout, and the GitHub Copilot app. Full install notes, the from-source option, and the Scout specifics are in [Install](#install).
+
+60 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers. MIT licensed. Current release: `v0.5.0`, published in the Alex ACT Mall.
+
+Using Muse instead of Copilot? The Muse edition lives at [Alex_ACT_ONE_Muse](https://github.com/fabioc-aloha/Alex_ACT_ONE_Muse).
 
 ## What You Can Do With Alex ACT ONE
 
