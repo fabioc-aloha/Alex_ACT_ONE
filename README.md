@@ -6,15 +6,15 @@
 
 Alex ACT ONE is a pack of 60 skills for GitHub Copilot that changes how the agent works: frame the problem before solving it, look for evidence against its first answer, check a plan against its risks, and verify what it produced before calling it done.
 
-**See the difference:** the same loaded prompt, "Our dashboard takes 8 seconds to load. Rust rewrite, or Redis caching?", handled two ways. The full prompt pair is in [the demo script](docs/launch/demo-script.md).
+**See the difference:** the same loaded prompt, "Our dashboard takes 8 seconds to load. Rust rewrite, or Redis caching?", handled two ways. Try it yourself with [the evaluation guide](docs/launch/evaluation-guide.md).
 
 |  | Without Alex ACT ONE | With Alex ACT ONE |
 |---|---|---|
-| First move | Answers the question as framed | Audits the frame before answering |
-| The answer | Picks one of the two options, confidently | Asks where the 8 seconds actually go first |
-| Evidence | None requested; the gaps get filled in | Names the missing measurement, and what would prove the answer wrong |
-| Confidence | Full, either way | Labeled: fact, report, estimate, guess |
-| The output | Delivered as done | Checked before anyone calls it done |
+| First move | Jumps straight to an answer | Stops and checks the question first |
+| The answer | Picks Rust or Redis, and sounds sure | Asks where the 8 seconds are actually spent |
+| Evidence | Does not ask for any | Says what to measure, and what result would change the answer |
+| Confidence | Sounds certain either way | Marks what is known, reported, estimated, or guessed |
+| The result | A plan, handed over as final | The work gets checked before it ships |
 
 ## Quick install
 
