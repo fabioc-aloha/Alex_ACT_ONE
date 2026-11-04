@@ -314,7 +314,7 @@ To adopt: start with [`starter/ADOPTION.md`](starter/ADOPTION.md), choose one st
 
 ## Falsifiability
 
-Revise this skill by **2026-10-29** (90 days) or sooner if any of the following fires:
+Revise this skill if any of the following fires:
 
 - A live root shell diverges from the starter's `index.html` such that copying the starter into another project no longer produces a working shell (byte-identity assumption broken).
 - A new adopter reports the starter's `$comment` fields do not surface a schema question they hit (the comments are meant to be self-documenting).

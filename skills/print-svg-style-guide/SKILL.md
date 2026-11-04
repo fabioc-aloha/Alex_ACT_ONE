@@ -56,6 +56,14 @@ At the standard 640-unit viewBox that reduces to `px × 0.4939`. Floors:
 
 **Rule**: minimum instructional px = `viewBoxWidth ÷ 54.5`. At 640 that is 11.74px, so 12px is the floor. A wider viewBox raises the floor — recompute rather than assuming 12px.
 
+**Run the gate; do not eyeball it.** This skill's bundled checker computes print points for every text element and enforces the floors and markers in this section:
+
+```powershell
+node scripts/check-print-floor.mjs <figure.svg>
+```
+
+It exits non-zero on any text below its class floor, on below-floor text missing its `data-print-role` marker, and on `micro` text at or over 40 characters that should have been promoted to `note`. A figure ships only when the checker passes.
+
 **The micro marker is not an escape hatch**. It exists for text the reader never needs to read at size (attribution, hash stamps). Marking instructional content `micro` to clear the gate is gaming it — the reader still cannot read it. The `note` role's auto-promote (≥40 chars) catches the class where this happens by accident.
 
 ### When text won't fit at 12px, the answer is never to shrink it
@@ -100,7 +108,7 @@ Two roles below the 5.8pt instructional floor:
 - **`data-print-role="micro"`** — attribution, provenance, hash stamps, source notes. Reader never needs to read at size.
 - **`data-print-role="note"`** — annotation text the reader IS meant to read, but below body copy. Auto-promoted from `micro` when the text is ≥40 characters.
 
-Both share the 2.9pt floor. The taxonomy exists because a coverage scanner otherwise cannot distinguish "this is a hash stamp" from "this is a caption the reader is expected to read."
+Both share the 2.9pt floor. The taxonomy exists because a coverage scanner otherwise cannot distinguish "this is a hash stamp" from "this is a caption the reader is expected to read." The bundled checker is that scanner: it verifies the marker on every below-floor element and asserts the ≥40-character promotion from `micro` to `note`, so neither check is left to a visual pass.
 
 ## Tailwind-grounded semantic palette
 
@@ -268,9 +276,7 @@ Used for dashboard-shaped figures. From dashboard-design literature (Wexler / Sh
 The floor formula, palette, or composition idioms have failed if any of the following occur within 90 days:
 
 - A figure shipped through this skill's discipline fails a print-legibility audit that this skill was supposed to prevent
-- Adopters report the semantic-palette rules are ambiguous ≥3 times in a quarter (color role unclear)
 - The `data-print-role="note"` auto-promote rule (≥40 chars) misses a class of content it should catch
-- The 5-Visual Rule dashboard blurred-thumbnail test is skipped ≥3 times because the tooling is too heavy
 
 Track outcomes in your project's own curation or decision log.
 

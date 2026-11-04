@@ -84,6 +84,19 @@ function parseEml(raw) {
     return { headers, to, subject, html };
 }
 
+function countBodyWords(html) {
+    const text = html
+        .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, " ")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/&nbsp;/gi, " ")
+        .replace(/&amp;/gi, "&")
+        .replace(/&lt;/gi, "<")
+        .replace(/&gt;/gi, ">")
+        .replace(/&quot;/gi, '"')
+        .replace(/&#0?39;|&apos;/gi, "'");
+    return text.split(/\s+/).filter(Boolean).length;
+}
+
 function wrapBase64(value, eol) {
     return value.match(/.{1,76}/g)?.join(eol) || "";
 }
@@ -145,7 +158,7 @@ function main() {
     const draft = buildOutlookDraftEml(raw);
     const parsed = parseEml(draft);
     if (args.validateOnly) {
-        process.stdout.write(`${JSON.stringify({ to: parsed.to, subject: parsed.subject, htmlBytes: Buffer.byteLength(parsed.html), unsent: /^X-Unsent: 1$/m.test(draft), spacerLines: 2 })}\n`);
+        process.stdout.write(`${JSON.stringify({ to: parsed.to, subject: parsed.subject, subjectChars: [...parsed.subject].length, bodyWords: countBodyWords(parsed.html), htmlBytes: Buffer.byteLength(parsed.html), unsent: /^X-Unsent: 1$/m.test(draft), spacerLines: 2 })}\n`);
         return;
     }
 
@@ -163,4 +176,4 @@ if (require.main === module) {
     try { main(); } catch (error) { console.error(error.message); process.exitCode = 1; }
 }
 
-module.exports = { buildOutlookDraftEml, parseEml };
+module.exports = { buildOutlookDraftEml, parseEml, countBodyWords };

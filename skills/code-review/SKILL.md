@@ -111,16 +111,16 @@ For safety-critical projects, apply NASA/JPL Power of 10 rules during review:
 | Rule | Check For | Detection |
 | ---- | --------- | --------- |
 | **R1** | Recursive function without `maxDepth` parameter | `grep -rn "function.*\(" \| xargs grep -l "walk\|traverse\|recurse"` |
-| **R2** | `while` loop without iteration counter | Manual review of all `while` statements |
+| **R2** | `while` loop without iteration counter | Enumerate every loop with `grep -rn "while\s*(" src/` first; judge only whether each listed loop is bounded by a counter |
 | **R3** | Unbounded array growth | `push()` in loops without size checks |
 
 ### High Priority (Strong Recommendation)
 
 | Rule | Check For | Detection |
 | ---- | --------- | --------- |
-| **R4** | Function > 60 lines | Line count per function |
+| **R4** | Function > 60 lines | Deterministic count: `node scripts/structure-metrics.cjs <path>` reports per-function line counts (or ESLint `max-lines-per-function` where configured); never count lines by eye |
 | **R5** | Missing entry assertions | Public functions without precondition checks |
-| **R8** | Nesting > 4 levels | Visual inspection of indentation |
+| **R8** | Nesting > 4 levels | Same script: `structure-metrics.cjs` reports max nesting depth per function (or ESLint `max-depth`); never judge depth from indentation |
 
 ### Medium Priority (Consider)
 
@@ -161,6 +161,8 @@ For safety-critical projects, apply NASA/JPL Power of 10 rules during review:
 | **Dependencies** | Unused packages, leftover references | package.json vs import analysis | Removable dependencies |
 
 ### Audit Report Template
+
+**Numbers rule:** every count and ratio in this template comes from `scripts/audit-tally.cjs`, never from tallying grep output or dividing in prose. Run `node scripts/audit-tally.cjs console <root>` for the console scan, add `--categories <file>` (one `path:line:legitimate` or `path:line:removable` entry per hit, after you categorize) for the split, and `node scripts/audit-tally.cjs ratio <working> <broken>` for the menu-validation ratio.
 
 ```markdown
 ## Executive Summary

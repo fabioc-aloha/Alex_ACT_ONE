@@ -190,6 +190,18 @@ Pull information from:
 - Session history (what we worked on)
 - Metrics dashboards (if available)
 
+### Numbers Come From the Tracker, Not From Counting
+
+Every metric that fills a template field (bugs open/closed, velocity, coverage %) comes from the issue tracker's own count or query output, or from a script run over a tracker export. Quote the returned value. Never tally issues, cards, or commits by eye to fill a field.
+
+Derived values are computed the same way, by a script or spreadsheet formula over the tracker data, never worked out in prose:
+
+- **Carry-over** = planned − completed (the [Z] in the Sprint Retrospective template)
+- **% complete** = completed ÷ planned × 100
+- **Timeline impact** (days ahead / behind) = the difference between the scheduled date and the forecast date held by the tracker or project plan
+
+If a number cannot be produced by a query, script, or formula, leave the field blank or mark it "not tracked" instead of estimating it.
+
 ## Best Practices
 
 ### DO ✅
@@ -250,10 +262,8 @@ Pull information from:
 
 ## Would Revise If
 
-Revisit this skill by **2026-08-26** (90 days) or sooner if any of the following fires:
+Revisit this skill if any of the following fires:
 
-- Stakeholder feedback reports the templates as unclear, jargon-heavy, or missing decisions-needed sections ≥3 times within a quarter
-- The audience-adaptation table produces tone mismatches when applied verbatim ≥2 times in observed reports
 - Reports generated via these templates consistently bury bad news or miss escalation triggers that surface later as preventable surprises
 
 ---

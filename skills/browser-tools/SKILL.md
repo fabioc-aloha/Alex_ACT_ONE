@@ -93,10 +93,29 @@ Target: verify a UI change looks right (spacing, color, layout, responsive break
 1. `open_browser_page(dev-server-url)` — usually `http://localhost:<port>` after the user's dev server starts.
 2. `screenshot_page()` — capture full page or a viewport crop.
 3. Read the screenshot in the response; compare against the design intent stated by the user.
-4. If the change looks wrong, name the specific pixel-level defect (spacing off by N, wrong color, element misaligned) — don't describe HTML.
+4. If the change looks wrong, measure it before naming it. Use `run_playwright_code` to read the suspect element's `getBoundingClientRect()` (x, y, width, height) and `getComputedStyle()` values (margin, padding, color, font-size), plus the same values for a reference element or the design spec, then report the defect with the measured numbers. Example: "card is 12px narrower than its sibling (348px vs 360px); heading color computes to `rgb(31, 41, 55)`, not the specified `#111827`". Don't describe HTML, and don't estimate offsets or colors from the screenshot.
 5. For responsive checks: repeat at multiple viewport sizes via `run_playwright_code` if needed.
 
-**Design-validation output discipline**: don't paste "looks good" without evidence. Every design-validation turn produces either (a) a screenshot in the response, (b) a specific defect named with pixel/element precision, or (c) an explicit "screenshot required but couldn't render because X".
+```javascript
+// Measure, don't eyeball: exact geometry + computed styles for a suspect element
+run_playwright_code({
+  code: `async (page) => {
+    return await page.evaluate(() => {
+      const el = document.querySelector('<selector>');
+      const rect = el.getBoundingClientRect();
+      const style = getComputedStyle(el);
+      return {
+        x: rect.x, y: rect.y, width: rect.width, height: rect.height,
+        marginTop: style.marginTop, paddingLeft: style.paddingLeft,
+        color: style.color, backgroundColor: style.backgroundColor,
+        fontSize: style.fontSize,
+      };
+    });
+  }`,
+});
+```
+
+**Design-validation output discipline**: don't paste "looks good" without evidence. Every design-validation turn produces either (a) a screenshot in the response, (b) a specific defect named with measured pixel values and computed styles from `run_playwright_code`, or (c) an explicit "screenshot required but couldn't render because X".
 
 ### Pattern 3 — Interactive site behind a consent gate
 
@@ -241,9 +260,8 @@ If the goal was _look at a local artifact_, all of the above is Pattern 4 with e
 
 ## Falsifiability — Would Revise If
 
-Revisit this skill by **2026-10-26** (90 days from the 2026-07-26 Pattern 4 + 5 additions) or sooner if any of:
+Revisit this skill if any of the following fires:
 
-- Browser tools fire on tasks where `fetch_webpage` would have worked ≥3 times in a quarter (over-triggering; tighten the "When to Fire" criteria)
 - Bot-protected content still fails on browser tools ≥1 time (the platform doesn't clear the challenge as expected — surface the failure mode in Pattern 1)
 - Enterprise policy `BrowserChatTools` blocks browser tools entirely for the heir's org — skill becomes decorative in that context, add a "not-applicable" branch
 - A safety incident (sensitive content leaked via screenshot, credential typed into wrong field, ToS accepted without user authorization, or a file:// URL read something outside the workspace) — expand the Safety section with the specific failure

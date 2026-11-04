@@ -261,7 +261,25 @@ and the missing test rather than reporting that the lesson has been learned.
 ## Verify Persistence Before Compaction
 
 After all six steps, including any post-mortem, read back saved records and
-verify local links, task accounting, and applicable repository checks. Report
+verify local links, task accounting, and applicable repository checks:
+
+- Run the sibling compile-brain link checker over the saved records and
+  resolve every reported miss (resolve the script path against the
+  canonical skill source):
+
+  ```bash
+  node ../compile-brain/scripts/check-links.cjs HANDOFF.md TODO.md CHANGELOG.md AGENTS.md
+  ```
+
+- Reconcile task accounting with counts, not impressions. Count open items
+  in the authoritative task list before and after reconciliation, using
+  the project's checkbox convention (for example
+  `grep -c '^- \[ \]' TODO.md`), and confirm the difference equals the
+  number of items dispositioned in step 5: after = before - completed -
+  merged - cancelled. Any unexplained difference means an item was
+  silently dropped; restore it before continuing.
+
+Report
 exact files written, duplicate candidates skipped, and any blocked or incomplete
 writes. A partial write is not completion.
 

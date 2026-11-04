@@ -85,6 +85,7 @@ If the user provides a writing sample (their own previous writing), analyze it b
 
 1. **Read the sample first.** Note:
    - Sentence length patterns (short and punchy? Long and flowing? Mixed?)
+   - Sentence-length numbers (optional): run `node scripts/sentence-stats.cjs <sample-file>` for the sentence count and the mean, median, and spread of sentence lengths in words, and categorize the pattern from its output instead of by eye.
    - Word choice level (casual? academic? somewhere between?)
    - How they start paragraphs (jump right in? Set context first?)
    - Punctuation habits (lots of dashes? Parenthetical asides? Semicolons?)
@@ -262,6 +263,12 @@ explicitly — accept it as a finding or record why it was rejected.
 **Mark each finding with its origin** — surfaced by the sweep, or found only by reading. Without
 that, the workflow cannot be audited and the rejection rate cannot be read.
 
+**Log every candidate and its disposition.** One line per candidate in a plain-text log:
+`candidate | origin | disposition | reason`, where origin is `sweep` or `read` and disposition is
+`accepted` or `rejected`. Compute the rejection rate from the log with
+`node scripts/tally-rejections.cjs <log-file>`; it prints the totals and the rate. Do not
+reconstruct the rate from prose notes: a rate recalled from memory is a guess wearing a number.
+
 If the corpus is large, delegate Phase 2 to a subagent per section with the audience, the scope
 exclusion, and the taxonomy restated in full. A reviewer who has already seen the findings cannot
 produce an independent read, so on a high-stakes corpus run Phase 2 blind — without access to the
@@ -291,7 +298,11 @@ wrong in public — **run the close read more than once and union the results**:
    unless another run explicitly considered and rejected it. Silence is not rejection.
 4. Use **agreement count as a confidence tier**, not as a filter. Found by every run: high
    confidence, act first. Found once: still real, needs a judgement call. In the comparison, the
-   highest-value finding of the whole exercise appeared in exactly one run.
+   highest-value finding of the whole exercise appeared in exactly one run. Emit each run's
+   findings one per line as `key | location | summary`, where the key is a short stable label
+   (the element name or the quoted phrase), identical across runs for the same finding. Tally the
+   tiers with `node scripts/merge-runs.cjs <run-1> <run-2> [more runs]`: it prints the union with
+   each finding's agreement count, so the tier comes from the merge, not from matching runs by eye.
 5. Where runs **disagree on a recommendation** rather than on existence, a further run arbitrates.
    In the comparison a third pass dropped one over-flagged finding and confirmed one that a single
    pass had missed.
@@ -476,7 +487,7 @@ When auditing or rewriting AI-tell prose, check for unintended model-internal ci
 
 **Problem:** These words appear far more frequently in post-2023 text. They often co-occur.
 
-**Nuance on "load-bearing":** legitimate as canonical vocabulary in ACT-derived work, where it means "a claim that if wrong would break the argument" (analogous to a load-bearing wall). It becomes an AI-tell in three cases: used as a synonym for "important / key / central / vital" where those simpler words would do, repeated ≥3 times within a single document, or applied to soft nouns (a load-bearing feeling, a load-bearing moment). Heuristic: if "important" or "central" substitutes without loss, it was decorative.
+**Nuance on "load-bearing":** legitimate as canonical vocabulary in ACT-derived work, where it means "a claim that if wrong would break the argument" (analogous to a load-bearing wall). It becomes an AI-tell in three cases: used as a synonym for "important / key / central / vital" where those simpler words would do, repeated ≥3 times within a single document, or applied to soft nouns (a load-bearing feeling, a load-bearing moment). Heuristic: if "important" or "central" substitutes without loss, it was decorative. Count the repetitions before applying the ≥3 threshold; do not estimate them while reading: `grep -oi 'load-bearing' <file> | wc -l` prints the occurrence count.
 
 **Before:**
 
@@ -851,8 +862,6 @@ A Copywriter Mode worked example is in [`examples/copywriter-mode-example.md`](e
 
 ## Would Revise If
 
-- **Event-based**: zero observed invocations across the fleet within 90 days — sunset (skill is decorative on top of `markdown-author`'s always-on prose discipline). Sink to Mall rather than removing entirely so heirs who write a lot of public-facing prose can install on demand.
-- **Date-based**: 2026-09-07 (90 days from adoption). If by then `humanizer` is invoked but consistently overrides heir voice in ways the heir reverts ≥3 times, the Voice Calibration section is failing — either tighten the calibration discipline or rebalance toward voice-preserving rewrites.
 - **Counter-evidence**: if a heir reports that the pattern catalog flags legitimate stylistic choices (e.g., humor that uses Rule of Three intentionally) as AI tells ≥3 times in a quarter, the patterns are too aggressive — add explicit "false positive" carve-outs.
 - **Copywriter Mode, event-based**: if a heir reports Copywriter Mode flagging domain acronyms or jargon as findings ≥2 times despite the Scope section above, tighten the "confirm scope first" instruction — the mode is drifting back into acronym-expansion territory it was explicitly narrowed away from.
 - **Copywriter Mode, counter-evidence**: if a heir reports the taxonomy tags being applied inconsistently (the same finding tagged differently across sessions) ≥3 times, the six-tag definitions need sharper examples, not more tags.

@@ -131,6 +131,6 @@ Files owned by another plugin's receipt are never removed.
 
 ## Would Revise If
 
-Revise by **2026-12-07** if this plugin alone cannot activate every declared
+Revise if this plugin alone cannot activate every declared
 source, a preview mutates state, a receipt claims a file it does not own, source
 resolution fails in a delivered plugin, or removal deletes modified bytes.

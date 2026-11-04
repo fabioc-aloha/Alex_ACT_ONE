@@ -64,7 +64,7 @@ unfiltered output matters.
 
 ## Would Revise If
 
-Revisit by **2026-11-18** if the deferred procedure fails to load when a
+Revisit if the deferred procedure fails to load when a
 terminal command needs it, host behavior makes the version table inaccurate,
 or a terminal failure reaches the user because the resident Backtick Hazard
 alone was insufficient.

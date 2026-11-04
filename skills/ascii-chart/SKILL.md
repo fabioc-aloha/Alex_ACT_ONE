@@ -84,7 +84,16 @@ Status indicators use letters instead:
 +----------------+  +----------------+  +----------------+
 ```
 
-Width per card = `(78 - (N-1)*2) / N` where N = number of cards. For 3 cards: 24 chars each.
+Card widths are precomputed; never divide mentally. The raw formula `(78 - (N-1)*2) / N` rarely divides evenly, so the remainder rule applies: leftmost cards absorb one extra character each until the remainder runs out.
+
+| N | Card widths | Check |
+| --- | --- | --- |
+| 1 | 78 | 78 + 0 gap = 78 |
+| 2 | 38, 38 | 76 + 2 gap = 78 |
+| 3 | 25, 25, 24 | 74 + 4 gap = 78 |
+| 4 | 18, 18, 18, 18 | 72 + 6 gap = 78 |
+
+Or run `node scripts/ascii-chart.cjs cardwidth N` and use its output.
 
 ### Horizontal Bar Chart
 
@@ -101,13 +110,15 @@ Other          | ##                   |  5%
 
 Bar width = total width - label width - value width - borders. Fill character `#`, empty is space. Labels left-aligned, values right-aligned.
 
+Fill counts are computed, never eyeballed: fill = round(value / max × bar area), so bar length stays proportional to the value. `node scripts/ascii-chart.cjs bars <data.json>` renders the block with that formula, and `node scripts/ascii-chart.cjs bars <data.json> --check <rendered.txt>` re-derives each fill from the data and diffs it against a rendered block. Module 5's line-length validation cannot see a wrong fill; this check can.
+
 ### Sparkline Row
 
 ```text
 Trend (12 months):  _/\__/\/\___/\  High: 4.2M  Low: 2.1M
 ```
 
-Characters: `/` = up, `\` = down, `_` = flat, `^` = peak. One character per data point. Keep to 20 characters max (readable at a glance).
+Characters: `/` = up, `\` = down, `_` = flat, `^` = peak. One character per data point. Keep to 20 characters max (readable at a glance). Derive the characters from the series, never read direction off the numbers by eye: `node scripts/ascii-chart.cjs sparkline <data.json>` emits the string (a strict local maximum becomes `^`).
 
 ### Two-Column Dashboard
 
@@ -192,6 +203,8 @@ Largest bar on top. The eye scans top-down; put the story first.
 
 Center the title within the card width. No bold, no underline (not portable). Caps or title case for visual weight.
 
+Centering is measured, not eyeballed: pad both sides from the title's length (left pad = floor((inner width − title length) / 2), remainder on the right). `CenterRow` in Module 5's construction functions does this; `node scripts/ascii-chart.cjs center <width> "Title"` prints a centered line.
+
 ### Rule 5: Footer row for actions
 
 The last row of the dashboard is the call to action. It spans the full width and contains the one thing the reader should do next.
@@ -264,6 +277,7 @@ Do not freehand ASCII lines. Use a padding function to construct each line:
 
 ```
 function Row(content):  return "| " + content.padRight(74) + " |"
+function CenterRow(title):  return "| " + centerPad(title, 74) + " |"   // pad both sides from the measured title length; left pad = floor(extra / 2)
 function Border(char):  return "+" + (char * 76) + "+"
 ```
 

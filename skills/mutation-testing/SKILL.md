@@ -34,7 +34,7 @@ For each load-bearing branch / guard / constant in the module:
    entry point, with any required root override targeting the copy.
 4. **Expect ≥ 1 failure.** If the suite still passes, that branch has no real coverage.
 5. **Discard the copy** before applying the next mutation.
-6. **Record the result** — caught / survived / precondition-not-found.
+6. **Record the result**: caught / survived / precondition-not-found, as one result line per mutation in a run-log file. The harness below already prints `[Name] CAUGHT` / `[Name] *** SURVIVED ***` / `[Name] PRECONDITION-NOT-FOUND`; capture those lines to the log so the tally (below) is a count, not a recollection.
 
 The source files must remain unchanged. A mutation run that requires restoring a
 working-tree file is already too risky: an interrupted process, a failed write,
@@ -85,6 +85,15 @@ For a small validator, a purpose-built temporary fixture is often cheaper than
 copying the whole project. Steward's ONE-check suite uses that pattern: it
 generates disposable fixtures and temporary validator copies, then asserts the
 working validators' bytes remain unchanged.
+
+### Tallying the results
+
+The mutations-caught ratio in the Quality bar comes from counting the run log's result lines mechanically, never from tallying outcomes as you go:
+
+- PowerShell: `$caught = (Select-String -Path $log -Pattern '\] CAUGHT$').Count`, `$survived = (Select-String -Path $log -Pattern 'SURVIVED').Count`, `$missing = (Select-String -Path $log -Pattern 'PRECONDITION-NOT-FOUND').Count`
+- bash: `grep -c '\] CAUGHT$' run.log`, `grep -c 'SURVIVED' run.log`, `grep -c 'PRECONDITION-NOT-FOUND' run.log`
+
+Report caught / (caught + survived) from those counts, with survived and precondition-not-found listed separately.
 
 ## Counter-Test Detection Rules
 
@@ -146,7 +155,7 @@ A mutation-testing pass is complete when:
 
 - Every named branch in the production module has a mutation entry in your run log
 - Every survivor was either closed by a new test or explicitly accepted with a reason (e.g., "behavior is internal-only, no public contract")
-- The total mutations-caught ratio is recorded (e.g., "15 of 16 mutations caught; M8 deferred")
+- The total mutations-caught ratio is recorded from the run-log counts (e.g., "15 of 16 mutations caught; M8 deferred"; see Tallying the results)
 - The working tree's source files remain unchanged throughout the run, and the
     temporary copy is removed after each mutation
 
@@ -163,7 +172,6 @@ A mutation-testing pass is complete when:
 ## Falsifiability — would revise if
 
 - Event-based: if a formal mutation-testing tool (Stryker, mutmut) is adopted in CI, this skill becomes documentation for the manual fallback only; trim the protocol section accordingly.
-- Counter-evidence: if applying the protocol consistently catches zero mutations on three consecutive new test files, either the tests are unusually rigorous (good — note it) or the mutation set is too shallow (revise the "high-value patterns" table).
 
 ## Origin
 

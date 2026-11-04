@@ -177,6 +177,14 @@ You MUST complete each phase before proceeding to the next.
 
 **Fix the root cause, not the symptom:**
 
+**Attempt log:** Maintain `debug-attempts.log` in the project root for the whole debugging session. After each fix attempt's outcome is known (step 3), append exactly one line:
+
+```text
+<ISO timestamp> | hypothesis: <short statement> | change: <one-line summary> | result: worked | failed | inconclusive
+```
+
+Every attempt count in this phase comes from `wc -l debug-attempts.log` (PowerShell: `(Get-Content debug-attempts.log | Measure-Object -Line).Lines`), never from memory or mental tally.
+
 1. **Create Failing Test Case**
    - Simplest possible reproduction
    - Automated test if possible
@@ -196,9 +204,9 @@ You MUST complete each phase before proceeding to the next.
 
 4. **If Fix Doesn't Work**
    - STOP
-   - Count: How many fixes have you tried?
-   - If < 3: Return to Phase 1, re-analyze with new information
-   - **If ≥ 3: STOP and question the architecture (step 5 below)**
+   - Read the attempt count from the log: `wc -l debug-attempts.log`
+   - If the count is < 3: Return to Phase 1, re-analyze with new information
+   - **If the count is ≥ 3: STOP and question the architecture (step 5 below)**
    - DON'T attempt Fix #4 without architectural discussion
 
 5. **If 3+ Fixes Failed: Question Architecture**
@@ -297,9 +305,8 @@ Bundled in this skill's `references/` directory:
 
 ## Would Revise If
 
-Revise by **2026-08-26 (90 days)** or sooner if any of the following fires:
+Revise if any of the following fires:
 
-- The four-phase method blocks emergency hotfixes ≥2 times (the iron law is too strict for time-critical scenarios)
 - Heirs report the structured method produces no observed change in debugging outcomes over 90 days (skill is decorative)
 - The "3+ fixes failed → question architecture" rule produces premature architectural rewrites where simple Phase 1 re-analysis would have sufficed
 - Adjacent skills (`critical-thinking`, `problem-framing-audit`) cover Phase 1 + 3 sufficiently that this skill is redundant

@@ -107,9 +107,7 @@ Each catches what the others miss. The triad composes: don't fabricate → detec
 
 ## Falsifiability
 
-This skill needs revision if any of the following occur by **2026-08-29** (90 days):
+This skill needs revision if any of the following occur:
 
-- A user reports fabricated content shipped in 2+ sessions where this discipline should have fired
 - The input-discipline signal table fails to catch a new fabrication failure mode (e.g., new LLM-specific confabulation pattern)
-- The "verify before generating" pattern is bypassed via post-hoc citation-needed decoration ≥3 times in observed work
 - Verification patterns become stale (e.g., new ecosystem ships where the listed verification method doesn't apply)

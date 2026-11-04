@@ -145,7 +145,7 @@ Step 4 exists.
 
 ## Would Revise If
 
-Revise this skill by **2026-11-06** (90 days) or sooner if any of the following
+Revise this skill if any of the following
 fires:
 
 - A sweep run by this method reports violations that are later found to be

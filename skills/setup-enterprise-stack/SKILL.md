@@ -133,7 +133,14 @@ Additive settings merge: if the target file already has an `enabledPlugins` map 
 
 ### 3. Audit only
 
-Read the current settings file at the chosen scope. Under `--user`, read `~/.copilot/settings.json`; otherwise read `.github/copilot/settings.json` in the workspace. Compare against the target block, produce a table:
+Read the current settings file at the chosen scope. Under `--user`, read `~/.copilot/settings.json`; otherwise read `.github/copilot/settings.json` in the workspace. Produce the audit table with the bundled script, which diffs both settings files against the target block; do not compare the JSON by hand:
+
+```powershell
+node skills/setup-enterprise-stack/scripts/audit-settings.cjs --scope repo
+# user scope: --scope user; override paths with --repo-settings / --user-settings
+```
+
+The script emits the table directly:
 
 | Plugin | Currently enabled at chosen scope? | Currently enabled at other scope? | Marketplace registered? | Action |
 |---|---|---|---|---|
@@ -173,12 +180,11 @@ The "other scope" column surfaces Users who accidentally enabled at user scope w
 
 ## Falsifiability
 
-Sunset or revise this skill by **2027-01-30** (6 months) if any of the following fires:
+Sunset or revise this skill if any of the following fires:
 
 - Any target plugin is renamed, moved, or deprecated upstream, making the emitted block stale. This fired once: the persona-axis Fabric bundles were retired into `fabric-skills` and the skill kept emitting all three for months. Verify each name with `copilot plugin marketplace browse` before emitting, under the account whose tenant owns the marketplace.
 - Microsoft ships a new plugin in the same ecosystem that users consistently install alongside these (block is incomplete).
 - The `copilot plugin marketplace add` CLI syntax changes (install flow is broken on emit).
-- Two or more Users report the auto-install mode overwriting unrelated settings (safety rule failed).
 
 Track outcomes in the maintaining repo's curation log.
 

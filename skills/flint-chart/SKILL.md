@@ -356,6 +356,11 @@ not just the column names, and watch for:
 - **One real entity.** If your breakdown column has a single distinct value, the
   per-group chart collapses to one mark — the intended breakdown is likely a
   different column.
+- **Share of total.** For a part-of-a-whole question, compute each category's
+  share in the data tool during this read (category sum ÷ grand total, as a
+  percentage). The pie rule in §0.2 and §0.3 (a slice must dominate at ≥60%,
+  or the story must be "X vs the rest") is decided from those computed shares,
+  never estimated by eyeballing raw values.
 
 ## Post-Flint style customization
 
@@ -1091,7 +1096,7 @@ Before returning, verify:
 
 ## Would Revise If
 
-Revise this skill by 2026-10-22 (90 days) or sooner if any of the following fires:
+Revise this skill if any of the following fires:
 
 - [_The Defensible Decision_ chart gallery](https://www.thedefensibledecision.com/gallery/chart-gallery.html) 404s or restructures such that the §0.5 deep-reference URLs no longer resolve — refresh the escalation targets or fold the needed tips into §0 directly.
 - `flint://agent-skill` or `flint://theme-skill` disappears, diverges from the
@@ -1099,7 +1104,6 @@ Revise this skill by 2026-10-22 (90 days) or sooner if any of the following fire
   minimum local reference needed while the upstream defect is active.
 - `flint-chart-mcp` ships a breaking change (chart-type rename, `ChartAssemblyInput` shape change, tool signature change) that this skill doesn't account for — sync §0.4 (Flint coverage) and the worked examples to the new version.
 - Any recommendation in §0.2 (question → family → chartType) is refuted by a source we trust (a case study, a Knaflic/Kirk/Few/Wexler update, or field feedback from ≥2 heir workspaces) — retire or rework that row.
-- The plugin gets ≥3 heir installs and none of them exercise §0.5 (deep-reference escalation) — that signals the compact table alone is sufficient and §0.5 is decorative; prune it.
 - The upstream fork base ([`microsoft/flint-chart/agent-skills/flint-chart-author/SKILL.md`](https://github.com/microsoft/flint-chart/blob/main/agent-skills/flint-chart-author/SKILL.md)) publishes a materially revised body — decide whether to rebase §1-N onto the new upstream or hold on the current fork point. **Do not rebase blindly.** As of 2026-08-05 upstream's skill is itself behind its own generated references: it still teaches "Donut chart: use `Pie Chart` with `innerRadius`" and never names the `Donut Chart` type that `reference-vegalite.md` documents. A straight rebase would regress the backend-specific donut guidance and the corrected `binCount` / `polyOrder` ranges in §Chart-level properties. Diff against the generated `reference-*.md` files, not against upstream's skill.
 - **Upstream absorbs chart selection itself.** Recommendations, named views,
   and transformations are available through `create_chart_view`, but not as
