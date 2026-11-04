@@ -8,6 +8,10 @@ Alex ACT ONE is a pack of 60 skills for GitHub Copilot that changes how the agen
 
 **See the difference:** [the 60 second demo](docs/launch/demo-script.md) runs the same loaded prompt twice, once with a plain Copilot install and once with ACT ONE active. The plain install answers the question as framed. ACT ONE audits the frame first, names the missing evidence, and answers a better question. (Recording lands with the v0.6.0 launch; the script and prompt pair are in the repo now.)
 
+![The frame audit: a wrong plan erased to a ghost, the corrected plan drawn over it](docs/launch/frame-audit.gif)
+
+*The frame audit, from the explainer film: the wrong plan is erased to a ghost, and the corrected plan is drawn over it.*
+
 ## Quick install
 
 Install the plugin once, at the user level:
