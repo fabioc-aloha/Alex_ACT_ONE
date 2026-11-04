@@ -34,7 +34,9 @@ One installed copy serves Copilot CLI, VS Code, Microsoft Scout, and the GitHub 
 
 60 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers. MIT licensed. Current release: `v0.5.0`, published in the Alex ACT Mall.
 
-Using Muse instead of Copilot? The Muse edition lives at [Alex_ACT_ONE_Muse](https://github.com/fabioc-aloha/Alex_ACT_ONE_Muse).
+Using Muse instead of Copilot? The Muse edition lives at [Alex_ACT_ONE_Muse](https://github.com/fabioc-aloha/Alex_ACT_ONE_Muse)
+
+Using Claude Code? The skills install there too, by hand: see [Using Claude Code instead?](#using-claude-code-instead) under Install..
 
 ## What You Can Do With Alex ACT ONE
 
@@ -364,6 +366,44 @@ prints the exact target directory first.
 
 Step 1 alone is a complete, working install. Step 2 adds the always-on
 behavior, and skipping it costs you nothing else.
+
+### Using Claude Code instead?
+
+The skills travel. They follow the Agent Skills open standard, which Claude
+Code also implements: each skill is a folder holding a `SKILL.md` whose
+frontmatter carries a `name` and a `description`, and that is the shape Claude
+Code loads. (Claude Code is Anthropic's terminal agent, a different tool from
+the Muse assistant; the separate Muse edition of this pack lives at
+[Alex_ACT_ONE_Muse](https://github.com/fabioc-aloha/Alex_ACT_ONE_Muse).)
+
+Clone this repo, then copy the skill folders into Claude Code's personal
+skills directory, plus the shared scripts where the skill scripts look for
+them:
+
+```bash
+git clone https://github.com/fabioc-aloha/Alex_ACT_ONE.git
+mkdir -p ~/.claude/skills ~/.claude/scripts
+cp -r Alex_ACT_ONE/skills/* ~/.claude/skills/
+cp -r Alex_ACT_ONE/scripts/* ~/.claude/scripts/
+```
+
+For a single project, copy into that project's `.claude/skills/` instead,
+with `scripts/` beside it at `.claude/scripts/`. Claude Code loads a skill
+automatically when a request matches its description, or you invoke one
+directly as `/skill-name`.
+
+What does not transfer: the plugin install, the 15 always-on instructions,
+and the 15 slash commands are Copilot-format. Claude Code's always-on
+equivalent is `CLAUDE.md`; the texts in `instructions/` can be adapted into
+one by hand. The three MCP servers are standard stdio servers and can be
+registered with `claude mcp add`, using the commands in `plugin.json` pointed
+at your clone. Until they are, the chart, browser-check, and image skills
+still guide the work but have no rendering back end to call.
+
+One honesty note: this pack is tested on its Copilot hosts, not on Claude
+Code. The format is shared and the skills are plain markdown and scripts, so
+they load; treat your first runs as an evaluation anyway. The evaluation
+guide in `docs/launch/evaluation-guide.md` works here too.
 
 ### On Microsoft Scout, register the MCP servers
 
