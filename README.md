@@ -32,7 +32,7 @@ Then, in each app where you want the always-on behavior, run:
 
 One installed copy serves Copilot CLI, VS Code, Microsoft Scout, and the GitHub Copilot app. Full install notes, the from-source option, and the Scout specifics are in [Install](#install).
 
-60 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers. MIT licensed. Current release: `v0.5.0`, published in the Alex ACT Mall.
+60 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers. MIT licensed. Current release: `v0.6.0`, published in the Alex ACT Mall.
 
 Using Muse instead of Copilot? The Muse edition lives at [Alex_ACT_ONE_Muse](https://github.com/fabioc-aloha/Alex_ACT_ONE_Muse)
 
