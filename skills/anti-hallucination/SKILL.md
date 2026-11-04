@@ -61,7 +61,19 @@ The line in the middle is *between thinking and typing*. Once the fabricated con
 | A version number is current | Check the package registry or release notes, not training-data memory |
 | A file path exists | `Test-Path` / `ls` / `fs.existsSync` in the current workspace |
 | A command succeeded | Cite exit code or output, not "ran cleanly" |
+| A computed value (sum, count, total, date difference) | Run it in a script, test, or formula and quote the output; never compute in prose (see Deterministic Checks) |
 | Absence (no matches found) | Cite the search scope; an absent result and a misconfigured search look identical |
+
+## Deterministic Checks
+
+A language model predicting tokens does not compute. Arithmetic, counts, totals, comparisons, date math, and character counts produced in prose are guesses wearing a number's clothes, and asking the same model to "double-check" produces a second guess, not a check.
+
+**Rule: route every calculation or check that can be scripted to a deterministic module** — a script, a test, a spreadsheet formula, a calculator or query tool. The model's job is to write the checker and interpret its output. The model is never the checker.
+
+- A check is an artifact (script, test, formula) that returns the same answer on every run. Re-reading your own prose is not a check.
+- Quote the module's output when reporting the number. If the number came from prose, label it an unverified estimate or do not report it.
+- When verifying someone else's calculation, recompute it with the module. Never verify arithmetic by reading it.
+- Counts follow the same rule: lines, items, occurrences, files. Count with a tool (`grep -c`, `wc`, a loop), never by eye.
 
 ## Anti-Patterns
 
@@ -69,6 +81,7 @@ The line in the middle is *between thinking and typing*. Once the fabricated con
 |---|---|---|
 | "I'll generate the answer and check it after" | Once written confidently, downstream review struggles to flag it | Verify before generating |
 | "Probably works like X" | "Probably" is the fabrication signal | Either verify, or say "I don't know" |
+| Doing arithmetic in prose and reporting the result | The model predicts tokens; it does not compute, so the number is a guess | Write a script or test that computes it, then quote its output |
 | Defending a fabrication when challenged | Doubles down on the original lie | Acknowledge, correct, move on |
 | Generating plausible-looking citations | Citation confabulation is a well-documented LLM failure mode | Cite only what's been seen; mark inferred refs as inferred |
 | "The documentation must say..." | Inferring doc content is fabrication | Read the doc or hedge the claim |

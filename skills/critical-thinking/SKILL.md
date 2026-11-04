@@ -302,6 +302,7 @@ Underneath all seven disciplines sits a non-negotiable rule: when data is missin
 | --------------------------- | -------------------------- | ----------------------------- |
 | A date                      | "Date not documented"      | "Approximately 2018"          |
 | A specific value            | (omit or mark unknown)     | An inferred value             |
+| A computed value (sum, count, difference) | (the deterministic module's output, quoted) | A number worked out in prose |
 | A source / citation         | (don't cite it)            | A plausible-looking reference |
 | A causal relationship       | "Associated with"          | "Caused by"                   |
 | An unconfirmed state        | "Suspected, not confirmed" | The state as established fact |
@@ -313,6 +314,10 @@ Underneath all seven disciplines sits a non-negotiable rule: when data is missin
 ### Implementation Pattern
 
 Place the "never guess" discipline **before** the main workflow in any skill, not after. The constraint must be loaded before processing begins — it's a gate, not a review.
+
+### Deterministic before semantic
+
+Numbers are guesses too. Before challenging or accepting any quantitative claim, ask whether a script, test, or formula can settle it. If yes, run that first and argue from its output. Do not debate arithmetic, and do not accept a value that a model (this one or another) computed in prose. Full rule: the Deterministic Checks section of the anti-hallucination skill.
 
 ---
 
