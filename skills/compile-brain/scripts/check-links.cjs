@@ -99,24 +99,28 @@ function lineOf(content, index) {
 }
 
 function extractLinks(content) {
-  const text = stripCode(content);
+  let text = stripCode(content);
   const links = [];
   const refDefs = new Map();
   let m;
 
-  const defRe = /^\s{0,3}\[([^\]]+)\]:\s*(\S+)/gm;
+  const normalize = (label) => label.trim().replace(/\s+/g, " ").toLowerCase();
+  const defRe = /^\s{0,3}\[([^\]]+)\]:\s*(<[^>]+>|\S+)/gm;
   while ((m = defRe.exec(text)) !== null) {
-    refDefs.set(m[1].toLowerCase(), m[2]);
+    const label = normalize(m[1]);
+    if (!refDefs.has(label)) refDefs.set(label, m[2].replace(/^<|>$/g, ""));
   }
+  text = text.replace(defRe, (definition) => definition.replace(/[^\n]/g, " "));
 
   const inlineRe = /!?\[[^\]]*\]\(\s*(<[^>]*>|[^\s)]+)(?:\s+["'(][^)]*)?\)/g;
   while ((m = inlineRe.exec(text)) !== null) {
     links.push({ dest: m[1].replace(/^<|>$/g, ""), index: m.index });
   }
+  text = text.replace(inlineRe, (link) => " ".repeat(link.length));
 
-  const refUseRe = /!?\[[^\]]+\]\[([^\]]+)\]/g;
+  const refUseRe = /!?\[([^\]]+)\](?:\[([^\]]*)\])?/g;
   while ((m = refUseRe.exec(text)) !== null) {
-    const dest = refDefs.get(m[1].toLowerCase());
+    const dest = refDefs.get(normalize(m[2] || m[1]));
     if (dest) links.push({ dest, index: m.index });
   }
 

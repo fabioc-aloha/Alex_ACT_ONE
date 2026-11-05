@@ -3,10 +3,9 @@
 
 /**
  * Computes the Phase 1 to Phase 2 rejection rate for Copywriter Mode from
- * the candidate/disposition log, instead of reconstructing it from prose
- * notes. The rate is the health signal the skill reads: zero rejections
- * means the sweep list is too narrow, near-total rejection means it is
- * too noisy.
+ * optional task-local candidate/disposition log. Reports the sweep-only
+ * rate, not a mixture with close-read findings. The rate does not establish
+ * review quality and is not cross-session telemetry.
  *
  * Log format: one candidate per line, pipe-separated:
  *   candidate | origin | disposition | reason (optional)
@@ -22,18 +21,24 @@
 const fs = require('node:fs');
 
 function tally(text) {
-  const result = { total: 0, accepted: 0, rejected: 0, malformed: 0 };
+  const result = { total: 0, accepted: 0, rejected: 0, malformed: 0,
+    sweep: { total: 0, accepted: 0, rejected: 0 } };
   for (const raw of text.split(/\r?\n/)) {
     const line = raw.trim();
     if (!line || line.startsWith('#')) continue;
     const fields = line.split('|').map((f) => f.trim());
+    const origin = (fields[1] || '').toLowerCase();
     const disposition = (fields[2] || '').toLowerCase();
-    if (fields.length < 3 || (disposition !== 'accepted' && disposition !== 'rejected')) {
+    if (!fields[0] || !['sweep', 'read'].includes(origin) || !['accepted', 'rejected'].includes(disposition)) {
       result.malformed += 1;
       continue;
     }
     result.total += 1;
     result[disposition] += 1;
+    if (origin === 'sweep') {
+      result.sweep.total += 1;
+      result.sweep[disposition] += 1;
+    }
   }
   return result;
 }
@@ -54,17 +59,19 @@ function main(argv) {
 
   const r = tally(text);
   if (r.malformed > 0) {
-    console.error(`Warning: skipped ${r.malformed} malformed line(s)`);
+    console.error(`Cannot tally: ${r.malformed} malformed candidate line(s); use sweep/read and accepted/rejected.`);
+    return 1;
   }
   if (r.total === 0) {
     console.error('No usable candidate lines in the log.');
     return 1;
   }
-  const rate = ((r.rejected / r.total) * 100).toFixed(1);
   console.log(`Candidates: ${r.total}`);
   console.log(`Accepted: ${r.accepted}`);
   console.log(`Rejected: ${r.rejected}`);
-  console.log(`Rejection rate: ${rate}%`);
+  const rate = r.sweep.total === 0 ? 'not measured (no sweep candidates)' :
+    `${((r.sweep.rejected / r.sweep.total) * 100).toFixed(1)}% (${r.sweep.rejected}/${r.sweep.total})`;
+  console.log(`Sweep rejection rate: ${rate}`);
   return 0;
 }
 

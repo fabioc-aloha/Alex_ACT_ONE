@@ -10,4 +10,4 @@ Over-reliance signals (prompt roulette, zero verification, instant high-stakes a
 
 ## Would Revise If
 
-Revise if the 6 signal patterns produce false-positive nudges that interrupt user flow more often than they catch real over-reliance, if nudges deliver no measurable change in user verification behavior over a quarter, or if the inhibition rules fail and stacked nudges appear in single responses 2+ times in observed sessions.
+Revise if a concrete nudge interrupts flow without a relevant risk, omits an actionable verification step, or bypasses the inhibition rules. A response containing stacked nudges is itself a failure case; no cross-session effectiveness score is required.

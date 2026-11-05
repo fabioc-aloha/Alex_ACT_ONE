@@ -7,8 +7,8 @@ lastReviewed: 2026-09-07
 # Setup Dependencies
 
 Most of this plugin needs nothing beyond Node. Roughly three quarters of its
-skills run with no external tools at all. This skill handles the rest: seven
-document converters that need Pandoc, a few visual skills that use optional
+skills run with no external tools at all. This skill handles the rest: document
+converters that need Pandoc, a few visual skills that use optional
 render helpers, and three MCP servers that back charts, image generation, and
 browser verification.
 
@@ -32,7 +32,7 @@ relative to a capability, so the report sorts every item into three tiers:
 
 | Tier | Meaning | Members |
 | --- | --- | --- |
-| **Required** | The skills that call it cannot run without it | Pandoc (7 converters), Pillow (annotate-screenshot), Flint MCP (chart rendering) |
+| **Required** | The skills that call it cannot run without it | Pandoc (document conversion), Pillow (annotate-screenshot), Flint MCP (chart rendering) |
 | **Recommended** | Those skills run and produce less | Mermaid CLI (diagrams stay unrendered), svgexport (no PNG export), jszip (Word loses table formatting), Playwright MCP (`render-verify` falls back to the host's browser tools) |
 | **Add-on** | Blocks nothing. Adds capability this package does not have | Replicate MCP (also needs a paid token), visual companions, Microsoft ecosystem plugins |
 
@@ -43,8 +43,8 @@ throughout and have no fallback. Playwright has one, documented in
 `render-verify`'s own description. Replicate needs a paid account before it does
 anything at all.
 
-The distinction matters when reporting to a user. A missing Pandoc means seven
-skills are unavailable and should be named. A missing jszip means one output is
+The distinction matters when reporting to a user. A missing Pandoc means the
+affected converters are unavailable and should be named. A missing jszip means one output is
 plainer. A missing add-on means nothing at all, and telling someone to install
 one to "fix" a problem is wrong.
 
@@ -53,6 +53,10 @@ Plugin installation is not handled here. `install-visual-companions` and
 registration, the consent gates, and the post-install caveats — several
 companions pull roughly 100 MB of Chromium each. This skill reports the state so
 one command shows the whole picture; it does not duplicate their install logic.
+
+Before proposing browser setup, inspect the active host's native capabilities.
+Keep the pinned Playwright fallback for an actual missing or unverified case;
+neither install it silently nor remove it merely because a native browser exists.
 
 Plugin counts depend on which store the host reads. `copilot plugin list`
 follows `COPILOT_HOME` when set and `~/.copilot` otherwise, and different apps
@@ -209,3 +213,7 @@ them. Private runtime state must never run ahead of reviewed source.
 Revise if a supported host cannot launch the private runtime
 directly, if a direct launch starts npm or npx, or if the dependency report and the
 error messages skills emit ever disagree.
+
+## Compatibility command constraints: setup-dependencies
+
+Default to read-only dependency reporting. Explain the missing capability and obtain consent before installing reviewed dependencies.

@@ -33,7 +33,7 @@ Generalized from [`chart-big-idea`](../chart-big-idea/SKILL.md), which specializ
 - **Bullet lists inside a doc** — each bullet doesn't need its own thesis. The section header carries the Big Idea if any bullet does.
 - **Code comments** — unless the comment IS a thesis (rare — most code comments explain _how_, not _why anything changes_).
 - **README intro paragraphs** — those get to be longer than one sentence. Use Big Idea for the README's title tagline, not its opening paragraph.
-- **Chart summaries** — use the bundled `chart-big-idea` skill instead. That skill's step 5 emits a Chart Brief; this skill's step 5 emits prose.
+- **Chart workflow** — when called by chart-big-idea, complete the shared distillation here and return the claim, audience, and stance. Do not load chart-big-idea again: the caller owns the Chart Brief and chart-specific constraints.
 
 ## The four-step distill (plus emit)
 
@@ -169,8 +169,6 @@ This skill has failed if any of the following occur:
 
 - **Decorative steps**: the four-step distill (context read → claim → arc → stance → emit) consistently produces identical output to skipping steps 3–5 — the extra steps are ritual, not method
 - **Drifts from parent**: `chart-big-idea` upstream evolves in a way this skill can't accommodate — the specialization relationship broke
-
-Track in your project's audit trail (Alex ACT itself tracks in `operations/ledgers/curation-log.md`) tagged `[BIG-IDEA-DRIFT]`.
 
 ## Would Revise If
 

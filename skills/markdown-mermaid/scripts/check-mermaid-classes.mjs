@@ -68,11 +68,11 @@ function maskQuotes(line) {
   return line.replace(/"[^"]*"/g, (quoted) => " ".repeat(quoted.length));
 }
 
-const OPENERS = { "[[": "]", "[(": ")", "((": ")", "[": "]", "(": ")", "{": "}", ">": "]" };
+const OPENERS = { "(((": ")))", "[[": "]]", "[(": ")]", "([": "])", "((": "))", "{{": "}}", "[": "]", "(": ")", "{": "}", ">": "]" };
 
 function findDefinitions(line) {
   const defs = [];
-  const pattern = /([A-Za-z_][\w-]*)\s*(\[\[|\(\(|\[\(|\[|\(|\{|>)/g;
+  const pattern = /([A-Za-z_][\w-]*)\s*(\(\(\(|\[\[|\(\(|\[\(|\(\[|\{\{|\[|\(|\{|>)/g;
   let match;
   while ((match = pattern.exec(line)) !== null) {
     const id = match[1];
@@ -82,19 +82,17 @@ function findDefinitions(line) {
     let end = -1;
     for (let i = match.index + match[0].length; i < line.length; i += 1) {
       const ch = line[i];
-      if (ch === match[2].slice(-1) && match[2] !== ">") depth += 1;
-      if (ch === closer) {
-        if (depth === 0) {
-          end = i;
-          break;
-        }
-        depth -= 1;
+      if (depth === 0 && line.startsWith(closer, i)) {
+        end = i + closer.length;
+        break;
       }
+      if (ch === match[2].slice(-1) && match[2] !== ">") depth += 1;
+      if (ch === closer[0] && depth > 0) depth -= 1;
     }
     if (end === -1) continue;
-    const rest = line.slice(end + 1);
+    const rest = line.slice(end);
     const classMatch = rest.match(/^\s*:::([A-Za-z_][\w-]*)/);
-    defs.push({ id, classed: classMatch !== null, start: match.index, end: end + 1 + (classMatch ? classMatch[0].length : 0) });
+    defs.push({ id, classed: classMatch !== null, start: match.index, end: end + (classMatch ? classMatch[0].length : 0) });
   }
   return defs;
 }
@@ -136,7 +134,6 @@ function lintBlock(blockLines, label) {
     for (const def of defs) {
       definedIds.add(def.id);
       if (def.classed) classedIds.add(def.id);
-      else flags.push(`${label} line ${i + 1}: node "${def.id}" defined without :::class`);
     }
 
     // Edge endpoints: blank out definitions and |labels|, then read the

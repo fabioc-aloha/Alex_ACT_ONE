@@ -4,37 +4,16 @@ applyTo: "**"
 lastReviewed: 2026-08-18
 ---
 
-# Terminal Command Safety
+# terminal-command-safety
 
-## Backtick Hazard (Critical)
+## Activation and resident floor
 
-Backticks break in ALL shells (bash=command substitution, PowerShell=escape char). NEVER place raw backticks inside double-quoted terminal arguments.
+Before constructing or running shell commands, especially multiline/quoted input or long-lived work.
 
-| Content contains   | Action                             |
-| ------------------ | ---------------------------------- |
-| Backticks          | Always use temp file               |
-| Multi-line text    | Prefer temp file                   |
-| Both quote types   | Use temp file                      |
-| Dollar signs (`$`) | Single-quoted heredoc or temp file |
-| Plain text only    | Inline is safe                     |
+Never place raw backticks in double-quoted terminal arguments. Use file-based multiline input outside the worktree. Disable pagers; preserve process-local environment setup. Bound waits and retrieve existing output rather than rerunning. Stop only specifically identified owned processes; never kill by name.
 
-Rules: `gh` → `--body-file`, `git commit` → `-F <file>`, any CLI → file-based input over inline.
+## Required execution
 
-**Temp file location matters**: place temp files **outside the working tree** (`$env:TEMP\<slug>.txt` on Windows, `/tmp/<slug>.txt` on Unix) OR add the pattern to `.gitignore` before staging. Otherwise `git add -A` will stage and commit the message file itself. S360 hit this twice in 2026-05 (commits `26631b4` then caught mid-flight on the next leak via Tenet X self-review).
+When the trigger requires the detailed workflow, load and follow [terminal-command-safety](../skills/terminal-command-safety/SKILL.md) in **shell-safety** mode, including its runtime-terminal-command-safety reference where applicable. These guardrails apply before loading; a hyperlink alone is not execution.
 
-Preferred PowerShell template for multi-line commit messages:
-
-```pwsh
-$m = Join-Path $env:TEMP "<slug>.txt"
-Set-Content -Path $m -Value $msg -NoNewline
-git commit -F $m
-Remove-Item $m
-```
-
-Filesystem isolation prevents the leak by construction.
-
-## Deferred Procedures
-
-For output capture, hung-command handling, and current host behavior, use the
-terminal-command-safety skill. The Backtick Hazard remains resident because
-safe command construction must be decided before an on-demand skill can load.
+Use native skill discovery first. Links are relative to the canonical installed instruction source, not this activated profile copy or an adopter checkout. If discovery is unavailable, locate the canonical alex-act-one package through native plugin discovery and use its bootstrap preview `routing.skillRoutes` and `routing.canonicalRoot` to resolve the linked skill. Report a missing owner/reference explicitly; never skip a required check or claim it completed. Loading grants no additional write, installation, send, or publication authority.

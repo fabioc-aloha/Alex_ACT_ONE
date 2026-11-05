@@ -4,7 +4,7 @@
  * @lifecycle stable
  * @muscle lint-innerhtml
  * @inheritance inheritable
- * @description Enumerate innerHTML/outerHTML assignments and flag any value that is not DOMPurify.sanitize output
+ * @description Scan direct innerHTML/outerHTML assignments for expressions needing review
  * @version 1.0.0
  * @skill markdown-sanitization-chain
  * @platform windows,macos,linux
@@ -12,11 +12,10 @@
  *
  * Deterministic check behind the markdown-sanitization-chain verification
  * item "No raw innerHTML without sanitization anywhere in the surface".
- * Scans JavaScript/TypeScript sources, enumerates every innerHTML and
- * outerHTML assignment, and classifies each value:
+ * Heuristically scans dot-property assignments in JavaScript/TypeScript.
+ * This is a review aid, not a parser or proof of XSS safety:
  *
- *   OK        value is a DOMPurify.sanitize(...) call, an identifier that
- *             this file assigns from a DOMPurify.sanitize(...) call, or a
+ *   OK        the entire value is a DOMPurify.sanitize(...) call or a
  *             plain string literal with no interpolation
  *   FLAGGED   anything else: unsanitized expressions, interpolated
  *             template literals, and unverifiable indirect values
@@ -62,18 +61,6 @@ function collectFiles(target, out = []) {
   return out;
 }
 
-/** Identifiers in this file assigned from a DOMPurify.sanitize(...) call. */
-function sanitizedIdentifiers(content) {
-  const names = new Set();
-  const re = /(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*[^;\n]*DOMPurify\.sanitize\s*\(/g;
-  let m;
-  while ((m = re.exec(content)) !== null) names.add(m[1]);
-  // Reassignment form: name = DOMPurify.sanitize(...)
-  const re2 = /(?:^|[;\n])\s*([A-Za-z_$][\w$]*)\s*=\s*DOMPurify\.sanitize\s*\(/g;
-  while ((m = re2.exec(content)) !== null) names.add(m[1]);
-  return names;
-}
-
 /** Read an assignment RHS starting at `start`, tracking strings and nesting. */
 function readRhs(content, start) {
   let i = start;
@@ -101,18 +88,33 @@ function readRhs(content, start) {
   return content.slice(start, i).trim();
 }
 
-function classify(rhs, sanitizedNames) {
-  if (/DOMPurify\.sanitize\s*\(/.test(rhs)) {
+function isSanitizeCall(rhs) {
+  const start = rhs.match(/^DOMPurify\.sanitize\s*\(/);
+  if (!start) return false;
+  let depth = 1;
+  let quote = null;
+  for (let i = start[0].length; i < rhs.length; i++) {
+    const ch = rhs[i];
+    if (quote) {
+      if (ch === "\\") i++;
+      else if (ch === quote) quote = null;
+      continue;
+    }
+    if (ch === "'" || ch === '"' || ch === "`") quote = ch;
+    else if (ch === "(") depth++;
+    else if (ch === ")" && --depth === 0) return rhs.slice(i + 1).trim() === "";
+  }
+  return false;
+}
+
+function classify(rhs) {
+  if (isSanitizeCall(rhs)) {
     return { ok: true, reason: "DOMPurify.sanitize(...) output" };
   }
-  if (/^[A-Za-z_$][\w$]*$/.test(rhs) && sanitizedNames.has(rhs)) {
-    return { ok: true, reason: `identifier assigned from DOMPurify.sanitize(...)` };
-  }
-  const first = rhs[0];
-  if ((first === "'" || first === '"') && !rhs.includes("${")) {
+  if (/^(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')$/.test(rhs)) {
     return { ok: true, reason: "static string literal" };
   }
-  if (first === "`" && !rhs.includes("${")) {
+  if (/^`(?:\\.|[^`\\])*`$/.test(rhs) && !rhs.includes("${")) {
     return { ok: true, reason: "static template literal" };
   }
   if (/^[A-Za-z_$][\w$]*$/.test(rhs)) {
@@ -123,14 +125,13 @@ function classify(rhs, sanitizedNames) {
 
 function lintFile(file) {
   const content = fs.readFileSync(file, "utf8");
-  const sanitizedNames = sanitizedIdentifiers(content);
   const findings = [];
   const re = /\.(innerHTML|outerHTML)\s*\+?=(?![=>])\s*/g;
   let m;
   while ((m = re.exec(content)) !== null) {
     const rhs = readRhs(content, m.index + m[0].length);
     const line = content.slice(0, m.index).split("\n").length;
-    const verdict = classify(rhs, sanitizedNames);
+    const verdict = classify(rhs);
     findings.push({ line, sink: m[1], rhs: rhs.length > 80 ? rhs.slice(0, 77) + "..." : rhs, ...verdict });
   }
   return findings;
@@ -171,7 +172,7 @@ function main() {
     console.log("\u274C innerHTML lint FAILED");
     process.exit(1);
   }
-  console.log("\u2705 No unsanitized innerHTML/outerHTML assignments");
+  console.log("No flagged expressions in supported dot-property assignments. Review dynamic sinks and data flow separately; this scan does not prove XSS safety.");
 }
 
 if (require.main === module) {

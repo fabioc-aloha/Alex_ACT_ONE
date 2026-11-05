@@ -17,7 +17,10 @@
  *
  *   node check-print-floor.mjs <figure.svg> [--print-width-in 4.39]
  *
- * Exit codes: 0 = gate passes, 1 = a violation was found, 2 = usage error.
+ * Supports explicit unitless/px font sizes on text, g, and svg elements.
+ * Stylesheets, transforms, and independently styled tspans require a rendered
+ * check and are reported as unsupported, not passed.
+ * Exit codes: 0 = gate passes, 1 = a violation, 2 = error/unsupported input.
  * Node built-ins only.
  */
 
@@ -55,19 +58,23 @@ function parseArgs(argv) {
 
 function parseAttrs(tagText) {
   const attrs = {};
-  const pattern = /([\w-]+)\s*=\s*"([^"]*)"/g;
+  const pattern = /([\w-]+)\s*=\s*(["'])(.*?)\2/g;
   let match;
-  while ((match = pattern.exec(tagText)) !== null) attrs[match[1]] = match[2];
+  while ((match = pattern.exec(tagText)) !== null) attrs[match[1]] = match[3];
   return attrs;
 }
 
 function fontSizeFrom(attrs) {
-  if (attrs["font-size"] !== undefined) return Number(attrs["font-size"]);
+  let value = attrs["font-size"];
   if (attrs.style) {
-    const styleMatch = attrs.style.match(/font-size\s*:\s*([\d.]+)/);
-    if (styleMatch) return Number(styleMatch[1]);
+    if (/(?:^|;)\s*font\s*:/i.test(attrs.style)) usageError("unsupported font shorthand; use an explicit px font-size");
+    const styleMatch = attrs.style.match(/(?:^|;)\s*font-size\s*:\s*([^;]+)/i);
+    if (styleMatch) value = styleMatch[1].replace(/\s*!important\s*$/i, "").trim();
   }
-  return null;
+  if (value === undefined) return null;
+  const size = String(value).trim().match(/^(\d+(?:\.\d+)?|\.\d+)(?:px)?$/);
+  if (!size || !Number.isFinite(Number(size[1]))) usageError(`unsupported font-size "${value}"; use unitless or px sizes`);
+  return Number(size[1]);
 }
 
 function decodeText(raw) {
@@ -92,6 +99,9 @@ function main() {
   } catch (error) {
     usageError(`cannot read ${args.file}: ${error.message}`);
   }
+  if (/<style\b|\btransform\s*[=:]|<tspan\b[^>]*(?:font-size|style\s*=)/i.test(svg)) {
+    usageError("unsupported stylesheet, transform, or styled tspan; measure the rendered text instead");
+  }
 
   const svgTag = svg.match(/<svg\b([^>]*)>/);
   if (!svgTag) usageError(`${args.file}: no <svg> element found`);
@@ -102,10 +112,10 @@ function main() {
     if (parts.length === 4 && Number.isFinite(parts[2])) viewBoxWidth = parts[2];
   }
   if (viewBoxWidth === null && svgAttrs.width) viewBoxWidth = Number(svgAttrs.width);
-  if (!viewBoxWidth) usageError(`${args.file}: cannot determine viewBox width`);
+  if (!Number.isFinite(viewBoxWidth) || viewBoxWidth <= 0) usageError(`${args.file}: cannot determine a positive viewBox width`);
 
   const tokenPattern = /<text\b([^>]*)>([\s\S]*?)<\/text>|<g\b([^>]*?)>|<\/g\s*>/g;
-  const groupStack = [];
+  const groupStack = [{ fontSize: fontSizeFrom(svgAttrs), role: svgAttrs["data-print-role"] ?? null }];
   const elements = [];
   let match;
   while ((match = tokenPattern.exec(svg)) !== null) {
@@ -114,6 +124,7 @@ function main() {
       continue;
     }
     if (match[3] !== undefined) {
+      if (match[0].endsWith("/>")) continue;
       const attrs = parseAttrs(match[3]);
       groupStack.push({ fontSize: fontSizeFrom(attrs), role: attrs["data-print-role"] ?? null });
       continue;
@@ -133,9 +144,7 @@ function main() {
     const snippet = element.text.length > 30 ? `${element.text.slice(0, 30)}...` : element.text;
     const chars = element.text.length;
     if (element.fontSize === null) {
-      violations += 1;
-      console.log(`VIOLATION "${snippet}" : no font-size resolvable (element or ancestor <g>)`);
-      continue;
+      usageError(`cannot resolve font-size for "${snippet}"; specify a unitless or px size on text or its ancestors`);
     }
     const pt = (element.fontSize * printWidthIn * 72) / viewBoxWidth;
     const problems = [];

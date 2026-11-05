@@ -7,7 +7,7 @@ What is working now, what is being built, and what is deliberately out of scope.
 - One payload in the shared Copilot CLI store can serve Copilot CLI, VS Code,
   Microsoft Scout, and the GitHub Copilot app. Scout must enable **Load Copilot
   CLI skills**; a Scout-local install is an unnecessary duplicate that can drift
-- The package declares 60 skills, 15 prompts, 15 always-on instructions, and
+- The package declares 63 skills, 15 prompts, 15 always-on instructions, and
   three MCP servers. The [README](README.md) distinguishes current release
   support from host-level evidence
 - Always-on instructions activate through a preview-first command that asks

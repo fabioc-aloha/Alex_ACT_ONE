@@ -143,6 +143,15 @@ describe('Humanizer voice fallback', () => {
     test('keeps the governance reference aligned to the six-tag taxonomy', () => {
         assert.match(governance, /six-tag taxonomy/i);
     });
+
+    test('preserves current source scope and historical promotional-language caveats', () => {
+        const catalog = read('skills', 'humanizer', 'references', 'pattern-catalog.md');
+        const promotion = catalog.split('### 4.')[1]?.split('### 5.')[0] || '';
+        assert.match(promotion, /historical/i);
+        assert.match(catalog.replace(/\s+/g, ' '), /primary or tertiary sources/i);
+        assert.match(catalog, /Wikipedia.*list.*titles/i);
+        assert.match(humanizer, /Source revision: https:\/\/en\.wikipedia\.org\/w\/index\.php\?oldid=\d+/);
+    });
 });
 
 describe('Compile Brain customization boundary', () => {
@@ -358,6 +367,11 @@ describe('Microsoft Scout setup guidance', () => {
     test('makes duplicate plugin roots and restart requirements checkable', () => {
         assert.match(scoutSetup, /plugin root/i);
         assert.match(scoutSetup, /fully quit(?: and restart)? Scout/i);
+    });
+
+    test('preserves the historical Scout inventory instead of rewriting it as the current count', () => {
+        assert.match(readme, /^> all 60 skills surfaced/m);
+        assert.doesNotMatch(readme, /all 63 skills surfaced/);
     });
 
     test('names every Flint tool expected after Scout restarts', () => {

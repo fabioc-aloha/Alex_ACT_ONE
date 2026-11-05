@@ -4,7 +4,7 @@
 
 **Your coding agent is fast, confident, and too often wrong. Give it a discipline.**
 
-Alex ACT ONE is a pack of 60 skills for GitHub Copilot that changes how the agent works: frame the problem before solving it, look for evidence against its first answer, check a plan against its risks, and verify what it produced before calling it done.
+Alex ACT ONE is a pack of 63 skills for GitHub Copilot that changes how the agent works: frame the problem before solving it, look for evidence against its first answer, check a plan against its risks, and verify what it produced before calling it done.
 
 **See the difference:** the same loaded prompt, "Our dashboard takes 8 seconds to load. Rust rewrite, or Redis caching?", handled two ways. Try it yourself with [the evaluation guide](docs/launch/evaluation-guide.md).
 
@@ -32,7 +32,7 @@ Then, in each app where you want the always-on behavior, run:
 
 One installed copy serves Copilot CLI, VS Code, Microsoft Scout, and the GitHub Copilot app. Full install notes, the from-source option, and the Scout specifics are in [Install](#install).
 
-60 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers. MIT licensed. Current release: `v0.6.0`, published in the Alex ACT Mall.
+63 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers. MIT licensed. Version: `v0.7.0`. Existing command names, bootstrap activation, and optional browser fallback remain available.
 
 Using Muse instead of Copilot? The Muse edition lives at [Alex_ACT_ONE_Muse](https://github.com/fabioc-aloha/Alex_ACT_ONE_Muse)
 
@@ -60,7 +60,7 @@ banners, then check that what rendered says what you meant.
 write project-specific skills from work you keep repeating, and consolidate what
 a session learned into something reusable.
 
-60 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers.
+63 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers.
 Not every surface reaches every app — see [Where Alex ACT ONE Works](#where-alex-act-one-works).
 
 Large package by design: one install brings all of it, so expect noticeably
@@ -85,7 +85,7 @@ How to think through a problem before acting on it.
 | `critical-thinking` | Challenge what you think is right — alternative hypotheses, missing data, evidence quality, bias detection,… | — |
 | `problem-framing-audit` | Step-back protocol — restate, generalize, specialize, invert, ask why, pre-mortem, check stakeholders, and audit… | — |
 | `adversarial-review` | Structured skepticism for high-stakes decisions and reviews | — |
-| `deep-review` | Adversarial code review with three parallel perspectives — Advocate, Skeptic, Architect — that create productive… | — |
+| `deep-review` | Select the canonical code-review deep mode without requiring a fixed agent topology | — |
 | `anti-hallucination` | Prevent fabricated facts, invented APIs, and citation confabulation at the point of generation | — |
 | `risk-analysis` | Probability × impact risk assessment for curation and planning decisions | — |
 | `ethical-reasoning` | Reason through ethical tensions using moral foundations, constitutional principles, and a five-step decision… | — |
@@ -102,7 +102,7 @@ Writing and changing code that survives review.
 | `test-driven-development` | Use for any feature, bug fix, refactor, or behavior change — enforces RED-GREEN-REFACTOR | — |
 | `systematic-debugging` | Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes | — |
 | `git-workflow` | Apply consistent git practices for branch hygiene, safe commits, and recovery from common mishaps (lost commits,… | — |
-| `plan` | Use when the user wants a plan instead of execution, or before any non-trivial implementation (multi-file,… | — |
+| `plan` | Use native planning with explicit approval and verification, without compulsory repository plan files | — |
 | `spike` | Use when the user wants to feel out an idea before committing to a real build | — |
 
 ### Prose and documentation
@@ -126,6 +126,7 @@ Deciding what to draw, drawing it, and checking it says what you meant.
 
 | Skill | What it does | Needs |
 | --- | --- | --- |
+| `render-chart` | Orchestrate the Chart Brief, data-preserving treatments, rendering, and verification | Flint MCP |
 | `chart-big-idea` | Distill the one-sentence Big Idea, story arc, audience, and style stance for a chart BEFORE picking a chart type | — |
 | `chart-vocabulary` | Catalog of chart types organized by seven communication goals (comparison, change over time, proportion,… | — |
 | `chart-interpretation` | Read a chart someone else made — image, screenshot, HTML, or dashboard — and extract insights, patterns,… | — |
@@ -147,6 +148,7 @@ Moving a document between formats without losing its structure.
 
 | Skill | What it does | Needs |
 | --- | --- | --- |
+| `convert` | Select the existing format-specific converter and validate its output | Pandoc |
 | `docx-to-md` | Convert Word documents (.docx) to clean Markdown with image extraction and pandoc cleanup | Pandoc |
 | `html-to-md` | Convert HTML documents to clean Markdown via pandoc | Pandoc |
 | `md-to-html` | Convert Markdown to standalone HTML pages with embedded CSS, images, and Mermaid diagrams | Pandoc |
@@ -167,6 +169,7 @@ Auditing, extending, and consolidating the agent.
 | `project-capability-authoring` | Create tested project-local skills and scripts from demonstrated repeated work | — |
 | `token-waste-elimination` | Audit active brain artifacts for context cost, duplicated guidance, oversized routing files, and stale metadata | — |
 | `proactive-awareness` | Applies cross-session context recovery, uncommitted-work detection, and focus routing once proactive behavior has… | — |
+| `project-status` | Report a read-only project checkpoint using current Git, handoff, tasks, and applicable QA | — |
 | `evaluate-before-adopting` | Decide whether a plugin or skill from a catalog is worth installing | — |
 
 ### Setup and platform
@@ -178,8 +181,8 @@ Getting the plugin and its dependencies working.
 | `bootstrap-core` | Activates, verifies, repairs, or removes this plugin's user-scope runtime instructions from canonical installed… | — |
 | `bootstrap-project` | Previews and applies this plugin's repository scaffold, portable workspace QoL settings, and project Copilot… | — |
 | `setup-dependencies` | Check which optional dependencies this plugin can use, report what each missing one costs, and install them with… | — |
-| `platform-awareness` | VS Code Copilot platform changes affecting how tools are used: deferred-tool categories with example search… | — |
-| `browser-tools` | Use VS Code 1.127+ browser tools (open_browser_page, screenshot_page, click_element, navigate_page,… | — |
+| `platform-awareness` | Discover current host capabilities and verify platform claims against native help and official documentation | — |
+| `browser-tools` | Use native browser capabilities first, retaining registered fallback tools for missing scenarios | — |
 | `terminal-command-safety` | Provides terminal output-capture, hung-command, and platform-behavior procedures while the resident instruction… | — |
 | `install-visual-companions` | Offer to install marketplace plugins that extend visual-authoring workflows: chart rendering, screenshot… | — |
 | `setup-enterprise-stack` | Emit and (with consent) install the Copilot CLI settings block for the public Microsoft ecosystem: Azure, Fabric,… | — |
@@ -259,6 +262,11 @@ copy is duplicate state and can drift independently. Verify the loaded root and
 version before activation or Scout MCP registration. The other three surfaces
 are not automatic in the same way, and this table says which are.
 
+For `v0.7.0`, automated installed-package checks and a live CLI project-checkpoint
+probe passed. VS Code 1.145.0 was detected, but new-release activation in VS Code,
+Scout, and the Copilot app has not yet been rechecked. The table describes
+supported delivery; the dated observations below remain historical evidence.
+
 | Where you use Copilot | Skills | Instructions | Slash commands | MCP servers |
 | --- | --- | --- | --- | --- |
 | Copilot CLI | All | All, after activation | All | All, from the manifest |
@@ -277,7 +285,8 @@ slash commands were not exhaustively invoked. This is historical host evidence,
 not a `v0.3.5` activation claim.
 
 The Scout row was re-checked against `v0.2.0` on 2026-09-13 inside a live session:
-all 60 skills surfaced, all 15 instructions were active in context, none of the 15 slash
+
+> all 60 skills surfaced, all 15 instructions were active in context, none of the 15 slash
 commands were reachable, and both registered MCP servers answered a protocol
 handshake — 6 tools from Flint, 24 from Playwright.
 
@@ -473,8 +482,10 @@ and Replicate adds a capability rather than unblocking one.
 
 That fallback has a limit worth knowing before you rely on it. A host can have a
 browser and still refuse to open `file://`, which is the case that matters for
-checking an artifact you just wrote to disk. VS Code opens local files with no
-flags; Scout's built-in browser blocks them; Copilot CLI has no browser at all.
+checking an artifact you just wrote to disk. VS Code documents native browser
+verification, and current Copilot CLI releases include a browser-use plugin.
+Local-file, console, remote, and authentication parity still depend on the
+host, harness, and policy; retain the fallback for unavailable or unverified cases.
 The package registers its own server as `alex-playwright` — a distinct name, so
 it sits alongside a host's built-in browser tools rather than shadowing them.
 

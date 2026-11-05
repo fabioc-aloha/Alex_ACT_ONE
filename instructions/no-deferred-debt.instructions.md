@@ -4,45 +4,16 @@ applyTo: "**"
 lastReviewed: 2026-08-18
 ---
 
-# No Deferred Debt
+# no-deferred-debt
 
-If a turn surfaces tech debt — stale references, dead links, outdated content, dead-letter prompts, hardcoded names that no longer exist — fix it in the same turn. Do not log it as "non-blocking" or "follow-up workstream." The cheapest moment to fix the debt is the moment it surfaced.
+## Activation and resident floor
 
-## Rule
+When a task exposes a directly related stale reference, broken route, or implementation debt.
 
-When any of the following appears in a turn's output:
+Repair task-coupled debt within approved scope. Do not turn a single-file fix into unrelated work or bypass approval. If blocked by a real decision or architectural change, name the exact blocker in the existing task record; never hide a broken state behind a success claim.
 
-- A `grep`/`Select-String` surfaces references to artifacts I just deleted
-- A regen reveals stale counts in a manifest
-- A file lookup returns a path that no longer exists
-- A doc enumerates skills/instructions/prompts that are gone
-- A script hardcodes names I just renamed or removed
-- A link in a markdown file points to something that 404s locally
-- A `description` or `applyTo` references concepts no longer in the brain
+## Required execution
 
-**Fix it before declaring the turn done.** Do not write "non-blocking, deferred to next pass" unless the debt is genuinely architectural and requires its own decision cycle (in which case open an explicit decision artifact — ADR draft, proposal, or HANDOFF entry naming the *specific* decision the deferral is waiting on).
+When the trigger requires the detailed workflow, load and follow [code-review](../skills/code-review/SKILL.md) in **completion** mode, including its runtime-no-deferred-debt reference where applicable. These guardrails apply before loading; a hyperlink alone is not execution.
 
-"I'll fix it in the next session" is not an acceptable reason. The context is already loaded. The diff is already small. The reviewer is already in the file.
-
-## When deferral IS legitimate
-
-| Deferral reason | Acceptable? |
-|---|---|
-| "Not in scope of this turn" | No — if I spotted it, it's in scope now |
-| "Needs user decision" | Yes — but write the specific question in HANDOFF.md or a proposal, don't just leave the debt |
-| "Requires architectural redesign" | Yes — open ADR draft naming the question, don't leave a silent broken state |
-| "Would take more than 10 minutes" | Borderline — if it's mechanical, do it; if genuinely complex, name the deferral concretely with timeline |
-| "Documentation update only" | No — docs that lie are debt |
-| "Test data" | No — test data with dead refs makes tests untrustworthy |
-
-## Anti-patterns
-
-| Came out | Correction |
-|---|---|
-| "Known tech debt (non-blocking, deferred)" with no decision-blocker named | Either fix it or name the specific decision waiting |
-| Logging debt in commit message and shipping the broken state | The commit message names the debt; the next commit pays it. Don't ship debt with attribution. |
-| Spotting a broken link mid-task and skipping past it because "different task" | Same task. The link is now your responsibility because you saw it. |
-
-## Composition
-
-Composes with the `lint-discipline` instruction: lint-discipline covers files I touched; this rule covers debt I surfaced regardless of whether I touched its file.
+Use native skill discovery first. Links are relative to the canonical installed instruction source, not this activated profile copy or an adopter checkout. If discovery is unavailable, locate the canonical alex-act-one package through native plugin discovery and use its bootstrap preview `routing.skillRoutes` and `routing.canonicalRoot` to resolve the linked skill. Report a missing owner/reference explicitly; never skip a required check or claim it completed. Loading grants no additional write, installation, send, or publication authority.

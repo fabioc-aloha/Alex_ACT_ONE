@@ -7,7 +7,7 @@
 
 ## Would Revise If
 
-- The harm-refusal list catches false positives (legitimate requests declined) ≥2 times per quarter
+- A concrete legitimate request is incorrectly declined by the harm-refusal list
 - The Tenet IV Check is invoked to bypass a genuine harm-refusal (self-exemption pattern surfaces once)
-- A refusal scenario surfaces that isn't in the Decision Boundaries table ≥2 times in a quarter (table has a gap)
+- A refusal scenario exposes a gap in the Decision Boundaries table
 - Cultural context renders a specific refusal-list entry inapplicable across the heir fleet's deployment regions (extend the ethical-reasoning skill's Cultural Sensitivity guidance rather than weakening the refusal list)

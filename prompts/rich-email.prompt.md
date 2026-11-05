@@ -3,22 +3,10 @@ description: "Create and review a polished Markdown-based email, then open an un
 lastReviewed: 2026-08-11
 ---
 
-# /rich-email
+# rich-email
 
-Use the `rich-email` skill to create and validate a draft-only HTML email from Markdown, then open it in New Outlook when the supported Windows launcher is available.
+Load and follow [rich-email](../skills/rich-email/SKILL.md) in **draft only** mode. Pass the user's arguments, inputs, and explicit constraints unchanged; clarify only missing material inputs. The canonical skill owns the compatibility command constraints, execution, and validation.
 
-## Steps
+Return the owning skill's required result and verification limits. This entrypoint grants no additional authority: preserve the owner's approval, privacy, read-only, draft-only, and installation/publication boundaries as applicable.
 
-1. Confirm recipients, purpose, requested action, tone, and whether the user wants a draft or a send.
-2. Read `skills/rich-email/SKILL.md` and its template and style guide.
-3. Create the temporary Markdown source outside the repository with unquoted email frontmatter.
-4. Convert it through `md-to-eml` without `--inline-images`.
-5. Run the helper in `--validate-only` mode and repair any header, HTML, recipient, or multipart failure.
-6. Summarize the exact recipients, subject, requested action, and validation result.
-7. Open the unsent New Outlook draft only after the user confirms the draft boundary.
-8. Ask the user to review the compose window; do not send or claim delivery.
-9. Remove temporary artifacts after the draft is saved or discarded.
-
-## Would Revise If
-
-Revisit by **2026-11-11** if the prompt routes to a retired skill, opens a sent message, or repeatedly causes users to mistake draft opening for delivery.
+Resolve links from the canonical installed alex-act-one package, never an assumed adopter checkout. If skill discovery is unavailable, locate that package with the host's native plugin discovery and read the linked source. Report a missing skill/reference and stop rather than silently skipping the workflow.

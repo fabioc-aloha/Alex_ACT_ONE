@@ -182,5 +182,9 @@ Do not ship PNGs unless required — they double the asset weight and can drift 
 
 Revisit this skill if any of the following fires:
 
-- A heir configures a brand override and reports the config schema is too tight or too loose (missing fields they need, or fields they never use) ≥2 times in a quarter
+- A concrete brand override cannot be represented by the config schema without bypassing its intended extension points
 - The default Alex brand config drifts from the built-in fallback in the script (two sources of truth in disagreement) — one of them wins on the next audit
+
+## Compatibility command constraints: banner
+
+Preserve the requested title, subtitle, watermark, output location, and approved brand configuration. Use the svg-banner generator, not image generation.

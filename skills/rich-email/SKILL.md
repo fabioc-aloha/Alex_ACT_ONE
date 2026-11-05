@@ -83,3 +83,7 @@ git status --short
 ## Would Revise If
 
 Revisit if New Outlook cannot be opened reliably on supported Windows hosts, any draft is sent without explicit authorization, or the capability proves unrelated to Document Tools ownership.
+
+## Compatibility command constraints: rich-email
+
+Draft only. Confirm recipients and the exact message boundary; validate before opening New Outlook. Never send or imply delivery.

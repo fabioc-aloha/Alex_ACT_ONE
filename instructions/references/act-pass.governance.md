@@ -24,8 +24,8 @@ The `critical-thinking` instruction is the *content* companion to this *procedur
 
 ## Would Revise If
 
-Revisit this pass structure if any of the following occur within a quarter:
+Revisit this pass structure if:
 
-- Medium/high-stakes decisions pass the protocol but still produce repeated avoidable regressions
-- Trimmed-pass outputs repeatedly miss disconfirmers that later invalidate the chosen approach
-- Full-pass usage drops to near-zero on clearly high-stakes operations (ritual becoming decorative)
+- A medium/high-stakes decision passes the protocol despite a material defect the checks should have caught
+- A trimmed pass misses an available disconfirmer that invalidates the chosen approach
+- A clearly high-stakes operation bypasses the required full pass

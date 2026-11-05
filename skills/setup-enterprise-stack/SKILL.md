@@ -186,10 +186,13 @@ Sunset or revise this skill if any of the following fires:
 - Microsoft ships a new plugin in the same ecosystem that users consistently install alongside these (block is incomplete).
 - The `copilot plugin marketplace add` CLI syntax changes (install flow is broken on emit).
 
-Track outcomes in the maintaining repo's curation log.
 
 ## Related
 
 - [`/alex-act-one setup-enterprise`](../../prompts/setup-enterprise.prompt.md) — namespaced slash-command entry point
 
 - Steward's user-brain inventory § 184 — source spec for this block
+
+## Compatibility command constraints: setup-enterprise
+
+Decide repository versus explicitly requested user scope, then emit/install/audit. Default to emit; preserve unrelated settings and require install consent.

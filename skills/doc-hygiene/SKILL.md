@@ -189,6 +189,6 @@ The yield is decision buckets, not a per-file list. Surface the buckets and let 
 
 ## Would Revise If
 
-Revise if the anti-drift rules let stale counts ship to released artifacts twice in a quarter, or if the 'living vs historical' classification produces disputes the rules cannot resolve.
+Revise if the anti-drift rules let a stale count ship to a released artifact, or if the 'living vs historical' classification produces a dispute the rules cannot resolve.
 
 By **2026-11-07**, revise the code-documentation ladder if two reviews still find stale mechanism comments, two projects duplicate one claim across three or more layers, or a recurring documentation artifact cannot be classified by the ladder.

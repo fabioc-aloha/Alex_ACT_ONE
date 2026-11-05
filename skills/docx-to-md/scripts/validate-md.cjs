@@ -103,12 +103,14 @@ function checkImages(content, baseDir) {
   while ((m = htmlRe.exec(content)) !== null) dests.push(m[1]);
 
   for (const dest of dests) {
-    if (/^data:/i.test(dest) || /^[a-z][a-z0-9+.-]*:/i.test(dest) || dest.startsWith("//")) continue;
-    count++;
-    if (path.isAbsolute(dest) || /^[a-zA-Z]:[\\/]/.test(dest)) {
+    if (dest.startsWith("//")) continue;
+    if (path.isAbsolute(dest) || path.win32.isAbsolute(dest) || /^file:/i.test(dest)) {
+      count++;
       issues.push(`image uses an absolute path: ${dest}`);
       continue;
     }
+    if (/^[a-z][a-z0-9+.-]*:/i.test(dest)) continue;
+    count++;
     const decoded = (() => { try { return decodeURIComponent(dest); } catch { return dest; } })();
     const target = path.resolve(baseDir, decoded.split("#")[0].split("?")[0]);
     if (!fs.existsSync(target)) issues.push(`image file does not exist: ${dest}`);

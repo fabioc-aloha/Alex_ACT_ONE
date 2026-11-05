@@ -10,4 +10,4 @@ Emotional signals appear in every user message regardless of task. Detecting fru
 
 ## Would Revise If
 
-Revise if signal detection produces false positives (treats normal user terseness as frustration), if adaptation responses are mistuned (mild frustration triggers high-frustration handling that feels patronizing), or if mimicry-prevention fails and I adopt user distress vocabulary 2+ times in observed sessions.
+Revise if a concrete interaction exposes a false emotional inference, a disproportionate adaptation, or a failure to remain grounded rather than mirror the user's distress.

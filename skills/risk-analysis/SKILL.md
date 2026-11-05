@@ -4,66 +4,10 @@ description: Probability × impact risk assessment for curation and planning dec
 lastReviewed: 2026-07-31
 ---
 
-# Curation Risk Analysis
+# risk-analysis
 
-> **ACT Tenet VI**: Match rigor to stakes. Reversible decisions deserve speed; irreversible ones deserve doubt.
+Compatibility entrypoint for curation-specific likelihood/impact and approval routing.
 
-Applied to curation work: accepting a bad skill is reversible (revert next patch). Shipping a broken release to consumers is expensive to undo.
+Load and follow [critical-thinking](../critical-thinking/SKILL.md) in **curation** mode before proceeding. Pass the original inputs and constraints; use its selected reference and output contract. Do not copy its procedure or load this alias again from the owner.
 
-## Risk Categories (Curation-Specific)
-
-| Category | Examples |
-|----------|----------|
-| **Quality** | Skill has bugs, stale references, or misleading content |
-| **Coherence** | New content conflicts with existing brain architecture |
-| **Scope creep** | Feature belongs in a different repo or surface (not Core / Mall / Steward) |
-| **Token budget** | Addition pushes Core past 25K instruction budget |
-| **Breaking change** | Rename/remove that breaks heir upgrades |
-| **Staleness** | Store/skill stays past its useful life, misleading by presence |
-
-## Risk Matrix for Curation Decisions
-
-| | Low Impact | Medium Impact | High Impact |
-|---|-----------|---------------|-------------|
-| **High Likelihood** | Ship with note | Gate on review | Full ACT pass + ADR |
-| **Medium Likelihood** | Ship | Ship with note | Gate on review |
-| **Low Likelihood** | Ship | Ship | Ship with note |
-
-### Impact Calibration for This Repo
-
-| Level | Curation Impact |
-|-------|-----------------|
-| **High** | Breaks heir upgrades, violates a governing project rule, token budget breach |
-| **Medium** | Quality gap ships to heirs, coherence drift, stale reference |
-| **Low** | Cosmetic issue, suboptimal wording, minor inconsistency |
-
-### Likelihood Calibration
-
-| Level | Probability | Curation Signal |
-|-------|-------------|-----------------|
-| **High** | >60% | Multiple heirs affected, or same issue seen before |
-| **Medium** | 20-60% | Plausible failure mode, no prior occurrence |
-| **Low** | <20% | Theoretical risk, strong mitigations in place |
-
-## Decision Routing by Risk Score
-
-| Score (L×I) | Route |
-|-------------|-------|
-| Low × Low | Ship immediately, log in curation-log |
-| Any Medium | Ship with trimmed ACT pass visible in curation-log |
-| Any High | Full ACT pass, write ADR, require explicit approval |
-| High × High | Surface as an ADR and raise it directly with the owner before acting |
-
-## Risk Register (Running)
-
-Maintained in your project's audit trail (Alex ACT itself uses `operations/ledgers/brain-qa-changelog.md`) — every entry carries implicit risk assessment via the Severity column. Explicit risk registers warranted only for:
-
-- Release candidates (per your project's release process)
-- Adopting an external artifact that scored below your project's acceptance bar
-- Structural changes to your project's brain architecture
-
-## Would Revise If
-
-Revise if any of the following fires:
-
-- A curation decision that scored Low×Low ships and produces fleet-breaking impact ≥1 time (impact calibration too lax)
+If the owner is unavailable, report the missing capability and stop. This alias grants no additional write, installation, or publication authority.

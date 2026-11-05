@@ -6,11 +6,11 @@ lastReviewed: 2026-09-19
 
 # Bootstrap Core
 
-Activate the plugin's own runtime with nothing else installed. Copilot plugins
-expose skills and commands but do not load `.instructions.md` files as plugin
-components. This skill copies only the canonical instruction sources the plugin
-manifest declares, plus their receipt, to the active user instruction location
-after explicit consent.
+Activate this package's legacy instruction delivery with nothing else installed.
+Current Copilot clients document native plugin rules, but that is not proof this
+legacy package's instructions are active. Until the native-delivery compatibility
+gate passes on supported hosts, this skill copies only manifest-declared
+canonical instructions and their receipt after explicit consent.
 
 ## Preview First
 
@@ -32,6 +32,13 @@ When `COPILOT_HOME` is an absolute path, the default target is
 `--target-instructions <path>` only for an explicit alternate target or a
 disposable test. Use `--workspace-instructions <path>` to recursively report
 possible workspace overlap before applying user-scope instructions.
+
+The preview also exposes `routing.canonicalRoot` and `routing.skillRoutes`.
+Resolve instruction-to-skill links against the canonical installed source,
+not the activated profile directory. Missing, undeclared, or externally
+redirected skill owners block activation before any writes. Native skill
+discovery remains the preferred loading mechanism; the routing map is a
+read-only fallback, not evidence that a skill was invoked.
 
 Instructions activate per app, not per machine. Each app that sets its own
 `COPILOT_HOME` gets its own target, so activation runs once per app.
@@ -134,3 +141,7 @@ Files owned by another plugin's receipt are never removed.
 Revise if this plugin alone cannot activate every declared
 source, a preview mutates state, a receipt claims a file it does not own, source
 resolution fails in a delivered plugin, or removal deletes modified bytes.
+
+## Compatibility command constraints: bootstrap-core
+
+Preview exact profile actions first. Apply only after explicit activation/repair consent; removal needs its own explicit consent. Preserve foreign or modified owned files.

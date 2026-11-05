@@ -438,7 +438,9 @@ test('compile contract requires semantic preservation review before approval', (
     const skill = fs.readFileSync(compileSkill, 'utf8');
     const prompt = fs.readFileSync(compilePrompt, 'utf8');
 
-    for (const content of [skill, prompt]) {
+    assert.ok(prompt.includes('](../skills/compile-brain/SKILL.md)'));
+    assert.match(prompt, /load and follow/i);
+    for (const content of [skill]) {
         assert.match(content, /Semantic Preservation Gate/);
         assert.match(content, /behavioral invariants/i);
         assert.match(content, /relative links/i);

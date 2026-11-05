@@ -6,6 +6,7 @@ Debt surfaces in any context (script run, doc audit, file edit, command output).
 
 ## Would Revise If
 
-- **Date-based**: 2026-08-23. If by then the rule has produced no observed change in deferral-language in commits or HANDOFF entries, sunset.
-- **Event-based**: at 10 debt-surfacing turns where the rule had opportunity to fire, audit. If bypassed ≥3 times with "non-blocking deferred" framing and no decision-blocker named, sunset.
-- **Scope-creep**: if the rule turns single-file fixes into rabbit holes that consistently double the turn's scope ("fix now" overhead > "fix later" cost) ≥3 times in a quarter, narrow the rule or codify a batching exception.
+- A known defect is deferred without identifying the decision that blocks its resolution.
+- The prescribed fix introduces a regression or bypasses required user approval.
+- A concrete task expands into unrelated work because the scope boundary is unclear; clarify
+  that boundary rather than creating a debt-surfacing counter.

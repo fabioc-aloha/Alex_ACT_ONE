@@ -62,7 +62,7 @@ At the standard 640-unit viewBox that reduces to `px × 0.4939`. Floors:
 node scripts/check-print-floor.mjs <figure.svg>
 ```
 
-It exits non-zero on any text below its class floor, on below-floor text missing its `data-print-role` marker, and on `micro` text at or over 40 characters that should have been promoted to `note`. A figure ships only when the checker passes.
+For supported SVGs it exits with code 1 on below-floor text, missing role markers, or `micro` text at or over 40 characters that should be promoted to `note`. It supports explicit unitless/px font sizes on text, groups, and the root SVG. Stylesheets, transforms, styled tspans, and unresolved sizes exit with code 2: measure the rendered text instead. Unsupported is not a pass. A supported figure must pass the checker; the meaning of its role markers still requires review.
 
 **The micro marker is not an escape hatch**. It exists for text the reader never needs to read at size (attribution, hash stamps). Marking instructional content `micro` to clear the gate is gaming it — the reader still cannot read it. The `note` role's auto-promote (≥40 chars) catches the class where this happens by accident.
 
@@ -273,11 +273,9 @@ Used for dashboard-shaped figures. From dashboard-design literature (Wexler / Sh
 
 ## Would revise if
 
-The floor formula, palette, or composition idioms have failed if any of the following occur within 90 days:
+Revise the floor formula, palette, or composition idioms if:
 
 - A figure shipped through this skill's discipline fails a print-legibility audit that this skill was supposed to prevent
 - The `data-print-role="note"` auto-promote rule (≥40 chars) misses a class of content it should catch
-
-Track outcomes in your project's own curation or decision log.
 
 The floor math, palette semantics, and composition idioms are book-tested across 53 shipped figures and 368 pages.

@@ -4,29 +4,16 @@ applyTo: "**/*"
 lastReviewed: 2026-08-18
 ---
 
-# Critical Thinking
+# critical-thinking
 
-Challenge what you think is right through structured skepticism.
+## Activation and resident floor
 
-## Core Protocol
+When drawing a conclusion or choosing a material technical approach.
 
-1. **Alternative hypotheses (Two-Hypothesis Floor)** — For every conclusion at medium or high activation, generate at least one competing explanation **and explicitly state both before committing to either**. The visible marker is a one-line stub at the start of the response: `Considered: A vs B — going with A because <specific reason>.` Both alternatives must cite a specific reason ("because" or "given") — performative alternatives without reasons fail the rule (Wason 1960; Nickerson 1998; Heuer 1999).
-2. **User-framing audit** — Is the user's framing the right one, or have I anchored on it because they stated it confidently? User confidence ("clearly", "obviously", "just do X") is a sycophancy trigger, not evidence. Challenge before accepting.
-3. **Missing data** — What evidence would you need to be more confident? What's absent?
-4. **Evidence quality** — Is the source reliable? Is the sample size adequate? Is it reproducible?
-5. **Bias detection** — Check for confirmation bias, survivorship bias, anchoring, availability heuristic
-6. **Falsifiability** — What would prove this wrong? If nothing could, the claim is unfalsifiable
-7. **Adversarial review** — Argue the opposite position. If you can't steelman the counter-argument, you don't understand the problem
+Challenge assumptions and seek disconfirming evidence. Keep a two-hypothesis floor for material conclusions. Do not treat user confidence or fluent prose as evidence; do not repeat a full pass already supplied by the user.
 
-> **Frame audit comes first.** Before this protocol fires, run the Discipline -1 frame audit per the `problem-framing-audit` instruction on any non-trivial request. Solving the wrong problem precisely is the most expensive class of error.
+## Required execution
 
-## When to Apply
+When the trigger requires the detailed workflow, load and follow [critical-thinking](../skills/critical-thinking/SKILL.md) in **reasoning** mode, including its runtime-critical-thinking reference where applicable. These guardrails apply before loading; a hyperlink alone is not execution.
 
-- Before committing to a technical approach
-- When reviewing proposals or architecture decisions
-- When evidence "feels" right but hasn't been verified
-- When consensus forms too quickly (groupthink signal)
-
-## Skill Reference
-
-Full framework in the `critical-thinking` skill, alongside `deep-review` and related framework skills.
+Use native skill discovery first. Links are relative to the canonical installed instruction source, not this activated profile copy or an adopter checkout. If discovery is unavailable, locate the canonical alex-act-one package through native plugin discovery and use its bootstrap preview `routing.skillRoutes` and `routing.canonicalRoot` to resolve the linked skill. Report a missing owner/reference explicitly; never skip a required check or claim it completed. Loading grants no additional write, installation, send, or publication authority.

@@ -1,16 +1,17 @@
 #!/usr/bin/env node
 /**
- * check-claims.mjs - render-verify helper: verify prose numbers against a dataset.
+ * check-claims.mjs - render-verify helper: numeric membership and explicit ratios.
  *
  * Two modes:
  *
  * 1. Numbers-in-dataset (Prose-coupling check, Numeric claims row):
  *      node check-claims.mjs --prose <doc.md> --data <dataset.json>
- *    Extracts every numeric token from the prose and reports which ones do not
+ *    Extracts numeric candidates from the prose and reports which ones do not
  *    appear in the dataset. A token matches when a dataset value equals it,
  *    either at face value or at the pre-suffix figure (so "$4.2M" matches a
  *    dataset storing 4200000 or 4.2; "78%" matches 78 or 0.78). Bare years
- *    (1900-2099, no suffix) are skipped: they are dates, not claims.
+ *    (1900-2099, no suffix) are skipped. This heuristic does not verify units,
+ *    entity attribution, dates, or whether the prose claim is true.
  *
  * 2. Ratio claim (Step 4 arithmetic check):
  *      node check-claims.mjs --data <dataset.json> --part <n|a.b.c> \
@@ -64,13 +65,13 @@ const SUFFIX_MULTIPLIER = { K: 1e3, M: 1e6, B: 1e9 };
 
 function extractProseNumbers(text) {
   const tokens = [];
-  const pattern = /\$?\d[\d,]*(?:\.\d+)?\s*(?:[KMB](?![a-z])|%|×)?/g;
+  const pattern = /[-+\u2212]?\$?\d[\d,]*(?:\.\d+)?\s*(?:[KMB](?![a-z])|%|×)?/g;
   let match;
   while ((match = pattern.exec(text)) !== null) {
     const raw = match[0].trim();
     const suffixMatch = raw.match(/([KMB]|%|×)$/);
     const suffix = suffixMatch ? suffixMatch[1] : "";
-    const numericText = raw.replace(/[$,\s]/g, "").replace(/([KMB]|%|×)$/, "");
+    const numericText = raw.replace(/[$,\s]/g, "").replace(/\u2212/g, "-").replace(/([KMB]|%|×)$/, "");
     const base = Number(numericText);
     if (!Number.isFinite(base)) continue;
     // Skip bare years: dates, not numeric claims.
@@ -163,7 +164,7 @@ function main() {
       console.log(`${status} line ${token.line}: ${token.raw}`);
     }
     console.log(
-      `numbers check: ${tokens.length - missing.length}/${tokens.length} prose numbers appear in the dataset (${datasetNumbers.length} dataset values searched)`,
+      `numeric membership: ${tokens.length - missing.length}/${tokens.length} candidates appear in the dataset (${datasetNumbers.length} dataset values searched); attribution and units require semantic review`,
     );
     if (missing.length > 0) failed = true;
   }

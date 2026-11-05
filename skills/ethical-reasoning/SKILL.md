@@ -87,6 +87,13 @@ Continuously evaluate output against these principles. When detecting potential 
 
 ## Would Revise If
 
-- The 5 foundations produce no measurable framing effect in observed ethical decisions over a quarter
+- A concrete decision exposes a material harm, privacy, or consent boundary the ethical framing missed
 - Privacy by Design or Responsible AI principles are cited in code review without being operationalized at actual decision points
 - Cultural context renders specific principles inapplicable across the heir fleet's deployment regions
+
+## Runtime contract references
+
+Load only the reference selected by the triggering instruction; do not replay all runtime contracts for unrelated work. These references add no authority and do not call the instruction again.
+
+- **persistence**: [pii-memory-filter](references/runtime-pii-memory-filter.md)
+- **safety**: [worldview](references/runtime-worldview.md)

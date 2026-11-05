@@ -58,3 +58,7 @@ capability. Do not represent `declared` or `explicitly-routed` as `runnable`.
 Revise by 2026-11-19 if the analyzer must execute target code to produce useful
 findings, if two target roots show post-assessment hash drift, or if static
 routes repeatedly misrepresent runtime behavior.
+
+## Compatibility command constraints: assess-brain
+
+Require an explicit local target root. Use the canonical bundled analyzer, never target-owned code. Return the read-only JSON findings and immutability evidence.

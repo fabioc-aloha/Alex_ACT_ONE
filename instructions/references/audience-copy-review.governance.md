@@ -18,17 +18,10 @@ moment I write them.
 
 ## Would Revise If
 
-- The gate fires on internal artifacts (`plan.md`, `HANDOFF.md`, session notes, commit messages)
-  ≥2 times — the Audience Test table has a gap, or doubt is not resolving toward silence as
-  written.
-- The gate stays silent on a genuinely customer-facing artifact that later needed a copy pass ≥2
-  times — the table under-enumerates and needs the missed surface added explicitly.
-- Findings are applied without approval ≥1 time when I authored the text myself — the
-  self-approval carve-out in "When I Am the Author" is not strong enough and needs to become a
-  hard refusal rather than a stated obligation.
-- The pass adds a visible turn cost on short artifacts (a two-line release note) that users
-  consistently skip ≥3 times — add a length floor below which the gate stays silent, rather than
-  weakening the rule for long copy.
-- Copywriter Mode is invoked by this gate but the taxonomy proves unusable without the skill
-  loaded ≥2 times — the four always-on obligations are too thin a summary and need the tag
-  definitions inlined, accepting the token cost.
+- The gate fires on an internal artifact despite the Audience Test's silence rule.
+- The gate stays silent on a customer-facing artifact that needs a copy review.
+- Findings are applied without approval, including when the assistant authored the text.
+- The pass adds disproportionate overhead to a short artifact; refine the materiality boundary
+  rather than weakening approval for substantive copy.
+- The resident summary cannot support consistent taxonomy use; improve its routing to the
+  skill before adding more always-on content.

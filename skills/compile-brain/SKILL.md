@@ -328,3 +328,7 @@ until that integration is confirmed.
 - "Improve `.github/skills/release/SKILL.md` and show me the draft."
 - "Turn the text below into a reusable `triage` skill."
 - "Compile the checklist in my previous message into an instruction file."
+
+## Compatibility command constraints: compile-brain
+
+Require an explicitly selected source. Return the draft and preservation receipt; do not overwrite the source before the separate approval boundary.

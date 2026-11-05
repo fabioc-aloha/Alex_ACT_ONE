@@ -95,6 +95,19 @@ is still true rather than inheriting last release's word.
 Verified means someone ran it there. "Not yet tested" is an acceptable entry and
 a better one than a guess.
 
+For native-first candidates, distinguish native skill discovery/invocation from
+native rule activation. Keep legacy bootstrap, receipt ownership, aliases, and
+browser fallback until the corresponding target-host scenarios pass. An empty
+native instruction list is not an activation success. The bootstrap preview's
+`routing.canonicalRoot` and `routing.skillRoutes` must resolve instruction owners
+from an installed package, not the adopter's working directory.
+
+Run the compatible routing suite before considering a delivery change:
+
+```text
+node --test tests/native-compatibility.test.mjs tests/activation-routing.test.mjs tests/activation-readiness.test.mjs
+```
+
 > Added 2026-09-07. The table said Scout was "Verified" across every surface
 > while slash commands did not reach it at all and no MCP server was registered.
 

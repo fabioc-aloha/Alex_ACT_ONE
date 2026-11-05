@@ -155,6 +155,30 @@ function expectedFiles() {
     }));
 }
 
+function instructionSkillRoutes(files) {
+    const manifest = readJson(MANIFEST_PATH);
+    const skills = new Map(manifest.assets.skills.map((entry) => [entry.name, entry.path]));
+    const canonicalRoot = fs.realpathSync(CORE_ROOT);
+    const routes = [];
+    for (const file of files) {
+        const links = file.bytes.toString('utf8').matchAll(/\]\(\.\.\/skills\/([a-z0-9-]+)\/SKILL\.md\)/g);
+        for (const [, skill] of links) {
+            const sourceRelativePath = `skills/${skill}/SKILL.md`;
+            const destination = path.join(CORE_ROOT, sourceRelativePath);
+            if (skills.get(skill) !== sourceRelativePath || !fs.existsSync(destination)) {
+                throw new Error(`required skill is missing or undeclared: ${skill}`);
+            }
+            const resolvedPath = fs.realpathSync(destination);
+            const relative = path.relative(canonicalRoot, resolvedPath);
+            if (relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative)) {
+                throw new Error(`required skill resolves outside the canonical plugin: ${skill}`);
+            }
+            routes.push({ instruction: file.name, skill, sourceRelativePath, resolvedPath });
+        }
+    }
+    return { canonicalRoot, skillRoutes: routes };
+}
+
 function legacySourceRelativePath(file) {
     return `.github/instructions/${file.name.replace(/^alex-act-/, '')}`;
 }
@@ -322,6 +346,7 @@ function buildPlan(options) {
         schemaVersion: 1,
         apply: options.apply,
         mode: 'activate',
+        routing: instructionSkillRoutes(files),
         coreVersion: options.coreVersion,
         targetInstructions: options.targetInstructions,
         targetSource: options.targetSource,

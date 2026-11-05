@@ -44,7 +44,7 @@ To override the palette for a project, edit `.github/config/brand-palette.json` 
 
 ## Semantic classDef vocabulary
 
-Apply `:::<class>` to every node, and verify it with this skill's bundled lint rather than by eye: `node scripts/check-mermaid-classes.mjs <file.md>` flags every flowchart node definition or edge endpoint that carries no class. Semantic roles ship with the default config:
+Apply a semantic class to every node, using `:::<class>` or a `class A,B <class>` statement. `node scripts/check-mermaid-classes.mjs <file.md>` checks conventional flowchart node definitions and edge endpoints; it is a source heuristic, not a Mermaid parser. Review skipped diagram types and unfamiliar syntax separately, and render the result. Semantic roles ship with the default config:
 
 | Class        | Role                              | Example                 |
 | ------------ | --------------------------------- | ----------------------- |

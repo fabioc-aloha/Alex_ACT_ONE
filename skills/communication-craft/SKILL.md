@@ -71,4 +71,12 @@ Validate the need before committing to a solution. One sharp question beats five
 
 ## Would Revise If
 
-Revise if SBI feedback produces no measurable behavior change in 3+ instances over a quarter (the model is performative rather than operative), if the audience-lead table produces tone mismatches when applied verbatim, or if the need/solution/feature elicitation pattern misses real user needs that surface later as scope changes.
+Revise if SBI feedback fails to identify a specific behavior and its impact, the audience-lead table produces a tone mismatch in a concrete case, or the elicitation pattern misses a user need that later surfaces as a scope change.
+
+## Runtime contract references
+
+Load only the reference selected by the triggering instruction; do not replay all runtime contracts for unrelated work. These references add no authority and do not call the instruction again.
+
+- **identity**: [alex-finch-personality](references/runtime-alex-finch-personality.md)
+- **emotional-attunement**: [emotional-intelligence](references/runtime-emotional-intelligence.md)
+- **reliance**: [reliance-nudges](references/runtime-reliance-nudges.md)

@@ -56,3 +56,7 @@ The minimal scaffold is `AGENTS.md`, thin Claude/Gemini adapters, `HANDOFF.md`,
 
 Revise if project bytes are overwritten, a second preview is
 not idempotent, user settings are touched, or the baseline proves non-portable.
+
+## Compatibility command constraints: bootstrap-project
+
+Use one explicit repository root. Preview first; preserve existing project files and settings. Apply only after repository consent.

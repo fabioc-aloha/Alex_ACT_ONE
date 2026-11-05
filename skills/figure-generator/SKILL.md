@@ -175,11 +175,11 @@ Sometimes an approved sample SVG exists but its underlying dataset is missing. D
    node scripts/invert-svg.mjs <sample>.svg --tick-a 0 --tick-b 50
    ```
 
-   The script pairs each numeric tick label with its tick-mark line and solves `pxPerUnit = (y1 - y2) / (v2 - v1)` for the two ticks you name, where `y1, y2` are the ticks' pixel Y coordinates and `v1, v2` their labeled values. Example from a shipped case: Fig 6.6 solved to `2.25 px per point`.
+   The script selects tick labels aligned on the requested axis, pairs them with nearby tick-mark lines, and solves `pxPerUnit = (y1 - y2) / (v2 - v1)`. It supports flat SVGs with explicit, double-quoted coordinates, not arbitrary rendered SVG geometry. Ambiguous axes, transforms, and missing supported points exit with code 2; isolate or flatten the intended chart before retrying. Example from a shipped case: Fig 6.6 solved to `2.25 px per point`.
 
 3. **Invert every data-point coordinate through the scale**. The same script run inverts every circle centre and polyline / polygon point it finds (`dataValue = vA + (pA - p) / pxPerUnit`, with the scale's sign carrying the axis direction) and reports each derived value. Pass `--grid <step>` (or `--precision <decimals>`) for the domain's natural precision, and `--write <path>` to save the derived values as a JSON array ready to become `data/<slug>.json`.
 
-4. **The test that the derivation is faithful**: every derived value resolves to an EXACT value on the natural grid, and the script asserts it, exiting non-zero if any point lands off-grid. Fig 6.6's 24 data points all landed on integers, with no fractional pixels and no rounding fudge. If the script reports off-grid points, either the scale is wrong or the sample is drawing something other than the dataset you think it is.
+4. **A necessary check on the derivation**: every derived value resolves to an EXACT value on the natural grid. The script exits with code 1 and does not write a dataset if a point is off-grid. Fig 6.6's 24 data points all landed on integers, with no fractional pixels and no rounding fudge. Passing this check does not establish that the selected axis, marks, or units are the right ones; those remain semantic decisions.
 
 5. **Feed the derived values into the generator and verify byte-identity**. The output polylines should be byte-identical to the sample. That is the strongest evidence the dataset faithfully encodes the approved design.
 
@@ -232,8 +232,8 @@ Before hoisting, the figure count typically lives scattered across three or four
 
 ## Would revise if
 
-- Dataset inversion procedure fails on ≥1 real sample where the derivation was correct but the byte-identity check failed
-
-Track outcomes in your project's own curation or decision log.
+- A generated figure drifts from its data or design contract despite passing the prescribed checks
+- Dataset inversion fails on a sample whose derivation is correct, or the regenerated geometry fails the byte-identity check
+- A manual SVG correction cannot be reproduced by the generator
 
 The generator pattern, contract-test discipline, and dataset-inversion procedure are book-tested across 53 shipped figures.

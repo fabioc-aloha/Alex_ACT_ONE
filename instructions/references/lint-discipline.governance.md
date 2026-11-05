@@ -6,4 +6,4 @@ Applies to *any* file touched in any session. A file-type-scoped glob would miss
 
 ## Would Revise If
 
-Revise if owning all lint state on touched files repeatedly blocks emergency hotfixes (the rule is wrongly absolute for time-critical scenarios), or if the "pre-existing, not my edit" anti-pattern stops appearing in shipped commits for two full quarters — at which point the rule may be obsoleted because the discipline has been internalized.
+Revise if a concrete hotfix exposes a conflict between lint ownership and time-critical correctness, or the prescribed checks fail to catch an error in a modified file. Use the actual failure as evidence; do not track long-term compliance rates.

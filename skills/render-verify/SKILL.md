@@ -98,7 +98,7 @@ Before declaring a figure done in a document / chapter / report / worked solutio
 | **Big Idea sentence**                       | The chapter or section's one-line takeaway still holds against the data, and it matches the figure's own subtitle       |
 | **Caption / alt text**                      | Describes what the figure now shows. Alt text IS the caption in most publication workflows                              |
 | **Anchoring paragraph**                     | Introduces the figure with the correct panels in the correct order (BEFORE-left, AFTER-right for paired panels)         |
-| **Numeric claims**                          | Every number the prose cites (`$4.2M`, `2.18×`, `78%`) appears in the dataset, verified by script rather than by eye: run this skill's bundled `scripts/check-claims.mjs --prose <doc> --data <dataset.json>` and work from its report. Include category names and sort order, not just values |
+| **Numeric claims**                          | Run `scripts/check-claims.mjs --prose <doc> --data <dataset.json>` as a numeric-membership scan, then verify entity, period, units, category names, and sort order semantically. A value occurring somewhere in the dataset does not establish that the prose claim is true |
 | **Figure text that belongs in the chapter** | Sentence-length exposition inside the SVG is a smell — propose relocation to the chapter body                             |
 
 ### Look for the non-data lever first
@@ -452,8 +452,9 @@ path inside that folder. Verified 2026-07-25: a bare filename leaked into
 Revise this skill if:
 
 - **The host's built-in browser tools gain or lose console-error access.**
-  `browser_console_messages` is currently the main capability that justifies the
-  optional Playwright server at all.
+  Prefer native console inspection where available; current VS Code documentation
+  includes it. Retain the optional Playwright server for required scenarios that
+  are unavailable or unverified on the active host, not as a universal requirement.
 - **A host appears whose canvas renders HTML for the _user_ but returns nothing
   to the agent.** Capability 2 in Step 1 assumes "renders" and "agent can read
   it back" usually travel together. A surface that splits them would make rung 3

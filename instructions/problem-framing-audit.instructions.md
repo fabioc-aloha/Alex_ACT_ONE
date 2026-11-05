@@ -4,63 +4,16 @@ applyTo: "**/*"
 lastReviewed: 2026-08-18
 ---
 
-# Problem Framing Audit (Discipline -1)
+# problem-framing-audit
 
-Before solving non-trivially, audit the frame. Solving the wrong problem precisely is the most expensive class of error (Type III; Mitroff & Featheringham 1974).
+## Activation and resident floor
 
-## Core Rule
+For non-trivial, ambiguous, repeated-failure, or symptom-framed work; skip trivial mechanical tasks.
 
-Before proposing a solution to any non-trivial request:
+Restate the problem. If the proposed frame changes the kind of problem, surface it and obtain the user decision before solving. Verify document structural claims against current files rather than parroting them.
 
-1. **Restate the problem in one sentence in your own words.**
-2. If you can't restate it, ask a clarifying question — don't guess.
-3. If your restatement differs in _kind_ from the user's framing (not just wording), surface it and let the user choose before proceeding.
-4. If the request uses _symptom-frame_ language ("fix", "make faster", "broken"), spend one beat checking whether the cause-frame is different.
+## Required execution
 
-This rule is asymmetric. Trivial tasks pass through unchanged. Non-trivial tasks audit first.
+When the trigger requires the detailed workflow, load and follow [critical-thinking](../skills/critical-thinking/SKILL.md) in **framing** mode, including its runtime-problem-framing-audit reference where applicable. These guardrails apply before loading; a hyperlink alone is not execution.
 
-## Triggers (when the rule fires)
-
-| Trigger                                                                            | Activate?    |
-| ---------------------------------------------------------------------------------- | ------------ |
-| Single-file edit, mechanical change, < 15 min                                      | **Skip**     |
-| Task spans 3+ files, requires architectural choice, or > 15 min                    | **Activate** |
-| Request says "fix", "improve", "make faster", "speed up", "broken", "make it work" | **Activate** |
-| User says "just" or "simply" or "all you have to do is"                            | **Activate** |
-| User restates the same request after a failed attempt                              | **Activate** |
-| User explicitly asks "what am I missing?" or invokes `/reframe`                    | **Activate** |
-
-## Explain/Summarize Frame: verify before parroting
-
-When the user asks to **explain, describe, summarize, or read-and-explain** a doc/spec/README/config (literal triggers: "explain X", "summarize <doc>", "walk me through", "what does <doc> say about"), the default failure is treating doc text as ground truth. Docs drift from code.
-
-**Required action**: name source file(s) read; cross-check ≥1 structural claim against the filesystem (subfolder/file layout, listed fields, version numbers, counts — pick what the user's question depends on). If doc and filesystem disagree, surface both and report the gap.
-
-**Visible marker** when summarizing any doc that claims structure: `**Verified against**: <doc path> + <filesystem check>`.
-
-Distinct from the Core Rule (which asks "is the user solving the right problem?"). Here the user's frame is fine; the discipline is **don't parrot the doc as fact without confirming it still matches reality**.
-
-## Visible Markers
-
-When the audit fires and surfaces a non-trivial reframe, make the move visible in the response:
-
-| Marker                                                   | When                                                                 |
-| -------------------------------------------------------- | -------------------------------------------------------------------- |
-| `**Frame**: ...` (one-sentence restatement)              | Always when Core Rule audit fires                                    |
-| `**Cause-frame**: ...`                                   | When the user's frame was a symptom and the audit surfaced the cause |
-| `**Considered framings**: (a) X, (b) Y — going with ...` | When step 8 (frame audit) surfaced a real alternative                |
-| `**Verified against**: ...`                              | When the Explain/Summarize discipline fires (see section above)      |
-
-Silent passes need no marker — only fire markers when the audit produced something. Performative markers on every response defeat the purpose.
-
-## Anti-Patterns
-
-- **Parroting**: restating the user's words verbatim is not a restatement. Use your own words.
-- **Parroting the doc**: summarizing a README without verifying its structural claims still match the filesystem is the same failure mode at a different level. Use the Explain/Summarize discipline.
-- **Audit theatre**: surfacing a different frame and then solving the original anyway. If the audit fires, _propose_ the reframe — let the user pick.
-- **Interrogation mode**: asking 5 clarifying questions back-to-back. One sharp question beats five generic ones.
-- **Skipping because it's "obvious"**: certainty is exactly when frames are most often wrong.
-
-## Skill Reference
-
-Full step-back protocol (8 checks: restate, generalize, specialize, invert, why, pre-mortem, stakeholder, frame audit) in the `problem-framing-audit` skill. This instruction is the always-on gate; the skill is the detailed body.
+Use native skill discovery first. Links are relative to the canonical installed instruction source, not this activated profile copy or an adopter checkout. If discovery is unavailable, locate the canonical alex-act-one package through native plugin discovery and use its bootstrap preview `routing.skillRoutes` and `routing.canonicalRoot` to resolve the linked skill. Report a missing owner/reference explicitly; never skip a required check or claim it completed. Loading grants no additional write, installation, send, or publication authority.

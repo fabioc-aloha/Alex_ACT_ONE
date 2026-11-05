@@ -35,7 +35,7 @@ or a personal preference.
    | Workflow with deterministic automation | `.github/skills/<name>/scripts/<task>.cjs` |
    | Cross-cutting project automation | `scripts/<task>.cjs` |
 
-4. **Define the contract**: write the trigger, inputs, outputs, failure mode,
+4. **Use the shared authoring owner**: load and follow [compile-brain](../compile-brain/SKILL.md) for the explicitly selected draft, its contract, semantic preservation, and validation. This does not bypass the proof-of-need, local-scope, or approval requirements here. **Define the contract**: write the trigger, inputs, outputs, failure mode,
    and one should-fire plus one should-not-fire example. A script must state its
    prerequisites, accepted arguments, and validation command.
 5. **Preview the change**: show every proposed file and the validation plan.

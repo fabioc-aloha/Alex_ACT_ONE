@@ -12,7 +12,9 @@
  *   node invert-svg.mjs <sample.svg> --tick-a 0 --tick-b 100 --axis x --precision 1
  *   node invert-svg.mjs <sample.svg> --tick-a 0 --tick-b 50 --write data/<slug>.json
  *
- * Tick pairing: each numeric <text> label is anchored to the nearest tick-mark
+ * Tick pairing: the two labels must align on the requested axis (within 2px
+ * in the perpendicular direction); ambiguous pairs are rejected. Each label
+ * is then anchored to the nearest tick-mark
  * <line> (within 10px perpendicular, 80px along the axis); if no line matches,
  * the label's own coordinate is used.
  *
@@ -23,7 +25,7 @@
  *   --write <path>    Also write the derived values as a JSON array
  *
  * Exit codes: 0 = every point on-grid, 1 = a point landed off-grid,
- * 2 = usage error or ticks not found.
+ * 2 = usage error, ambiguous ticks, or unsupported transformed coordinates.
  * Node built-ins only.
  */
 
@@ -154,10 +156,22 @@ function tickAnchor(text, lines, axis) {
   return best ? best.coord : axis === "y" ? text.y : text.x;
 }
 
-function findTick(texts, lines, axis, value) {
-  const label = texts.find((text) => text.value === value);
-  if (!label) return null;
-  return { value, coord: tickAnchor(label, lines, axis) };
+function findTicks(texts, lines, axis, valueA, valueB) {
+  const along = axis === "y" ? "y" : "x";
+  const perpendicular = axis === "y" ? "x" : "y";
+  const pairs = [];
+  for (const a of texts.filter((text) => text.value === valueA)) {
+    for (const b of texts.filter((text) => text.value === valueB)) {
+      if (Math.abs(a[perpendicular] - b[perpendicular]) > 2 || a[along] === b[along]) continue;
+      pairs.push([
+        { value: valueA, coord: tickAnchor(a, lines, axis) },
+        { value: valueB, coord: tickAnchor(b, lines, axis) },
+      ]);
+    }
+  }
+  if (pairs.length === 0) usageError("tick labels not found aligned on the requested axis");
+  if (pairs.length > 1) usageError("ambiguous tick labels; isolate the intended axis in the sample SVG");
+  return pairs[0];
 }
 
 function main() {
@@ -181,15 +195,11 @@ function main() {
   } catch (error) {
     usageError(`cannot read ${args.file}: ${error.message}`);
   }
+  if (/\btransform\s*[=:]/i.test(svg)) usageError("unsupported transformed coordinates; flatten the SVG before inversion");
 
   const { texts, lines, points } = extractElements(svg);
-  const tickA = findTick(texts, lines, args.axis, tickValueA);
-  const tickB = findTick(texts, lines, args.axis, tickValueB);
-  if (!tickA || !tickB) {
-    usageError(
-      `tick labels not found in ${args.file}: looked for ${!tickA ? tickValueA : ""} ${!tickB ? tickValueB : ""}`.trim(),
-    );
-  }
+  const [tickA, tickB] = findTicks(texts, lines, args.axis, tickValueA, tickValueB);
+  if (points.length === 0) usageError("no supported circle or polyline/polygon data points found");
   if (tickA.coord === tickB.coord) usageError("both ticks resolved to the same pixel coordinate; scale is undefined");
 
   // scale: pixels per unit, sign carries the axis direction.
@@ -217,7 +227,7 @@ function main() {
 
   console.log(`inversion: ${points.length} points, ${points.length - offGrid} on-grid, ${offGrid} off-grid (grid step ${grid})`);
 
-  if (args.write) {
+  if (args.write && offGrid === 0) {
     writeFileSync(args.write, `${JSON.stringify(derived, null, 2)}\n`);
     console.log(`wrote derived values to ${args.write}`);
   }

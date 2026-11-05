@@ -66,14 +66,17 @@ The line in the middle is *between thinking and typing*. Once the fabricated con
 
 ## Deterministic Checks
 
-A language model predicting tokens does not compute. Arithmetic, counts, totals, comparisons, date math, and character counts produced in prose are guesses wearing a number's clothes, and asking the same model to "double-check" produces a second guess, not a check.
+Quantitative claims need reproducible evidence. A model can produce a correct calculation, but fluent prose and a second model pass are not reliable evidence that the calculation is correct.
 
-**Rule: route every calculation or check that can be scripted to a deterministic module** — a script, a test, a spreadsheet formula, a calculator or query tool. The model's job is to write the checker and interpret its output. The model is never the checker.
+**Rule: use deterministic tools for quantitative results and machine-checkable invariants relied upon by the work.** Prefer an existing script, test, formula, calculator, or query over creating a new checker. Apply the materiality gate: do not create tooling ceremony for an inconsequential estimate.
 
-- A check is an artifact (script, test, formula) that returns the same answer on every run. Re-reading your own prose is not a check.
-- Quote the module's output when reporting the number. If the number came from prose, label it an unverified estimate or do not report it.
+- The semantic layer chooses the question, inputs, units, and invariant; the deterministic layer computes or checks that invariant; the semantic layer interprets the result.
+- Repeatability is not correctness. Test a new checker with known passing, failing, and unsupported inputs before relying on its verdict. Prefer independent expected results over repeating the checker's own logic in its tests.
+- Report the computed result and its scope. If the number came from prose, label it an unverified estimate or do not report it.
 - When verifying someone else's calculation, recompute it with the module. Never verify arithmetic by reading it.
-- Counts follow the same rule: lines, items, occurrences, files. Count with a tool (`grep -c`, `wc`, a loop), never by eye.
+- Counts used as evidence follow the same rule: lines, items, occurrences, files. Count with a tool, not by eye.
+- A heuristic scan produces candidates, not a semantic or safety proof. Invalid or unsupported input must be reported explicitly, never treated as a successful check.
+- Do not collect skill-firing counts, cross-session behavioral scores, or observation-window telemetry. Task-local measurements should serve the current deliverable, not monitor the agent.
 
 ## Anti-Patterns
 
@@ -81,7 +84,7 @@ A language model predicting tokens does not compute. Arithmetic, counts, totals,
 |---|---|---|
 | "I'll generate the answer and check it after" | Once written confidently, downstream review struggles to flag it | Verify before generating |
 | "Probably works like X" | "Probably" is the fabrication signal | Either verify, or say "I don't know" |
-| Doing arithmetic in prose and reporting the result | The model predicts tokens; it does not compute, so the number is a guess | Write a script or test that computes it, then quote its output |
+| Reporting unsupported arithmetic as verified | Fluent output is not reproducible evidence | Compute it with an existing tool or a tested helper and report its result |
 | Defending a fabrication when challenged | Doubles down on the original lie | Acknowledge, correct, move on |
 | Generating plausible-looking citations | Citation confabulation is a well-documented LLM failure mode | Cite only what's been seen; mark inferred refs as inferred |
 | "The documentation must say..." | Inferring doc content is fabrication | Read the doc or hedge the claim |
@@ -110,4 +113,11 @@ Each catches what the others miss. The triad composes: don't fabricate → detec
 This skill needs revision if any of the following occur:
 
 - The input-discipline signal table fails to catch a new fabrication failure mode (e.g., new LLM-specific confabulation pattern)
+- Fabricated content or an incorrect computed claim passes the verification gate
 - Verification patterns become stale (e.g., new ecosystem ships where the listed verification method doesn't apply)
+
+## Runtime contract references
+
+Load only the reference selected by the triggering instruction; do not replay all runtime contracts for unrelated work. These references add no authority and do not call the instruction again.
+
+- **calibration**: [epistemic-calibration](references/runtime-epistemic-calibration.md)
