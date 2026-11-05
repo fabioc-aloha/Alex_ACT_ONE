@@ -83,6 +83,8 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
+          node (Join-Path $PWD 'scripts' 'build-flint-showcase.mjs') --describe-runtime
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node (Join-Path $PWD 'scripts' 'build-flint-showcase.mjs') --check
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           node (Join-Path $PWD 'scripts' 'build-flint-showcase.mjs') --experimental --check

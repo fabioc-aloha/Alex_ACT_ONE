@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
+import { createHash } from 'node:crypto';
 import { homedir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -252,6 +253,28 @@ function packageDirectory(name, from) {
     return directory;
 }
 
+export function rendererEnvironment(runtime) {
+    const server = join(runtime, 'node_modules', MCP_SERVERS.flint.package);
+    const packages = {};
+    for (const name of ['flint-chart-mcp', 'flint-chart', 'vega', 'vega-lite', 'echarts', 'chart.js',
+        '@napi-rs/canvas', '@modelcontextprotocol/sdk', '@modelcontextprotocol/ext-apps']) {
+        packages[name] = JSON.parse(readFileSync(join(packageDirectory(name, server), 'package.json'), 'utf8')).version;
+    }
+    const fontDirectory = join(server, 'assets', 'fonts');
+    const fonts = Object.fromEntries(readdirSync(fontDirectory).filter(file => /\.ttf$/i.test(file)).sort()
+        .map(file => [file, createHash('sha256').update(readFileSync(join(fontDirectory, file))).digest('hex')]));
+    const canvas = createRequire(join(server, 'package.json'))('@napi-rs/canvas');
+    const metrics = {};
+    canvas.GlobalFonts.registerFromPath(join(fontDirectory, 'LiberationSans-Regular.ttf'), 'Showcase metric fixture');
+    const context = canvas.createCanvas(1, 1).getContext('2d');
+    for (const text of ['Core', 'Services', 'North', 'South']) {
+        context.font = '12px "Showcase metric fixture"';
+        metrics[text] = context.measureText(text).width;
+    }
+    return { platform: process.platform, architecture: process.arch, node: process.version,
+        packages, fonts, metrics };
+}
+
 function collectNotices(nodeModules) {
     const seen = new Set();
     const notices = [];
@@ -317,10 +340,10 @@ export function canonicalSvgPositions(svg) {
         if (start < 0) return output + svg.slice(cursor);
         output += svg.slice(cursor, start);
         const terminator = svg.startsWith('<!--', start) ? '-->' :
-            svg.startsWith('<![CDATA[', start) ? ']]>' : null;
+            svg.startsWith('<![CDATA[', start) ? ']]>' : svg.startsWith('<?', start) ? '?>' : null;
         if (terminator) {
             const end = svg.indexOf(terminator, start);
-            if (end < 0) throw new Error('Unterminated SVG comment or CDATA');
+            if (end < 0) throw new Error('Unterminated SVG comment, CDATA, or processing instruction');
             cursor = end + terminator.length;
             output += svg.slice(start, cursor);
             continue;
@@ -696,15 +719,21 @@ async function main() {
     let output;
     let check = false;
     let experimental = false;
+    let describeRuntime = false;
     const args = process.argv.slice(2);
     for (let i = 0; i < args.length; i++) {
         if (args[i] === '--check') check = true;
         else if (args[i] === '--experimental') experimental = true;
+        else if (args[i] === '--describe-runtime') describeRuntime = true;
         else if (['--runtime-root', '--out'].includes(args[i]) && args[i + 1]) {
             const key = args[i++];
             if (key === '--runtime-root') runtime = resolve(args[i]);
             else output = resolve(args[i]);
         } else throw new Error('Usage: node scripts\\build-flint-showcase.mjs [--experimental] [--runtime-root <directory>] [--out <file>] [--check]');
+    }
+    if (describeRuntime) {
+        console.log(JSON.stringify(rendererEnvironment(runtime), null, 2));
+        return;
     }
     output ||= join(ROOT, 'docs', experimental ? 'flint-experimental.html' : 'flint-showcase.html');
     const content = await buildShowcase(runtime, { experimental });

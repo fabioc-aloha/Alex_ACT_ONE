@@ -14,7 +14,7 @@ test('equivalent sub-millipixel positions serialize identically', () => {
     assert.equal(canonical(canonical(first)), canonical(first));
 });
 test('data, text, specs, non-position geometry, and other transform coefficients remain exact', () => {
-    const svg = `<svg viewBox="0 0 1.234567 2.345678"><!-- x="1.234567" -->
+    const svg = `<svg viewBox="0 0 1.234567 2.345678"><!-- x="1.234567" --><?fixture x="1.234567"?>
 <metadata><![CDATA[{"x":1.234567,"spec":"translate(1.234567)"}]]></metadata>
 <g transform="translate(1.234567 2.345678) scale(0.12345678) rotate(12.345678)">
 <text x="1.234567" \u79c1x="1.234567" data-x="1.234567" aria-label="value 1.234567; x='2.345678'; translate(3.456789)">1.234567</text>
