@@ -17,6 +17,14 @@ The demo CLI sets its own process timezone to UTC before loading renderers.
 It does not change the OS or parent process, or impose a timezone on the live
 viewer. Integration tests compare real exports from UTC and Eastern caller
 environments so a local date boundary cannot silently change the artifact.
+Static SVG serialization also rounds only scalar position attributes and
+`translate` coordinates to three decimal places (0.001 SVG-unit precision).
+Tests bound each scalar rounding change to 0.0005 SVG units. Text, analytical
+data, compiled specs, view boxes, paths, sizes, colors, opacity, and other
+transform coefficients remain exact. Unit-bearing or multi-value position
+attributes are left unchanged. This is not a general SVG validator or sanitizer.
+The byte-for-byte artifact check still fails on any remaining difference; it
+does not use a blanket whitespace, numeric, or image-similarity tolerance.
 
 The test runner has no npm test-framework dependency or root package manifest.
 Release verification nevertheless needs PowerShell; integration also needs the

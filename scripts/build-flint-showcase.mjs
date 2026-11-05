@@ -301,13 +301,59 @@ function textResult(result) {
     return result.content.filter(item => item.type === 'text').map(item => item.text).join('\n');
 }
 
+export function canonicalSvgPositions(svg) {
+    const positions = new Set(['x', 'y', 'x1', 'y1', 'x2', 'y2', 'cx', 'cy', 'dx', 'dy']);
+    const numeric = '[+-]?(?:\\d+(?:\\.\\d*)?|\\.\\d+)(?:[eE][+-]?\\d+)?';
+    const scalar = new RegExp(`^${numeric}$`);
+    const translation = new RegExp(`translate\\(\\s*(${numeric})(?:[\\s,]+(${numeric}))?\\s*\\)`, 'g');
+    const round = value => {
+        const number = Number(value);
+        if (!Number.isFinite(number)) throw new Error('Invalid non-finite SVG position');
+        return String(Number(number.toFixed(3)));
+    };
+    let output = '', cursor = 0;
+    while (cursor < svg.length) {
+        const start = svg.indexOf('<', cursor);
+        if (start < 0) return output + svg.slice(cursor);
+        output += svg.slice(cursor, start);
+        const terminator = svg.startsWith('<!--', start) ? '-->' :
+            svg.startsWith('<![CDATA[', start) ? ']]>' : null;
+        if (terminator) {
+            const end = svg.indexOf(terminator, start);
+            if (end < 0) throw new Error('Unterminated SVG comment or CDATA');
+            cursor = end + terminator.length;
+            output += svg.slice(start, cursor);
+            continue;
+        }
+        let quote = null, end = start + 1;
+        for (; end < svg.length; end++) {
+            const char = svg[end];
+            if (quote) { if (char === quote) quote = null; }
+            else if (char === '"' || char === "'") quote = char;
+            else if (char === '>') break;
+        }
+        if (end === svg.length) throw new Error('Unterminated SVG tag');
+        const tag = svg.slice(start, end + 1);
+        output += tag.replace(/(\s+)([^\s=<>]+)(\s*=\s*)(["'])([\s\S]*?)\4/g,
+            (attribute, space, name, equals, delimiter, value) => {
+                let normalized = value;
+                if (positions.has(name) && scalar.test(value)) normalized = round(value);
+                else if (name === 'transform') normalized = value.replace(translation, (_, x, y) =>
+                    `translate(${round(x)}${y === undefined ? '' : ',' + round(y)})`);
+                return space + name + equals + delimiter + normalized + delimiter;
+            });
+        cursor = end + 1;
+    }
+    return output;
+}
+
 function svgResult(result) {
     if (result.isError) throw new Error(JSON.stringify(result.content));
     const text = result.content.find(item => item.type === 'text' && item.text.includes('<svg'))?.text;
     const start = text?.indexOf('<svg') ?? -1;
     const end = text?.lastIndexOf('</svg>') ?? -1;
     if (start < 0 || end < start) throw new Error('Flint returned no complete SVG artifact.');
-    return text.slice(start, end + '</svg>'.length);
+    return canonicalSvgPositions(text.slice(start, end + '</svg>'.length));
 }
 
 export async function buildShowcase(runtime, { experimental = false } = {}) {
