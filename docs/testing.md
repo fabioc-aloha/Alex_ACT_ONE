@@ -13,6 +13,11 @@ macOS and other Node versions are not covered by this workflow.
 | Integration | Explicit reviewed MCP runtime, JSZip from the shared registry, Pandoc 3.13, reviewed Mermaid CLI | Actual MCP version/launch and three-backend render tests, real HTML/Word conversion, and installed Mermaid CLI startup |
 | Canonical demo rebuild | Windows integration environment | Byte-for-byte checks of both generated HTML pages; Git preserves their LF endings |
 
+The demo CLI sets its own process timezone to UTC before loading renderers.
+It does not change the OS or parent process, or impose a timezone on the live
+viewer. Integration tests compare real exports from UTC and Eastern caller
+environments so a local date boundary cannot silently change the artifact.
+
 The test runner has no npm test-framework dependency or root package manifest.
 Release verification nevertheless needs PowerShell; integration also needs the
 named optional tools. Ordinary `node --test` may skip missing runtime/converter

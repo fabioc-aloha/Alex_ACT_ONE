@@ -429,6 +429,7 @@ body[data-mode=experimental] pre{background:#0b141c}
 </main>
 <footer>
 <p><strong>Scope:</strong> a representative capability gallery, not an exhaustive chart catalog or an accessibility certification. Examples use synthetic records. Typeface appearance depends on available system fonts; no font service is contacted.</p>
+<p>Static exports are generated in UTC for reproducible date annotations. The live viewer remains a separate host-rendered surface.</p>
 <p><strong>Rebuild:</strong> from a source checkout with the pinned Flint runtime provisioned, run <code>node scripts\build-flint-showcase.mjs --experimental</code>. Use <code>--check</code> to check that this file matches the build. No package is installed or fetched by the builder.</p>
 <p><a href="https://microsoft.github.io/flint-chart/" rel="noreferrer">Flint documentation</a> &middot; <a href="https://microsoft.github.io/flint-chart/#/interactions" rel="noreferrer">Interaction reference</a> &middot; Opening external links requires a connection.</p>
 <details><summary>Third-party notices</summary><div class="detail-body"><p>Flint and its embedded UI are distributed under their upstream open-source licenses. The original bundle is embedded unchanged; notices for its runtime dependencies and React are included below. Static exports are generated from the same pinned runtime.</p><pre class="notices">@floating-ui/core@1.8.0 (MIT)

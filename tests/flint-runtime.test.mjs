@@ -1,13 +1,16 @@
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync } from 'node:fs';
-import { homedir } from 'node:os';
-import { join } from 'node:path';
-import { spawn } from 'node:child_process';
+import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { homedir, tmpdir } from 'node:os';
+import { dirname, join, resolve } from 'node:path';
+import { spawn, spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 
 const runtime = process.env.FLINT_COMPATIBILITY_RUNTIME_ROOT || process.env.ALEX_ACT_ONE_RUNTIME_ROOT ||
     join(homedir(), '.copilot', 'plugin-data', 'alex-act-one', 'runtime');
 const metadata = join(runtime, 'node_modules', 'flint-chart-mcp', 'package.json');
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 function client(t) {
     const server = spawn(process.execPath, [join(runtime, 'node_modules', 'flint-chart-mcp', 'dist', 'cli.js')],
@@ -190,6 +193,24 @@ test('provisioned Flint 1.0.1 preserves the MCP and three-backend output contrac
         assert.match(report, /✓ source: sends category by click-highlight; receives category/);
         assert.match(report, /✓ recipient: receives category; sends nothing/);
         assert.doesNotMatch(report, /✗/);
+    });
+    await t.test('offline export CLI is independent of the caller timezone and uses UTC date annotations', () => {
+        const fixture = mkdtempSync(join(tmpdir(), 'one-flint-timezone-'));
+        t.after(() => rmSync(fixture, { recursive: true, force: true }));
+        const outputs = [];
+        for (const zone of ['UTC', 'America/New_York']) {
+            const output = join(fixture, zone === 'UTC' ? 'utc.html' : 'eastern.html');
+            const env = { ...process.env, TZ: zone };
+            delete env.NODE_TEST_CONTEXT;
+            const built = spawnSync(process.execPath, [
+                join(ROOT, 'scripts', 'build-flint-showcase.mjs'), '--runtime-root', runtime, '--out', output,
+            ], { encoding: 'utf8', env, timeout: 60000 });
+            assert.equal(built.status, 0, built.stderr);
+            const bytes = readFileSync(output);
+            outputs.push(createHash('sha256').update(bytes).digest('hex'));
+            assert.equal(bytes.toString('utf8').includes('aria-label="month: May 31, 2025; revenue: 76000'), false);
+        }
+        assert.equal(outputs[0], outputs[1], 'The same reviewed build must not depend on the caller timezone');
     });
     await t.test('invalid snake_case names and missing fields remain explicit failures', async () => {
         const invalid = jsonResult(await mcp.call('validate_chart', {
