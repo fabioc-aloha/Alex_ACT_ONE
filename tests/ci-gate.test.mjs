@@ -7,9 +7,11 @@ import { spawnSync } from 'node:child_process';
 import { test } from 'node:test';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const script = join(ROOT, 'scripts', 'test-gate.mjs');
+const script = join(ROOT, 'scripts', 'verification-gate.mjs');
 async function api() {
     assert.ok(existsSync(script), 'Missing the enforceable CI test gate');
+    assert.equal(existsSync(join(ROOT, 'scripts', 'test-gate.mjs')), false,
+        'A production entrypoint named test-* is automatically executed by node --test');
     return import(pathToFileURL(script));
 }
 const tap = ({ tests = 1, passed = 1, failed = 0, skipped = 0, todo = 0, cancelled = 0 } = {}) =>

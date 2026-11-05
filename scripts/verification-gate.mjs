@@ -99,7 +99,7 @@ function integrationPrerequisites() {
 
 async function main() {
     const args = process.argv.slice(2);
-    if (args.length !== 2 || args[0] !== '--lane') throw new Error('Usage: node scripts\\test-gate.mjs --lane structural|integration');
+    if (args.length !== 2 || args[0] !== '--lane') throw new Error('Usage: node scripts\\verification-gate.mjs --lane structural|integration');
     if (Number(process.versions.node.split('.')[0]) < 24) throw new Error('The verification gate requires Node 24 or newer');
     const lane = args[1];
     const selection = laneSelection(ROOT, lane);

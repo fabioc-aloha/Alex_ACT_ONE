@@ -76,7 +76,7 @@ This is source verification, not publication or a new host-activation claim.
 [workflow](.github/workflows/verify.yml) uses push/manual triggers and reviewed
 immutable actions with read-only permissions. Structural jobs target Windows
 2025/Ubuntu 24.04 with Node 24/26; provisioned runtime/converter jobs use Node 26.
-The [gate](scripts/test-gate.mjs) rejects failed, skipped, todo, cancelled,
+The [gate](scripts/verification-gate.mjs) rejects failed, skipped, todo, cancelled,
 empty, or unreported runs. Provisioning is restricted to disposable CI runners.
 
 Local Windows verification passed both lanes. This is not yet a claim that the

@@ -16,7 +16,7 @@ environment and require every job for the same candidate commit to pass.
 ```text
 git clone --depth 1 https://github.com/fabioc-aloha/Alex_ACT_ONE.git <tmp>
 cd <tmp>
-node scripts/test-gate.mjs --lane structural
+node scripts/verification-gate.mjs --lane structural
 ```
 
 Not the working copy. A fresh clone is the only thing that proves the release

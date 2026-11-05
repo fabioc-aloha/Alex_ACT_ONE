@@ -12,11 +12,17 @@ const examples = {
     'rich-email-tests': 'tests/rich-email.test.cjs',
     'rich-email-validate': 'skills/rich-email/scripts/open-rich-outlook-draft.cjs',
 };
-function block(id) {
+const commands = {
+    'rich-email-tests': 'node --test "<plugin-root>\\tests\\rich-email.test.cjs"',
+    'rich-email-validate': 'node "<plugin-root>\\skills\\rich-email\\scripts\\open-rich-outlook-draft.cjs" "$env:TEMP\\message.eml" --validate-only',
+};
+function block(id, source = skill) {
     const marker = `<!-- executable-example: ${id} -->`;
-    assert.ok(skill.includes(marker), `Missing explicit runnable example ${id}`);
-    const content = skill.slice(skill.indexOf(marker) + marker.length).match(/```powershell\r?\n([\s\S]*?)```/)?.[1];
+    assert.ok(source.includes(marker), `Missing explicit runnable example ${id}`);
+    const content = source.slice(source.indexOf(marker) + marker.length).match(/```powershell\r?\n([\s\S]*?)```/)?.[1];
     assert.ok(content, id);
+    assert.equal(content.replace(/`\r?\n\s*/g, ' ').replace(/\s+/g, ' ').trim(), commands[id],
+        'The documented command must match its reviewed safe execution contract');
     return content;
 }
 test('runnable rich-email commands are marked, portable, and backed by real shipped targets', () => {
@@ -29,6 +35,10 @@ test('runnable rich-email commands are marked, portable, and backed by real ship
     assert.match(block('rich-email-validate'), /--validate-only/);
     assert.ok(skill.includes('<!-- illustrative-example: rich-email-open-draft -->'));
     assert.doesNotMatch(skill, /scripts\/test-rich-email\.cjs/);
+});
+test('additional flags or commands cannot masquerade as a reviewed executable example', () => {
+    assert.throws(() => block('rich-email-validate', skill.replace('--validate-only', '--validate-only; unexpected-command')),
+        /reviewed safe execution contract/);
 });
 test('new executable markers cannot silently bypass the curated safe command tests', () => {
     const found = [];

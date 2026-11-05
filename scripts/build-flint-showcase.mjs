@@ -630,6 +630,19 @@ selectSample();
 `;
 }
 
+export function assertCurrentArtifact(output, generated) {
+    if (!existsSync(output)) throw new Error(`Showcase is missing: ${output}`);
+    const actual = readFileSync(output, 'utf8');
+    if (actual === generated) return;
+    let offset = 0;
+    while (offset < Math.min(actual.length, generated.length) && actual[offset] === generated[offset]) offset++;
+    const context = value => JSON.stringify(value.slice(Math.max(0, offset - 100), offset + 180));
+    throw new Error(`Showcase is stale at UTF-16 offset ${offset}. ` +
+        `Expected (${Buffer.byteLength(generated)} bytes): ${context(generated)}. ` +
+        `Actual (${Buffer.byteLength(actual)} bytes): ${context(actual)}. ` +
+        'Use the reviewed runtime/environment; inspect this difference before rebuilding.');
+}
+
 async function main() {
     let runtime = process.env.ALEX_ACT_ONE_RUNTIME_ROOT || join(homedir(), '.copilot', 'plugin-data', 'alex-act-one', 'runtime');
     let output;
@@ -648,7 +661,7 @@ async function main() {
     output ||= join(ROOT, 'docs', experimental ? 'flint-experimental.html' : 'flint-showcase.html');
     const content = await buildShowcase(runtime, { experimental });
     if (check) {
-        if (!existsSync(output) || readFileSync(output, 'utf8') !== content) throw new Error('Showcase is missing or stale. Rebuild it with the pinned runtime.');
+        assertCurrentArtifact(output, content);
         console.log('Offline showcase matches the pinned runtime and all validated examples.');
     } else {
         writeFileSync(output, content);

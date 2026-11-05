@@ -19,7 +19,7 @@ named optional tools. Ordinary `node --test` may skip missing runtime/converter
 cases locally. A release lane cannot pass with skipped, todo, cancelled, failed,
 empty, or unreported tests.
 
-The [gate](../scripts/test-gate.mjs) discovers the test files and records every
+The [gate](../scripts/verification-gate.mjs) discovers the test files and records every
 lane/platform exclusion. Provisioned cases live in dedicated files rather than
 being silently skipped inside the structural lane. Actual Windows npm-shim
 tests run on Windows; their exclusion on Linux is explicit. Newly added test
@@ -30,7 +30,7 @@ files join the structural lane unless classified as provisioned tests.
 These commands do not install packages:
 
 ```powershell
-node scripts\test-gate.mjs --lane structural
+node scripts\verification-gate.mjs --lane structural
 ```
 
 The structural lane gives its child tests a disposable home/profile and an
@@ -43,7 +43,7 @@ existing runtime explicitly before integration checks:
 
 ```powershell
 $env:ALEX_ACT_ONE_RUNTIME_ROOT = '<absolute provisioned runtime path>'
-node scripts\test-gate.mjs --lane integration
+node scripts\verification-gate.mjs --lane integration
 ```
 
 Use native path separators outside Windows. Integration preflight fails on

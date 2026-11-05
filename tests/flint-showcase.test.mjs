@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Script } from 'node:vm';
@@ -128,4 +129,17 @@ test('gallery generation is reproducible and pinned rather than fetching a movin
     assert.match(source, /--check/);
     assert.doesNotMatch(source, /\bnpx\b|\bnpm install\b|\bfetch\s*\(/);
     assert.match(readFileSync(join(ROOT, 'README.md'), 'utf8'), /docs\/flint-showcase\.html/);
+});
+
+test('stale artifact diagnostics identify a bounded first difference instead of hiding the cause', async t => {
+    const { assertCurrentArtifact } = await import('../scripts/build-flint-showcase.mjs');
+    assert.equal(typeof assertCurrentArtifact, 'function');
+    const root = mkdtempSync(join(tmpdir(), 'one-artifact-diff-'));
+    t.after(() => rmSync(root, { recursive: true, force: true }));
+    const file = join(root, 'fixture.html');
+    writeFileSync(file, 'same-prefix old value ' + 'x'.repeat(10000));
+    assert.throws(() => assertCurrentArtifact(file, 'same-prefix new value ' + 'x'.repeat(10000)), error =>
+        /offset 12/.test(error.message) && /old value/.test(error.message) &&
+        /new value/.test(error.message) && error.message.length < 1200);
+    assert.doesNotThrow(() => assertCurrentArtifact(file, readFileSync(file, 'utf8')));
 });

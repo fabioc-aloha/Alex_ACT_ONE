@@ -32,7 +32,7 @@ jobs:
           package-manager-cache: false
       - name: Verify structural contracts without provisioning packages
         shell: pwsh
-        run: node (Join-Path $PWD 'scripts' 'test-gate.mjs') --lane structural
+        run: node (Join-Path $PWD 'scripts' 'verification-gate.mjs') --lane structural
       - name: Require unchanged tracked sources
         shell: pwsh
         run: git diff --exit-code
@@ -78,7 +78,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Verify runtime and real converter output without skips
         shell: pwsh
-        run: node (Join-Path $PWD 'scripts' 'test-gate.mjs') --lane integration
+        run: node (Join-Path $PWD 'scripts' 'verification-gate.mjs') --lane integration
       - name: Check canonical Windows demo rebuilds
         if: runner.os == 'Windows'
         shell: pwsh
