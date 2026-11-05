@@ -16,28 +16,32 @@ Alex ACT ONE is a pack of skills for GitHub Copilot that changes how the agent w
 | Confidence | Sounds certain either way | Marks what is known, reported, estimated, or guessed |
 | The result | A plan, handed over as final | The work gets checked before it ships |
 
-## Quick install
+## Start here
 
-Install the plugin once, at the user level:
+### Quick install
+
+Install directly from the repository:
 
 ```powershell
-copilot plugin install alex-act-one@alex-mall
+copilot plugin install fabioc-aloha/Alex_ACT_ONE
 ```
 
-Then, in each app where you want the always-on behavior, run:
+Then follow [your first session](docs/getting-started.md) for preview-first
+activation, verification, and a read-only critical-thinking exercise. Installation
+alone does not turn on the always-on instructions. No optional runtime tools or
+API tokens are needed for that workflow.
 
-```text
-/alex-act-one bootstrap-core
-```
-
-One installed copy serves Copilot CLI, VS Code, Microsoft Scout, and the GitHub Copilot app. Full install notes, the from-source option, and the Scout specifics are in [Install](#install).
+The [install and host reference](docs/install.md) covers the Mall option for a
+reviewed release, Scout setup, and optional tools. Already set up? Browse the
+[skill catalog](#the-skills).
 
 **Release status, reviewed 2026-11-05:** the published baseline is `v0.8.0`.
 This source checkout also includes the not yet released `flint-interactions`
 workflow, offline demonstration pages, and activation/runtime/conversion repairs.
-They do not appear in an existing
-installation until a new package is published and installed. Existing command
-names, bootstrap activation, and optional browser fallback remain available.
+Existing installations do not acquire those changes automatically. Repository
+installs can include these source changes; Mall installs track the reviewed
+release. Existing command names, bootstrap activation, and optional browser
+fallback remain available.
 
 Try the [offline Flint chart gallery](docs/flint-showcase.html) for working examples of semantic data, themes, interactions, linked views, and static exports, or the [experimental interaction lab](docs/flint-experimental.html) for polar brushing, direct reordering, distribution shapes, and reader-driven stories. Open either downloaded HTML in a browser; no server or connection is needed.
 
@@ -59,7 +63,7 @@ the published release's historical inventory.
 
 Using Muse instead of Copilot? The Muse edition lives at [Alex_ACT_ONE_Muse](https://github.com/fabioc-aloha/Alex_ACT_ONE_Muse)
 
-Using Claude Code? The skills install there too, by hand: see [Using Claude Code instead?](#using-claude-code-instead) under Install..
+Using Claude Code? The skills install there too, by hand: see [Using Claude Code instead?](docs/install.md#using-claude-code-instead).
 
 ## What You Can Do With Alex ACT ONE
 
@@ -85,7 +89,7 @@ a session learned into something reusable.
 
 See the [source inventory](#source-package-inventory) for the current package
 contents. Not every surface reaches every app — see
-[Where Alex ACT ONE Works](#where-alex-act-one-works).
+[Where Alex ACT ONE Works](docs/install.md#where-alex-act-one-works).
 
 Large package by design: one install brings all of it, so expect noticeably
 more files on disk and a longer first sync than a single-purpose plugin.
@@ -94,7 +98,7 @@ more files on disk and a longer first sync than a single-purpose plugin.
 
 Grouped by what you are trying to do. The **Needs** column lists anything beyond
 Node — most skills need nothing, and a skill only appears there if it genuinely
-cannot run without that dependency. See [Optional extras](#optional-extra-tools-for-a-few-skills)
+cannot run without that dependency. See [Optional extras](docs/install.md#optional-extra-tools-for-a-few-skills)
 for how to get them. The discovery summaries below come from current skill
 frontmatter and may be shortened; follow each source link for full triggers,
 inputs, authority, and verification.
@@ -415,359 +419,50 @@ wrong.
 
 ## Where Alex ACT ONE Works
 
-Skills sit at the package root, so each app can load them directly. Scout can
-use the plugin installed for Copilot CLI under `~/.copilot`; a Scout-local ONE
-copy is duplicate state and can drift independently. Verify the loaded root and
-version before activation or Scout MCP registration. The other three surfaces
-are not automatic in the same way, and this table says which are.
-
-Native-first installed-package checks and a live CLI project-checkpoint probe
-passed for `v0.7.0`; the Flint 1.0.1 integration was subsequently published in
-`v0.8.0`. Neither source-level tests nor the offline demos establish fresh
-activation parity across all hosts. The table describes supported delivery;
-the dated observations below remain historical evidence.
-
-| Where you use Copilot | Skills | Instructions | Slash commands | MCP servers |
-| --- | --- | --- | --- | --- |
-| Copilot CLI | All | All, after activation | All | All, from the manifest |
-| VS Code with GitHub Copilot Chat | All | All, after activation | All | All, from the manifest |
-| Microsoft Scout | All, after enabling **Load Copilot CLI skills** | All, after activation | **None** | All, after registration |
-| GitHub Copilot app | All, discovered and invoked | All, active after activation | All, exposed | Registered; Flint and Playwright verified in the `v0.2.0` baseline; Replicate requires an API token |
-
-The GitHub Copilot app test on 2026-09-13 found all 15 instructions active and
-at hash parity with the installed `v0.2.0` sources. The app discovered the skill
-catalog and prompt aliases; `bootstrap-core`, `platform-awareness`,
-`proactive-awareness`, and `humanizer` were invoked. Playwright listed the
-active browser tabs, and Flint validated a Vega-Lite chart with no warnings or
-errors. Replicate reached its MCP server but returned `401 Unauthenticated`
-because this app did not have a Replicate API token. Individual skills and
-slash commands were not exhaustively invoked. This is historical host evidence,
-not a `v0.3.5` activation claim.
-
-The Scout row was re-checked against `v0.2.0` on 2026-09-13 inside a live session:
-
-> all 60 skills surfaced, all 15 instructions were active in context, none of the 15 slash
-commands were reachable, and both registered MCP servers answered a protocol
-handshake — 6 tools from Flint, 24 from Playwright.
-
-Scout-specific notes, last verified 2026-09-13:
-
-- **Slash commands do not reach Scout.** It has no command surface for plugin
-  prompts. Every command has an equivalent skill you can ask for by name, so
-  nothing is lost in capability — but the commands themselves are absent rather
-  than merely undocumented.
-- **Scout should use the Copilot CLI installation.** A test found a stale
-  Scout-local `v0.1.0` alongside the then-current `v0.2.0` Mall installation under
-  `~/.copilot`. The duplicate was removed. Enable **Load Copilot CLI skills**
-  in Scout's UI, then confirm Scout loaded the shared path and version before
-  activation or MCP registration.
-- **MCP servers need one extra step.** CLI and VS Code read `plugin.json`
-  directly. Scout keeps its own registry and ignores that manifest, so the
-  servers must be registered from the loaded `setup-dependencies` skill.
-  Skipping it leaves every skill loaded and every server it calls missing.
+The [host delivery table and dated observations](docs/install.md#where-alex-act-one-works)
+now live in the install reference. Supported delivery is not fresh activation
+evidence for every host.
 
 ## Install
 
-Two steps. The first runs once per machine, the second once per app. Scout needs
-a few extra steps of its own, and a final section covers optional tools; none of
-those tools are needed to get started.
+Start with [your first session](docs/getting-started.md). The links below retain
+the previous section destinations for existing bookmarks.
 
 ### 1. Install the plugin
 
-From the Alex ACT Mall:
-
-```powershell
-copilot plugin install alex-act-one@alex-mall
-```
-
-The Mall entry tracks the reviewed release and keeps the installed name stable.
-
-Installing from source remains available:
-
-```powershell
-copilot plugin install fabioc-aloha/Alex_ACT_ONE
-```
-
-Copilot prints a deprecation notice for repository installs. The install still
-works, but the Mall command is preferred.
-
-Every skill is available in Copilot CLI, VS Code, Microsoft Scout, and the
-GitHub Copilot app from the user-level installation. Scout should reuse the
-Copilot CLI plugin under `~/.copilot`; do not maintain a second ONE installation
-under `~/.scout/copilot`. Enable **Load Copilot CLI skills** in Scout's UI so it
-discovers the shared plugin.
+See [source and Mall installation](docs/install.md#1-install-the-plugin).
 
 ### 2. Turn on the always-on instructions, once in each app
 
-Skills wait until something calls them. Instructions are different: they shape
-every response, so they are written into the profile of the app you are using
-rather than loaded from the plugin. Each app keeps its own profile, so run
-activation in each app where you want the behavior.
-
-| App | What to run |
-| --- | --- |
-| Copilot CLI | `/alex-act-one bootstrap-core` |
-| VS Code with GitHub Copilot Chat | `/alex-act-one bootstrap-core` |
-| Microsoft Scout | Ask for the `bootstrap-core` skill, or invoke it by name from the skill list |
-| GitHub Copilot app | Ask for the `bootstrap-core` skill, or invoke it by name from the skill list |
-
-When a host's setup requirements are unclear, start with its no-write readiness
-report. It names the activation target and the steps that only the host can
-complete; it does not turn on instructions or claim the host observed them.
-
-```text
-node <this-skill>/scripts/host-readiness.cjs --host scout
-```
-
-Activation previews every instruction file and waits for your approval before
-writing anything. Running it again reports no changes.
-
-In the current source candidate, modified or unowned destination files block
-the entire activation before any writes. Back up and review the named conflicts;
-only a separately approved `--overwrite-conflicts` preview/apply may replace or
-adopt them. See [the conflict procedure](skills/bootstrap-core/SKILL.md#instruction-conflicts).
-Reinstall automation does not bypass that guard.
-
-To check where a given app writes them, run activation without approving. It
-prints the exact target directory first.
+See [per-app activation and readiness](docs/install.md#2-turn-on-the-always-on-instructions-once-in-each-app).
 
 ### What you get after each step
 
-| After | Skills available | Instructions active |
-| --- | --- | --- |
-| Step 1 | Every app | None |
-| Step 2 in one app | Every app | That app only |
-| Step 2 in each app you use | Every app | Every app you ran it in |
-
-Step 1 alone is a complete, working install. Step 2 adds the always-on
-behavior, and skipping it costs you nothing else.
+See [installation versus activation](docs/install.md#what-you-get-after-each-step).
 
 ### Using Claude Code instead?
 
-The skills travel. They follow the Agent Skills open standard, which Claude
-Code also implements: each skill is a folder holding a `SKILL.md` whose
-frontmatter carries a `name` and a `description`, and that is the shape Claude
-Code loads. (Claude Code is Anthropic's terminal agent, a different tool from
-the Muse assistant; the separate Muse edition of this pack lives at
-[Alex_ACT_ONE_Muse](https://github.com/fabioc-aloha/Alex_ACT_ONE_Muse).)
-
-Clone this repo, then copy the skill folders into Claude Code's personal
-skills directory, plus the shared scripts where the skill scripts look for
-them:
-
-```bash
-git clone https://github.com/fabioc-aloha/Alex_ACT_ONE.git
-mkdir -p ~/.claude/skills ~/.claude/scripts
-cp -r Alex_ACT_ONE/skills/* ~/.claude/skills/
-cp -r Alex_ACT_ONE/scripts/* ~/.claude/scripts/
-```
-
-For a single project, copy into that project's `.claude/skills/` instead,
-with `scripts/` beside it at `.claude/scripts/`. Claude Code loads a skill
-automatically when a request matches its description, or you invoke one
-directly as `/skill-name`.
-
-What does not transfer: the plugin install, the 15 always-on instructions,
-and the 15 slash commands are Copilot-format. Claude Code's always-on
-equivalent is `CLAUDE.md`; the texts in `instructions/` can be adapted into
-one by hand. The three MCP servers are standard stdio servers and can be
-registered with `claude mcp add`, using the commands in `plugin.json` pointed
-at your clone. Until they are, the chart, browser-check, and image skills
-still guide the work but have no rendering back end to call.
-
-One honesty note: this pack is tested on its Copilot hosts, not on Claude
-Code. The format is shared and the skills are plain markdown and scripts, so
-they load; treat your first runs as an evaluation anyway. The evaluation
-guide in `docs/launch/evaluation-guide.md` works here too.
+See [manual Claude Code setup and its verification limits](docs/install.md#using-claude-code-instead).
 
 ### On Microsoft Scout, register the MCP servers
 
-Only on Scout, and only if you want charts, browser verification, or image
-generation. Copilot CLI and VS Code read the servers from `plugin.json` and need
-nothing extra; Scout keeps its own registry and ignores that manifest.
-
-Ask Scout for the `setup-dependencies` skill by name. Slash commands do not
-exist on this surface. From the skill copy Scout loaded, run the registration
-preview:
-
-```text
-node <this-skill>/scripts/register-scout-mcp.mjs
-```
-
-The preview prints its resolved plugin root, the Scout registry path, and one
-line per server. Confirm that plugin root is the same copy and version Scout
-served above. If it is not, stop rather than registering servers from the wrong
-version.
-
-After reviewing the preview, apply it:
-
-```text
-node <this-skill>/scripts/register-scout-mcp.mjs --apply
-```
-
-The script backs up the existing registry and merges rather than replaces, so
-other servers remain untouched. Fully quit and restart Scout afterwards. A new
-conversation is not enough because tools are discovered during the launch
-handshake.
-
-After upgrading to the reviewed Flint 1.0.1 runtime, confirm its expected tools:
-
-- `compile_chart`
-- `show`
-- `list_chart_types`
-- `list_themes`
-- `render_chart`
-- `validate_chart`
-- `validate_board`
-- `list_interaction_presets`
-- `get_flint_skill`
-
-`replicate` is skipped unless `REPLICATE_API_TOKEN` is set in the environment.
-That is deliberate: a clear omission now beats an opaque authentication failure
-at call time.
-
-Without this step every skill still loads, but the tools those skills call are
-missing, which looks like a broken package rather than an unregistered one.
+See [Scout registration, shared-root checks, and restart requirements](docs/install.md#on-microsoft-scout-register-the-mcp-servers).
 
 ### Optional: extra tools for a few skills
 
-Most of this plugin needs nothing but Node. The large majority of its skills run
-with no external tools at all, and nothing below is needed to start.
-
-Flint is reviewed at `flint-chart-mcp@1.0.1` with independently exact-pinned
-`flint-chart@1.0.1`. Upgrade the plugin before the shared runtime: older launchers
-correctly refuse a mismatched version. From the updated installed package,
-preview `skills/setup-dependencies/scripts/provision-runtime.mjs --server flint`,
-then apply the same selection after consent. This changes neither Playwright nor
-Replicate. Reload the host to discover the new validated `show` interface.
-
-If Microsoft proxy metadata points tarballs at a backend feed that npm policy
-blocks directly, do not enable remote fetching or edit npm configuration. With
-explicit approval, npm 12+ can route an exact HTTPS backend prefix through the
-configured proxy using the provisioner's `--registry-tarball-prefix` option.
-Its preview names the prefix, registry, runtime, and selected packages.
-
-In the current source candidate, dependency checks distinguish installed
-directories, exact version matches, and bounded launch probes. Host connection
-remains unobserved until checked in that host. Checker, provisioner, and launcher
-share the runtime-root selection; see
-[readiness and alternate runtimes](skills/setup-dependencies/SKILL.md#check-first).
-Known Windows npm tool shims are resolved to their package's Node entrypoint
-without shell argument concatenation.
-
-| If you want to... | You also need | Get it |
-| --- | --- | --- |
-| Convert documents (Word, HTML, email, plain text) | Pandoc | `winget install JohnMacFarlane.Pandoc`, `brew install pandoc`, or `apt install pandoc` |
-| Render Mermaid diagrams into Word or HTML output | Mermaid CLI | `npm install -g @mermaid-js/mermaid-cli@11.17.0` |
-| Export SVG banners and figures as PNG | svgexport | `npm install -g svgexport@0.4.2` |
-| Annotate a screenshot | Pillow | `pip install Pillow` |
-| Render charts | Flint MCP server | Ask for the `setup-dependencies` skill |
-| Check rendered output in a browser | The `alex-playwright` MCP server, or your host's own browser tools | Ask for the `setup-dependencies` skill |
-| Generate images with AI | Replicate MCP server, plus a paid account and API token | Ask for the `setup-dependencies` skill |
-
-The three MCP servers are not equally important. Only Flint is required for the
-skill that uses it: without it, chart rendering cannot run and there is no
-substitute. Playwright has one — several hosts provide their own browser tools —
-and Replicate adds a capability rather than unblocking one.
-
-That fallback has a limit worth knowing before you rely on it. A host can have a
-browser and still refuse to open `file://`, which is the case that matters for
-checking an artifact you just wrote to disk. VS Code documents native browser
-verification, and current Copilot CLI releases include a browser-use plugin.
-Local-file, console, remote, and authentication parity still depend on the
-host, harness, and policy; retain the fallback for unavailable or unverified cases.
-The package registers its own server as `alex-playwright` — a distinct name, so
-it sits alongside a host's built-in browser tools rather than shadowing them.
-
-To see what you already have and what any gap costs you, ask for the
-`setup-dependencies` skill by name. Copilot CLI and VS Code also expose it as
-`/alex-act-one setup-dependencies`.
-
-It reports what is present, what is missing, and what each missing piece
-unlocks. It installs nothing without asking, and it never runs a system package
-manager on your behalf.
-
-If you skip this entirely, every skill that needs one of these will tell you
-exactly which tool it wants and how to install it, at the moment you need it.
+See [optional tools, runtime readiness, and registry policy](docs/install.md#optional-extra-tools-for-a-few-skills).
 
 ### Scripts for reinstalling and optional setup
 
-Run these scripts from the repository checkout. The optional installer and
-expanded marketplace checks ship in `v0.5.0`.
+See [repository setup scripts and their write boundaries](docs/install.md#scripts-for-reinstalling-and-optional-setup).
 
 #### Reinstall and verify ONE
 
-Close hosts that may lock the installed plugin before running
-[`reinstall-and-check.ps1`](reinstall-and-check.ps1):
-
-```powershell
-.\reinstall-and-check.ps1
-```
-
-This is not a preview. It registers missing public marketplaces (`alex-mall`,
-`awesome-copilot`, `copilot-plugins`, `azure-skills`, and `fabric-collection`),
-rejects conflicting sources, and reinstalls ONE from the Mall's release tag,
-not the working checkout. It verifies the installed version and applies the
-canonical instructions to the default Copilot profile, checking their
-bootstrap receipt afterward. It does not install optional plugins or prove
-that a host has observed activation after restart.
+See [reinstall and verification](docs/install.md#reinstall-and-verify-one).
 
 #### Install or check optional dependencies
 
-[`install-optional-dependencies.ps1`](install-optional-dependencies.ps1)
-previews by default. Review its package list, configured registry, and
-installation paths before applying:
-
-```powershell
-.\install-optional-dependencies.ps1
-.\install-optional-dependencies.ps1 -Apply
-```
-
-The installer reads the shared version pins. Flint, Playwright, and JSZip go
-into ONE's private runtime; Mermaid CLI and svgexport use npm's global prefix.
-It leaves the registry and npm policy unchanged and does not install
-companion plugins or system packages.
-
-Replicate is optional. Add `-IncludeReplicate` to preview or apply to include
-its pinned MCP package. Image generation separately requires a paid account
-and `REPLICATE_API_TOKEN`; the script does not read or store credentials or
-make paid API calls.
-
-```powershell
-.\install-optional-dependencies.ps1 -IncludeReplicate
-.\install-optional-dependencies.ps1 -Apply -IncludeReplicate
-```
-
-Check existing package versions, MCP launchers, and actual Mermaid/SVG-to-PNG
-rendering without reinstalling:
-
-```powershell
-.\install-optional-dependencies.ps1 -VerifyOnly
-# Include Replicate in verification only if you selected it for installation.
-.\install-optional-dependencies.ps1 -VerifyOnly -IncludeReplicate
-```
-
-With npm 12, the Microsoft proxy can advertise tarball URLs on a different
-Microsoft host and trigger `EALLOWREMOTE`. For the verified feed prefix below,
-route those URLs back through your configured proxy. Preview first, then
-repeat with `-Apply`; add `-IncludeReplicate` if wanted.
-
-```powershell
-$feed = 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/'
-.\install-optional-dependencies.ps1 -RegistryTarballPrefix $feed
-.\install-optional-dependencies.ps1 -Apply -RegistryTarballPrefix $feed
-```
-
-This routing does not switch registries or relax `allow-remote`. A failed
-install may leave partial package state. If npm blocks Puppeteer's browser
-setup scripts, package installation can succeed while rendering still fails.
-The readiness check reports that failure rather than claiming success.
-Browser setup is a separate decision: its downloads do not use the npm feed,
-and svgexport's pinned dependency requests an old, deprecated browser build.
-Do not enable lifecycle scripts globally to suppress the warning.
-
-See the [release checklist](RELEASE-CHECKLIST.md) for the verification steps
-and installation boundaries.
+See [optional installer preview, apply, and verification](docs/install.md#install-or-check-optional-dependencies).
 
 ## Tests
 

@@ -3,7 +3,8 @@
 Prioritized from the end-to-end source and documentation review on 2026-11-05.
 R1-R4 are now repaired in the source candidate with regression coverage.
 R5 and R6 are complete in source, with hosted-matrix evidence below.
-Remaining items await implementation. Nothing here
+R7 onboarding is complete in source with disposable-profile verification.
+R8-R11 await implementation. Nothing here
 authorizes changing an installation or publishing a release.
 
 ## Review Baseline
@@ -114,16 +115,32 @@ snippets are not claimed as executed or exhaustively verified.
 
 ### R7. Make first success obvious, then split reference from onboarding
 
-The [README quick install](README.md#quick-install) explains installation and
-activation, but needs a short first-workflow example, expected result, and
-activation verification. The large catalog and platform detail serve reference
-use better than a first session.
+**Completed in source on 2026-11-05.** The
+[first-session guide](docs/getting-started.md) covers installation, preview and
+approval, activation success signals, and a synthetic read-only reasoning
+workflow with no optional runtime tools. It distinguishes verified instruction
+files from observed host loading, and published, source-only, and demo-only
+features. Direct repository installation leads the README and short guide;
+the detailed reference keeps the Mall alternative for the reviewed release,
+including its required marketplace-registration step.
 
-**Acceptance:** a fresh reader can install, activate, run one no-extra-dependency
-workflow, and identify success from a single short guide. Keep generated catalogs
-canonical; move detailed setup/reference material behind links rather than copy
-it. Clearly separate published-package, source-checkout, and demo-only features.
-Proofread navigation while reorganizing, without rewriting the project's voice.
+The [README entry point](README.md#start-here) leads to that guide before the
+catalogs. Detailed setup and dated host observations now live in the
+[install reference](docs/install.md); old README setup anchors remain linked
+destinations. Generated catalogs retain their single canonical location.
+
+[Onboarding regressions](tests/onboarding.test.mjs) run the shipped bootstrap
+from an installed-copy fixture with no tool PATH, an explicit disposable profile
+target, and an unrelated adopter workspace. Preview creates no instructions;
+approved-fixture apply verifies hashes and receipt; the second preview preserves
+every instruction and receipt without changes. The adopter workspace stays empty.
+The targeted documentation, navigation, activation, and compatibility suite
+passed 89 tests with zero failures or skips. Relative-link checks include heading
+anchors; generated catalogs have no drift.
+
+This verifies the guide's structure and file-state signals, not fresh human
+usability, a new installation, live model compliance, or host activation parity.
+Scenario and host evidence remain R8.
 
 ### R8. Add scenario-level skill and host evidence
 
@@ -205,4 +222,5 @@ An item is complete only when its acceptance gate is demonstrated, related
 documentation matches the behavior, and the result is in the reviewed source.
 Publication and user-level installation require their own approval. R1-R4 are
 implemented in source; R5 and R6 are complete with the evidence above.
-R7-R11 remain open. No new release, Mall update, or local activation is implied.
+R7 is complete in source; R8-R11 remain open. No new release, Mall update, or
+local activation is implied.

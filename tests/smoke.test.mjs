@@ -295,7 +295,7 @@ describe('documented counts', () => {
         servers: /(\d+)\s+MCP servers/g,
     };
 
-    for (const doc of ['README.md', 'ROADMAP.md']) {
+    for (const doc of ['README.md', 'ROADMAP.md', 'docs/install.md']) {
         test(`${doc} quotes the real counts`, () => {
             // Historical notes legitimately cite a number that was true at the
             // time ("retiring one command left 16 slash commands in four
@@ -320,10 +320,10 @@ describe('documented counts', () => {
 });
 
 describe('Microsoft Scout setup guidance', () => {
-    const readme = read('README.md');
+    const install = read('docs', 'install.md');
     const roadmap = read('ROADMAP.md');
     const bootstrapSkill = read('skills', 'bootstrap-core', 'SKILL.md');
-    const scoutSetup = readme.match(
+    const scoutSetup = install.match(
         /### On Microsoft Scout, register the MCP servers([\s\S]*?)### Optional: extra tools/,
     )?.[1] || '';
 
@@ -347,17 +347,17 @@ describe('Microsoft Scout setup guidance', () => {
     });
 
     test('documents host readiness without promising observed activation', () => {
-        assert.match(readme, /host-readiness\.cjs/);
+        assert.match(install, /host-readiness\.cjs/);
         assert.match(bootstrapSkill, /Host Readiness/);
         assert.match(bootstrapSkill, /writes no instructions or MCP registry entries/i);
         assert.match(bootstrapSkill, /cannot prove a host has restarted or observed/i);
     });
 
     test('documents the Copilot CLI plugin as Scout shared source', () => {
-        assert.match(readme, /Scout should use the Copilot CLI installation/i);
-        assert.match(readme, /Load Copilot CLI skills/);
-        assert.match(readme, /~[\\/]?\.copilot/);
-        assert.doesNotMatch(readme, /Scout can retain another version/i);
+        assert.match(install, /Scout should use the Copilot CLI installation/i);
+        assert.match(install, /Load Copilot CLI skills/);
+        assert.match(install, /~[\\/]?\.copilot/);
+        assert.doesNotMatch(install, /Scout can retain another version/i);
         assert.match(pluginJson.description, /Copilot CLI user store/i);
         assert.match(roadmap, /shared Copilot CLI store/i);
     });
@@ -368,8 +368,8 @@ describe('Microsoft Scout setup guidance', () => {
     });
 
     test('preserves the historical Scout inventory instead of rewriting it as the current count', () => {
-        assert.match(readme, /^> all 60 skills surfaced/m);
-        assert.doesNotMatch(readme, /all 63 skills surfaced/);
+        assert.match(install, /^> all 60 skills surfaced/m);
+        assert.doesNotMatch(install, /all 63 skills surfaced/);
     });
 
     test('names every Flint tool expected after Scout restarts', () => {
