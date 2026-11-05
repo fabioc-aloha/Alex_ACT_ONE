@@ -34,9 +34,9 @@ test('demo environment validation rejects floating renderer drift before generat
 });
 test('CI installs demo build pins only on the disposable runner before exact artifact checks', () => {
     const workflow = readFileSync(join(ROOT, '.github', 'workflows', 'verify.yml'), 'utf8');
-    assert.match(workflow, /SHOWCASE_PACKAGES/);
-    assert.match(workflow, /npm install --prefix \$env:ALEX_ACT_ONE_RUNTIME_ROOT --save-exact --ignore-scripts.*@showcase/);
-    assert.ok(workflow.indexOf('SHOWCASE_PACKAGES') < workflow.indexOf('Check canonical Windows demo rebuilds'));
+    assert.match(workflow, /'ci' 'runtime' 'package-lock\.json'/);
+    assert.match(workflow, /npm ci --prefix \$env:ALEX_ACT_ONE_RUNTIME_ROOT --ignore-scripts/);
+    assert.ok(workflow.indexOf('npm ci --prefix') < workflow.indexOf('Check canonical Windows demo rebuilds'));
     const source = readFileSync(join(ROOT, 'scripts', 'build-flint-showcase.mjs'), 'utf8');
     assert.ok(source.includes('validateRendererEnvironment(rendererEnvironment(runtime))'));
     assert.ok(source.indexOf('validateRendererEnvironment(rendererEnvironment(runtime))') <

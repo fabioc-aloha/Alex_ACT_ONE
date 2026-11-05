@@ -68,13 +68,10 @@ jobs:
       - name: Provision reviewed packages on this disposable runner
         shell: pwsh
         run: |
-          node (Join-Path $PWD 'skills' 'setup-dependencies' 'scripts' 'provision-runtime.mjs') --runtime-root $env:ALEX_ACT_ONE_RUNTIME_ROOT --apply
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          $zip = node -p "const d=require('./scripts/shared/dependencies.cjs').TOOLS.jszip; d.package+'@'+d.version"
-          npm install --prefix $env:ALEX_ACT_ONE_RUNTIME_ROOT --save-exact --ignore-scripts --no-audit --no-fund $zip
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          $showcase = @(node -p "require('./scripts/shared/dependencies.cjs').SHOWCASE_PACKAGES.map(p=>p.package+'@'+p.version).join('\n')")
-          npm install --prefix $env:ALEX_ACT_ONE_RUNTIME_ROOT --save-exact --ignore-scripts --no-audit --no-fund @showcase
+          New-Item -ItemType Directory -Force -Path $env:ALEX_ACT_ONE_RUNTIME_ROOT | Out-Null
+          Copy-Item (Join-Path $PWD 'ci' 'runtime' 'package.json') $env:ALEX_ACT_ONE_RUNTIME_ROOT
+          Copy-Item (Join-Path $PWD 'ci' 'runtime' 'package-lock.json') $env:ALEX_ACT_ONE_RUNTIME_ROOT
+          npm ci --prefix $env:ALEX_ACT_ONE_RUNTIME_ROOT --ignore-scripts --no-audit --no-fund
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           $mermaid = node -p "const d=require('./scripts/shared/dependencies.cjs').TOOLS.mmdc; d.package+'@'+d.version"
           npm install --global --ignore-scripts --no-audit --no-fund $mermaid

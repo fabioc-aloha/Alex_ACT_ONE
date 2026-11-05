@@ -1,0 +1,16 @@
+{
+  "name": "alex-act-one-ci-runtime",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "flint-chart-mcp": "1.0.1",
+    "flint-chart": "1.0.1",
+    "@playwright/mcp": "0.0.80",
+    "replicate-mcp": "0.9.0",
+    "jszip": "3.10.1",
+    "@napi-rs/canvas": "1.0.10",
+    "chart.js": "4.5.1",
+    "@modelcontextprotocol/sdk": "1.32.1"
+  }
+}

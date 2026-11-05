@@ -22,12 +22,23 @@ For local rebuilds, use a separately approved isolated build environment.
 `--describe-runtime` reports the actual renderer versions, bundled font hashes,
 and text metrics without creating a report.
 
+The disposable profile is declared in [ci/runtime/package.json](../ci/runtime/package.json)
+and locked by [ci/runtime/package-lock.json](../ci/runtime/package-lock.json).
+It includes integrity-checked transitive versions, not just the renderer
+top-level pins. The workflow copies both files to its temporary runtime and uses
+`npm ci --ignore-scripts`; it does not install into this checkout or an active
+user runtime. Tests require the profile's direct versions to match the shared
+registry. The lock's `registry.npmjs.org` URLs use npm's documented sentinel for
+the currently configured registry, not a workflow registry override.
+
 The hosted diagnosis found matching bundled-font hashes but canvas 1.1.0,
 Chart.js 4.6.1, and SDK 1.32.2 instead of the reviewed versions. Canvas measured
-different glyph widths, changing SVG paths and raster output. These explicit
-build pins fix that input drift rather than rounding paths or weakening the
-exact artifact check. They do not freeze every transitive package or upgrade a
-user's runtime; the broader locked/staged runtime policy remains R9.
+different glyph widths, changing SVG paths and raster output. These explicit build pins fix renderer input drift rather than rounding paths.
+A subsequent notice-only mismatch exposed `@hono/node-server` 2.1.6 versus
+2.1.4; the isolated lock also freezes that indirect build input. No paths or
+notice content are normalized away, and the exact artifact check remains.
+The profile does not upgrade a user's runtime; staged upgrades and rollback
+remain R9.
 
 The demo CLI sets its own process timezone to UTC before loading renderers.
 It does not change the OS or parent process, or impose a timezone on the live
@@ -89,16 +100,17 @@ structural matrix. Actions are pinned to reviewed immutable commits, checkout
 does not persist credentials, and token permissions are read-only.
 
 Only disposable integration runners install packages. MCP, JSZip, and Mermaid
-versions come from the [shared dependency registry](../scripts/shared/dependencies.cjs).
+direct versions agree with the [shared dependency registry](../scripts/shared/dependencies.cjs).
 The workflow uses the runner's configured npm registry without a registry URL
 override, suppresses lifecycle scripts for these installs, and does not request
 API credentials or browser downloads. Pandoc 3.13 is installed by the pinned
 Pandoc setup action.
 
-Top-level npm pins are not a locked transitive dependency graph. A new
-transitive version may expose a compatibility or golden-artifact difference;
-do not disable a failing check to conceal it. The reviewed locking/staging
-policy remains separate roadmap work.
+Update the isolated lock deliberately when changing its dependency graph, then
+review package versions, integrity, configured-registry portability, upstream
+notices, and real artifact differences. Do not disable a failing check or relax
+the artifact contract to conceal a dependency change. This CI/demo profile is
+not an implementation of staged production-runtime installation or rollback.
 
 Read the job's actual environment, prerequisite report, TAP totals, exclusions,
 and failure output. A valid workflow file or local Windows run is not proof
