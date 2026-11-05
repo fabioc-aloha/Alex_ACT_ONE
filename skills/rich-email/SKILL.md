@@ -33,16 +33,25 @@ Outlook supplies the default signature. Do not add a generated signoff or sender
 4. Use the existing `md-to-eml` converter without `--inline-images`. This first Outlook helper accepts single-part `text/html` EML and rejects multipart output rather than risking attachment corruption.
 5. Validate the EML:
 
+Resolve `<plugin-root>` from the canonical installed alex-act-one package, not
+the adopter's working directory. These PowerShell examples use Windows path
+separators; use native separators on other hosts. The validation command is safe
+to exercise with a synthetic EML; the draft-opening example requires consent.
+
+<!-- executable-example: rich-email-validate -->
+
 ```powershell
-node skills/rich-email/scripts/open-rich-outlook-draft.cjs `
+node "<plugin-root>\skills\rich-email\scripts\open-rich-outlook-draft.cjs" `
   "$env:TEMP\message.eml" --validate-only
 ```
 
 6. Inspect the validation output and decoded HTML. Read the Content Rules thresholds from the validator output, not by eye: `subjectChars` must be under 60, and `bodyWords` over 250 means the message needs the executive-summary callout. Confirm recipients, subject, readable headings, compact tables, correct links, no raw Markdown, no signoff, and no secrets.
 7. On Windows with New Outlook installed, open the unsent draft:
 
+<!-- illustrative-example: rich-email-open-draft -->
+
 ```powershell
-node skills/rich-email/scripts/open-rich-outlook-draft.cjs `
+node "<plugin-root>\skills\rich-email\scripts\open-rich-outlook-draft.cjs" `
   "$env:TEMP\message.eml"
 ```
 
@@ -74,11 +83,16 @@ The helper requires `olk.exe` or `outlook.exe`. Validation-only mode remains ava
 
 ## Validation Commands
 
+<!-- executable-example: rich-email-tests -->
+
 ```powershell
-node --test scripts/test-rich-email.cjs
-node skills/rich-email/scripts/open-rich-outlook-draft.cjs message.eml --validate-only
-git status --short
+node --test "<plugin-root>\tests\rich-email.test.cjs"
 ```
+
+The marked executable examples are checked by the repository's
+`documentation-examples` tests using an installed-copy fixture from an unrelated
+directory. They validate synthetic data only and never open or send a draft.
+Unmarked or illustrative snippets are not automatically executed.
 
 ## Would Revise If
 

@@ -31,7 +31,11 @@ function writeAtomic(file, content) {
     fs.mkdirSync(path.dirname(file), { recursive: true });
     const temporary = `${file}.tmp-${process.pid}`;
     fs.writeFileSync(temporary, content, { flag: 'wx' });
-    fs.renameSync(temporary, file);
+    try {
+        fs.renameSync(temporary, file);
+    } finally {
+        fs.rmSync(temporary, { force: true });
+    }
 }
 
 function readJson(file, fallback = null) {
@@ -62,6 +66,7 @@ function parseArgs(args) {
     const options = {
         apply: false,
         remove: false,
+        overwriteConflicts: false,
         targetInstructions: defaultTarget.path,
         targetSource: defaultTarget.source,
         workspaceInstructions: null,
@@ -76,6 +81,7 @@ function parseArgs(args) {
         const value = args[index];
         if (value === '--apply') options.apply = true;
         else if (value === '--remove') options.remove = true;
+        else if (value === '--overwrite-conflicts') options.overwriteConflicts = true;
         else if (values.has(value)) {
             if (!args[index + 1] || args[index + 1].startsWith('--')) {
                 throw new Error(`${value} requires a value`);
@@ -85,6 +91,9 @@ function parseArgs(args) {
         } else throw new Error(`unknown argument: ${value}`);
     }
     if (!options.coreVersion) throw new Error('plugin version is unavailable');
+    if (options.remove && options.overwriteConflicts) {
+        throw new Error('--overwrite-conflicts cannot be used with removal');
+    }
     options.targetInstructions = path.resolve(options.targetInstructions);
     if (options.workspaceInstructions) {
         options.workspaceInstructions = path.resolve(options.workspaceInstructions);
@@ -204,13 +213,14 @@ function receiptCurrent(receipt, options, files) {
     if (!receipt || receipt.schemaVersion !== 2
         || receipt.bootstrappedBy !== RECEIPT_OWNER
         || receipt.coreVersion !== options.coreVersion
-        || !Array.isArray(receipt.files) || receipt.files.length !== files.length) return false;
+        || !Array.isArray(receipt.files) || receipt.files.length < files.length) return false;
+    validatedOwnedReceipt(receipt, files, true);
     const expected = new Map(files.map((file) => [file.name, normalizedReceiptFile(file)]));
     const names = new Set(receipt.files.map((entry) => entry?.name));
-    if (names.size !== files.length) return false;
+    if (names.size !== receipt.files.length || files.some(file => !names.has(file.name))) return false;
     return receipt.files.every((entry) => {
         const source = expected.get(entry.name);
-        return source && entry.owner === RECEIPT_OWNER
+        return !source || entry.owner === RECEIPT_OWNER
             && entry.sourceRelativePath === source.sourceRelativePath
             && entry.sha256 === source.sha256;
     });
@@ -219,7 +229,7 @@ function receiptCurrent(receipt, options, files) {
 /**
  * Validates the receipt before acting on the files it claims.
  *
- * `forRemoval` relaxes two checks, and only those two. A receipt written when
+ * `allowRetired` permits an older inventory during upgrade or removal. A receipt written when
  * the package shipped more instructions than it does now is still a valid
  * record of what this plugin wrote, and those extra files are exactly what
  * removal exists to clean up. Requiring the count to match the current package
@@ -231,11 +241,11 @@ function receiptCurrent(receipt, options, files) {
  * Everything else still applies in both modes: schema, owner, name safety, hash
  * format, and no duplicates.
  */
-function validatedOwnedReceipt(receipt, files, forRemoval = false) {
+function validatedOwnedReceipt(receipt, files, allowRetired = false) {
     if (!receipt || receipt.schemaVersion !== 2
         || ![RECEIPT_OWNER, LEGACY_RECEIPT_OWNER].includes(receipt.bootstrappedBy)
         || !Array.isArray(receipt.files)
-        || (!forRemoval && receipt.files.length !== files.length)) {
+        || (!allowRetired && receipt.files.length !== files.length)) {
         throw new Error('bootstrap receipt is invalid');
     }
     const legacy = receipt.bootstrappedBy === LEGACY_RECEIPT_OWNER;
@@ -243,10 +253,15 @@ function validatedOwnedReceipt(receipt, files, forRemoval = false) {
     const names = new Set();
     for (const entry of receipt.files) {
         const source = expected.get(entry?.name);
-        const orphaned = forRemoval && !source;
-        if ((!source && !orphaned) || names.has(entry.name)
+        const orphaned = allowRetired && !source;
+        const recordedSource = source || {
+            name: entry?.name,
+            sourceRelativePath: `instructions/${String(entry?.name).replace(/^alex-act-/, '')}`,
+        };
+        if (!entry || (!source && !orphaned) || names.has(entry.name)
             || !safeInstructionName(entry.name)
-            || (source && !isOwnedReceiptEntry(entry, source, legacy))
+            || !entry.name.startsWith('alex-act-')
+            || !isOwnedReceiptEntry(entry, recordedSource, legacy)
             || typeof entry.sha256 !== 'string'
             || !/^[a-f0-9]{64}$/.test(entry.sha256)) {
             throw new Error('bootstrap receipt contains unsafe or unowned entries');
@@ -322,16 +337,30 @@ function buildPlan(options) {
             _receiptPath: receiptPath,
         };
     }
+    const owned = new Map((receipt ? validatedOwnedReceipt(receipt, files, true) : [])
+        .map((entry) => [entry.name, entry]));
     const actions = files.map((file) => {
         const destination = path.join(options.targetInstructions, file.name);
         const sourceHash = sha256(file.bytes);
-        if (!fs.existsSync(destination)) return { name: file.name, action: 'create', sha256: sourceHash };
+        if (!fs.existsSync(destination)) {
+            return { name: file.name, action: 'create', sha256: sourceHash, destinationSha256: null };
+        }
+        const destinationHash = sha256(fs.readFileSync(destination));
+        const owner = owned.get(file.name);
+        const reason = !owner ? 'unowned'
+            : destinationHash !== owner.sha256 && destinationHash !== sourceHash ? 'modified-owned' : null;
         return {
             name: file.name,
-            action: sha256(fs.readFileSync(destination)) === sourceHash ? 'preserve' : 'replace',
+            action: reason && !options.overwriteConflicts ? 'conflict'
+                : destinationHash === sourceHash ? 'preserve' : 'replace',
             sha256: sourceHash,
+            destinationSha256: destinationHash,
+            ...(reason ? { conflict: reason } : {}),
         };
     });
+    const conflicts = actions.filter((file) => file.conflict)
+        .map((file) => ({ name: file.name, reason: file.conflict }));
+    const blocked = conflicts.length > 0 && !options.overwriteConflicts;
     // Instructions this receipt owns that the package no longer ships. Activate
     // does not delete them, because that is removal's job and deleting during an
     // upgrade would be a surprise. But leaving them unmentioned is how a retired
@@ -346,6 +375,9 @@ function buildPlan(options) {
         schemaVersion: 1,
         apply: options.apply,
         mode: 'activate',
+        blocked,
+        overwriteConflicts: options.overwriteConflicts,
+        conflicts,
         routing: instructionSkillRoutes(files),
         coreVersion: options.coreVersion,
         targetInstructions: options.targetInstructions,
@@ -354,7 +386,7 @@ function buildPlan(options) {
         files: actions,
         orphaned,
         receipt: {
-            action: receiptCurrent(receipt, options, files)
+            action: blocked ? 'blocked' : receiptCurrent(receipt, options, files)
                 ? 'preserve'
                 : receipt ? 'refresh' : 'create',
         },
@@ -362,6 +394,13 @@ function buildPlan(options) {
         legacy: legacyEvidence(path.join(options.targetInstructions, LEGACY_RECEIPT_NAME)),
         _files: files,
         _receiptPath: receiptPath,
+        _receiptSha256: fs.existsSync(receiptPath) ? sha256(fs.readFileSync(receiptPath)) : null,
+        _retiredReceiptEntries: [...owned.values()].filter(entry => !current.has(entry.name))
+            .map(entry => ({
+                name: entry.name, owner: RECEIPT_OWNER,
+                sourceRelativePath: `instructions/${entry.name.replace(/^alex-act-/, '')}`,
+                sha256: entry.sha256,
+            })),
     };
 }
 
@@ -398,6 +437,19 @@ function applyPlan(plan, options) {
         };
         return plan;
     }
+    if (plan.blocked) {
+        throw new Error(`activation blocked by instruction conflicts: ${plan.conflicts.map(file => file.name).join(', ')}. ` +
+            'Back up and review the conflicts; preview --overwrite-conflicts before explicitly approving replacement.');
+    }
+    const receiptHash = fs.existsSync(plan._receiptPath) ? sha256(fs.readFileSync(plan._receiptPath)) : null;
+    if (receiptHash !== plan._receiptSha256) throw new Error('bootstrap receipt changed after planning; preview again');
+    for (const entry of plan.files) {
+        const destination = path.join(options.targetInstructions, entry.name);
+        const actual = fs.existsSync(destination) ? sha256(fs.readFileSync(destination)) : null;
+        if (actual !== entry.destinationSha256) {
+            throw new Error(`instruction changed after planning: ${entry.name}; preview again`);
+        }
+    }
     for (const file of plan._files) {
         const action = plan.files.find((entry) => entry.name === file.name)?.action;
         if (action === 'create' || action === 'replace') {
@@ -410,7 +462,7 @@ function applyPlan(plan, options) {
             bootstrappedBy: RECEIPT_OWNER,
             coreVersion: options.coreVersion,
             timestamp: new Date().toISOString(),
-            files: plan._files.map(normalizedReceiptFile),
+            files: [...plan._files.map(normalizedReceiptFile), ...plan._retiredReceiptEntries],
         };
         writeAtomic(plan._receiptPath, `${JSON.stringify(receipt, null, 2)}\n`);
     }
@@ -431,7 +483,7 @@ function applyPlan(plan, options) {
 }
 
 function publicPlan(plan) {
-    const { _files, _receiptPath, ...output } = plan;
+    const { _files, _receiptPath, _receiptSha256, _retiredReceiptEntries, ...output } = plan;
     return output;
 }
 

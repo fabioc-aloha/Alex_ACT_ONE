@@ -1,7 +1,7 @@
 ---
 name: render-verify
 description: "Verify a rendered visual artifact actually says what it was supposed to say — open it, read console errors, walk a failure catalog, and check its claim. Works on charts, reports, SVG, dashboards, diagrams, and printable output. Use after render_chart or Flint show, after backend edits, and before committing generated HTML/SVG/PNG. Prefer native browser tools; retain registered fallback for missing scenarios."
-lastReviewed: 2026-08-14
+lastReviewed: 2026-11-05
 ---
 
 # render-verify: look at what you rendered
@@ -37,6 +37,12 @@ longest; a shorter general catalog follows it.
 - Before **committing generated HTML, SVG, or PNG.** Inline specs fail silently.
 - When the artifact is **layered, faceted, multi-series, or multi-figure.** Most
   failures below come from layer, scale, or layout interaction.
+- When requested interaction behavior or state changes: if gesture and reset
+  acceptance is not already defined, load and follow
+  [flint-interactions](../flint-interactions/SKILL.md). Otherwise apply the
+  existing acceptance; do not reload that owner. This skill owns visual/data
+  checks, not a second interaction procedure; a valid spec, screenshot, or
+  accepted display call does not prove behavior.
 
 **Recommended:**
 
@@ -141,26 +147,22 @@ job the host already does.**
 
 1. **The host's own browser capability — always try this first.** If your tool
    inventory contains anything that opens a page and returns a screenshot or a
-   page snapshot _to you_, use it. This rung costs nothing and has no security
-   trade-off. **What it covers depends on the host, and the difference decides
-   whether rung 2 is needed at all:**
+   page snapshot _to you_, use it. Discover current capabilities rather than
+   assuming a product-wide browser matrix. Local-file access, child-frame input,
+   console access, and downloads are distinct, host-dependent capabilities.
+   Follow [browser-tools](../browser-tools/SKILL.md) when input times out or
+   reaches an iframe without reaching its chart; diagnose before changing the
+   artifact or switching tools.
 
-   | Host                 | Native browser  | Opens `file://`                    | Rung 2 needed for local artifacts |
-   | -------------------- | --------------- | ---------------------------------- | --------------------------------- |
-   | VS Code Copilot      | Built-in tools  | **Yes**, no flags, no downloads    | No — rung 1 is sufficient         |
-   | Microsoft Scout      | Built-in server | **No** — `file:` protocol blocked  | **Yes**                           |
-   | GitHub Copilot CLI   | None            | N/A                                | **Yes** — rung 2 is the only path |
-
-   The VS Code row was verified against this plugin's own demo. The Scout row was
-   verified 2026-09-07: `browser_navigate` to a local `.html` returns
-   `Access to "file:" protocol is blocked`. Do not assume a host that _has_ a
-   browser can open local files with it.
+   Historical observation: Scout blocked `file:` in a 2026-09-07 test. That is
+   not a permanent capability claim for Scout, CLI, or any other host. Verify
+   the currently selected host and preserve sharing and authentication boundaries.
 
 2. **The optional `alex-playwright` MCP server — fallback, or the only path.**
    Use when rung 1 is absent, when rung 1 cannot open `file://` and the artifact
    is local, or when rung 1 lacks console-error access and the defect you are
-   chasing needs a cause rather than a symptom. Per the table above that is
-   **CLI always, Scout for local artifacts, and VS Code rarely**. See
+   chasing needs a cause rather than a symptom. Do not substitute it when the
+   user explicitly requires native-browser evidence without naming the gap. See
    _Playwright MCP setup_ below. It carries real costs: a browser must already be
    installed, `file://` needs `--allow-unrestricted-file-access`, and it writes
    artifacts into the working directory.
@@ -174,7 +176,7 @@ chart described as verified is worse than an unverified chart.
 
 ### Which capabilities you actually need
 
-"Can open HTML" is not one capability — it is five, and hosts differ in which
+"Can open HTML" is not one capability, and hosts differ in which
 they provide. Establish what you have _before_ interpreting what you see.
 
 | #   | Capability                                                                         | Needed for                                | If missing                                                               |
@@ -184,6 +186,7 @@ they provide. Establish what you have _before_ interpreting what you see.
 | 3   | **Console-error access**                                                           | Step 2 — finding the _cause_              | You can still see symptoms; say that causes were not checked             |
 | 4   | **Element-scoped or scrolled capture**                                             | Multi-figure artifacts                    | Verify one figure per page-load, or accept reduced confidence and say so |
 | 5   | **Wait-for / re-capture after render**                                             | Anything JS-rendered (Vega-Lite, ECharts) | **See the false-positive warning below**                                 |
+| 6 | **Input reaches the intended frame and focus target** | Interactive acceptance, keyboard paths, and reset | Diagnose with browser-tools; label DOM-only or unsupported checks explicitly |
 
 > [!WARNING]
 > **Capability 5 can manufacture a defect that isn't there.** Vega-Lite and
@@ -230,9 +233,8 @@ and observe the result. Tool names vary between hosts; outcomes do not.
    `error`.
 3. **Then screenshot it.**
 
-Zero console errors plus a wrong-looking artifact means a spec, data, or layout
-problem. Console errors plus a right-looking artifact means you are probably
-looking at a stale render.
+Console output alone does not establish a stale render or a spec defect. Check
+the actual artifact, readiness, frame target, and state before choosing a cause.
 
 ## Step 3 — check the picture against the catalogs
 
@@ -253,6 +255,17 @@ is rendered as a page. Then, for multi-figure artifacts:
   otherwise; do not resolve it by looking harder at the picture.
 - **Search the rendered text for placeholders** — `TODO`, `undefined`, `NaN`,
   `{{`, `Lorem`. Search what rendered, not the source that produced it.
+- **Decode embedded images.** Require `decode()` success or `naturalWidth > 0`,
+  including data-URI SVG. An image can be complete and still fail XML decoding;
+  report/footer text outside its SVG root is not valid image content.
+- **Measure clipping after resize.** Wait for the child frame and layout to
+  settle; compare each plot's `getBoundingClientRect()` with its nearest
+  clipping container at desktop and narrow widths. A page with no horizontal
+  overflow can still hide part of a fixed-height board chart.
+- **Exercise requested behavior.** Use the existing flint-interactions
+  acceptance contract for themed controls, semantic identities, linked overlays,
+  preserved populations, and neutral-state reset. A static preview or changed
+  opacity alone does not prove that the correct recipient records responded.
 
 ## Step 4 — check the claim, not just the render
 
@@ -324,12 +337,13 @@ verified.
 ## Playwright MCP setup
 
 **Fallback only — rung 2 of Step 1.** Try the host's own browser capability
-first; if it can open the artifact and return a screenshot to you, you do not
-need this server. Check the per-host table in Step 1 before assuming that:
-a host with a browser may still block `file://`. Measured against
+first; if it provides the capabilities the task needs, you do not need this
+server. Check the actual capability inventory in Step 1: a host with a browser
+may still block `file://` or lack child-frame input. Measured against
 `@playwright/mcp@0.0.80`:
 
-Run `setup-dependencies` once after installing or updating Illustrator.
+Run `setup-dependencies` after installing or updating this plugin when the
+selected fallback runtime needs provisioning.
 Its `--check-updates` mode compares the reviewed Playwright pin with the stable
 dist-tag; a newer version still requires a browser-compatibility pass before the
 source pin changes.
@@ -383,9 +397,11 @@ page can attempt to drive the agent into reading local files and sending them
 out. Keep this server for local verification. If you need general web browsing,
 use a separate configuration without the flag.
 
-Do not enable `browser_run_code_unsafe` workflows for verification. Screenshot
-and console access are sufficient; arbitrary code execution is not needed to
-look at a chart.
+Do not enable arbitrary host-code execution just to inspect a chart.
+Screenshots and console access do not establish interactive behavior; prefer
+supported native input or narrowly scoped in-page evaluation when those
+capabilities are available. General-purpose host-code execution remains a
+separate capability and approval boundary, not a verification default.
 
 ### Housekeeping
 

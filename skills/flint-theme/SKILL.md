@@ -43,6 +43,11 @@ Theme Lab iteration, and visual verification.
 7. **Hand off to `render-verify`.** Verify representative charts at useful size,
    report what changed after iteration, and name any backend that ignores the
    selected ThemeSpec behavior.
+   For an interactive legend/key or themed control, also follow the existing
+   [flint-interactions](../flint-interactions/SKILL.md) acceptance contract.
+   Check hide/restore affordances and compiler/console warnings across the
+   requested themes. Do not suppress warning output to make a theme appear valid;
+   use supported policy overrides and verify the actual result.
 
 ## Boundaries
 

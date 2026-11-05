@@ -64,7 +64,8 @@ function instructionState(plan) {
     const current = plan.files.every((file) => file.action === 'preserve')
         && plan.receipt.action === 'preserve';
     return {
-        state: current ? 'current' : 'ready-to-apply',
+        state: plan.blocked ? 'blocked' : current ? 'current' : 'ready-to-apply',
+        conflicts: plan.conflicts || [],
         targetInstructions: plan.targetInstructions,
         targetSource: plan.targetSource,
         expectedFiles: plan.expectedFiles,
@@ -118,6 +119,9 @@ function buildReport(options) {
             'Fully quit and restart Scout, then verify a named skill and expected MCP tool.',
         ];
     }
+    if (bootstrap.blocked) {
+        report.nextActions.unshift('Resolve instruction conflicts first. Back up the affected files and review an --overwrite-conflicts preview only if replacement is intended.');
+    }
     return report;
 }
 
@@ -125,6 +129,9 @@ function printHuman(report) {
     console.log(`Host activation readiness: ${report.host}`);
     console.log(`  instruction target : ${report.instructionActivation.targetInstructions}`);
     console.log(`  instruction state  : ${report.instructionActivation.state}`);
+    for (const conflict of report.instructionActivation.conflicts) {
+        console.log(`  conflict           : ${conflict.name} (${conflict.reason})`);
+    }
     console.log(`  discovery          : ${report.discovery.state}`);
     console.log(`  MCP registration   : ${report.mcpRegistration.state}`);
     console.log(`  restart            : ${report.restart.state}`);

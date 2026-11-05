@@ -46,7 +46,9 @@ Fires when the goal is one of:
    export REPLICATE_API_TOKEN=r8_...
    ```
 
-   Do NOT commit the token to any config file. The plugin's shipped `.vscode/mcp.json` references it via `${env:REPLICATE_API_TOKEN}` so it stays out of source control.
+   Do NOT commit the token to any config file. The shipped
+   [plugin.json](../../plugin.json) declares the server and references
+   `${env:REPLICATE_API_TOKEN}`; it does not embed the token value.
 
 2. **The `replicate` MCP server** — run `setup-dependencies` once after installing or updating the plugin. It installs the reviewed `replicate-mcp@0.9.0` pin through npm's configured registry; the bundled Node launcher starts it on the first Replicate tool invocation. Use setup's `--check-updates` mode to compare the pin with the stable dist-tag before a release.
 

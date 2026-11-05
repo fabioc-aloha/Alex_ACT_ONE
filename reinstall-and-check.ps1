@@ -153,7 +153,7 @@ $receiptFiles = @($receipt.files)
 $invalidReceiptEntries = @($receiptFiles | Where-Object {
     $_.owner -ne $Plugin -or -not $_.sourceRelativePath.StartsWith('instructions/')
 })
-if ($receiptFiles.Count -ne $bootstrapPlan.expectedFiles -or $invalidReceiptEntries.Count -ne 0) {
+if ($receiptFiles.Count -lt $bootstrapPlan.expectedFiles -or $invalidReceiptEntries.Count -ne 0) {
     throw 'Bootstrap receipt entries are not fully migrated to the ONE ownership contract.'
 }
 

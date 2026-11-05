@@ -61,6 +61,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const { runTool } = require(path.join(__dirname, '..', '..', '..', 'scripts', 'shared', 'tool-runner.cjs'));
+const { runtimeRoot } = require(path.join(__dirname, '..', '..', '..', 'scripts', 'shared', 'runtime-status.cjs'));
 
 // ---------------------------------------------------------------------------
 // JSZip loading -- try multiple resolution paths
@@ -72,7 +73,7 @@ try {
   // Fallback: search known locations. plugin-data comes first because that is
   // where setup-dependencies installs it, and it survives plugin updates.
   const fallbackPaths = [
-    path.join(os.homedir(), '.copilot', 'plugin-data', 'alex-act-one', 'runtime', 'node_modules', 'jszip'),
+    path.join(runtimeRoot(), 'node_modules', 'jszip'),
     path.join(__dirname, '..', '..', '..', 'node_modules', 'jszip'), // plugin root
     path.join(__dirname, '..', '..', 'node_modules', 'jszip'),       // heir/node_modules
     path.join(__dirname, 'node_modules', 'jszip'),                   // skill/node_modules

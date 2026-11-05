@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 import { mkdirSync } from 'node:fs';
-import { homedir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { spawnCommand } from '../../../scripts/process-launch.mjs';
 import deps from '../../../scripts/shared/dependencies.cjs';
+import runtimeStatus from '../../../scripts/shared/runtime-status.cjs';
 
 // Read from the shared registry rather than restating the pins. Two copies of
 // the same three versions drift silently, and the copy a reader trusts is
@@ -40,9 +40,7 @@ const AUDIT_TARGETS = [
 const PACKAGES = PINNED_PACKAGES.map(({ name, version }) => `${name}@${version}`);
 const APPLY = process.argv.includes('--apply');
 const CHECK_UPDATES = process.argv.includes('--check-updates');
-const RUNTIME_ROOT = options.runtimeRoot
-  ? resolve(options.runtimeRoot)
-  : join(homedir(), '.copilot', 'plugin-data', 'alex-act-one', 'runtime');
+const RUNTIME_ROOT = runtimeStatus.runtimeRoot(options.runtimeRoot ? resolve(options.runtimeRoot) : undefined);
 
 if (unknownArgs.length > 0) {
   console.error(`Unknown argument(s): ${unknownArgs.join(', ')}`);
@@ -53,7 +51,7 @@ if (APPLY && CHECK_UPDATES) {
   process.exit(2);
 }
 
-function run(command, args, { capture = false, env = {} } = {}) {
+function run(command, args, { capture = false, env = {}, timeout = 60000 } = {}) {
   return new Promise((resolve, reject) => {
     const child = spawnCommand(command, args, {
       cwd: join(dirname(fileURLToPath(import.meta.url)), '..'),
@@ -64,6 +62,7 @@ function run(command, args, { capture = false, env = {} } = {}) {
         ...env,
       },
       stdio: capture ? ['ignore', 'pipe', 'pipe'] : 'inherit',
+      timeout,
     });
     let stdout = '';
     let stderr = '';
@@ -74,9 +73,9 @@ function run(command, args, { capture = false, env = {} } = {}) {
       child.stderr.on('data', (chunk) => { stderr += chunk; });
     }
     child.on('error', reject);
-    child.on('close', (code) => {
+    child.on('close', (code, signal) => {
       if (code === 0) resolve({ stdout, stderr });
-      else reject(new Error(`${command} exited ${code}${stderr ? `: ${stderr.trim()}` : ''}`));
+      else reject(new Error(`${command} exited ${code}${signal ? ` (${signal}; timeout ${timeout} ms)` : ''}${stderr ? `: ${stderr.trim()}` : ''}`));
     });
   });
 }
@@ -155,10 +154,15 @@ try {
       ...(options.tarballPrefix ? [`--replace-registry-host=${options.tarballPrefix}`] : []),
       ...PACKAGES,
     ], {
-      env: { NPM_CONFIG_REGISTRY: registry },
+      env: { NPM_CONFIG_REGISTRY: registry }, timeout: 180000,
     });
 
-  console.log('\nProvisioned direct runtime. Reload the host, then start a new session so the MCP servers pick up the runtime.');
+  for (const pinned of PINNED_PACKAGES.filter(packageInfo => packageInfo.route)) {
+    const state = runtimeStatus.checkRuntime(pinned.route, RUNTIME_ROOT);
+    if (!state.present) throw new Error(state.errors.join('\n'));
+    console.log(`verified ${pinned.route}: exact versions and successful launch probe; host connection not observed`);
+  }
+  console.log('\nProvisioned direct runtime. Reload the host, then verify its MCP connection in a new session.');
 } catch (error) {
   console.error(`FAIL  ${error.message}`);
   process.exit(1);

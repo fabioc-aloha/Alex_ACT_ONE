@@ -12,7 +12,7 @@ test('chart prompt selects the owner that links all bundled activation dependenc
     const prompt = read('prompts', 'render-chart.prompt.md');
     const owner = read('skills', 'render-chart', 'SKILL.md');
     assert.ok(prompt.includes('](../skills/render-chart/SKILL.md)'));
-    for (const name of ['chart-big-idea', 'flint-chart', 'render-verify']) {
+    for (const name of ['chart-big-idea', 'flint-chart', 'flint-interactions', 'render-verify']) {
         assert.ok(owner.includes(`](../${name}/SKILL.md)`), `Missing bundled route for ${name}`);
     }
     assert.match(owner, /installed (?:plugin|ONE)/i);
@@ -29,7 +29,7 @@ test('chart routes resolve from an installed package without adopter skill folde
     mkdirSync(adopter);
     const prompt = read('prompts', 'render-chart.prompt.md');
     writeFileSync(join(plugin, 'prompts', 'render-chart.prompt.md'), prompt);
-    const expected = ['render-chart', 'chart-big-idea', 'flint-chart', 'render-verify'];
+    const expected = ['render-chart', 'chart-big-idea', 'flint-chart', 'flint-interactions', 'render-verify'];
     for (const name of expected) {
         mkdirSync(join(plugin, 'skills', name), { recursive: true });
         writeFileSync(join(plugin, 'skills', name, 'SKILL.md'), read('skills', name, 'SKILL.md'));

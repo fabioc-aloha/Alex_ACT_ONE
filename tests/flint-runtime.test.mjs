@@ -124,6 +124,73 @@ test('provisioned Flint 1.0.1 preserves the MCP and three-backend output contrac
         assert.ok(!shown.isError, JSON.stringify(shown));
         assert.ok(shown.content.length > 0);
     });
+    await t.test('interaction grammar and chart-compatible discovery admit highlight plus keyboard navigation', async () => {
+        const grammar = await mcp.call('get_flint_skill', { skill: 'interaction', section: 'Add interactions to the chart' });
+        assert.ok(!grammar.isError, JSON.stringify(grammar));
+        assert.match(grammar.content.map(item => item.text || '').join('\n'), /interaction_spec/);
+        const presets = jsonResult(await mcp.call('list_interaction_presets', { chartType: 'Bar Chart' }));
+        for (const type of ['click-highlight', 'accessible-navigation']) {
+            assert.ok(presets.presets.some(preset => preset.type === type), type);
+        }
+        const chart = { ...input, interaction_spec: { interactions: [
+            { type: 'click-highlight', options: { targets: ['mark'], reset: ['escape'] } },
+            { type: 'accessible-navigation' },
+        ] } };
+        const validation = jsonResult(await mcp.call('validate_chart', { ...chart, backend: 'vegalite' }));
+        assert.equal(validation.valid, true);
+        assert.deepEqual(validation.errors, []);
+        assert.deepEqual(validation.warnings, []);
+        const shown = await mcp.call('show', { chart });
+        assert.ok(!shown.isError, JSON.stringify(shown));
+        assert.match(shown.content.map(item => item.text || '').join('\n'), /click-highlight/);
+    });
+    await t.test('a dropped interaction remains a warning even when the chart is valid', async () => {
+        const validation = jsonResult(await mcp.call('validate_chart', { ...input, backend: 'vegalite',
+            interaction_spec: { interactions: [{ type: 'legend-toggle' }] },
+        }));
+        assert.equal(validation.valid, true);
+        assert.deepEqual(validation.errors, []);
+        assert.ok(validation.warnings.some(warning => warning.code === 'unsupported_interaction' &&
+            /discrete legend.*dropped/s.test(warning.message)), JSON.stringify(validation));
+    });
+    await t.test('unknown reset gestures are explicit errors rather than neutral-state fallbacks', async () => {
+        const validation = jsonResult(await mcp.call('validate_chart', { ...input, backend: 'vegalite',
+            interaction_spec: { interactions: [{ type: 'click-highlight', options: { reset: ['nonsense'] } }] },
+        }));
+        assert.equal(validation.valid, false);
+        assert.ok(validation.errors.some(error => error.code === 'invalid_interaction_spec' &&
+            /reset gesture.*unknown/.test(error.message)), JSON.stringify(validation));
+    });
+    await t.test('initial state and linked boards use their separate supported input surfaces', async () => {
+        const updates = [{ id: 'initial-emphasis', ops: [
+            { op: 'set-style', targets: [{ select: { key: { category: 'Alpha' } } }], value: { opacity: 0.35 } },
+        ] }];
+        const validation = jsonResult(await mcp.call('validate_chart', { ...input, updates, backend: 'vegalite' }));
+        assert.equal(validation.valid, true, JSON.stringify(validation));
+        assert.deepEqual(validation.errors, []);
+        assert.deepEqual(validation.warnings, []);
+        assert.deepEqual(validation.updates, [{
+            id: 'initial-emphasis',
+            ops: [{ op: 'set-style', text: 'styles marks where category = Alpha', ok: true }],
+        }]);
+        const boardGrammar = await mcp.call('get_flint_skill', { skill: 'board' });
+        assert.ok(!boardGrammar.isError, JSON.stringify(boardGrammar));
+        const board = {
+            title: 'Synthetic linked interaction fixture',
+            subtitle: 'Two synthetic categories and their fixture values',
+            charts: [
+                { ...input, id: 'source', interaction_spec: { interactions: [{ type: 'click-highlight' }] } },
+                { ...input, id: 'recipient' },
+            ],
+            link_spec: { fields: ['category'] },
+        };
+        const checked = await mcp.call('validate_board', board);
+        assert.ok(!checked.isError, JSON.stringify(checked));
+        const report = checked.content.map(item => item.text || '').join('\n');
+        assert.match(report, /✓ source: sends category by click-highlight; receives category/);
+        assert.match(report, /✓ recipient: receives category; sends nothing/);
+        assert.doesNotMatch(report, /✗/);
+    });
     await t.test('invalid snake_case names and missing fields remain explicit failures', async () => {
         const invalid = jsonResult(await mcp.call('validate_chart', {
             ...input, backend: 'vegalite', chart_spec: { ...input.chart_spec, chartType: 'stacked_bar_chart' },

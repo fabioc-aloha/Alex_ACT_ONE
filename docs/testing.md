@@ -1,0 +1,103 @@
+# Verification environments and release gates
+
+The source workflow targets Windows Server 2025 and Ubuntu 24.04 on x64.
+Structural jobs use Node 24 and 26; provisioned integration jobs use Node 26.
+These are verification targets, not certification of every Copilot host or OS.
+macOS and other Node versions are not covered by this workflow.
+
+## What runs where
+
+| Lane | Prerequisites | Required evidence |
+| --- | --- | --- |
+| Structural | Git checkout, Node 24+, PowerShell 7; Windows also requires Windows PowerShell 5.1 | Catalog/role drift check, read-only structural assessment, dependency-free tests, and fake-install/activation safety cases |
+| Integration | Explicit reviewed MCP runtime, JSZip from the shared registry, Pandoc 3.13, reviewed Mermaid CLI | Actual MCP version/launch and three-backend render tests, real HTML/Word conversion, and installed Mermaid CLI startup |
+| Canonical demo rebuild | Windows integration environment | Byte-for-byte checks of both generated HTML pages; Git preserves their LF endings |
+
+The test runner has no npm test-framework dependency or root package manifest.
+Release verification nevertheless needs PowerShell; integration also needs the
+named optional tools. Ordinary `node --test` may skip missing runtime/converter
+cases locally. A release lane cannot pass with skipped, todo, cancelled, failed,
+empty, or unreported tests.
+
+The [gate](../scripts/test-gate.mjs) discovers the test files and records every
+lane/platform exclusion. Provisioned cases live in dedicated files rather than
+being silently skipped inside the structural lane. Actual Windows npm-shim
+tests run on Windows; their exclusion on Linux is explicit. Newly added test
+files join the structural lane unless classified as provisioned tests.
+
+## Running locally
+
+These commands do not install packages:
+
+```powershell
+node scripts\test-gate.mjs --lane structural
+```
+
+The structural lane gives its child tests a disposable home/profile and an
+absent private runtime. Installation tests must still pass their own explicit
+temporary runtime and reject writes outside that path inside the mock.
+An environment override alone is not a sufficient installation-test boundary.
+
+After separately provisioning the reviewed tools with consent, select an
+existing runtime explicitly before integration checks:
+
+```powershell
+$env:ALEX_ACT_ONE_RUNTIME_ROOT = '<absolute provisioned runtime path>'
+node scripts\test-gate.mjs --lane integration
+```
+
+Use native path separators outside Windows. Integration preflight fails on
+missing/mismatched packages or tools instead of allowing the tests to skip.
+The Word converter uses the same selected runtime for its optional JSZip
+fallback. Version probes establish launchability, not host MCP connection or
+paid API authentication.
+
+## Hosted workflow
+
+[Verify source candidate](../.github/workflows/verify.yml) runs on pushes to
+`main` and manual dispatch, not pull requests. The integration jobs wait for the
+structural matrix. Actions are pinned to reviewed immutable commits, checkout
+does not persist credentials, and token permissions are read-only.
+
+Only disposable integration runners install packages. MCP, JSZip, and Mermaid
+versions come from the [shared dependency registry](../scripts/shared/dependencies.cjs).
+The workflow uses the runner's configured npm registry without a registry URL
+override, suppresses lifecycle scripts for these installs, and does not request
+API credentials or browser downloads. Pandoc 3.13 is installed by the pinned
+Pandoc setup action.
+
+Top-level npm pins are not a locked transitive dependency graph. A new
+transitive version may expose a compatibility or golden-artifact difference;
+do not disable a failing check to conceal it. The reviewed locking/staging
+policy remains separate roadmap work.
+
+Read the job's actual environment, prerequisite report, TAP totals, exclusions,
+and failure output. A valid workflow file or local Windows run is not proof
+that the hosted Windows/Linux matrix passed. Use the same candidate commit's
+green hosted run as release evidence.
+
+## Executable documentation examples
+
+Instruction `role` metadata is generated from canonical instruction
+descriptions, not maintained as a second procedure:
+
+```powershell
+node scripts\update-docs.mjs --write
+node scripts\update-docs.mjs --check
+node --test tests\documentation-examples.test.mjs tests\documentation.test.mjs
+```
+
+The Rich Email validation examples are explicitly marked and mapped to a
+curated safe test. The tests execute their real shipped targets from an
+installed-copy fixture and unrelated working directory. Opening Outlook is an
+illustrative, consent-dependent example and is never executed by these tests.
+Other snippets are not automatically treated as runnable or verified.
+Register and test new executable examples explicitly; never evaluate arbitrary
+Markdown shell blocks as a documentation checker.
+
+## Evidence limits
+
+CI is not live Copilot skill invocation, browser gesture/accessibility UAT, a
+security audit, New Outlook opening/sending, or a paid Replicate request.
+Those require their own scoped evidence and consent. See the
+[release checklist](../RELEASE-CHECKLIST.md) and [roadmap](../ROADMAP.md).

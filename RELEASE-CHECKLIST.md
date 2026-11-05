@@ -8,13 +8,22 @@ the release announcement.
 
 ## 1. The suite passes on a fresh clone
 
+Use the [verification environments and release gates](docs/testing.md). The
+[source workflow](.github/workflows/verify.yml) targets Windows/Ubuntu with
+Node 24/26 structural jobs and Node 26 provisioned jobs. Record the actual
+environment and require every job for the same candidate commit to pass.
+
 ```text
 git clone --depth 1 https://github.com/fabioc-aloha/Alex_ACT_ONE.git <tmp>
-cd <tmp> && node --test
+cd <tmp>
+node scripts/test-gate.mjs --lane structural
 ```
 
 Not the working copy. A fresh clone is the only thing that proves the release
 does not depend on a file that is gitignored, uncommitted, or synced by hand.
+Then run the explicitly provisioned integration lane on its disposable runner;
+do not count missing prerequisites or skipped runtime tests as release success.
+The convenience `node --test` command is not a substitute for both strict gates.
 
 > Added 2026-09-07. Everything verified that day had been hand-copied into the
 > installed plugin directories, so nothing yet showed whether a real install
@@ -31,6 +40,18 @@ count. The suite asserts this, but run it once by hand before a release. With no
 arguments, it is a no-write preview; `apply: false` is part of the result.
 The preview exposes the instruction set that a later consented apply would
 write to a user's profile.
+
+Run the conflict regression suite:
+
+```powershell
+node --test tests\activation-conflicts.test.mjs tests\activation-readiness.test.mjs
+```
+
+Default apply must leave all files and receipt bytes untouched when a modified
+or unowned destination exists. An overwrite requires a separate backup, preview,
+and explicit approval; reinstall automation must not add the override itself.
+Verify upgrades, migration, stale-plan rejection, and interrupted-apply recovery
+only in disposable targets, never by mutating a real profile for a test.
 
 > Added 2026-09-07. `bootstrap-core` hardcoded a count of 15 instructions, so
 > adding a sixteenth — exactly what `compile-brain` and `meditation` exist to do
@@ -54,6 +75,19 @@ three-backend renderers, version-matched resources, validated `show`, and invali
 input paths. A direct MCP response is not proof that a host displayed its App UI.
 Keep an older active runtime untouched until its matching plugin is ready.
 
+For the source readiness repairs, run
+`node --test tests/runtime-readiness.test.mjs tests/tool-shims.test.cjs tests/conversion-runtime.test.cjs`.
+Check actual runtime selection, missing/malformed metadata, stale libraries,
+failed launches, timeouts, literal Windows arguments, and real converter output.
+Report optional-tool skips explicitly. `--version` readiness is not a host MCP
+connection or renderer-readiness proof.
+
+Any mocked installer must receive an explicit disposable runtime root and refuse
+writes outside it. Environment-variable-only isolation is not sufficient when
+testing an older provisioner that may ignore that variable. After npm returns
+success, verify the installed packages and selected launch probes before reporting
+provisioning success; host reconnection remains a separate check.
+
 > Added 2026-09-07. The launcher guarded `@playwright/mcp` at 0.0.78 while the
 > pin and the installed runtime were both 0.0.80, so the server could not start
 > on any host — and `check-dependencies` reported it healthy throughout, because
@@ -61,10 +95,23 @@ Keep an older active runtime untouched until its matching plugin is ready.
 
 ## 4. Counts are avoided, or checked
 
-Most of this documentation deliberately says "every skill" and "All / None"
-rather than a number, because prose has no compiler behind it. Where a count
-genuinely informs a reader — the README headline, which helps someone decide
-whether to install — it stays and the suite verifies it:
+The README has one generated source inventory and generated skill, prompt, and
+instruction catalogs. Regenerate them after changing asset metadata or routing:
+
+```powershell
+node scripts\update-docs.mjs --write
+node scripts\update-docs.mjs --check
+node --test tests\documentation.test.mjs tests\smoke.test.mjs
+```
+
+The check compares filesystem and manifest inventories, rejects missing skill
+owners, checks derived instruction role metadata, and verifies that the generated sections are current. Do not copy
+counts into new prose when a link to the inventory is enough.
+
+`tests/documentation-examples.test.mjs` verifies the explicitly marked safe
+examples against an installed copy from an unrelated directory. Keep opening or
+sending examples illustrative and consent-dependent; never execute arbitrary
+Markdown blocks to expand coverage.
 
 ```text
 node --test          # manifest and disk agree, both directions
@@ -82,6 +129,26 @@ in blockquotes — the test skips them.
 > Added 2026-09-07. Retiring one command left "16 slash commands" in four
 > places, and the same release found hardcoded instruction counts in nine more,
 > including two that broke activation outright.
+
+### Generated offline Flint pages
+
+When the candidate includes the demonstration pages, rebuild and check both
+with the exact provisioned runtime:
+
+```powershell
+node scripts\build-flint-showcase.mjs
+node scripts\build-flint-showcase.mjs --experimental
+node scripts\build-flint-showcase.mjs --check
+node scripts\build-flint-showcase.mjs --experimental --check
+node --test tests\flint-showcase.test.mjs tests\flint-experimental.test.mjs tests\flint-interactions.test.mjs
+```
+
+Open the actual local files in the internal browser. Inspect image decode and
+console errors, exercise meaningful gestures and reset, check linked recipients,
+and resize the live board. A successful build or valid spec is not browser UAT.
+Keep upstream notices embedded, and do not install packages or change the
+runtime merely to rebuild the docs. Record host limitations explicitly,
+including an unobserved download completion rather than claiming it passed.
 
 ## 5. Anything the release renames is checked on both sides
 

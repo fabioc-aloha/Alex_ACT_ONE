@@ -1,51 +1,26 @@
 // @ts-check
 'use strict';
 
-const path = require('node:path');
-const { execFileSync, spawnSync } = require('node:child_process');
+const { execFileSync } = require('node:child_process');
 const { remedyFor } = require('./dependencies.cjs');
+const { resolveInvocation } = require('./process-command.cjs');
 
 function envKeyForTool(tool) {
     return `ACT_TOOL_${String(tool).replace(/[^a-zA-Z0-9]/g, '_').toUpperCase()}`;
 }
 
-// Windows lookup cache so we do not re-run `where.exe` per invocation.
-const windowsResolveCache = new Map();
-
-function resolveWindowsTool(tool) {
-    if (path.isAbsolute(tool)) return tool;
-    if (windowsResolveCache.has(tool)) return windowsResolveCache.get(tool);
-    const probe = spawnSync('where.exe', [tool], { encoding: 'utf8' });
-    if (probe.status !== 0 || !probe.stdout) {
-        throw new Error(remedyFor(tool));
-    }
-    // Prefer .cmd/.exe/.bat over .ps1 so execFileSync can spawn without a PowerShell host.
-    const candidates = probe.stdout.split(/\r?\n/).filter(Boolean).map((line) => line.trim());
-    const preferred = candidates.find((c) => /\.(cmd|exe|bat)$/i.test(c)) || candidates[0];
-    windowsResolveCache.set(tool, preferred);
-    return preferred;
-}
-
 function runTool(tool, args, options = {}) {
     const overrideScript = process.env[envKeyForTool(tool)];
     if (overrideScript) {
-        return execFileSync(process.execPath, [overrideScript, ...args], options);
+        return execFileSync(process.execPath, [overrideScript, ...args], { ...options, shell: false });
     }
-    const isWindows = process.platform === 'win32';
-    if (!isWindows) {
-        try {
-            return execFileSync(tool, args, options);
-        } catch (error) {
-            // ENOENT means the binary is absent; anything else is a real failure
-            // from a tool that did run, and must surface unchanged.
-            if (error && error.code === 'ENOENT') throw new Error(remedyFor(tool));
-            throw error;
-        }
+    const invocation = resolveInvocation(tool, args, options);
+    try {
+        return execFileSync(invocation.command, invocation.args, { ...options, shell: false });
+    } catch (error) {
+        if (error && error.code === 'ENOENT') throw new Error(remedyFor(tool));
+        throw error;
     }
-    // Resolve the absolute .cmd/.exe path so we can drop `shell: true` and avoid the
-    // Node DEP0190 argument-concatenation vulnerability with user-supplied paths.
-    const resolved = resolveWindowsTool(tool);
-    return execFileSync(resolved, args, { ...options, shell: false });
 }
 
 module.exports = { runTool, envKeyForTool };

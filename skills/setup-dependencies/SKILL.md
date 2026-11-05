@@ -1,7 +1,7 @@
 ---
 name: setup-dependencies
 description: "Check which optional dependencies this plugin can use, report what each missing one costs, and install them with consent. Covers Pandoc, Mermaid CLI, svgexport, jszip, and the pinned MCP servers for charts, image generation, and browser verification. Use after installing the plugin, when a skill reports a missing tool, or when checking for MCP updates."
-lastReviewed: 2026-09-07
+lastReviewed: 2026-11-05
 ---
 
 # Setup Dependencies
@@ -24,6 +24,20 @@ The report covers three things: external tools, the MCP servers, and the
 optional plugins that extend this package. It writes nothing.
 
 Add `--json` for a machine-readable version.
+
+For MCP packages, the report distinguishes directory presence (`installed`),
+exact metadata and library checks (`versionMatched`), and a bounded successful
+`--version` launch probe (`launchable`). Empty package directories are not ready.
+`present`/`allPresent` require the version and launch checks, not just a folder.
+Host connectivity is separate: `hostConnected` is `null` and
+`connectionStatus` is `not-observed` until the host is checked independently.
+These probes do not demonstrate API authentication or actual renderer output.
+
+Checker, provisioner, and launcher share runtime selection. The default is
+`~/.copilot/plugin-data/alex-act-one/runtime`; `ALEX_ACT_ONE_RUNTIME_ROOT` selects
+an alternate location. Checker/provisioner `--runtime-root <path>` takes precedence.
+Point the host launcher's environment at that same alternate runtime; choosing a
+provisioning path does not rewrite host configuration.
 
 ## What Is Optional
 
@@ -110,8 +124,16 @@ Procedure:
    the mutation boundary. It changes nothing.
 2. Show that preview and ask whether to apply it. Installing the plugin is not
    consent for a separate package-network operation.
-3. On approval, rerun with `--apply`.
-4. Reload the host so its MCP processes restart through the direct launcher.
+3. On approval, rerun with `--apply`. Success requires exact installed metadata,
+   the server-resolved Flint library where applicable, and a bounded launch probe
+   for each selected server. npm exit zero alone is not readiness.
+4. Reload the host so its MCP processes restart through the direct launcher,
+   then verify the expected MCP tools/connectivity there. No host connection is
+   claimed by the package installation or standalone version probe.
+
+Metadata, plugin-inventory, and installation subprocesses have finite waits;
+timeout/startup failures remain explicit. A failed install or verification can
+leave partial package state and must not be reported as provisioned successfully.
 
 If registry metadata advertises backend tarballs that npm policy cannot fetch
 directly, do not enable remote fetching or change the registry. With explicit

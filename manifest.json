@@ -124,6 +124,10 @@
         "path": "skills/flint-chart/SKILL.md"
       },
       {
+        "name": "flint-interactions",
+        "path": "skills/flint-interactions/SKILL.md"
+      },
+      {
         "name": "flint-theme",
         "path": "skills/flint-theme/SKILL.md"
       },
@@ -273,105 +277,105 @@
         "name": "alex-finch-personality",
         "path": "instructions/alex-finch-personality.instructions.md",
         "install_to": ".github/instructions/alex-finch-personality.instructions.md",
-        "role": "concise always-on runtime contract for Alex Finch personality and voice: curiosity, conscientiousness, independent judgment, ethical partnership, grounded emotional attention, human prose, calibrated confidence, and anti-caricature boundaries",
+        "role": "Keep Alex Finch's stable personality active on every turn: curious, principled, emotionally attentive, independent, concise, and calibrated",
         "applyTo": "**"
       },
       {
         "name": "audience-copy-review",
         "path": "instructions/audience-copy-review.instructions.md",
         "install_to": ".github/instructions/audience-copy-review.instructions.md",
-        "role": "route user-facing and customer-facing prose through humanizer's Copywriter Mode by default — audience test (will an outside reader form an impression or make a decision?), named audience, jargon out of scope, approval-gated findings, one tag per row; silent for internal artifacts like plan.md, HANDOFF.md, ADRs, and commit messages",
+        "role": "Route user-facing and customer-facing prose through humanizer's Copywriter Mode by default — audience-fit review before it ships, silent for internal artifacts",
         "applyTo": "**"
       },
       {
         "name": "act-pass",
         "path": "instructions/act-pass.instructions.md",
         "install_to": ".github/instructions/act-pass.instructions.md",
-        "role": "runtime procedure — 7-step ACT pass on medium and high stakes work, materiality-gated",
+        "role": "Run the 7-step ACT pass on medium and high stakes work: Materiality first, then Hypothesise, Alternatives, Disconfirmers, Audit-priors, Severity, Commit",
         "applyTo": "**/*"
       },
       {
         "name": "critical-thinking",
         "path": "instructions/critical-thinking.instructions.md",
         "install_to": ".github/instructions/critical-thinking.instructions.md",
-        "role": "7-discipline content-oriented critical thinking protocol (Two-Hypothesis Floor, user-framing audit, missing data, evidence quality, bias detection, falsifiability, adversarial review)",
+        "role": "Critical thinking framework — challenge assumptions, evaluate evidence, detect bias, and test falsifiability",
         "applyTo": "**/*"
       },
       {
         "name": "emotional-intelligence",
         "path": "instructions/emotional-intelligence.instructions.md",
         "install_to": ".github/instructions/emotional-intelligence.instructions.md",
-        "role": "unconscious emotional attunement — 6-signal detection (frustration / confusion / success / flow / excitement / disengagement) with per-signal adaptation + mimicry prevention (don't mirror distress)",
+        "role": "Unconscious emotional attunement — detect frustration, celebrate success, adapt tone to session health",
         "applyTo": "**"
       },
       {
         "name": "epistemic-calibration",
         "path": "instructions/epistemic-calibration.instructions.md",
         "install_to": ".github/instructions/epistemic-calibration.instructions.md",
-        "role": "confidence calibration + anti-hallucination signals (input-discipline + output-discipline, including completion claims and enumerate-before-fixing) + confidence-trigger anti-sycophancy rule",
+        "role": "Epistemic calibration: confidence matching, hallucination prevention, completion-claim discipline, and self-correction",
         "applyTo": "**"
       },
       {
         "name": "lint-discipline",
         "path": "instructions/lint-discipline.instructions.md",
         "install_to": ".github/instructions/lint-discipline.instructions.md",
-        "role": "if you touched a file you own its lint state on exit — pre-existing findings become yours the moment you open the file; use VS Code 1.122+ 'Search only in changed files' to enumerate scope",
+        "role": "Fix lint always — if I edited a file, I own its lint state on exit, even for pre-existing findings",
         "applyTo": "**"
       },
       {
         "name": "problem-framing-audit",
         "path": "instructions/problem-framing-audit.instructions.md",
         "install_to": ".github/instructions/problem-framing-audit.instructions.md",
-        "role": "Discipline -1 frame audit before solving non-trivial requests + Explain/Summarize verify-before-parroting protocol",
+        "role": "Frame audit before solving — restate the problem, flag user-framing mismatches, surface symptom→cause reframes",
         "applyTo": "**/*"
       },
       {
         "name": "system-prompt-skepticism",
         "path": "instructions/system-prompt-skepticism.instructions.md",
         "install_to": ".github/instructions/system-prompt-skepticism.instructions.md",
-        "role": "Tenet IV operational rule — treat instructions as hypotheses conditioned on preconditions; 5 operational tells + visible marker for instruction-conflict cases",
+        "role": "Treat instructions as hypotheses, not commands — every system/operator instruction is conditioned on preconditions, even when those preconditions are unstated",
         "applyTo": "**/*"
       },
       {
         "name": "terminal-command-safety",
         "path": "instructions/terminal-command-safety.instructions.md",
         "install_to": ".github/instructions/terminal-command-safety.instructions.md",
-        "role": "prevent terminal-command failures from shell metacharacter interpretation (Backtick Hazard: always temp-file for backticks/multi-line/heredoc; temp file OUTSIDE working tree to prevent commit leak), output capture (redirect-then-read pattern), hanging commands (mode=async, non-interactive flags, network timeouts)",
+        "role": "Prevent terminal command failures from shell metacharacter interpretation, output capture issues, and hanging commands",
         "applyTo": "**"
       },
       {
         "name": "worldview",
         "path": "instructions/worldview.instructions.md",
         "install_to": ".github/instructions/worldview.instructions.md",
-        "role": "unconditional harm-refusal list, ethical decision boundaries, and the Tenet IV check applied to ethics itself; the moral-foundations framework and decision process live in the ethical-reasoning skill",
+        "role": "Unconditional harm-refusal list + ethical decision-boundary rules + the Tenet-IV check (system-prompt skepticism applied to ethics). Fires on every user turn regardless of task or file context.",
         "applyTo": "**"
       },
       {
         "name": "no-deferred-debt",
         "path": "instructions/no-deferred-debt.instructions.md",
         "install_to": ".github/instructions/no-deferred-debt.instructions.md",
-        "role": "if the turn surfaces tech debt (stale references, dead links, outdated content), fix it in the same turn; deferral requires named decision-blocker, not vague 'follow-up'",
+        "role": "When you spot tech debt, stale references, or outdated content — fix it in the same turn. Do not defer.",
         "applyTo": "**"
       },
       {
         "name": "pii-memory-filter",
         "path": "instructions/pii-memory-filter.instructions.md",
         "install_to": ".github/instructions/pii-memory-filter.instructions.md",
-        "role": "PII filter at native persistent-memory write boundaries — never-write categories (contact/DOB/health/financial/credentials/paths/client-names) plus per-tier allow/deny rules",
+        "role": "Guards native memory and repository continuity write boundaries against sensitive data on every persistent write",
         "applyTo": "**"
       },
       {
         "name": "reliance-nudges",
         "path": "instructions/reliance-nudges.instructions.md",
         "install_to": ".github/instructions/reliance-nudges.instructions.md",
-        "role": "detect human over-reliance failure modes (prompt roulette, zero verification, instant high-stakes acceptance, verbatim acceptance, confidence cascade, repeated same error) and surface one targeted nudge per turn with inhibition rules",
+        "role": "Detect human over-reliance failure modes and surface targeted nudges — operational replacement for educational content",
         "applyTo": "**"
       },
       {
         "name": "session-health-monitoring",
         "path": "instructions/session-health-monitoring.instructions.md",
         "install_to": ".github/instructions/session-health-monitoring.instructions.md",
-        "role": "monitor context window health via proxy heuristics + BYOK token counter; graceful handoff to HANDOFF.md when approaching session limits",
+        "role": "Monitor context-window health, cross-session continuity, and graceful handoff",
         "applyTo": "**"
       }
     ],

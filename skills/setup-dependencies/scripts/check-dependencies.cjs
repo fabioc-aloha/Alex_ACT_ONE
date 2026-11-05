@@ -24,17 +24,27 @@ const os = require('node:os');
 const path = require('node:path');
 
 const { TOOLS, MCP_SERVERS, PLUGINS, platformKey, specOf, installMap } = require('../../../scripts/shared/dependencies.cjs');
+const { runtimeRoot, checkRuntime } = require('../../../scripts/shared/runtime-status.cjs');
+const { resolveInvocation } = require('../../../scripts/shared/process-command.cjs');
 
 const APPLY = process.argv.includes('--apply');
 const JSON_OUT = process.argv.includes('--json');
 const PLATFORM_LABEL = { win32: 'Windows', darwin: 'macOS', linux: 'Linux' }[platformKey()];
-
-const MCP_RUNTIME = path.join(os.homedir(), '.copilot', 'plugin-data', 'alex-act-one', 'runtime');
+let selectedRuntime;
+for (let index = 2; index < process.argv.length; index++) {
+    const arg = process.argv[index];
+    if (arg === '--runtime-root') {
+        selectedRuntime = process.argv[++index];
+        if (!selectedRuntime || selectedRuntime.startsWith('--')) throw new Error('--runtime-root requires a path');
+    } else if (!['--apply', '--json'].includes(arg)) throw new Error(`Unknown argument: ${arg}`);
+}
+if (APPLY && JSON_OUT) throw new Error('--apply and --json are separate operations');
+const MCP_RUNTIME = runtimeRoot(selectedRuntime);
 
 function onPath(bin) {
     const probe = process.platform === 'win32'
-        ? spawnSync('where.exe', [bin], { encoding: 'utf8' })
-        : spawnSync('which', [bin], { encoding: 'utf8' });
+        ? spawnSync('where.exe', [bin], { encoding: 'utf8', timeout: 5000 })
+        : spawnSync('which', [bin], { encoding: 'utf8', timeout: 5000 });
     return probe.status === 0 && Boolean(probe.stdout && probe.stdout.trim());
 }
 
@@ -47,7 +57,7 @@ function moduleResolvable(name) {
 
 function pythonModulePresent(name) {
     for (const py of ['python', 'python3']) {
-        const probe = spawnSync(py, ['-c', `import ${name}`], { stdio: 'ignore' });
+        const probe = spawnSync(py, ['-c', `import ${name}`], { stdio: 'ignore', timeout: 5000 });
         if (probe.status === 0) return true;
     }
     return false;
@@ -67,10 +77,8 @@ function detect() {
 
 function detectMcp() {
     const rows = [];
-    for (const [key, srv] of Object.entries(MCP_SERVERS)) {
-        // The package name may contain a scope, which is a real subdirectory.
-        const dir = path.join(MCP_RUNTIME, 'node_modules', ...srv.package.split('/'));
-        rows.push({ key, ...srv, present: fs.existsSync(dir) });
+    for (const key of Object.keys(MCP_SERVERS)) {
+        rows.push(checkRuntime(key, MCP_RUNTIME));
     }
     return { servers: rows, root: MCP_RUNTIME, allPresent: rows.every((r) => r.present) };
 }
@@ -79,7 +87,7 @@ function detectMcp() {
 // which triggers Node DEP0190 and concatenates args unescaped.
 function resolveCopilotBin() {
     if (process.platform !== 'win32') return 'copilot';
-    const which = spawnSync('where.exe', ['copilot'], { encoding: 'utf8' });
+    const which = spawnSync('where.exe', ['copilot'], { encoding: 'utf8', timeout: 5000 });
     if (which.status !== 0 || !which.stdout) return null;
     const candidates = which.stdout.split(/\r?\n/).filter(Boolean).map((l) => l.trim());
     return candidates.find((c) => /\.(cmd|exe|bat)$/i.test(c)) || candidates[0];
@@ -163,6 +171,7 @@ function detectPlugins() {
         const probe = spawnSync(bin, ['plugin', 'list'], {
             encoding: 'utf8',
             env: { ...process.env, COPILOT_HOME: store },
+            timeout: 15000,
         });
         if (probe.status !== 0 || !probe.stdout) {
             stores.push({ path: store, available: fromMarketplace.size > 0, count: fromMarketplace.size });
@@ -227,6 +236,11 @@ for (const r of byTier('required')) console.log(line(r, 'MISSING'));
 console.log('\nRECOMMENDED enhancements');
 console.log('  The skills work without these and produce less.\n');
 for (const r of byTier('enhances')) console.log(line(r, 'absent '));
+console.log(`\nMCP runtime: ${MCP_RUNTIME}`);
+for (const state of mcp.servers) {
+    console.log(`  ${state.key}: installed=${state.installed}, versionMatched=${state.versionMatched}, launchable=${state.launchable}; host connection not observed`);
+    for (const error of state.errors) console.log(`    ${error}`);
+}
 
 const addonTools = byTier('addon');
 
@@ -296,9 +310,10 @@ for (const r of missingTools.filter((x) => x.kind !== 'system')) {
     if (r.kind === 'npm-global') args = ['install', '-g', r.spec];
     else if (r.kind === 'python-module') { cmd = 'pip'; args = ['install', r.spec]; }
     else args = ['install', '--prefix', MCP_RUNTIME, '--no-audit', '--no-fund', r.spec];
-    const res = spawnSync(cmd, args, { stdio: 'inherit', shell: process.platform === 'win32' });
+    const invocation = resolveInvocation(cmd, args);
+    const res = spawnSync(invocation.command, invocation.args, { stdio: 'inherit', shell: false, timeout: 180000 });
     if (res.status === 0) installed += 1;
-    else { failed += 1; console.error(`FAILED: ${r.label}`); }
+    else { failed += 1; console.error(`FAILED: ${r.label}${res.error ? `: ${res.error.message}` : ''}`); }
 }
 
 const systemLeft = missingTools.filter((x) => x.kind === 'system');

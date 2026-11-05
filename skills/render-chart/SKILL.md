@@ -30,6 +30,12 @@ file before reporting a missing capability or recommending installation.
 
 6. **Author the candidate `ChartAssemblyInput` values** using the loaded version-matched grammar: exact chartType, real field-to-channel mappings, and registered semantic types. Reuse the semantic truth layer across candidates. For a standalone chart, title the supported finding and use the subtitle for population, period, measure, and units; omit them only when the surrounding artifact supplies the same reading. Select a preset with `list_themes` or load `flint-theme` for a custom system.
 
+   When the requested experience includes exploration, reader gestures, initial
+   emphasis, linked views, or app integration, load and follow
+   [flint-interactions](../flint-interactions/SKILL.md). Reuse the Brief and
+   chart input; do not restart framing. Define behavior/reset acceptance before
+   validation, then test it after display. Static-only output needs no interaction pass.
+
 7. **Validate, render, and compare.** For interactive Vega-Lite with App UI support, call `validate_chart`, resolve errors/warnings, then `show({ "chart": input })` with the full spec. Flint 1.0.1 keeps no chart state between calls. Use `render_chart` for requested static output or a host without App UI; Vega-Lite/ECharts support PNG/SVG and Chart.js PNG. Use `compile_chart` for backend JSON. ThemeSpec applies to Vega-Lite in this MCP workflow. Compare the rendered candidates' focal point, reading order, hierarchy, accessibility, and study cost against the Brief.
 
 8. **Verify and iterate — look at what you rendered.** Load [render-verify](../render-verify/SKILL.md) using the same resolution rule. Use the host's built-in browser tools if it has them and they can open the artifact; otherwise the optional `alex-playwright` MCP server. Read console errors _before_ judging the picture, then walk the skill's chart and storytelling checks. Repair visible defects and re-render the smallest responsible layer. Check that the selected picture carries the Brief's Big Idea without relying on surrounding prose to explain what the visual failed to show.

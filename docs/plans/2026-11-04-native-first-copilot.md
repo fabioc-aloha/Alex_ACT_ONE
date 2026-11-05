@@ -1,5 +1,11 @@
 # Native-first Copilot implementation plan
 
+> Historical plan and dated execution receipts for the v0.7.0 native-first work.
+> Later source additions and the v0.8.0 baseline are documented in the
+> [current README](../../README.md#native-first-skill-optimization) and
+> [roadmap](../../ROADMAP.md). Preserve the inventory and verification snapshots
+> below as evidence of that rollout, not current package counts.
+
 **Goal:** Reduce duplicate platform machinery without losing ACT's reasoning, approval, privacy, verification, or specialist-output contracts.
 
 **Architecture:** Use native Copilot facilities for planning, review execution, browser access, context management, and customization discovery. Keep instructions as short activation contracts and prompts as thin user-invoked entrypoints; skills own execution and validation, with detailed information in selectively loaded references. Migrate packaging and entrypoints only after both target clients pass bounded compatibility checks.

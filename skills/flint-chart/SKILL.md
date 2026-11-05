@@ -13,8 +13,9 @@ render verification. Do not copy a static schema/type catalog into this skill.
 ## Load the installed language first
 
 Read `flint://agent-skill` or call `get_flint_skill({ "skill": "chart" })`.
-For interactions and boards, load the matching `interaction` or `board`
-skill/resource. Use `list_chart_types`, `list_interaction_presets`, and
+For reader behavior, chart-state updates, or linked views, load and follow
+[flint-interactions](../flint-interactions/SKILL.md) and its selected native
+`interaction` or `board` skill/resource. Use `list_chart_types`, `list_interaction_presets`, and
 `list_themes` to verify actual capabilities before promising them. Report an
 unavailable resource/tool instead of inventing grammar.
 
@@ -62,9 +63,12 @@ version-matched grammar. In the exposed three-backend MCP workflow, ThemeSpec
 applies to Vega-Lite; do not claim ECharts/Chart.js parity. The library's
 additional backends are separate from the MCP backend enum.
 
-Use `interaction_spec` for behavior and `updates` for supported initial
-state only after reading the interaction grammar. Use `validate_board` before
-displaying a board. Do not treat static PNG/SVG output as interactive behavior.
+When the request or exploratory session calls for behavior/state/linking, load
+and follow [flint-interactions](../flint-interactions/SKILL.md) to choose the
+smallest compatible workflow and define gesture/reset acceptance. It owns
+`interaction_spec` versus `updates` versus linking decisions; this skill keeps
+the base chart/data/display contract. Static-only requests do not acquire
+interactions. Use `validate_board` before displaying a board.
 
 ## Step 4: Validate, then display
 
@@ -75,6 +79,10 @@ displaying a board. Do not treat static PNG/SVG output as interactive behavior.
 - For a board: validate, then `show({ "board": boardInput })`.
 - Use `render_chart` for requested static output or a host without App UI:
   Vega-Lite/ECharts support SVG and PNG; Chart.js supports PNG only.
+  Inspect MCP content blocks separately: keep SVG as one complete XML root
+  ending at `</svg>`, with summary/report text outside the artifact. Never
+  concatenate all text blocks into an SVG file or data URI. For image blocks,
+  preserve their MIME type and data; check browser decode or `naturalWidth > 0`.
 - Use `compile_chart` for backend-native JSON. Do not send edited backend
   JSON back to Flint as a portable input. If narrow post-compile styling is
   needed, render it with that backend and verify the actual result.

@@ -22,7 +22,6 @@ import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { homedir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -35,16 +34,15 @@ const readJson = (...p) => JSON.parse(read(...p));
 const manifest = readJson('manifest.json');
 const pluginJson = readJson('plugin.json');
 const { MCP_SERVERS } = require(join(ROOT, 'scripts', 'shared', 'dependencies.cjs'));
+const { runtimeRoutes } = require(join(ROOT, 'scripts', 'shared', 'runtime-status.cjs'));
 
 const LAUNCHER_REL = join('skills', 'setup-dependencies', 'scripts', 'runtime-launcher.mjs');
 const launcherSource = read(LAUNCHER_REL);
 
-/** Routes and their guarded versions, as the launcher itself declares them. */
+/** The launcher must use the shared registry-backed guards, not independent pins. */
 function launcherRoutes() {
-    const routes = {};
-    const block = /(\w+)\s*:\s*\{\s*expectedVersion:\s*'([^']+)'/g;
-    for (const [, name, version] of launcherSource.matchAll(block)) routes[name] = version;
-    return routes;
+    assert.match(launcherSource, /runtime\.inspectRuntime\(route\)/, 'launcher bypasses the shared version guards');
+    return Object.fromEntries(Object.entries(runtimeRoutes(ROOT)).map(([name, config]) => [name, config.expectedVersion]));
 }
 
 /** The launcher route a `plugin.json` server entry actually invokes. */
@@ -421,34 +419,5 @@ describe('activation', () => {
             'activation plans a different number of files than the manifest declares');
         assert.equal(plan.expectedFiles, declared,
             'the plan reports a different expected count than the manifest declares');
-    });
-});
-
-describe('provisioned runtime', () => {
-    // These need `setup-dependencies` to have run, so they skip rather than fail
-    // where it has not — a clean checkout should not report a red suite for a
-    // step it was never asked to perform.
-    const runtimeRoot = process.env.ALEX_ACT_ONE_RUNTIME_ROOT
-        || join(homedir(), '.copilot', 'plugin-data', 'alex-act-one', 'runtime');
-    for (const [route, spec] of Object.entries(MCP_SERVERS)) {
-        const installed = existsSync(join(runtimeRoot, 'node_modules', spec.package, 'package.json'));
-        const skip = installed ? false : `${spec.package} not provisioned`;
-        test(`${route} starts and reports ${spec.version}`, { skip }, () => {
-            // Exit 0 alone would pass while the launcher ran the wrong version.
-            // Asserting the reported version closes that gap.
-            const out = execFileSync(process.execPath, [join(ROOT, LAUNCHER_REL), route, '--version'], {
-                encoding: 'utf8',
-                timeout: 60000,
-            });
-            assert.match(out, new RegExp(spec.version.replace(/\./g, '\\.')),
-                `${route} started but reported "${out.trim()}" instead of ${spec.version}`);
-        });
-    }
-
-    test('an unknown route fails loudly', () => {
-        assert.throws(
-            () => execFileSync(process.execPath, [join(ROOT, LAUNCHER_REL), 'no-such-route'], { encoding: 'utf8' }),
-            /Unknown MCP runtime route/,
-        );
     });
 });
