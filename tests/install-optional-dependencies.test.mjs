@@ -1,13 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, rmSync, writeFileSync, existsSync } from 'node:fs';
+import { mkdtempSync, realpathSync, readFileSync, rmSync, writeFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { spawnSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
+const { runPowerShell } = require('./helpers/powershell.cjs');
 const deps = require('../scripts/shared/dependencies.cjs');
 const script = fileURLToPath(new URL('../install-optional-dependencies.ps1', import.meta.url));
 const packages = [
@@ -25,7 +25,7 @@ const replicate = {
 };
 
 function runInstaller(t, shell, options = {}) {
-    const root = mkdtempSync(join(tmpdir(), 'one-optional-deps-'));
+    const root = realpathSync.native(mkdtempSync(join(tmpdir(), 'one-optional-deps-')));
     t.after(() => rmSync(root, { recursive: true, force: true }));
     const runtime = join(root, 'runtime');
     const globalPrefix = join(root, 'global');
@@ -124,12 +124,13 @@ fs.writeFileSync(output, content);
 Write-Output "Unexpected npm arguments: $($Arguments -join ' ')"
 exit 1
 `, 'utf8');
-    const invoke = (verifyOnly = false) => spawnSync(shell, [
-        '-NoProfile', '-File', script, ...(verifyOnly ? ['-VerifyOnly'] : options.apply ? ['-Apply'] : []),
-        '-RuntimeRoot', runtime, '-NpmCommand', npm, '-NodeCommand', process.execPath,
-        ...(options.tarballPrefix ? ['-RegistryTarballPrefix', options.tarballPrefix] : []),
-        ...(options.includeReplicate ? ['-IncludeReplicate'] : []),
-    ], {
+    const invoke = (verifyOnly = false) => runPowerShell(shell, script, {
+        ...(verifyOnly ? { VerifyOnly: true } : options.apply ? { Apply: true } : {}),
+        RuntimeRoot: runtime, NpmCommand: npm, NodeCommand: process.execPath,
+        ...(options.tarballPrefix ? { RegistryTarballPrefix: options.tarballPrefix } : {}),
+        ...(options.includeReplicate ? { IncludeReplicate: true } : {}),
+    }, {
+        root,
         encoding: 'utf8', timeout: 30000,
         env: {
             ...process.env,

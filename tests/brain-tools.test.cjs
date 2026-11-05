@@ -21,7 +21,7 @@ const compileSkill = bundledComponent('.github/skills/compile-brain/SKILL.md', '
 const compilePrompt = bundledComponent('prompts/compile-brain.prompt.md', '.github/prompts/compile-brain.prompt.md', 'commands/compile-brain.md');
 
 function temporaryDirectory(prefix) {
-    const directory = fs.mkdtempSync(path.join(os.tmpdir(), prefix));
+    const directory = fs.realpathSync.native(fs.mkdtempSync(path.join(os.tmpdir(), prefix)));
     temporaryDirectories.push(directory);
     return directory;
 }

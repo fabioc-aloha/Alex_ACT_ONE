@@ -4,7 +4,10 @@ import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { spawnSync } from 'node:child_process';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
+const { runPowerShell } = require('./helpers/powershell.cjs');
 
 const ROOT = new URL('..', import.meta.url);
 const SCRIPT = new URL('../reinstall-and-check.ps1', import.meta.url);
@@ -106,13 +109,10 @@ $Arguments | ConvertTo-Json -Compress | Set-Content -LiteralPath $env:FAKE_BOOTS
 exit 0
 `);
 
-    const invoke = () => spawnSync(shell, [
-        '-NoProfile', '-File', SCRIPT_PATH,
-        '-CopilotHome', copilotHome,
-        '-CopilotCommand', copilot,
-        '-NodeCommand', node,
-        '-ExpectedVersion', VERSION,
-    ], {
+    const invoke = () => runPowerShell(shell, SCRIPT_PATH, {
+        CopilotHome: copilotHome, CopilotCommand: copilot, NodeCommand: node, ExpectedVersion: VERSION,
+    }, {
+        root,
         cwd: ROOT_PATH,
         encoding: 'utf8',
         env: {
