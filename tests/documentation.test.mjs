@@ -119,3 +119,71 @@ test('current docs distinguish shipped optimization from source-only chart addit
     assert.match(readme, /build-flint-showcase\.mjs/);
     assert.match(read('RELEASE-CHECKLIST.md'), /update-docs\.mjs --check/);
 });
+
+test('install reference separates repository source, Mall release, and optional runtime state', () => {
+    const install = read('docs/install.md');
+    assert.match(install, /^## Installation sources/m);
+    for (const delivery of ['Repository', 'Mall', 'Optional runtime']) {
+        assert.ok(install.includes(`| ${delivery} |`), delivery);
+    }
+    assert.match(install, /same.*version|version.*same/i);
+    assert.match(install, /revision/);
+    assert.match(install, /does not.*(?:activate|provision)/i);
+    assert.match(read('README.md'), /\]\(docs\/install\.md#installation-sources\)/);
+    assert.doesNotMatch(read('ROADMAP.md'), /source-only until a separately approved release and installation/);
+});
+
+test('release and testing docs cover the relocated host reference and current onboarding boundary', () => {
+    const checklist = read('RELEASE-CHECKLIST.md');
+    const testing = read('docs/testing.md');
+    assert.ok(checklist.includes('](docs/install.md#where-alex-act-one-works)'));
+    assert.doesNotMatch(checklist, /compatibility table in the README/);
+    for (const source of [checklist, testing, read('README.md')]) {
+        assert.ok(source.includes('tests\\onboarding.test.mjs'), 'Keep onboarding in the documented focused gate');
+    }
+    assert.match(testing, /disposable.*profile|profile.*disposable/i);
+    assert.match(testing, /not.*(?:install|installation).*command|install.*commands.*not/is);
+    const readme = read('README.md').split('## What Is Next')[1];
+    assert.match(readme, /R7.*complete/is);
+    assert.match(readme, /R8/);
+    assert.match(read('ROADMAP.md'), /R8.*next|next.*R8/i);
+});
+
+test('roadmap is a pending-work plan with evidence links and explicit decision gates', () => {
+    const roadmap = read('ROADMAP.md');
+    for (const section of ['Now', 'Next', 'Watchlist', 'Completion rules']) {
+        assert.ok(roadmap.includes(`## ${section}`), section);
+    }
+    assert.match(roadmap, /R8\./);
+    assert.match(roadmap, /R9\./);
+    assert.doesNotMatch(roadmap, /^### R(?:[1-7]|10|11)\./m);
+    assert.doesNotMatch(roadmap, /^## (?:Review Baseline|Source Repairs Completed|Working Today)/m);
+    for (const target of [
+        'docs/verification/README.md', 'docs/verification/flint-browser.md',
+        'docs/testing.md', 'RELEASE-CHECKLIST.md',
+    ]) assert.ok(roadmap.includes(`](${target})`), target);
+    assert.match(roadmap, /same.commit/i);
+    assert.match(roadmap, /approval/);
+    assert.match(roadmap, /rollback/);
+    assert.match(roadmap, /screen.reader/);
+    assert.match(roadmap, /not run/);
+});
+
+test('repository candidate notices match package metadata and keep the manual install switch explicit', () => {
+    const plugin = JSON.parse(read('plugin.json'));
+    assert.equal(plugin.version, manifest.version);
+    const escaped = manifest.version.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    for (const file of ['README.md', 'ROADMAP.md', 'docs/install.md', 'docs/getting-started.md']) {
+        assert.match(read(file), new RegExp(`candidate[^\\n]*\`v?${escaped}\``, 'i'), file);
+    }
+    const install = read('docs/install.md');
+    assert.match(install, /^## Testing the repository candidate$/m);
+    for (const command of [
+        'copilot plugin uninstall alex-act-one@alex-mall',
+        'copilot plugin install fabioc-aloha/Alex_ACT_ONE',
+        'copilot plugin list --json',
+    ]) assert.ok(install.includes(command), command);
+    assert.match(install, /uninstall.*does not.*(?:instruction|profile)/is);
+    assert.match(install, /preview.*approval/is);
+    assert.match(install, /not.*reinstall-and-check\.ps1/is);
+});

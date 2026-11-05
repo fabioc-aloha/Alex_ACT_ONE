@@ -101,7 +101,8 @@ instruction catalogs. Regenerate them after changing asset metadata or routing:
 ```powershell
 node scripts\update-docs.mjs --write
 node scripts\update-docs.mjs --check
-node --test tests\documentation.test.mjs tests\smoke.test.mjs
+node --test tests\documentation.test.mjs tests\documentation-examples.test.mjs tests\onboarding.test.mjs tests\smoke.test.mjs tests\native-compatibility.test.mjs
+node skills\compile-brain\scripts\check-links.cjs README.md ROADMAP.md RELEASE-CHECKLIST.md docs\getting-started.md docs\install.md docs\testing.md
 ```
 
 The check compares filesystem and manifest inventories, rejects missing skill
@@ -112,6 +113,15 @@ counts into new prose when a link to the inventory is enough.
 examples against an installed copy from an unrelated directory. Keep opening or
 sending examples illustrative and consent-dependent; never execute arbitrary
 Markdown blocks to expand coverage.
+
+The [first-session guide](docs/getting-started.md) leads with direct repository
+installation. Keep the Mall alternative and its registration prerequisite in
+the [install reference](docs/install.md#mall-option), and verify that both paths
+describe their delivery source accurately. The onboarding test exercises
+activation only in an explicit disposable profile, verifies the second preview
+is unchanged, and checks old README section anchors. It does not execute plugin
+install commands or prove host loading. Do not use the reinstall helper as a
+documentation test: it changes the real installation and profile.
 
 ```text
 node --test          # manifest and disk agree, both directions
@@ -150,6 +160,18 @@ Keep upstream notices embedded, and do not install packages or change the
 runtime merely to rebuild the docs. Record host limitations explicitly,
 including an unobserved download completion rather than claiming it passed.
 
+Run the [reusable local-browser gate](docs/verification/flint-browser.md) with
+an existing approved Playwright runtime and installed browser:
+
+```powershell
+node scripts\flint-browser-acceptance.mjs --channel msedge
+```
+
+Require its actual JSON report and zero exit status. Missing, failed, or blocked
+required checks cannot count as success. The gate saves and validates test-owned
+JSON files, then removes them; it does not install a browser or change a runtime.
+Keep integrated-browser and headless-browser evidence separate.
+
 ## 5. Anything the release renames is checked on both sides
 
 Server keys, launcher routes, skill directory names, manifest entries, and the
@@ -162,12 +184,18 @@ everything else is manual.
 
 ## 6. Host reach is re-stated, not assumed
 
-The compatibility table in the README claims a specific set of surfaces per app.
+The [host delivery table](docs/install.md#where-alex-act-one-works) describes a
+specific set of surfaces per app, alongside dated observations.
 After any change to `plugin.json`, the manifest, or the prompts, confirm the row
 is still true rather than inheriting last release's word.
 
 Verified means someone ran it there. "Not yet tested" is an acceptable entry and
 a better one than a guess.
+
+Record the installed root, delivery source, and source revision when available.
+Source and Mall packages can declare the same version while containing different
+bytes; version equality alone is not source parity. Do not mark an unavailable
+revision or host activation result as verified.
 
 For native-first candidates, distinguish native skill discovery/invocation from
 native rule activation. Keep legacy bootstrap, receipt ownership, aliases, and
@@ -184,6 +212,26 @@ node --test tests/native-compatibility.test.mjs tests/activation-routing.test.mj
 
 > Added 2026-09-07. The table said Scout was "Verified" across every surface
 > while slash commands did not reach it at all and no MCP server was registered.
+
+### Manual release evidence
+
+Copy this blank table into the candidate's task-local release evidence.
+It is a manual observation template, not a standing cross-session ledger or
+skill-firing telemetry. Do not fill a row from an expected answer.
+Use the [versioned synthetic scenarios](docs/verification/README.md) for
+representative workflows and missing-input, denied-tool, unsupported-output,
+read-only, and approval-boundary cases.
+
+| Source revision / release | Scenario | Host / version | Actual invocation | Observed result | Evidence / limitations |
+| --- | --- | --- | --- | --- | --- |
+| Record exact candidate and loaded package | Record scenario ID / version | CLI, VS Code, Scout, or Copilot app; actual version | Exact prompt or command and relevant permissions | not run / observed / failed / blocked / unverified | Artifact or transcript reference, input path, and unobserved requirements |
+
+Record model/settings, sample size, and profile isolation for paired model
+comparisons. For each host, distinguish package discovery, skill invocation,
+instruction loading, tool connection, and end-to-end behavior. Preserve failures
+and denied actions. Mark unavailable host/version/revision evidence unverified;
+leave inaccessible hosts not run. Never upgrade a supported-delivery row to
+freshly verified because another host passed or a structural test was green.
 
 ## 7. New tests are confirmed able to fail
 
@@ -205,8 +253,9 @@ a manual check at least every 30 days and before a humanizer release; this
 is not an unattended job. If the guide cannot be checked, stop the release
 rather than claim the catalog is current.
 
-When the new humanizer routes ship, remove or update the README's
-source-checkout notice so it describes the published release accurately.
+When a new release is approved, update the README's source-versus-release notice
+and the install reference's version comparison against the actual candidate.
+Keep unreleased work distinct from the version delivered through Mall.
 
 > Added 2026-10-16. The Wikipedia-derived catalog needed a source refresh;
 > a prior review date alone does not establish release-time freshness.
@@ -221,6 +270,11 @@ git fetch origin && git rev-list --count HEAD..origin/main
 Clean tree, zero commits behind. Then push.
 
 ## 10. After Mall delivery, verify a real installation
+
+Mall is the reviewed-release alternative, not a prerequisite for the
+repository-first [getting-started path](docs/getting-started.md).
+This section applies only after separately approved Mall publication and
+installation; a source push does not authorize running the helper below.
 
 Close any host that may lock the installed package, then run this from the
 release checkout:

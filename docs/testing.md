@@ -133,6 +133,10 @@ Counts differ by explicitly selected platform cases and shells; do not combine
 matrix totals into an effectiveness claim. This is dated evidence for that
 commit, not an automatic green result for later source changes or a new release.
 
+The later [onboarding run](https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/runs/42107469576)
+also passed every required job at `b6cc870` on 2026-11-05. It does not verify
+subsequent working-tree changes; record their own checks before publication.
+
 ## Executable documentation examples
 
 Instruction `role` metadata is generated from canonical instruction
@@ -151,6 +155,57 @@ illustrative, consent-dependent example and is never executed by these tests.
 Other snippets are not automatically treated as runnable or verified.
 Register and test new executable examples explicitly; never evaluate arbitrary
 Markdown shell blocks as a documentation checker.
+
+## Onboarding verification
+
+The [first-session guide](getting-started.md) starts with direct repository
+installation; the [install reference](install.md#mall-option) keeps Mall as the
+reviewed-release alternative. Source and Mall can share a plugin version while
+having different contents, so record the loaded root and revision when available.
+
+Run the focused documentation and routing checks without installing anything:
+
+```powershell
+node --test tests\documentation.test.mjs tests\documentation-examples.test.mjs tests\onboarding.test.mjs tests\smoke.test.mjs tests\native-compatibility.test.mjs
+node scripts\update-docs.mjs --check
+node skills\compile-brain\scripts\check-links.cjs README.md ROADMAP.md RELEASE-CHECKLIST.md docs\getting-started.md docs\install.md docs\testing.md
+```
+
+The onboarding regression copies shipped files to a temporary installed-package
+fixture and runs bootstrap with an explicit disposable profile target, an empty
+tool PATH, and an unrelated adopter workspace. It checks that preview creates no
+instructions, fixture apply verifies hashes and receipt, and the next preview
+preserves every instruction and receipt without changes. The adopter workspace
+remains empty. Navigation checks include the preserved README anchors and the
+relocated host reference; generated catalogs remain canonical in the README.
+
+The documented plugin installation commands are not executed by these tests.
+The synthetic reasoning prompt has a reader-facing success rubric, not a
+machine-verified model outcome. Skill invocation, loaded instructions, and
+observed behavior in a real host remain separate R8 evidence.
+
+## Scenario and browser evidence
+
+The [versioned scenario kit](verification/README.md) covers representative
+skill families and failure/consent boundaries. Its tests check fixture structure,
+declared skill owners, and coverage; they do not grade model responses or turn
+unrun hosts into verified rows.
+
+The [browser acceptance guide](verification/flint-browser.md) documents the
+optional real-browser gate and its recorded scope. It runs outside the existing
+CI lanes because those runners do not provision browser binaries. Do not silently
+add browser downloads to satisfy it.
+
+```powershell
+node --test tests\evaluation-guide.test.mjs tests\skill-scenarios.test.mjs tests\showcase-provenance.test.mjs tests\flint-browser-acceptance.test.mjs
+node scripts\flint-browser-acceptance.mjs --channel msedge
+```
+
+The first command validates deterministic helpers and documentation contracts,
+not actual browser behavior. The second runs the existing Playwright package
+and installed browser, including saved-file verification and cleanup.
+Generated pages expose source status and deterministic input/content provenance;
+the original embedded App and upstream notices remain unchanged.
 
 ## Evidence limits
 

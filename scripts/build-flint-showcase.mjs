@@ -144,6 +144,7 @@ export function createExperimentalSamples() {
         data: { values }, semantic_types, interaction_spec: { interactions },
     });
     const focus = { type: 'hover-group-focus', options: { groupBy: 'cohort', emphasis: 'spotlight' } };
+    const keyboard = { type: 'accessible-navigation', options: { sections: ['data'], caption: true } };
     const clickGroup = { type: 'click-group-focus', options: { groupBy: 'cohort', reset: ['escape', 'click-none'] } };
     const zoom = { type: 'brush-zoom', options: { reset: ['escape', 'double-click'],
         transition: { duration: 0 }, resetTransition: { duration: 0 } } };
@@ -181,7 +182,7 @@ export function createExperimentalSamples() {
         [{ type: 'filter-controls', options: { fields: [
             { field: 'cohort', widget: 'checkboxes', label: 'Team' },
             { field: 'latency', widget: 'range', label: 'Latency (min)' },
-        ], mode: 'filter', placement: 'top' } }, focus]);
+        ], mode: 'filter', placement: 'top' } }, focus, keyboard]);
     const bump = chart('Bump Chart', 'Forge moves from fourth to first',
         'Four synthetic teams over six checkpoints; rank 1 is best', rankRows,
         { x: { field: 'checkpoint' }, y: { field: 'rank' }, color: { field: 'cohort' } },
@@ -197,7 +198,7 @@ export function createExperimentalSamples() {
         value: { text: 'Forge finishes first', anchor: 'point' } });
     const linkedScatter = structuredClone(lens);
     linkedScatter.chart_spec.encodings = { x: { field: 'cost' }, y: { field: 'score' }, color: { field: 'cohort' }, detail: { field: 'run' } };
-    linkedScatter.interaction_spec = { interactions: [clickGroup] };
+    linkedScatter.interaction_spec = { interactions: [clickGroup, keyboard] };
     const ecdf = chart('ECDF Plot', 'Latency across the same four teams',
         'Share of runs at or below each latency; synthetic minutes', runs,
         { x: { field: 'latency' }, color: { field: 'cohort' } },
@@ -425,6 +426,9 @@ export async function buildShowcase(runtime, { experimental = false } = {}) {
                 const base = input.chart || input.board;
                 base.theme_spec = theme.id;
                 for (const chart of input.chart ? [input.chart] : input.board.charts) {
+                    // Explicit sizes disable the upstream App's responsive relayout.
+                    delete chart.chart_spec.baseSize;
+                    delete chart.chart_spec.canvasSize;
                     if (chart.interaction_spec?.interactions.some(item => item.type === 'legend-toggle')) {
                         chart.theme_spec = { extends: theme.id, legend: { show: 'always', placement: ['top'] } };
                     } else if (experimental && ['Connected Scatter Plot', 'Bump Chart', 'ECDF Plot'].includes(chart.chart_spec.chartType)) {
@@ -477,16 +481,35 @@ export async function buildShowcase(runtime, { experimental = false } = {}) {
                     `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}` });
         }
         const ui = readFileSync(join(serverRoot, 'assets', 'flint-app.html'), 'utf8');
-        return renderDocument({ mode: experimental ? 'experimental' : 'editorial',
-            version: serverVersion, themes, samples, backendInput, backends },
-            ui, collectNotices(nodeModules));
+        const data = { mode: experimental ? 'experimental' : 'editorial',
+            version: serverVersion, themes, samples, backendInput, backends };
+        return renderDocument(data, ui, collectNotices(nodeModules),
+            buildProvenance(data, ui, rendererEnvironment(runtime)));
     } finally {
         await client.close();
         await server.close();
     }
 }
 
-export function renderDocument(data, ui, notices) {
+export function buildProvenance(data, ui, environment) {
+    const digest = value => createHash('sha256').update(value).digest('hex');
+    const inputs = [
+        'scripts/build-flint-showcase.mjs', 'scripts/shared/dependencies.cjs',
+        'ci/runtime/package.json', 'ci/runtime/package-lock.json', 'plugin.json',
+    ];
+    return {
+        schemaVersion: 1,
+        sourceStatus: 'repository-source-demo',
+        sourceInputs: Object.fromEntries(inputs.map(file =>
+            [file, digest(readFileSync(join(ROOT, ...file.split('/')), 'utf8').replace(/\r\n/g, '\n'))])),
+        dataSha256: digest(JSON.stringify(data)),
+        appUiSha256: digest(ui),
+        packages: environment.packages,
+        fonts: environment.fonts,
+    };
+}
+
+export function renderDocument(data, ui, notices, provenance) {
     const lab = data.mode === 'experimental';
     return `<!doctype html>
 <html lang="en">
@@ -538,6 +561,7 @@ body[data-mode=experimental] .preview{background:#fff;margin:16px 18px 20px;min-
 body[data-mode=experimental] .card-copy .eyebrow{color:var(--accent)}
 body[data-mode=experimental] button{background:var(--accent);color:#15282c;border-color:var(--accent);font-weight:700}
 body[data-mode=experimental] button:hover{background:#dafabf}
+body[data-mode=experimental] :is(button,select,a,summary):focus-visible{outline-color:var(--accent)}
 body[data-mode=experimental] .viewer,body[data-mode=experimental] .controls{border-radius:0}
 body[data-mode=experimental] .status{color:#31484e;background:#f1f5ee}
 body[data-mode=experimental] pre{background:#0b141c}
@@ -602,6 +626,8 @@ body[data-mode=experimental] pre{background:#0b141c}
 </main>
 <footer>
 <p><strong>Scope:</strong> a representative capability gallery, not an exhaustive chart catalog or an accessibility certification. Examples use synthetic records. Typeface appearance depends on available system fonts; no font service is contacted.</p>
+<p><strong>Source-built demonstration:</strong> this file is not a released package or evidence that a Copilot host loaded the plugin. Build inputs are content-addressed below; no wall-clock build date is used.</p>
+<details><summary>Build provenance</summary><div class="detail-body"><pre>${html(JSON.stringify(provenance, null, 2))}</pre></div></details>
 <p>Static exports are generated in UTC for reproducible date annotations. The live viewer remains a separate host-rendered surface.</p>
 <p><strong>Rebuild:</strong> from a source checkout with the reviewed isolated demo build environment, run <code>node scripts\\build-flint-showcase.mjs${lab ? ' --experimental' : ''}</code>. Use <code>--check</code> to check that this file matches the build, or <code>--describe-runtime</code> for renderer versions, font hashes, and text metrics. The renderer/protocol pins are listed in the verification guide. No package is installed or fetched by the builder; it rejects mismatched build dependencies.</p>
 <p><a href="https://microsoft.github.io/flint-chart/" rel="noreferrer">Flint documentation</a> &middot; <a href="https://microsoft.github.io/flint-chart/#/interactions" rel="noreferrer">Interaction reference</a> &middot; Opening external links requires a connection.</p>
@@ -610,6 +636,7 @@ body[data-mode=experimental] pre{background:#0b141c}
 </div>
 <script type="application/json" id="flint-runtime">${json(ui)}</script>
 <script type="application/json" id="showcase-data">${json(data)}</script>
+<script type="application/json" id="build-provenance">${json(provenance)}</script>
 <script id="showcase-script">
 'use strict';
 const gallery = JSON.parse(document.getElementById('showcase-data').textContent);

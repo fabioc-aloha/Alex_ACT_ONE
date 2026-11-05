@@ -1,0 +1,88 @@
+# Offline Flint browser acceptance
+
+The [acceptance harness](../../scripts/flint-browser-acceptance.mjs) exercises
+the actual [editorial gallery](../flint-showcase.html) and
+[interaction lab](../flint-experimental.html). It does not substitute a renderer
+or modify the embedded upstream App.
+
+## Run it
+
+Use the already provisioned Playwright package and an installed Chromium-family
+browser. This command installs nothing and opens only the two local files:
+
+```powershell
+node scripts\flint-browser-acceptance.mjs --channel msedge
+```
+
+Use `--runtime-root <absolute existing runtime>` to select a different approved
+runtime, or `--channel chrome` for an installed Chrome browser. Missing packages
+or browsers fail explicitly; the harness does not download one. It runs in a
+fresh headless browser, closes every page and the browser in `finally`, and saves
+downloaded specs only to test-owned temporary files that it removes afterward.
+The JSON result goes to stdout; a failed or blocked required check exits nonzero.
+
+The exported `verifyShowcasePage(page, options)` can also use an existing
+Playwright page scoped to a local demo. `nativeFocus: true` opts into the
+documented child-frame CDP path and restores focus emulation afterward.
+`downloads: false` records a blocked check, never a successful file-save result.
+Neither current host code runner supported importing this module; the recorded
+run below therefore used the direct Node CLI, not an integrated-browser run.
+
+## Required checks
+
+| Check | Evidence required |
+| --- | --- |
+| Offline | Fresh load with HTTP(S) blocked; no attempted requests or browser errors |
+| Images | Every backend image decodes to nonzero dimensions |
+| Matrix | Every sample/theme/story variant mounts its expected real charts |
+| Keyboard | Shell Tab order and an actual chart Enter step change the announced focus target |
+| Focus | Visible indicator and measured contrast of at least 3:1 against its adjacent shell background |
+| Live regions | Shell and chart feedback regions exist; speech itself is not observed |
+| Contrast | Sampled shell text and controls measure at least 4.5:1 |
+| Linked selection | Selected semantic identities are emphasized in every recipient; base populations stay intact |
+| Reset | Escape and Reset example restore populations and emphasis |
+| Resize | Settled plots fit their nearest clipping containers at desktop, tablet, and narrow widths |
+| Saved spec | A download event produces an actual saved file, equal to the selected starting input |
+| Provenance | Embedded data and upstream App digests match their actual payloads |
+
+Line charts may dim every base path and redraw the selected series in an
+overlay. The harness checks the selected series' unique stroke identity in
+that overlay, not just a changed opacity or the presence of any overlay.
+Unsupported or ambiguous identity mapping cannot pass.
+
+## Recorded local evidence
+
+Tested on 2026-11-05 in Windows, Node `26.13.0`, and headless Edge
+`156.0.4314.58`, against the working source candidate based on `b6cc870`.
+This is not a same-commit hosted CI result or a published release. Each HTML
+file carries the tested build's source-input and content digests.
+
+| Page | Render matrix | Linked recipients | Layout widths | Saved starting input | Result |
+| --- | --- | --- | --- | --- | --- |
+| Editorial | 24 variants | Region totals and store points | 1440, 768, 390 | `flint-linked-swiss.json`, exact JSON match | All required checks passed |
+| Experimental | 27 variants | Rank, run scatter, and ECDF overlays | 1440, 768, 390 | `flint-linked-lab-de-stijl.json`, exact JSON match | All required checks passed |
+
+The pass caught two artifact defects: explicit live sizes disabled upstream
+responsive relayout, and the experimental focus ring lacked sufficient
+contrast against its dark background. Live inputs now omit fixed sizes while
+static previews keep their export sizing. The experimental ring uses the
+existing accent color; measured focus contrast passed the required threshold.
+The scatter examples in the lab also declare supported accessible navigation.
+
+Native VS Code screenshots were separately inspected for the editorial
+desktop board and experimental mobile board. Native saved-download completion
+remains unverified. A headless Edge save is not proof of a native host download.
+
+## Provenance and limits
+
+Build provenance records normalized-LF source-input SHA-256 digests, the exact
+embedded data/App digests, renderer package versions, and bundled-font hashes.
+It contains no home directory, wall-clock timestamp, or moving Git HEAD.
+Rebuild with the [reviewed environment](../testing.md) and use both builder
+`--check` modes to verify exact outputs. Do not edit the generated HTML by hand.
+
+This is representative pointer/keyboard behavior, sampled shell contrast, and a
+live-region DOM check, not an accessibility certification. It does not cover
+every chart's keyboard path, all SVG text/colors, screen-reader announcements,
+every gesture preset, all browsers, or installed Copilot skill/host parity.
+Keep those limits separate from the [scenario suite](README.md).

@@ -1,226 +1,135 @@
 # Roadmap
 
-Prioritized from the end-to-end source and documentation review on 2026-11-05.
-R1-R4 are now repaired in the source candidate with regression coverage.
-R5 and R6 are complete in source, with hosted-matrix evidence below.
-R7 onboarding is complete in source with disposable-profile verification.
-R8-R11 await implementation. Nothing here
-authorizes changing an installation or publishing a release.
+Updated 2026-11-05. This is the forward plan for pending work, not a history of
+completed repairs. R8 live-host evidence is next; runtime upgrade recovery needs
+a design decision before implementation.
 
-## Review Baseline
+The repository test candidate is `v0.9.0-rc.1`; the published baseline remains
+`v0.8.0`. Repository source includes later work;
+existing installations do not acquire it automatically. See
+[installation sources](docs/install.md#installation-sources) for the distinction.
+Current verification belongs in [testing](docs/testing.md),
+[scenario evidence](docs/verification/README.md), and
+[browser evidence](docs/verification/flint-browser.md), not duplicated here.
 
-| Surface | Evidence and limits |
-| --- | --- |
-| Source versus release | Published baseline is `v0.8.0`. The interaction skill, offline demos, recent UAT guidance, and generated documentation improvements are source-only additions. See the [current inventory](README.md#source-package-inventory). |
-| Automated baseline | The complete existing suite passed 315 tests with zero failures and zero skips on Windows, Node `26.13.0`, and PowerShell `7.6.9`. This is a dated environment result, not a supported-platform matrix. |
-| Brain structure | The read-only analyzer reported no findings and preserved assessed hashes. It checks structure and declared routes, not semantic effectiveness. |
-| Lifecycle and output probes | Disposable fixtures reproduced the activation, Windows-launch, dependency-detection, and inline-code problems listed under P1. No real profile or runtime was modified. |
-| Review coverage | Installation, activation/removal, dependency provisioning/launch, representative conversion and drafting workflows, skill ownership/tests, and project documentation. Documentation received a separate read-only review. |
-| Not established | Exhaustive live execution of every skill, fresh-install parity on every supported host/OS, a vulnerability audit, paid image generation, or successful native-browser file saving. |
+## Now
 
-Passing structural tests is not a release-readiness verdict. The additional
-failure probes below passed through gaps in the current coverage.
+### R8. Run fresh live-host scenarios
 
-## Working Today
+**Status:** the synthetic scenario kit is ready; fresh host runs are not run.
 
-- One payload in the shared Copilot CLI store can serve the supported hosts. Scout requires
-  **Load Copilot CLI skills**, a plugin-root check, separate MCP registration,
-  and a full restart. A no-write host activation readiness report exists;
-  discovery and readiness do not prove observed activation.
-- Instructions and prompts are thin routes to canonical skill owners, with
-  selected references, preserved aliases, and explicit consent boundaries.
-  Tested deterministic helpers support material quantitative checks without
-  cross-session skill telemetry.
-- Preview-first activation and receipt-backed removal exist. Source activation
-  now blocks modified/unowned conflicts before any writes; replacement needs a
-  separately previewed, explicitly approved override. Removal preserves modified bytes.
-  Runtime packages are retained after uninstall by design. Profile instructions
-  need their own consented removal; uninstall is not proof of complete cleanup.
-- The [dependency registry](scripts/shared/dependencies.cjs) exact-pins reviewed
-  top-level npm packages. Flint also has an independently pinned library and
-  root/server-resolved version guards. This is not a locked transitive graph.
-- The source [editorial gallery](docs/flint-showcase.html) and
-  [experimental interaction lab](docs/flint-experimental.html) demonstrate
-  validated Flint 1.0.1 inputs, real embedded rendering, and synthetic records.
-  Native-browser UAT has exercised selected gestures, reset, linked views, and
-  narrow layouts; download completion remains unverified.
-- [Generated asset catalogs](scripts/update-docs.mjs) check filesystem/manifest
-  parity and explicit execution-owner routes. They do not validate every prose
-  claim, executable example, or actual host invocation.
+Use the [versioned cases and run guide](docs/verification/README.md) to exercise
+reasoning, review, recovery, conversion, chart, and draft-only workflows.
+Preserve missing-input, denied-tool fixture, unsupported-output, read-only,
+and approval-boundary cases rather than testing only successful requests.
 
-## Source Repairs Completed: R1-R4
+**Next actions**
 
-The original failures were reproduced before correction. These repairs are
-source-only until a separately approved release and installation.
+- Start with a fresh Copilot CLI session, then repeat in VS Code, Scout, and
+  the Copilot app as access permits.
+- Record the loaded plugin root, source revision when available, host/version,
+  model/settings, instruction state, exact invocation, response, and tool actions.
+- For Scout, verify the shared Copilot CLI store, **Load Copilot CLI skills**,
+  the plugin-root check, separate MCP registration, and full restart.
+  Use the no-write host activation readiness report before any consented apply.
+- Keep unavailable hosts marked not run and unavailable observations unverified.
+  Synthetic denied-tool facts are not proof that a real host enforced a denial.
 
-| ID | Original failure | Source correction and evidence | Verified scope |
-| --- | --- | --- | --- |
-| R1 | Activation could overwrite modified or unowned instructions. | [Conflict-aware planner/apply](skills/bootstrap-core/scripts/bootstrap-core.cjs) blocks the whole apply by default; host readiness reports blocked; `--overwrite-conflicts` needs separate approval and cannot bypass receipt validation. | [Activation regressions](tests/activation-conflicts.test.mjs) cover foreign/modified files, unchanged upgrades, migration, stale plans, receipt ownership, no-write blocking, and explicit recovery after a failed apply. No real profile was used. |
-| R2 | Windows `.cmd` tool launching failed with `EINVAL`. | [Shared command resolution](scripts/shared/process-command.cjs) maps known npm tools to validated package bins and launches Node without a shell; synchronous and asynchronous consumers share it. | [Real shim-layout regressions](tests/tool-shims.test.cjs) cover global/local package bins, spaces, literal metacharacters, native executables, and escaping bin rejection. Existing npm-prefix behavior remains covered. |
-| R3 | Prose transforms altered literal inline code. | [Shared preprocessing](scripts/shared/markdown-preprocessor.cjs) protects single/multi-backtick inline spans and fenced content while retaining intended prose transforms. | [Span regressions](tests/markdown-inline-code.test.cjs) and [real HTML/Word conversion](tests/conversion-runtime.test.cjs) verify literals, multiline spans, headings, tables, and links. Actual diagram/rendering coverage remains a separate prerequisite-dependent check. |
-| R4 | Empty package directories looked ready and runtime selection diverged. | [Shared runtime state](scripts/shared/runtime-status.cjs) drives detector/launcher/provisioner selection and distinguishes installation, version, bounded launch, and unobserved host connection. Provisioning verifies its outcome before success. | [Readiness regressions](tests/runtime-readiness.test.mjs) cover malformed/empty packages, version/library drift, failed/hanging launches, CLI root selection, and isolated mocked installs. Fixture installers refuse writes outside their exact temporary root. |
+**Done when:** each available host has task-local, inspectable results in the
+[manual evidence template](RELEASE-CHECKLIST.md#manual-release-evidence), including
+failures and limitations. Discovery, instruction loading, MCP connectivity, and
+end-to-end behavior must remain separate claims. Do not mark an inaccessible
+host freshly verified or infer semantic compliance from structural tests.
 
-Version probes do not prove MCP host connectivity or paid API authentication.
-The release/environment/host gates below remain open.
+### Validate candidate delivery before publication
 
-Repair verification on 2026-11-05: the full suite passed 357 tests with zero
-failures or skips. Real HTML/Word conversion and installed Mermaid CLI startup
-passed; read-only launch probes passed for the existing pinned MCP packages.
-Both offline-demo rebuild checks and the generated catalog drift check passed.
-This is source verification, not publication or a new host-activation claim.
+**Status:** the repository test candidate is selected; live installation testing
+and release publication remain separate gates.
 
-## P1: Repeatable Release and Contract Gates
+**Next actions**
 
-### R5. Automate the supported-environment baseline
+- For each approved source change, commit and push the reviewed candidate to main.
+- Require the Windows/Ubuntu structural matrix, provisioned integration lanes,
+  and exact demo rebuilds for that same commit. Verify from a clean clone using
+  the [environment contract](docs/testing.md).
+- Attach applicable live-host results and explicit unresolved limitations.
+  Follow the [release checklist](RELEASE-CHECKLIST.md), not a green-test
+  shorthand for release readiness.
+- If publication is requested, choose a new version, review source-versus-release
+  notices, publish an immutable release, and update the optional Mall route.
+  Do not move the existing `v0.8.0` tag.
 
-**Completed and hosted-verified.** The
-[workflow](.github/workflows/verify.yml) uses push/manual triggers and reviewed
-immutable actions with read-only permissions. Structural jobs target Windows
-2025/Ubuntu 24.04 with Node 24/26; provisioned runtime/converter jobs use Node 26.
-The [gate](scripts/verification-gate.mjs) rejects failed, skipped, todo, cancelled,
-empty, or unreported runs. Provisioning is restricted to disposable CI runners.
+**Done when:** the selected delivery operation is verified end to end.
+A source push, tagged release, Mall update, plugin installation, profile
+activation, and runtime upgrade are separate operations requiring their own
+approval. No publication or installation is authorized by this roadmap.
 
-The [passing hosted run](https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/runs/42102913755)
-verified commit `6c90220` on 2026-11-05: Windows and Ubuntu structural jobs on
-Node 24/26, both Node 26 integration jobs, and exact Windows rebuilds of both
-HTML demos. No required lane skipped tests. The local complete suite also
-passed 389 tests with zero failures or skips.
-
-The [isolated CI/demo profile](ci/runtime/package-lock.json) freezes the
-integrity-checked dependency graph. Diagnosis demonstrated matching font hashes
-but changed text metrics from a floating canvas version, followed by changed
-indirect-dependency notices. UTC generation, the approved position-only
-serialization policy, and locked build inputs preserve exact artifact checks;
-paths, data, text, and notices are not normalized away. See the
-[environment contract](docs/testing.md) for prerequisites, platform exclusions,
-canonical demo rebuilds, and evidence limits. This proves these release lanes,
-not every skill's live host behavior. Production-runtime staging/rollback
-remains R9.
-
-### R6. Check executable examples and metadata, not just Markdown links
-
-**Completed in source.** Rich Email names its real test/validator paths and
-resolves them from the installed plugin. Marked validation examples run against
-an installed-copy fixture from an unrelated directory; Outlook opening is
-explicitly illustrative and never executed by the checker. Replicate points to
-the actual plugin manifest rather than a nonexistent workspace config.
-
-Instruction roles now derive from canonical descriptions through
-[update-docs](scripts/update-docs.mjs); the read-only check rejects metadata
-drift. [Example tests](tests/documentation-examples.test.mjs) and
-[catalog tests](tests/documentation.test.mjs) cover these contracts. Unmarked
-snippets are not claimed as executed or exhaustively verified.
-
-## P2: Product Experience and Evidence
-
-### R7. Make first success obvious, then split reference from onboarding
-
-**Completed in source on 2026-11-05.** The
-[first-session guide](docs/getting-started.md) covers installation, preview and
-approval, activation success signals, and a synthetic read-only reasoning
-workflow with no optional runtime tools. It distinguishes verified instruction
-files from observed host loading, and published, source-only, and demo-only
-features. Direct repository installation leads the README and short guide;
-the detailed reference keeps the Mall alternative for the reviewed release,
-including its required marketplace-registration step.
-
-The [README entry point](README.md#start-here) leads to that guide before the
-catalogs. Detailed setup and dated host observations now live in the
-[install reference](docs/install.md); old README setup anchors remain linked
-destinations. Generated catalogs retain their single canonical location.
-
-[Onboarding regressions](tests/onboarding.test.mjs) run the shipped bootstrap
-from an installed-copy fixture with no tool PATH, an explicit disposable profile
-target, and an unrelated adopter workspace. Preview creates no instructions;
-approved-fixture apply verifies hashes and receipt; the second preview preserves
-every instruction and receipt without changes. The adopter workspace stays empty.
-The targeted documentation, navigation, activation, and compatibility suite
-passed 89 tests with zero failures or skips. Relative-link checks include heading
-anchors; generated catalogs have no drift.
-
-This verifies the guide's structure and file-state signals, not fresh human
-usability, a new installation, live model compliance, or host activation parity.
-Scenario and host evidence remain R8.
-
-### R8. Add scenario-level skill and host evidence
-
-[Routing tests](tests/native-compatibility.test.mjs) and
-[UAT-guidance tests](tests/visual-uat-guidance.test.mjs) protect contract text and
-packaging; they do not prove that a model followed the procedure. Historical host
-tests must not become current-release compatibility claims.
-
-**Acceptance:** keep versioned synthetic scenarios for representative reasoning,
-review, recovery, conversion, chart, and draft-only workflows. Include missing
-input, read-only/no-write, denied tool, unsupported output, and approval-boundary
-cases. Record release/commit, host/version, actual invocation, observed result,
-and limitations in a compact release-evidence table. No cross-session usage or
-skill-firing telemetry. Recheck CLI, VS Code, Scout, and the Copilot app before
-upgrading a supported-delivery row to freshly verified.
+## Next
 
 ### R9. Make runtime upgrades reproducible and recoverable
 
-[Provisioning](skills/setup-dependencies/scripts/provision-runtime.mjs) currently
-installs into shared active state; top-level version pins do not freeze
-transitive dependencies or provide rollback.
+**Status:** design decision pending; active-runtime changes remain deferred.
 
-The isolated CI/demo build now has a version/integrity lock under R5. That
-protects repeatable runner artifacts, not user-runtime upgrade recovery.
+The [provisioner](skills/setup-dependencies/scripts/provision-runtime.mjs)
+installs into shared active state. The [CI/demo lock](ci/runtime/package-lock.json)
+protects build reproducibility, not user-runtime upgrade recovery.
 
-**Acceptance:** decide a reviewed lock/integrity policy for runtime dependencies;
-stage an upgrade, verify versions and launch/render behavior, then switch only
-after consent. A failed stage leaves the previous runtime usable. Preserve
-configured registries and npm policy, selected-server upgrades, and reload
-boundaries. R4's readiness model is a prerequisite.
+**Decide first**
 
-### R10. Make the demos and manual UAT evidence portable
+- Which runtime packages and transitive dependencies are locked, how integrity
+  is reviewed, and how selected-server upgrades preserve unselected packages.
+- How a candidate runtime is staged, verified, selected, and rolled back across
+  supported platforms without silently switching a running host.
+- How retained runtimes are owned and eventually cleaned up without removing
+  user or unrelated package state.
 
-The [offline reports](README.md#flint-charts-and-interaction-demos) provide real
-examples; browser UAT is still a manual sequence, and native download completion
-was not observed.
+**Done when:** a failed stage leaves the previous runtime usable; versions,
+launches, and real rendering pass before an explicitly approved switch; rollback
+is demonstrated in disposable fixtures. Preserve configured registries, npm
+policy, explicit runtime-root selection, consent, and host reload boundaries.
+Do not use the active user runtime as a failure-test fixture.
 
-**Acceptance:** retain reproducible offline builds and add a reusable browser
-acceptance harness for image decode, themed controls, semantic linked recipients,
-reset, resize, and saved-spec validation in a host that supports downloads.
-Run a dedicated keyboard/focus/live-region/contrast pass rather than infer
-accessibility from one navigation check. Downloaded pages should carry source
-status and deterministic build provenance; keep standalone offline delivery and
-upstream notices. Test provenance generation without making identical builds
-depend on the wall clock.
+### Extend accessibility and browser coverage
 
-### R11. Separate evaluation hypotheses from demonstrated outcomes
+**Status:** the scoped local browser gate exists; broader coverage is pending.
 
-The [evaluation guide](docs/launch/evaluation-guide.md) is a useful comparison
-exercise, not evidence that a short run establishes durable reliability gains.
+Build on the [recorded browser scope and limitations](docs/verification/flint-browser.md)
+rather than rerunning the same happy path and calling it full accessibility.
 
-**Acceptance:** name CLI as the reference path and state coverage limits or host
-adaptations. Label desired signals as hypotheses, provide a task-local results
-table with sample size and limitations, and avoid general product claims from a
-single comparison. Treat a manual release-evidence template as part of the
-[release checklist](RELEASE-CHECKLIST.md), not a standing behavioral ledger.
+**Next actions**
 
-## External Dependency Watch
+- Verify actual screen-reader announcements and keyboard traversal across the
+  remaining chart types, controls, gestures, and focus-restoration paths.
+- Measure SVG text and meaningful chart-color contrast, beyond the sampled shell.
+- Verify saved-spec completion in a native integrated browser where supported;
+  headless Edge saving is not evidence that the native host saved a file.
+- Add browser/OS cases where they change a supported-delivery claim. Decide
+  browser provisioning explicitly before adding a required CI browser lane.
 
-**Scout prompt commands:** no plugin prompt surface has been demonstrated in the
-recorded Scout baseline. Keep owning-skill invocation as the documented fallback.
-Recheck when Scout changes; this needs host support, not another ONE command alias.
+**Done when:** the expanded cases have reproducible observations, regression
+coverage for fixes, and a published evidence boundary. Unsupported paths stay
+blocked or unverified; they must not be hidden behind a passing aggregate.
 
-**Native rule delivery:** retain legacy bootstrap and receipts until the
-target-host activation gate passes. Native skill discovery is not that gate.
+## Watchlist
 
-## Not Planned
+- **Native instruction delivery:** retain preview-first bootstrap and receipts
+  until supported-host probes establish real activation and safe removal.
+  Skill discovery alone is not the retirement gate.
+- **Scout command support:** use owning-skill invocation while plugin prompt
+  commands remain unavailable in the recorded baseline. Recheck when the host
+  changes; do not add another alias to compensate for a missing host surface.
+- **Dependency changes:** review version/integrity changes, launch/render behavior,
+  upstream notices, and exact artifact differences before updating pins or locks.
+  Do not relax registry policy or artifact checks to make an upgrade pass.
 
-- Replacing human judgment or treating a passing static check as semantic proof.
-- Silent activation, installation, external sending, or publication.
-- Telemetry or cross-session behavioral usage scoring.
-- A new shared continuity store. Existing project guidance remains authoritative.
-- Provider operations in ONE. AI Operations remains a separate Mall plugin for
-  users who need provider-specific planning and integrations.
+## Completion rules
 
-## Completion Rules
-
-An item is complete only when its acceptance gate is demonstrated, related
-documentation matches the behavior, and the result is in the reviewed source.
-Publication and user-level installation require their own approval. R1-R4 are
-implemented in source; R5 and R6 are complete with the evidence above.
-R7 is complete in source; R8-R11 remain open. No new release, Mall update, or
-local activation is implied.
+- Close work against its stated acceptance evidence, not implementation alone.
+- Keep evidence with the candidate/task; collect no cross-session skill telemetry
+  or standing behavioral ledger.
+- Keep related docs, generated catalogs, and links consistent. Link to canonical
+  results rather than copying changing totals into the roadmap.
+- Preserve explicit consent for installation, activation, sending, publication,
+  and runtime switching. No unattended changes are planned.
+- Provider-specific operations remain outside ONE; no new shared continuity
+  store or replacement for human judgment is planned.

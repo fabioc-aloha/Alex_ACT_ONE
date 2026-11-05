@@ -15,8 +15,11 @@ copilot plugin install fabioc-aloha/Alex_ACT_ONE
 ```
 
 This installs repository source, which can include unreleased changes.
+The repository test candidate is `0.9.0-rc.1`, not a tagged or Mall release.
 For the reviewed release instead, use the [Mall option](install.md#mall-option).
 No marketplace registration is needed for the direct command.
+Already using Mall? Follow the [candidate switch procedure](install.md#testing-the-repository-candidate)
+after the candidate's source verification passes.
 
 Open a Copilot session and confirm it discovers the installed `bootstrap-core`
 and `critical-thinking` skills. If either is missing, stop and check the loaded

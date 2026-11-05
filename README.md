@@ -6,15 +6,15 @@
 
 Alex ACT ONE is a pack of skills for GitHub Copilot that changes how the agent works: frame the problem before solving it, look for evidence against its first answer, check a plan against its risks, and verify what it produced before calling it done.
 
-**See the difference:** the same loaded prompt, "Our dashboard takes 8 seconds to load. Rust rewrite, or Redis caching?", handled two ways. Try it yourself with [the evaluation guide](docs/launch/evaluation-guide.md).
+**Try the discipline:** "Our dashboard takes 8 seconds to load. Rust rewrite, or Redis caching?" The comparison below is illustrative: these are hypotheses to test, not recorded outcomes. Try it yourself with [the evaluation guide](docs/launch/evaluation-guide.md).
 
-|  | Without Alex ACT ONE | With Alex ACT ONE |
+|  | Possible unexamined response | Response to look for |
 |---|---|---|
 | First move | Jumps straight to an answer | Stops and checks the question first |
 | The answer | Picks Rust or Redis, and sounds sure | Asks where the 8 seconds are actually spent |
 | Evidence | Does not ask for any | Says what to measure, and what result would change the answer |
 | Confidence | Sounds certain either way | Marks what is known, reported, estimated, or guessed |
-| The result | A plan, handed over as final | The work gets checked before it ships |
+| Verification | A plan, handed over as final | A specific check before calling the plan proven |
 
 ## Start here
 
@@ -36,12 +36,16 @@ reviewed release, Scout setup, and optional tools. Already set up? Browse the
 [skill catalog](#the-skills).
 
 **Release status, reviewed 2026-11-05:** the published baseline is `v0.8.0`.
+The repository test candidate is `v0.9.0-rc.1`; it is not a tagged release or
+a Mall update. See [switching from Mall for testing](docs/install.md#testing-the-repository-candidate).
 This source checkout also includes the not yet released `flint-interactions`
-workflow, offline demonstration pages, and activation/runtime/conversion repairs.
+workflow, offline demonstration pages, activation/runtime/conversion repairs,
+and the first-session guide.
 Existing installations do not acquire those changes automatically. Repository
 installs can include these source changes; Mall installs track the reviewed
-release. Existing command names, bootstrap activation, and optional browser
-fallback remain available.
+release. See [installation sources](docs/install.md#installation-sources) for
+revision checks and the separate activation/runtime steps. Existing command names,
+bootstrap activation, and optional browser fallback remain available.
 
 Try the [offline Flint chart gallery](docs/flint-showcase.html) for working examples of semantic data, themes, interactions, linked views, and static exports, or the [experimental interaction lab](docs/flint-experimental.html) for polar brushing, direct reordering, distribution shapes, and reader-driven stories. Open either downloaded HTML in a browser; no server or connection is needed.
 
@@ -352,6 +356,12 @@ board layout. They do not certify every preset, browser, or accessibility path.
 Saving a downloaded spec through the integrated browser remains unverified:
 the host did not expose a download event during that check.
 
+The [repeatable offline browser gate](docs/verification/flint-browser.md)
+subsequently verified actual saved JSON, semantic linked recipients, reset,
+responsive relayout, keyboard feedback, and sampled shell/focus contrast in
+headless Edge. The pages now carry deterministic build provenance. This is
+local browser evidence, not proof of a live Copilot skill invocation.
+
 ## Check a draft or rewrite it
 
 Ask "Audit this draft for AI tells; don't edit it" for a read-only report with
@@ -478,12 +488,19 @@ Descriptions are discovery summaries, not a second execution contract.
 ```powershell
 node scripts\update-docs.mjs --write
 node scripts\update-docs.mjs --check
-node --test tests\documentation.test.mjs tests\smoke.test.mjs
+node --test tests\documentation.test.mjs tests\documentation-examples.test.mjs tests\onboarding.test.mjs tests\smoke.test.mjs tests\native-compatibility.test.mjs
+node skills\compile-brain\scripts\check-links.cjs README.md ROADMAP.md RELEASE-CHECKLIST.md docs\getting-started.md docs\install.md docs\testing.md
 ```
 
 `--check` is read-only and fails on drift. When adding a skill, choose its
 reader-facing group in the generator rather than duplicating a workflow.
 Historical inventories and host observations remain dated snapshots.
+
+The focused checks cover the first-session guide, source/Mall delivery
+distinctions, preserved setup anchors, and disposable-profile activation signals.
+They do not run the documented installation commands or establish that a live
+host loaded instructions. See [the testing guide](docs/testing.md#onboarding-verification)
+for the boundary between file-state verification and a live first session.
 
 ### Full suite
 
@@ -514,7 +531,11 @@ failures that motivated them are in the
 
 ## What Is Next
 
-See the [roadmap](ROADMAP.md).
+R7 onboarding, the R10 local browser gate, and R11 evaluation calibration are
+complete in source. R8's [versioned scenarios](docs/verification/README.md)
+are ready; fresh live-host runs remain next. R9 runtime upgrade recovery needs
+its own design decision. See the [roadmap](ROADMAP.md) for acceptance gates;
+completion in source does not publish a release or update an installation.
 
 ## License
 

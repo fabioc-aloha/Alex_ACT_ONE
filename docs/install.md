@@ -4,6 +4,57 @@ For your first session, use [the short getting-started guide](getting-started.md
 This page keeps the host differences, alternate installation paths, optional
 tools, and historical verification notes in one reference.
 
+## Installation sources
+
+| Source | What it delivers | What remains separate |
+| --- | --- | --- |
+| Repository | The repository source selected at installation time; it can include unreleased work | Review the loaded root and source revision before activation; existing installs do not follow later commits automatically |
+| Mall | The reviewed release selected by the marketplace entry | Source changes need a separately published release before they appear through this path |
+| Optional runtime | The separately provisioned chart, browser, image, and converter packages | Plugin installation does not activate instructions or provision these packages; installs and upgrades require their own approval |
+
+The repository test candidate is `0.9.0-rc.1`; the published Mall baseline is
+`0.8.0`. A candidate version is not a tagged release or evidence of live-host
+activation. Packages with the same version can also contain different bytes.
+Check the loaded plugin root, installation source, and revision when available;
+if the revision cannot be established, do not claim exact source parity.
+Use [the roadmap](../ROADMAP.md) to distinguish completed source work from the
+published baseline. Never mix a checkout's bootstrap with a different installed
+package merely because the versions match.
+
+## Testing the repository candidate
+
+These are manual steps for the person switching installations, not commands
+the preparation workflow runs automatically. Wait for the selected candidate's
+same-commit verification to pass, then close apps that may lock or cache the
+plugin. Use a separate terminal for the switch:
+
+```powershell
+copilot plugin uninstall alex-act-one@alex-mall
+copilot plugin install fabioc-aloha/Alex_ACT_ONE
+copilot plugin list --json
+```
+
+Confirm the enabled direct-repository entry reports `0.9.0-rc.1` and the expected
+repository source. If an old or duplicate entry remains, stop rather than testing
+an ambiguous payload. The direct command selects source available at installation
+time; record its source revision when exposed and compare it with the verified
+candidate commit. Do not assume version equality proves byte parity.
+
+Uninstalling the plugin does not remove previously activated profile instructions
+or the optional runtime. Do not delete either by glob. The runtime package pins
+are unchanged for this candidate; no dependency upgrade is part of this switch.
+
+Fully restart the host. Invoke the newly installed `bootstrap-core` skill and
+confirm its loaded root and version before using its preview. Review the target,
+file actions, and receipt; apply only after explicit approval. The candidate's
+conflict guard must stop on modified or unowned instructions rather than
+silently replace them. Follow the [first-session verification](getting-started.md#3-verify)
+and then the [scenario run guide](verification/README.md).
+
+Do not run `reinstall-and-check.ps1` for this repository-candidate switch: that
+helper reinstalls from Mall and applies instructions. No new release, Mall
+publication, profile activation, or runtime installation is implied here.
+
 ## Where Alex ACT ONE Works
 
 Skills sit at the package root, so each app can load them directly. Scout can
