@@ -33,6 +33,7 @@ const PINNED_PACKAGES = deps.mcpPackages(options.server ? [options.server] : und
 // pin nothing watches is a version claim that quietly stops being true.
 const AUDIT_TARGETS = [
   ...PINNED_PACKAGES,
+  ...deps.SHOWCASE_PACKAGES.map((pin) => ({ name: pin.package, version: pin.version })),
   ...Object.values(deps.TOOLS)
     .filter((t) => t.version && (t.kind === 'npm-global' || t.kind === 'npm-module'))
     .map((t) => ({ name: t.package, version: t.version })),

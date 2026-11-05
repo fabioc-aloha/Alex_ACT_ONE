@@ -329,7 +329,8 @@ prove that an interaction works.
 Both pages embed the pinned App UI, synthetic data, theme choices, inspectable
 starting specs, and static exports from Vega-Lite, ECharts, and Chart.js.
 Opening the HTML needs no server, installation, or network connection.
-Rebuilding requires the already provisioned pinned runtime; the
+Rebuilding requires the reviewed isolated demo build environment, including
+the renderer/protocol pins in [the verification guide](docs/testing.md); the
 [builder](scripts/build-flint-showcase.mjs) never installs or fetches packages.
 The live viewer is Vega-Lite: the static backend comparison does not imply
 theme or interaction parity across backends.

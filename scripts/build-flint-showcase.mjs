@@ -7,7 +7,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const require = createRequire(import.meta.url);
-const { MCP_SERVERS } = require('./shared/dependencies.cjs');
+const { MCP_SERVERS, SHOWCASE_PACKAGES } = require('./shared/dependencies.cjs');
 const THEMES = [
     { id: 'nyt', label: 'Newsroom' },
     { id: 'economist', label: 'Print weekly' },
@@ -275,6 +275,16 @@ export function rendererEnvironment(runtime) {
         packages, fonts, metrics };
 }
 
+export function validateRendererEnvironment(environment) {
+    for (const pin of SHOWCASE_PACKAGES) {
+        const actual = environment.packages[pin.package];
+        if (actual !== pin.version) {
+            throw new Error(`Demo build dependency mismatch: ${pin.package} expected ${pin.version}, found ${actual || '(missing)'}. ` +
+                'Use the reviewed isolated demo build environment; do not silently upgrade an active runtime.');
+        }
+    }
+}
+
 function collectNotices(nodeModules) {
     const seen = new Set();
     const notices = [];
@@ -380,6 +390,7 @@ function svgResult(result) {
 }
 
 export async function buildShowcase(runtime, { experimental = false } = {}) {
+    validateRendererEnvironment(rendererEnvironment(runtime));
     const nodeModules = join(runtime, 'node_modules');
     const serverRoot = join(nodeModules, MCP_SERVERS.flint.package);
     const serverVersion = JSON.parse(readFileSync(join(serverRoot, 'package.json'), 'utf8')).version;
@@ -592,7 +603,7 @@ body[data-mode=experimental] pre{background:#0b141c}
 <footer>
 <p><strong>Scope:</strong> a representative capability gallery, not an exhaustive chart catalog or an accessibility certification. Examples use synthetic records. Typeface appearance depends on available system fonts; no font service is contacted.</p>
 <p>Static exports are generated in UTC for reproducible date annotations. The live viewer remains a separate host-rendered surface.</p>
-<p><strong>Rebuild:</strong> from a source checkout with the pinned Flint runtime provisioned, run <code>node scripts\\build-flint-showcase.mjs${lab ? ' --experimental' : ''}</code>. Use <code>--check</code> to check that this file matches the build. No package is installed or fetched by the builder.</p>
+<p><strong>Rebuild:</strong> from a source checkout with the reviewed isolated demo build environment, run <code>node scripts\\build-flint-showcase.mjs${lab ? ' --experimental' : ''}</code>. Use <code>--check</code> to check that this file matches the build, or <code>--describe-runtime</code> for renderer versions, font hashes, and text metrics. The renderer/protocol pins are listed in the verification guide. No package is installed or fetched by the builder; it rejects mismatched build dependencies.</p>
 <p><a href="https://microsoft.github.io/flint-chart/" rel="noreferrer">Flint documentation</a> &middot; <a href="https://microsoft.github.io/flint-chart/#/interactions" rel="noreferrer">Interaction reference</a> &middot; Opening external links requires a connection.</p>
 <details><summary>Third-party notices</summary><div class="detail-body"><p>Flint and its embedded UI are distributed under their upstream open-source licenses. The original bundle is embedded unchanged; notices for its runtime dependencies and React are included below. Static exports are generated from the same pinned runtime.</p><pre class="notices">${html(notices)}</pre></div></details>
 </footer>

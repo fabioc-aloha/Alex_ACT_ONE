@@ -13,6 +13,22 @@ macOS and other Node versions are not covered by this workflow.
 | Integration | Explicit reviewed MCP runtime, JSZip from the shared registry, Pandoc 3.13, reviewed Mermaid CLI | Actual MCP version/launch and three-backend render tests, real HTML/Word conversion, and installed Mermaid CLI startup |
 | Canonical demo rebuild | Windows integration environment | Byte-for-byte checks of both generated HTML pages; Git preserves their LF endings |
 
+Canonical demos additionally require `@napi-rs/canvas@1.0.10`,
+`chart.js@4.5.1`, and `@modelcontextprotocol/sdk@1.32.1`, defined in
+`SHOWCASE_PACKAGES` in the shared dependency registry. CI installs them only in
+its disposable demo/runtime prefix. The builder checks server-resolved versions
+before generating output and never changes an existing runtime to match them.
+For local rebuilds, use a separately approved isolated build environment.
+`--describe-runtime` reports the actual renderer versions, bundled font hashes,
+and text metrics without creating a report.
+
+The hosted diagnosis found matching bundled-font hashes but canvas 1.1.0,
+Chart.js 4.6.1, and SDK 1.32.2 instead of the reviewed versions. Canvas measured
+different glyph widths, changing SVG paths and raster output. These explicit
+build pins fix that input drift rather than rounding paths or weakening the
+exact artifact check. They do not freeze every transitive package or upgrade a
+user's runtime; the broader locked/staged runtime policy remains R9.
+
 The demo CLI sets its own process timezone to UTC before loading renderers.
 It does not change the OS or parent process, or impose a timezone on the live
 viewer. Integration tests compare real exports from UTC and Eastern caller

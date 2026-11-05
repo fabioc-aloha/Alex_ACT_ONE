@@ -73,6 +73,9 @@ jobs:
           $zip = node -p "const d=require('./scripts/shared/dependencies.cjs').TOOLS.jszip; d.package+'@'+d.version"
           npm install --prefix $env:ALEX_ACT_ONE_RUNTIME_ROOT --save-exact --ignore-scripts --no-audit --no-fund $zip
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $showcase = @(node -p "require('./scripts/shared/dependencies.cjs').SHOWCASE_PACKAGES.map(p=>p.package+'@'+p.version).join('\n')")
+          npm install --prefix $env:ALEX_ACT_ONE_RUNTIME_ROOT --save-exact --ignore-scripts --no-audit --no-fund @showcase
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           $mermaid = node -p "const d=require('./scripts/shared/dependencies.cjs').TOOLS.mmdc; d.package+'@'+d.version"
           npm install --global --ignore-scripts --no-audit --no-fund $mermaid
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

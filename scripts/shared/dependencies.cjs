@@ -107,6 +107,12 @@ const MCP_SERVERS = {
     },
 };
 
+const SHOWCASE_PACKAGES = Object.freeze([
+    { package: '@napi-rs/canvas', version: '1.0.10' },
+    { package: 'chart.js', version: '4.5.1' },
+    { package: '@modelcontextprotocol/sdk', version: '1.32.1' },
+]);
+
 function platformKey() {
     if (process.platform === 'win32') return 'win32';
     if (process.platform === 'darwin') return 'darwin';
@@ -223,4 +229,4 @@ function mcpPackages(routes = Object.keys(MCP_SERVERS)) {
     });
 }
 
-module.exports = { TOOLS, MCP_SERVERS, PLUGINS, mcpPackages, platformKey, remedyFor, specOf, installMap };
+module.exports = { TOOLS, MCP_SERVERS, SHOWCASE_PACKAGES, PLUGINS, mcpPackages, platformKey, remedyFor, specOf, installMap };
