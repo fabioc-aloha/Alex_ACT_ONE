@@ -95,12 +95,13 @@ or npx.
 
 | Pinned package | Tier | Role |
 | --- | --- | --- |
-| `flint-chart-mcp@0.5.1` | Required | Chart rendering, ThemeSpec discovery, version-matched authoring resources. No fallback |
+| `flint-chart-mcp@1.0.1` with `flint-chart@1.0.1` | Required | Chart rendering, validated interactive show, and version-matched chart/theme/interaction/board resources. No fallback |
 | `@playwright/mcp@0.0.80` | Recommended | Browser verification. `render-verify` also works with the host's own browser tools |
 | `replicate-mcp@0.9.0` | Add-on | AI image generation. Also needs `REPLICATE_API_TOKEN` and a paid account |
 
-Provisioning installs all three; there is no per-server flag. That is fine for
-disk, and the launcher only starts a server when a skill actually calls it.
+Provisioning selects all MCP servers by default. Use `--server flint` to select
+only Flint and its independently exact-pinned library. The launcher checks both
+metadata versions before invoking Flint; other server pins remain unchanged.
 
 Procedure:
 
@@ -111,6 +112,12 @@ Procedure:
    consent for a separate package-network operation.
 3. On approval, rerun with `--apply`.
 4. Reload the host so its MCP processes restart through the direct launcher.
+
+If registry metadata advertises backend tarballs that npm policy cannot fetch
+directly, do not enable remote fetching or change the registry. With explicit
+approval and npm 12+, `--registry-tarball-prefix <HTTPS-prefix/>` routes matching
+tarball URLs through the configured registry for that command only. Preview the
+exact prefix first; the installer does not invent it or persist npm settings.
 
 The provisioner installs nothing globally and never passes `--registry` or edits
 `.npmrc`. Whatever registry the user has configured is the one it uses.

@@ -377,11 +377,14 @@ describe('Microsoft Scout setup guidance', () => {
     test('names every Flint tool expected after Scout restarts', () => {
         for (const tool of [
             'compile_chart',
-            'create_chart_view',
+            'show',
             'list_chart_types',
             'list_themes',
             'render_chart',
             'validate_chart',
+            'validate_board',
+            'list_interaction_presets',
+            'get_flint_skill',
         ]) {
             assert.match(scoutSetup, new RegExp(`\\b${tool}\\b`), `missing Flint tool ${tool}`);
         }

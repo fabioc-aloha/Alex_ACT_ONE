@@ -1,17 +1,22 @@
 #!/usr/bin/env node
 
 import { spawn } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, realpathSync } from 'node:fs';
 import { homedir } from 'node:os';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
+import { createRequire } from 'node:module';
 
 const runtimeRoot = process.env.ALEX_ACT_ONE_RUNTIME_ROOT
   || join(homedir(), '.copilot', 'plugin-data', 'alex-act-one', 'runtime');
 const routes = {
   flint: {
-    expectedVersion: '0.5.1',
+    expectedVersion: '1.0.1',
     packagePath: join(runtimeRoot, 'node_modules', 'flint-chart-mcp', 'package.json'),
     target: join(runtimeRoot, 'node_modules', 'flint-chart-mcp', 'dist', 'cli.js'),
+    library: {
+      packagePath: join(runtimeRoot, 'node_modules', 'flint-chart', 'package.json'),
+      expectedVersion: '1.0.1',
+    },
   },
   playwright: {
     expectedVersion: '0.0.80',
@@ -54,6 +59,29 @@ if (installedVersion !== expectedVersion) {
   console.error(`MCP runtime version mismatch for ${route}: expected ${expectedVersion}, found ${installedVersion || '(missing)'}.`);
   console.error('Run /alex-act-one setup-dependencies.');
   process.exit(4);
+}
+if (config.library) {
+  const { packagePath: libraryPath, expectedVersion: libraryVersion } = config.library;
+  if (!existsSync(libraryPath)) {
+    console.error(`Required flint-chart library metadata is missing: ${libraryPath}`);
+    process.exit(3);
+  }
+  const searchPaths = createRequire(join(dirname(realpathSync(target)), 'runtime-check.cjs')).resolve.paths('flint-chart');
+  const serverLibrary = searchPaths.map(directory => join(directory, 'flint-chart', 'package.json')).find(existsSync);
+  for (const metadataPath of new Set([libraryPath, serverLibrary || libraryPath])) {
+    let actual;
+    try {
+      actual = JSON.parse(readFileSync(metadataPath, 'utf8')).version;
+    } catch (error) {
+      console.error(`Invalid flint-chart library metadata: ${error.message}`);
+      process.exit(3);
+    }
+    if (actual !== libraryVersion) {
+      console.error(`flint-chart library version mismatch: expected ${libraryVersion}, found ${actual || '(missing)'} at ${metadataPath}.`);
+      console.error('Run /alex-act-one setup-dependencies.');
+      process.exit(4);
+    }
+  }
 }
 
 const child = spawn(process.execPath, [target, ...args], {

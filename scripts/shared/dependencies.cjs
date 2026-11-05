@@ -83,7 +83,8 @@ const MCP_SERVERS = {
     flint: {
         label: 'Flint (charts)',
         package: 'flint-chart-mcp',
-        version: '0.5.1',
+        version: '1.0.1',
+        library: { package: 'flint-chart', version: '1.0.1' },
         tier: 'required',
         unlocks: 'flint-chart and flint-theme. Without it they cannot render anything, and there is no fallback',
     },
@@ -207,4 +208,16 @@ function remedyFor(toolName) {
     ].join('\n');
 }
 
-module.exports = { TOOLS, MCP_SERVERS, PLUGINS, platformKey, remedyFor, specOf, installMap };
+function mcpPackages(routes = Object.keys(MCP_SERVERS)) {
+    return routes.flatMap((route) => {
+        const server = MCP_SERVERS[route];
+        if (!server) throw new Error(`Unknown MCP server: ${route}`);
+        const packages = [{ name: server.package, version: server.version, route }];
+        if (server.library) packages.push({
+            name: server.library.package, version: server.library.version, route: null,
+        });
+        return packages;
+    });
+}
+
+module.exports = { TOOLS, MCP_SERVERS, PLUGINS, mcpPackages, platformKey, remedyFor, specOf, installMap };

@@ -1,6 +1,6 @@
 ---
 name: render-verify
-description: "Verify a rendered visual artifact actually says what it was supposed to say — open it, read its console errors, walk a failure catalog, and check it against the claim it was meant to carry. Works on charts, generated HTML reports, SVG, dashboards, diagrams, and any other output meant to be looked at. Use after render_chart, after a Vega-Lite create_chart_view, after editing a post-Flint Vega-Lite spec, and before committing any generated HTML/SVG/PNG. Satisfied by the host's built-in browser tools or by the optional alex-playwright MCP server."
+description: "Verify a rendered visual artifact actually says what it was supposed to say — open it, read console errors, walk a failure catalog, and check its claim. Works on charts, reports, SVG, dashboards, diagrams, and printable output. Use after render_chart or Flint show, after backend edits, and before committing generated HTML/SVG/PNG. Prefer native browser tools; retain registered fallback for missing scenarios."
 lastReviewed: 2026-08-14
 ---
 
@@ -271,7 +271,7 @@ defect.**
   there is.
 - **Re-read the claim and ask whether the picture shows it.** If the claim is
   about a gap and the eye goes to a trend, the chart type is wrong — go back to
-  `flint-chart` §0.2, do not patch the styling.
+  the owning `flint-chart` selection reference, do not patch the styling.
 
 ### Storytelling read-back
 

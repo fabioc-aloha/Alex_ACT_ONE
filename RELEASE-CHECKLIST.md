@@ -47,6 +47,13 @@ node skills/setup-dependencies/scripts/runtime-launcher.mjs replicate --version
 The reported version must match the pin. Exit 0 alone is not enough: a launcher
 can start cleanly while running something other than the reviewed build.
 
+For Flint, check both the MCP server and its exact `flint-chart` library pin.
+Run `node --test tests/flint-runtime.test.mjs tests/flint-upgrade.test.mjs`
+against the candidate runtime. The compatibility suite exercises the real
+three-backend renderers, version-matched resources, validated `show`, and invalid
+input paths. A direct MCP response is not proof that a host displayed its App UI.
+Keep an older active runtime untouched until its matching plugin is ready.
+
 > Added 2026-09-07. The launcher guarded `@playwright/mcp` at 0.0.78 while the
 > pin and the installed runtime were both 0.0.80, so the server could not start
 > on any host — and `check-dependencies` reported it healthy throughout, because

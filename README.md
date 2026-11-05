@@ -32,7 +32,7 @@ Then, in each app where you want the always-on behavior, run:
 
 One installed copy serves Copilot CLI, VS Code, Microsoft Scout, and the GitHub Copilot app. Full install notes, the from-source option, and the Scout specifics are in [Install](#install).
 
-63 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers. MIT licensed. Version: `v0.7.0`. Existing command names, bootstrap activation, and optional browser fallback remain available.
+63 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers. MIT licensed. Version: `v0.8.0`. Existing command names, bootstrap activation, and optional browser fallback remain available.
 
 Using Muse instead of Copilot? The Muse edition lives at [Alex_ACT_ONE_Muse](https://github.com/fabioc-aloha/Alex_ACT_ONE_Muse)
 
@@ -444,14 +444,17 @@ other servers remain untouched. Fully quit and restart Scout afterwards. A new
 conversation is not enough because tools are discovered during the launch
 handshake.
 
-Confirm that Flint exposes all six expected tools:
+After upgrading to the reviewed Flint 1.0.1 runtime, confirm its expected tools:
 
 - `compile_chart`
-- `create_chart_view`
+- `show`
 - `list_chart_types`
 - `list_themes`
 - `render_chart`
 - `validate_chart`
+- `validate_board`
+- `list_interaction_presets`
+- `get_flint_skill`
 
 `replicate` is skipped unless `REPLICATE_API_TOKEN` is set in the environment.
 That is deliberate: a clear omission now beats an opaque authentication failure
@@ -464,6 +467,19 @@ missing, which looks like a broken package rather than an unregistered one.
 
 Most of this plugin needs nothing but Node. The large majority of its skills run
 with no external tools at all, and nothing below is needed to start.
+
+Flint is reviewed at `flint-chart-mcp@1.0.1` with independently exact-pinned
+`flint-chart@1.0.1`. Upgrade the plugin before the shared runtime: older launchers
+correctly refuse a mismatched version. From the updated installed package,
+preview `skills/setup-dependencies/scripts/provision-runtime.mjs --server flint`,
+then apply the same selection after consent. This changes neither Playwright nor
+Replicate. Reload the host to discover the new validated `show` interface.
+
+If Microsoft proxy metadata points tarballs at a backend feed that npm policy
+blocks directly, do not enable remote fetching or edit npm configuration. With
+explicit approval, npm 12+ can route an exact HTTPS backend prefix through the
+configured proxy using the provisioner's `--registry-tarball-prefix` option.
+Its preview names the prefix, registry, runtime, and selected packages.
 
 | If you want to... | You also need | Get it |
 | --- | --- | --- |

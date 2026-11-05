@@ -26,6 +26,7 @@ export function spawnCommand(command, args, options = {}, {
   locate = spawnSync,
   launch = spawn,
   fileExists = existsSync,
+  prefixProbe = spawnSync,
 } = {}) {
   const resolved = resolveWindowsCommand(command, { platform, locate });
   if (platform === 'win32' && /\.cmd$/i.test(resolved)) {
@@ -37,7 +38,23 @@ export function spawnCommand(command, args, options = {}, {
     if (!entrypoint) {
       throw new Error(`refusing shell execution for unsupported command shim: ${resolved}`);
     }
-    const cli = join(dirname(resolved), 'node_modules', 'npm', 'bin', entrypoint);
+    let cli = join(dirname(resolved), 'node_modules', 'npm', 'bin', entrypoint);
+    const prefixHelper = join(dirname(resolved), 'node_modules', 'npm', 'bin', 'npm-prefix.js');
+    if (fileExists(prefixHelper)) {
+      const prefix = prefixProbe(process.execPath, [prefixHelper], {
+        cwd: options.cwd,
+        env: options.env,
+        encoding: 'utf8',
+        shell: false,
+        windowsHide: true,
+        timeout: 30000,
+      });
+      if (prefix.error || prefix.status !== 0 || !String(prefix.stdout || '').trim()) {
+        throw new Error(`npm prefix discovery failed: ${prefix.error?.message || prefix.stderr || 'empty prefix'}`);
+      }
+      const candidate = join(String(prefix.stdout).trim(), 'node_modules', 'npm', 'bin', entrypoint);
+      if (fileExists(candidate)) cli = candidate;
+    }
     if (!fileExists(cli)) throw new Error(`${command} CLI entry point not found beside shim: ${cli}`);
     return launch(process.execPath, [cli, ...args], { ...options, shell: false });
   }

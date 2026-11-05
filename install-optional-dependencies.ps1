@@ -79,11 +79,11 @@ $readPins = @'
 const deps = require(process.argv[1]);
 const routes = ['flint', 'playwright'];
 if (process.argv[2] === 'true') routes.push('replicate');
-const packages = routes.map(key => ({
-    name: deps.MCP_SERVERS[key].package,
-    version: deps.MCP_SERVERS[key].version,
+const packages = deps.mcpPackages(routes).map(pkg => ({
+    name: pkg.name,
+    version: pkg.version,
     scope: 'private',
-    route: key
+    route: pkg.route
 }));
 for (const key of ['jszip', 'mmdc', 'svgexport']) {
     const tool = deps.TOOLS[key];

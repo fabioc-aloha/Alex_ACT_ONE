@@ -24,13 +24,13 @@ file before reporting a missing capability or recommending installation.
 
 3. **Understand the data.** If the user attached a file, read the first ~20 rows to see column names, types, and cardinality. If not, ask for a sample, file path, or paste. Do not chart blind — the skill's "Sanity-read the values first" rule applies.
 
-4. **Confirm the analytical question** using the skill's §0.1 (one-sentence message). The Brief's Big Idea usually IS the one-sentence message — if not, tighten it now. Do not re-elicit if Step 1 already produced it. If the requested claim conflicts with the data, stop and surface the conflict; do not choose a chart that hides the disagreement.
+4. **Confirm the analytical question** using the Brief and the owning skill's Step 0. Do not re-elicit an existing supported claim. If it conflicts with the data, surface the conflict before choosing a chart.
 
-5. **Pick the creative range.** Use `chart-vocabulary` and the `flint-chart` §0.2 table (question → family → chartType), constrained by the Brief. For an open-ended storytelling request, author two materially different candidates over the **same `data` and `semantic_types`**: one **familiar** treatment and one more **expressive** treatment. Change chart family, arrangement, faceting, direct labels, reference structure, or theme with intent; do not produce palette-only alternatives. If the user chose a treatment explicitly, supplied a fully formed spec, or requested a diagnostic chart, take the fast path and author only that treatment.
+5. **Pick the creative range.** Use `chart-vocabulary` and the owning skill's chart-selection reference, then verify exact names with the backend catalog. For an open-ended storytelling request, author two materially different candidates over the **same `data` and `semantic_types`**: one familiar and one more expressive. Change the analytical presentation, not merely the palette. Preserve the fast path for an explicit treatment, supplied spec, or diagnostic chart.
 
-6. **Author the candidate `ChartAssemblyInput` values** per the skill's Step 1 (chartType), Step 2 (encodings), Step 3 (semantic types). Reference data columns by name. Reuse the semantic truth layer across candidates. For a standalone Vega-Lite chart, set `chart_spec.title` from the Brief's Big Idea and set `chart_spec.subtitle` to the measure, population, period, and units. Omit them only when a surrounding caption already supplies that reading; for ECharts or Chart.js, retain the authored text and make it visible in the surrounding artifact after inspecting the compiled result. Select a preset theme with `list_themes`, or load `flint-theme` when the user needs a custom visual system.
+6. **Author the candidate `ChartAssemblyInput` values** using the loaded version-matched grammar: exact chartType, real field-to-channel mappings, and registered semantic types. Reuse the semantic truth layer across candidates. For a standalone chart, title the supported finding and use the subtitle for population, period, measure, and units; omit them only when the surrounding artifact supplies the same reading. Select a preset with `list_themes` or load `flint-theme` for a custom system.
 
-7. **Render and compare.** For a Vega-Lite candidate, default to `create_chart_view` (interactive SVG panel with customization sidebar) when the host supports MCP App UI. For ECharts or Chart.js, use `render_chart` or `compile_chart`: both Vega-Lite and ECharts can render PNG/SVG, while Chart.js renders PNG only. ThemeSpec realizes only in Vega-Lite. Render both serious candidates when feasible, then compare first focal point, reading order, message hierarchy, context, accessibility, and study cost against the Brief. Use `validate_chart` first if you're unsure a spec is well-formed. Use `compile_chart` when the user wants backend-native JSON.
+7. **Validate, render, and compare.** For interactive Vega-Lite with App UI support, call `validate_chart`, resolve errors/warnings, then `show({ "chart": input })` with the full spec. Flint 1.0.1 keeps no chart state between calls. Use `render_chart` for requested static output or a host without App UI; Vega-Lite/ECharts support PNG/SVG and Chart.js PNG. Use `compile_chart` for backend JSON. ThemeSpec applies to Vega-Lite in this MCP workflow. Compare the rendered candidates' focal point, reading order, hierarchy, accessibility, and study cost against the Brief.
 
 8. **Verify and iterate — look at what you rendered.** Load [render-verify](../render-verify/SKILL.md) using the same resolution rule. Use the host's built-in browser tools if it has them and they can open the artifact; otherwise the optional `alex-playwright` MCP server. Read console errors _before_ judging the picture, then walk the skill's chart and storytelling checks. Repair visible defects and re-render the smallest responsible layer. Check that the selected picture carries the Brief's Big Idea without relying on surrounding prose to explain what the visual failed to show.
 
@@ -39,9 +39,9 @@ file before reporting a missing capability or recommending installation.
 9. **Report** what you chose and why, using the Brief as the spine:
    - The Brief's Big Idea + story arc + style stance
    - Which chart family + chartType you picked
-   - Which alternates from the Brief and from §0.2 you considered
+   - Which alternates from the Brief and chart-selection reference you considered
    - The strongest rejected alternative and the trade-off that made it lose
-   - Any anti-patterns you avoided (per §0.3 or per `chart-big-idea` anti-patterns)
+   - Any analytical or chart-framing anti-patterns you avoided
    - **Whether you verified the render, and how** — or that you could not
 
 If the `flint` MCP server isn't registered, point the user at the plugin README's Install section and stop — do not attempt to render.
@@ -51,8 +51,8 @@ If the `flint` MCP server isn't registered, point the user at the plugin README'
 - **Skipping Step 1 (Chart Brief).** Rendering before framing is the top failure mode. The Brief is 10 lines; the wrong chart costs a re-render plus a user correction.
 - **Not asking the TRADITIONAL vs INNOVATIVE question.** Both are valid; the user is entitled to the choice. Silent defaults produce mismatches when the audience is glance-time and you picked innovative because it was more interesting to render.
 - **Guessing at data shape.** Read the actual rows. Column names lie; sample values don't.
-- **Rendering before framing.** If you can't write the one-sentence message from §0.1 (or the Brief's Big Idea), you don't know what chart to pick yet.
-- **Skipping §0.4 (Flint coverage).** If the Brief or §0.2 recommends a chart Flint can't build (Waffle, Chord, Beeswarm, SPC, AI-powered), substitute per §0.4 before authoring the spec — otherwise the render will fail.
+- **Rendering before framing.** If the Brief does not establish a supported analytical message, do not choose a treatment that implies one.
+- **Skipping backend catalog verification.** A generic chart-family recommendation is not proof of an exact registered chartType. Verify names and use a supported substitute before authoring.
 - **Overloading a single chart.** More than ~5 series on a line, more than ~5 slices on a pie, more than ~4 series on grouped bars → propose Small Multiples (`row`/`column` facet) or split into multiple charts.
 - **Claiming a render is correct without opening it.** "The tool returned success" means bytes were written, not that the picture is true. Step 8 exists because `validate_chart` passing and the chart being right are different facts.
 - **Palette-only creativity.** A new color set is not a materially different treatment. Change the rhetorical or perceptual strategy.
@@ -65,6 +65,6 @@ Revise this prompt if:
 - Users consistently skip Step 1 or find the Chart Brief too heavy (indicates `chart-big-idea` needs its "tighten to 3 fields" fallback triggered).
 - Users consistently skip Steps 2-5 (indicating the numbered flow is too heavy for the common case).
 - Users consistently skip Step 8 (indicating verification belongs inside the render step rather than as its own stage).
-- `create_chart_view` becomes unavailable in the majority of hosts (revise the default in step 7).
-- `create_chart_view`'s interactive panel turns out to make Step 8 redundant for non-edited charts — then narrow Step 8 to post-Flint edits and committed artifacts only.
-- The `flint-chart` skill's §0 section is restructured such that these step references (§0.1, §0.2, §0.4, §0.5) go stale.
+- The runtime's validated `show` contract or App UI support changes.
+- A reproducible case establishes that an interactive panel already performs a specific verification check; remove only that duplicate check, not the semantic/data verification.
+- An owning skill's procedure or reference routes change and this orchestration no longer preserves them.

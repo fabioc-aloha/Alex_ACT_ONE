@@ -11,8 +11,8 @@ const require = createRequire(import.meta.url);
 const deps = require('../scripts/shared/dependencies.cjs');
 const script = fileURLToPath(new URL('../install-optional-dependencies.ps1', import.meta.url));
 const packages = [
-    ...['flint', 'playwright'].map(key => ({
-        name: deps.MCP_SERVERS[key].package, version: deps.MCP_SERVERS[key].version, scope: 'private',
+    ...deps.mcpPackages(['flint', 'playwright']).map(pkg => ({
+        name: pkg.name, version: pkg.version, scope: 'private',
     })),
     ...['jszip', 'mmdc', 'svgexport'].map(key => ({
         name: deps.TOOLS[key].package, version: deps.TOOLS[key].version,
@@ -193,8 +193,8 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
         const { commands, output, runtime } = runInstaller(t, shell, { apply: true });
         const views = commands.filter(command => command[0] === 'view');
         const installs = commands.filter(command => command[0] === 'install');
-        assert.equal(views.length, 5);
-        assert.equal(installs.length, 5);
+        assert.equal(views.length, packages.length);
+        assert.equal(installs.length, packages.length);
         assert.ok(commands.findIndex(command => command[0] === 'install') >
             commands.map(command => command[0]).lastIndexOf('view'));
         for (const pkg of packages) {
@@ -204,7 +204,7 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
             assert.equal(args.includes('--global'), pkg.scope === 'global');
             if (pkg.scope === 'private') assert.equal(args[args.indexOf('--prefix') + 1], runtime);
         }
-        assert.match(output, /Verified all selected pinned dependencies \(5\), MCP launchers \(2\)/);
+        assert.ok(output.includes(`Verified all selected pinned dependencies (${packages.length}), MCP launchers (2)`));
     });
 
     test(`${shell}: unavailable proxy pin prevents all installations`, (t) => {
@@ -247,9 +247,9 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
 
     test(`${shell}: explicit backend prefix is routed only during installs without policy changes`, (t) => {
         const { commands, output } = runInstaller(t, shell, { apply: true, tarballPrefix: feedPrefix });
-        assert.equal(commands.filter(command => command[0] === 'install').length, 5);
+        assert.equal(commands.filter(command => command[0] === 'install').length, packages.length);
         assert.ok(output.includes(`${feedPrefix} -> https://proxy.example.invalid/npm/`));
-        assert.match(output, /Verified all selected pinned dependencies \(5\), MCP launchers \(2\)/);
+        assert.ok(output.includes(`Verified all selected pinned dependencies (${packages.length}), MCP launchers (2)`));
     });
 
     test(`${shell}: explicit routing preview still performs no installs`, (t) => {
@@ -293,8 +293,8 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
 
     test(`${shell}: VerifyOnly checks existing packages and renderers without another install`, (t) => {
         const { commands } = runInstaller(t, shell, { apply: true, verifyAgain: true });
-        assert.equal(commands.filter(command => command[0] === 'install').length, 5);
-        assert.equal(commands.filter(command => command[0] === 'view').length, 5);
+        assert.equal(commands.filter(command => command[0] === 'install').length, packages.length);
+        assert.equal(commands.filter(command => command[0] === 'view').length, packages.length);
         assert.equal(commands.filter(command => command.join(' ') === 'prefix --global').length, 2);
     });
 
@@ -330,14 +330,14 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
         const { commands, output, runtime } = runInstaller(t, shell, {
             apply: true, includeReplicate: true, verifyAgain: true, tarballPrefix: feedPrefix,
         });
-        assert.equal(commands.filter(command => command[0] === 'view').length, 6);
+        assert.equal(commands.filter(command => command[0] === 'view').length, packages.length + 1);
         const installs = commands.filter(command => command[0] === 'install');
-        assert.equal(installs.length, 6);
+        assert.equal(installs.length, packages.length + 1);
         const args = installs.find(command => command.at(-1) === `${replicate.name}@${replicate.version}`);
         assert.ok(args);
         assert.equal(args.includes('--global'), false);
         assert.equal(args[args.indexOf('--prefix') + 1], runtime);
-        assert.match(output, /Verified all selected pinned dependencies \(6\), MCP launchers \(3\)/);
+        assert.ok(output.includes(`Verified all selected pinned dependencies (${packages.length + 1}), MCP launchers (3)`));
     });
 
     test(`${shell}: unavailable Replicate pin prevents all opt-in installations`, (t) => {
