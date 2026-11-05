@@ -2,8 +2,8 @@
 
 Prioritized from the end-to-end source and documentation review on 2026-11-05.
 R1-R4 are now repaired in the source candidate with regression coverage.
-R6 is implemented; R5's source workflow and local gates are implemented pending
-hosted-matrix verification. Remaining items await implementation. Nothing here
+R5 and R6 are complete in source, with hosted-matrix evidence below.
+Remaining items await implementation. Nothing here
 authorizes changing an installation or publishing a release.
 
 ## Review Baseline
@@ -72,21 +72,29 @@ This is source verification, not publication or a new host-activation claim.
 
 ### R5. Automate the supported-environment baseline
 
-**Implemented, hosted verification pending.** The
+**Completed and hosted-verified.** The
 [workflow](.github/workflows/verify.yml) uses push/manual triggers and reviewed
 immutable actions with read-only permissions. Structural jobs target Windows
 2025/Ubuntu 24.04 with Node 24/26; provisioned runtime/converter jobs use Node 26.
 The [gate](scripts/verification-gate.mjs) rejects failed, skipped, todo, cancelled,
 empty, or unreported runs. Provisioning is restricted to disposable CI runners.
 
-Local Windows verification passed both lanes. This is not yet a claim that the
-hosted Linux/Node 24 matrix passed. See the
-[environment contract](docs/testing.md) for prerequisites, platform exclusions,
-canonical demo rebuilds, and evidence limits. The transitive lock/staging
-policy remains R9 rather than an implied guarantee of top-level pins.
+The [passing hosted run](https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/runs/42102913755)
+verified commit `6c90220` on 2026-11-05: Windows and Ubuntu structural jobs on
+Node 24/26, both Node 26 integration jobs, and exact Windows rebuilds of both
+HTML demos. No required lane skipped tests. The local complete suite also
+passed 389 tests with zero failures or skips.
 
-**Remaining acceptance:** the clean hosted matrix passes for the same candidate
-commit, including R1-R4 regressions and provisioned renderer/converter checks.
+The [isolated CI/demo profile](ci/runtime/package-lock.json) freezes the
+integrity-checked dependency graph. Diagnosis demonstrated matching font hashes
+but changed text metrics from a floating canvas version, followed by changed
+indirect-dependency notices. UTC generation, the approved position-only
+serialization policy, and locked build inputs preserve exact artifact checks;
+paths, data, text, and notices are not normalized away. See the
+[environment contract](docs/testing.md) for prerequisites, platform exclusions,
+canonical demo rebuilds, and evidence limits. This proves these release lanes,
+not every skill's live host behavior. Production-runtime staging/rollback
+remains R9.
 
 ### R6. Check executable examples and metadata, not just Markdown links
 
@@ -137,6 +145,9 @@ upgrading a supported-delivery row to freshly verified.
 [Provisioning](skills/setup-dependencies/scripts/provision-runtime.mjs) currently
 installs into shared active state; top-level version pins do not freeze
 transitive dependencies or provide rollback.
+
+The isolated CI/demo build now has a version/integrity lock under R5. That
+protects repeatable runner artifacts, not user-runtime upgrade recovery.
 
 **Acceptance:** decide a reviewed lock/integrity policy for runtime dependencies;
 stage an upgrade, verify versions and launch/render behavior, then switch only
@@ -193,5 +204,5 @@ target-host activation gate passes. Native skill discovery is not that gate.
 An item is complete only when its acceptance gate is demonstrated, related
 documentation matches the behavior, and the result is in the reviewed source.
 Publication and user-level installation require their own approval. R1-R4 are
-implemented in source; R6 is complete, R5 awaits hosted verification, and
-R7-R11 remain open.
+implemented in source; R5 and R6 are complete with the evidence above.
+R7-R11 remain open. No new release, Mall update, or local activation is implied.

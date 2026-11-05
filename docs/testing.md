@@ -117,6 +117,22 @@ and failure output. A valid workflow file or local Windows run is not proof
 that the hosted Windows/Linux matrix passed. Use the same candidate commit's
 green hosted run as release evidence.
 
+### Recorded verification
+
+The [2026-11-05 hosted run](https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/runs/42102913755)
+passed at commit `6c90220`:
+
+| Job | Observed result |
+| --- | --- |
+| Windows 2025 structural, Node 24 and 26 | 371 passed per job; no skips, todos, or cancellations |
+| Ubuntu 24.04 structural, Node 24 and 26 | 322 passed per job; no skips, todos, or cancellations |
+| Windows and Ubuntu integration, Node 26 | 18 passed per job; no skips, todos, or cancellations |
+| Canonical Windows artifacts | Both HTML pages matched byte-for-byte; tracked checkout remained unchanged |
+
+Counts differ by explicitly selected platform cases and shells; do not combine
+matrix totals into an effectiveness claim. This is dated evidence for that
+commit, not an automatic green result for later source changes or a new release.
+
 ## Executable documentation examples
 
 Instruction `role` metadata is generated from canonical instruction
