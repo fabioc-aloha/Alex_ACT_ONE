@@ -5,6 +5,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { test } from 'node:test';
+import { Script } from 'node:vm';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const script = join(ROOT, 'scripts', 'verification-gate.mjs');
@@ -80,12 +81,32 @@ test('workflow uses reviewed immutable actions, read-only permissions, direct-ma
     assert.match(workflow, /contents: read/);
     assert.match(workflow, /windows-2025/);
     assert.match(workflow, /ubuntu-24\.04/);
-    assert.match(workflow, /node: \['24', '26'\]/);
+    assert.match(workflow, /schedule:/);
+    assert.match(workflow, /node:.*github\.event_name == 'push'.*\["24"\].*\["24","26"\]/);
+    const integration = workflow.split('\n  integration:')[1];
+    assert.ok(integration);
+    assert.doesNotMatch(integration, /needs: structural/);
+    assert.match(integration, /cache: npm/);
+    assert.match(integration, /cache-dependency-path: ci\/runtime\/package-lock\.json/);
+    assert.match(workflow, /group:.*github\.event_name/);
     for (const action of workflow.matchAll(/uses: ([^\s]+)@([^\s]+)/g)) assert.match(action[2], /^[a-f0-9]{40}$/);
     assert.match(workflow, /--lane structural/);
     assert.match(workflow, /--lane integration/);
     assert.match(workflow, /RUNNER_TEMP/);
     assert.doesNotMatch(workflow, /registry-url:|allow-remote|pull_request_target/);
+});
+
+test('pushes use both OSes on the minimum Node while manual and scheduled runs retain full release coverage', () => {
+    const workflow = readFileSync(join(ROOT, '.github', 'workflows', 'verify.yml'), 'utf8');
+    const expression = workflow.match(/^\s+node: \$\{\{ (.+) \}\}$/m)?.[1];
+    assert.ok(expression, 'Missing explicit event-based compatibility matrix');
+    for (const [event, expected] of [
+        ['push', ['24']], ['workflow_dispatch', ['24', '26']], ['schedule', ['24', '26']],
+    ]) {
+        const nodes = new Script(expression).runInNewContext({ github: { event_name: event }, fromJSON: JSON.parse });
+        assert.deepEqual([...nodes], expected, event);
+    }
+    assert.match(workflow, /cancel-in-progress: \$\{\{ github.event_name == 'push' \}\}/);
 });
 test('Word optional-module loading honors an explicitly provisioned CI runtime', async t => {
     const root = mkdtempSync(join(tmpdir(), 'one-ci-jszip-'));

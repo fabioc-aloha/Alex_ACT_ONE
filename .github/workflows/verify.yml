@@ -4,13 +4,15 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * 1'
 
 permissions:
   contents: read
 
 concurrency:
-  group: verify-${{ github.ref }}
-  cancel-in-progress: true
+  group: verify-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'push' }}
 
 jobs:
   structural:
@@ -21,7 +23,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-2025, ubuntu-24.04]
-        node: ['24', '26']
+        node: ${{ fromJSON(github.event_name == 'push' && '["24"]' || '["24","26"]') }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -39,7 +41,6 @@ jobs:
 
   integration:
     name: Provisioned runtime / ${{ matrix.os }} / Node 26
-    needs: structural
     runs-on: ${{ matrix.os }}
     timeout-minutes: 20
     strategy:
@@ -57,6 +58,8 @@ jobs:
         with:
           node-version: '26'
           package-manager-cache: false
+          cache: npm
+          cache-dependency-path: ci/runtime/package-lock.json
       - uses: r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
         with:
           pandoc-version: '3.13'

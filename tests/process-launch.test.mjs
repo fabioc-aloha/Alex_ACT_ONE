@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import { join, resolve } from 'node:path';
 import { test } from 'node:test';
-import { spawnCommand } from '../scripts/process-launch.mjs';
+import { existsSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { spawnCommand, resolveWindowsCommand } from '../scripts/process-launch.mjs';
 
 function probe({ prefixExists = true, status = 0 } = {}) {
     const shim = join('shim', 'npm.cmd');
@@ -69,4 +71,73 @@ test('Windows Copilot npm shims resolve the reviewed package identity without a 
     assert.throws(() => spawnCommand('copilot', [], {}, {
         ...dependencies, readMetadata: () => ({ name: 'other-package', bin: 'npm-loader.js' }),
     }), /identity mismatch/);
+});
+
+test('Windows discovery has a bounded cold-start budget and identifies the failing command', () => {
+    let observed;
+    assert.throws(() => resolveWindowsCommand('pandoc', {
+        platform: 'win32',
+        locate: (command, args, options) => {
+            observed = { command, args, options };
+            return { error: Object.assign(new Error('spawnSync where.exe ETIMEDOUT'), { code: 'ETIMEDOUT' }) };
+        },
+    }), /pandoc.*30000.*ETIMEDOUT/);
+    assert.equal(observed.options.timeout, 30000);
+    assert.equal(observed.options.shell, false);
+});
+
+test('Windows discovery caches successful paths only within the same environment and directory', () => {
+    let lookups = 0;
+    const locate = () => { lookups++; return { status: 0, stdout: process.execPath + '\n' }; };
+    const options = { platform: 'win32', locate, cwd: 'first', env: { Path: 'tools-a', PATHEXT: '.EXE;.CMD' } };
+    assert.equal(resolveWindowsCommand('fixture', options), process.execPath);
+    assert.equal(resolveWindowsCommand('fixture', options), process.execPath);
+    assert.equal(lookups, 1);
+    resolveWindowsCommand('fixture', { ...options, env: { PATH: 'tools-b', PATHEXT: '.EXE;.CMD' } });
+    resolveWindowsCommand('fixture', { ...options, cwd: 'second' });
+    resolveWindowsCommand('fixture', { ...options, env: { Path: 'tools-a', PATHEXT: '.CMD;.EXE' } });
+    assert.equal(lookups, 4, 'PATH, working directory, and PATHEXT changes require fresh discovery');
+});
+
+test('failed Windows discovery is never cached or retried implicitly', () => {
+    let lookups = 0;
+    const options = { platform: 'win32', locate: () => { lookups++; return { status: 1, stdout: '' }; } };
+    assert.equal(resolveWindowsCommand('missing', options), 'missing');
+    assert.equal(resolveWindowsCommand('missing', options), 'missing');
+    assert.equal(lookups, 2);
+});
+
+test('Windows discovery invalidates removed cached files and never caches lookup exceptions', t => {
+    const root = mkdtempSync(join(tmpdir(), 'one-discovery-'));
+    t.after(() => rmSync(root, { recursive: true, force: true }));
+    const executable = join(root, 'fixture.exe');
+    writeFileSync(executable, 'fixture');
+    let lookups = 0;
+    const options = { platform: 'win32', locate: () => {
+        lookups++;
+        if (lookups === 3) return { error: new Error('fixture lookup failure') };
+        return { status: 0, stdout: (existsSync(executable) ? executable : process.execPath) + '\n' };
+    } };
+    assert.equal(resolveWindowsCommand('fixture', options), executable);
+    rmSync(executable);
+    assert.equal(resolveWindowsCommand('fixture', options), process.execPath);
+    const changed = { ...options, cwd: root };
+    assert.throws(() => resolveWindowsCommand('fixture', changed), /fixture lookup failure/);
+    assert.equal(resolveWindowsCommand('fixture', changed), process.execPath);
+    assert.equal(lookups, 4);
+});
+
+test('Windows command discovery receives the same environment and cwd as the launched tool', () => {
+    let lookup;
+    const options = { cwd: 'selected-directory', env: { PATH: 'selected-tools', PATHEXT: '.CMD;.EXE' } };
+    spawnCommand('pandoc', ['--version'], options, {
+        platform: 'win32',
+        locate: (command, args, received) => {
+            lookup = received;
+            return { status: 0, stdout: process.execPath + '\n' };
+        },
+        launch: () => {},
+    });
+    assert.deepEqual(lookup.env, options.env);
+    assert.equal(lookup.cwd, options.cwd);
 });

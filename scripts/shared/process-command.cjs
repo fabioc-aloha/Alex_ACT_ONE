@@ -5,17 +5,34 @@ const { existsSync, readFileSync } = require('node:fs');
 const { basename, dirname, isAbsolute, join, relative, resolve, sep } = require('node:path');
 const { TOOLS } = require('./dependencies.cjs');
 
-function resolveWindowsCommand(command, { platform = process.platform, locate = spawnSync } = {}) {
+const commandCaches = new WeakMap();
+const LOOKUP_TIMEOUT_MS = 30000;
+
+function resolveWindowsCommand(command, {
+    platform = process.platform, locate = spawnSync, cwd = process.cwd(), env = process.env,
+} = {}) {
     if (platform !== 'win32' || isAbsolute(command)) return command;
+    const environment = Object.fromEntries(Object.entries(env).map(([key, value]) => [key.toUpperCase(), value]));
+    const key = JSON.stringify([command, resolve(cwd), environment.PATH, environment.PATHEXT]);
+    let cache = commandCaches.get(locate);
+    if (!cache) { cache = new Map(); commandCaches.set(locate, cache); }
+    const cached = cache.get(key);
+    if (cached && existsSync(cached)) return cached;
+    cache.delete(key);
     const result = locate('where.exe', [command], {
-        encoding: 'utf8', shell: false, windowsHide: true, timeout: 5000,
+        cwd, env, encoding: 'utf8', shell: false, windowsHide: true, timeout: LOOKUP_TIMEOUT_MS,
     });
-    if (result.error) throw new Error(`Command lookup failed: ${result.error.message}`);
+    if (result.error) {
+        throw new Error(`Command lookup failed for ${command} (budget ${LOOKUP_TIMEOUT_MS} ms): ${result.error.message}`,
+            { cause: result.error });
+    }
     if (result.status !== 0) return command;
     const candidates = String(result.stdout || '').split(/\r?\n/).map(line => line.trim()).filter(Boolean);
-    return candidates.find(file => /\.cmd$/i.test(file)) ||
+    const selected = candidates.find(file => /\.cmd$/i.test(file)) ||
         candidates.find(file => /\.exe$/i.test(file)) ||
-        candidates.find(file => /\.bat$/i.test(file)) || candidates[0] || command;
+        candidates.find(file => /\.bat$/i.test(file)) || candidates[0];
+    if (selected) cache.set(key, selected);
+    return selected || command;
 }
 
 function resolveInvocation(command, args, options = {}, {
@@ -25,7 +42,7 @@ function resolveInvocation(command, args, options = {}, {
     prefixProbe = spawnSync,
     readMetadata = file => JSON.parse(readFileSync(file, 'utf8')),
 } = {}) {
-    const resolved = resolveWindowsCommand(command, { platform, locate });
+    const resolved = resolveWindowsCommand(command, { platform, locate, cwd: options.cwd, env: options.env });
     if (platform !== 'win32' || !/\.(?:cmd|bat|ps1)$/i.test(resolved)) {
         return { command: resolved, args };
     }

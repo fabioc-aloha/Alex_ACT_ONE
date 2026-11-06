@@ -7,7 +7,9 @@ The dated baseline runs below do not substitute for same-commit release evidence
 Live-host and browser observations retain their separately documented limits.
 
 The source workflow targets Windows Server 2025 and Ubuntu 24.04 on x64.
-Structural jobs use Node 24 and 26; provisioned integration jobs use Node 26.
+Ordinary pushes run structural jobs on Node 24 and provisioned integration jobs
+on Node 26, on both OSes. Manual dispatch and the weekly scheduled run add
+Node 26 structural jobs for the full release matrix.
 These are verification targets, not certification of every Copilot host or OS.
 macOS and other Node versions are not covered by this workflow.
 
@@ -101,16 +103,44 @@ paid API authentication.
 ## Hosted workflow
 
 [Verify source candidate](../.github/workflows/verify.yml) runs on pushes to
-`main` and manual dispatch, not pull requests. The integration jobs wait for the
-structural matrix. Actions are pinned to reviewed immutable commits, checkout
+`main`, manual dispatch, and a weekly schedule, not pull requests. Structural
+and integration jobs run independently in parallel; every required job must
+pass. Ordinary pushes use the minimum supported Node for structural coverage
+on both OSes. Manual and scheduled runs cover both Node 24 and 26.
+
+Before publication, explicitly dispatch the full workflow on the candidate
+branch and verify its `headSha` is the frozen candidate commit:
+
+```powershell
+gh workflow run verify.yml --ref main
+```
+
+A green push run alone is not full release evidence. Use the full manual
+matrix for runtime/dependency changes too; the weekly run is compatibility
+monitoring, not evidence for a different candidate. Event-specific concurrency
+groups keep an ordinary push from cancelling a full manual run. Only older
+push runs are automatically cancelled by a newer run in the same group.
+
+Actions are pinned to reviewed immutable commits, checkout
 does not persist credentials, and token permissions are read-only.
 
 Only disposable integration runners install packages. MCP, JSZip, and Mermaid
 direct versions agree with the [shared dependency registry](../scripts/shared/dependencies.cjs).
+The pinned Node setup action caches npm's download cache using the isolated
+runtime lockfile. Installed `node_modules` directories are not cached:
+`npm ci --ignore-scripts` still creates and integrity-checks each fresh runtime.
 The workflow uses the runner's configured npm registry without a registry URL
 override, suppresses lifecycle scripts for these installs, and does not request
 API credentials or browser downloads. Pandoc 3.13 is installed by the pinned
 Pandoc setup action.
+
+Windows shell-free tool resolution uses a bounded 30-second discovery budget,
+with the command and error in failures, instead of the earlier five-second
+cold-start limit. Successful existing paths are cached only inside the current
+process and discovery environment (PATH, PATHEXT, and working directory);
+removed paths and environment changes trigger new lookup. Discovery uses the
+same environment/directory as the tool. Missing tools and failed lookups are
+not cached as successes, and neither tests nor jobs are automatically retried.
 
 Update the isolated lock deliberately when changing its dependency graph, then
 review package versions, integrity, configured-registry portability, upstream

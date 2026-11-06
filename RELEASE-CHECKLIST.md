@@ -12,6 +12,12 @@ Use the [verification environments and release gates](docs/testing.md). The
 [source workflow](.github/workflows/verify.yml) targets Windows/Ubuntu with
 Node 24/26 structural jobs and Node 26 provisioned jobs. Record the actual
 environment and require every job for the same candidate commit to pass.
+Use **manual dispatch** for that full matrix; ordinary push runs intentionally
+cover only Node 24 structural plus Node 26 integration on both OSes. Dispatch
+the candidate branch with `gh workflow run verify.yml --ref main` and confirm
+the run's `headSha` matches the reviewed candidate before accepting its results.
+Structural and provisioned jobs run in parallel; neither substitutes for the
+other. A green reduced push run does not satisfy this release gate.
 
 ```text
 git clone --depth 1 https://github.com/fabioc-aloha/Alex_ACT_ONE.git <tmp>
