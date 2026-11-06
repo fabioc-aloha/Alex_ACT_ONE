@@ -1,7 +1,7 @@
 ---
 name: "md-to-eml"
 description: Convert Markdown to RFC 5322 email (.eml) with inline CSS and CID images. Use when the user asks to convert to email, make an eml, or export markdown as an .eml file.
-lastReviewed: 2026-07-28
+lastReviewed: 2026-11-06
 ---
 
 
@@ -56,6 +56,13 @@ Convert Markdown documents with YAML frontmatter into RFC 5322-compliant `.eml` 
 | CID images | Local images embedded as base64 multipart MIME attachments |
 | Emoji preservation | Subject and body emoji render correctly across clients |
 | Test mode | `--test` flag overrides recipients for safe preview |
+
+Header values and `--test-to` reject control characters before conversion or
+test-recipient overrides. Source and rendered HTML use the same executable-HTML
+screening as the HTML converter; scripts, event handlers, and executable URLs
+stop conversion without replacing an existing email. Literal HTML inside code
+remains escaped. This screening is not a substitute for sanitizing untrusted
+input, and conversion does not send email or prove mail-client behavior.
 
 ---
 
@@ -193,7 +200,7 @@ For high-fidelity diagrams, pre-render to PNG and include as images.
 
 - Node.js 24+
 - pandoc (for Markdown to HTML conversion)
-- Shared runtime: `scripts/shared/tool-runner.cjs`, `dependencies.cjs`, `markdown-preprocessor.cjs`, and `mermaid-pipeline.cjs`
+- Shared runtime: keep the complete `scripts/shared/` directory at the same relative location, including the image-path and HTML-screening helpers and their transitive imports.
 
 ---
 

@@ -51,8 +51,12 @@ function runReleaseForShell(t, shell, options = {}) {
             return [file.slice(unselectedHome.length), readFileSync(file, 'base64')];
         }).sort(([a], [b]) => a.localeCompare(b));
     const unselectedBefore = snapshotUnselected();
-    mkdirSync(installedRoot, { recursive: true });
-    writeFileSync(join(installedRoot, 'plugin.json'), JSON.stringify({ name: 'alex-act-one', version: '0.3.0' }));
+    const initialVersion = options.oldVersion ? '0.3.0' : VERSION;
+    if (!options.firstInstall) {
+        mkdirSync(join(installedRoot, 'skills', 'bootstrap-core', 'scripts'), { recursive: true });
+        writeFileSync(join(installedRoot, 'plugin.json'), JSON.stringify({ name: 'alex-act-one', version: initialVersion }));
+        writeFileSync(join(installedRoot, 'skills', 'bootstrap-core', 'scripts', 'bootstrap-core.cjs'), '// mocked bootstrap');
+    }
     if (options.realBootstrap) {
         const copy = relative => {
             const destination = join(installedRoot, relative);
@@ -74,9 +78,10 @@ function runReleaseForShell(t, shell, options = {}) {
         writeFileSync(join(copilotHome, 'instructions', 'alex-act-act-pass.instructions.md'), '# Keep fixture authority\n');
     }
     const otherPlugins = options.otherPlugins || [];
-    writeFileSync(statePath, JSON.stringify([...otherPlugins, {
-        name: 'alex-act-one', marketplace: 'alex-mall', version: '0.3.0', enabled: true, source: 'installed',
-    }]));
+    mkdirSync(copilotHome, { recursive: true });
+    writeFileSync(statePath, JSON.stringify([...otherPlugins, ...(options.firstInstall ? [] : [{
+        name: 'alex-act-one', marketplace: 'alex-mall', version: initialVersion, enabled: true, source: 'installed',
+    }])]));
     writeFileSync(marketplaceStatePath, JSON.stringify(options.marketplaces || []));
     writePowerShell(copilot, `
 param([Parameter(ValueFromRemainingArguments = $true)][string[]]$Arguments)
@@ -90,7 +95,7 @@ $marketplaces = @((Get-Content -LiteralPath $marketplaceStatePath -Raw | Convert
 $command = $Arguments -join ' '
 Add-Content -LiteralPath $env:FAKE_COMMAND_LOG -Value $command
 if ($command -eq 'plugin list --json') {
-  $state | ConvertTo-Json -Compress
+  ConvertTo-Json -InputObject @($state) -Compress
   exit 0
 }
 if ($command -eq 'plugin marketplace list --json') {
@@ -117,6 +122,7 @@ if ($command -eq 'plugin uninstall alex-act-one@alex-mall') {
   exit 0
 }
 if ($command -eq 'plugin install alex-act-one@alex-mall') {
+  if ($env:FAKE_INSTALL_FAILURE -eq '1') { Write-Output 'fixture install failure'; exit 23 }
   New-Item -ItemType Directory -Force -Path $installedRoot | Out-Null
     @{ name = 'alex-act-one'; version = '${VERSION}' } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $installedRoot 'plugin.json')
   New-Item -ItemType Directory -Force -Path (Join-Path $installedRoot 'skills/bootstrap-core/scripts') | Out-Null
@@ -184,6 +190,7 @@ try {
             FAKE_ADD_FAILURE: options.addFailure || '',
             FAKE_ADD_NOOP: options.addNoop || '',
             FAKE_ADD_WRONG_SOURCE: options.addWrongSource || '',
+            FAKE_INSTALL_FAILURE: options.installFailure ? '1' : '',
         },
     });
     const result = invoke();
@@ -198,14 +205,21 @@ try {
         assert.notEqual(result.status, 0, result.stdout + result.stderr);
         assert.match(result.stdout + result.stderr, options.error);
         const commands = readFileSync(commandLog, 'utf8');
+        assert.doesNotMatch(commands, /plugin uninstall /);
         if (options.bootstrapConflict) {
-            assert.match(commands, /plugin install /);
+            assert.doesNotMatch(commands, /plugin install /);
             assert.equal(readFileSync(join(copilotHome, 'instructions', 'alex-act-act-pass.instructions.md'), 'utf8'),
                 '# Keep fixture authority\n');
             assert.equal(existsSync(join(copilotHome, 'instructions', '.alex-act-one-bootstrap.json')), false);
+        } else if (options.installFailure) {
+            assert.match(commands, /plugin install alex-act-one@alex-mall/);
+            assert.equal(existsSync(bootstrapLog), false);
         } else {
             assert.doesNotMatch(commands, /plugin (uninstall|install) /);
             assert.equal(existsSync(bootstrapLog), false);
+        }
+        if (options.oldVersion) {
+            assert.equal(JSON.parse(readFileSync(join(installedRoot, 'plugin.json'), 'utf8')).version, '0.3.0');
         }
         return;
     }
@@ -245,6 +259,8 @@ try {
     }
     assert.ok(commands.filter((command) => command.startsWith('plugin install '))
         .every((command) => command === 'plugin install alex-act-one@alex-mall'));
+    assert.equal(commands.filter((command) => command.startsWith('plugin install ')).length, options.firstInstall ? 1 : 0);
+    assert.ok(commands.every(command => !command.startsWith('plugin uninstall ')));
     assert.ok(bootstrapArgs.includes('--apply'));
     assert.ok(bootstrapArgs.some((argument) => argument.endsWith('bootstrap-core.cjs')));
     assert.equal(existsSync(join(copilotHome, 'session-state')), false);
@@ -254,8 +270,28 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
     const runRelease = (t, options) => runReleaseForShell(t, shell, options);
     const testRelease = (name, fn) => test(`${shell}: ${name}`, fn);
 
-    testRelease('registers all missing public marketplaces, reinstalls ONE and applies bootstrap migration', (t) => {
-        runRelease(t, { repeat: true });
+    testRelease('registers missing marketplaces, installs ONE only when absent, then verifies without reinstalling', (t) => {
+        runRelease(t, { firstInstall: true, repeat: true });
+    });
+
+    testRelease('preserves an older installed release and refuses automatic replacement before marketplace writes', (t) => {
+        runRelease(t, { oldVersion: true, error: /existing.*preserv|automatic.*replacement|upgrade/i });
+    });
+
+    testRelease('rejects same-name installations from another source before making changes', (t) => {
+        runRelease(t, { firstInstall: true, otherPlugins: [{
+            name: 'alex-act-one', version: VERSION, enabled: true, source: 'installed',
+        }], error: /different source|cross-source/i });
+    });
+
+    testRelease('rejects a matching release accompanied by a same-name installation elsewhere', (t) => {
+        runRelease(t, { otherPlugins: [{
+            name: 'alex-act-one', marketplace: 'direct', version: VERSION, enabled: true, source: 'installed',
+        }], error: /Multiple installed entries/ });
+    });
+
+    testRelease('a failed first install never uninstalls anything or runs activation', (t) => {
+        runRelease(t, { firstInstall: true, installFailure: true, error: /fixture install failure|Command failed/ });
     });
 
     testRelease('scopes every CLI operation and real bootstrap to the explicit home, restoring inherited home', (t) => {

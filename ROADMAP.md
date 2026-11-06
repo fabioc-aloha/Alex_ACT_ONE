@@ -74,6 +74,9 @@ needs its own evidence; an earlier candidate's green CI is not transferable.
 - If publication is requested, choose a new version, review source-versus-release
   notices, publish an immutable release, and update the optional Mall route.
   Do not move existing published tags.
+- Before enabling automatic plugin replacement, design and test staged delivery
+  and rollback without overwriting unrelated profile state. The source helper
+  currently verifies matching installations and refuses automatic upgrades.
 
 **Done when:** the selected delivery operation is verified end to end.
 A source push, tagged release, Mall update, plugin installation, profile

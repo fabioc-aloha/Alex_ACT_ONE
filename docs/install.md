@@ -69,7 +69,7 @@ silently replace them. Follow the [first-session verification](getting-started.m
 and then the [scenario run guide](verification/README.md).
 
 Do not run `reinstall-and-check.ps1` for this repository-candidate switch: that
-helper reinstalls from Mall and applies instructions. No new release, Mall
+helper uses Mall and applies instructions; it does not switch installation sources. No new release, Mall
 publication, profile activation, or runtime installation is implied here.
 
 ## Where Alex ACT ONE Works
@@ -381,13 +381,23 @@ Close hosts that may lock the installed plugin before running
 .\reinstall-and-check.ps1
 ```
 
-This is not a preview. It registers missing public marketplaces (`alex-mall`,
+The current checkout's helper is not a preview. It first rejects duplicate or
+cross-source ONE installations. An older, disabled, or otherwise mismatched
+existing release is preserved and blocks automatic replacement. A matching
+release is verified in place; only an absent package is installed. Explicit
+upgrades require a separately reviewed delivery operation until staged
+replacement and rollback are available. These safety changes are unreleased
+source behavior, not a claim about the existing Mall release.
+
+The helper registers missing public marketplaces (`alex-mall`,
 `awesome-copilot`, `copilot-plugins`, `azure-skills`, and `fabric-collection`),
-rejects conflicting sources, and reinstalls ONE from the Mall's release tag,
+rejects conflicting sources, and uses the Mall's release tag for a first install,
 not the working checkout. It verifies the installed version and applies the
-canonical instructions to the default Copilot profile, checking their
+canonical instructions to the selected Copilot profile, checking their
 bootstrap receipt afterward. It does not install optional plugins or prove
-that a host has observed activation after restart.
+that a host has observed activation after restart. `-CopilotHome` selects that
+profile explicitly; otherwise `COPILOT_HOME` is used when set, then
+`~/.copilot`. It never uninstalls an existing package.
 
 #### Install or check optional dependencies
 

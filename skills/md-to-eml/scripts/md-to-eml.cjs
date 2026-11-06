@@ -57,6 +57,7 @@ const path = require('path');
 const os = require('os');
 const { runTool } = require(path.join(__dirname, '..', '..', '..', 'scripts', 'shared', 'tool-runner.cjs'));
 const { resolveLocalImagePath } = require(path.join(__dirname, '..', '..', '..', 'scripts', 'shared', 'local-image-path.cjs'));
+const { screenExecutableHtml } = require(path.join(__dirname, '..', '..', '..', 'scripts', 'shared', 'html-screening.cjs'));
 
 // Try to load shared modules
 let sharedPreprocessor, sharedMermaid;
@@ -99,13 +100,20 @@ const EMAIL_STYLES = {
 // ---------------------------------------------------------------------------
 // YAML Frontmatter Parser (lightweight, no external deps)
 // ---------------------------------------------------------------------------
+function validateHeaderValue(value) {
+  if (/[\u0000-\u001f\u007f-\u009f]/.test(value)) {
+    throw new Error('Email header contains forbidden control characters');
+  }
+}
+
 function parseFrontmatter(content) {
   const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
   if (!match) return { headers: {}, body: content };
 
   const yaml = match[1];
   const headers = {};
-  for (const line of yaml.split('\n')) {
+  for (const line of yaml.split(/\r?\n/)) {
+    validateHeaderValue(line);
     const colonIdx = line.indexOf(':');
     if (colonIdx > 0) {
       const key = line.slice(0, colonIdx).trim().toLowerCase();
@@ -124,6 +132,7 @@ function parseFrontmatter(content) {
 // Markdown -> Email-safe HTML
 // ---------------------------------------------------------------------------
 function markdownToEmailHtml(markdown, options = {}) {
+  screenExecutableHtml(markdown);
   // Preprocess markdown using shared module if available
   if (sharedPreprocessor) {
     markdown = sharedPreprocessor.preprocessMarkdown(markdown, { format: 'email', stripFrontmatter: false });
@@ -156,6 +165,7 @@ function markdownToEmailHtml(markdown, options = {}) {
 
     // Apply inline CSS to all elements (email clients strip <style> blocks)
     html = applyInlineStyles(html);
+    screenExecutableHtml(html, false);
 
     if (options.debug) {
       const debugPath = path.join(path.dirname(options.source || '.'), '_debug_email.html');
@@ -266,6 +276,7 @@ function embedImagesAsCid(html, sourceDir) {
 // RFC 5322 .eml Generation
 // ---------------------------------------------------------------------------
 function generateEml(headers, htmlBody, attachments = []) {
+  for (const value of Object.values(headers)) validateHeaderValue(value);
   const boundary = `----=_Part_${Date.now()}_${Math.random().toString(36).slice(2)}`;
   const date = new Date().toUTCString();
   const messageId = `<${Date.now()}.${Math.random().toString(36).slice(2)}@md-to-eml>`;
@@ -385,6 +396,7 @@ function parseArgs(argv) {
 // ---------------------------------------------------------------------------
 async function main() {
   const args = parseArgs(process.argv);
+  if (args.testTo !== null) validateHeaderValue(args.testTo);
 
   const sourcePath = path.resolve(args.source);
   if (!fs.existsSync(sourcePath)) {

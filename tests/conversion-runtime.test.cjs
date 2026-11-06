@@ -396,3 +396,24 @@ for (const source of ['sequenceDiagram\nAlice->>Bob: Hello\nBob-->>Alice: Reply'
         assert.doesNotMatch(fallback, /^(\*\[Diagram\]\*)$/);
     });
 }
+
+for (const skill of ['md-to-html', 'md-to-eml']) {
+    test(`real ${skill} preserves indented and blockquote-fenced HTML examples`, {
+        skip: pandoc ? false : 'Pandoc unavailable: literal HTML examples not exercised',
+    }, t => {
+        const directory = conversionFixture(t);
+        const source = path.join(directory, 'source.md');
+        const output = path.join(directory, skill === 'md-to-html' ? 'output.html' : 'output.eml');
+        fs.writeFileSync(source, '---\nfrom: sender@example.invalid\nto: recipient@example.invalid\nsubject: Examples\n---\n\n' +
+            '    <script>/* indented literal */</script>\n\n> ~~~html\n> <script>/* quoted literal */</script>\n> ~~~\n');
+        const result = convert(skill, directory, source, output);
+        assert.equal(result.status, 0, result.stderr + result.stdout);
+        const rendered = fs.readFileSync(output, 'utf8');
+        const html = skill === 'md-to-html' ? rendered
+            : Buffer.from(rendered.split('\r\n\r\n')[1].replace(/\s/g, ''), 'base64').toString('utf8');
+        assert.ok(html.includes('indented literal'));
+        assert.ok(html.includes('quoted literal'));
+        assert.match(html, /&lt;script&gt;/);
+        assert.doesNotMatch(html, /<script\b/);
+    });
+}

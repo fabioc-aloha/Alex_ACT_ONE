@@ -70,6 +70,8 @@ for (const markdown of [
     '<a href="data:text/html;base64,xxx">link</a>',
     '<img title="`" onerror="`">',
     '`literal`\n\n<img\nonload=active()>',
+    '> ~~~html\n> literal\n> ~~~\n\n<script>/* active */</script>',
+    '    literal code\n\n<script>/* active */</script>',
 ]) {
     test(`HTML screening still rejects active HTML: ${markdown}`, t => {
         const directory = fs.mkdtempSync(path.join(ROOT, '.html-screening-test-'));

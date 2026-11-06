@@ -1,7 +1,7 @@
 ---
 name: "docx-to-md"
 description: "Convert Word documents (.docx) to clean Markdown with image extraction and pandoc cleanup. Use when the user asks to convert a Word doc, convert docx to md, or import a .docx into markdown."
-lastReviewed: 2026-07-28
+lastReviewed: 2026-11-06
 ---
 
 
@@ -59,6 +59,13 @@ Convert .docx files into clean, linted Markdown with extracted images, normalize
 Image extraction leaves literal image syntax in inline, fenced, and indented
 code unchanged. Real media references are still copied and verified, including
 images nested in lists.
+
+The converter stages Markdown and extracted images together before publishing
+them. A conversion failure leaves the prior document and media unchanged;
+handled publication failures roll back files already replaced. If rollback
+itself fails, the error names retained recovery copies. This is not a
+power-loss or process-crash transaction guarantee. Windows UNC/network and
+device image paths are rejected before filesystem access.
 
 ---
 

@@ -285,7 +285,13 @@ release checkout:
 .\reinstall-and-check.ps1
 ```
 
-Before reinstalling, the script checks ONE's public marketplace routes:
+The current source helper verifies a matching existing release in place and
+installs only when absent. It refuses older, disabled, duplicate, or cross-source
+installations before changing package state; it never uninstalls a package.
+Use a separately reviewed upgrade operation instead of automatic replacement
+until staged plugin delivery and rollback are implemented.
+
+The script checks ONE's public marketplace routes:
 `alex-mall`, `awesome-copilot`, `copilot-plugins`, `azure-skills`, and
 `fabric-collection`. It registers missing entries at user scope using the
 expected GitHub sources, preserves existing matching/default registrations,
@@ -295,10 +301,11 @@ not install optional plugins or alter private/local marketplaces.
 The release-script regression tests exercise both PowerShell 7 and Windows
 PowerShell 5.1 on Windows, including inventories with unrelated entries.
 
-The script then reinstalls `alex-act-one@alex-mall`, verifies the plugin inventory
+The script installs `alex-act-one@alex-mall` only if absent, verifies the plugin inventory
 and installed manifest, applies the canonical instructions, and checks the
-receipt's ownership, version, and instruction entries. It proves installed
-bytes and receipt state, not that a host observed activation after restart.
+receipt's ownership, version, and instruction entries in the selected
+`-CopilotHome` / `COPILOT_HOME` / default home. It verifies manifest and instruction
+receipt state, not whole-package source parity or host activation after restart.
 
 Optional npm dependencies have a separate, preview-first installer:
 

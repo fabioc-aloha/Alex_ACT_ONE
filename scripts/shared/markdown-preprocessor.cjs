@@ -411,7 +411,7 @@ function transformOutsideInlineCode(content, transform) {
   return output + transform(content.slice(cursor));
 }
 
-function transformOutsideMarkdownCode(content, transform) {
+function transformOutsideMarkdownCode(content, transform, { inlineCode = true } = {}) {
   const indentation = text => {
     let columns = 0;
     for (const character of text) columns += character === '\t' ? 4 - columns % 4 : 1;
@@ -419,55 +419,82 @@ function transformOutsideMarkdownCode(content, transform) {
   };
   let listIndents = [];
   let quoteDepth = 0;
-  return transformOutsideCodeFences(content, prose => {
-    const output = [];
-    let plain = [];
-    let paragraph = false;
-    let indentedCode = false;
-    const flush = () => {
-      if (plain.length) output.push(transformOutsideInlineCode(plain.join(''), transform));
-      plain = [];
-    };
-    for (const original of prose.split(/(?<=\n)/)) {
-      let line = original;
-      let depth = 0;
-      let quote;
-      while ((quote = line.match(/^ {0,3}>[ \t]?/))) {
-        line = line.slice(quote[0].length);
-        depth++;
-      }
-      if (depth !== quoteDepth) {
-        listIndents = [];
-        paragraph = false;
-        indentedCode = false;
-        quoteDepth = depth;
-      }
-      if (!line.trim()) {
-        if (indentedCode) output.push(original);
-        else plain.push(original);
-        paragraph = false;
-        continue;
-      }
+  let fence = null;
+  const output = [];
+  let plain = [];
+  let paragraph = false;
+  let indentedCode = false;
+  const flush = () => {
+    if (plain.length) {
+      const prose = plain.join('');
+      output.push(inlineCode ? transformOutsideInlineCode(prose, transform) : transform(prose));
+    }
+    plain = [];
+  };
+  for (const original of content.split(/(?<=\n)/)) {
+    let line = original;
+    let depth = 0;
+    let quote;
+    while ((!fence || depth < quoteDepth) && (quote = line.match(/^ {0,3}>[ \t]?/))) {
+      line = line.slice(quote[0].length);
+      depth++;
+    }
+    if (depth !== quoteDepth) {
+      listIndents = [];
+      paragraph = false;
+      indentedCode = false;
+      fence = null;
+      quoteDepth = depth;
+    }
+    if (fence) {
       const leading = line.match(/^[ \t]*/)[0];
       const indent = indentation(leading);
-      while (listIndents.length && indent < listIndents.at(-1)) listIndents.pop();
-      // List continuation indentation is not itself a code block.
-      const base = listIndents.at(-1) || 0;
-      if (indent >= base + 4 && (!paragraph || indentedCode)) {
-        flush();
+      if (line.trim() && indent < fence.base) {
+        fence = null;
+      } else {
         output.push(original);
-        indentedCode = true;
+        const closer = line.slice(leading.length).match(/^(`{3,}|~{3,})[ \t]*\r?\n?$/);
+        if (indent <= fence.base + 3 && closer && closer[1][0] === fence.character &&
+            closer[1].length >= fence.length) fence = null;
+        paragraph = false;
         continue;
       }
-      indentedCode = false;
-      const list = line.slice(leading.length).match(/^(?:[-+*]|\d+[.)])[ \t]+/);
-      if (list) listIndents.push(indent + indentation(list[0]));
-      plain.push(original);
-      paragraph = !/^#{1,6}\s/.test(line.slice(leading.length));
     }
-    flush();
-    return output.join('');
-  });
+    if (!line.trim()) {
+      if (indentedCode) output.push(original);
+      else plain.push(original);
+      paragraph = false;
+      continue;
+    }
+    const leading = line.match(/^[ \t]*/)[0];
+    const indent = indentation(leading);
+    while (listIndents.length && indent < listIndents.at(-1)) listIndents.pop();
+    // List continuation indentation is not itself a code block.
+    const base = listIndents.at(-1) || 0;
+    if (indent >= base + 4 && (!paragraph || indentedCode)) {
+      flush();
+      output.push(original);
+      indentedCode = true;
+      continue;
+    }
+    indentedCode = false;
+    const list = line.slice(leading.length).match(/^(?:[-+*]|\d+[.)])[ \t]+/);
+    if (list) listIndents.push(indent + indentation(list[0]));
+    const candidate = line.slice(leading.length + (list?.[0].length || 0));
+    const opener = candidate.match(/^(`{3,}|~{3,})([^\r\n]*)/);
+    if ((list || indent - base <= 3) && opener &&
+        (opener[1][0] !== '`' || !opener[2].includes('`'))) {
+      flush();
+      output.push(original);
+      fence = { character: opener[1][0], length: opener[1].length, base: list ? listIndents.at(-1) : base };
+      paragraph = false;
+      continue;
+    }
+    plain.push(original);
+    paragraph = !/^#{1,6}\s/.test(line.slice(leading.length));
+  }
+  flush();
+  return output.join('');
 }
 
 function transformProseSyntax(content) {

@@ -234,7 +234,7 @@ profile, send email or provision dependencies:
 ```powershell
 node --test tests\reinstall-release.test.mjs tests\install-optional-dependencies.test.mjs tests\activation-conflicts.test.mjs tests\bootstrap-project.test.mjs
 node --test tests\brain-tools.test.cjs tests\deterministic-helpers.test.cjs tests\process-launch.test.mjs tests\tool-shims.test.cjs tests\runtime-readiness.test.mjs tests\documentation-examples.test.mjs
-node --test tests\markdown-inline-code.test.cjs tests\md-to-word.test.mjs tests\rich-email.test.cjs
+node --test tests\markdown-inline-code.test.cjs tests\md-to-word.test.mjs tests\converter-safety.test.cjs tests\output-publication.test.cjs tests\rich-email.test.cjs
 ```
 
 Real DOCX media preservation, detached Word conversion, HTML TOC and local-image
@@ -247,6 +247,15 @@ Converter regressions also cover literal image examples in DOCX code alongside
 real media, and malformed PNG chunks, checksums, compressed data, raster length,
 and row filters. Failed PNG validation must not call Pandoc or replace a prior
 diagram/Word output. Positive rendering fixtures use checksum-correct PNG bytes.
+
+Unreleased source regressions additionally cover email-header controls (including
+test mode), executable source/rendered HTML, encoded UNC/device paths, code
+inside Markdown containers, and the exact 256 MiB PNG raster budget. Renderer
+and Pandoc failures preserve the complete prior document/media set. Publication
+tests inject later replacement and rollback failures; they do not prove
+power-loss or process-crash atomicity. Installer fixtures verify first-install
+behavior and refusal to replace existing or cross-source packages in both
+Windows PowerShell versions; no real profile or CLI installation is modified.
 
 CI is not live Copilot skill invocation, browser gesture/accessibility UAT, a
 security audit, New Outlook opening/sending, or a paid Replicate request.

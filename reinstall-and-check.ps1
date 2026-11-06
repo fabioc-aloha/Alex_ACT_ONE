@@ -28,14 +28,21 @@ function Invoke-ExternalCommand {
 
 function Get-InstalledPlugin {
     $raw = (Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'list', '--json')) -join "`n"
+    if ([string]::IsNullOrWhiteSpace($raw) -or $raw.Trim() -eq 'null') {
+        throw 'Copilot returned no usable plugin inventory; refusing installation changes.'
+    }
     $plugins = @(($raw | ConvertFrom-Json))
     $matches = @($plugins | Where-Object {
-        $_.name -eq $Plugin -and $_.marketplace -eq $Marketplace
+        $null -ne $_ -and $_.name -eq $Plugin
     })
     if ($matches.Count -gt 1) {
-        throw "Multiple installed entries match $Plugin@$Marketplace. Resolve the duplicate before reinstalling."
+        throw "Multiple installed entries match $Plugin. Resolve the duplicates before making changes."
     }
     if ($matches.Count -eq 1) {
+        $marketplaceProperty = $matches[0].PSObject.Properties['marketplace']
+        if (-not $marketplaceProperty -or $marketplaceProperty.Value -ne $Marketplace) {
+            throw "$Plugin is installed from a different source. Resolve the cross-source installation explicitly; existing state was preserved."
+        }
         return $matches[0]
     }
     return $null
@@ -69,6 +76,14 @@ $CopilotHome = [IO.Path]::GetFullPath($CopilotHome)
 $previousCopilotHome = $env:COPILOT_HOME
 try {
     $env:COPILOT_HOME = $CopilotHome
+    $initial = Get-InstalledPlugin
+    if ($initial -and ($initial.version -ne $ExpectedVersion -or -not $initial.enabled -or $initial.source -ne 'installed')) {
+        throw "Existing $Plugin installation preserved. Automatic replacement/upgrades are disabled; expected enabled $ExpectedVersion from installed, found $($initial.version)."
+    }
+    $installedRoot = Join-Path (Join-Path (Join-Path $CopilotHome 'installed-plugins') $Marketplace) $Plugin
+    if (-not $initial -and (Test-Path -LiteralPath $installedRoot)) {
+        throw "Unregistered package files exist at $installedRoot; resolve them explicitly before installation."
+    }
     $requiredMarketplaces = @(
         @{ Name = $Marketplace; Source = $MarketplaceSource }
         @{ Name = 'awesome-copilot'; Source = 'github/awesome-copilot' }
@@ -101,12 +116,9 @@ try {
         }
     }
 
-    $initial = Get-InstalledPlugin
-    if ($initial) {
-        Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'uninstall', "$Plugin@$Marketplace") | Out-Null
+    if (-not $initial) {
+        Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'install', "$Plugin@$Marketplace") | Out-Null
     }
-
-    Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'install', "$Plugin@$Marketplace") | Out-Null
 
     $installed = Get-InstalledPlugin
     if (-not $installed) {
@@ -116,7 +128,6 @@ try {
         throw "Installed inventory does not match the expected release: expected $Plugin@$Marketplace $ExpectedVersion enabled from installed; got version=$($installed.version), enabled=$($installed.enabled), source=$($installed.source)."
     }
 
-    $installedRoot = Join-Path (Join-Path (Join-Path $CopilotHome 'installed-plugins') $Marketplace) $Plugin
     $installedManifest = Join-Path $installedRoot 'plugin.json'
     if (-not (Test-Path -LiteralPath $installedManifest -PathType Leaf)) {
         throw "Installed plugin manifest is missing: $installedManifest"
@@ -154,7 +165,7 @@ try {
         throw 'Bootstrap receipt entries are not fully migrated to the ONE ownership contract.'
     }
 
-    Write-Output "Reinstalled and verified $Plugin@$Marketplace $ExpectedVersion."
+    Write-Output "Verified $Plugin@$Marketplace $ExpectedVersion in $CopilotHome. Existing packages were not replaced."
 } finally {
     if ($null -eq $previousCopilotHome) {
         Remove-Item Env:COPILOT_HOME -ErrorAction SilentlyContinue

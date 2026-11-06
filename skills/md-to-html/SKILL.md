@@ -1,7 +1,7 @@
 ---
 name: "md-to-html"
 description: "Convert Markdown to standalone HTML pages with embedded CSS, images, and Mermaid diagrams. Use when the user asks to convert to HTML, make a webpage, or export markdown as an .html file."
-lastReviewed: 2026-07-28
+lastReviewed: 2026-11-06
 ---
 
 
@@ -17,6 +17,11 @@ Convert Markdown documents into self-contained HTML files with embedded CSS, bas
 > attributes, and `javascript:` URLs. Sanitize externally supplied Markdown
 > before conversion; do not weaken this boundary to make an untrusted document
 > render.
+
+The source and rendered HTML are both screened. Fenced and indented code,
+including examples inside blockquotes and lists, remain literal. Local image
+embedding rejects Windows UNC/network and device paths, including encoded forms,
+before filesystem access. Remote image URLs remain linked rather than fetched.
 
 ---
 

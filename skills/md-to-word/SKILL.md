@@ -1,7 +1,7 @@
 ---
 name: "md-to-word"
 description: "Convert Markdown with Mermaid diagrams and SVG illustrations to professional Word documents. Use when the user asks to convert to Word, make a docx, or export markdown as a .docx file."
-lastReviewed: 2026-07-28
+lastReviewed: 2026-11-06
 ---
 
 
@@ -82,8 +82,16 @@ Diagrams are rendered at 4x scale (4800px width) for crisp printing, then sized 
 
 Rendered PNGs are checked for chunk structure/checksums, valid dimensions,
 complete compressed raster data, and row filters before replacing an existing
-diagram. A failed render or validation stops conversion and preserves the
-previous diagram and Word output.
+diagram. Decompressed raster data, including scanline filter bytes, is limited
+to 256 MiB before inflation. Split an oversized diagram or pre-render it at a
+smaller resolution rather than bypassing validation.
+
+The Word document and newly generated images are staged until rendering,
+Pandoc, and document post-processing all succeed. A failure before publication
+preserves the complete prior output set, even when an earlier diagram succeeded.
+Handled publication errors roll back replaced files; failed rollback reports
+the retained recovery copies. This does not guarantee atomicity across process
+crashes or power loss.
 
 ---
 
