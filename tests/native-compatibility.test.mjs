@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
+import { createServer } from 'node:net';
 import { test } from 'node:test';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -25,6 +26,39 @@ function fixture(t) {
     t.after(() => rmSync(root, { recursive: true, force: true }));
     return root;
 }
+
+function copyPlugin(source, destination) {
+    for (const name of ['plugin.json', 'manifest.json', 'skills', 'instructions', 'scripts']) {
+        cpSync(join(source, name), join(destination, name), { recursive: true });
+    }
+}
+
+test('installed activation fixtures exclude concurrent test scratch state', async t => {
+    const root = fixture(t);
+    const source = join(root, 'source');
+    const destination = join(root, 'installed plugin');
+    for (const name of ['skills', 'instructions', 'scripts', '.test-optional-deps-fixture']) {
+        mkdirSync(join(source, name), { recursive: true });
+        writeFileSync(join(source, name, 'marker'), 'fixture');
+    }
+    for (const name of ['plugin.json', 'manifest.json']) writeFileSync(join(source, name), '{}');
+    const server = process.platform === 'win32' ? null : createServer();
+    try {
+        if (server) {
+            await new Promise((resolve, reject) => {
+                server.once('error', reject);
+                server.listen(join(source, '.test-optional-deps-fixture', 'diagnostic.socket'), resolve);
+            });
+        }
+        copyPlugin(source, destination);
+        assert.equal(existsSync(join(destination, '.test-optional-deps-fixture')), false);
+        for (const name of ['skills', 'instructions', 'scripts', 'plugin.json', 'manifest.json']) {
+            assert.ok(existsSync(join(destination, name)), name);
+        }
+    } finally {
+        if (server?.listening) await new Promise((resolve, reject) => server.close(error => error ? reject(error) : resolve()));
+    }
+});
 
 for (const [command, owner] of Object.entries(owners)) {
     test(`compatibility command ${command} is a thin route to ${owner}`, () => {
@@ -143,8 +177,7 @@ test('new workflow owners are declared without retiring the original commands', 
 test('activated copies expose canonical skill routes from an arbitrary working directory', (t) => {
     const root = fixture(t);
     const plugin = join(root, 'installed plugin');
-    cpSync(ROOT, plugin, { recursive: true, filter: (source) =>
-        !source.split(/[\\/]/).includes('.git') && !source.split(/[\\/]/).includes('node_modules') });
+    copyPlugin(ROOT, plugin);
     const script = join(plugin, 'skills', 'bootstrap-core', 'scripts', 'bootstrap-core.cjs');
     const target = join(root, 'instructions');
     const result = spawnSync(process.execPath, [script, '--apply', '--target-instructions', target],
@@ -180,8 +213,7 @@ test('native availability does not silently remove legacy integrations', () => {
 test('activation rejects an externally redirected owner before writing instructions', (t) => {
     const root = fixture(t);
     const plugin = join(root, 'plugin');
-    cpSync(ROOT, plugin, { recursive: true, filter: (source) =>
-        !source.split(/[\\/]/).includes('.git') && !source.split(/[\\/]/).includes('node_modules') });
+    copyPlugin(ROOT, plugin);
     const owner = join(plugin, 'skills', 'critical-thinking');
     const outside = join(root, 'outside');
     mkdirSync(outside);

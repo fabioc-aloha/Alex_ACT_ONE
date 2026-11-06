@@ -291,7 +291,21 @@ function embedLocalImages(html, sourceDir) {
 // ---------------------------------------------------------------------------
 // Main conversion
 // ---------------------------------------------------------------------------
+function markdownOutputPath(sourcePath, suffix) {
+  return sourcePath.replace(/\.md$/i, '') + suffix;
+}
+
 function convertMarkdownToHtml(sourcePath, outputPath, options = {}) {
+  const debugPath = options.debug ? markdownOutputPath(sourcePath, '_debug_combined.md') : null;
+  const source = fs.statSync(sourcePath, { bigint: true });
+  for (const destination of [outputPath, debugPath].filter(Boolean)) {
+    if (fs.existsSync(destination)) {
+      const target = fs.statSync(destination, { bigint: true });
+      if (source.dev === target.dev && source.ino === target.ino) {
+        throw new Error(`Output aliases the Markdown source; choose a different destination: ${destination}`);
+      }
+    }
+  }
   const styleName = options.style || 'professional';
   const style = STYLE_PRESETS[styleName] || STYLE_PRESETS.professional;
   const embedImages = options.embedImages !== false;
@@ -337,7 +351,6 @@ function convertMarkdownToHtml(sourcePath, outputPath, options = {}) {
   markdown = processMermaidBlocks(markdown, sourceDir, usePngMermaid);
 
   if (options.debug) {
-    const debugPath = sourcePath.replace(/\.md$/, '_debug_combined.md');
     fs.writeFileSync(debugPath, markdown, 'utf8');
     console.log(`  \u{1F50D} Debug: saved preprocessed markdown to ${debugPath}`);
   }
@@ -455,7 +468,7 @@ function main() {
 
   const outputPath = positional[1]
     ? path.resolve(positional[1])
-    : sourcePath.replace(/\.md$/, '.html');
+    : markdownOutputPath(sourcePath, '.html');
 
   convertMarkdownToHtml(sourcePath, outputPath, options);
 }

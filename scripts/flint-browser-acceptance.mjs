@@ -46,6 +46,7 @@ export function summarizeAcceptance(checks) {
 }
 
 export async function waitForFrameViewport(page, frame) {
+    await page.locator('#flint-viewer').scrollIntoViewIfNeeded();
     const deadline = Date.now() + 10000;
     let previous;
     let parent;
@@ -59,6 +60,33 @@ export async function waitForFrameViewport(page, frame) {
         await page.waitForTimeout(100);
     }
     throw new Error(`Iframe viewport did not settle: current parent=${parent}, child=${child}`);
+}
+
+export async function waitForChartLayout(frame) {
+    await frame.waitForFunction(function stable() {
+        const charts = [...document.querySelectorAll('svg.marks')].map(svg => {
+            const bounds = svg.getBoundingClientRect();
+            const clips = [];
+            for (let parent = svg.parentElement; parent; parent = parent.parentElement) {
+                if (/(hidden|clip|auto)/.test(getComputedStyle(parent).overflowX)) {
+                    const clip = parent.getBoundingClientRect();
+                    clips.push([clip.left, clip.right]);
+                }
+            }
+            return { x: bounds.x, y: bounds.y, left: bounds.left, right: bounds.right,
+                width: bounds.width, height: bounds.height, clips };
+        });
+        const signature = JSON.stringify({ viewport: innerWidth, charts });
+        const now = performance.now();
+        if (signature !== stable.previous) {
+            stable.previous = signature;
+            stable.since = now;
+        }
+        // Flint 1.0.1 debounces relayout by 150 ms; two 100 ms polls can see only the old fitting chart.
+        return now - stable.since >= 300 && charts.length > 0 && charts.every(chart =>
+            chart.width > 0 && chart.height > 0 && chart.left >= -1 && chart.right <= innerWidth + 1 &&
+            chart.clips.every(([left, right]) => chart.left >= left - 1 && chart.right <= right + 1));
+    }, null, { polling: 100, timeout: 10000 });
 }
 
 function rgb(value) {
@@ -328,23 +356,7 @@ export async function verifyShowcasePage(page, { nativeFocus = false, downloads 
                 await page.setViewportSize({ width, height: 1000 });
                 await page.waitForFunction(expected => innerWidth === expected, width, { polling: 100, timeout: 10000 });
                 await waitForFrameViewport(page, frame);
-                await frame.waitForFunction(function stable() {
-                    const svgs = [...document.querySelectorAll('svg.marks')];
-                    const signature = JSON.stringify(svgs.map(svg => {
-                        const bounds = svg.getBoundingClientRect();
-                        return [bounds.x, bounds.y, bounds.width, bounds.height];
-                    }));
-                    const settled = signature === stable.previous;
-                    stable.previous = signature;
-                    return settled && svgs.length > 0 && svgs.every(svg =>
-                        svg.getBoundingClientRect().width > 0 && svg.getBoundingClientRect().height > 0 &&
-                        svg.getBoundingClientRect().right <= innerWidth + 1 &&
-                        [...function* () {
-                            for (let parent = svg.parentElement; parent; parent = parent.parentElement) {
-                                if (/(hidden|clip|auto)/.test(getComputedStyle(parent).overflowX)) yield parent;
-                            }
-                        }()].every(parent => svg.getBoundingClientRect().right <= parent.getBoundingClientRect().right + 1));
-                }, null, { polling: 100, timeout: 10000 });
+                await waitForChartLayout(frame);
                 const bounds = await frame.locator('svg.marks').evaluateAll(nodes => nodes.map(svg => {
                     const rect = svg.getBoundingClientRect();
                     const clips = [];
@@ -364,18 +376,23 @@ export async function verifyShowcasePage(page, { nativeFocus = false, downloads 
         });
         if (!downloads) block('saved-spec', 'Host download completion is not available or not approved; no saved-file claim');
         else await check('saved-spec', async () => {
-            await page.locator('summary').filter({ hasText: 'Inspect the Flint input' }).click();
+            const disclosure = page.locator('summary').filter({ hasText: 'Inspect the Flint input' });
+            await disclosure.focus();
+            await disclosure.press('Enter');
+            const button = page.locator('#download-spec');
+            await button.waitFor({ state: 'visible', timeout: 10000 });
+            await button.focus();
             const expected = JSON.parse(await page.locator('#spec-output').textContent());
             const [download] = await Promise.all([
                 page.waitForEvent('download', { timeout: 10000 }),
-                page.locator('#download-spec').click(),
+                button.press('Enter'),
             ]);
             const root = mkdtempSync(join(tmpdir(), 'one-showcase-download-'));
             try {
                 const file = join(root, 'starting-spec.json');
                 await download.saveAs(file);
                 validateDownloadedSpec(readFileSync(file, 'utf8'), expected);
-                return { filename: download.suggestedFilename(), savedAndValidated: true };
+                return { filename: download.suggestedFilename(), savedAndValidated: true, input: 'trusted keyboard activation' };
             } finally { rmSync(root, { recursive: true, force: true }); }
         });
         await check('offline', async () => {

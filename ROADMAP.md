@@ -1,8 +1,9 @@
 # Roadmap
 
-Updated 2026-11-05. This is the forward plan for pending work, not a history of
-completed repairs. R8 remaining-host evidence is next; runtime upgrade recovery needs
-a design decision before implementation.
+Updated 2026-11-06. This is the forward plan for pending work, not a history of
+completed repairs. Require same-commit release evidence for the source repairs
+before delivery. R8 remaining-host evidence is next; runtime upgrade recovery
+needs a design decision before implementation.
 
 Release version: `v0.9.0`. This roadmap describes work beyond its scoped
 verification, not an instruction to reopen completed repairs or automatically
@@ -19,8 +20,10 @@ Current verification belongs in [testing](docs/testing.md),
 **Status:** the CLI invocation is fixed and the revised suite has real model
 results in [scenario evidence](docs/verification/README.md). Fresh `.2` reasoning
 also loaded the required references in VS Code without coaching.
-The recovery finding has a canonical correction and a passing scoped CLI
-source retest. Scout and the Copilot app remain not run. Existing candidate
+The recovery finding has a canonical correction, a passing scoped CLI source
+retest, and frozen/delivered-package evidence in the
+[v0.9.0 release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.0).
+The original finding and isolated retest remain preserved. Scout and the Copilot app remain not run. Existing candidate
 installations require an explicitly approved upgrade to receive new source.
 
 Use the [versioned cases and run guide](docs/verification/README.md) to exercise
@@ -30,9 +33,6 @@ and approval-boundary cases rather than testing only successful requests.
 
 **Next actions**
 
-- Verify the corrected recovery guidance in the final delivered package;
-  preserve both the original finding and isolated-source retest in the evidence.
-  Do not treat the unchanged installed candidate as already repaired.
 - Repeat in Scout and the Copilot app as access permits. Expand VS Code coverage
   only with separately observed cases, not by inheriting the boundary-test result.
 - Record the loaded plugin root, source revision when available, host/version,
@@ -54,9 +54,16 @@ host freshly verified or infer semantic compliance from structural tests.
 **Status:** release verification follows the
 [release checklist](RELEASE-CHECKLIST.md). Each later source or delivery change
 needs its own evidence; an earlier candidate's green CI is not transferable.
+The [verification record](docs/testing.md) preserves the earlier failed Ubuntu
+fixture-copy gate and the source corrections. Local Windows results are not a
+replacement for a green same-commit matrix.
 
 **Next actions**
 
+- Require the activation fixture boundary, conversion source/media/code
+  preservation regressions, and corrected browser settling checks to pass
+  for the selected candidate. Keep actual browser observations separate from
+  structural tests, as described in the [browser evidence](docs/verification/flint-browser.md).
 - Keep Mall-first onboarding. Direct installs succeeded for this candidate but
   emitted a deprecation warning covering repositories, URLs, and local paths.
   Plan a separately approved marketplace-based candidate route rather than

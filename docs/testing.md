@@ -143,6 +143,33 @@ The later [onboarding run](https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/
 also passed every required job at `b6cc870` on 2026-11-05. It does not verify
 subsequent working-tree changes; record their own checks before publication.
 
+### Unreleased readiness corrections
+
+[Run 42259125372](https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/runs/42259125372)
+at `a6a3038` failed two Ubuntu activation fixture-copy cases on both Node
+versions, skipping provisioned jobs. The recursive copy walked the entire
+checkout, including concurrent test scratch directories. Node's recursive copy
+reaches `ERR_INTERNAL_ASSERTION` on unsupported entries such as Unix sockets;
+PowerShell subprocess fixtures use their scratch directory as `TMPDIR`.
+Activation fixtures now copy only the shipped activation surfaces. A regression
+excludes scratch state and includes a real Unix-domain socket on Linux.
+Production activation behavior and the required matrix are not weakened.
+
+The conversion regressions require uppercase Markdown and debug paths to
+preserve the input, reject source aliases before writes, isolate media for two
+different DOCX outputs in one directory, and preserve literal code through
+cleanup, heading normalization, and comment removal. Media directories are
+named after the complete Markdown output filename; special characters are
+URL-encoded in links. Repeated conversion must not alter another output's media.
+Real Pandoc cases exercise batch media and literal-code roundtrips.
+
+Browser regressions require bringing the resized iframe onscreen before frame
+work, reject premature settling before the pinned renderer's resize debounce,
+and retain the one-pixel clipping limit. See
+[browser diagnosis and evidence](verification/flint-browser.md) for the actual
+failure and the separate local-browser gate. These source corrections are not
+included in the published `v0.9.0` package.
+
 ## Executable documentation examples
 
 Instruction `role` metadata is generated from canonical instruction

@@ -22,6 +22,9 @@ The source and rendered HTML are both screened. Fenced and indented code,
 including examples inside blockquotes and lists, remain literal. Local image
 embedding rejects Windows UNC/network and device paths, including encoded forms,
 before filesystem access. Remote image URLs remain linked rather than fetched.
+Default HTML and debug filenames handle `.md` case-insensitively. Output and
+debug destinations that alias the source, including hard links, are rejected
+before conversion or writes.
 
 ---
 
@@ -53,7 +56,7 @@ before filesystem access. Remote image URLs remain linked rather than fetched.
 | **Lists** | ✅ | Ordered, unordered, nested |
 | **Task lists** | ✅ | Checkbox rendering |
 | **Mermaid diagrams** | ✅ | PNG or table fallback |
-| **SVG** | ✅ | Inline or base64 embedded |
+| **SVG** | ✅ | Local SVG images embedded; raw inline SVG rejected |
 | **Horizontal rules** | ✅ | Styled dividers |
 | **Footnotes** | ✅ | Via pandoc |
 
@@ -134,17 +137,21 @@ node skills/md-to-html/scripts/md-to-html.cjs report.md --debug
 | Diagram Type | PNG Mode | Fallback Mode |
 |--------------|----------|---------------|
 | Flowchart | ✅ Full render | ✅ Table |
-| Sequence | ✅ Full render | ✅ Table |
-| Class | ✅ Full render | ✅ Table |
-| State | ✅ Full render | ✅ Table |
-| ER | ✅ Full render | ✅ Table |
-| Gantt | ✅ Full render | ⚠️ Limited |
-| Pie | ✅ Full render | ✅ Table |
-| Journey | ✅ Full render | ⚠️ Limited |
+| Sequence | ✅ Full render | Source retained |
+| Class | ✅ Full render | Source retained |
+| State | ✅ Full render | Source retained |
+| ER | ✅ Full render | Source retained |
+| Gantt | ✅ Full render | Source retained |
+| Pie | ✅ Full render | Source retained |
+| Journey | ✅ Full render | Source retained |
 
 **PNG Mode** (`--mermaid-png`): Requires mermaid-cli (`mmdc`). Renders at scale 3 and 1200px width. Diagrams are embedded as base64 PNGs.
 
-**Fallback Mode** (default): No external dependencies. Converts diagram syntax to an ASCII table representation suitable for text-only viewing.
+**Fallback Mode** (default): No renderer dependency. The supported simple
+`graph`/`flowchart` subset becomes node and relationship tables. Unsupported
+types or syntax retain the complete original source in a labeled code block;
+they are not rendered diagrams or successful table conversions. Use PNG mode
+when the reader needs a visual diagram.
 
 ---
 

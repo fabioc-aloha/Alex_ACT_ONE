@@ -173,6 +173,9 @@ Require its actual JSON report and zero exit status. Missing, failed, or blocked
 required checks cannot count as success. The gate saves and validates test-owned
 JSON files, then removes them; it does not install a browser or change a runtime.
 Keep integrated-browser and headless-browser evidence separate.
+Resize checks must wait beyond the pinned renderer's debounce before accepting
+unchanged geometry; do not advance through stale fitting plots or relax the
+one-pixel clipping limit to hide a failure.
 
 ## 5. Anything the release renames is checked on both sides
 

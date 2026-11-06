@@ -34,7 +34,7 @@ Convert .docx files into clean, linted Markdown with extracted images, normalize
 | **Headings** | ✅ | Hierarchy normalized to start at H1 |
 | **Bold/Italic** | ✅ | Converted to Markdown syntax |
 | **Links** | ✅ | Preserved as Markdown links |
-| **Images** | ✅ | Extracted to images/ folder |
+| **Images** | ✅ | Extracted to images/<output filename>/ |
 | **Tables** | ✅ | Cleaned and aligned |
 | **Lists** | ✅ | Ordered, unordered, nested |
 | **Code blocks** | ⚠️ | Detected if styled as code |
@@ -49,16 +49,23 @@ Convert .docx files into clean, linted Markdown with extracted images, normalize
 
 | Feature | Details |
 |---------|---------|
-| Image extraction | Embedded images saved to `images/` folder with sequential naming |
+| Image extraction | Embedded images saved to `images/<output filename>/` with sequential naming |
 | Pandoc cleanup | Removes escaped brackets, span classes, trailing backslashes |
 | Table normalization | Aligns columns, adds proper separators |
 | Heading fix | Normalizes hierarchy to start at H1 |
 | Frontmatter | Optional YAML frontmatter with title and date |
 | Comment stripping | Removes Word review comments |
 
-Image extraction leaves literal image syntax in inline, fenced, and indented
-code unchanged. Real media references are still copied and verified, including
-images nested in lists.
+Cleanup and image extraction leave inline, fenced, and indented code unchanged,
+including examples nested in blockquotes and lists. Heading normalization and
+comment removal apply outside code. Real media references are copied and
+verified, including images nested in lists.
+
+Each output owns a separate media directory named after its complete output
+filename. Converting or reconverting another document in the same folder does
+not replace the first document's images. Links URL-encode special characters
+in that directory name. Existing shared images from older conversions are not
+deleted automatically.
 
 The converter stages Markdown and extracted images together before publishing
 them. A conversion failure leaves the prior document and media unchanged;
@@ -99,7 +106,7 @@ node skills/docx-to-md/scripts/docx-to-md.cjs spec.docx --add-frontmatter --fix-
 
 | Option | Default | Description |
 |--------|---------|-------------|
-| `--extract-images` | true | Extract images to images/ folder |
+| `--extract-images` | true | Extract images to images/<output filename>/ |
 | `--no-extract-images` | - | Keep images inline in Pandoc's Markdown output |
 | `--add-frontmatter` | off | Generate YAML frontmatter with title/date |
 | `--clean-tables` | true | Normalize table column widths |
@@ -150,22 +157,24 @@ The conversion follows a multi-stage cleanup:
 
 ## Image Extraction
 
-Embedded images are extracted to a sibling `images/` folder:
+Embedded images are extracted below a sibling `images/` folder, namespaced by
+the output filename:
 
 ```
 input/
 ├── document.docx
-└── document.md (output)
-    └── images/
-        ├── image1.png
-        ├── image2.png
-        └── image3.jpg
+├── document.md (output)
+└── images/
+    └── document.md/
+        ├── image-001.png
+        ├── image-002.png
+        └── image-003.jpg
 ```
 
 Image references in markdown are updated automatically:
 
 ```markdown
-![](images/image1.png)
+![](images/document.md/image-001.png)
 ```
 
 ---

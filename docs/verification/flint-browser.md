@@ -46,13 +46,16 @@ run below therefore used the direct Node CLI, not an integrated-browser run.
 | Linked selection | Selected semantic identities are emphasized in every recipient; base populations stay intact |
 | Reset | Escape and Reset example restore populations and emphasis |
 | Resize | Settled plots fit their nearest clipping containers at desktop, tablet, and narrow widths |
-| Saved spec | A download event produces an actual saved file, equal to the selected starting input |
+| Saved spec | Trusted keyboard activation produces a download event and actual saved file, equal to the selected starting input |
 | Provenance | Embedded data and upstream App digests match their actual payloads |
 
-Resize settling requires repeated exact agreement between the current iframe
-and child viewport widths before measuring plot fit. A width captured before
-scrollbars or automatic-height layout settles can become stale; the clipping
-and chart-fit thresholds are not relaxed to compensate.
+After each viewport change, resize checks bring the viewer onscreen so
+Chromium does not suspend offscreen cross-origin frame work. Resize settling
+requires repeated exact agreement between the current iframe
+and child viewport widths before measuring plot fit, then 300 ms of unchanged
+viewport, chart, and clipping geometry. The pinned Flint renderer debounces
+relayout by 150 ms, so two fitting samples 100 ms apart can still describe the
+old layout. The one-pixel clipping and chart-fit thresholds are unchanged.
 
 Line charts may dim every base path and redraw the selected series in an
 overlay. The harness checks the selected series' unique stroke identity in
@@ -81,6 +84,44 @@ The scatter examples in the lab also declare supported accessible navigation.
 Native VS Code screenshots were separately inspected for the editorial
 desktop board and experimental mobile board. Native saved-download completion
 remains unverified. A headless Edge save is not proof of a native host download.
+
+### 2026-11-06 resize diagnosis
+
+A standalone Edge `157.0.4341.42` run timed out on editorial resizing while the
+experimental page passed; a targeted follow-up passed. Instrumented repeated
+editorial runs later reproduced stable 474/512-pixel SVGs inside 320-pixel
+clipping containers at the narrow viewport. This was real stale layout, not
+pixel jitter or a reason to loosen the acceptance threshold.
+
+The narrow viewport moved the iframe below the visible window: its top was
+1050 pixels in a 1000-pixel viewport, even though `visibilityState` remained
+`visible`. Bringing that same stalled frame onscreen let both charts fit within
+three seconds, without remounting or changing inputs. The gate now scrolls the
+viewer into view after every viewport change before waiting on frame work.
+
+The old gate could also advance before the upstream 150 ms relayout debounce.
+It now requires an unchanged-geometry quiet interval beyond that debounce
+before advancing. Extending that interval alone did not resolve offscreen
+throttling; those failed diagnostic runs remain part of the investigation.
+Deterministic regressions check visibility ordering, delayed geometry changes,
+persistent clipping, and both sides of the existing one-pixel limit. The bundled
+upstream App and generated pages are unchanged. Required standalone acceptance
+must still pass; earlier timeouts remain failures, not discarded observations.
+
+The onscreen-frame correction also exposed a download setup failure: a parent
+pointer action returned without delivering a click to the disclosure, leaving
+its button hidden. The saved-file check now focuses and activates the disclosure
+and button with trusted Enter keys, waits for button visibility before listening
+for the download, and still saves and validates the real file. Instrumented
+keyboard events reached both intended targets and produced the native download.
+This is keyboard-download evidence, not a claim that the failed pointer action
+worked.
+
+After both harness corrections, three consecutive fresh standalone gates on
+Windows/Node `26.13.0` and Edge `157.0.4341.42` passed every required check for
+both pages, including actual saved JSON validation. These are working-source
+observations, not a new release, integrated-browser download proof, or stress
+certification.
 
 ## Provenance and limits
 

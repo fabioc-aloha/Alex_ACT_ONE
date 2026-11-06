@@ -40,7 +40,7 @@ Convert Markdown documents with YAML frontmatter into RFC 5322-compliant `.eml` 
 | **Tables** | ✅ | HTML tables with borders |
 | **Blockquotes** | ✅ | Indented with border |
 | **Lists** | ✅ | Ordered and unordered |
-| **Mermaid diagrams** | ⚠️ | Table fallback (no JS in email) |
+| **Mermaid diagrams** | ⚠️ | Simple flowchart tables; unsupported source retained |
 | **Emoji** | ✅ | Unicode preserved |
 | **Horizontal rules** | ✅ | Styled dividers |
 
@@ -52,7 +52,7 @@ Convert Markdown documents with YAML frontmatter into RFC 5322-compliant `.eml` 
 |---------|---------|
 | YAML frontmatter | Maps to RFC 5322 headers (To, From, Subject, CC, Reply-To) |
 | Email-safe HTML | Inline CSS with table-based layout (no `<style>` blocks) |
-| Mermaid fallback | Diagrams converted to ASCII table representation (email-safe) |
+| Mermaid fallback | Simple flowchart tables; unsupported diagrams keep labeled source |
 | CID images | Local images embedded as base64 multipart MIME attachments |
 | Emoji preservation | Subject and body emoji render correctly across clients |
 | Test mode | `--test` flag overrides recipients for safe preview |
@@ -153,7 +153,10 @@ reply-to: noreply@example.com
 
 ## Mermaid Diagrams in Email
 
-Email clients cannot execute JavaScript, so Mermaid diagrams are converted to text-based table representations:
+Email clients cannot execute JavaScript. The supported simple `graph`/`flowchart`
+subset becomes node and relationship tables. Unsupported diagram types or syntax
+retain their complete original source in a labeled code block, not a rendered
+diagram. Pre-render to PNG when a visual diagram is required.
 
 ```
 ┌─────────────────┐
@@ -187,7 +190,7 @@ For high-fidelity diagrams, pre-render to PNG and include as images.
 
 ## Limitations
 
-- Email clients cannot execute JavaScript — Mermaid diagrams use table fallback
+- Email clients cannot execute JavaScript — simple flowcharts use tables; unsupported diagrams retain labeled source
 - Complex CSS layouts may render differently across clients (Outlook vs Gmail vs Apple Mail)
 - Inline images add to email size — consider linking for large image sets
 - Some clients strip CSS — design for graceful degradation
@@ -224,7 +227,7 @@ For high-fidelity diagrams, pre-render to PNG and include as images.
 | Images missing or show broken icons | Reject | Embed as base64 or CID attachment |
 | Links are clickable and point to correct URLs | Accept | Spot-check 2-3 links |
 | Mermaid diagrams pre-rendered as inline images | Accept | Raw mermaid syntax is not email-safe |
-| Mermaid diagrams show as code blocks | Reject | Pre-render to PNG before embedding |
+| Mermaid diagrams show as code blocks | Warning | Expected for unsupported fallback; pre-render to PNG when visual output is required |
 | File opens in default mail client without errors | Accept | Test .eml file import |
 | Total .eml size >5MB | Warning | Compress images or link instead of embed |
 | Plain-text MIME part included as fallback | Accept | Recommended for accessibility |

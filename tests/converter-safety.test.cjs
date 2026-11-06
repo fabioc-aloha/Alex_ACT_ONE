@@ -8,7 +8,8 @@ const { spawnSync } = require('node:child_process');
 const { test } = require('node:test');
 const { crc32, deflateSync } = require('node:zlib');
 const { resolveLocalImagePath } = require('../scripts/shared/local-image-path.cjs');
-const { extractImages } = require('../skills/docx-to-md/scripts/docx-to-md.cjs');
+const { extractImages, cleanPandocQuirks, normalizeHeadings, cleanTables } = require('../skills/docx-to-md/scripts/docx-to-md.cjs');
+const { checkImages } = require('../skills/docx-to-md/scripts/validate-md.cjs');
 
 const ROOT = path.resolve(__dirname, '..');
 function fixture(t) {
@@ -38,6 +39,72 @@ function png(width = 1, height = 1, color = 6) {
     return Buffer.concat([Buffer.from('89504e470d0a1a0a', 'hex'), chunk('IHDR', header),
         chunk('IDAT', deflateSync(Buffer.from([0, 0, 0, 0, 255]))), chunk('IEND', Buffer.alloc(0))]);
 }
+
+for (const extension of ['.MD', '.mD', '.markdown']) {
+    test(`HTML default and debug outputs preserve ${extension} input`, t => {
+        const root = fixture(t);
+        const source = path.join(root, `source${extension}`);
+        const original = '# Original\n\nKeep this source.\n';
+        const hook = path.join(root, 'pandoc.cjs');
+        fs.writeFileSync(source, original);
+        fs.writeFileSync(hook, "require('node:fs').writeFileSync(process.argv[process.argv.indexOf('-o')+1],'<p>Fixture</p>');");
+        const result = convert(root, 'md-to-html', [source, '--debug'], { ACT_TOOL_PANDOC: hook });
+        assert.equal(result.status, 0, result.stderr);
+        assert.equal(fs.readFileSync(source, 'utf8'), original);
+        const stem = extension === '.markdown' ? source : source.slice(0, -extension.length);
+        assert.match(fs.readFileSync(stem + '.html', 'utf8'), /<!DOCTYPE html>/);
+        assert.ok(fs.existsSync(stem + '_debug_combined.md'));
+    });
+}
+
+for (const alias of ['same-path', 'hard-link', 'debug-path']) {
+    test(`HTML rejects ${alias} source/output aliases before conversion or debug writes`, t => {
+        const root = fixture(t);
+        const source = path.join(root, 'source.md');
+        const original = '# Original\n';
+        const output = alias === 'same-path' ? source : path.join(root, 'output.html');
+        const hook = path.join(root, 'pandoc.cjs');
+        const marker = path.join(root, 'called');
+        fs.writeFileSync(source, original);
+        if (alias === 'hard-link') fs.linkSync(source, output);
+        if (alias === 'debug-path') fs.linkSync(source, path.join(root, 'source_debug_combined.md'));
+        fs.writeFileSync(hook, `require('node:fs').writeFileSync(${JSON.stringify(marker)},'called');process.exit(2);`);
+        const result = convert(root, 'md-to-html', [source, output, '--debug'], { ACT_TOOL_PANDOC: hook });
+        assert.notEqual(result.status, 0);
+        assert.match(result.stderr, /source|alias|same/i);
+        assert.equal(fs.readFileSync(source, 'utf8'), original);
+        assert.equal(fs.existsSync(marker), false);
+    });
+}
+
+for (const literal of [
+    '`const style = "{.underline}";`',
+    '``\\[example\\] {.custom} {#anchor} with ` ticks``',
+    '~~~javascript\nconst style = "{.underline}";\n~~~\n',
+    '    const style = "{.underline}";\n    const path = "\\\\";\n',
+    '> ~~~javascript\n> const style = "{.underline}";\n> ~~~\n',
+    '- A list\n\n  ~~~javascript\n  const style = "{.underline}";\n  ~~~\n',
+]) {
+    test(`DOCX cleanup preserves literal code: ${JSON.stringify(literal)}`, () => {
+        const prose = 'Text {.underline}\n\n';
+        assert.equal(cleanPandocQuirks(prose + literal), 'Text \n\n' + literal);
+    });
+}
+
+test('DOCX heading and table cleanup leave code blocks unchanged', () => {
+    const code = '~~~markdown\n### Literal heading\n| A | B |\n| --- | --- |\n| C | D |\n~~~\n\n';
+    const input = code + '### Real heading\n';
+    assert.equal(normalizeHeadings(input), code + '# Real heading\n');
+    assert.equal(cleanTables(input), input);
+});
+
+test('DOCX acceptance decodes image filenames after removing URL query and fragment suffixes', t => {
+    const root = fixture(t);
+    fs.writeFileSync(path.join(root, 'pixel # %.png'), 'fixture');
+    assert.deepEqual(checkImages('![Pixel](pixel%20%23%20%25.png?download=1#preview)', root).issues, []);
+    assert.match(checkImages('![Pixel](bad%ZZ.png)', root).issues[0], /invalid.*encoding/i);
+    assert.match(checkImages('![Pixel](%5C%5Creview.invalid%5Cshare%5Cpixel.png)', root).issues[0], /absolute path/i);
+});
 
 for (const src of ['\\\\review.invalid\\share\\pixel.png', '%5C%5Creview.invalid%5Cshare%5Cpixel.png',
     '\\\\?\\UNC\\review.invalid\\share\\pixel.png', '\\\\.\\pipe\\review', '%2F%2Freview.invalid/share/pixel.png']) {

@@ -60,62 +60,70 @@ const { publishFiles } = require(path.join(__dirname, '..', '..', '..', 'scripts
 
 /** Remove pandoc escape quirks */
 function cleanPandocQuirks(md) {
-  // Remove escaped brackets \[ \] that pandoc adds
-  md = md.replace(/\\\[/g, "[").replace(/\\\]/g, "]");
-  // Remove trailing backslashes pandoc uses for hard line breaks
-  md = md.replace(/\\\s*$/gm, "");
-  // Clean up excessive blank lines (3+ -> 2)
-  md = md.replace(/\n{3,}/g, "\n\n");
-  // Remove {width="..."} image attributes pandoc adds
-  md = md.replace(/\{width="[^"]*"(?:\s+height="[^"]*")?\}/g, "");
-  // Remove {.underline} and similar pandoc span classes
-  md = md.replace(/\{\.underline\}/g, "");
-  md = md.replace(/\{\.[a-z-]+\}/g, "");
-  // Clean up empty heading anchors {#section-n}
-  md = md.replace(/\s*\{#[a-zA-Z0-9_-]+\}/g, "");
-  return md;
+  return transformOutsideMarkdownCode(md, md => {
+    // Remove escaped brackets \[ \] that pandoc adds
+    md = md.replace(/\\\[/g, "[").replace(/\\\]/g, "]");
+    // Remove trailing backslashes pandoc uses for hard line breaks
+    md = md.replace(/\\\s*$/gm, "");
+    // Clean up excessive blank lines (3+ -> 2)
+    md = md.replace(/\n{3,}/g, "\n\n");
+    // Remove {width="..."} image attributes pandoc adds
+    md = md.replace(/\{width="[^"]*"(?:\s+height="[^"]*")?\}/g, "");
+    // Remove {.underline} and similar pandoc span classes
+    md = md.replace(/\{\.underline\}/g, "");
+    md = md.replace(/\{\.[a-z-]+\}/g, "");
+    // Clean up empty heading anchors {#section-n}
+    md = md.replace(/\s*\{#[a-zA-Z0-9_-]+\}/g, "");
+    return md;
+  });
 }
 
 /** Normalize heading hierarchy so the first heading is H1 */
 function normalizeHeadings(md) {
-  const headingMatch = md.match(/^(#{1,6})\s/m);
+  let headingMatch;
+  transformOutsideMarkdownCode(md, prose => {
+    headingMatch ||= prose.match(/^(#{1,6})\s/m);
+    return prose;
+  });
   if (!headingMatch) return md;
 
   const firstLevel = headingMatch[1].length;
   if (firstLevel === 1) return md;
 
   const shift = firstLevel - 1;
-  return md.replace(/^(#{1,6})\s/gm, (match, hashes) => {
+  return transformOutsideMarkdownCode(md, prose => prose.replace(/^(#{1,6})\s/gm, (match, hashes) => {
     const newLevel = Math.max(1, hashes.length - shift);
     return "#".repeat(newLevel) + " ";
-  });
+  }));
 }
 
 /** Clean up pandoc table output for readable alignment */
 function cleanTables(md) {
-  const lines = md.split(/\r?\n/);
-  const result = [];
-  let inTable = false;
-  let tableLines = [];
+  return transformOutsideMarkdownCode(md, md => {
+    const lines = md.split(/\r?\n/);
+    const result = [];
+    let inTable = false;
+    let tableLines = [];
 
-  for (const line of lines) {
-    const isTableLine = /^\|/.test(line) || /^[+:-]+$/.test(line);
+    for (const line of lines) {
+      const isTableLine = /^\|/.test(line) || /^[+:-]+$/.test(line);
 
-    if (isTableLine) {
-      inTable = true;
-      tableLines.push(line);
-    } else {
-      if (inTable) {
-        result.push(...formatTable(tableLines));
-        tableLines = [];
-        inTable = false;
+      if (isTableLine) {
+        inTable = true;
+        tableLines.push(line);
+      } else {
+        if (inTable) {
+          result.push(...formatTable(tableLines));
+          tableLines = [];
+          inTable = false;
+        }
+        result.push(line);
       }
-      result.push(line);
     }
-  }
-  if (inTable) result.push(...formatTable(tableLines));
+    if (inTable) result.push(...formatTable(tableLines));
 
-  return result.join("\n");
+    return result.join("\n");
+  }, { inlineCode: false });
 }
 
 function formatTable(lines) {
@@ -166,6 +174,9 @@ function formatTable(lines) {
 function collectImages(md, outputDir, imageDirName, mediaRoot, staging) {
   const files = [];
   let imageCount = 0;
+  const referencePrefix = imageDirName.split(/[\\/]/).map(segment =>
+    encodeURIComponent(segment).replace(/[!'()*]/g, character =>
+      '%' + character.charCodeAt(0).toString(16).toUpperCase())).join('/');
 
   md = transformOutsideMarkdownCode(md, prose => {
     // Pandoc emits absolute, URL-encoded extraction paths as well as media/ paths.
@@ -186,7 +197,7 @@ function collectImages(md, outputDir, imageDirName, mediaRoot, staging) {
         }
         files.push({ source: destination, destination: path.join(outputDir, imageDirName, newName) });
 
-        return `![${alt}](${imageDirName}/${newName})`;
+        return `![${alt}](${referencePrefix}/${newName})`;
       },
     );
 
@@ -201,7 +212,7 @@ function collectImages(md, outputDir, imageDirName, mediaRoot, staging) {
         fs.writeFileSync(imagePath, bytes);
         if (!fs.readFileSync(imagePath).equals(bytes)) throw new Error(`Extracted image verification failed: ${imagePath}`);
         files.push({ source: imagePath, destination: path.join(outputDir, imageDirName, filename) });
-        return `![${alt}](${imageDirName}/${filename})`;
+        return `![${alt}](${referencePrefix}/${filename})`;
       },
     );
   });
@@ -222,11 +233,13 @@ function extractImages(md, outputDir, imageDirName, mediaRoot = outputDir) {
 
 /** Strip Word comment annotations */
 function stripComments(md) {
-  // Remove comment markers like [GD1], [FC1], etc.
-  md = md.replace(/\[([A-Z]{1,4}\d+)\]/g, "");
-  // Remove comment text blocks pandoc sometimes inserts
-  md = md.replace(/> \*\*Comment \[.*?\]\*\*.*?(?=\n[^>]|\n\n|\z)/gs, "");
-  return md;
+  return transformOutsideMarkdownCode(md, md => {
+    // Remove comment markers like [GD1], [FC1], etc.
+    md = md.replace(/\[([A-Z]{1,4}\d+)\]/g, "");
+    // Remove comment text blocks pandoc sometimes inserts
+    md = md.replace(/> \*\*Comment \[.*?\]\*\*.*?(?=\n[^>]|\n\n|\z)/gs, "");
+    return md;
+  });
 }
 
 /** Generate YAML frontmatter from document properties */
@@ -285,7 +298,7 @@ function convertDocxToMarkdown(sourcePath, outputPath, options = {}) {
     if (doExtractImages) {
       const staging = path.join(mediaTempDir, 'normalized-images');
       fs.mkdirSync(staging);
-      const extracted = collectImages(md, outputDir, "images", mediaRoot, staging);
+      const extracted = collectImages(md, outputDir, path.join("images", path.basename(outputPath)), mediaRoot, staging);
       md = extracted.md;
       files.push(...extracted.files);
     }

@@ -5,12 +5,31 @@ import { dirname, join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { test } from 'node:test';
+import mermaid from '../scripts/shared/mermaid-pipeline.cjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const read = file => readFileSync(join(ROOT, file), 'utf8').replace(/\r\n/g, '\n');
 const manifest = JSON.parse(read('manifest.json'));
 const script = join(ROOT, 'scripts', 'update-docs.mjs');
 const labels = { skills: 'SKILL TABLE', prompts: 'PROMPT TABLE', instructions: 'INSTRUCTION TABLE' };
+
+test('HTML and email guides distinguish supported Mermaid tables from source-retaining fallback', () => {
+    const html = read('skills/md-to-html/SKILL.md');
+    const email = read('skills/md-to-eml/SKILL.md');
+    for (const [type, source] of [
+        ['Sequence', 'sequenceDiagram\nAlice->>Bob: Hello'],
+        ['Class', 'classDiagram\nclass Example'],
+        ['State', 'stateDiagram-v2\n[*] --> Ready'],
+        ['ER', 'erDiagram\nTEAM ||--o{ MEMBER : includes'],
+        ['Pie', 'pie\n"Yes": 1'],
+    ]) {
+        assert.match(mermaid.mermaidToTableFallback(source), /Unsupported Mermaid fallback; original source retained/);
+        const row = html.split('\n').find(line => line.startsWith(`| ${type} |`));
+        assert.ok(row?.includes('Source retained'), type);
+    }
+    for (const text of [html, email]) assert.match(text, /unsupported.*source|source.*unsupported/is);
+    assert.match(email, /Mermaid diagrams show as code blocks \| Warning/);
+});
 
 function section(label) {
     const text = read('README.md');

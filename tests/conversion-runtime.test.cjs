@@ -4,6 +4,7 @@ const os = require('node:os');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { test } = require('node:test');
+const { crc32, deflateSync } = require('node:zlib');
 const { runTool } = require('../scripts/shared/tool-runner.cjs');
 
 const ROOT = path.resolve(__dirname, '..');
@@ -162,9 +163,64 @@ test('real DOCX roundtrip preserves literal image examples alongside extracted m
     const markdown = fs.readFileSync(output, 'utf8');
     assert.ok(markdown.includes(`\`${literal}\``), markdown);
     assert.ok(markdown.includes(`    ${literal}`), markdown);
-    assert.match(markdown, /!\[Actual\]\(images\/image-001\.png\)/);
-    assert.deepEqual(fs.readFileSync(path.join(directory, 'images', 'image-001.png')), PNG);
+    assert.match(markdown, /!\[Actual\]\(images\/converted\.md\/image-001\.png\)/);
+    assert.deepEqual(fs.readFileSync(path.join(directory, 'images', 'converted.md', 'image-001.png')), PNG);
     assert.equal(fs.readdirSync(directory).some(name => name.startsWith('docx-to-md-media-')), false);
+});
+
+test('real DOCX batch conversion isolates each output media set, including encoded output names', {
+    skip: pandoc ? false : 'Pandoc unavailable: batch media ownership not exercised',
+}, t => {
+    const directory = conversionFixture(t);
+    const data = deflateSync(Buffer.from([0, 0, 0]));
+    const idat = Buffer.alloc(data.length + 12);
+    idat.writeUInt32BE(data.length);
+    idat.write('IDAT', 4);
+    data.copy(idat, 8);
+    idat.writeUInt32BE(crc32(idat.subarray(4, -4)), idat.length - 4);
+    const secondPng = Buffer.concat([PNG.subarray(0, 33), idat, PNG.subarray(-12)]);
+    const outputs = [];
+    for (const [name, image] of [['first', PNG], ['second', secondPng]]) {
+        const source = path.join(directory, `${name}.md`);
+        const docx = path.join(directory, `${name}.docx`);
+        const output = path.join(directory, `${name} # (report).md`);
+        fs.writeFileSync(path.join(directory, `${name}.png`), image);
+        fs.writeFileSync(source, `# ${name}\n\n![Pixel](${name}.png)\n`);
+        runTool('pandoc', [source, '-o', docx, '--resource-path', directory], { timeout: 15000 });
+        const result = convert('docx-to-md', directory, docx, output);
+        assert.equal(result.status, 0, result.stderr + result.stdout);
+        const reference = fs.readFileSync(output, 'utf8').match(/!\[[^\]]*\]\(([^)]+)\)/)?.[1];
+        assert.ok(reference, 'Missing extracted media');
+        outputs.push({ docx, output, reference, image });
+    }
+    assert.notEqual(outputs[0].reference, outputs[1].reference);
+    const repeated = convert('docx-to-md', directory, outputs[1].docx, outputs[1].output);
+    assert.equal(repeated.status, 0, repeated.stderr + repeated.stdout);
+    for (const output of outputs) {
+        assert.deepEqual(fs.readFileSync(path.join(directory, decodeURIComponent(output.reference))), output.image);
+        const validated = spawnSync(process.execPath, [
+            path.join(ROOT, 'skills', 'docx-to-md', 'scripts', 'validate-md.cjs'), output.output,
+        ], { encoding: 'utf8', timeout: 10000 });
+        assert.equal(validated.status, 0, validated.stdout + validated.stderr);
+    }
+});
+
+test('real DOCX cleanup preserves literal code through every cleanup option', {
+    skip: pandoc ? false : 'Pandoc unavailable: literal code fidelity not exercised',
+}, t => {
+    const directory = conversionFixture(t);
+    const source = path.join(directory, 'code.md');
+    const docx = path.join(directory, 'code.docx');
+    const output = path.join(directory, 'code-output.md');
+    const literal = 'const style = "{.underline}"; // [AB1] {#anchor}';
+    fs.writeFileSync(source, `### Real heading\n\nInline \`${literal}\`.\n\n\`\`\`javascript\n${literal}\n\`\`\`\n`);
+    runTool('pandoc', [source, '-o', docx], { timeout: 15000 });
+    const result = convert('docx-to-md', directory, docx, output, ['--fix-headings', '--strip-comments']);
+    assert.equal(result.status, 0, result.stderr + result.stdout);
+    const markdown = fs.readFileSync(output, 'utf8');
+    assert.ok(markdown.includes('`' + literal + '`'), markdown);
+    assert.ok(markdown.includes('    ' + literal), markdown);
+    assert.match(markdown, /^# Real heading/m);
 });
 
 for (const [marker, args, expected] of [['', ['--toc'], true], ['[toc]\n\n', [], true], ['', [], false]]) {

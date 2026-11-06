@@ -111,8 +111,18 @@ function checkImages(content, baseDir) {
     }
     if (/^[a-z][a-z0-9+.-]*:/i.test(dest)) continue;
     count++;
-    const decoded = (() => { try { return decodeURIComponent(dest); } catch { return dest; } })();
-    const target = path.resolve(baseDir, decoded.split("#")[0].split("?")[0]);
+    let decoded;
+    try {
+      decoded = decodeURIComponent(dest.split(/[?#]/, 1)[0]);
+    } catch (error) {
+      issues.push(`invalid image URL encoding: ${dest}: ${error.message}`);
+      continue;
+    }
+    if (path.isAbsolute(decoded) || path.win32.isAbsolute(decoded)) {
+      issues.push(`image uses an absolute path: ${dest}`);
+      continue;
+    }
+    const target = path.resolve(baseDir, decoded);
     if (!fs.existsSync(target)) issues.push(`image file does not exist: ${dest}`);
   }
   return { count, issues };
