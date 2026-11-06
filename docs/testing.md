@@ -208,6 +208,52 @@ integration tests per OS, and both canonical Windows demo rebuilds). Version
 non-destructive fetch-policy and cleanup recovery regressions (80 tests across
 PowerShell 7 and Windows PowerShell 5.1).
 
+### 0.9.2 local installation verification
+
+Observed 2026-11-06 on Windows x64, Node `26.13.0`, against release commit
+`32e94005825c248968f31e0bbe69be3a531dd435`. The latest published release, remote
+`main`, and peeled `v0.9.2` tag selected that commit. The same-commit
+[manual CI run 42304698572](https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/runs/42304698572)
+was independently confirmed successful; its full release evidence remains in
+the [release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.2).
+
+| Check | Observed result |
+| --- | --- |
+| CLI user-store and loaded VS Code cache | Both `0.9.2`; all 304 tracked source files present, no content differences, and 5 line-ending-only differences per copy |
+| Bootstrap preview and profile receipt | Schema-v2 receipt at `0.9.2`; 15 preserve actions, preserved receipt, no conflicts |
+| Structural lane in the Git checkout | 553 passed; no failures, skips, todos, or cancellations |
+| Integration lane against the installed VS Code package | 58 passed; no failures, skips, todos, or cancellations |
+| Optional dependency `-VerifyOnly -IncludeReplicate -BrowserExecutablePath` | All 7 selected pins and 3 MCP launchers verified; actual Mermaid SVG and SVG-to-PNG rendering passed with installed Edge |
+| Live MCP probes | Flint theme listing and Playwright tab listing succeeded; Replicate public-model lookup returned HTTP 401 |
+
+The initial structural run against the installed cache failed three
+Git-dependent checks because that directory has no `.git` metadata.
+The documented structural prerequisite is a Git checkout; rerunning the full
+lane there passed. This does not invalidate the installed-package integration
+result or justify weakening the Git-dependent checks.
+
+The configured npm registry returned array-wrapped metadata and a prerelease
+value for Playwright's `latest` tag. The bundled update audit incorrectly
+reported equal versions as updates and called the prerelease stable. An
+independent normalized, fresh-metadata check identified newer stable npm pins;
+Pillow also had a newer upstream release. These remain review candidates, not
+approved upgrades. Track the correction and regression cases in the
+[dependency-audit task](../ROADMAP.md#repair-the-dependency-update-audit).
+
+No dependencies, credentials, profile instructions, or host configuration were
+changed, and no paid image generation was attempted. Replicate launchability
+does not establish API authorization. These observations do not certify every
+host, semantic skill scenario, browser interaction, or runtime rollback path.
+The scoped runtime description check confirmed the reviewed demo renderer
+versions; the audit did not rebuild the demonstration pages or repeat browser
+acceptance.
+
+Historical pre-upgrade baseline: the earlier CLI store and VS Code cache held
+`0.9.1`, with 15 profile instructions preserved. Refreshing `w/mixed`
+working-tree files from the Git index restored `w/crlf` checkout parity and a
+`preserve:15` bootstrap preview against the `0.9.1` receipt. That is historical
+activation evidence, not the current installation state.
+
 ## Executable documentation examples
 
 Instruction `role` metadata is generated from canonical instruction

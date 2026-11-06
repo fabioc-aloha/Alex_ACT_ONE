@@ -2,8 +2,9 @@
 
 Updated 2026-11-06. This is the forward plan for pending work, not a history of
 completed repairs. Require same-commit release evidence for the source repairs
-before delivery. R8 remaining-host evidence is next; runtime upgrade recovery
-needs a design decision before implementation.
+before delivery. R8 remaining-host evidence is next for host coverage; the
+dependency-audit repair is the immediate maintenance follow-up. Runtime upgrade
+recovery needs a design decision before implementation.
 
 Release version: `v0.9.2`. This roadmap describes work beyond its scoped
 verification, not an instruction to reopen completed repairs or automatically
@@ -48,6 +49,36 @@ and approval-boundary cases rather than testing only successful requests.
 failures and limitations. Discovery, instruction loading, MCP connectivity, and
 end-to-end behavior must remain separate claims. Do not mark an inaccessible
 host freshly verified or infer semantic compliance from structural tests.
+
+### Repair the dependency update audit
+
+**Status:** reproducible reporting defect found during the
+[local installation audit](docs/testing.md#092-local-installation-verification);
+implementation is pending. The configured registry returns array-wrapped
+metadata, so equal version strings were reported as updates. A prerelease
+`latest` tag was also incorrectly described as a stable update.
+
+**Next actions**
+
+- Correct the existing
+  [update auditor](skills/setup-dependencies/scripts/provision-runtime.mjs)
+  to handle scalar and single-result array metadata consistently. Reject
+  malformed or ambiguous responses explicitly rather than reporting success.
+- Distinguish a newer stable version from a prerelease or otherwise anomalous
+  `latest` tag. Use fresh metadata for current-version claims without changing
+  the configured registry or npm policy.
+- Extend the existing
+  [runtime readiness tests](tests/runtime-readiness.test.mjs) with equal-version,
+  changed-version, scalar/array, prerelease, malformed, and multi-result cases,
+  retaining explicit subprocess error and timeout reporting.
+- Review surfaced npm and Pillow updates separately. Preserve reviewed source
+  pins, the isolated demo lock, and the active runtime until compatibility,
+  artifact, and separately approved delivery checks pass.
+
+**Done when:** regression tests prove equal versions remain current across
+supported response shapes, only newer stable versions are reported as stable
+updates, and invalid or prerelease metadata has an explicit non-success outcome.
+The audit remains read-only and no package upgrade is implied by its results.
 
 ### Verify future delivery changes
 
@@ -114,6 +145,38 @@ launches, and real rendering pass before an explicitly approved switch; rollback
 is demonstrated in disposable fixtures. Preserve configured registries, npm
 policy, explicit runtime-root selection, consent, and host reload boundaries.
 Do not use the active user runtime as a failure-test fixture.
+
+### Consider retiring bundled Replicate support
+
+**Status:** proposed product-scope simplification; removal is not yet approved.
+Reduce credential setup, paid-service coupling, and provider-specific maintenance
+if generative imagery is not a core requirement. An authentication failure alone
+is not evidence that the integration is defective.
+
+**Next actions**
+
+- Decide between retiring the bundled integration and keeping it explicitly
+  opt-in. Retention is justified if consistent cross-host image generation is
+  a core requirement.
+- If retirement is approved, remove the Replicate MCP declaration from
+  [plugin.json](plugin.json) and retire the
+  [provider-specific skill](skills/replicate-imagery/SKILL.md). Reconcile dependency
+  reporting, provisioning, installer options, host registration, CI runtime
+  manifests and locks, tests, and active documentation together.
+- Preserve charts, Mermaid diagrams, SVG authoring, and image annotation.
+  Leave generative imagery to user-configured providers or host tools without
+  promising an equivalent capability on every host.
+- Document the capability loss and migration choices. Preserve historical
+  release evidence; do not uninstall existing runtime packages, remove
+  credentials, or change user-owned server registrations without separate
+  approval.
+
+**Done when:** the scope decision is recorded and, if retirement is chosen,
+active routes and guidance contain no stale Replicate dependency, retained
+visual workflows pass their applicable tests, and the change follows the
+[delivery gates](#verify-future-delivery-changes). This does not close the
+[dependency-audit task](#repair-the-dependency-update-audit) or R9 runtime
+recovery work.
 
 ### Extend accessibility and browser coverage
 

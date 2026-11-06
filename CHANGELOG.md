@@ -3,6 +3,19 @@
 Completed-change history lives here; pending work remains in [ROADMAP.md](ROADMAP.md).
 An Unreleased entry does not imply publication, installation, or activation.
 
+## Unreleased
+
+- 2026-11-06: Recorded the local `0.9.2` installation and dependency audit in
+  [verification history](docs/testing.md#092-local-installation-verification),
+  including installed-package integration checks, source structural checks,
+  activation parity, renderer output, and separate host/API limits. No packages,
+  credentials, profile instructions, or host configuration were changed.
+- Added the [Replicate retirement proposal](ROADMAP.md#consider-retiring-bundled-replicate-support)
+  and retained the dependency-audit defect as pending work. Neither provider
+  removal nor dependency upgrades are implemented or approved by these records.
+- Refreshed the installation handoff while preserving the earlier `0.9.1`
+  activation and line-ending recovery baseline in the verification history.
+
 ## 0.9.2 - 2026-11-06
 
 - Added an explicit `-BrowserExecutablePath` option to the optional dependency
