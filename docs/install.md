@@ -8,12 +8,12 @@ tools, and historical verification notes in one reference.
 
 | Source | What it delivers | What remains separate |
 | --- | --- | --- |
-| Repository | The repository source selected at installation time; it can include unreleased work | Review the loaded root and source revision before activation; existing installs do not follow later commits automatically |
-| Mall | The reviewed release selected by the marketplace entry | Source changes need a separately published release before they appear through this path |
+| Mall | Recommended: the reviewed release selected by the marketplace entry | Source changes need a separately published release before they appear through this path |
+| Repository | Deprecated direct-install path: repository source selected at installation time; it can include unreleased work | Temporary candidate testing only; review root/revision and do not assume future CLI support |
 | Optional runtime | The separately provisioned chart, browser, image, and converter packages | Plugin installation does not activate instructions or provision these packages; installs and upgrades require their own approval |
 
-The repository test candidate is `0.9.0-rc.1`; the published Mall baseline is
-`0.8.0`. A candidate version is not a tagged release or evidence of live-host
+Release version: `0.9.0`. Mall selects the reviewed release tag; a checkout on
+main can later include unreleased changes. A version is not evidence of live-host
 activation. Packages with the same version can also contain different bytes.
 Check the loaded plugin root, installation source, and revision when available;
 if the revision cannot be established, do not claim exact source parity.
@@ -22,6 +22,22 @@ published baseline. Never mix a checkout's bootstrap with a different installed
 package merely because the versions match.
 
 ## Testing the repository candidate
+
+This section preserves the historical `0.9.0-rc.1` candidate-testing procedure.
+It is not the normal installation path for `0.9.0`.
+
+**Deprecated installation path.** During the user's candidate install on
+2026-11-05, installation succeeded and the CLI printed:
+
+```text
+Warning: Direct plugin installs (repos, URLs, local paths) are deprecated. Only plugin@marketplace installs will be supported in a future release.
+```
+
+Command availability in help does not establish that a path is not deprecated.
+The warning names no removal date or version. Keep Mall as the normal install
+path and plan marketplace-based candidate delivery; do not treat direct installs
+as a durable workaround. This warning alone does not invalidate the already
+installed candidate or require uninstalling it.
 
 These are manual steps for the person switching installations, not commands
 the preparation workflow runs automatically. Wait for the selected candidate's
@@ -34,8 +50,9 @@ copilot plugin install fabioc-aloha/Alex_ACT_ONE
 copilot plugin list --json
 ```
 
-Confirm the enabled direct-repository entry reports `0.9.0-rc.1` and the expected
-repository source. If an old or duplicate entry remains, stop rather than testing
+Confirm the enabled direct-repository entry reports the selected candidate's
+version and expected repository source. Do not expect the historical
+`0.9.0-rc.1` from a newer repository checkout. If an old or duplicate entry remains, stop rather than testing
 an ambiguous payload. The direct command selects source available at installation
 time; record its source revision when exposed and compare it with the verified
 candidate commit. Do not assume version equality proves byte parity.
@@ -116,15 +133,8 @@ those tools are needed to get started.
 
 ### 1. Install the plugin
 
-Install directly from the repository:
-
-```powershell
-copilot plugin install fabioc-aloha/Alex_ACT_ONE
-```
-
-This installs repository source and can include unreleased changes. It does not
-require marketplace registration. The [current Copilot CLI documentation](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing#install-plugins)
-supports direct repository installation.
+Use Alex Mall for normal installation. Direct source installation is deprecated;
+its command remains below only for explicitly selected temporary testing.
 
 Every skill is available in Copilot CLI, VS Code, Microsoft Scout, and the
 GitHub Copilot app from the user-level installation. Scout should reuse the
@@ -134,7 +144,7 @@ discovers the shared plugin.
 
 #### Mall option
 
-To install the reviewed release rather than repository source, use Alex Mall.
+To install the reviewed release, use Alex Mall.
 If it is not already registered, add its source first:
 
 ```powershell
@@ -148,7 +158,21 @@ copilot plugin install alex-act-one@alex-mall
 ```
 
 The Mall entry tracks the reviewed release and keeps the installed name stable.
-This is an alternative installation path, not an additional required step.
+It is the recommended path.
+
+#### Repository source (deprecated)
+
+For explicitly selected candidate testing while this path still works:
+
+```powershell
+copilot plugin install fabioc-aloha/Alex_ACT_ONE
+```
+
+This installs repository source, which can include unreleased changes, without
+marketplace registration. Read the
+[observed warning and candidate boundaries](#testing-the-repository-candidate)
+before choosing it. Documentation or help listing the command does not override
+its runtime deprecation warning.
 
 ### 2. Turn on the always-on instructions, once in each app
 
@@ -175,7 +199,7 @@ node <this-skill>/scripts/host-readiness.cjs --host scout
 Activation previews every instruction file and waits for your approval before
 writing anything. Running it again reports no changes.
 
-In the current source candidate, modified or unowned destination files block
+In version `0.9.0`, modified or unowned destination files block
 the entire activation before any writes. Back up and review the named conflicts;
 only a separately approved `--overwrite-conflicts` preview/apply may replace or
 adopt them. See [the conflict procedure](../skills/bootstrap-core/SKILL.md#instruction-conflicts).
@@ -300,7 +324,7 @@ explicit approval, npm 12+ can route an exact HTTPS backend prefix through the
 configured proxy using the provisioner's `--registry-tarball-prefix` option.
 Its preview names the prefix, registry, runtime, and selected packages.
 
-In the current source candidate, dependency checks distinguish installed
+In version `0.9.0`, dependency checks distinguish installed
 directories, exact version matches, and bounded launch probes. Host connection
 remains unobserved until checked in that host. Checker, provisioner, and launcher
 share the runtime-root selection; see

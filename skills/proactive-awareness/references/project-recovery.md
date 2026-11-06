@@ -8,9 +8,10 @@ Use this skill once that decision is made, to apply PA1, PA2, or PA4.
 
 At the start of every relevant conversation:
 
-1. **Check repo-root `HANDOFF.md`** — the canonical project handoff. If present,
+1. **Check repo-root `HANDOFF.md` when permitted** — the canonical project handoff. If present,
    read current state, blockers, next action, and verification; tolerate older
-   section names without assuming they contain the full backlog.
+   section names without assuming they contain the full backlog. A denied read
+   follows the boundary below, not the absent-file fallback.
 2. **Check the authoritative task list** linked from handoff or `AGENTS.md`.
    Otherwise read root `TODO.md` if present. Use relevant pending work to inform
    recovery, not to force old tasks onto a new request. If handoff is missing,
@@ -21,6 +22,23 @@ At the start of every relevant conversation:
    list, or session memory, offer a one-line recovery summary subject to the
    inhibition rules. These checks are read-only; do not rewrite continuity
    records or create episodic/native memory as part of recovery.
+
+### Denied sources and unknown worktree state
+
+- Distinguish an **absent** record from a **policy-denied** source. Report the
+  denial and resulting unknowns; do not infer that the project has no pending
+  work or that the denied source contains any particular task.
+- Do not request that the user paste, supply, reupload, or summarize denied
+  contents. Do not reconstruct them from backups, session history, another
+  tool, or another channel. A user-mediated copy is not a permission bypass.
+- Use only independently authorized context. If a safe next step is unclear,
+  ask for the task goal or next action without requesting restricted source
+  contents or a summary of them. Do not make the user explain the denial to
+  continue.
+- Preserve the boundary between supplied fixture facts and live observations.
+  Do not infer staged/unstaged state, change age, filenames, counts, or task
+  completion from the word "modified." State any unobserved details as unknown;
+  run checks only when separately permitted.
 
 ### When to Surface Context
 

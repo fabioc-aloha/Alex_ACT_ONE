@@ -20,6 +20,10 @@ or browsers fail explicitly; the harness does not download one. It runs in a
 fresh headless browser, closes every page and the browser in `finally`, and saves
 downloaded specs only to test-owned temporary files that it removes afterward.
 The JSON result goes to stdout; a failed or blocked required check exits nonzero.
+Run this browser gate separately from CPU-intensive full-suite jobs. During
+release preparation, concurrent runs reached the bounded resize deadline while
+standalone runs passed; this is not evidence that concurrent/stress execution
+has been certified. Preserve timeout reports rather than treating them as passes.
 
 The exported `verifyShowcasePage(page, options)` can also use an existing
 Playwright page scoped to a local demo. `nativeFocus: true` opts into the
@@ -44,6 +48,11 @@ run below therefore used the direct Node CLI, not an integrated-browser run.
 | Resize | Settled plots fit their nearest clipping containers at desktop, tablet, and narrow widths |
 | Saved spec | A download event produces an actual saved file, equal to the selected starting input |
 | Provenance | Embedded data and upstream App digests match their actual payloads |
+
+Resize settling requires repeated exact agreement between the current iframe
+and child viewport widths before measuring plot fit. A width captured before
+scrollbars or automatic-height layout settles can become stale; the clipping
+and chart-fit thresholds are not relaxed to compensate.
 
 Line charts may dim every base path and redraw the selected series in an
 overlay. The harness checks the selected series' unique stroke identity in

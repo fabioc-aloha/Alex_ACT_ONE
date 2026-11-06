@@ -43,3 +43,12 @@ test('scenario instructions require fresh observed evidence rather than syntheti
     assert.match(guide, /CLI.*VS Code.*Scout.*Copilot app/is);
     assert.match(guide, /no.*(?:telemetry|standing.*ledger)/is);
 });
+
+test('every scenario explicitly permits the required skill references without granting commands or writes', () => {
+    const suite = JSON.parse(readFileSync(path, 'utf8'));
+    assert.equal(suite.version, '2026-11-05.2');
+    for (const item of suite.cases) {
+        assert.ok(item.prompt.includes('Loading guidance includes reading the skill and its required bundled references.'), item.id);
+        assert.ok(item.prompt.includes('This does not permit commands, file writes, installation, or external actions.'), item.id);
+    }
+});

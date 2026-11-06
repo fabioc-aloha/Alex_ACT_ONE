@@ -114,10 +114,12 @@ examples against an installed copy from an unrelated directory. Keep opening or
 sending examples illustrative and consent-dependent; never execute arbitrary
 Markdown blocks to expand coverage.
 
-The [first-session guide](docs/getting-started.md) leads with direct repository
-installation. Keep the Mall alternative and its registration prerequisite in
-the [install reference](docs/install.md#mall-option), and verify that both paths
-describe their delivery source accurately. The onboarding test exercises
+The [first-session guide](docs/getting-started.md) uses Mall-first installation
+with its registration prerequisite. The
+[install reference](docs/install.md#mall-option) keeps the reviewed-release
+route canonical and labels direct source testing deprecated. Preserve the
+observed CLI warning; help listing a command is not evidence against deprecation.
+Verify that both paths describe their delivery source accurately. The onboarding test exercises
 activation only in an explicit disposable profile, verifies the second preview
 is unchanged, and checks old README section anchors. It does not execute plugin
 install commands or prove host loading. Do not use the reinstall helper as a
@@ -271,8 +273,8 @@ Clean tree, zero commits behind. Then push.
 
 ## 10. After Mall delivery, verify a real installation
 
-Mall is the reviewed-release alternative, not a prerequisite for the
-repository-first [getting-started path](docs/getting-started.md).
+Mall is the normal reviewed-release path in the
+marketplace-first [getting-started guide](docs/getting-started.md).
 This section applies only after separately approved Mall publication and
 installation; a source push does not authorize running the helper below.
 

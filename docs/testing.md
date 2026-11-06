@@ -1,5 +1,11 @@
 # Verification environments and release gates
 
+Release version: `0.9.0`. Use the
+[release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.0)
+for the frozen commit's CI, clean-clone, artifact, and packaged recovery results.
+The dated baseline runs below do not substitute for same-commit release evidence.
+Live-host and browser observations retain their separately documented limits.
+
 The source workflow targets Windows Server 2025 and Ubuntu 24.04 on x64.
 Structural jobs use Node 24 and 26; provisioned integration jobs use Node 26.
 These are verification targets, not certification of every Copilot host or OS.
@@ -158,10 +164,11 @@ Markdown shell blocks as a documentation checker.
 
 ## Onboarding verification
 
-The [first-session guide](getting-started.md) starts with direct repository
-installation; the [install reference](install.md#mall-option) keeps Mall as the
-reviewed-release alternative. Source and Mall can share a plugin version while
-having different contents, so record the loaded root and revision when available.
+The [first-session guide](getting-started.md) uses Mall-first installation.
+The [install reference](install.md#mall-option) keeps the reviewed-release
+route canonical and records the observed deprecation of direct source installs.
+Source and Mall can share a plugin version while having different contents,
+so record the loaded root and revision when available.
 
 Run the focused documentation and routing checks without installing anything:
 
@@ -190,6 +197,17 @@ The [versioned scenario kit](verification/README.md) covers representative
 skill families and failure/consent boundaries. Its tests check fixture structure,
 declared skill owners, and coverage; they do not grade model responses or turn
 unrun hosts into verified rows.
+
+The [CLI scenario runner](../scripts/run-skill-scenarios.mjs) probes one explicitly
+selected installed executable with automatic updates disabled, exposes only
+guidance-loading tools, and sends exact versioned prompts via stdin.
+Its [deterministic regressions](../tests/skill-scenario-runner.test.mjs) cover
+version-bound flag selection, explicit session-local package selection, and
+fail-closed response/tool/mutation evidence. A disposable corrected source copy
+can be selected without installing it; read-reference digests preserve its
+identity after cleanup.
+Real model results require the separate semantic review described in the
+[scenario run guide](verification/README.md#running-the-cli-scenarios).
 
 The [browser acceptance guide](verification/flint-browser.md) documents the
 optional real-browser gate and its recorded scope. It runs outside the existing

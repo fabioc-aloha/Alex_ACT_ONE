@@ -1,12 +1,12 @@
 # Roadmap
 
 Updated 2026-11-05. This is the forward plan for pending work, not a history of
-completed repairs. R8 live-host evidence is next; runtime upgrade recovery needs
+completed repairs. R8 remaining-host evidence is next; runtime upgrade recovery needs
 a design decision before implementation.
 
-The repository test candidate is `v0.9.0-rc.1`; the published baseline remains
-`v0.8.0`. Repository source includes later work;
-existing installations do not acquire it automatically. See
+Release version: `v0.9.0`. This roadmap describes work beyond its scoped
+verification, not an instruction to reopen completed repairs or automatically
+change existing installations. See
 [installation sources](docs/install.md#installation-sources) for the distinction.
 Current verification belongs in [testing](docs/testing.md),
 [scenario evidence](docs/verification/README.md), and
@@ -16,7 +16,12 @@ Current verification belongs in [testing](docs/testing.md),
 
 ### R8. Run fresh live-host scenarios
 
-**Status:** the synthetic scenario kit is ready; fresh host runs are not run.
+**Status:** the CLI invocation is fixed and the revised suite has real model
+results in [scenario evidence](docs/verification/README.md). Fresh `.2` reasoning
+also loaded the required references in VS Code without coaching.
+The recovery finding has a canonical correction and a passing scoped CLI
+source retest. Scout and the Copilot app remain not run. Existing candidate
+installations require an explicitly approved upgrade to receive new source.
 
 Use the [versioned cases and run guide](docs/verification/README.md) to exercise
 reasoning, review, recovery, conversion, chart, and draft-only workflows.
@@ -25,8 +30,11 @@ and approval-boundary cases rather than testing only successful requests.
 
 **Next actions**
 
-- Start with a fresh Copilot CLI session, then repeat in VS Code, Scout, and
-  the Copilot app as access permits.
+- Verify the corrected recovery guidance in the final delivered package;
+  preserve both the original finding and isolated-source retest in the evidence.
+  Do not treat the unchanged installed candidate as already repaired.
+- Repeat in Scout and the Copilot app as access permits. Expand VS Code coverage
+  only with separately observed cases, not by inheriting the boundary-test result.
 - Record the loaded plugin root, source revision when available, host/version,
   model/settings, instruction state, exact invocation, response, and tool actions.
 - For Scout, verify the shared Copilot CLI store, **Load Copilot CLI skills**,
@@ -41,13 +49,21 @@ failures and limitations. Discovery, instruction loading, MCP connectivity, and
 end-to-end behavior must remain separate claims. Do not mark an inaccessible
 host freshly verified or infer semantic compliance from structural tests.
 
-### Validate candidate delivery before publication
+### Verify future delivery changes
 
-**Status:** the repository test candidate is selected; live installation testing
-and release publication remain separate gates.
+**Status:** release verification follows the
+[release checklist](RELEASE-CHECKLIST.md). Each later source or delivery change
+needs its own evidence; an earlier candidate's green CI is not transferable.
 
 **Next actions**
 
+- Keep Mall-first onboarding. Direct installs succeeded for this candidate but
+  emitted a deprecation warning covering repositories, URLs, and local paths.
+  Plan a separately approved marketplace-based candidate route rather than
+  relying on direct installs for future CLI versions. This is future delivery
+  planning, not an additional implementation blocker for `0.9.0`. Preserve the observed
+  warning in the [install reference](docs/install.md#testing-the-repository-candidate).
+  No Mall publication or installation switch is implied by this correction.
 - For each approved source change, commit and push the reviewed candidate to main.
 - Require the Windows/Ubuntu structural matrix, provisioned integration lanes,
   and exact demo rebuilds for that same commit. Verify from a clean clone using
@@ -57,7 +73,7 @@ and release publication remain separate gates.
   shorthand for release readiness.
 - If publication is requested, choose a new version, review source-versus-release
   notices, publish an immutable release, and update the optional Mall route.
-  Do not move the existing `v0.8.0` tag.
+  Do not move existing published tags.
 
 **Done when:** the selected delivery operation is verified end to end.
 A source push, tagged release, Mall update, plugin installation, profile

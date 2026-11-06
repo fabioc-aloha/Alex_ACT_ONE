@@ -20,10 +20,16 @@ Alex ACT ONE is a pack of skills for GitHub Copilot that changes how the agent w
 
 ### Quick install
 
-Install directly from the repository:
+If Alex Mall is not already registered, add it first:
 
 ```powershell
-copilot plugin install fabioc-aloha/Alex_ACT_ONE
+copilot plugin marketplace add fabioc-aloha/Alex_Skill_Mall
+```
+
+Install the reviewed release:
+
+```powershell
+copilot plugin install alex-act-one@alex-mall
 ```
 
 Then follow [your first session](docs/getting-started.md) for preview-first
@@ -31,21 +37,25 @@ activation, verification, and a read-only critical-thinking exercise. Installati
 alone does not turn on the always-on instructions. No optional runtime tools or
 API tokens are needed for that workflow.
 
-The [install and host reference](docs/install.md) covers the Mall option for a
-reviewed release, Scout setup, and optional tools. Already set up? Browse the
+Direct repository installs still work but are deprecated; they are not the
+recommended onboarding path. The [install and host reference](docs/install.md)
+covers temporary candidate testing, Scout setup, and optional tools.
+Already set up? Browse the
 [skill catalog](#the-skills).
 
-**Release status, reviewed 2026-11-05:** the published baseline is `v0.8.0`.
-The repository test candidate is `v0.9.0-rc.1`; it is not a tagged release or
-a Mall update. See [switching from Mall for testing](docs/install.md#testing-the-repository-candidate).
-This source checkout also includes the not yet released `flint-interactions`
-workflow, offline demonstration pages, activation/runtime/conversion repairs,
-and the first-session guide.
-Existing installations do not acquire those changes automatically. Repository
-installs can include these source changes; Mall installs track the reviewed
-release. See [installation sources](docs/install.md#installation-sources) for
-revision checks and the separate activation/runtime steps. Existing command names,
-bootstrap activation, and optional browser fallback remain available.
+**Release version: `v0.9.0`**, prepared 2026-11-05. This version includes the
+`flint-interactions` workflow, offline chart demonstrations, activation/runtime/
+conversion repairs, the first-session guide, and explicit denied-source recovery
+boundaries. Existing command names, preview-first bootstrap, and optional browser
+fallback remain available; runtime package pins are unchanged.
+
+Existing installations do not update automatically. Use the reviewed Mall
+release, verify the loaded version/root, and preview activation again before
+approving profile changes. The [install reference](docs/install.md#installation-sources)
+separates package delivery, activation, and optional runtime provisioning.
+CLI/VS Code observations and local browser evidence have
+[documented limits](docs/verification/README.md); Scout and Copilot app behavior
+is **not freshly verified** for this release.
 
 Try the [offline Flint chart gallery](docs/flint-showcase.html) for working examples of semantic data, themes, interactions, linked views, and static exports, or the [experimental interaction lab](docs/flint-experimental.html) for polar brushing, direct reordering, distribution shapes, and reader-driven stories. Open either downloaded HTML in a browser; no server or connection is needed.
 
@@ -322,7 +332,7 @@ theme, interaction, and board grammar; ONE supplies framing, consent, and
 verification. Author the semantic input, validate it, and then use `show` for a
 live chart or board. Static rendering and backend compilation remain separate.
 
-The source-only [flint-interactions](skills/flint-interactions/SKILL.md) workflow
+The [flint-interactions](skills/flint-interactions/SKILL.md) workflow
 distinguishes reader gestures (`interaction_spec`), initial or agent-authored
 state (`updates`), linked boards (`link_spec`), and requested application code.
 It checks incompatible gestures and dropped-interaction warnings, then requires
@@ -440,7 +450,7 @@ the previous section destinations for existing bookmarks.
 
 ### 1. Install the plugin
 
-See [source and Mall installation](docs/install.md#1-install-the-plugin).
+See [Mall installation and deprecated source testing](docs/install.md#1-install-the-plugin).
 
 ### 2. Turn on the always-on instructions, once in each app
 
@@ -531,11 +541,12 @@ failures that motivated them are in the
 
 ## What Is Next
 
-R7 onboarding, the R10 local browser gate, and R11 evaluation calibration are
-complete in source. R8's [versioned scenarios](docs/verification/README.md)
-are ready; fresh live-host runs remain next. R9 runtime upgrade recovery needs
-its own design decision. See the [roadmap](ROADMAP.md) for acceptance gates;
-completion in source does not publish a release or update an installation.
+R7 onboarding, the scoped local browser gate, and evaluation calibration are
+complete. R8's [versioned scenarios](docs/verification/README.md) have scoped
+CLI/VS Code observations; remaining host coverage is explicitly unverified.
+R9 runtime upgrade recovery and broader accessibility/browser coverage remain
+future work. See the [roadmap](ROADMAP.md) for acceptance gates and approval
+boundaries; publication does not update an existing installation or profile.
 
 ## License
 

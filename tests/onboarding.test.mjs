@@ -25,22 +25,24 @@ test('one short guide covers install, consented activation, verification, and a 
     for (const heading of ['Install', 'Activate', 'Verify', 'Try one workflow']) {
         assert.match(text, new RegExp(`^## \\d\\. ${heading}`, 'm'));
     }
-    assert.match(text, /copilot plugin install fabioc-aloha\/Alex_ACT_ONE/);
-    assert.doesNotMatch(text, /copilot plugin marketplace add|copilot plugin install alex-act-one@alex-mall/);
+    assert.match(text, /copilot plugin install alex-act-one@alex-mall/);
+    assert.doesNotMatch(text, /copilot plugin install fabioc-aloha\/Alex_ACT_ONE/);
     assert.ok(text.includes('](install.md#mall-option)'));
     const reference = read(referencePath);
     const marketplace = read('reinstall-and-check.ps1').match(/MarketplaceSource = '([^']+)'/)?.[1];
     assert.ok(marketplace, 'Use the same reviewed marketplace as the repository installer');
     const register = `copilot plugin marketplace add ${marketplace}`;
-    const mall = reference.indexOf('#### Mall option');
-    const direct = reference.indexOf('copilot plugin install fabioc-aloha/Alex_ACT_ONE');
-    assert.ok(mall >= 0, 'Keep marketplace setup in the detailed option');
-    assert.ok(direct >= 0 && direct < mall);
-    assert.ok(reference.indexOf(register) > mall);
-    assert.ok(reference.indexOf(register) < reference.indexOf('copilot plugin install alex-act-one@alex-mall'));
-    assert.doesNotMatch(reference, /deprecation notice for repository installs|Mall command is preferred/);
+    assert.ok(text.includes(register), 'A fresh profile must register Mall before using its install command');
+    assert.ok(text.indexOf(register) < text.indexOf('copilot plugin install alex-act-one@alex-mall'));
+    const installSection = reference.split('### 1. Install the plugin')[1]?.split('### 2.')[0];
+    assert.ok(installSection, 'Missing the detailed install section');
+    const mall = installSection.indexOf('#### Mall option');
+    const direct = installSection.indexOf('copilot plugin install fabioc-aloha/Alex_ACT_ONE');
+    assert.ok(mall >= 0 && direct > mall, 'Lead the reference install section with Mall, not deprecated direct installation');
+    assert.ok(installSection.indexOf(register) > mall);
+    assert.ok(installSection.indexOf(register) < installSection.indexOf('copilot plugin install alex-act-one@alex-mall'));
     for (const source of [text, reference]) {
-        assert.match(source, /repository source/);
+        assert.match(source, /repository\s+source/);
         assert.match(source, /unreleased/);
         assert.match(source, /reviewed release/);
     }
@@ -52,7 +54,7 @@ test('one short guide covers install, consented activation, verification, and a 
     }
     assert.match(text, /host.*(?:observ|load)|(?:observ|load).*host/i);
     assert.match(text, /no optional.*tools/i);
-    assert.match(text, /source.only|not yet released/i);
+    assert.ok(text.includes(`Release version: \`${JSON.parse(read('plugin.json')).version}\``));
     assert.match(text, /demo.only/i);
 });
 
@@ -76,11 +78,13 @@ test('README routes to onboarding before its catalogs and keeps setup reference 
     const entry = readme.indexOf(`](${guidePath})`);
     assert.ok(entry >= 0 && entry < readme.indexOf('## The Skills'));
     assert.ok(readme.includes(`](${referencePath})`));
-    const install = readme.indexOf('copilot plugin install fabioc-aloha/Alex_ACT_ONE');
-    assert.ok(install >= 0 && install < entry, 'Lead with direct installation before the guide');
+    const install = readme.indexOf('copilot plugin install alex-act-one@alex-mall');
+    assert.ok(install >= 0 && install < entry, 'Lead with marketplace installation before the guide');
     const start = readme.slice(readme.indexOf('## Start here'), readme.indexOf('## What You Can Do'));
-    assert.doesNotMatch(start, /copilot plugin marketplace add|copilot plugin install alex-act-one@alex-mall/);
-    assert.match(start, /repository\s+installs.*source changes/is);
+    assert.match(start, /copilot plugin marketplace add fabioc-aloha\/Alex_Skill_Mall/);
+    assert.doesNotMatch(start, /copilot plugin install fabioc-aloha\/Alex_ACT_ONE/);
+    assert.match(start, /deprecat/i);
+    assert.match(start, /Existing installations do not update automatically/);
     assert.doesNotMatch(readme, /under Install\.\./);
     const reference = read(referencePath);
     for (const section of ['Where Alex ACT ONE Works', 'Install', 'On Microsoft Scout, register the MCP servers',
@@ -89,6 +93,20 @@ test('README routes to onboarding before its catalogs and keeps setup reference 
     }
     assert.match(reference, /historical host evidence/);
     assert.match(reference, /^> all 60 skills surfaced/m);
+});
+
+test('install guidance preserves observed deprecation instead of treating command availability as a support promise', () => {
+    const reference = read(referencePath);
+    assert.ok(reference.includes('Warning: Direct plugin installs (repos, URLs, local paths) are deprecated. Only plugin@marketplace installs will be supported in a future release.'));
+    assert.match(reference, /installation succeeded/i);
+    assert.match(reference, /(?:removal|retirement).*(?:date|version)|(?:date|version).*removal/i);
+    assert.match(reference, /help.*not.*deprecat|deprecat.*help/is);
+    assert.match(read('ROADMAP.md'), /marketplace.*candidate|candidate.*marketplace/i);
+    for (const file of ['RELEASE-CHECKLIST.md', 'docs/testing.md']) {
+        const source = read(file);
+        assert.doesNotMatch(source, /repository-first|leads with direct repository|starts with direct repository/i);
+        assert.match(source, /Mall-first|marketplace-first/i);
+    }
 });
 
 test('onboarding links and legacy README setup anchors still resolve', () => {

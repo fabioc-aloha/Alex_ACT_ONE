@@ -6,20 +6,27 @@ workflow. You need a working GitHub Copilot setup and Node 24 or newer, but
 Copilot CLI is the reference path below; VS Code also exposes the activation
 command. Other hosts have [their own setup steps](install.md#where-alex-act-one-works).
 
+Release version: `0.9.0`. Verify the installed version and delivery source;
+this guide does not establish that a host loaded the instructions.
+
 ## 1. Install
 
-Install directly from the repository in your terminal:
+If Alex Mall is not registered, add it in your terminal:
 
 ```powershell
-copilot plugin install fabioc-aloha/Alex_ACT_ONE
+copilot plugin marketplace add fabioc-aloha/Alex_Skill_Mall
 ```
 
-This installs repository source, which can include unreleased changes.
-The repository test candidate is `0.9.0-rc.1`, not a tagged or Mall release.
-For the reviewed release instead, use the [Mall option](install.md#mall-option).
-No marketplace registration is needed for the direct command.
-Already using Mall? Follow the [candidate switch procedure](install.md#testing-the-repository-candidate)
-after the candidate's source verification passes.
+Then install the reviewed release:
+
+```powershell
+copilot plugin install alex-act-one@alex-mall
+```
+
+See the [Mall option](install.md#mall-option) for details. Direct repository
+source installs can include unreleased changes and are deprecated.
+The [historical candidate procedure](install.md#testing-the-repository-candidate)
+records the warning and is separate from normal onboarding.
 
 Open a Copilot session and confirm it discovers the installed `bootstrap-core`
 and `critical-thinking` skills. If either is missing, stop and check the loaded
@@ -42,9 +49,8 @@ Activation affects every workspace using that profile, not just this project.
 Give approval only for the target and actions you want. Installing the plugin
 alone does not activate instructions; repeat activation in each app you use.
 
-The source-only conflict guard is not in published `v0.8.0`. Review existing
-files before approving replacements; do not assume the release will block them.
-If blocked in the source candidate, stop and review the
+Version `0.9.0` blocks modified or unowned instruction conflicts before writing.
+Review existing files before approving replacements. If blocked, stop and review the
 [conflict procedure](../skills/bootstrap-core/SKILL.md#instruction-conflicts);
 do not add an overwrite flag to get past it.
 
@@ -78,8 +84,8 @@ Use the critical-thinking skill in act-pass mode.
 This is a synthetic dashboard case: someone reports that loading takes
 8 seconds and proposes a Rust rewrite or Redis caching. No timings have
 been measured beyond that report.
-Do not edit or write files. Apart from loading the skill guidance,
-do not use tools or commands for this exercise.
+Do not edit or write files. Apart from loading skill guidance, including
+its required bundled references, do not use tools or commands for this exercise.
 Give two plausible explanations, evidence that would disconfirm each,
 and the next measurement to collect. Mark what remains unknown rather
 than choosing a rewrite or cache without evidence.
@@ -95,7 +101,6 @@ This is one practice case, not evidence of general reliability gains.
 - [Skills and commands](../README.md#the-skills): choose a workflow for your work.
 - [Install and host reference](install.md): Scout, other hosts, optional tools,
   and reinstall boundaries.
-- [Roadmap](../ROADMAP.md): the published baseline is `v0.8.0`; repository installs
-  can include later source-only repairs and the interaction skill, which are not
-  yet released through Mall. The offline galleries are demo-only files to open
-  in a browser, not proof your MCP runtime is ready.
+- [Roadmap](../ROADMAP.md): remaining host verification, runtime upgrade recovery,
+  and accessibility work. The offline galleries are demo-only files to open in
+  a browser, not proof your MCP runtime is ready.

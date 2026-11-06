@@ -45,6 +45,22 @@ export function summarizeAcceptance(checks) {
     return { passed: checks.every(check => check.status === 'passed'), checks };
 }
 
+export async function waitForFrameViewport(page, frame) {
+    const deadline = Date.now() + 10000;
+    let previous;
+    let parent;
+    let child;
+    while (Date.now() < deadline) {
+        parent = await page.locator('#flint-viewer').evaluate(element => Math.round(element.clientWidth));
+        child = await frame.evaluate(() => innerWidth);
+        if (!Number.isFinite(parent) || !Number.isFinite(child)) throw new Error('Invalid iframe viewport dimensions');
+        if (parent > 0 && child === parent && previous === parent) return parent;
+        previous = child === parent ? parent : undefined;
+        await page.waitForTimeout(100);
+    }
+    throw new Error(`Iframe viewport did not settle: current parent=${parent}, child=${child}`);
+}
+
 function rgb(value) {
     const channels = value.match(/[\d.]+/g)?.map(Number);
     if (!channels || (channels.length !== 3 && !(channels.length === 4 && channels[3] === 1))) {
@@ -311,8 +327,7 @@ export async function verifyShowcasePage(page, { nativeFocus = false, downloads 
             for (const width of [1440, 768, 390]) {
                 await page.setViewportSize({ width, height: 1000 });
                 await page.waitForFunction(expected => innerWidth === expected, width, { polling: 100, timeout: 10000 });
-                const frameWidth = await page.locator('#flint-viewer').evaluate(element => Math.round(element.clientWidth));
-                await frame.waitForFunction(expected => innerWidth === expected, frameWidth, { polling: 100, timeout: 10000 });
+                await waitForFrameViewport(page, frame);
                 await frame.waitForFunction(function stable() {
                     const svgs = [...document.querySelectorAll('svg.marks')];
                     const signature = JSON.stringify(svgs.map(svg => {

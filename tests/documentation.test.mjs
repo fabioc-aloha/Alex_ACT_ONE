@@ -105,14 +105,15 @@ test('generation rejects a prompt routed to a missing owner before producing mis
     assert.throws(() => generateSections(fixture), /missing.owner|undeclared.*owner/i);
 });
 
-test('current docs distinguish shipped optimization from source-only chart additions', () => {
+test('release docs include the interaction workflow without claiming exhaustive host verification', () => {
     const readme = read('README.md');
     assert.match(readme, /## Native-first.*optimization/i);
     for (const owner of ['critical-thinking', 'code-review', 'big-idea', 'convert', 'proactive-awareness', 'compile-brain']) {
         assert.ok(readme.includes(`](skills/${owner}/SKILL.md)`), owner);
     }
-    assert.match(readme, /published.*v0\.8\.0|v0\.8\.0.*published/i);
-    assert.match(readme, /source.only|not yet released/i);
+    assert.ok(readme.includes(`Release version: \`v${manifest.version}\``));
+    assert.doesNotMatch(readme, /source-only \[flint-interactions\]|not yet released `flint-interactions`/);
+    assert.match(readme, /unverified|not freshly verified/i);
     for (const demo of ['flint-showcase.html', 'flint-experimental.html']) {
         assert.ok(readme.includes(`](docs/${demo})`), demo);
     }
@@ -169,12 +170,12 @@ test('roadmap is a pending-work plan with evidence links and explicit decision g
     assert.match(roadmap, /not run/);
 });
 
-test('repository candidate notices match package metadata and keep the manual install switch explicit', () => {
+test('release notices match package metadata and keep historical candidate switching explicit', () => {
     const plugin = JSON.parse(read('plugin.json'));
     assert.equal(plugin.version, manifest.version);
     const escaped = manifest.version.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     for (const file of ['README.md', 'ROADMAP.md', 'docs/install.md', 'docs/getting-started.md']) {
-        assert.match(read(file), new RegExp(`candidate[^\\n]*\`v?${escaped}\``, 'i'), file);
+        assert.match(read(file), new RegExp(`Release version: \`v?${escaped}\``, 'i'), file);
     }
     const install = read('docs/install.md');
     assert.match(install, /^## Testing the repository candidate$/m);
@@ -186,4 +187,5 @@ test('repository candidate notices match package metadata and keep the manual in
     assert.match(install, /uninstall.*does not.*(?:instruction|profile)/is);
     assert.match(install, /preview.*approval/is);
     assert.match(install, /not.*reinstall-and-check\.ps1/is);
+    assert.match(install, /historical.*candidate|candidate.*historical/i);
 });
