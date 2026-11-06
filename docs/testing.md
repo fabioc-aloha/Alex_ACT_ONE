@@ -227,6 +227,27 @@ the original embedded App and upstream notices remain unchanged.
 
 ## Evidence limits
 
+The adversarial-regression checks use disposable profiles, project scaffolds
+and converter outputs. They do not reinstall a real plugin, activate a user
+profile, send email or provision dependencies:
+
+```powershell
+node --test tests\reinstall-release.test.mjs tests\install-optional-dependencies.test.mjs tests\activation-conflicts.test.mjs tests\bootstrap-project.test.mjs
+node --test tests\brain-tools.test.cjs tests\deterministic-helpers.test.cjs tests\process-launch.test.mjs tests\tool-shims.test.cjs tests\runtime-readiness.test.mjs tests\documentation-examples.test.mjs
+node --test tests\markdown-inline-code.test.cjs tests\md-to-word.test.mjs tests\rich-email.test.cjs
+```
+
+Real DOCX media preservation, detached Word conversion, HTML TOC and local-image
+embedding run in `tests\conversion-runtime.test.cjs` with existing Pandoc and
+the explicitly selected runtime. Use the strict integration lane above to
+reject missing prerequisites or skipped cases. Mocked renderer failures and
+PowerShell SVG-input checks do not establish browser readiness.
+
+Converter regressions also cover literal image examples in DOCX code alongside
+real media, and malformed PNG chunks, checksums, compressed data, raster length,
+and row filters. Failed PNG validation must not call Pandoc or replace a prior
+diagram/Word output. Positive rendering fixtures use checksum-correct PNG bytes.
+
 CI is not live Copilot skill invocation, browser gesture/accessibility UAT, a
 security audit, New Outlook opening/sending, or a paid Replicate request.
 Those require their own scoped evidence and consent. See the

@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { existsSync, mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { createRequire } from 'node:module';
 import { spawnSync } from 'node:child_process';
@@ -16,7 +15,7 @@ const name = 'alex-act-act-pass.instructions.md';
 const receiptName = '.alex-act-one-bootstrap.json';
 const hash = value => createHash('sha256').update(value).digest('hex');
 function fixture(t) {
-    const root = mkdtempSync(join(tmpdir(), 'one-activation-conflict-'));
+    const root = mkdtempSync(join(ROOT, '.test-activation-conflict-'));
     const target = join(root, 'instructions');
     mkdirSync(target);
     t.after(() => rmSync(root, { recursive: true, force: true }));
@@ -119,6 +118,58 @@ test('a late destination change invalidates an in-memory plan before any writes'
     assert.throws(() => bootstrap.applyPlan(plan, options), /changed|conflict|stale/i);
     assert.deepEqual(snapshot(target), before);
     assert.equal(existsSync(join(target, receiptName)), false);
+});
+
+for (const change of ['instruction', 'receipt', 'missing-instruction', 'absent-instruction', 'missing-receipt']) {
+    test(`stale removal refuses a changed ${change} before deleting any owned state`, (t) => {
+        const target = fixture(t);
+        apply(target);
+        if (change === 'absent-instruction') rmSync(join(target, name));
+        const options = bootstrap.parseArgs(['--target-instructions', target, '--remove', '--apply']);
+        const plan = bootstrap.buildPlan(options);
+        if (change === 'instruction' || change === 'absent-instruction') {
+            writeFileSync(join(target, name), '# Newly customized fixture instruction\n');
+        } else if (change === 'receipt') {
+            const receiptPath = join(target, receiptName);
+            const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'));
+            receipt.timestamp = 'newly modified fixture receipt';
+            writeFileSync(receiptPath, JSON.stringify(receipt));
+        } else {
+            rmSync(join(target, change === 'missing-receipt' ? receiptName : name));
+        }
+        const before = snapshot(target);
+        assert.throws(() => bootstrap.applyPlan(plan, options), /changed|stale|preview again/i);
+        assert.deepEqual(snapshot(target), before);
+    });
+}
+
+test('stale removal cannot delete a receipt created after an empty preview', (t) => {
+    const target = fixture(t);
+    const options = bootstrap.parseArgs(['--target-instructions', target, '--remove', '--apply']);
+    const plan = bootstrap.buildPlan(options);
+    apply(target);
+    const before = snapshot(target);
+    assert.throws(() => bootstrap.applyPlan(plan, options), /receipt.*changed|stale/i);
+    assert.deepEqual(snapshot(target), before);
+});
+
+test('fresh removal preserves customized instructions and receipt, then removes clean owned state', (t) => {
+    const target = fixture(t);
+    apply(target);
+    const custom = '# Keep this fixture customization\n';
+    writeFileSync(join(target, name), custom);
+    const receipt = readFileSync(join(target, receiptName), 'utf8');
+    const removed = run(target, '--remove', '--apply');
+    assert.equal(removed.status, 0, removed.stderr);
+    assert.deepEqual(JSON.parse(removed.stdout).verification.preservedModified, [name]);
+    assert.deepEqual(readdirSync(target).sort(), [receiptName, name].sort());
+    assert.equal(readFileSync(join(target, name), 'utf8'), custom);
+    assert.equal(readFileSync(join(target, receiptName), 'utf8'), receipt);
+    writeFileSync(join(target, name), readFileSync(join(ROOT, 'instructions', 'act-pass.instructions.md')));
+    const clean = run(target, '--remove', '--apply');
+    assert.equal(clean.status, 0, clean.stderr);
+    assert.equal(JSON.parse(clean.stdout).verification.receiptRemoved, true);
+    assert.deepEqual(snapshot(target), []);
 });
 
 test('overwrite policy does not bypass removal ownership rules', (t) => {

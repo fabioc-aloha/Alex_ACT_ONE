@@ -80,6 +80,11 @@ All Mermaid diagram types are supported:
 
 Diagrams are rendered at 4x scale (4800px width) for crisp printing, then sized to fit within page bounds.
 
+Rendered PNGs are checked for chunk structure/checksums, valid dimensions,
+complete compressed raster data, and row filters before replacing an existing
+diagram. A failed render or validation stops conversion and preserves the
+previous diagram and Word output.
+
 ---
 
 ## Quick Start
@@ -440,7 +445,7 @@ node skills/md-to-word/scripts/md-to-word.cjs spec.md --watch
 ## For Other Projects
 
 1. Copy `skills/md-to-word/scripts/md-to-word.cjs` to the same relative path in the target project.
-2. Copy `tool-runner.cjs`, `dependencies.cjs`, `markdown-preprocessor.cjs`, and `mermaid-pipeline.cjs` to `scripts/shared/`, keeping that relative layout so the script's imports resolve.
+2. Copy the complete `scripts/shared/` directory to the same relative path in the target project. Keep its helpers together, including `process-command.cjs` and `runtime-status.cjs`, so unconditional and transitive imports resolve.
 3. Install prerequisites: Pandoc is required; jszip, Mermaid CLI, and svgexport are optional format helpers. The copied `tool-runner` still prints the install command for any missing tool.
 4. Run: `node skills/md-to-word/scripts/md-to-word.cjs your-doc.md`.
 

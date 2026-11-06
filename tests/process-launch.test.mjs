@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { test } from 'node:test';
 import { spawnCommand } from '../scripts/process-launch.mjs';
 
@@ -47,4 +47,26 @@ test('failed npm prefix discovery is explicit and never launches an unintended C
     const fixture = probe({ status: 1 });
     assert.throws(() => spawnCommand('npm', ['install', 'package'], {}, fixture.dependencies), /prefix/i);
     assert.equal(fixture.calls.filter(call => call.kind === 'launch').length, 0);
+});
+
+test('Windows Copilot npm shims resolve the reviewed package identity without a shell', () => {
+    const shim = join('prefix', 'copilot.cmd');
+    const directory = join('prefix', 'node_modules', '@github', 'copilot');
+    const metadata = join(directory, 'package.json');
+    const entrypoint = join(directory, 'npm-loader.js');
+    const calls = [];
+    const dependencies = {
+        platform: 'win32',
+        locate: () => ({ status: 0, stdout: shim + '\n' }),
+        fileExists: file => [metadata, resolve(entrypoint)].includes(file),
+        readMetadata: () => ({ name: '@github/copilot', bin: { copilot: 'npm-loader.js' } }),
+        launch: (command, args, options) => { calls.push({ command, args, options }); },
+    };
+    spawnCommand('copilot', ['plugin', 'list'], {}, dependencies);
+    assert.equal(calls[0].command, process.execPath);
+    assert.deepEqual(calls[0].args, [resolve(entrypoint), 'plugin', 'list']);
+    assert.equal(calls[0].options.shell, false);
+    assert.throws(() => spawnCommand('copilot', [], {}, {
+        ...dependencies, readMetadata: () => ({ name: 'other-package', bin: 'npm-loader.js' }),
+    }), /identity mismatch/);
 });

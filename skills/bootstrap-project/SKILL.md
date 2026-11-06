@@ -38,7 +38,11 @@ The minimal scaffold is `AGENTS.md`, thin Claude/Gemini adapters, `HANDOFF.md`,
 
 - One explicit repository root per invocation.
 - Divergent root `AGENT.md` and `AGENTS.md` block apply.
+- A lone legacy `AGENT.md` also blocks apply pending an explicit migration
+  decision; bootstrap does not create a competing `AGENTS.md`.
 - Existing handoff, episodic, agent, and settings files are preserved.
+- Post-apply verification must be unblocked with no pending scaffold, settings,
+  or `.gitignore` changes.
 - Comment-rich JSONC requiring changes fails closed for manual merge.
 - Do not create `MEMORY.md`, README, license, framework, package manager, or Git.
 - Do not edit VS Code user settings or configure shared continuity.

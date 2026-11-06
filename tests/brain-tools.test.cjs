@@ -408,11 +408,52 @@ test('scaffolds every supported platform when all is explicitly requested', () =
     const result = scaffold(root, 'all', ['--apply']);
     assert.equal(result.status, 0, result.stderr);
     const report = JSON.parse(result.stdout);
-    assert.equal(report.files.length, 8);
+    assert.equal(report.files.length, 16);
     assert.equal(fs.existsSync(path.join(root, '.agents', 'skills', 'compile-brain', 'SKILL.md')), true);
     assert.equal(fs.existsSync(path.join(root, '.cursor', 'skills', 'compile-brain', 'SKILL.md')), true);
     assert.equal(fs.existsSync(path.join(root, 'GEMINI.md')), true);
     assert.equal(fs.existsSync(path.join(root, 'CHATGPT-COMPILE-BRAIN.md')), true);
+});
+
+for (const [platform, entrypoint, scripts] of [
+    ['copilot', '.github/skills/compile-brain/SKILL.md', '.github/skills/compile-brain/scripts'],
+    ['agent-skills', '.agents/skills/compile-brain/SKILL.md', '.agents/skills/compile-brain/scripts'],
+    ['claude-code', '.claude/skills/compile-brain/SKILL.md', '.claude/skills/compile-brain/scripts'],
+    ['cursor', '.cursor/skills/compile-brain/SKILL.md', '.cursor/skills/compile-brain/scripts'],
+    ['codex', 'AGENTS.md', '.agents/skills/compile-brain/scripts'],
+    ['gemini-cli', 'GEMINI.md', '.agents/skills/compile-brain/scripts'],
+    ['chatgpt', 'CHATGPT-COMPILE-BRAIN.md', '.agents/skills/compile-brain/scripts'],
+]) {
+    test(`adopted ${platform} compiler includes runnable preservation helpers`, () => {
+        const root = temporaryDirectory('one-adopted-compiler-');
+        const result = scaffold(root, platform, ['--apply']);
+        assert.equal(result.status, 0, result.stderr);
+        const content = fs.readFileSync(path.join(root, entrypoint), 'utf8');
+        if (!entrypoint.endsWith('SKILL.md')) {
+            assert.ok(content.includes(`${scripts}/check-links.cjs`), 'Root adapter must name its actual helper route');
+        }
+        const document = path.join(root, 'fixture.md');
+        write(document, '# Fixture\n\n[Section](#fixture)\n');
+        const checked = spawnSync(process.execPath, [path.join(root, scripts, 'check-links.cjs'), document],
+            { cwd: os.tmpdir(), encoding: 'utf8' });
+        assert.equal(checked.status, 0, checked.stderr + checked.stdout);
+        const measured = spawnSync(process.execPath, [
+            path.join(root, scripts, 'measure-reduction.cjs'), document, document,
+        ], { cwd: os.tmpdir(), encoding: 'utf8' });
+        assert.equal(measured.status, 0, measured.stderr);
+        assert.match(measured.stdout, /Character reduction: 0\.0%/);
+    });
+}
+
+test('an existing adopted helper blocks the entire scaffold without changing its bytes', () => {
+    const root = temporaryDirectory('one-adopted-helper-conflict-');
+    const existing = path.join(root, '.claude', 'skills', 'compile-brain', 'scripts', 'check-links.cjs');
+    write(existing, '// Project-owned helper\n');
+    const before = hashTree(root);
+    const result = scaffold(root, 'claude-code', ['--apply']);
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /Refusing to overwrite/);
+    assert.equal(hashTree(root), before);
 });
 
 test('scaffolds from the normalized Mall package layout', () => {
@@ -428,6 +469,8 @@ test('scaffolds from the normalized Mall package layout', () => {
         path.join(packageRoot, 'commands', 'compile-brain.md'),
         fs.readFileSync(compilePrompt, 'utf8'),
     );
+    fs.cpSync(path.join(path.dirname(compileSkill), 'scripts'),
+        path.join(packageRoot, 'skills', 'compile-brain', 'scripts'), { recursive: true });
     const result = scaffoldWith(scaffoldScript, target, 'copilot', ['--apply']);
     assert.equal(result.status, 0, result.stderr);
     assert.equal(fs.existsSync(path.join(target, '.github', 'skills', 'compile-brain', 'SKILL.md')), true);
@@ -498,7 +541,7 @@ test('runs both commands by absolute path from an unrelated adopter directory', 
     const preview = spawnSync(process.execPath, [platformScaffolder, '--platform', 'all', '--target', cwd],
         { cwd, encoding: 'utf8' });
     assert.equal(preview.status, 0, preview.stderr);
-    assert.equal(JSON.parse(preview.stdout).files.length, 8);
+    assert.equal(JSON.parse(preview.stdout).files.length, 16);
     assert.equal(hashTree(cwd), before);
 });
 

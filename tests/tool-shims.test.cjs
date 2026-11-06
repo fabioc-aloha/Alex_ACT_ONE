@@ -11,7 +11,8 @@ function fixture(t, { tool = 'mmdc', local = false, badBin = false } = {}) {
     const prefix = path.join(root, 'prefix with spaces');
     const modules = path.join(prefix, 'node_modules');
     const bin = local ? path.join(modules, '.bin') : prefix;
-    const packageName = tool === 'mmdc' ? '@mermaid-js/mermaid-cli' : 'svgexport';
+    const packageName = tool === 'mmdc' ? '@mermaid-js/mermaid-cli'
+        : tool === 'copilot' ? '@github/copilot' : 'svgexport';
     const directory = path.join(modules, ...packageName.split('/'));
     fs.mkdirSync(bin, { recursive: true });
     fs.mkdirSync(directory, { recursive: true });
@@ -26,7 +27,7 @@ function fixture(t, { tool = 'mmdc', local = false, badBin = false } = {}) {
 const windows = { skip: process.platform === 'win32' ? false : 'Real npm .cmd layout is Windows-specific' };
 const args = ['path with spaces.svg', '& whoami', 'literal%PATH%', 'a!b', '`literal`', 'quote"value'];
 
-for (const options of [{}, { local: true }, { tool: 'svgexport' }]) {
+for (const options of [{}, { local: true }, { tool: 'svgexport' }, { tool: 'copilot' }]) {
     test(`Windows sync tool launch resolves the installed package bin: ${JSON.stringify(options)}`, windows, t => {
         const { shim } = fixture(t, options);
         const output = runTool(shim, args, { encoding: 'utf8', timeout: 5000 });

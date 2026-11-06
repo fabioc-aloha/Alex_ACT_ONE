@@ -92,3 +92,29 @@ test('Replicate documentation points to the real manifest and environment refere
     assert.doesNotMatch(source, /shipped `\.vscode\/mcp\.json`/);
     assert.equal(plugin.mcpServers.replicate.env.REPLICATE_API_TOKEN, '${env:REPLICATE_API_TOKEN}');
 });
+
+test('the documented standalone Word layout loads without the original checkout', t => {
+    const root = mkdtempSync(join(tmpdir(), 'one detached-word-'));
+    t.after(() => rmSync(root, { recursive: true, force: true }));
+    const instructions = readFileSync(join(ROOT, 'skills', 'md-to-word', 'SKILL.md'), 'utf8')
+        .split('## For Other Projects')[1].split('\n---')[0];
+    const destination = join(root, 'skills', 'md-to-word', 'scripts', 'md-to-word.cjs');
+    mkdirSync(dirname(destination), { recursive: true });
+    cpSync(join(ROOT, 'skills', 'md-to-word', 'scripts', 'md-to-word.cjs'), destination);
+    const shared = join(root, 'scripts', 'shared');
+    mkdirSync(shared, { recursive: true });
+    if (/Copy the complete `scripts\/shared\/` directory/.test(instructions)) {
+        cpSync(join(ROOT, 'scripts', 'shared'), shared, { recursive: true });
+    } else {
+        for (const [, name] of instructions.matchAll(/`([a-z-]+\.cjs)`/g)) {
+            if (name !== 'md-to-word.cjs') cpSync(join(ROOT, 'scripts', 'shared', name), join(shared, name));
+        }
+    }
+    const result = spawnSync(process.execPath, ['-e',
+        `const converter=require(${JSON.stringify(destination)});if(typeof converter.formatHeadings!=='function')process.exit(2);`],
+    { cwd: root, encoding: 'utf8', timeout: 10000,
+        env: { ...process.env, NODE_PATH: '', ALEX_ACT_ONE_RUNTIME_ROOT: join(root, 'absent-runtime') } });
+    assert.equal(result.status, 0, result.stderr);
+    assert.ok(existsSync(join(shared, 'runtime-status.cjs')));
+    assert.ok(existsSync(join(shared, 'process-command.cjs')));
+});

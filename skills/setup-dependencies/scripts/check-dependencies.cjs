@@ -83,16 +83,6 @@ function detectMcp() {
     return { servers: rows, root: MCP_RUNTIME, allPresent: rows.every((r) => r.present) };
 }
 
-// Resolve the executable rather than passing shell:true with arguments,
-// which triggers Node DEP0190 and concatenates args unescaped.
-function resolveCopilotBin() {
-    if (process.platform !== 'win32') return 'copilot';
-    const which = spawnSync('where.exe', ['copilot'], { encoding: 'utf8', timeout: 5000 });
-    if (which.status !== 0 || !which.stdout) return null;
-    const candidates = which.stdout.split(/\r?\n/).filter(Boolean).map((l) => l.trim());
-    return candidates.find((c) => /\.(cmd|exe|bat)$/i.test(c)) || candidates[0];
-}
-
 function candidateStores() {
     const seen = new Set();
     const out = [];
@@ -152,7 +142,6 @@ function marketplacePlugins(store) {
 }
 
 function detectPlugins() {
-    const bin = resolveCopilotBin();
     const stores = [];
     const installed = new Set();
 
@@ -161,20 +150,23 @@ function detectPlugins() {
         const fromMarketplace = marketplacePlugins(store);
         for (const name of fromMarketplace) installed.add(name);
 
-        if (!bin) {
-            // Without the CLI binary the marketplace scan is still meaningful.
-            if (fromMarketplace.size) anyRead = true;
-            stores.push({ path: store, available: fromMarketplace.size > 0, count: fromMarketplace.size });
-            continue;
-        }
-
-        const probe = spawnSync(bin, ['plugin', 'list'], {
+        const options = {
             encoding: 'utf8',
             env: { ...process.env, COPILOT_HOME: store },
             timeout: 15000,
-        });
+            shell: false,
+        };
+        let probe;
+        try {
+            const invocation = resolveInvocation('copilot', ['plugin', 'list'], options);
+            probe = spawnSync(invocation.command, invocation.args, options);
+        } catch (error) {
+            probe = { status: null, error };
+        }
         if (probe.status !== 0 || !probe.stdout) {
-            stores.push({ path: store, available: fromMarketplace.size > 0, count: fromMarketplace.size });
+            const error = probe.error?.message || String(probe.stderr || '').trim() ||
+                `Copilot plugin inventory returned exit ${probe.status} with no usable output`;
+            stores.push({ path: store, available: fromMarketplace.size > 0, count: fromMarketplace.size, error });
             if (fromMarketplace.size) anyRead = true;
             continue;
         }
@@ -268,6 +260,9 @@ if (!plugins.available) {
     if (plugins.stores.length > 1) {
         console.log('  Hosts point at different stores, so all are read and combined.');
     }
+}
+for (const store of plugins.stores) {
+    if (store.error) console.error(`  Plugin inventory unavailable at ${store.path}: ${store.error}`);
 }
 
 const missingRequired = byTier('required').filter((r) => !r.present).length;

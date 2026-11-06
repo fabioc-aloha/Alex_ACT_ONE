@@ -63,8 +63,8 @@ function slugify(heading, seen) {
     .trim()
     .toLowerCase()
     .replace(/[`*_~]/g, "")
-    .replace(/[^\p{L}\p{N} _-]/gu, "")
-    .replace(/\s+/g, "-");
+    .replace(/[^\p{L}\p{M}\p{N} _-]/gu, "")
+    .replace(/\s/g, "-");
   if (seen.has(slug)) {
     let n = 1;
     while (seen.has(`${slug}-${n}`)) n++;

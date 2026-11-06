@@ -75,7 +75,25 @@ function plannedFiles(platform) {
     if (platforms.some((name) => !Object.hasOwn(PLATFORM_FILES, name))) {
         throw new Error(`Unsupported platform: ${platform}`);
     }
-    return platforms.flatMap((name) => PLATFORM_FILES[name].map((file) => ({ ...file, platform: name })));
+    const files = new Map();
+    for (const name of platforms) {
+        for (const file of PLATFORM_FILES[name]) {
+            files.set(file.target, { ...file, platform: name });
+            if (file.source !== skillSource) continue;
+            const helperDirectory = file.stripFrontmatter
+                ? '.agents/skills/compile-brain/scripts'
+                : `${path.posix.dirname(file.target)}/scripts`;
+            for (const helper of ['check-links.cjs', 'measure-reduction.cjs']) {
+                const target = `${helperDirectory}/${helper}`;
+                if (!files.has(target)) files.set(target, {
+                    source: path.join(path.dirname(skillSource), 'scripts', helper),
+                    target,
+                    platform: name,
+                });
+            }
+        }
+    }
+    return [...files.values()];
 }
 
 function preflightDestination(root, destination) {
@@ -155,7 +173,12 @@ function main() {
     if (options.apply) {
         const prepared = files.map((file) => {
             let content = fs.readFileSync(file.source, 'utf8');
-            if (file.stripFrontmatter) content = removeFrontmatter(content);
+            if (file.stripFrontmatter) {
+                content = removeFrontmatter(content)
+                    .replace(/scripts\/(check-links|measure-reduction)\.cjs/g,
+                        '.agents/skills/compile-brain/scripts/$1.cjs')
+                    .replace(/in this skill's `scripts\/` directory/g, 'in the adopted compiler helper directory');
+            }
             return { ...file, content };
         });
         for (const file of prepared) {

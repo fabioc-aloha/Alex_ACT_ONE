@@ -206,7 +206,7 @@ function planGitignore(root) {
 function buildPlan(options) {
     const root = options.repositoryRoot;
     const classification = classify(root);
-    const blocked = classification === 'agent-source-conflict';
+    const blocked = classification === 'agent-source-conflict' || classification === 'legacy-singular';
     const creates = [];
     for (const [relativePath, resourceName] of Object.entries(RESOURCE_FILES)) {
         if (!fs.existsSync(path.join(root, relativePath))) {
@@ -267,7 +267,12 @@ function applyPlan(plan) {
         repositoryRoot: plan._root,
         apply: false,
     });
+    if (verification.blocked || verification.creates.length > 0
+        || verification.settings.action !== 'preserve' || verification.gitignore.action !== 'preserve') {
+        throw new Error(`project bootstrap verification failed: ${verification.classification}; preview again`);
+    }
     plan.verification = {
+        blocked: verification.blocked,
         pendingCreates: verification.creates.length,
         pendingSettingsChanges: verification.settings.changes.length,
     };

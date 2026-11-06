@@ -1,8 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 
@@ -27,19 +26,53 @@ function writePowerShell(file, content) {
 }
 
 function runReleaseForShell(t, shell, options = {}) {
-    const root = mkdtempSync(join(tmpdir(), 'alex-act-release-'));
+    const root = mkdtempSync(join(ROOT_PATH, '.test-release-'));
     const copilotHome = join(root, '.copilot');
+    const unselectedHome = join(root, 'unselected');
     const installedRoot = join(copilotHome, 'installed-plugins', 'alex-mall', 'alex-act-one');
-    const statePath = join(root, 'plugins.json');
-    const marketplaceStatePath = join(root, 'marketplaces.json');
+    const statePath = join(copilotHome, 'plugins.json');
+    const marketplaceStatePath = join(copilotHome, 'marketplaces.json');
     const bootstrapLog = join(root, 'bootstrap.log');
     const commandLog = join(root, 'commands.log');
+    const homeLog = join(root, 'homes.log');
+    const restoredLog = join(root, 'restored.json');
     const copilot = join(root, 'copilot.ps1');
     const node = join(root, 'node.ps1');
+    const wrapper = join(root, 'release-wrapper.ps1');
 
     t.after(() => rmSync(root, { recursive: true, force: true }));
+    mkdirSync(unselectedHome);
+    writeFileSync(join(unselectedHome, 'plugins.json'), '[]');
+    writeFileSync(join(unselectedHome, 'marketplaces.json'), '[]');
+    const snapshotUnselected = () => readdirSync(unselectedHome, { recursive: true, withFileTypes: true })
+        .filter(entry => entry.isFile())
+        .map(entry => {
+            const file = join(entry.parentPath, entry.name);
+            return [file.slice(unselectedHome.length), readFileSync(file, 'base64')];
+        }).sort(([a], [b]) => a.localeCompare(b));
+    const unselectedBefore = snapshotUnselected();
     mkdirSync(installedRoot, { recursive: true });
     writeFileSync(join(installedRoot, 'plugin.json'), JSON.stringify({ name: 'alex-act-one', version: '0.3.0' }));
+    if (options.realBootstrap) {
+        const copy = relative => {
+            const destination = join(installedRoot, relative);
+            mkdirSync(dirname(destination), { recursive: true });
+            writeFileSync(destination, readFileSync(join(ROOT_PATH, relative)));
+        };
+        copy('manifest.json');
+        copy(join('skills', 'bootstrap-core', 'scripts', 'bootstrap-core.cjs'));
+        for (const instruction of readdirSync(join(ROOT_PATH, 'instructions')).filter(name => name.endsWith('.instructions.md'))) {
+            copy(join('instructions', instruction));
+            const source = readFileSync(join(ROOT_PATH, 'instructions', instruction), 'utf8');
+            for (const [, skill] of source.matchAll(/\]\(\.\.\/skills\/([a-z0-9-]+)\/SKILL\.md\)/g)) {
+                copy(join('skills', skill, 'SKILL.md'));
+            }
+        }
+    }
+    if (options.bootstrapConflict) {
+        mkdirSync(join(copilotHome, 'instructions'));
+        writeFileSync(join(copilotHome, 'instructions', 'alex-act-act-pass.instructions.md'), '# Keep fixture authority\n');
+    }
     const otherPlugins = options.otherPlugins || [];
     writeFileSync(statePath, JSON.stringify([...otherPlugins, {
         name: 'alex-act-one', marketplace: 'alex-mall', version: '0.3.0', enabled: true, source: 'installed',
@@ -47,9 +80,11 @@ function runReleaseForShell(t, shell, options = {}) {
     writeFileSync(marketplaceStatePath, JSON.stringify(options.marketplaces || []));
     writePowerShell(copilot, `
 param([Parameter(ValueFromRemainingArguments = $true)][string[]]$Arguments)
-$statePath = $env:FAKE_STATE_PATH
-$marketplaceStatePath = $env:FAKE_MARKETPLACE_STATE_PATH
-$installedRoot = $env:FAKE_INSTALLED_ROOT
+$selectedHome = if ($env:COPILOT_HOME) { $env:COPILOT_HOME } else { Join-Path $env:FAKE_PROFILE '.copilot' }
+$statePath = Join-Path $selectedHome 'plugins.json'
+$marketplaceStatePath = Join-Path $selectedHome 'marketplaces.json'
+$installedRoot = Join-Path $selectedHome 'installed-plugins/alex-mall/alex-act-one'
+Add-Content -LiteralPath $env:FAKE_HOME_LOG -Value $selectedHome
 $state = Get-Content -LiteralPath $statePath -Raw | ConvertFrom-Json
 $marketplaces = @((Get-Content -LiteralPath $marketplaceStatePath -Raw | ConvertFrom-Json))
 $command = $Arguments -join ' '
@@ -85,7 +120,9 @@ if ($command -eq 'plugin install alex-act-one@alex-mall') {
   New-Item -ItemType Directory -Force -Path $installedRoot | Out-Null
     @{ name = 'alex-act-one'; version = '${VERSION}' } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $installedRoot 'plugin.json')
   New-Item -ItemType Directory -Force -Path (Join-Path $installedRoot 'skills/bootstrap-core/scripts') | Out-Null
-    Set-Content -LiteralPath (Join-Path $installedRoot 'skills/bootstrap-core/scripts/bootstrap-core.cjs') -Value '// mocked bootstrap'
+    if ($env:FAKE_REAL_BOOTSTRAP -ne '1') {
+      Set-Content -LiteralPath (Join-Path $installedRoot 'skills/bootstrap-core/scripts/bootstrap-core.cjs') -Value '// mocked bootstrap'
+    }
     $others = @($state | Where-Object { $_.name -ne 'alex-act-one' })
     $installed = @{ name = 'alex-act-one'; marketplace = 'alex-mall'; version = '${VERSION}'; enabled = $true; source = 'installed' }
     ConvertTo-Json -InputObject @($others + $installed) -Compress | Set-Content -LiteralPath $statePath
@@ -96,6 +133,12 @@ exit 1
 `);
     writePowerShell(node, `
 param([Parameter(ValueFromRemainingArguments = $true)][string[]]$Arguments)
+$Arguments | ConvertTo-Json -Compress | Set-Content -LiteralPath $env:FAKE_BOOTSTRAP_LOG
+Add-Content -LiteralPath $env:FAKE_HOME_LOG -Value $env:COPILOT_HOME
+if ($env:FAKE_REAL_BOOTSTRAP -eq '1') {
+    & $env:FAKE_NODE @Arguments
+    exit $LASTEXITCODE
+}
 $receiptPath = Join-Path $env:COPILOT_HOME 'instructions/.alex-act-one-bootstrap.json'
 New-Item -ItemType Directory -Force -Path (Split-Path -Parent $receiptPath) | Out-Null
 @{
@@ -108,18 +151,34 @@ $Arguments | ConvertTo-Json -Compress | Set-Content -LiteralPath $env:FAKE_BOOTS
 @{ apply = $true; expectedFiles = 1; verification = @{ receiptCurrent = $true } } | ConvertTo-Json -Compress
 exit 0
 `);
+    writePowerShell(wrapper, `
+param([string]$CopilotHome, [string]$CopilotCommand, [string]$NodeCommand, [string]$ExpectedVersion)
+Set-Variable -Name HOME -Value $env:FAKE_PROFILE -Force
+try {
+    & $env:FAKE_RELEASE_SCRIPT @PSBoundParameters
+} finally {
+    @{ present = (Test-Path Env:COPILOT_HOME); value = $env:COPILOT_HOME } |
+        ConvertTo-Json -Compress | Set-Content -LiteralPath $env:FAKE_RESTORED_LOG
+}
+`);
 
-    const invoke = () => runPowerShell(shell, SCRIPT_PATH, {
-        CopilotHome: copilotHome, CopilotCommand: copilot, NodeCommand: node, ExpectedVersion: VERSION,
+    const inheritedHome = options.unsetHome ? '' : options.unselectedHome ? unselectedHome : copilotHome;
+    const invoke = () => runPowerShell(shell, wrapper, {
+        ...(options.inheritHome ? {} : { CopilotHome: copilotHome }),
+        CopilotCommand: copilot, NodeCommand: node, ExpectedVersion: VERSION,
     }, {
         root,
         cwd: ROOT_PATH,
         encoding: 'utf8',
         env: {
             ...process.env,
-            FAKE_STATE_PATH: statePath,
-            FAKE_MARKETPLACE_STATE_PATH: marketplaceStatePath,
-            FAKE_INSTALLED_ROOT: installedRoot,
+            COPILOT_HOME: options.unsetHome ? undefined : inheritedHome,
+            FAKE_PROFILE: join(root, 'profile'),
+            FAKE_RELEASE_SCRIPT: SCRIPT_PATH,
+            FAKE_RESTORED_LOG: restoredLog,
+            FAKE_HOME_LOG: homeLog,
+            FAKE_REAL_BOOTSTRAP: options.realBootstrap ? '1' : '',
+            FAKE_NODE: process.execPath,
             FAKE_BOOTSTRAP_LOG: bootstrapLog,
             FAKE_COMMAND_LOG: commandLog,
             FAKE_ADD_FAILURE: options.addFailure || '',
@@ -128,12 +187,26 @@ exit 0
         },
     });
     const result = invoke();
+    assert.ifError(result.error);
+    const restored = JSON.parse(readFileSync(restoredLog, 'utf8'));
+    assert.equal(restored.present, inheritedHome !== '');
+    assert.equal(restored.value || '', inheritedHome);
+    assert.deepEqual(snapshotUnselected(), unselectedBefore, 'The unselected profile must remain byte-identical');
+    const homes = readFileSync(homeLog, 'utf8').trim().split(/\r?\n/);
+    assert.ok(homes.every(home => home === copilotHome), `Unexpected operation homes: ${homes.join(', ')}`);
     if (options.error) {
         assert.notEqual(result.status, 0, result.stdout + result.stderr);
         assert.match(result.stdout + result.stderr, options.error);
         const commands = readFileSync(commandLog, 'utf8');
-        assert.doesNotMatch(commands, /plugin (uninstall|install) /);
-        assert.equal(existsSync(bootstrapLog), false);
+        if (options.bootstrapConflict) {
+            assert.match(commands, /plugin install /);
+            assert.equal(readFileSync(join(copilotHome, 'instructions', 'alex-act-act-pass.instructions.md'), 'utf8'),
+                '# Keep fixture authority\n');
+            assert.equal(existsSync(join(copilotHome, 'instructions', '.alex-act-one-bootstrap.json')), false);
+        } else {
+            assert.doesNotMatch(commands, /plugin (uninstall|install) /);
+            assert.equal(existsSync(bootstrapLog), false);
+        }
         return;
     }
 
@@ -183,6 +256,28 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
 
     testRelease('registers all missing public marketplaces, reinstalls ONE and applies bootstrap migration', (t) => {
         runRelease(t, { repeat: true });
+    });
+
+    testRelease('scopes every CLI operation and real bootstrap to the explicit home, restoring inherited home', (t) => {
+        runRelease(t, { unselectedHome: true, realBootstrap: true });
+    });
+
+    testRelease('scopes the default to inherited COPILOT_HOME rather than the profile home', (t) => {
+        runRelease(t, { inheritHome: true, realBootstrap: true });
+    });
+
+    testRelease('scopes an explicit home and restores an initially absent COPILOT_HOME', (t) => {
+        runRelease(t, { unsetHome: true, realBootstrap: true });
+    });
+
+    testRelease('scopes marketplace refusal and restores the unselected home without plugin writes', (t) => {
+        runRelease(t, { unselectedHome: true, addFailure: 'microsoft/skills-for-fabric',
+            error: /Command failed|mock marketplace add failed/ });
+    });
+
+    testRelease('scopes real bootstrap refusal and restores inherited home while preserving conflicts', (t) => {
+        runRelease(t, { unselectedHome: true, realBootstrap: true, bootstrapConflict: true,
+            error: /blocked|conflict/i });
     });
 
     testRelease('preserves existing/default and unrelated marketplace registrations without re-adding them', (t) => {

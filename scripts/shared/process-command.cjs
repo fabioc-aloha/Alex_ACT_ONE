@@ -48,7 +48,7 @@ function resolveInvocation(command, args, options = {}, {
         if (!fileExists(cli)) throw new Error(`${name} CLI entry point not found beside shim: ${cli}`);
         return { command: process.execPath, args: [cli, ...args] };
     }
-    const tool = TOOLS[name];
+    const tool = name === 'copilot' ? { kind: 'npm-global', package: '@github/copilot' } : TOOLS[name];
     if (!tool || !['npm-global', 'npm-module'].includes(tool.kind)) {
         throw new Error(`refusing shell execution for unsupported command shim: ${resolved}`);
     }

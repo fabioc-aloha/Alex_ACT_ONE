@@ -315,11 +315,15 @@ function buildPlan(options) {
             // An entry the package no longer ships is still ours to remove, and
             // saying so makes the cleanup visible rather than silent.
             const orphaned = !current.has(entry.name);
-            if (!fs.existsSync(destination)) return { name: entry.name, action: 'absent', orphaned };
+            if (!fs.existsSync(destination)) {
+                return { name: entry.name, action: 'absent', orphaned, destinationSha256: null };
+            }
+            const destinationSha256 = sha256(fs.readFileSync(destination));
             return {
                 name: entry.name,
                 orphaned,
-                action: sha256(fs.readFileSync(destination)) === entry.sha256
+                destinationSha256,
+                action: destinationSha256 === entry.sha256
                     ? 'remove'
                     : 'preserve-modified',
             };
@@ -335,6 +339,7 @@ function buildPlan(options) {
             files: actions,
             receipt: { action: receipt ? 'remove-when-clean' : 'absent' },
             _receiptPath: receiptPath,
+            _receiptSha256: fs.existsSync(receiptPath) ? sha256(fs.readFileSync(receiptPath)) : null,
         };
     }
     const owned = new Map((receipt ? validatedOwnedReceipt(receipt, files, true) : [])
@@ -405,6 +410,19 @@ function buildPlan(options) {
 }
 
 function applyPlan(plan, options) {
+    if (plan.blocked) {
+        throw new Error(`activation blocked by instruction conflicts: ${plan.conflicts.map(file => file.name).join(', ')}. ` +
+            'Back up and review the conflicts; preview --overwrite-conflicts before explicitly approving replacement.');
+    }
+    const receiptHash = fs.existsSync(plan._receiptPath) ? sha256(fs.readFileSync(plan._receiptPath)) : null;
+    if (receiptHash !== plan._receiptSha256) throw new Error('bootstrap receipt changed after planning; preview again');
+    for (const entry of plan.files) {
+        const destination = path.join(options.targetInstructions, entry.name);
+        const actual = fs.existsSync(destination) ? sha256(fs.readFileSync(destination)) : null;
+        if (actual !== entry.destinationSha256) {
+            throw new Error(`instruction changed after planning: ${entry.name}; preview again`);
+        }
+    }
     if (plan.mode === 'remove') {
         for (const entry of plan.files) {
             if (entry.action === 'remove') {
@@ -436,19 +454,6 @@ function applyPlan(plan, options) {
             receiptRemoved,
         };
         return plan;
-    }
-    if (plan.blocked) {
-        throw new Error(`activation blocked by instruction conflicts: ${plan.conflicts.map(file => file.name).join(', ')}. ` +
-            'Back up and review the conflicts; preview --overwrite-conflicts before explicitly approving replacement.');
-    }
-    const receiptHash = fs.existsSync(plan._receiptPath) ? sha256(fs.readFileSync(plan._receiptPath)) : null;
-    if (receiptHash !== plan._receiptSha256) throw new Error('bootstrap receipt changed after planning; preview again');
-    for (const entry of plan.files) {
-        const destination = path.join(options.targetInstructions, entry.name);
-        const actual = fs.existsSync(destination) ? sha256(fs.readFileSync(destination)) : null;
-        if (actual !== entry.destinationSha256) {
-            throw new Error(`instruction changed after planning: ${entry.name}; preview again`);
-        }
     }
     for (const file of plan._files) {
         const action = plan.files.find((entry) => entry.name === file.name)?.action;

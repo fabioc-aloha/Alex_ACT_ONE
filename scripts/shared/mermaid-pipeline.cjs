@@ -312,56 +312,54 @@ function convertSvgToPng(svgPath, pngPath, width = 800) {
  * Handles flowchart nodes and simple connections.
  */
 function mermaidToTableFallback(mmdContent) {
-  const lines = mmdContent.trim().split('\n');
-  const nodes = [];
+  const retainedSource = () => {
+    const runs = mmdContent.match(/`+/g) || [];
+    const fence = '`'.repeat(Math.max(3, ...runs.map(run => run.length + 1)));
+    return `*[Unsupported Mermaid fallback; original source retained below.]*\n\n${fence}text\n${mmdContent}\n${fence}`;
+  };
+  const lines = mmdContent.trim().split(/\r?\n/).filter(line => line.trim() && !line.trim().startsWith('%%'));
+  if (!/^(?:graph|flowchart)\s+(?:TD|TB|BT|LR|RL)\s*;?\s*$/.test(lines.shift() || '')) return retainedSource();
+  const nodes = new Map();
   const connections = [];
-
+  const endpoint = /^([A-Za-z_][\w-]*)(?:\[([^\[\]]*)\]|\(([^()]*)\)|\{([^{}]*)\})?/;
+  const remember = match => {
+    const id = match[1];
+    const label = match[2] ?? match[3] ?? match[4];
+    if (label !== undefined) nodes.set(id, label.replace(/^"(.*)"$/, '$1').replace(/<br\s*\/?>/gi, ' ').trim());
+    else if (!nodes.has(id)) nodes.set(id, id);
+    return id;
+  };
   for (const line of lines) {
-    const trimmed = line.trim();
-    // Skip directives and empty lines
-    if (!trimmed || trimmed.startsWith('%%') || trimmed.startsWith('graph') ||
-      trimmed.startsWith('flowchart') || trimmed.startsWith('sequenceDiagram') ||
-      trimmed.startsWith('gantt') || trimmed.startsWith('pie') ||
-      trimmed.startsWith('classDiagram') || trimmed.startsWith('stateDiagram') ||
-      trimmed.startsWith('erDiagram') || trimmed.startsWith('journey') ||
-      trimmed.startsWith('gitGraph') || trimmed.startsWith('mindmap') ||
-      trimmed.startsWith('timeline') || trimmed.startsWith('title') ||
-      trimmed.startsWith('section') || trimmed.startsWith('end')) continue;
-
-    // Node definitions: A[Label] or A(Label) or A{Label}
-    const nodeMatch = trimmed.match(/^\s*(\w+)\s*[\[\({](.+?)[\]\)}]/);
-    if (nodeMatch) {
-      const [, id, label] = nodeMatch;
-      if (!nodes.find(n => n.id === id)) {
-        nodes.push({ id, label: label.replace(/<br\/>/g, ' ').trim() });
-      }
-    }
-
-    // Connections: A --> B or A -->|label| B
-    const connMatch = trimmed.match(/(\w+)\s*--[->|]+\s*(?:\|([^|]+)\|\s*)?(\w+)/);
-    if (connMatch) {
-      connections.push({
-        from: connMatch[1],
-        label: connMatch[2] || '',
-        to: connMatch[3]
-      });
+    let remaining = line.trim().replace(/;\s*$/, '');
+    const first = remaining.match(endpoint);
+    if (!first) return retainedSource();
+    let from = remember(first);
+    remaining = remaining.slice(first[0].length).trim();
+    while (remaining) {
+      const edge = remaining.match(/^(?:-->|==>|-\.->|---)(?:\s*\|([^|]*)\|)?\s*|^--\s+(.+?)\s+-->\s*/);
+      if (!edge) return retainedSource();
+      remaining = remaining.slice(edge[0].length);
+      const target = remaining.match(endpoint);
+      if (!target) return retainedSource();
+      const to = remember(target);
+      connections.push({ from, to, label: edge[1] ?? edge[2] ?? '' });
+      from = to;
+      remaining = remaining.slice(target[0].length).trim();
     }
   }
 
-  if (nodes.length === 0) return '*[Diagram]*';
+  if (!nodes.size) return retainedSource();
 
-  // Build a simple markdown table
-  const rows = ['| Step | Description |', '|------|-------------|'];
-  for (let i = 0; i < nodes.length; i++) {
-    rows.push(`| ${i + 1} | ${nodes[i].label} |`);
+  const cell = value => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\|/g, '&#124;');
+  const rows = ['| Node | Description |', '|------|-------------|'];
+  for (const [id, label] of nodes) {
+    rows.push(`| ${cell(id)} | ${cell(label)} |`);
   }
 
   if (connections.length > 0) {
     rows.push('', '| From | To | Relation |', '|------|-----|----------|');
     for (const conn of connections) {
-      const fromNode = nodes.find(n => n.id === conn.from);
-      const toNode = nodes.find(n => n.id === conn.to);
-      rows.push(`| ${fromNode ? fromNode.label : conn.from} | ${toNode ? toNode.label : conn.to} | ${conn.label} |`);
+      rows.push(`| ${cell(nodes.get(conn.from))} | ${cell(nodes.get(conn.to))} | ${cell(conn.label)} |`);
     }
   }
 

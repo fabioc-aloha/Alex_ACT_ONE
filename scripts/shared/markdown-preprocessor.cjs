@@ -411,6 +411,65 @@ function transformOutsideInlineCode(content, transform) {
   return output + transform(content.slice(cursor));
 }
 
+function transformOutsideMarkdownCode(content, transform) {
+  const indentation = text => {
+    let columns = 0;
+    for (const character of text) columns += character === '\t' ? 4 - columns % 4 : 1;
+    return columns;
+  };
+  let listIndents = [];
+  let quoteDepth = 0;
+  return transformOutsideCodeFences(content, prose => {
+    const output = [];
+    let plain = [];
+    let paragraph = false;
+    let indentedCode = false;
+    const flush = () => {
+      if (plain.length) output.push(transformOutsideInlineCode(plain.join(''), transform));
+      plain = [];
+    };
+    for (const original of prose.split(/(?<=\n)/)) {
+      let line = original;
+      let depth = 0;
+      let quote;
+      while ((quote = line.match(/^ {0,3}>[ \t]?/))) {
+        line = line.slice(quote[0].length);
+        depth++;
+      }
+      if (depth !== quoteDepth) {
+        listIndents = [];
+        paragraph = false;
+        indentedCode = false;
+        quoteDepth = depth;
+      }
+      if (!line.trim()) {
+        if (indentedCode) output.push(original);
+        else plain.push(original);
+        paragraph = false;
+        continue;
+      }
+      const leading = line.match(/^[ \t]*/)[0];
+      const indent = indentation(leading);
+      while (listIndents.length && indent < listIndents.at(-1)) listIndents.pop();
+      // List continuation indentation is not itself a code block.
+      const base = listIndents.at(-1) || 0;
+      if (indent >= base + 4 && (!paragraph || indentedCode)) {
+        flush();
+        output.push(original);
+        indentedCode = true;
+        continue;
+      }
+      indentedCode = false;
+      const list = line.slice(leading.length).match(/^(?:[-+*]|\d+[.)])[ \t]+/);
+      if (list) listIndents.push(indent + indentation(list[0]));
+      plain.push(original);
+      paragraph = !/^#{1,6}\s/.test(line.slice(leading.length));
+    }
+    flush();
+    return output.join('');
+  });
+}
+
 function transformProseSyntax(content) {
   // LaTeX math -> Unicode
   content = convertLatexProse(content);
@@ -706,6 +765,7 @@ module.exports = {
   convertLatexMath,
   extractFrontmatter,
   applyOutsideFences,
+  transformOutsideMarkdownCode,
   replaceEmDashes,
   stripDecorativeRules,
   detectTocMarker,

@@ -111,6 +111,7 @@ test('dependency CLI reports the explicitly selected runtime and rejects empty p
         encoding: 'utf8', timeout: 20000,
         env: { ...process.env, PATH: '', COPILOT_HOME: join(root, 'profile'), USERPROFILE: root, HOME: root },
     });
+
     assert.equal(result.status, 0, result.stderr);
     const report = JSON.parse(result.stdout);
     assert.equal(report.mcp.root, root);
@@ -118,6 +119,49 @@ test('dependency CLI reports the explicitly selected runtime and rejects empty p
     assert.ok(report.mcp.servers.every(server => server.installed && !server.versionMatched &&
         !server.launchable && server.hostConnected === null));
 });
+
+for (const mode of ['ready', 'failed']) {
+    test(`Windows plugin inventory resolves its npm shim and reports startup outcome: ${mode}`, t => {
+            const root = fixture(t);
+            const prefix = join(root, 'prefix with spaces');
+            const packageRoot = join(prefix, 'node_modules', '@github', 'copilot');
+            mkdirSync(packageRoot, { recursive: true });
+            const shim = join(prefix, 'copilot.cmd');
+            writeFileSync(shim, '@echo off\r\necho DO_NOT_RUN_SHELL\r\n');
+            writeFileSync(join(packageRoot, 'package.json'),
+                JSON.stringify({ name: '@github/copilot', bin: { copilot: 'loader.cjs' } }));
+            writeFileSync(join(packageRoot, 'loader.cjs'), mode === 'ready'
+                ? "console.log('- fixture-installed-plugin');\n"
+                : "console.error('fixture inventory startup failed');process.exit(7);\n");
+            const hook = join(root, 'isolate.cjs');
+            writeFileSync(hook, [
+                "const cp=require('node:child_process');",
+                "const os=require('node:os');",
+                'const original=cp.spawnSync;',
+                "Object.defineProperty(process,'platform',{value:'win32'});",
+                `os.homedir=()=>${JSON.stringify(root)};`,
+                'cp.spawnSync=function(command,args,options){',
+                " if(command==='where.exe') return args[0]==='copilot'",
+                ` ? {status:0,stdout:${JSON.stringify(shim + '\n')}} : {status:1,stdout:''};`,
+                " if(command==='python'||command==='python3') return {status:1,stdout:''};",
+                ' return original(command,args,options);',
+                '};',
+            ].join('\n'));
+            const checker = join(ROOT, 'skills', 'setup-dependencies', 'scripts', 'check-dependencies.cjs');
+            const result = spawnSync(process.execPath, ['--require', hook, checker, '--json', '--runtime-root', root], {
+                encoding: 'utf8', timeout: 10000,
+                env: { ...process.env, COPILOT_HOME: join(root, 'profile'), ALEX_ACT_ONE_RUNTIME_ROOT: root },
+            });
+            assert.equal(result.status, 0, result.stderr);
+            const stores = JSON.parse(result.stdout).plugins.stores;
+            if (mode === 'ready') {
+                assert.ok(stores.every(store => store.available && store.count === 1), result.stdout);
+            } else {
+                assert.ok(stores.every(store => !store.available && /fixture inventory startup failed/.test(store.error)),
+                    'Failed inventory must expose the actual startup error');
+            }
+    });
+}
 for (const route of Object.keys(deps.MCP_SERVERS)) {
     test(`the actual ${route} launcher rejects metadata drift from the shared registry`, t => {
         const root = fixture(t);

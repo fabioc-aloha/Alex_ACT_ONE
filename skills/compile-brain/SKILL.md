@@ -279,6 +279,12 @@ also specified. It preflights all destinations and refuses symbolic links,
 junctions, or incompatible destination types before writing. Forced replacement
 does not change other files hard-linked to an existing destination.
 
+The scaffold includes `check-links.cjs` and `measure-reduction.cjs`, not just the
+Markdown entrypoint. Skill adapters keep them in the skill's `scripts/` directory.
+Root instruction adapters use `.agents/skills/compile-brain/scripts/` and rewrite
+their helper references to that location. Existing helper files receive the
+same overwrite protection as entrypoints. Preview and approve the entire bundle.
+
 ## Brain Contract Mode
 
 Use a brain contract when the user wants to make a project-wide agent

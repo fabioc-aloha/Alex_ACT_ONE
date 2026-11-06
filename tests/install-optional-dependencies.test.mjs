@@ -1,7 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, realpathSync, readFileSync, rmSync, writeFileSync, existsSync } from 'node:fs';
-import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
@@ -10,6 +9,7 @@ const require = createRequire(import.meta.url);
 const { runPowerShell } = require('./helpers/powershell.cjs');
 const deps = require('../scripts/shared/dependencies.cjs');
 const script = fileURLToPath(new URL('../install-optional-dependencies.ps1', import.meta.url));
+const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const packages = [
     ...deps.mcpPackages(['flint', 'playwright']).map(pkg => ({
         name: pkg.name, version: pkg.version, scope: 'private',
@@ -25,7 +25,7 @@ const replicate = {
 };
 
 function runInstaller(t, shell, options = {}) {
-    const root = realpathSync.native(mkdtempSync(join(tmpdir(), 'one-optional-deps-')));
+    const root = realpathSync.native(mkdtempSync(join(ROOT, '.test-optional-deps-')));
     t.after(() => rmSync(root, { recursive: true, force: true }));
     const runtime = join(root, 'runtime');
     const globalPrefix = join(root, 'global');
@@ -112,6 +112,21 @@ if (process.env.FAKE_RENDER_FAILURE === bin) {
     process.exit(1);
 }
 if (process.env.FAKE_RENDER_NO_OUTPUT === bin) process.exit(0);
+if (bin === 'svgexport') {
+    const svg = fs.readFileSync(process.argv[2], 'utf8');
+    const check = [
+        "$svg = New-Object System.Xml.XmlDocument; $svg.Load([Console]::In)",
+        "if ($svg.DocumentElement.LocalName -ne 'svg' -or $svg.DocumentElement.NamespaceURI -ne 'http://www.w3.org/2000/svg' -or $svg.DocumentElement.GetAttribute('width') -ne '20' -or $svg.DocumentElement.GetAttribute('height') -ne '20' -or $svg.DocumentElement.FirstChild.GetAttribute('fill') -ne 'blue') { throw 'Unexpected SVG fixture content' }"
+    ].join('; ');
+    const parsed = require('node:child_process').spawnSync(process.env.FAKE_POWERSHELL,
+        ['-NoProfile', '-Command', "$ErrorActionPreference = 'Stop'; " + check],
+        { input: svg, encoding: 'utf8', timeout: 10000 });
+    if (parsed.error || parsed.status !== 0) {
+        console.error('SVG input parse failed: ' + (parsed.error?.message || parsed.stderr));
+        process.exit(1);
+    }
+    fs.writeFileSync(process.env.FAKE_RENDER_INPUT, svg);
+}
 const content = process.env.FAKE_RENDER_INVALID === bin ? 'invalid' :
     bin === 'mmdc' ? '<svg xmlns="http://www.w3.org/2000/svg"></svg>' :
     Buffer.from([137,80,78,71,13,10,26,10,0]);
@@ -134,6 +149,9 @@ exit 1
         encoding: 'utf8', timeout: 30000,
         env: {
             ...process.env,
+            TEMP: root, TMP: root, TMPDIR: root,
+            FAKE_POWERSHELL: shell,
+            FAKE_RENDER_INPUT: join(root, 'verified-input.svg'),
             FAKE_NPM_LOG: log,
             FAKE_GLOBAL_PREFIX: globalPrefix,
             FAKE_MISSING_PIN: options.missingPin || '',
@@ -168,6 +186,10 @@ exit 1
         assert.doesNotMatch(output, /Verified all selected pinned dependencies/);
     } else {
         assert.equal(result.status, 0, output);
+        if (options.apply) {
+            assert.match(readFileSync(join(root, 'verified-input.svg'), 'utf8'),
+                /<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg" width="20" height="20">/);
+        }
     }
     for (const command of commands) {
         assert.ok(!command.some(arg => /--registry|allow-remote|strict-ssl/.test(arg)));

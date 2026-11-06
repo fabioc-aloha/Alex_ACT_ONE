@@ -56,6 +56,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 const { runTool } = require(path.join(__dirname, '..', '..', '..', 'scripts', 'shared', 'tool-runner.cjs'));
+const { resolveLocalImagePath } = require(path.join(__dirname, '..', '..', '..', 'scripts', 'shared', 'local-image-path.cjs'));
 
 // Try to load shared modules
 let sharedPreprocessor, sharedMermaid;
@@ -236,16 +237,13 @@ function embedImagesAsCid(html, sourceDir) {
   let cidCounter = 0;
 
   html = html.replace(/<img\s+([^>]*?)src=["']([^"']+)["']([^>]*)>/g, (match, pre, src, post) => {
-    // Skip external URLs and data URIs
-    if (src.startsWith('http') || src.startsWith('data:')) return match;
-
-    const imagePath = path.resolve(sourceDir, src);
-    if (!fs.existsSync(imagePath)) return match;
+    const imagePath = resolveLocalImagePath(src, sourceDir);
+    if (imagePath === null) return match;
 
     const ext = path.extname(imagePath).toLowerCase();
     const mimeMap = { '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.webp': 'image/webp' };
     const mime = mimeMap[ext];
-    if (!mime) return match;
+    if (!mime) throw new Error(`Unsupported local image format: ${src}`);
 
     cidCounter++;
     const cid = `image${cidCounter}@md-to-eml`;

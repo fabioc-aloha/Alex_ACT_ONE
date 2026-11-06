@@ -56,6 +56,10 @@ Convert .docx files into clean, linted Markdown with extracted images, normalize
 | Frontmatter | Optional YAML frontmatter with title and date |
 | Comment stripping | Removes Word review comments |
 
+Image extraction leaves literal image syntax in inline, fenced, and indented
+code unchanged. Real media references are still copied and verified, including
+images nested in lists.
+
 ---
 
 

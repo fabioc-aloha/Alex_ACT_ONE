@@ -235,6 +235,33 @@ test('link checker ignores example references inside code', (t) => {
     assert.match(result.output, /Checked 0 relative link/);
 });
 
+test('link checker preserves GitHub punctuation gaps, Unicode and duplicate heading fragments', t => {
+    const write = fixture(t);
+    const file = write('headings.md', [
+        '# Sub-pattern — Search engines',
+        '# Sub-pattern — Search engines',
+        '# Café 中文',
+        '# A  B',
+        '',
+        '[First](#sub-pattern--search-engines)',
+        '[Repeated](#sub-pattern--search-engines-1)',
+        '[Unicode](#caf%C3%A9-%E4%B8%AD%E6%96%87)',
+        '[Spaces](#a--b)',
+    ].join('\n'));
+    const valid = run('compile-brain', 'check-links.cjs', file);
+    assert.equal(valid.status, 0, valid.output);
+    fs.appendFileSync(file, '\n[Missing](#sub-pattern-search-engines)\n');
+    const invalid = run('compile-brain', 'check-links.cjs', file);
+    assert.equal(invalid.status, 1, invalid.output);
+    assert.match(invalid.output, /anchor not found/);
+});
+
+test('deep review routes its cross-model critic to a real canonical method fragment', () => {
+    const file = path.join(root, 'skills', 'code-review', 'references', 'deep-review.md');
+    const result = run('compile-brain', 'check-links.cjs', file);
+    assert.equal(result.status, 0, result.output);
+});
+
 test('rejection tally keeps sweep rates separate from close-read findings', (t) => {
     const write = fixture(t);
     const log = ['a | sweep | accepted', 'b | sweep | rejected',

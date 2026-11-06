@@ -37,13 +37,18 @@ if ($Apply -and $VerifyOnly) {
 function Invoke-CheckedCommand {
     param(
         [Parameter(Mandatory)] [string]$Command,
-        [Parameter(Mandatory)] [string[]]$Arguments
+        [Parameter(Mandatory)] [string[]]$Arguments,
+        [string]$InputText
     )
 
     $previousPreference = $ErrorActionPreference
     try {
         $ErrorActionPreference = 'Continue'
-        $output = & $Command @Arguments 2>&1
+        $output = if ($PSBoundParameters.ContainsKey('InputText')) {
+            $InputText | & $Command @Arguments 2>&1
+        } else {
+            & $Command @Arguments 2>&1
+        }
         $exitCode = $LASTEXITCODE
     } finally {
         $ErrorActionPreference = $previousPreference
@@ -193,7 +198,7 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
-const modules = process.argv[1];
+const modules = process.argv[2];
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'one-render-verify-'));
 try {
     const diagram = path.join(root, 'diagram.mmd');
@@ -227,5 +232,5 @@ try {
     fs.rmSync(root, { recursive: true, force: true });
 }
 '@
-Invoke-CheckedCommand -Command $NodeCommand -Arguments @('-e', $verifyRenderers, $globalModules) | Write-Output
+Invoke-CheckedCommand -Command $NodeCommand -Arguments @('-', $globalModules) -InputText $verifyRenderers | Write-Output
 Write-Output "Verified all selected pinned dependencies ($($packages.Count)), MCP launchers ($($mcpPackages.Count)), and Mermaid/SVG-to-PNG rendering. Reload the host before using the MCP servers."
