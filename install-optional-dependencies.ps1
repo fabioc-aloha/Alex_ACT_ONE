@@ -8,6 +8,8 @@ svgexport use npm's global prefix. Installation may download browsers.
 No optional plugins, system packages, registry or npm policy changes.
 An explicit RegistryTarballPrefix routes matching backend tarballs through
 the configured registry using npm 12's per-command URL-prefix replacement.
+BrowserExecutablePath selects an existing browser for renderer checks only.
+It does not enable lifecycle scripts, download a browser or change the environment.
 .EXAMPLE
 .\install-optional-dependencies.ps1
 .EXAMPLE
@@ -16,6 +18,8 @@ the configured registry using npm 12's per-command URL-prefix replacement.
 .\install-optional-dependencies.ps1 -VerifyOnly
 .EXAMPLE
 .\install-optional-dependencies.ps1 -Apply -IncludeReplicate
+.EXAMPLE
+.\install-optional-dependencies.ps1 -VerifyOnly -BrowserExecutablePath 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 #>
 [CmdletBinding()]
 param(
@@ -23,6 +27,7 @@ param(
     [switch]$VerifyOnly,
     [switch]$IncludeReplicate,
     [string]$RegistryTarballPrefix,
+    [string]$BrowserExecutablePath,
     [string]$RuntimeRoot = (Join-Path $HOME '.copilot\plugin-data\alex-act-one\runtime'),
     [string]$NpmCommand = 'npm',
     [string]$NodeCommand = 'node'
@@ -32,6 +37,25 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 if ($Apply -and $VerifyOnly) {
     throw '-Apply and -VerifyOnly are separate operations.'
+}
+
+$browserSource = if ($PSBoundParameters.ContainsKey('BrowserExecutablePath')) {
+    'BrowserExecutablePath'
+} else {
+    'PUPPETEER_EXECUTABLE_PATH'
+}
+$effectiveBrowser = if ($browserSource -eq 'BrowserExecutablePath') {
+    $BrowserExecutablePath
+} else {
+    $env:PUPPETEER_EXECUTABLE_PATH
+}
+if ($browserSource -eq 'BrowserExecutablePath' -or $effectiveBrowser) {
+    if (-not $effectiveBrowser -or -not [IO.Path]::IsPathRooted($effectiveBrowser) -or
+        ($env:OS -eq 'Windows_NT' -and $effectiveBrowser -notmatch '^(?:[A-Za-z]:[\\/]|[\\/]{2})') -or
+        -not (Test-Path -LiteralPath $effectiveBrowser -PathType Leaf)) {
+        throw "$browserSource must name an existing absolute file path. No installs started."
+    }
+    $effectiveBrowser = [IO.Path]::GetFullPath($effectiveBrowser)
 }
 
 function Invoke-CheckedCommand {
@@ -54,7 +78,21 @@ function Invoke-CheckedCommand {
         $ErrorActionPreference = $previousPreference
     }
     if ($exitCode -ne 0) {
-        throw "Command failed ($exitCode): $Command $($Arguments -join ' ')`n$($output -join "`n")`nInstallation or verification stopped. Partial installations may remain. No registry or fetch-policy override was attempted."
+        $detail = $output -join "`n"
+        $guidance = @()
+        if ($Command -eq $NpmCommand -and $Arguments[0] -eq 'install') {
+            if ($detail -match '\bEALLOWREMOTE\b') {
+                if ($RegistryTarballPrefix) {
+                    $guidance += 'Explicit tarball routing was already requested. Check whether the confirmed prefix covers the rejected URL, including transitive packages. No automatic retry or broader routing was attempted.'
+                } else {
+                    $guidance += 'npm refused a remote tarball. Inspect dist.tarball metadata through the configured registry. With npm 12 or later, preview -RegistryTarballPrefix <confirmed-HTTPS-prefix/> to route matching URLs through that registry; apply separately after approval. Do not enable remote fetching or switch registries.'
+                }
+            }
+            if ($detail -match '\b(?:EPERM|EACCES)\b') {
+                $guidance += 'Close applications using the affected package before retrying. If access remains denied, investigate its permissions. No package directories were deleted by this helper.'
+            }
+        }
+        throw "Command failed ($exitCode): $Command $($Arguments -join ' ')`n$detail`n$($guidance -join "`n")`nInstallation or verification stopped. Partial installations may remain. No registry or fetch-policy settings were changed."
     }
     return $output | ForEach-Object { $_.ToString() }
 }
@@ -117,6 +155,11 @@ if (-not $registry -or -not [IO.Path]::IsPathRooted($globalPrefix)) {
 Write-Output "Registry: $registry"
 Write-Output "Private runtime: $RuntimeRoot"
 Write-Output "Global npm prefix: $globalPrefix"
+if ($effectiveBrowser) {
+    Write-Output "Browser executable: $effectiveBrowser ($browserSource; renderer processes only)"
+} else {
+    Write-Output 'Browser executable: Puppeteer default; no browser auto-detection.'
+}
 if ($RegistryTarballPrefix) {
     Write-Output "Tarball routing: $RegistryTarballPrefix -> $registry (per-install URL-prefix replacement only)"
 }
@@ -199,6 +242,10 @@ const os = require('node:os');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const modules = process.argv[2];
+const browserExecutable = process.argv[3];
+const rendererEnv = browserExecutable
+    ? { ...process.env, PUPPETEER_EXECUTABLE_PATH: browserExecutable }
+    : process.env;
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'one-render-verify-'));
 try {
     const diagram = path.join(root, 'diagram.mmd');
@@ -214,11 +261,11 @@ try {
         const cli = typeof pkg.bin === 'string' ? pkg.bin : pkg.bin?.[bin];
         if (!cli) throw Error(`Renderer entry point missing: ${name}`);
         const result = spawnSync(process.execPath, [path.join(packageRoot, cli), ...args], {
-            encoding: 'utf8', timeout: 30000, maxBuffer: 1024 * 1024
+            encoding: 'utf8', timeout: 30000, maxBuffer: 1024 * 1024, env: rendererEnv
         });
         if (result.error || result.status !== 0) {
             const detail = result.error?.message || result.stderr || result.stdout;
-            throw Error(`${name} render failed: ${String(detail).trim().slice(0, 2000)}\nPackage versions are installed, but renderer readiness is NOT verified. Browser setup may be incomplete because lifecycle scripts were blocked. Review browser delivery separately; verification does not enable scripts or download browsers.`);
+            throw Error(`${name} render failed: ${String(detail).trim().slice(0, 2000)}\nPackage versions are installed, but renderer readiness is NOT verified. Browser setup may be incomplete because lifecycle scripts were blocked. To check a compatible existing browser without reinstalling packages, rerun with -VerifyOnly -BrowserExecutablePath <absolute-browser-path>. Review browser delivery separately; verification does not enable scripts or download browsers.`);
         }
         if (!fs.existsSync(output)) throw Error(`${name} exited successfully but did not create render output.`);
         const bytes = fs.readFileSync(output);
@@ -232,5 +279,7 @@ try {
     fs.rmSync(root, { recursive: true, force: true });
 }
 '@
-Invoke-CheckedCommand -Command $NodeCommand -Arguments @('-', $globalModules) -InputText $verifyRenderers | Write-Output
+$rendererArguments = @('-', $globalModules)
+if ($effectiveBrowser) { $rendererArguments += $effectiveBrowser }
+Invoke-CheckedCommand -Command $NodeCommand -Arguments $rendererArguments -InputText $verifyRenderers | Write-Output
 Write-Output "Verified all selected pinned dependencies ($($packages.Count)), MCP launchers ($($mcpPackages.Count)), and Mermaid/SVG-to-PNG rendering. Reload the host before using the MCP servers."

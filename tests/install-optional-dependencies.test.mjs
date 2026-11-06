@@ -31,6 +31,14 @@ function runInstaller(t, shell, options = {}) {
     const globalPrefix = join(root, 'global');
     const log = join(root, 'commands.log');
     const npm = join(root, 'npm.ps1');
+    const browserPath = options.browserPath === 'fixture'
+        ? join(root, 'browser with spaces.exe')
+        : options.browserPath === 'directory' ? root : options.browserPath;
+    const inheritedBrowser = options.inheritedBrowserPath === 'fixture'
+        ? join(root, 'inherited browser.exe') : options.inheritedBrowserPath || '';
+    if (options.browserPath === 'fixture') writeFileSync(browserPath, '');
+    if (options.inheritedBrowserPath === 'fixture') writeFileSync(inheritedBrowser, '');
+    const renderLog = join(root, 'renderers.log');
     writeFileSync(npm, `
 param([Parameter(ValueFromRemainingArguments = $true)][string[]]$Arguments)
 $ErrorActionPreference = 'Stop'
@@ -62,9 +70,13 @@ if ($Arguments[0] -eq 'view') {
     exit 0
 }
 if ($Arguments[0] -eq 'install') {
+    if ($env:PUPPETEER_EXECUTABLE_PATH -cne $env:FAKE_INHERITED_BROWSER) {
+        throw 'Renderer browser override leaked into npm'
+    }
     $spec = $Arguments[-1]
     if ($env:FAKE_INSTALL_FAILURE -eq $spec) {
-        & $env:FAKE_NODE -e "console.error('EALLOWREMOTE: fetching remote packages disabled')"
+        $ErrorActionPreference = 'Continue'
+        & $env:FAKE_NODE -e "console.error(process.env.FAKE_INSTALL_ERROR)"
         exit 1
     }
     if ($env:FAKE_STDERR_WARNING -eq '1') {
@@ -77,7 +89,11 @@ if ($Arguments[0] -eq 'install') {
         if ($env:OS -eq 'Windows_NT') { Join-Path $env:FAKE_GLOBAL_PREFIX 'node_modules' }
         else { Join-Path $env:FAKE_GLOBAL_PREFIX 'lib/node_modules' }
     } else {
-        Join-Path $Arguments[([Array]::IndexOf($Arguments, '--prefix') + 1)] 'node_modules'
+        $prefix = $Arguments[([Array]::IndexOf($Arguments, '--prefix') + 1)]
+        if ($prefix -cne $env:FAKE_RUNTIME_ROOT) {
+            throw 'Mock installer refused a write outside the temporary runtime'
+        }
+        Join-Path $prefix 'node_modules'
     }
     $directory = Join-Path $modules $package.name
     New-Item -ItemType Directory -Force -Path $directory | Out-Null
@@ -107,6 +123,13 @@ if ($Arguments[0] -eq 'install') {
             $cli = "const fs = require('node:fs'); const output = process.argv[3]; const bin = 'svgexport';"
         }
         $cli += @'
+if (process.env.FAKE_EXPECT_BROWSER && process.env.PUPPETEER_EXECUTABLE_PATH !== process.env.FAKE_EXPECT_BROWSER) {
+    console.error('Expected the selected browser in the renderer environment');
+    process.exit(1);
+}
+fs.appendFileSync(process.env.FAKE_RENDER_LOG, JSON.stringify({
+    bin, browser: process.env.PUPPETEER_EXECUTABLE_PATH || ''
+}) + '\\n');
 if (process.env.FAKE_RENDER_FAILURE === bin) {
     console.error('Could not find browser: lifecycle script blocked');
     process.exit(1);
@@ -143,6 +166,7 @@ exit 1
         ...(verifyOnly ? { VerifyOnly: true } : options.apply ? { Apply: true } : {}),
         RuntimeRoot: runtime, NpmCommand: npm, NodeCommand: process.execPath,
         ...(options.tarballPrefix ? { RegistryTarballPrefix: options.tarballPrefix } : {}),
+        ...(browserPath !== undefined ? { BrowserExecutablePath: browserPath } : {}),
         ...(options.includeReplicate ? { IncludeReplicate: true } : {}),
     }, {
         root,
@@ -154,9 +178,11 @@ exit 1
             FAKE_RENDER_INPUT: join(root, 'verified-input.svg'),
             FAKE_NPM_LOG: log,
             FAKE_GLOBAL_PREFIX: globalPrefix,
+            FAKE_RUNTIME_ROOT: runtime,
             FAKE_MISSING_PIN: options.missingPin || '',
             FAKE_WRONG_PIN: options.wrongPin || '',
             FAKE_INSTALL_FAILURE: options.installFailure || '',
+            FAKE_INSTALL_ERROR: options.installError || 'EALLOWREMOTE: fetching remote packages disabled',
             FAKE_METADATA_MISMATCH: options.metadataMismatch || '',
             FAKE_LAUNCHER_MISMATCH: options.launcherMismatch || '',
             FAKE_NPM_VERSION: options.npmVersion || '12.0.2',
@@ -165,6 +191,11 @@ exit 1
             FAKE_RENDER_FAILURE: options.renderFailure || '',
             FAKE_RENDER_NO_OUTPUT: options.renderNoOutput || '',
             FAKE_RENDER_INVALID: options.renderInvalid || '',
+            PUPPETEER_EXECUTABLE_PATH: inheritedBrowser,
+            FAKE_INHERITED_BROWSER: inheritedBrowser,
+            FAKE_EXPECT_BROWSER: options.expectBrowser === 'explicit' ? browserPath
+                : options.expectBrowser === 'inherited' ? inheritedBrowser : '',
+            FAKE_RENDER_LOG: renderLog,
         },
     });
     const result = invoke();
@@ -183,6 +214,7 @@ exit 1
     if (options.error) {
         assert.notEqual(result.status, 0, output);
         assert.match(output, options.error);
+        if (options.installFailure) assert.match(output, /Command failed \(1\):/);
         assert.doesNotMatch(output, /Verified all selected pinned dependencies/);
     } else {
         assert.equal(result.status, 0, output);
@@ -199,7 +231,10 @@ exit 1
         assert.deepEqual(routing, command[0] === 'install' && options.tarballPrefix
             ? [`--replace-registry-host=${options.tarballPrefix}`] : []);
     }
-    return { commands, output, runtime, globalPrefix };
+    const renderers = existsSync(renderLog)
+        ? readFileSync(renderLog, 'utf8').trim().split(/\r?\n/).map(line => JSON.parse(line))
+        : [];
+    return { commands, output, runtime, globalPrefix, browserPath, inheritedBrowser, renderers };
 }
 
 for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pwsh']) {
@@ -254,6 +289,28 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
         assert.equal(commands.filter(command => command[0] === 'install').length, 2);
     });
 
+    test(`${shell}: fetch-policy failure gives explicit routing guidance without retrying`, (t) => {
+        const { commands, output } = runInstaller(t, shell, {
+            apply: true, installFailure: `${packages[0].name}@${packages[0].version}`,
+            error: /EALLOWREMOTE/,
+        });
+        assert.match(output, /-RegistryTarballPrefix/);
+        assert.match(output, /npm 12/);
+        assert.match(output, /No registry or fetch-policy settings were changed/);
+        assert.equal(commands.filter(command => command[0] === 'install').length, 1);
+    });
+
+    test(`${shell}: cleanup failure gives non-destructive recovery guidance`, (t) => {
+        const { commands, output } = runInstaller(t, shell, {
+            apply: true, installFailure: `${packages[0].name}@${packages[0].version}`,
+            installError: 'EPERM: operation not permitted, rmdir package',
+            error: /EPERM/,
+        });
+        assert.match(output, /Close applications.*affected package/);
+        assert.match(output, /No package directories were deleted/);
+        assert.equal(commands.filter(command => command[0] === 'install').length, 1);
+    });
+
     test(`${shell}: installed version mismatch is not reported as success`, (t) => {
         runInstaller(t, shell, {
             apply: true, metadataMismatch: `${packages[2].name}@${packages[2].version}`,
@@ -300,11 +357,63 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
     });
 
     test(`${shell}: routing does not mask a continued fetch-policy failure`, (t) => {
-        const { commands } = runInstaller(t, shell, {
+        const { commands, output } = runInstaller(t, shell, {
             apply: true, tarballPrefix: feedPrefix,
             installFailure: `${packages[0].name}@${packages[0].version}`, error: /EALLOWREMOTE/,
         });
+        assert.match(output, /Explicit tarball routing was already requested/);
+        assert.match(output, /No automatic retry/);
         assert.equal(commands.filter(command => command[0] === 'install').length, 1);
+    });
+
+    test(`${shell}: explicit browser path preview stays read-only`, (t) => {
+        const { commands, output, browserPath, runtime } = runInstaller(t, shell, { browserPath: 'fixture' });
+        assert.ok(output.includes(`Browser executable: ${browserPath}`));
+        assert.match(output, /renderer processes only/);
+        assert.deepEqual(commands, [['config', 'get', 'registry'], ['prefix', '--global']]);
+        assert.equal(existsSync(runtime), false);
+    });
+
+    test(`${shell}: explicit browser path reaches both renderers without overriding npm environment`, (t) => {
+        const { browserPath, renderers, commands } = runInstaller(t, shell, {
+            apply: true, verifyAgain: true, browserPath: 'fixture',
+            inheritedBrowserPath: 'fixture', expectBrowser: 'explicit',
+        });
+        assert.deepEqual(renderers, ['mmdc', 'svgexport', 'mmdc', 'svgexport']
+            .map(bin => ({ bin, browser: browserPath })));
+        assert.equal(commands.filter(command => command[0] === 'install').length, packages.length);
+    });
+
+    test(`${shell}: inherited browser path is validated and preserved`, (t) => {
+        const { inheritedBrowser, output, renderers } = runInstaller(t, shell, {
+            apply: true, inheritedBrowserPath: 'fixture', expectBrowser: 'inherited',
+        });
+        assert.ok(output.includes(`Browser executable: ${inheritedBrowser}`));
+        assert.match(output, /PUPPETEER_EXECUTABLE_PATH/);
+        assert.deepEqual(renderers, ['mmdc', 'svgexport']
+            .map(bin => ({ bin, browser: inheritedBrowser })));
+    });
+
+    for (const [label, browserPath] of [
+        ['relative', 'relative-browser.exe'],
+        ['missing', join(ROOT, 'absent-browser.exe')],
+        ['directory', 'directory'],
+        ['empty', ''],
+    ]) {
+        test(`${shell}: rejects ${label} browser path before any npm commands`, (t) => {
+            const { commands } = runInstaller(t, shell, {
+                apply: true, browserPath, error: /BrowserExecutablePath must name an existing absolute file path/,
+            });
+            assert.deepEqual(commands, []);
+        });
+    }
+
+    test(`${shell}: rejects missing inherited browser path before any npm commands`, (t) => {
+        const { commands } = runInstaller(t, shell, {
+            apply: true, inheritedBrowserPath: join(ROOT, 'absent-browser.exe'),
+            error: /PUPPETEER_EXECUTABLE_PATH must name an existing absolute file path/,
+        });
+        assert.deepEqual(commands, []);
     });
 
     test(`${shell}: native stderr warnings remain visible text without PowerShell error records`, (t) => {
@@ -323,9 +432,11 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
 
     for (const renderer of ['mmdc', 'svgexport']) {
         test(`${shell}: ${renderer} missing browser prevents a readiness success claim`, (t) => {
-            runInstaller(t, shell, {
+            const { output } = runInstaller(t, shell, {
                 apply: true, renderFailure: renderer, error: /Could not find browser/,
             });
+            assert.match(output, /-VerifyOnly -BrowserExecutablePath/);
+            assert.match(output, /does not enable scripts or download browsers/);
         });
 
         test(`${shell}: ${renderer} exit zero without output is not success`, (t) => {

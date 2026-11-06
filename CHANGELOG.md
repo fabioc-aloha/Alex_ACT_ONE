@@ -3,6 +3,18 @@
 Completed-change history lives here; pending work remains in [ROADMAP.md](ROADMAP.md).
 An Unreleased entry does not imply publication, installation, or activation.
 
+## Unreleased
+
+- Added an explicit `-BrowserExecutablePath` option to the optional dependency
+  installer. It validates the selected or inherited browser path before installing
+  packages and passes the selection only to renderer processes. There is no
+  automatic browser selection, browser download, or parent-environment change.
+- Added actionable fetch-policy and access-denied cleanup diagnostics without
+  automatic retries, package-directory deletion, or npm policy changes.
+  Updated installation guidance. Local Windows verification passed 80 installer
+  regressions across PowerShell 7 and Windows PowerShell 5.1, plus actual Mermaid
+  SVG and SVG-to-PNG rendering using an explicitly selected installed Edge.
+
 ## 0.9.1 - 2026-11-06
 
 - Confined the Markdown-link smoke scan to tracked source documents after

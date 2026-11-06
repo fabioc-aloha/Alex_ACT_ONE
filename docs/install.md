@@ -434,6 +434,21 @@ rendering without reinstalling:
 .\install-optional-dependencies.ps1 -VerifyOnly -IncludeReplicate
 ```
 
+To use an existing compatible browser instead of downloading Puppeteer's browser,
+pass its absolute executable path explicitly:
+
+```powershell
+$browser = 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
+.\install-optional-dependencies.ps1 -VerifyOnly -BrowserExecutablePath $browser
+```
+
+The option works with preview, `-Apply`, and `-VerifyOnly`. Invalid paths stop
+before any installation. The selected path is passed only to renderer processes;
+it does not configure the host or change the parent environment. An existing
+`PUPPETEER_EXECUTABLE_PATH` is used when the option is omitted and is also validated.
+No browser is selected automatically, and a supplied path does not prove browser
+compatibility: the render checks must still pass.
+
 With npm 12, the Microsoft proxy can advertise tarball URLs on a different
 Microsoft host and trigger `EALLOWREMOTE`. For the verified feed prefix below,
 route those URLs back through your configured proxy. Preview first, then
@@ -444,6 +459,13 @@ $feed = 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-publ
 .\install-optional-dependencies.ps1 -RegistryTarballPrefix $feed
 .\install-optional-dependencies.ps1 -Apply -RegistryTarballPrefix $feed
 ```
+
+Combine `-BrowserExecutablePath $browser` with `-RegistryTarballPrefix $feed`
+when both are needed. Fetch-policy failures retain npm's error and explain the
+explicit routing option; a continued failure with routing enabled stops without
+broadening the prefix or retrying automatically. Access-denied cleanup errors
+suggest closing applications using the affected package and checking permissions.
+The helper does not delete package directories to recover from these errors.
 
 This routing does not switch registries or relax `allow-remote`. A failed
 install may leave partial package state. If npm blocks Puppeteer's browser
