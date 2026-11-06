@@ -45,7 +45,9 @@ Exit 0, `apply: false`, and `expectedFiles` equal to the manifest's instruction
 count. The suite asserts this, but run it once by hand before a release. With no
 arguments, it is a no-write preview; `apply: false` is part of the result.
 The preview exposes the instruction set that a later consented apply would
-write to a user's profile.
+write to a user's profile. Because `bootstrap-core` hashes raw instruction
+bytes, confirm `git ls-files --eol` shows no `w/mixed` working-tree files
+before comparing a repository checkout preview against an installed profile.
 
 Run the conflict regression suite:
 
@@ -347,9 +349,21 @@ availability, use:
 .\install-optional-dependencies.ps1 -VerifyOnly
 ```
 
-Browser acquisition is a separate decision because Puppeteer downloads
-browsers outside the npm feed. The pinned svgexport package also uses an old,
-deprecated Puppeteer browser build; review that before allowing a download.
+To verify rendering with an existing compatible browser when npm lifecycle
+scripts blocked Puppeteer's browser setup, pass its absolute executable path
+explicitly (or validate an inherited `PUPPETEER_EXECUTABLE_PATH`):
+
+```powershell
+$browser = 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
+.\install-optional-dependencies.ps1 -VerifyOnly -BrowserExecutablePath $browser
+```
+
+The selected path is validated before any `npm` command runs and is passed only
+to renderer child processes (`mmdc` and `svgexport`); it does not auto-detect a
+browser or alter the parent environment. Browser acquisition remains a separate
+decision because Puppeteer downloads browsers outside the npm feed. The pinned
+svgexport package also uses an old, deprecated Puppeteer browser build; review
+that before allowing a download.
 
 To include the shared pinned Replicate MCP package in the private runtime,
 add `-IncludeReplicate` to preview, apply, or verification:

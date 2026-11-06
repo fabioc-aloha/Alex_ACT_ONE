@@ -12,7 +12,7 @@ tools, and historical verification notes in one reference.
 | Repository | Deprecated direct-install path: repository source selected at installation time; it can include unreleased work | Temporary candidate testing only; review root/revision and do not assume future CLI support |
 | Optional runtime | The separately provisioned chart, browser, image, and converter packages | Plugin installation does not activate instructions or provision these packages; installs and upgrades require their own approval |
 
-Release version: `0.9.1`. Mall selects the reviewed release tag; a checkout on
+Release version: `0.9.2`. Mall selects the reviewed release tag; a checkout on
 main can later include unreleased changes. A version is not evidence of live-host
 activation. Packages with the same version can also contain different bytes.
 Check the loaded plugin root, installation source, and revision when available;
@@ -24,7 +24,7 @@ package merely because the versions match.
 ## Testing the repository candidate
 
 This section preserves the historical `0.9.0-rc.1` candidate-testing procedure.
-It is not the normal installation path for `0.9.1`.
+It is not the normal installation path for `0.9.2`.
 
 **Deprecated installation path.** During the user's candidate install on
 2026-11-05, installation succeeded and the CLI printed:

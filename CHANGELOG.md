@@ -3,10 +3,11 @@
 Completed-change history lives here; pending work remains in [ROADMAP.md](ROADMAP.md).
 An Unreleased entry does not imply publication, installation, or activation.
 
-## Unreleased
+## 0.9.2 - 2026-11-06
 
 - Added an explicit `-BrowserExecutablePath` option to the optional dependency
-  installer. It validates the selected or inherited browser path before installing
+  installer ([`100433d`](https://github.com/fabioc-aloha/Alex_ACT_ONE/commit/100433d54dcdacbf06c5f39e876a1ccd3d395b3a)).
+  It validates the selected or inherited browser path before installing
   packages and passes the selection only to renderer processes. There is no
   automatic browser selection, browser download, or parent-environment change.
 - Added actionable fetch-policy and access-denied cleanup diagnostics without
@@ -14,9 +15,24 @@ An Unreleased entry does not imply publication, installation, or activation.
   Updated installation guidance. Local Windows verification passed 80 installer
   regressions across PowerShell 7 and Windows PowerShell 5.1, plus actual Mermaid
   SVG and SVG-to-PNG rendering using an explicitly selected installed Edge.
+- Reconciled [HANDOFF.md](HANDOFF.md), [RELEASE-CHECKLIST.md](RELEASE-CHECKLIST.md),
+  [docs/testing.md](docs/testing.md), and the `0.9.1` release history below with
+  published tag [`v0.9.1`](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.1)
+  (`a7b4ba6`, manual CI run `42273804899`) and the `-BrowserExecutablePath` and
+  working-tree line-ending (`w/mixed`) verification checks. Refreshed offline
+  Flint demonstration provenance for `0.9.2`.
 
 ## 0.9.1 - 2026-11-06
 
+- Streamlined push CI to run minimum-Node structural and Node 26 integration
+  lanes while retaining the full Node 24/26 matrix on manual dispatch and
+  weekly runs, and hardened Windows command discovery with per-process path
+  caching in [`a7b4ba6`](https://github.com/fabioc-aloha/Alex_ACT_ONE/commit/a7b4ba6facab0c54ffa435833cc590bb18789b37).
+  [Full same-commit manual run 42273804899](https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/runs/42273804899)
+  passed 533 Windows structural tests per job, 474 Ubuntu structural tests per
+  job on Node 24/26, 58 provisioned integration tests per OS, and both canonical
+  Windows demo rebuilds, and was published to `Alex_Skill_Mall` in
+  [`3c740ba`](https://github.com/fabioc-aloha/Alex_Skill_Mall/commit/3c740ba9a1e506d9a4f65878b8bd775b0e26e740).
 - Confined the Markdown-link smoke scan to tracked source documents after
   release preparation exposed it reading a concurrent, already-removed fixture.
   A failing-then-passing regression preserves shipped-document coverage.
@@ -79,7 +95,8 @@ package recovery checks passed, completing that roadmap verification item.
 The original recovery finding and isolated-source retest remain in
 [scenario evidence](docs/verification/README.md).
 
-The repairs above ship in `0.9.1`, not `0.9.0`. See the
+The repairs above ship in `0.9.1` and `0.9.2`, not `0.9.0`. See the
 [0.9.1 release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.1)
-for final publication and delivery evidence. Preparing the release did not
-upgrade the active plugin, profile instructions, or runtime.
+and [0.9.2 release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.2)
+for final publication and delivery evidence. Preparing a release does not
+automatically upgrade the active plugin, profile instructions, or runtime.

@@ -43,10 +43,11 @@ covers temporary candidate testing, Scout setup, and optional tools.
 Already set up? Browse the
 [skill catalog](#the-skills).
 
-**Release version: `v0.9.1`**, prepared 2026-11-06. This patch preserves Markdown
-sources and literal DOCX code, isolates extracted media between documents,
-checks converter safety, and preserves existing installations. It also repairs
-Linux fixture isolation and browser verification. The `flint-interactions`
+**Release version: `v0.9.2`**, prepared 2026-11-06. This patch adds explicit
+`-BrowserExecutablePath` renderer verification and non-destructive fetch-policy
+and cleanup diagnostics to the optional dependency installer, reconciles release
+continuity and checklist guidance, and retains the `0.9.1` conversion, fixture,
+and browser-verification repairs. The `flint-interactions`
 workflow, offline demonstrations, existing commands, preview-first bootstrap,
 and optional browser fallback remain available; runtime package pins are unchanged.
 

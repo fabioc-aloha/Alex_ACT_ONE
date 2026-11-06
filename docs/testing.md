@@ -1,7 +1,7 @@
 # Verification environments and release gates
 
-Release version: `0.9.1`. Use the
-[release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.1)
+Release version: `0.9.2`. Use the
+[release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.2)
 for the frozen commit's CI, clean-clone, artifact, and delivered-package results.
 The dated baseline runs below do not substitute for same-commit release evidence.
 Live-host and browser observations retain their separately documented limits.
@@ -200,8 +200,13 @@ Browser regressions require bringing the resized iframe onscreen before frame
 work, reject premature settling before the pinned renderer's resize debounce,
 and retain the one-pixel clipping limit. See
 [browser diagnosis and evidence](verification/flint-browser.md) for the actual
-failure and the separate local-browser gate. These corrections ship in `v0.9.1`;
-they are not included in the earlier `v0.9.0` package.
+failure and the separate local-browser gate. These corrections shipped in
+`v0.9.1` (full manual run [`42273804899`](https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/runs/42273804899)
+at `a7b4ba6`: 533 Windows and 474 Ubuntu structural tests per job, 58
+integration tests per OS, and both canonical Windows demo rebuilds). Version
+`v0.9.2` adds explicit `-BrowserExecutablePath` renderer-verification and
+non-destructive fetch-policy and cleanup recovery regressions (80 tests across
+PowerShell 7 and Windows PowerShell 5.1).
 
 ## Executable documentation examples
 
