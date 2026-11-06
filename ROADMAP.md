@@ -5,7 +5,7 @@ completed repairs. Require same-commit release evidence for the source repairs
 before delivery. R8 remaining-host evidence is next; runtime upgrade recovery
 needs a design decision before implementation.
 
-Release version: `v0.9.0`. This roadmap describes work beyond its scoped
+Release version: `v0.9.1`. This roadmap describes work beyond its scoped
 verification, not an instruction to reopen completed repairs or automatically
 change existing installations. See
 [installation sources](docs/install.md#installation-sources) for the distinction.

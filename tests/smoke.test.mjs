@@ -13,15 +13,15 @@
  *
  * Run: node --test
  *
- * No dependencies and no package.json: the package's claim is that it runs on
- * Node alone, and a test suite that needed a framework would undercut it.
+ * No test-framework dependency or root package.json. Source inventory checks
+ * use Git from the documented structural verification environment.
  */
 
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { createRequire } from 'node:module';
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -30,6 +30,11 @@ const require = createRequire(import.meta.url);
 
 const read = (...p) => readFileSync(join(ROOT, ...p), 'utf8');
 const readJson = (...p) => JSON.parse(read(...p));
+
+function markdownFiles() {
+    return execFileSync('git', ['ls-files', '-z', '--', '*.md'], { cwd: ROOT, encoding: 'utf8' })
+        .split('\0').filter(Boolean).map(file => join(ROOT, file));
+}
 
 const manifest = readJson('manifest.json');
 const pluginJson = readJson('plugin.json');
@@ -246,18 +251,21 @@ describe('frontmatter', () => {
 });
 
 describe('markdown links', () => {
+    test('source inventory excludes concurrent scratch documents without dropping shipped Markdown', t => {
+        const root = mkdtempSync(join(ROOT, '.test-smoke-'));
+        t.after(() => rmSync(root, { recursive: true, force: true }));
+        const transient = join(root, 'AGENT.md');
+        writeFileSync(transient, '# Transient test document\n');
+        const files = markdownFiles();
+        assert.ok(files.includes(join(ROOT, 'README.md')));
+        assert.equal(files.includes(transient), false);
+    });
     test('no relative link points at a missing file', () => {
         // Code fences carry illustrative paths and templates carry placeholders;
         // neither is a real link, and treating them as one produces noise that
         // trains people to ignore the check.
-        const walk = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
-            if (e.name === '.git' || e.name === 'node_modules') return [];
-            const full = join(dir, e.name);
-            return e.isDirectory() ? walk(full) : (e.name.endsWith('.md') ? [full] : []);
-        });
-
         const broken = [];
-        for (const file of walk(ROOT)) {
+        for (const file of markdownFiles()) {
             const text = readFileSync(file, 'utf8')
                 .replace(/```[\s\S]*?```/g, '')
                 .replace(/`[^`\n]*`/g, '');

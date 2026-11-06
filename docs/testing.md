@@ -1,8 +1,8 @@
 # Verification environments and release gates
 
-Release version: `0.9.0`. Use the
-[release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.0)
-for the frozen commit's CI, clean-clone, artifact, and packaged recovery results.
+Release version: `0.9.1`. Use the
+[release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.1)
+for the frozen commit's CI, clean-clone, artifact, and delivered-package results.
 The dated baseline runs below do not substitute for same-commit release evidence.
 Live-host and browser observations retain their separately documented limits.
 
@@ -143,7 +143,7 @@ The later [onboarding run](https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/
 also passed every required job at `b6cc870` on 2026-11-05. It does not verify
 subsequent working-tree changes; record their own checks before publication.
 
-### Unreleased readiness corrections
+### 0.9.1 readiness corrections
 
 [Run 42259125372](https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/runs/42259125372)
 at `a6a3038` failed two Ubuntu activation fixture-copy cases on both Node
@@ -154,6 +154,9 @@ PowerShell subprocess fixtures use their scratch directory as `TMPDIR`.
 Activation fixtures now copy only the shipped activation surfaces. A regression
 excludes scratch state and includes a real Unix-domain socket on Linux.
 Production activation behavior and the required matrix are not weakened.
+The Markdown-link smoke check likewise reads Git's tracked source inventory,
+not transient Markdown created and removed by concurrent tests. Its regression
+requires the README to remain covered while excluding scratch documents.
 
 The conversion regressions require uppercase Markdown and debug paths to
 preserve the input, reject source aliases before writes, isolate media for two
@@ -167,8 +170,8 @@ Browser regressions require bringing the resized iframe onscreen before frame
 work, reject premature settling before the pinned renderer's resize debounce,
 and retain the one-pixel clipping limit. See
 [browser diagnosis and evidence](verification/flint-browser.md) for the actual
-failure and the separate local-browser gate. These source corrections are not
-included in the published `v0.9.0` package.
+failure and the separate local-browser gate. These corrections ship in `v0.9.1`;
+they are not included in the earlier `v0.9.0` package.
 
 ## Executable documentation examples
 
@@ -275,7 +278,7 @@ real media, and malformed PNG chunks, checksums, compressed data, raster length,
 and row filters. Failed PNG validation must not call Pandoc or replace a prior
 diagram/Word output. Positive rendering fixtures use checksum-correct PNG bytes.
 
-Unreleased source regressions additionally cover email-header controls (including
+Version `0.9.1` regressions additionally cover email-header controls (including
 test mode), executable source/rendered HTML, encoded UNC/device paths, code
 inside Markdown containers, and the exact 256 MiB PNG raster budget. Renderer
 and Pandoc failures preserve the complete prior document/media set. Publication

@@ -43,11 +43,12 @@ covers temporary candidate testing, Scout setup, and optional tools.
 Already set up? Browse the
 [skill catalog](#the-skills).
 
-**Release version: `v0.9.0`**, prepared 2026-11-05. This version includes the
-`flint-interactions` workflow, offline chart demonstrations, activation/runtime/
-conversion repairs, the first-session guide, and explicit denied-source recovery
-boundaries. Existing command names, preview-first bootstrap, and optional browser
-fallback remain available; runtime package pins are unchanged.
+**Release version: `v0.9.1`**, prepared 2026-11-06. This patch preserves Markdown
+sources and literal DOCX code, isolates extracted media between documents,
+checks converter safety, and preserves existing installations. It also repairs
+Linux fixture isolation and browser verification. The `flint-interactions`
+workflow, offline demonstrations, existing commands, preview-first bootstrap,
+and optional browser fallback remain available; runtime package pins are unchanged.
 
 Existing installations do not update automatically. Use the reviewed Mall
 release, verify the loaded version/root, and preview activation again before

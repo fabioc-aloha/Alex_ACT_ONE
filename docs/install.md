@@ -12,7 +12,7 @@ tools, and historical verification notes in one reference.
 | Repository | Deprecated direct-install path: repository source selected at installation time; it can include unreleased work | Temporary candidate testing only; review root/revision and do not assume future CLI support |
 | Optional runtime | The separately provisioned chart, browser, image, and converter packages | Plugin installation does not activate instructions or provision these packages; installs and upgrades require their own approval |
 
-Release version: `0.9.0`. Mall selects the reviewed release tag; a checkout on
+Release version: `0.9.1`. Mall selects the reviewed release tag; a checkout on
 main can later include unreleased changes. A version is not evidence of live-host
 activation. Packages with the same version can also contain different bytes.
 Check the loaded plugin root, installation source, and revision when available;
@@ -24,7 +24,7 @@ package merely because the versions match.
 ## Testing the repository candidate
 
 This section preserves the historical `0.9.0-rc.1` candidate-testing procedure.
-It is not the normal installation path for `0.9.0`.
+It is not the normal installation path for `0.9.1`.
 
 **Deprecated installation path.** During the user's candidate install on
 2026-11-05, installation succeeded and the CLI printed:
@@ -386,8 +386,8 @@ cross-source ONE installations. An older, disabled, or otherwise mismatched
 existing release is preserved and blocks automatic replacement. A matching
 release is verified in place; only an absent package is installed. Explicit
 upgrades require a separately reviewed delivery operation until staged
-replacement and rollback are available. These safety changes are unreleased
-source behavior, not a claim about the existing Mall release.
+replacement and rollback are available. These safety changes ship in `0.9.1`;
+they are not a claim about older Mall packages.
 
 The helper registers missing public marketplaces (`alex-mall`,
 `awesome-copilot`, `copilot-plugins`, `azure-skills`, and `fabric-collection`),

@@ -1,0 +1,73 @@
+# Changelog
+
+Completed-change history lives here; pending work remains in [ROADMAP.md](ROADMAP.md).
+An Unreleased entry does not imply publication, installation, or activation.
+
+## 0.9.1 - 2026-11-06
+
+- Confined the Markdown-link smoke scan to tracked source documents after
+  release preparation exposed it reading a concurrent, already-removed fixture.
+  A failing-then-passing regression preserves shipped-document coverage.
+- Fixed the production-review findings in pushed commit
+  [`e41ccc4`](https://github.com/fabioc-aloha/Alex_ACT_ONE/commit/e41ccc43a6202af7b83e12d8d133906210c0b14d):
+  case-insensitive HTML outputs and source-alias guards, per-output DOCX media
+  namespaces, literal-code-aware cleanup, and compatible encoded-image validation.
+  Corrected Mermaid fallback claims in the HTML and email guides.
+- Restricted activation fixtures to shipped surfaces rather than copying
+  concurrent scratch state. A Linux socket regression covers the entry type
+  that reached Node's recursive-copy assertion.
+- Corrected browser verification to bring resized iframes onscreen, wait beyond
+  the renderer debounce, and use trusted keyboard activation for saved specs.
+  A longer settling interval alone failed; the decisive visibility intervention
+  resumed the same stalled charts without remounting. Pointer actions that did
+  not deliver clicks were not counted as successful downloads.
+- [Same-commit hosted run 42267875970](https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/runs/42267875970)
+  passed all required jobs: Windows structural 526 per job, Ubuntu structural
+  467 per job on Node 24/26, provisioned integration 58 per OS, and both exact
+  Windows artifacts. A fresh local clone passed 526 structural, 58 integration,
+  and both artifact checks with an unchanged checkout. Three fresh standalone
+  Edge gates passed both pages. No required lane had skipped or failed tests.
+  Related diagnostics and documentation links passed.
+- Committed and pushed source repairs in
+  [`d0d3215`](https://github.com/fabioc-aloha/Alex_ACT_ONE/commit/d0d3215fe585293bad4b1376703e7462b8d8d5b2)
+  and
+  [`a6a3038`](https://github.com/fabioc-aloha/Alex_ACT_ONE/commit/a6a3038b5f354e662aa8fa2c95a4e9f5ba3b7bd7):
+  email-header and executable-HTML checks, network/device image-path rejection,
+  literal-code preservation, staged document/media publication with handled-error
+  rollback, and a 256 MiB decompressed PNG budget.
+- Changed the source installation helper to verify matching installations in
+  place, install only when absent, and refuse automatic replacement or
+  cross-source duplicates. This deliberately avoids claiming plugin rollback.
+- Local Windows/Node 26 verification for `a6a3038` passed 508 structural and
+  56 integration tests, with no failures, skips, cancellations, or todos.
+  Related diagnostics and documentation links passed. See
+  [verification environments and limits](docs/testing.md).
+- Hosted verification for that earlier revision was **not green**:
+  [run 42259125372](https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/runs/42259125372)
+  passed Windows structural jobs but failed Ubuntu structural jobs on both
+  Node 24 and 26; provisioned jobs were skipped. Both Ubuntu jobs report
+  `ERR_INTERNAL_ASSERTION` in Node's `fs.cpSync` while preparing the
+  canonical-route and redirected-owner cases in
+  [native-compatibility.test.mjs](tests/native-compatibility.test.mjs).
+  Root cause and same-commit integration/artifact evidence were unresolved at
+  that revision; the later `e41ccc4` result above closes that source blocker.
+- Applied the installed plugin's project scaffold after preview and consent.
+  Project guidance, compatibility adapters, handoff, episodic-directory README,
+  and workspace settings were created locally; existing tracked files were
+  unchanged. Template comparisons, diagnostics, and a second no-op preview
+  passed before continuity reconciliation. The files remained uncommitted during
+  the readiness review; this release includes the approved scaffold and continuity
+  records without adding episodic summaries.
+
+## Published baseline
+
+The [v0.9.0 release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.0)
+owns earlier release history and delivery evidence. Its frozen and delivered
+package recovery checks passed, completing that roadmap verification item.
+The original recovery finding and isolated-source retest remain in
+[scenario evidence](docs/verification/README.md).
+
+The repairs above ship in `0.9.1`, not `0.9.0`. See the
+[0.9.1 release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.1)
+for final publication and delivery evidence. Preparing the release did not
+upgrade the active plugin, profile instructions, or runtime.
