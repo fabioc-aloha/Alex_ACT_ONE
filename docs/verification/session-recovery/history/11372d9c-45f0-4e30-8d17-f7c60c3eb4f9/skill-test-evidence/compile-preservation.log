@@ -1,0 +1,93 @@
+PROMPT
+Use compile-brain to improve source.instructions.md. Show the proposed draft and its preservation receipt in this conversation; do not overwrite the source.
+
+STDOUT
+● skill(compile-brain)                                                                            9s
+
+● skill(assess-brain)
+
+● Read measure-reduction.cjs
+  │ ~\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-a
+  │ lex-act-one\1a1ac14e63b\skills\compile-brain\scripts\measure-reduction.cjs
+  └ 135 lines read
+
+/ Search (glob)
+  │ "**/source.instructions.md"
+  └ 1 file found
+
+● Read check-links.cjs
+  │ ~\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-a
+  │ lex-act-one\1a1ac14e63b\skills\compile-brain\scripts\check-links.cjs
+  └ 210 lines read
+
+● Read source.instructions.md
+  └ 7 lines read
+
+✗ Assess selected instruction workspace read-only (shell)
+  │ node "C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed
+  │ -plugins-alex-mall-alex-act-one\1a1ac14e63b\scripts\assess-brain.cjs" --root
+  │ "C:\Users\<USER>\AppData\Local\Temp\one-skill-tests-ca0jAU\compile-preservation\workspace"
+  └ Permission denied because no interactive user response was available. Retry in an interactive
+    session so the user can approve it, or try an alternative that does not require this permission.
+  Approval check
+    └ ✗ Denied, no one to approve
+
+✗ Record worktree state and source hash (shell)
+  │ git --no-pager status --short; Get-FileHash -Algorithm SHA256 .\source.instructions.md
+  └ Permission denied because no interactive user response was available. Retry in an interactive
+    session so the user can approve it, or try an alternative that does not require this permission.
+  Approval check
+    └ ✗ Denied, no one to approve
+
+The source defines a small inspection-only contract. I’ll preserve its scope and prohibitions; the required analyzer and measurement commands were denied, so I cannot claim those checks passed.
+
+● Edit
+  └ Create ~\AppData\Local\Temp\one-skill-tests-ca0jAU\compile-preservation\home\session-state\c5c05
+    032-48aa-4726-83bf-4fb94529fced\plan.md
+
+● Todo added 4 items, 2 dependencies
+  │ Inventorying source requirements
+  │ Reviewing conservative proposal
+  │ Verifying canonical script checks
+  │ Presenting draft and receipt
+  │ Dependency: review-proposal → inventory-source
+  └ Dependency: present-proposal → review-proposal
+
+● Read source.instructions.md
+  └ 7 lines read
+
+**Proposed instruction draft** for `source.instructions.md`; the source remains unchanged.
+
+```markdown
+---
+description: "Fixture inspection contract"
+applyTo: "**/*.js"
+---
+# Inspect
+
+Inspect only the selected project. Never install packages. Never publish without explicit approval. Report a missing file rather than inventing its contents.
+```
+
+**Preservation receipt**
+
+- **Retained:** exact frontmatter, inspection-only scope, selected-project boundary, installation ban, publication approval requirement, and missing-file reporting without fabrication.
+- **Changed:** opening sentence word order only; no intended behavioral change.
+- **Removed:** nothing. No illustrations or supporting links exist.
+- **Scenario review:** ordinary inspection remains project-scoped; missing files require reporting, not invention; publication without approval remains forbidden.
+- **Ambiguities:** none material to this edit. Human-facing gate does not apply.
+- **Verification limitation:** command execution was denied. Canonical assessment, link checking, and reduction measurement remain unverified; no measured reduction is claimed.
+
+The plan is saved in the session’s `plan.md`. This is a review proposal, not a fully verified compilation.
+
+
+
+STDERR
+● Using model "gpt-6.1-sol" for this session because of an administrator-managed setting. Contact
+  your administrator if this is unexpected.
+
+
+
+Changes    +32 -0
+AI Credits 8.72 (1m 0s)
+Tokens     ↑ 187.8k (166.9k cached, 20.9k written) • ↓ 1.8k (400 reasoning)
+Resume     copilot --resume=c5c05032-48aa-4726-83bf-4fb94529fced

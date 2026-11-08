@@ -1,0 +1,621 @@
+TAP version 13
+# Subtest: runnable rich-email commands are marked, portable, and backed by real shipped targets
+ok 1 - runnable rich-email commands are marked, portable, and backed by real shipped targets
+  ---
+  duration_ms: 3.1943
+  type: 'test'
+  ...
+# Subtest: additional flags or commands cannot masquerade as a reviewed executable example
+ok 2 - additional flags or commands cannot masquerade as a reviewed executable example
+  ---
+  duration_ms: 1.9899
+  type: 'test'
+  ...
+# Subtest: new executable markers cannot silently bypass the curated safe command tests
+ok 3 - new executable markers cannot silently bypass the curated safe command tests
+  ---
+  duration_ms: 505.6733
+  type: 'test'
+  ...
+# Subtest: documented commands run against an installed copy from an unrelated adopter directory
+ok 4 - documented commands run against an installed copy from an unrelated adopter directory
+  ---
+  duration_ms: 445.4237
+  type: 'test'
+  ...
+# Subtest: Replicate documentation points to the real manifest and environment reference
+ok 5 - Replicate documentation points to the real manifest and environment reference
+  ---
+  duration_ms: 5.3611
+  type: 'test'
+  ...
+# Subtest: README skills table lists every declared asset exactly once with its source link
+ok 6 - README skills table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 3.8434
+  type: 'test'
+  ...
+# Subtest: README prompts table lists every declared asset exactly once with its source link
+ok 7 - README prompts table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 47.6583
+  type: 'test'
+  ...
+# Subtest: README instructions table lists every declared asset exactly once with its source link
+ok 8 - README instructions table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 46.3809
+  type: 'test'
+  ...
+# Subtest: one generated inventory derives source counts from the manifest and server registrations
+ok 9 - one generated inventory derives source counts from the manifest and server registrations
+  ---
+  duration_ms: 4.0919
+  type: 'test'
+  ...
+# Subtest: the documentation generator has no drift and --check performs no writes
+ok 10 - the documentation generator has no drift and --check performs no writes
+  ---
+  duration_ms: 671.6386
+  type: 'test'
+  ...
+# Subtest: instruction role metadata is derived from canonical descriptions, not an independent procedure
+ok 11 - instruction role metadata is derived from canonical descriptions, not an independent procedure
+  ---
+  duration_ms: 79.0516
+  type: 'test'
+  ...
+# Subtest: stale instruction role metadata fails the read-only drift check
+ok 12 - stale instruction role metadata fails the read-only drift check
+  ---
+  duration_ms: 190.2598
+  type: 'test'
+  ...
+# Subtest: generation rejects a prompt routed to a missing owner before producing misleading tables
+ok 13 - generation rejects a prompt routed to a missing owner before producing misleading tables
+  ---
+  duration_ms: 1330.7341
+  type: 'test'
+  ...
+# Subtest: current docs distinguish shipped optimization from source-only chart additions
+ok 14 - current docs distinguish shipped optimization from source-only chart additions
+  ---
+  duration_ms: 2.4169
+  type: 'test'
+  ...
+# Subtest: compatibility command assess-brain is a thin route to assess-brain
+ok 15 - compatibility command assess-brain is a thin route to assess-brain
+  ---
+  duration_ms: 6.6714
+  type: 'test'
+  ...
+# Subtest: compatibility command banner is a thin route to svg-banner
+ok 16 - compatibility command banner is a thin route to svg-banner
+  ---
+  duration_ms: 2.6876
+  type: 'test'
+  ...
+# Subtest: compatibility command bootstrap-core is a thin route to bootstrap-core
+ok 17 - compatibility command bootstrap-core is a thin route to bootstrap-core
+  ---
+  duration_ms: 2.956
+  type: 'test'
+  ...
+# Subtest: compatibility command bootstrap-project is a thin route to bootstrap-project
+ok 18 - compatibility command bootstrap-project is a thin route to bootstrap-project
+  ---
+  duration_ms: 3.6397
+  type: 'test'
+  ...
+# Subtest: compatibility command compile-brain is a thin route to compile-brain
+ok 19 - compatibility command compile-brain is a thin route to compile-brain
+  ---
+  duration_ms: 4.8699
+  type: 'test'
+  ...
+# Subtest: compatibility command convert is a thin route to convert
+ok 20 - compatibility command convert is a thin route to convert
+  ---
+  duration_ms: 3.3286
+  type: 'test'
+  ...
+# Subtest: compatibility command critical-thinking is a thin route to critical-thinking
+ok 21 - compatibility command critical-thinking is a thin route to critical-thinking
+  ---
+  duration_ms: 3.421
+  type: 'test'
+  ...
+# Subtest: compatibility command install-visual-companions is a thin route to install-visual-companions
+ok 22 - compatibility command install-visual-companions is a thin route to install-visual-companions
+  ---
+  duration_ms: 2.5292
+  type: 'test'
+  ...
+# Subtest: compatibility command meditate is a thin route to meditation
+ok 23 - compatibility command meditate is a thin route to meditation
+  ---
+  duration_ms: 2.8724
+  type: 'test'
+  ...
+# Subtest: compatibility command problem-framing-audit is a thin route to problem-framing-audit
+ok 24 - compatibility command problem-framing-audit is a thin route to problem-framing-audit
+  ---
+  duration_ms: 2.7938
+  type: 'test'
+  ...
+# Subtest: compatibility command render-chart is a thin route to render-chart
+ok 25 - compatibility command render-chart is a thin route to render-chart
+  ---
+  duration_ms: 2.8258
+  type: 'test'
+  ...
+# Subtest: compatibility command rich-email is a thin route to rich-email
+ok 26 - compatibility command rich-email is a thin route to rich-email
+  ---
+  duration_ms: 3.0984
+  type: 'test'
+  ...
+# Subtest: compatibility command setup-dependencies is a thin route to setup-dependencies
+ok 27 - compatibility command setup-dependencies is a thin route to setup-dependencies
+  ---
+  duration_ms: 2.8148
+  type: 'test'
+  ...
+# Subtest: compatibility command setup-enterprise is a thin route to setup-enterprise-stack
+ok 28 - compatibility command setup-enterprise is a thin route to setup-enterprise-stack
+  ---
+  duration_ms: 2.462
+  type: 'test'
+  ...
+# Subtest: compatibility command status is a thin route to project-status
+ok 29 - compatibility command status is a thin route to project-status
+  ---
+  duration_ms: 2.1163
+  type: 'test'
+  ...
+# Subtest: all resident instructions are short activation contracts with installed-source routing
+ok 30 - all resident instructions are short activation contracts with installed-source routing
+  ---
+  duration_ms: 45.4194
+  type: 'test'
+  ...
+# Subtest: problem-framing-audit selects a canonical mode without a second procedure
+ok 31 - problem-framing-audit selects a canonical mode without a second procedure
+  ---
+  duration_ms: 5.2337
+  type: 'test'
+  ...
+# Subtest: adversarial-review selects a canonical mode without a second procedure
+ok 32 - adversarial-review selects a canonical mode without a second procedure
+  ---
+  duration_ms: 5.9882
+  type: 'test'
+  ...
+# Subtest: risk-analysis selects a canonical mode without a second procedure
+ok 33 - risk-analysis selects a canonical mode without a second procedure
+  ---
+  duration_ms: 5.2621
+  type: 'test'
+  ...
+# Subtest: deep-review selects a canonical mode without a second procedure
+ok 34 - deep-review selects a canonical mode without a second procedure
+  ---
+  duration_ms: 4.9141
+  type: 'test'
+  ...
+# Subtest: ACT has a materiality-first procedure and optional non-code critique methods
+ok 35 - ACT has a materiality-first procedure and optional non-code critique methods
+  ---
+  duration_ms: 2.5581
+  type: 'test'
+  ...
+# Subtest: native planning has no compulsory project file or prewritten implementation
+ok 36 - native planning has no compulsory project file or prewritten implementation
+  ---
+  duration_ms: 3.082
+  type: 'test'
+  ...
+# Subtest: browser routing prefers native tools but retains an honest fallback
+ok 37 - browser routing prefers native tools but retains an honest fallback
+  ---
+  duration_ms: 2.3163
+  type: 'test'
+  ...
+# Subtest: Humanizer keeps its modes and loads its catalog as a reference
+ok 38 - Humanizer keeps its modes and loads its catalog as a reference
+  ---
+  duration_ms: 4.4951
+  type: 'test'
+  ...
+# Subtest: ordinary code review does not inline deep or specialist checklists
+ok 39 - ordinary code review does not inline deep or specialist checklists
+  ---
+  duration_ms: 3.7591
+  type: 'test'
+  ...
+# Subtest: read-only recovery is shared without inheriting meditation writes
+ok 40 - read-only recovery is shared without inheriting meditation writes
+  ---
+  duration_ms: 10.5173
+  type: 'test'
+  ...
+# Subtest: new workflow owners are declared without retiring the original commands
+ok 41 - new workflow owners are declared without retiring the original commands
+  ---
+  duration_ms: 11.7052
+  type: 'test'
+  ...
+# Subtest: activated copies expose canonical skill routes from an arbitrary working directory
+ok 42 - activated copies expose canonical skill routes from an arbitrary working directory
+  ---
+  duration_ms: 1924.1224
+  type: 'test'
+  ...
+# Subtest: native availability does not silently remove legacy integrations
+ok 43 - native availability does not silently remove legacy integrations
+  ---
+  duration_ms: 3.9486
+  type: 'test'
+  ...
+# Subtest: activation rejects an externally redirected owner before writing instructions
+ok 44 - activation rejects an externally redirected owner before writing instructions
+  ---
+  duration_ms: 1279.8482
+  type: 'test'
+  ...
+# Subtest: git-workflow retains its contract without loading its entire execution essay
+ok 45 - git-workflow retains its contract without loading its entire execution essay
+  ---
+  duration_ms: 2.0504
+  type: 'test'
+  ...
+# Subtest: systematic-debugging retains its contract without loading its entire execution essay
+ok 46 - systematic-debugging retains its contract without loading its entire execution essay
+  ---
+  duration_ms: 1.6651
+  type: 'test'
+  ...
+# Subtest: test-driven-development retains its contract without loading its entire execution essay
+ok 47 - test-driven-development retains its contract without loading its entire execution essay
+  ---
+  duration_ms: 1.7092
+  type: 'test'
+  ...
+# Subtest: spike retains its contract without loading its entire execution essay
+ok 48 - spike retains its contract without loading its entire execution essay
+  ---
+  duration_ms: 1.7312
+  type: 'test'
+  ...
+# Subtest: meditation retains its contract without loading its entire execution essay
+ok 49 - meditation retains its contract without loading its entire execution essay
+  ---
+  duration_ms: 1.6443
+  type: 'test'
+  ...
+# Subtest: install-visual-companions retains its contract without loading its entire execution essay
+ok 50 - install-visual-companions retains its contract without loading its entire execution essay
+  ---
+  duration_ms: 1.7781
+  type: 'test'
+  ...
+# Subtest: one short guide covers install, consented activation, verification, and a dependency-free first workflow
+ok 51 - one short guide covers install, consented activation, verification, and a dependency-free first workflow
+  ---
+  duration_ms: 9.4193
+  type: 'test'
+  ...
+# Subtest: the first-workflow prompt is synthetic and read-only with a semantic success rubric
+ok 52 - the first-workflow prompt is synthetic and read-only with a semantic success rubric
+  ---
+  duration_ms: 1.9379
+  type: 'test'
+  ...
+# Subtest: README routes to onboarding before its catalogs and keeps setup reference separate
+ok 53 - README routes to onboarding before its catalogs and keeps setup reference separate
+  ---
+  duration_ms: 4.1853
+  type: 'test'
+  ...
+# Subtest: onboarding links and legacy README setup anchors still resolve
+ok 54 - onboarding links and legacy README setup anchors still resolve
+  ---
+  duration_ms: 76.2431
+  type: 'test'
+  ...
+# Subtest: documented activation signals work from an installed copy without touching an adopter workspace
+ok 55 - documented activation signals work from an installed copy without touching an adopter workspace
+  ---
+  duration_ms: 1781.0462
+  type: 'test'
+  ...
+# Subtest: MCP runtime pins
+    # Subtest: every launcher route guards the reviewed pin
+    ok 1 - every launcher route guards the reviewed pin
+      ---
+      duration_ms: 1.451
+      type: 'test'
+      ...
+    # Subtest: every reviewed server has a launcher route
+    ok 2 - every reviewed server has a launcher route
+      ---
+      duration_ms: 0.3538
+      type: 'test'
+      ...
+    # Subtest: the documented pins match the reviewed pins
+    ok 3 - the documented pins match the reviewed pins
+      ---
+      duration_ms: 2.6302
+      type: 'test'
+      ...
+    1..3
+ok 56 - MCP runtime pins
+  ---
+  duration_ms: 5.6802
+  type: 'suite'
+  ...
+# Subtest: plugin.json
+    # Subtest: every declared server invokes a real launcher route
+    ok 1 - every declared server invokes a real launcher route
+      ---
+      duration_ms: 0.5365
+      type: 'test'
+      ...
+    # Subtest: every declared server points at a launcher that exists
+    ok 2 - every declared server points at a launcher that exists
+      ---
+      duration_ms: 0.9381
+      type: 'test'
+      ...
+    # Subtest: skills and commands directories resolve
+    ok 3 - skills and commands directories resolve
+      ---
+      duration_ms: 0.4944
+      type: 'test'
+      ...
+    1..3
+ok 57 - plugin.json
+  ---
+  duration_ms: 2.3205
+  type: 'suite'
+  ...
+# Subtest: Humanizer voice fallback
+    # Subtest: uses the practitioner-editor fallback without overriding an explicit voice
+    ok 1 - uses the practitioner-editor fallback without overriding an explicit voice
+      ---
+      duration_ms: 0.5103
+      type: 'test'
+      ...
+    # Subtest: routes default Copywriter rewrites through the practitioner-editor fallback
+    ok 2 - routes default Copywriter rewrites through the practitioner-editor fallback
+      ---
+      duration_ms: 0.2923
+      type: 'test'
+      ...
+    # Subtest: keeps the governance reference aligned to the six-tag taxonomy
+    ok 3 - keeps the governance reference aligned to the six-tag taxonomy
+      ---
+      duration_ms: 0.2781
+      type: 'test'
+      ...
+    # Subtest: preserves current source scope and historical promotional-language caveats
+    ok 4 - preserves current source scope and historical promotional-language caveats
+      ---
+      duration_ms: 3.8493
+      type: 'test'
+      ...
+    1..4
+ok 58 - Humanizer voice fallback
+  ---
+  duration_ms: 5.4241
+  type: 'suite'
+  ...
+# Subtest: Compile Brain customization boundary
+    # Subtest: keeps installed skills canonical and routes project customizations locally
+    ok 1 - keeps installed skills canonical and routes project customizations locally
+      ---
+      duration_ms: 0.6704
+      type: 'test'
+      ...
+    # Subtest: checks whether a process exists before renaming it
+    ok 2 - checks whether a process exists before renaming it
+      ---
+      duration_ms: 0.4791
+      type: 'test'
+      ...
+    1..2
+ok 59 - Compile Brain customization boundary
+  ---
+  duration_ms: 1.5189
+  type: 'suite'
+  ...
+# Subtest: Mutation testing isolation
+    # Subtest: mutates an isolated copy and counter-tests detection rules
+    ok 1 - mutates an isolated copy and counter-tests detection rules
+      ---
+      duration_ms: 0.2892
+      type: 'test'
+      ...
+    1..1
+ok 60 - Mutation testing isolation
+  ---
+  duration_ms: 0.4009
+  type: 'suite'
+  ...
+# Subtest: manifest matches disk
+    # Subtest: every manifest skills entry exists on disk
+    ok 1 - every manifest skills entry exists on disk
+      ---
+      duration_ms: 8.8307
+      type: 'test'
+      ...
+    # Subtest: every skills file on disk is in the manifest
+    ok 2 - every skills file on disk is in the manifest
+      ---
+      duration_ms: 0.8714
+      type: 'test'
+      ...
+    # Subtest: every manifest prompts entry exists on disk
+    ok 3 - every manifest prompts entry exists on disk
+      ---
+      duration_ms: 2.2322
+      type: 'test'
+      ...
+    # Subtest: every prompts file on disk is in the manifest
+    ok 4 - every prompts file on disk is in the manifest
+      ---
+      duration_ms: 0.5784
+      type: 'test'
+      ...
+    # Subtest: every manifest instructions entry exists on disk
+    ok 5 - every manifest instructions entry exists on disk
+      ---
+      duration_ms: 1.8249
+      type: 'test'
+      ...
+    # Subtest: every instructions file on disk is in the manifest
+    ok 6 - every instructions file on disk is in the manifest
+      ---
+      duration_ms: 0.4805
+      type: 'test'
+      ...
+    1..6
+ok 61 - manifest matches disk
+  ---
+  duration_ms: 15.3278
+  type: 'suite'
+  ...
+# Subtest: frontmatter
+    # Subtest: every skill declares a name matching its directory, and a description
+    ok 1 - every skill declares a name matching its directory, and a description
+      ---
+      duration_ms: 149.7997
+      type: 'test'
+      ...
+    # Subtest: every instruction declares a description and applyTo
+    ok 2 - every instruction declares a description and applyTo
+      ---
+      duration_ms: 40.2223
+      type: 'test'
+      ...
+    1..2
+ok 62 - frontmatter
+  ---
+  duration_ms: 191.413
+  type: 'suite'
+  ...
+# Subtest: markdown links
+    # Subtest: no relative link points at a missing file
+    ok 1 - no relative link points at a missing file
+      ---
+      duration_ms: 572.6177
+      type: 'test'
+      ...
+    1..1
+ok 63 - markdown links
+  ---
+  duration_ms: 572.8475
+  type: 'suite'
+  ...
+# Subtest: documented counts
+    # Subtest: README.md quotes the real counts
+    ok 1 - README.md quotes the real counts
+      ---
+      duration_ms: 1.4311
+      type: 'test'
+      ...
+    # Subtest: ROADMAP.md quotes the real counts
+    ok 2 - ROADMAP.md quotes the real counts
+      ---
+      duration_ms: 1.7677
+      type: 'test'
+      ...
+    # Subtest: docs/install.md quotes the real counts
+    ok 3 - docs/install.md quotes the real counts
+      ---
+      duration_ms: 1.2214
+      type: 'test'
+      ...
+    1..3
+ok 64 - documented counts
+  ---
+  duration_ms: 4.7495
+  type: 'suite'
+  ...
+# Subtest: Microsoft Scout setup guidance
+    # Subtest: uses skills and bundled scripts instead of unavailable slash commands
+    ok 1 - uses skills and bundled scripts instead of unavailable slash commands
+      ---
+      duration_ms: 0.3408
+      type: 'test'
+      ...
+    # Subtest: package metadata and roadmap do not overstate automatic setup
+    ok 2 - package metadata and roadmap do not overstate automatic setup
+      ---
+      duration_ms: 0.2817
+      type: 'test'
+      ...
+    # Subtest: documents host readiness without promising observed activation
+    ok 3 - documents host readiness without promising observed activation
+      ---
+      duration_ms: 0.1882
+      type: 'test'
+      ...
+    # Subtest: documents the Copilot CLI plugin as Scout shared source
+    ok 4 - documents the Copilot CLI plugin as Scout shared source
+      ---
+      duration_ms: 0.3178
+      type: 'test'
+      ...
+    # Subtest: makes duplicate plugin roots and restart requirements checkable
+    ok 5 - makes duplicate plugin roots and restart requirements checkable
+      ---
+      duration_ms: 0.1272
+      type: 'test'
+      ...
+    # Subtest: preserves the historical Scout inventory instead of rewriting it as the current count
+    ok 6 - preserves the historical Scout inventory instead of rewriting it as the current count
+      ---
+      duration_ms: 0.1047
+      type: 'test'
+      ...
+    # Subtest: names every Flint tool expected after Scout restarts
+    ok 7 - names every Flint tool expected after Scout restarts
+      ---
+      duration_ms: 0.2802
+      type: 'test'
+      ...
+    1..7
+ok 65 - Microsoft Scout setup guidance
+  ---
+  duration_ms: 1.9285
+  type: 'suite'
+  ...
+# Subtest: activation
+    # Subtest: previews without error and writes nothing
+    ok 1 - previews without error and writes nothing
+      ---
+      duration_ms: 233.1837
+      type: 'test'
+      ...
+    # Subtest: plans exactly the instructions the manifest declares
+    ok 2 - plans exactly the instructions the manifest declares
+      ---
+      duration_ms: 204.0772
+      type: 'test'
+      ...
+    1..2
+ok 66 - activation
+  ---
+  duration_ms: 437.4778
+  type: 'suite'
+  ...
+1..66
+# tests 89
+# suites 11
+# pass 89
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3617.1807

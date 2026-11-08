@@ -1,0 +1,143 @@
+TAP version 13
+# Subtest: equivalent sub-millipixel positions serialize identically
+not ok 1 - equivalent sub-millipixel positions serialize identically
+  ---
+  duration_ms: 1.3166
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\svg-position-precision.test.mjs:9:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Missing the approved bounded SVG position serialization
+    + actual - expected
+    
+    + 'undefined'
+    - 'function'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'function'
+  actual: 'undefined'
+  operator: 'strictEqual'
+  stack: |-
+    canonical (file:///C:/Development/Alex_ACT_ONE/tests/svg-position-precision.test.mjs:6:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/svg-position-precision.test.mjs:12:18)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: data, text, specs, non-position geometry, and other transform coefficients remain exact
+not ok 2 - data, text, specs, non-position geometry, and other transform coefficients remain exact
+  ---
+  duration_ms: 0.1597
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\svg-position-precision.test.mjs:16:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Missing the approved bounded SVG position serialization
+    + actual - expected
+    
+    + 'undefined'
+    - 'function'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'function'
+  actual: 'undefined'
+  operator: 'strictEqual'
+  stack: |-
+    canonical (file:///C:/Development/Alex_ACT_ONE/tests/svg-position-precision.test.mjs:6:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/svg-position-precision.test.mjs:25:18)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: every rounded scalar position stays within 0.0005 SVG units
+not ok 3 - every rounded scalar position stays within 0.0005 SVG units
+  ---
+  duration_ms: 0.1443
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\svg-position-precision.test.mjs:27:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Missing the approved bounded SVG position serialization
+    + actual - expected
+    
+    + 'undefined'
+    - 'function'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'function'
+  actual: 'undefined'
+  operator: 'strictEqual'
+  stack: |-
+    canonical (file:///C:/Development/Alex_ACT_ONE/tests/svg-position-precision.test.mjs:6:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/svg-position-precision.test.mjs:29:24)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: unterminated SVG markup is rejected rather than silently altered
+not ok 4 - unterminated SVG markup is rejected rather than silently altered
+  ---
+  duration_ms: 0.6065
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\svg-position-precision.test.mjs:34:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /unterminated|invalid/i. Input:
+    
+    'AssertionError [ERR_ASSERTION]: Missing the approved bounded SVG position serialization\n' +
+      '+ actual - expected\n' +
+      '\n' +
+      "+ 'undefined'\n" +
+      "- 'function'\n"
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+  error: |-
+    Missing the approved bounded SVG position serialization
+    + actual - expected
+    
+    + 'undefined'
+    - 'function'
+    
+  stack: |-
+    canonical (file:///C:/Development/Alex_ACT_ONE/tests/svg-position-precision.test.mjs:6:12)
+    file:///C:/Development/Alex_ACT_ONE/tests/svg-position-precision.test.mjs:35:25
+    getActual (node:assert:580:5)
+    strict.throws (node:assert:728:24)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/svg-position-precision.test.mjs:35:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/svg-position-precision.test.mjs:35:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 0
+# fail 4
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 103.2047

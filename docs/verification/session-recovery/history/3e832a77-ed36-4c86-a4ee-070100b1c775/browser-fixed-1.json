@@ -1,0 +1,492 @@
+{
+  "browser": "157.0.4341.42",
+  "channel": "msedge",
+  "reports": [
+    {
+      "url": "file:///C:/Development/Alex_ACT_ONE/docs/flint-showcase.html",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+      "input": "Playwright",
+      "limitations": [
+        "Sampled shell contrast, not all SVG text or chart colors",
+        "Live-region DOM checked; screen-reader speech not observed",
+        "Representative keyboard and linked-selection checks, not every gesture preset"
+      ],
+      "passed": true,
+      "checks": [
+        {
+          "id": "provenance",
+          "status": "passed",
+          "details": {
+            "schemaVersion": 1,
+            "sourceStatus": "repository-source-demo",
+            "sourceInputs": {
+              "scripts/build-flint-showcase.mjs": "7d998e53194ad3082f4defd93a88fb32f35b83506cdabe14d1ee50c721c48400",
+              "scripts/shared/dependencies.cjs": "e794248fe28674250182b04d6606ca8843456388eb647832327a113407ea4f44",
+              "ci/runtime/package.json": "e4011951f2de2a30ef758dd7ff5b6a40d2d6046d0d06353420e8dfa786da01b9",
+              "ci/runtime/package-lock.json": "aa718fb624b276687f4b8c0abf32e344b390bf05eef1e2f8fe3ba611c08c56c3",
+              "plugin.json": "5fbb424ce9427716b2e8d5b4c423307f7db60c33149f0cae9de15aaf244f08b5"
+            },
+            "dataSha256": "c0585bdd7a57dc0700b8f256e590820470e45ace60247b3023e0138c67ad666e",
+            "appUiSha256": "510665bfd6f495cbbb2ba33790187f239c08f5203f4c8fdf9ab4c8a366cb9034",
+            "packages": {
+              "flint-chart-mcp": "1.0.1",
+              "flint-chart": "1.0.1",
+              "vega": "6.4.0",
+              "vega-lite": "6.5.0",
+              "echarts": "6.1.0",
+              "chart.js": "4.5.1",
+              "@napi-rs/canvas": "1.0.10",
+              "@modelcontextprotocol/sdk": "1.32.1",
+              "@modelcontextprotocol/ext-apps": "1.7.5"
+            },
+            "fonts": {
+              "DejaVuSans-Bold.ttf": "d1c3ff99f1e1ce1827a33efd4dad81f40babda06bff9e43bd7591c86662a287b",
+              "DejaVuSans.ttf": "690243adfefe0ce154b547db6205794bd30ac4277275179517a90994f4980648",
+              "LiberationSans-Bold.ttf": "788abee4c806d660e8aee46689dd8540cd4bb98da03dcc9d171ce3efd99a9173",
+              "LiberationSans-Regular.ttf": "76d04c18ea243f426b7de1f3ad208e927008f961dc5945e5aad352d0dfde8ee8"
+            }
+          }
+        },
+        {
+          "id": "images",
+          "status": "passed",
+          "details": [
+            {
+              "width": 343,
+              "height": 368
+            },
+            {
+              "width": 756,
+              "height": 417
+            },
+            {
+              "width": 712,
+              "height": 400
+            }
+          ]
+        },
+        {
+          "id": "matrix",
+          "status": "passed",
+          "details": {
+            "cases": 24,
+            "samples": 8,
+            "themes": 3
+          }
+        },
+        {
+          "id": "keyboard",
+          "status": "passed",
+          "details": {
+            "input": "Playwright key",
+            "before": "Bar Chart: West fulfils the most orders. Orders by region; one synthetic week. X axis region. 4 bars. Press Enter to explore 1 parts, or H for help.",
+            "after": "Data. 4 bars, orders from 96 to 154."
+          }
+        },
+        {
+          "id": "focus",
+          "status": "passed",
+          "details": {
+            "active": true,
+            "outline": "solid",
+            "width": 3,
+            "color": "rgb(154, 92, 0)",
+            "background": "rgb(227, 239, 235)",
+            "ratio": 4.561596496907142
+          }
+        },
+        {
+          "id": "live-regions",
+          "status": "passed",
+          "details": {
+            "chartRegions": 1,
+            "screenReaderAnnouncement": "not observed; DOM contract only"
+          }
+        },
+        {
+          "id": "contrast",
+          "status": "passed",
+          "details": [
+            {
+              "selector": "body",
+              "ratio": 13.097045418552971
+            },
+            {
+              "selector": ".lede",
+              "ratio": 5.8517253200547446
+            },
+            {
+              "selector": ".helper",
+              "ratio": 5.8517253200547446
+            },
+            {
+              "selector": "label",
+              "ratio": 12.21832473664451
+            },
+            {
+              "selector": "button",
+              "ratio": 14.404833637877616
+            },
+            {
+              "selector": "select",
+              "ratio": 14.404833637877616
+            },
+            {
+              "selector": "summary",
+              "ratio": 14.404833637877616
+            }
+          ]
+        },
+        {
+          "id": "linked-selection",
+          "status": "passed",
+          "details": {
+            "field": "region",
+            "selected": "North",
+            "recipients": [
+              {
+                "id": "flint-board-regions",
+                "population": [
+                  "region: East; orders: 112",
+                  "region: North; orders: 128",
+                  "region: South; orders: 96",
+                  "region: West; orders: 154"
+                ],
+                "selected": 1,
+                "other": 0.25,
+                "selectedOverlayPaths": 0
+              },
+              {
+                "id": "flint-board-stores",
+                "population": [
+                  "hours: 14; orders: 44; region: South; store: S1",
+                  "hours: 16; orders: 48; region: East; store: E1",
+                  "hours: 18; orders: 58; region: North; store: N1",
+                  "hours: 20; orders: 52; region: South; store: S2",
+                  "hours: 24; orders: 64; region: East; store: E2",
+                  "hours: 26; orders: 70; region: North; store: N2",
+                  "hours: 28; orders: 72; region: West; store: W1",
+                  "hours: 34; orders: 82; region: West; store: W2"
+                ],
+                "selected": 0.7,
+                "other": 0.25,
+                "selectedOverlayPaths": 0
+              }
+            ]
+          }
+        },
+        {
+          "id": "reset",
+          "status": "passed",
+          "details": "Escape and Reset example restored semantic populations and emphasis"
+        },
+        {
+          "id": "resize",
+          "status": "passed",
+          "details": [
+            {
+              "width": 1440,
+              "charts": 2
+            },
+            {
+              "width": 768,
+              "charts": 2
+            },
+            {
+              "width": 390,
+              "charts": 2
+            }
+          ]
+        },
+        {
+          "id": "saved-spec",
+          "status": "passed",
+          "details": {
+            "filename": "flint-linked-swiss.json",
+            "savedAndValidated": true,
+            "input": "trusted keyboard activation"
+          }
+        },
+        {
+          "id": "offline",
+          "status": "passed",
+          "details": {
+            "networkRequests": 0,
+            "browserErrors": 0
+          }
+        }
+      ]
+    },
+    {
+      "url": "file:///C:/Development/Alex_ACT_ONE/docs/flint-experimental.html",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+      "input": "Playwright",
+      "limitations": [
+        "Sampled shell contrast, not all SVG text or chart colors",
+        "Live-region DOM checked; screen-reader speech not observed",
+        "Representative keyboard and linked-selection checks, not every gesture preset"
+      ],
+      "passed": true,
+      "checks": [
+        {
+          "id": "provenance",
+          "status": "passed",
+          "details": {
+            "schemaVersion": 1,
+            "sourceStatus": "repository-source-demo",
+            "sourceInputs": {
+              "scripts/build-flint-showcase.mjs": "7d998e53194ad3082f4defd93a88fb32f35b83506cdabe14d1ee50c721c48400",
+              "scripts/shared/dependencies.cjs": "e794248fe28674250182b04d6606ca8843456388eb647832327a113407ea4f44",
+              "ci/runtime/package.json": "e4011951f2de2a30ef758dd7ff5b6a40d2d6046d0d06353420e8dfa786da01b9",
+              "ci/runtime/package-lock.json": "aa718fb624b276687f4b8c0abf32e344b390bf05eef1e2f8fe3ba611c08c56c3",
+              "plugin.json": "5fbb424ce9427716b2e8d5b4c423307f7db60c33149f0cae9de15aaf244f08b5"
+            },
+            "dataSha256": "6f3a9f8983171bc23e016621197892dd29e47866ba79e78c49791de40872fd86",
+            "appUiSha256": "510665bfd6f495cbbb2ba33790187f239c08f5203f4c8fdf9ab4c8a366cb9034",
+            "packages": {
+              "flint-chart-mcp": "1.0.1",
+              "flint-chart": "1.0.1",
+              "vega": "6.4.0",
+              "vega-lite": "6.5.0",
+              "echarts": "6.1.0",
+              "chart.js": "4.5.1",
+              "@napi-rs/canvas": "1.0.10",
+              "@modelcontextprotocol/sdk": "1.32.1",
+              "@modelcontextprotocol/ext-apps": "1.7.5"
+            },
+            "fonts": {
+              "DejaVuSans-Bold.ttf": "d1c3ff99f1e1ce1827a33efd4dad81f40babda06bff9e43bd7591c86662a287b",
+              "DejaVuSans.ttf": "690243adfefe0ce154b547db6205794bd30ac4277275179517a90994f4980648",
+              "LiberationSans-Bold.ttf": "788abee4c806d660e8aee46689dd8540cd4bb98da03dcc9d171ce3efd99a9173",
+              "LiberationSans-Regular.ttf": "76d04c18ea243f426b7de1f3ad208e927008f961dc5945e5aad352d0dfde8ee8"
+            }
+          }
+        },
+        {
+          "id": "images",
+          "status": "passed",
+          "details": [
+            {
+              "width": 343,
+              "height": 368
+            },
+            {
+              "width": 756,
+              "height": 417
+            },
+            {
+              "width": 712,
+              "height": 400
+            }
+          ]
+        },
+        {
+          "id": "matrix",
+          "status": "passed",
+          "details": {
+            "cases": 27,
+            "samples": 7,
+            "themes": 3
+          }
+        },
+        {
+          "id": "keyboard",
+          "status": "passed",
+          "details": {
+            "input": "Playwright key",
+            "before": "Scatter Plot: Narrow the population before comparing the runs. 32 synthetic runs; cost in USD, score 0-100; filters change the visible rows. X axis cost; Y axis score; color legend cohort. 32 points. Press Enter to explore 1 parts, or H for help.",
+            "after": "Data. 32 points, score from 45 to 97."
+          }
+        },
+        {
+          "id": "focus",
+          "status": "passed",
+          "details": {
+            "active": true,
+            "outline": "solid",
+            "width": 3,
+            "color": "rgb(188, 242, 143)",
+            "background": "rgb(30, 51, 61)",
+            "ratio": 10.172024376164226
+          }
+        },
+        {
+          "id": "live-regions",
+          "status": "passed",
+          "details": {
+            "chartRegions": 1,
+            "screenReaderAnnouncement": "not observed; DOM contract only"
+          }
+        },
+        {
+          "id": "contrast",
+          "status": "passed",
+          "details": [
+            {
+              "selector": "body",
+              "ratio": 15.368965177147416
+            },
+            {
+              "selector": ".lede",
+              "ratio": 9.636114122512623
+            },
+            {
+              "selector": ".helper",
+              "ratio": 9.636114122512623
+            },
+            {
+              "selector": "label",
+              "ratio": 11.709985908639942
+            },
+            {
+              "selector": "button",
+              "ratio": 11.835607083449615
+            },
+            {
+              "selector": "select",
+              "ratio": 13.03938159798534
+            },
+            {
+              "selector": "summary",
+              "ratio": 13.03938159798534
+            }
+          ]
+        },
+        {
+          "id": "linked-selection",
+          "status": "passed",
+          "details": {
+            "field": "cohort",
+            "selected": "Atlas",
+            "recipients": [
+              {
+                "id": "flint-board-rank",
+                "population": [
+                  "checkpoint: 1; rank: 1; cohort: Atlas",
+                  "checkpoint: 1; rank: 2; cohort: Drift",
+                  "checkpoint: 1; rank: 3; cohort: Kite",
+                  "checkpoint: 1; rank: 4; cohort: Forge",
+                  "checkpoint: 2; rank: 1; cohort: Drift",
+                  "checkpoint: 2; rank: 2; cohort: Atlas",
+                  "checkpoint: 2; rank: 3; cohort: Forge",
+                  "checkpoint: 2; rank: 4; cohort: Kite",
+                  "checkpoint: 3; rank: 1; cohort: Drift",
+                  "checkpoint: 3; rank: 2; cohort: Forge",
+                  "checkpoint: 3; rank: 3; cohort: Atlas",
+                  "checkpoint: 3; rank: 4; cohort: Kite",
+                  "checkpoint: 4; rank: 1; cohort: Forge",
+                  "checkpoint: 4; rank: 2; cohort: Atlas",
+                  "checkpoint: 4; rank: 3; cohort: Drift",
+                  "checkpoint: 4; rank: 4; cohort: Kite",
+                  "checkpoint: 5; rank: 1; cohort: Forge",
+                  "checkpoint: 5; rank: 2; cohort: Drift",
+                  "checkpoint: 5; rank: 3; cohort: Atlas",
+                  "checkpoint: 5; rank: 4; cohort: Kite",
+                  "checkpoint: 6; rank: 1; cohort: Forge",
+                  "checkpoint: 6; rank: 2; cohort: Atlas",
+                  "checkpoint: 6; rank: 3; cohort: Drift",
+                  "checkpoint: 6; rank: 4; cohort: Kite"
+                ],
+                "selected": 1,
+                "other": 0.25,
+                "selectedOverlayPaths": 5
+              },
+              {
+                "id": "flint-board-runs",
+                "population": [
+                  "cost: 104; score: 57; cohort: Drift; run: Drift-2",
+                  "cost: 107; score: 57; cohort: Atlas; run: Atlas-4",
+                  "cost: 110; score: 61; cohort: Forge; run: Forge-1",
+                  "cost: 113; score: 61; cohort: Drift; run: Drift-3",
+                  "cost: 116; score: 61; cohort: Atlas; run: Atlas-5",
+                  "cost: 119; score: 65; cohort: Forge; run: Forge-2",
+                  "cost: 122; score: 65; cohort: Drift; run: Drift-4",
+                  "cost: 125; score: 65; cohort: Atlas; run: Atlas-6",
+                  "cost: 125; score: 69; cohort: Kite; run: Kite-1",
+                  "cost: 128; score: 69; cohort: Forge; run: Forge-3",
+                  "cost: 131; score: 69; cohort: Drift; run: Drift-5",
+                  "cost: 134; score: 69; cohort: Atlas; run: Atlas-7",
+                  "cost: 134; score: 73; cohort: Kite; run: Kite-2",
+                  "cost: 137; score: 73; cohort: Forge; run: Forge-4",
+                  "cost: 140; score: 73; cohort: Drift; run: Drift-6",
+                  "cost: 143; score: 73; cohort: Atlas; run: Atlas-8",
+                  "cost: 143; score: 77; cohort: Kite; run: Kite-3",
+                  "cost: 146; score: 77; cohort: Forge; run: Forge-5",
+                  "cost: 149; score: 77; cohort: Drift; run: Drift-7",
+                  "cost: 152; score: 81; cohort: Kite; run: Kite-4",
+                  "cost: 155; score: 81; cohort: Forge; run: Forge-6",
+                  "cost: 158; score: 81; cohort: Drift; run: Drift-8",
+                  "cost: 161; score: 85; cohort: Kite; run: Kite-5",
+                  "cost: 164; score: 85; cohort: Forge; run: Forge-7",
+                  "cost: 170; score: 89; cohort: Kite; run: Kite-6",
+                  "cost: 173; score: 89; cohort: Forge; run: Forge-8",
+                  "cost: 179; score: 93; cohort: Kite; run: Kite-7",
+                  "cost: 188; score: 97; cohort: Kite; run: Kite-8",
+                  "cost: 80; score: 45; cohort: Atlas; run: Atlas-1",
+                  "cost: 89; score: 49; cohort: Atlas; run: Atlas-2",
+                  "cost: 95; score: 53; cohort: Drift; run: Drift-1",
+                  "cost: 98; score: 53; cohort: Atlas; run: Atlas-3"
+                ],
+                "selected": 1,
+                "other": 0.25,
+                "selectedOverlayPaths": 0
+              },
+              {
+                "id": "flint-board-latency",
+                "population": [
+                  "latency: 2; Cumulative proportion: 0.125; cohort: Forge",
+                  "latency: 4; Cumulative proportion: 0.25; cohort: Atlas",
+                  "latency: 7; Cumulative proportion: 0.125; cohort: Drift",
+                  "latency: 9; Cumulative proportion: 0.125; cohort: Kite"
+                ],
+                "selected": 1,
+                "other": 0.25,
+                "selectedOverlayPaths": 7
+              }
+            ]
+          }
+        },
+        {
+          "id": "reset",
+          "status": "passed",
+          "details": "Escape and Reset example restored semantic populations and emphasis"
+        },
+        {
+          "id": "resize",
+          "status": "passed",
+          "details": [
+            {
+              "width": 1440,
+              "charts": 3
+            },
+            {
+              "width": 768,
+              "charts": 3
+            },
+            {
+              "width": 390,
+              "charts": 3
+            }
+          ]
+        },
+        {
+          "id": "saved-spec",
+          "status": "passed",
+          "details": {
+            "filename": "flint-linked-lab-de-stijl.json",
+            "savedAndValidated": true,
+            "input": "trusted keyboard activation"
+          }
+        },
+        {
+          "id": "offline",
+          "status": "passed",
+          "details": {
+            "networkRequests": 0,
+            "browserErrors": 0
+          }
+        }
+      ]
+    }
+  ]
+}

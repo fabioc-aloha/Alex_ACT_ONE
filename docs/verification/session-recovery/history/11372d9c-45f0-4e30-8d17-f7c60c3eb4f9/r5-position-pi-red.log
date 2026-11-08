@@ -1,0 +1,53 @@
+TAP version 13
+# Subtest: data, text, specs, non-position geometry, and other transform coefficients remain exact
+not ok 1 - data, text, specs, non-position geometry, and other transform coefficients remain exact
+  ---
+  duration_ms: 1.7528
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\svg-position-precision.test.mjs:16:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + '<svg viewBox="0 0 1.234567 2.345678"><!-- x="1.234567" --><?fixture x="1.235"?>\n' +
+    - '<svg viewBox="0 0 1.234567 2.345678"><!-- x="1.234567" --><?fixture x="1.234567"?>\n' +
+        '<metadata><![CDATA[{"x":1.234567,"spec":"translate(1.234567)"}]]></metadata>\n' +
+        '<g transform="translate(1.235,2.346) scale(0.12345678) rotate(12.345678)">\n' +
+        `<text x="1.235" 私x="1.234567" data-x="1.234567" aria-label="value 1.234567; x='2.345678'; translate(3.456789)">1.234567</text>\n` +
+        '<path d="M1.234567,2.345678" stroke-width="1.234567" opacity="0.12345678"/>\n' +
+        '<text x="50%" y="1.234567em">unchanged units</text></g></svg>'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: |-
+    <svg viewBox="0 0 1.234567 2.345678"><!-- x="1.234567" --><?fixture x="1.234567"?>
+    <metadata><![CDATA[{"x":1.234567,"spec":"translate(1.234567)"}]]></metadata>
+    <g transform="translate(1.235,2.346) scale(0.12345678) rotate(12.345678)">
+    <text x="1.235" 私x="1.234567" data-x="1.234567" aria-label="value 1.234567; x='2.345678'; translate(3.456789)">1.234567</text>
+    <path d="M1.234567,2.345678" stroke-width="1.234567" opacity="0.12345678"/>
+    <text x="50%" y="1.234567em">unchanged units</text></g></svg>
+  actual: |-
+    <svg viewBox="0 0 1.234567 2.345678"><!-- x="1.234567" --><?fixture x="1.235"?>
+    <metadata><![CDATA[{"x":1.234567,"spec":"translate(1.234567)"}]]></metadata>
+    <g transform="translate(1.235,2.346) scale(0.12345678) rotate(12.345678)">
+    <text x="1.235" 私x="1.234567" data-x="1.234567" aria-label="value 1.234567; x='2.345678'; translate(3.456789)">1.234567</text>
+    <path d="M1.234567,2.345678" stroke-width="1.234567" opacity="0.12345678"/>
+    <text x="50%" y="1.234567em">unchanged units</text></g></svg>
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/svg-position-precision.test.mjs:25:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 0
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 89.1832

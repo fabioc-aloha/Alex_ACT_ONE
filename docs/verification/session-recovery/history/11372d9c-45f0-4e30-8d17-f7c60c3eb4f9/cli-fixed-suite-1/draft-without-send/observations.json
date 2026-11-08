@@ -1,0 +1,26 @@
+{
+  "response": "This is a short, simple reschedule note, so I'll follow the simpler message shape (the style guide allows a simpler structure when the audience doesn't need the full one). No tools used beyond the guidance reads above — no file created, no Outlook opened, no send.\n\n## Draft Text\n\n**To:** [RECIPIENT NAME/EMAIL — to be confirmed]\n**Subject:** Demo rescheduled: Tuesday → Thursday\n\n[GREETING — e.g., \"Hi [Name],\"]\n\nThe demo originally scheduled for **Tuesday, [ORIGINAL DATE]** has moved to **Thursday, [NEW DATE]**. [Optional: same time/location, or note if time/location also changed — TBD.]\n\n**What changed:**\n- **Date:** Tuesday [ORIGINAL DATE] → Thursday [NEW DATE]\n- **Time:** [UNCHANGED / NEW TIME — to be confirmed]\n- **Location/link:** [UNCHANGED / NEW LINK — to be confirmed]\n\nPlease let me know if this new time doesn't work and I'll find an alternative.\n\n[Optional closing line, e.g., \"Looking forward to it.\"]\n\n---\n\n## Must be confirmed before this could be sent\n\n1. **Recipient(s)** — name/email address(es) are unknown; placeholder only.\n2. **Exact original date** (the Tuesday being replaced).\n3. **Exact new date** (the Thursday being moved to).\n4. **Time** — whether it stays the same or changes.\n5. **Location/meeting link** — whether it stays the same or changes.\n6. **Sender's greeting/tone preference** and whether a send (not just a draft) is authorized.\n\nThis is text only — no file was created, no EML generated, and no Outlook draft was opened.",
+  "models": [
+    "claude-sonnet-5"
+  ],
+  "toolCalls": [
+    {
+      "name": "skill",
+      "skill": "rich-email"
+    },
+    {
+      "name": "view",
+      "path": "rich-email/references/style-guide.md"
+    },
+    {
+      "name": "view",
+      "path": "rich-email/assets/rich-email-template.md"
+    }
+  ],
+  "codeChanges": {
+    "linesAdded": 0,
+    "linesRemoved": 0,
+    "filesModified": []
+  },
+  "semanticStatus": "not-reviewed"
+}

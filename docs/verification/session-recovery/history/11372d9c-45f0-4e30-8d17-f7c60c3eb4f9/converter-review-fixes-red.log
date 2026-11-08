@@ -1,0 +1,292 @@
+TAP version 13
+# Subtest: DOCX extraction preserves image syntax in inline, fenced, and indented code while copying real images
+not ok 1 - DOCX extraction preserves image syntax in inline, fenced, and indented code while copying real images
+  ---
+  duration_ms: 10.3379
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\conversion-runtime.test.cjs:104:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, stat 'C:\\Development\\Alex_ACT_ONE\\.conversion-test-txWFms\\missing-example.png'"
+  code: 'ENOENT'
+  stack: |-
+    Object.statSync (node:fs:2187:25)
+    resolveLocalImagePath (C:\Development\Alex_ACT_ONE\scripts\shared\local-image-path.cjs:25:11)
+    C:\Development\Alex_ACT_ONE\skills\docx-to-md\scripts\docx-to-md.cjs:173:25
+    String.replace (<anonymous>)
+    extractImages (C:\Development\Alex_ACT_ONE\skills\docx-to-md\scripts\docx-to-md.cjs:169:11)
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\conversion-runtime.test.cjs:139:20)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: real DOCX roundtrip preserves literal image examples alongside extracted media
+not ok 2 - real DOCX roundtrip preserves literal image examples alongside extracted media
+  ---
+  duration_ms: 611.8427
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\conversion-runtime.test.cjs:149:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    [31m[FATAL] ENOENT: no such file or directory, stat 'C:\Development\Alex_ACT_ONE\.conversion-test-jsyfJN\docx-to-md-media-fFZ8ik\missing-example.png'[0m
+    
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\conversion-runtime.test.cjs:161:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: Word refuses stale Mermaid PNG on failure and preserves source and prior output
+ok 3 - Word refuses stale Mermaid PNG on failure and preserves source and prior output
+  ---
+  duration_ms: 534.0179
+  type: 'test'
+  ...
+# Subtest: Word refuses stale Mermaid PNG on partial-failure and preserves source and prior output
+ok 4 - Word refuses stale Mermaid PNG on partial-failure and preserves source and prior output
+  ---
+  duration_ms: 442.68
+  type: 'test'
+  ...
+# Subtest: Word refuses stale Mermaid PNG on empty-success and preserves source and prior output
+ok 5 - Word refuses stale Mermaid PNG on empty-success and preserves source and prior output
+  ---
+  duration_ms: 441.1116
+  type: 'test'
+  ...
+# Subtest: Word refuses stale Mermaid PNG on corrupt-success and preserves source and prior output
+ok 6 - Word refuses stale Mermaid PNG on corrupt-success and preserves source and prior output
+  ---
+  duration_ms: 433.2007
+  type: 'test'
+  ...
+# Subtest: Word refuses stale Mermaid PNG on signature-only and preserves source and prior output
+not ok 7 - Word refuses stale Mermaid PNG on signature-only and preserves source and prior output
+  ---
+  duration_ms: 572.217
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\md-to-word.test.mjs:88:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /Mermaid|diagram.*failed/i. Input:
+    
+    '   💡 Diagram 1 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.\n' +
+      "FATAL: Can't find end of central directory : is this a zip file ? If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html\n"
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+       💡 Diagram 1 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.
+    FATAL: Can't find end of central directory : is this a zip file ? If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/md-to-word.test.mjs:119:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: Word refuses stale Mermaid PNG on zero-size and preserves source and prior output
+not ok 8 - Word refuses stale Mermaid PNG on zero-size and preserves source and prior output
+  ---
+  duration_ms: 544.6512
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\md-to-word.test.mjs:88:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /Mermaid|diagram.*failed/i. Input:
+    
+    '   💡 Diagram 1 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.\n' +
+      "FATAL: Can't find end of central directory : is this a zip file ? If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html\n"
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+       💡 Diagram 1 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.
+    FATAL: Can't find end of central directory : is this a zip file ? If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/md-to-word.test.mjs:119:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: Word refuses stale Mermaid PNG on bad-filter and preserves source and prior output
+not ok 9 - Word refuses stale Mermaid PNG on bad-filter and preserves source and prior output
+  ---
+  duration_ms: 520.9608
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\md-to-word.test.mjs:88:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /Mermaid|diagram.*failed/i. Input:
+    
+    '   💡 Diagram 1 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.\n' +
+      "FATAL: Can't find end of central directory : is this a zip file ? If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html\n"
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+       💡 Diagram 1 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.
+    FATAL: Can't find end of central directory : is this a zip file ? If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/md-to-word.test.mjs:119:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: Word refuses stale Mermaid PNG on short-raster and preserves source and prior output
+not ok 10 - Word refuses stale Mermaid PNG on short-raster and preserves source and prior output
+  ---
+  duration_ms: 698.8941
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\md-to-word.test.mjs:88:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /Mermaid|diagram.*failed/i. Input:
+    
+    '   💡 Diagram 1 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.\n' +
+      "FATAL: Can't find end of central directory : is this a zip file ? If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html\n"
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+       💡 Diagram 1 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.
+    FATAL: Can't find end of central directory : is this a zip file ? If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/md-to-word.test.mjs:119:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: Word refuses stale Mermaid PNG on bad-deflate and preserves source and prior output
+not ok 11 - Word refuses stale Mermaid PNG on bad-deflate and preserves source and prior output
+  ---
+  duration_ms: 814.3698
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\md-to-word.test.mjs:88:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /Mermaid|diagram.*failed/i. Input:
+    
+    '   💡 Diagram 1 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.\n' +
+      "FATAL: Can't find end of central directory : is this a zip file ? If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html\n"
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+       💡 Diagram 1 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.
+    FATAL: Can't find end of central directory : is this a zip file ? If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/md-to-word.test.mjs:119:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: Word refuses stale Mermaid PNG on bad-crc and preserves source and prior output
+not ok 12 - Word refuses stale Mermaid PNG on bad-crc and preserves source and prior output
+  ---
+  duration_ms: 681.6507
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\md-to-word.test.mjs:88:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /Mermaid|diagram.*failed/i. Input:
+    
+    '   💡 Diagram 1 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.\n' +
+      "FATAL: Can't find end of central directory : is this a zip file ? If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html\n"
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+       💡 Diagram 1 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.
+    FATAL: Can't find end of central directory : is this a zip file ? If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/md-to-word.test.mjs:119:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: Word refuses stale Mermaid PNG on missing-iend and preserves source and prior output
+not ok 13 - Word refuses stale Mermaid PNG on missing-iend and preserves source and prior output
+  ---
+  duration_ms: 577.9306
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\md-to-word.test.mjs:88:3'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /Mermaid|diagram.*failed/i. Input:
+    
+    '   💡 Diagram 1 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.\n' +
+      "FATAL: Can't find end of central directory : is this a zip file ? If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html\n"
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+       💡 Diagram 1 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.
+    FATAL: Can't find end of central directory : is this a zip file ? If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/md-to-word.test.mjs:119:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 4
+# fail 9
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 7029.613

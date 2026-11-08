@@ -1,0 +1,206 @@
+TAP version 13
+# Subtest: chart prompt selects the owner that links all bundled activation dependencies
+not ok 1 - chart prompt selects the owner that links all bundled activation dependencies
+  ---
+  duration_ms: 9.1728
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\activation-routing.test.mjs:11:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing bundled route for flint-interactions'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/activation-routing.test.mjs:16:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: chart routes resolve from an installed package without adopter skill folders
+not ok 2 - chart routes resolve from an installed package without adopter skill folders
+  ---
+  duration_ms: 28.82
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\activation-routing.test.mjs:23:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open 'C:\\Development\\Alex_ACT_ONE\\skills\\flint-interactions\\SKILL.md'"
+  code: 'ENOENT'
+  stack: |-
+    readFileSync (node:fs:624:20)
+    read (file:///C:/Development/Alex_ACT_ONE/tests/activation-routing.test.mjs:9:28)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/activation-routing.test.mjs:35:65)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: continuity consumers read current handoff state and the authoritative task list
+ok 3 - continuity consumers read current handoff state and the authoritative task list
+  ---
+  duration_ms: 7.231
+  type: 'test'
+  ...
+# Subtest: brain command guidance resolves executables from the plugin rather than the target
+ok 4 - brain command guidance resolves executables from the plugin rather than the target
+  ---
+  duration_ms: 9.934
+  type: 'test'
+  ...
+# Subtest: Big Idea routes chart work to the bundled owner
+ok 5 - Big Idea routes chart work to the bundled owner
+  ---
+  duration_ms: 3.2031
+  type: 'test'
+  ...
+# Subtest: interaction workflow is a declared discoverable skill, not another prompt or runtime
+not ok 6 - interaction workflow is a declared discoverable skill, not another prompt or runtime
+  ---
+  duration_ms: 11.3033
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\flint-interactions.test.mjs:17:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+    
+      assert.ok(manifest.assets.skills.some(entry =>
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/flint-interactions.test.mjs:19:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: interaction workflow delegates grammar and preset discovery to the installed Flint runtime
+not ok 7 - interaction workflow delegates grammar and preset discovery to the installed Flint runtime
+  ---
+  duration_ms: 1.5296
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\flint-interactions.test.mjs:32:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing the approved flint-interactions workflow'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    interactionSkill (file:///C:/Development/Alex_ACT_ONE/tests/flint-interactions.test.mjs:13:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/flint-interactions.test.mjs:33:18)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: workflow separates behavior, state, linked boards, and application-only custom handlers
+not ok 8 - workflow separates behavior, state, linked boards, and application-only custom handlers
+  ---
+  duration_ms: 0.3196
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\flint-interactions.test.mjs:43:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing the approved flint-interactions workflow'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    interactionSkill (file:///C:/Development/Alex_ACT_ONE/tests/flint-interactions.test.mjs:13:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/flint-interactions.test.mjs:44:18)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: verification requires gestures, reset, keyboard behavior, and explicitly scoped evidence
+not ok 9 - verification requires gestures, reset, keyboard behavior, and explicitly scoped evidence
+  ---
+  duration_ms: 0.288
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\flint-interactions.test.mjs:55:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing the approved flint-interactions workflow'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    interactionSkill (file:///C:/Development/Alex_ACT_ONE/tests/flint-interactions.test.mjs:13:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/flint-interactions.test.mjs:56:18)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: chart owners explicitly load the interaction workflow without making static charts interactive
+not ok 10 - chart owners explicitly load the interaction workflow without making static charts interactive
+  ---
+  duration_ms: 3.2932
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\flint-interactions.test.mjs:67:1'
+  failureType: 'testCodeFailure'
+  error: 'flint-chart'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/flint-interactions.test.mjs:70:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: installed interaction routes resolve without an adopter skills directory
+not ok 11 - installed interaction routes resolve without an adopter skills directory
+  ---
+  duration_ms: 2.8706
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\flint-interactions.test.mjs:79:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing the approved flint-interactions workflow'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    interactionSkill (file:///C:/Development/Alex_ACT_ONE/tests/flint-interactions.test.mjs:13:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/flint-interactions.test.mjs:82:5)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 3
+# fail 8
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 317.467

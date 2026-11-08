@@ -1,0 +1,262 @@
+TAP version 13
+# Subtest: pwsh: registers missing marketplaces, installs ONE only when absent, then verifies without reinstalling
+ok 1 - pwsh: registers missing marketplaces, installs ONE only when absent, then verifies without reinstalling
+  ---
+  duration_ms: 3754.8782
+  type: 'test'
+  ...
+# Subtest: pwsh: preserves an older installed release and refuses automatic replacement before marketplace writes
+ok 2 - pwsh: preserves an older installed release and refuses automatic replacement before marketplace writes
+  ---
+  duration_ms: 963.4656
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects same-name installations from another source before making changes
+ok 3 - pwsh: rejects same-name installations from another source before making changes
+  ---
+  duration_ms: 974.911
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects a matching release accompanied by a same-name installation elsewhere
+ok 4 - pwsh: rejects a matching release accompanied by a same-name installation elsewhere
+  ---
+  duration_ms: 881.9695
+  type: 'test'
+  ...
+# Subtest: pwsh: a failed first install never uninstalls anything or runs activation
+ok 5 - pwsh: a failed first install never uninstalls anything or runs activation
+  ---
+  duration_ms: 1653.6725
+  type: 'test'
+  ...
+# Subtest: pwsh: scopes every CLI operation and real bootstrap to the explicit home, restoring inherited home
+ok 6 - pwsh: scopes every CLI operation and real bootstrap to the explicit home, restoring inherited home
+  ---
+  duration_ms: 2308.3069
+  type: 'test'
+  ...
+# Subtest: pwsh: scopes the default to inherited COPILOT_HOME rather than the profile home
+ok 7 - pwsh: scopes the default to inherited COPILOT_HOME rather than the profile home
+  ---
+  duration_ms: 1990.0516
+  type: 'test'
+  ...
+# Subtest: pwsh: scopes an explicit home and restores an initially absent COPILOT_HOME
+ok 8 - pwsh: scopes an explicit home and restores an initially absent COPILOT_HOME
+  ---
+  duration_ms: 1883.869
+  type: 'test'
+  ...
+# Subtest: pwsh: scopes marketplace refusal and restores the unselected home without plugin writes
+ok 9 - pwsh: scopes marketplace refusal and restores the unselected home without plugin writes
+  ---
+  duration_ms: 1047.3075
+  type: 'test'
+  ...
+# Subtest: pwsh: scopes real bootstrap refusal and restores inherited home while preserving conflicts
+ok 10 - pwsh: scopes real bootstrap refusal and restores inherited home while preserving conflicts
+  ---
+  duration_ms: 1860.6991
+  type: 'test'
+  ...
+# Subtest: pwsh: preserves existing/default and unrelated marketplace registrations without re-adding them
+ok 11 - pwsh: preserves existing/default and unrelated marketplace registrations without re-adding them
+  ---
+  duration_ms: 1242.4232
+  type: 'test'
+  ...
+# Subtest: pwsh: adds only missing marketplaces when some are already registered
+ok 12 - pwsh: adds only missing marketplaces when some are already registered
+  ---
+  duration_ms: 1288.6794
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects a mismatched alex-mall source before uninstalling
+ok 13 - pwsh: rejects a mismatched alex-mall source before uninstalling
+  ---
+  duration_ms: 823.933
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects a mismatched awesome-copilot source before uninstalling
+ok 14 - pwsh: rejects a mismatched awesome-copilot source before uninstalling
+  ---
+  duration_ms: 826.0544
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects a mismatched copilot-plugins source before uninstalling
+ok 15 - pwsh: rejects a mismatched copilot-plugins source before uninstalling
+  ---
+  duration_ms: 870.6905
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects a mismatched azure-skills source before uninstalling
+ok 16 - pwsh: rejects a mismatched azure-skills source before uninstalling
+  ---
+  duration_ms: 977.4449
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects a mismatched fabric-collection source before uninstalling
+ok 17 - pwsh: rejects a mismatched fabric-collection source before uninstalling
+  ---
+  duration_ms: 990.1442
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects duplicate marketplace names before uninstalling
+ok 18 - pwsh: rejects duplicate marketplace names before uninstalling
+  ---
+  duration_ms: 949.85
+  type: 'test'
+  ...
+# Subtest: pwsh: stops on a failed marketplace add before uninstalling
+ok 19 - pwsh: stops on a failed marketplace add before uninstalling
+  ---
+  duration_ms: 1367.8168
+  type: 'test'
+  ...
+# Subtest: pwsh: verifies a successful add actually registered the expected marketplace
+ok 20 - pwsh: verifies a successful add actually registered the expected marketplace
+  ---
+  duration_ms: 1485.8292
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects a wrong source returned after marketplace add
+ok 21 - pwsh: rejects a wrong source returned after marketplace add
+  ---
+  duration_ms: 1229.6233
+  type: 'test'
+  ...
+# Subtest: powershell: registers missing marketplaces, installs ONE only when absent, then verifies without reinstalling
+ok 22 - powershell: registers missing marketplaces, installs ONE only when absent, then verifies without reinstalling
+  ---
+  duration_ms: 3111.8327
+  type: 'test'
+  ...
+# Subtest: powershell: preserves an older installed release and refuses automatic replacement before marketplace writes
+ok 23 - powershell: preserves an older installed release and refuses automatic replacement before marketplace writes
+  ---
+  duration_ms: 1198.2236
+  type: 'test'
+  ...
+# Subtest: powershell: rejects same-name installations from another source before making changes
+ok 24 - powershell: rejects same-name installations from another source before making changes
+  ---
+  duration_ms: 1117.2935
+  type: 'test'
+  ...
+# Subtest: powershell: rejects a matching release accompanied by a same-name installation elsewhere
+ok 25 - powershell: rejects a matching release accompanied by a same-name installation elsewhere
+  ---
+  duration_ms: 1119.4047
+  type: 'test'
+  ...
+# Subtest: powershell: a failed first install never uninstalls anything or runs activation
+ok 26 - powershell: a failed first install never uninstalls anything or runs activation
+  ---
+  duration_ms: 1538.1157
+  type: 'test'
+  ...
+# Subtest: powershell: scopes every CLI operation and real bootstrap to the explicit home, restoring inherited home
+ok 27 - powershell: scopes every CLI operation and real bootstrap to the explicit home, restoring inherited home
+  ---
+  duration_ms: 2017.2065
+  type: 'test'
+  ...
+# Subtest: powershell: scopes the default to inherited COPILOT_HOME rather than the profile home
+ok 28 - powershell: scopes the default to inherited COPILOT_HOME rather than the profile home
+  ---
+  duration_ms: 2238.261
+  type: 'test'
+  ...
+# Subtest: powershell: scopes an explicit home and restores an initially absent COPILOT_HOME
+ok 29 - powershell: scopes an explicit home and restores an initially absent COPILOT_HOME
+  ---
+  duration_ms: 2119.4833
+  type: 'test'
+  ...
+# Subtest: powershell: scopes marketplace refusal and restores the unselected home without plugin writes
+ok 30 - powershell: scopes marketplace refusal and restores the unselected home without plugin writes
+  ---
+  duration_ms: 1514.3355
+  type: 'test'
+  ...
+# Subtest: powershell: scopes real bootstrap refusal and restores inherited home while preserving conflicts
+ok 31 - powershell: scopes real bootstrap refusal and restores inherited home while preserving conflicts
+  ---
+  duration_ms: 2206.4203
+  type: 'test'
+  ...
+# Subtest: powershell: preserves existing/default and unrelated marketplace registrations without re-adding them
+ok 32 - powershell: preserves existing/default and unrelated marketplace registrations without re-adding them
+  ---
+  duration_ms: 1420.3355
+  type: 'test'
+  ...
+# Subtest: powershell: adds only missing marketplaces when some are already registered
+ok 33 - powershell: adds only missing marketplaces when some are already registered
+  ---
+  duration_ms: 1407.1963
+  type: 'test'
+  ...
+# Subtest: powershell: rejects a mismatched alex-mall source before uninstalling
+ok 34 - powershell: rejects a mismatched alex-mall source before uninstalling
+  ---
+  duration_ms: 1247.1823
+  type: 'test'
+  ...
+# Subtest: powershell: rejects a mismatched awesome-copilot source before uninstalling
+ok 35 - powershell: rejects a mismatched awesome-copilot source before uninstalling
+  ---
+  duration_ms: 1131.8807
+  type: 'test'
+  ...
+# Subtest: powershell: rejects a mismatched copilot-plugins source before uninstalling
+ok 36 - powershell: rejects a mismatched copilot-plugins source before uninstalling
+  ---
+  duration_ms: 1052.0849
+  type: 'test'
+  ...
+# Subtest: powershell: rejects a mismatched azure-skills source before uninstalling
+ok 37 - powershell: rejects a mismatched azure-skills source before uninstalling
+  ---
+  duration_ms: 1055.0269
+  type: 'test'
+  ...
+# Subtest: powershell: rejects a mismatched fabric-collection source before uninstalling
+ok 38 - powershell: rejects a mismatched fabric-collection source before uninstalling
+  ---
+  duration_ms: 1104.8362
+  type: 'test'
+  ...
+# Subtest: powershell: rejects duplicate marketplace names before uninstalling
+ok 39 - powershell: rejects duplicate marketplace names before uninstalling
+  ---
+  duration_ms: 1052.276
+  type: 'test'
+  ...
+# Subtest: powershell: stops on a failed marketplace add before uninstalling
+ok 40 - powershell: stops on a failed marketplace add before uninstalling
+  ---
+  duration_ms: 1371.0747
+  type: 'test'
+  ...
+# Subtest: powershell: verifies a successful add actually registered the expected marketplace
+ok 41 - powershell: verifies a successful add actually registered the expected marketplace
+  ---
+  duration_ms: 1320.0594
+  type: 'test'
+  ...
+# Subtest: powershell: rejects a wrong source returned after marketplace add
+ok 42 - powershell: rejects a wrong source returned after marketplace add
+  ---
+  duration_ms: 1309.5257
+  type: 'test'
+  ...
+1..42
+# tests 42
+# suites 0
+# pass 42
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 61169.6098

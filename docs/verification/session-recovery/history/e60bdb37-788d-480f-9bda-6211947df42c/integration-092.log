@@ -1,0 +1,410 @@
+Environment: win32/x64, Node 26.13.0; lane=integration
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\activation-conflicts.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\activation-readiness.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\activation-routing.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\bootstrap-project.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\brain-tools.test.cjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\ci-gate.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\ci-runtime-lock.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\converter-safety.test.cjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\deterministic-helpers.test.cjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\documentation-examples.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\documentation.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\evaluation-guide.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\flint-browser-acceptance.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\flint-experimental.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\flint-interactions.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\flint-showcase.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\flint-upgrade.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\install-optional-dependencies.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\markdown-inline-code.test.cjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\md-to-word.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\native-compatibility.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\onboarding.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\output-publication.test.cjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\powershell-diagnostics.test.cjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\process-launch.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\recovery-boundaries.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\reinstall-release.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\rich-email.test.cjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\runtime-readiness.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\showcase-environment.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\showcase-provenance.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\skill-scenario-runner.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\skill-scenarios.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\smoke.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\svg-position-precision.test.mjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\tool-shims.test.cjs: Structural lane
+Excluded C:\Users\<USER>\AppData\Roaming\Code\agentPlugins\file-c-3A-Users-USER-copilot-installed-plugins-alex-mall-alex-act-one\1a1b30b515c\tests\visual-uat-guidance.test.mjs: Structural lane
+flint: exact versions and launch probe verified; host connection not observed.
+playwright: exact versions and launch probe verified; host connection not observed.
+replicate: exact versions and launch probe verified; host connection not observed.
+Converter prerequisites: pandoc 3.13; mmdc 11.17.0; jszip 3.10.1.
+TAP version 13
+# Subtest: real md-to-html preserves literal inline/fenced code and renders tables and links
+ok 1 - real md-to-html preserves literal inline/fenced code and renders tables and links
+  ---
+  duration_ms: 1174.1348
+  type: 'test'
+  ...
+# Subtest: real md-to-word preserves literal inline/fenced code and renders tables and links
+ok 2 - real md-to-word preserves literal inline/fenced code and renders tables and links
+  ---
+  duration_ms: 1754.3707
+  type: 'test'
+  ...
+# Subtest: the installed Mermaid npm CLI starts through the shared tool runner
+ok 3 - the installed Mermaid npm CLI starts through the shared tool runner
+  ---
+  duration_ms: 432.241
+  type: 'test'
+  ...
+# Subtest: real Pandoc DOCX media survive extraction cleanup with original PNG bytes
+ok 4 - real Pandoc DOCX media survive extraction cleanup with original PNG bytes
+  ---
+  duration_ms: 293.4413
+  type: 'test'
+  ...
+# Subtest: DOCX extraction handles encoded absolute media paths; missing=false
+ok 5 - DOCX extraction handles encoded absolute media paths; missing=false
+  ---
+  duration_ms: 22.3765
+  type: 'test'
+  ...
+# Subtest: DOCX extraction handles encoded absolute media paths; missing=true
+ok 6 - DOCX extraction handles encoded absolute media paths; missing=true
+  ---
+  duration_ms: 3.557
+  type: 'test'
+  ...
+# Subtest: DOCX extraction preserves image syntax in inline, fenced, and indented code while copying real images
+ok 7 - DOCX extraction preserves image syntax in inline, fenced, and indented code while copying real images
+  ---
+  duration_ms: 23.1266
+  type: 'test'
+  ...
+# Subtest: real DOCX roundtrip preserves literal image examples alongside extracted media
+ok 8 - real DOCX roundtrip preserves literal image examples alongside extracted media
+  ---
+  duration_ms: 382.9048
+  type: 'test'
+  ...
+# Subtest: real DOCX batch conversion isolates each output media set, including encoded output names
+ok 9 - real DOCX batch conversion isolates each output media set, including encoded output names
+  ---
+  duration_ms: 1108.7667
+  type: 'test'
+  ...
+# Subtest: real DOCX cleanup preserves literal code through every cleanup option
+ok 10 - real DOCX cleanup preserves literal code through every cleanup option
+  ---
+  duration_ms: 324.0191
+  type: 'test'
+  ...
+# Subtest: real HTML TOC links target headings, marker=false, flag=true
+ok 11 - real HTML TOC links target headings, marker=false, flag=true
+  ---
+  duration_ms: 206.2909
+  type: 'test'
+  ...
+# Subtest: real HTML TOC links target headings, marker=true, flag=false
+ok 12 - real HTML TOC links target headings, marker=true, flag=false
+  ---
+  duration_ms: 196.5083
+  type: 'test'
+  ...
+# Subtest: real HTML TOC links target headings, marker=false, flag=false
+ok 13 - real HTML TOC links target headings, marker=false, flag=false
+  ---
+  duration_ms: 207.0547
+  type: 'test'
+  ...
+# Subtest: real md-to-html embeds URL-encoded local image bytes
+ok 14 - real md-to-html embeds URL-encoded local image bytes
+  ---
+  duration_ms: 209.4067
+  type: 'test'
+  ...
+# Subtest: md-to-html propagates real Pandoc failure without writing output
+ok 15 - md-to-html propagates real Pandoc failure without writing output
+  ---
+  duration_ms: 125.5676
+  type: 'test'
+  ...
+# Subtest: real md-to-eml embeds URL-encoded local image bytes
+ok 16 - real md-to-eml embeds URL-encoded local image bytes
+  ---
+  duration_ms: 203.6852
+  type: 'test'
+  ...
+# Subtest: md-to-eml propagates real Pandoc failure without writing output
+ok 17 - md-to-eml propagates real Pandoc failure without writing output
+  ---
+  duration_ms: 142.4577
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination missing%20image.png
+ok 18 - md-to-html rejects invalid local image destination missing%20image.png
+  ---
+  duration_ms: 141.7181
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination bad%ZZ.png
+ok 19 - md-to-html rejects invalid local image destination bad%ZZ.png
+  ---
+  duration_ms: 134.2711
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination file:///private/image.png
+ok 20 - md-to-html rejects invalid local image destination file:///private/image.png
+  ---
+  duration_ms: 146.1825
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination ftp://example.invalid/image.png
+ok 21 - md-to-html rejects invalid local image destination ftp://example.invalid/image.png
+  ---
+  duration_ms: 134.1088
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination directory.png
+ok 22 - md-to-html rejects invalid local image destination directory.png
+  ---
+  duration_ms: 137.8066
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination unsupported.bmp
+ok 23 - md-to-html rejects invalid local image destination unsupported.bmp
+  ---
+  duration_ms: 136.3957
+  type: 'test'
+  ...
+# Subtest: md-to-html leaves remote and data image URLs unchanged without fetching
+ok 24 - md-to-html leaves remote and data image URLs unchanged without fetching
+  ---
+  duration_ms: 136.2527
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination missing%20image.png
+ok 25 - md-to-eml rejects invalid local image destination missing%20image.png
+  ---
+  duration_ms: 134.2376
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination bad%ZZ.png
+ok 26 - md-to-eml rejects invalid local image destination bad%ZZ.png
+  ---
+  duration_ms: 128.355
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination file:///private/image.png
+ok 27 - md-to-eml rejects invalid local image destination file:///private/image.png
+  ---
+  duration_ms: 138.5329
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination ftp://example.invalid/image.png
+ok 28 - md-to-eml rejects invalid local image destination ftp://example.invalid/image.png
+  ---
+  duration_ms: 128.0031
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination directory.png
+ok 29 - md-to-eml rejects invalid local image destination directory.png
+  ---
+  duration_ms: 124.0738
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination unsupported.bmp
+ok 30 - md-to-eml rejects invalid local image destination unsupported.bmp
+  ---
+  duration_ms: 120.7168
+  type: 'test'
+  ...
+# Subtest: md-to-eml leaves remote and data image URLs unchanged without fetching
+ok 31 - md-to-eml leaves remote and data image URLs unchanged without fetching
+  ---
+  duration_ms: 140.4191
+  type: 'test'
+  ...
+# Subtest: Mermaid fallback preserves labeled edges, implicit endpoints, chains, and node labels
+ok 32 - Mermaid fallback preserves labeled edges, implicit endpoints, chains, and node labels
+  ---
+  duration_ms: 0.5791
+  type: 'test'
+  ...
+# Subtest: real detached Word converter loads the documented shared closure and creates a readable DOCX
+ok 33 - real detached Word converter loads the documented shared closure and creates a readable DOCX
+  ---
+  duration_ms: 395.6668
+  type: 'test'
+  ...
+# Subtest: Word accepts only a fresh successful Mermaid render and embeds its current PNG bytes
+ok 34 - Word accepts only a fresh successful Mermaid render and embeds its current PNG bytes
+  ---
+  duration_ms: 570.2201
+  type: 'test'
+  ...
+# Subtest: shared image paths decode once, honor HTML entities, and ignore URL query/fragment suffixes
+ok 35 - shared image paths decode once, honor HTML entities, and ignore URL query/fragment suffixes
+  ---
+  duration_ms: 4.5274
+  type: 'test'
+  ...
+# Subtest: DOCX extraction missing-media preserves existing Markdown and cleans staging
+ok 36 - DOCX extraction missing-media preserves existing Markdown and cleans staging
+  ---
+  duration_ms: 136.2079
+  type: 'test'
+  ...
+# Subtest: DOCX extraction pandoc-failure preserves existing Markdown and cleans staging
+ok 37 - DOCX extraction pandoc-failure preserves existing Markdown and cleans staging
+  ---
+  duration_ms: 112.4554
+  type: 'test'
+  ...
+# Subtest: real HTML preserves literal HTML code while rejecting active HTML hidden among raw backticks
+ok 38 - real HTML preserves literal HTML code while rejecting active HTML hidden among raw backticks
+  ---
+  duration_ms: 441.4362
+  type: 'test'
+  ...
+# Subtest: unsupported Mermaid fallback retains complete source: sequenceDiagram
+ok 39 - unsupported Mermaid fallback retains complete source: sequenceDiagram
+  ---
+  duration_ms: 0.2648
+  type: 'test'
+  ...
+# Subtest: unsupported Mermaid fallback retains complete source: flowchart TD
+ok 40 - unsupported Mermaid fallback retains complete source: flowchart TD
+  ---
+  duration_ms: 0.0903
+  type: 'test'
+  ...
+# Subtest: unsupported Mermaid fallback retains complete source: pie title Votes
+ok 41 - unsupported Mermaid fallback retains complete source: pie title Votes
+  ---
+  duration_ms: 0.0327
+  type: 'test'
+  ...
+# Subtest: real md-to-html preserves indented and blockquote-fenced HTML examples
+ok 42 - real md-to-html preserves indented and blockquote-fenced HTML examples
+  ---
+  duration_ms: 265.2893
+  type: 'test'
+  ...
+# Subtest: real md-to-eml preserves indented and blockquote-fenced HTML examples
+ok 43 - real md-to-eml preserves indented and blockquote-fenced HTML examples
+  ---
+  duration_ms: 237.7276
+  type: 'test'
+  ...
+# Subtest: provisioned Flint 1.0.1 preserves the MCP and three-backend output contracts
+    # Subtest: vegalite: catalog, validation, compilation, and real render
+    ok 1 - vegalite: catalog, validation, compilation, and real render
+      ---
+      duration_ms: 2063.4292
+      type: 'test'
+      ...
+    # Subtest: echarts: catalog, validation, compilation, and real render
+    ok 2 - echarts: catalog, validation, compilation, and real render
+      ---
+      duration_ms: 1398.3324
+      type: 'test'
+      ...
+    # Subtest: chartjs: catalog, validation, compilation, and real render
+    ok 3 - chartjs: catalog, validation, compilation, and real render
+      ---
+      duration_ms: 77.8102
+      type: 'test'
+      ...
+    # Subtest: validated show accepts the complete chart input
+    ok 4 - validated show accepts the complete chart input
+      ---
+      duration_ms: 10.5892
+      type: 'test'
+      ...
+    # Subtest: interaction grammar and chart-compatible discovery admit highlight plus keyboard navigation
+    ok 5 - interaction grammar and chart-compatible discovery admit highlight plus keyboard navigation
+      ---
+      duration_ms: 14.4907
+      type: 'test'
+      ...
+    # Subtest: a dropped interaction remains a warning even when the chart is valid
+    ok 6 - a dropped interaction remains a warning even when the chart is valid
+      ---
+      duration_ms: 3.2187
+      type: 'test'
+      ...
+    # Subtest: unknown reset gestures are explicit errors rather than neutral-state fallbacks
+    ok 7 - unknown reset gestures are explicit errors rather than neutral-state fallbacks
+      ---
+      duration_ms: 3.0623
+      type: 'test'
+      ...
+    # Subtest: initial state and linked boards use their separate supported input surfaces
+    ok 8 - initial state and linked boards use their separate supported input surfaces
+      ---
+      duration_ms: 17.3802
+      type: 'test'
+      ...
+    # Subtest: offline export CLI is independent of the caller timezone and uses UTC date annotations
+    ok 9 - offline export CLI is independent of the caller timezone and uses UTC date annotations
+      ---
+      duration_ms: 8089.2358
+      type: 'test'
+      ...
+    # Subtest: invalid snake_case names and missing fields remain explicit failures
+    ok 10 - invalid snake_case names and missing fields remain explicit failures
+      ---
+      duration_ms: 2.1631
+      type: 'test'
+      ...
+    1..10
+ok 44 - provisioned Flint 1.0.1 preserves the MCP and three-backend output contracts
+  ---
+  duration_ms: 12598.7485
+  type: 'test'
+  ...
+# Unknown MCP runtime route: no-such-route
+# Subtest: provisioned runtime
+    # Subtest: flint starts and reports 1.0.1
+    ok 1 - flint starts and reports 1.0.1
+      ---
+      duration_ms: 656.5409
+      type: 'test'
+      ...
+    # Subtest: playwright starts and reports 0.0.80
+    ok 2 - playwright starts and reports 0.0.80
+      ---
+      duration_ms: 301.6609
+      type: 'test'
+      ...
+    # Subtest: replicate starts and reports 0.9.0
+    ok 3 - replicate starts and reports 0.9.0
+      ---
+      duration_ms: 485.6089
+      type: 'test'
+      ...
+    # Subtest: an unknown route fails loudly
+    ok 4 - an unknown route fails loudly
+      ---
+      duration_ms: 55.6293
+      type: 'test'
+      ...
+    1..4
+ok 45 - provisioned runtime
+  ---
+  duration_ms: 1500.274
+  type: 'suite'
+  ...
+1..45
+# tests 58
+# suites 1
+# pass 58
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 12730.4198
+Verified integration lane: 58 passed; no skips, todos, or cancellations.

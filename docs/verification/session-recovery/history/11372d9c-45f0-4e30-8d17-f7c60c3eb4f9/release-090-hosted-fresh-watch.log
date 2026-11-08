@@ -1,0 +1,1125 @@
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch less than a minute ago
+
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch less than a minute ago
+
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 1 minute ago
+
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 1 minute ago
+
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 1 minute ago
+
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 2 minutes ago
+
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 2 minutes ago
+
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 2 minutes ago
+
+JOBS
+* Structural / ubuntu-24.04 / Node 24 (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Verify structural contracts without provisioning packages
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+* Structural / windows-2025 / Node 26 (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  * Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Verify structural contracts without provisioning packages
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+* Structural / ubuntu-24.04 / Node 26 (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Verify structural contracts without provisioning packages
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+* Structural / windows-2025 / Node 24 (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  * Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Verify structural contracts without provisioning packages
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 3 minutes ago
+
+JOBS
+* Structural / ubuntu-24.04 / Node 24 (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Verify structural contracts without provisioning packages
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+* Structural / windows-2025 / Node 26 (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Verify structural contracts without provisioning packages
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+* Structural / ubuntu-24.04 / Node 26 (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Verify structural contracts without provisioning packages
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+* Structural / windows-2025 / Node 24 (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Verify structural contracts without provisioning packages
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 3 minutes ago
+
+JOBS
+✓ Structural / ubuntu-24.04 / Node 24 in 41s (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* Structural / windows-2025 / Node 26 (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Verify structural contracts without provisioning packages
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+✓ Structural / ubuntu-24.04 / Node 26 in 53s (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* Structural / windows-2025 / Node 24 (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Verify structural contracts without provisioning packages
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 4 minutes ago
+
+JOBS
+✓ Structural / ubuntu-24.04 / Node 24 in 41s (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* Structural / windows-2025 / Node 26 (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Verify structural contracts without provisioning packages
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+✓ Structural / ubuntu-24.04 / Node 26 in 53s (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* Structural / windows-2025 / Node 24 (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 4 minutes ago
+
+JOBS
+✓ Structural / ubuntu-24.04 / Node 24 in 41s (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 26 in 1m32s (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / ubuntu-24.04 / Node 26 in 53s (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 24 in 1m19s (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* Provisioned runtime / windows-2025 / Node 26 (ID 127658648182)
+  ✓ Set up job
+  * Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  * Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  * Select a disposable runtime
+  * Provision reviewed packages on this disposable runner
+  * Verify runtime and real converter output without skips
+  * Check canonical Windows demo rebuilds
+  * Require unchanged tracked sources
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+* Provisioned runtime / ubuntu-24.04 / Node 26 (ID 127658648190)
+  ✓ Set up job
+  * Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  * Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  * Select a disposable runtime
+  * Provision reviewed packages on this disposable runner
+  * Verify runtime and real converter output without skips
+  * Check canonical Windows demo rebuilds
+  * Require unchanged tracked sources
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 4 minutes ago
+
+JOBS
+✓ Structural / ubuntu-24.04 / Node 24 in 41s (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 26 in 1m32s (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / ubuntu-24.04 / Node 26 in 53s (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 24 in 1m19s (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* Provisioned runtime / windows-2025 / Node 26 (ID 127658648182)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  * Provision reviewed packages on this disposable runner
+  * Verify runtime and real converter output without skips
+  * Check canonical Windows demo rebuilds
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+* Provisioned runtime / ubuntu-24.04 / Node 26 (ID 127658648190)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  * Provision reviewed packages on this disposable runner
+  * Verify runtime and real converter output without skips
+  * Check canonical Windows demo rebuilds
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 5 minutes ago
+
+JOBS
+✓ Structural / ubuntu-24.04 / Node 24 in 41s (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 26 in 1m32s (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / ubuntu-24.04 / Node 26 in 53s (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 24 in 1m19s (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* Provisioned runtime / windows-2025 / Node 26 (ID 127658648182)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  * Provision reviewed packages on this disposable runner
+  * Verify runtime and real converter output without skips
+  * Check canonical Windows demo rebuilds
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+✓ Provisioned runtime / ubuntu-24.04 / Node 26 in 44s (ID 127658648190)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  ✓ Provision reviewed packages on this disposable runner
+  ✓ Verify runtime and real converter output without skips
+  - Check canonical Windows demo rebuilds
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 5 minutes ago
+
+JOBS
+✓ Structural / ubuntu-24.04 / Node 24 in 41s (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 26 in 1m32s (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / ubuntu-24.04 / Node 26 in 53s (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 24 in 1m19s (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* Provisioned runtime / windows-2025 / Node 26 (ID 127658648182)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  * Provision reviewed packages on this disposable runner
+  * Verify runtime and real converter output without skips
+  * Check canonical Windows demo rebuilds
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+✓ Provisioned runtime / ubuntu-24.04 / Node 26 in 44s (ID 127658648190)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  ✓ Provision reviewed packages on this disposable runner
+  ✓ Verify runtime and real converter output without skips
+  - Check canonical Windows demo rebuilds
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 5 minutes ago
+
+JOBS
+✓ Structural / ubuntu-24.04 / Node 24 in 41s (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 26 in 1m32s (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / ubuntu-24.04 / Node 26 in 53s (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 24 in 1m19s (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* Provisioned runtime / windows-2025 / Node 26 (ID 127658648182)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  * Provision reviewed packages on this disposable runner
+  * Verify runtime and real converter output without skips
+  * Check canonical Windows demo rebuilds
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+✓ Provisioned runtime / ubuntu-24.04 / Node 26 in 44s (ID 127658648190)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  ✓ Provision reviewed packages on this disposable runner
+  ✓ Verify runtime and real converter output without skips
+  - Check canonical Windows demo rebuilds
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 6 minutes ago
+
+JOBS
+✓ Structural / ubuntu-24.04 / Node 24 in 41s (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 26 in 1m32s (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / ubuntu-24.04 / Node 26 in 53s (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 24 in 1m19s (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* Provisioned runtime / windows-2025 / Node 26 (ID 127658648182)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  * Provision reviewed packages on this disposable runner
+  * Verify runtime and real converter output without skips
+  * Check canonical Windows demo rebuilds
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+✓ Provisioned runtime / ubuntu-24.04 / Node 26 in 44s (ID 127658648190)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  ✓ Provision reviewed packages on this disposable runner
+  ✓ Verify runtime and real converter output without skips
+  - Check canonical Windows demo rebuilds
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 6 minutes ago
+
+JOBS
+✓ Structural / ubuntu-24.04 / Node 24 in 41s (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 26 in 1m32s (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / ubuntu-24.04 / Node 26 in 53s (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 24 in 1m19s (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* Provisioned runtime / windows-2025 / Node 26 (ID 127658648182)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  * Provision reviewed packages on this disposable runner
+  * Verify runtime and real converter output without skips
+  * Check canonical Windows demo rebuilds
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+✓ Provisioned runtime / ubuntu-24.04 / Node 26 in 44s (ID 127658648190)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  ✓ Provision reviewed packages on this disposable runner
+  ✓ Verify runtime and real converter output without skips
+  - Check canonical Windows demo rebuilds
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 6 minutes ago
+
+JOBS
+✓ Structural / ubuntu-24.04 / Node 24 in 41s (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 26 in 1m32s (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / ubuntu-24.04 / Node 26 in 53s (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 24 in 1m19s (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* Provisioned runtime / windows-2025 / Node 26 (ID 127658648182)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  * Provision reviewed packages on this disposable runner
+  * Verify runtime and real converter output without skips
+  * Check canonical Windows demo rebuilds
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+✓ Provisioned runtime / ubuntu-24.04 / Node 26 in 44s (ID 127658648190)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  ✓ Provision reviewed packages on this disposable runner
+  ✓ Verify runtime and real converter output without skips
+  - Check canonical Windows demo rebuilds
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 7 minutes ago
+
+JOBS
+✓ Structural / ubuntu-24.04 / Node 24 in 41s (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 26 in 1m32s (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / ubuntu-24.04 / Node 26 in 53s (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 24 in 1m19s (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* Provisioned runtime / windows-2025 / Node 26 (ID 127658648182)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  * Provision reviewed packages on this disposable runner
+  * Verify runtime and real converter output without skips
+  * Check canonical Windows demo rebuilds
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+✓ Provisioned runtime / ubuntu-24.04 / Node 26 in 44s (ID 127658648190)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  ✓ Provision reviewed packages on this disposable runner
+  ✓ Verify runtime and real converter output without skips
+  - Check canonical Windows demo rebuilds
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 7 minutes ago
+
+JOBS
+✓ Structural / ubuntu-24.04 / Node 24 in 41s (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 26 in 1m32s (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / ubuntu-24.04 / Node 26 in 53s (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 24 in 1m19s (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* Provisioned runtime / windows-2025 / Node 26 (ID 127658648182)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  * Provision reviewed packages on this disposable runner
+  * Verify runtime and real converter output without skips
+  * Check canonical Windows demo rebuilds
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+✓ Provisioned runtime / ubuntu-24.04 / Node 26 in 44s (ID 127658648190)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  ✓ Provision reviewed packages on this disposable runner
+  ✓ Verify runtime and real converter output without skips
+  - Check canonical Windows demo rebuilds
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 7 minutes ago
+
+JOBS
+✓ Structural / ubuntu-24.04 / Node 24 in 41s (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 26 in 1m32s (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / ubuntu-24.04 / Node 26 in 53s (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 24 in 1m19s (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* Provisioned runtime / windows-2025 / Node 26 (ID 127658648182)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  * Provision reviewed packages on this disposable runner
+  * Verify runtime and real converter output without skips
+  * Check canonical Windows demo rebuilds
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+✓ Provisioned runtime / ubuntu-24.04 / Node 26 in 44s (ID 127658648190)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  ✓ Provision reviewed packages on this disposable runner
+  ✓ Verify runtime and real converter output without skips
+  - Check canonical Windows demo rebuilds
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 8 minutes ago
+
+JOBS
+✓ Structural / ubuntu-24.04 / Node 24 in 41s (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 26 in 1m32s (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / ubuntu-24.04 / Node 26 in 53s (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 24 in 1m19s (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+* Provisioned runtime / windows-2025 / Node 26 (ID 127658648182)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  * Provision reviewed packages on this disposable runner
+  * Verify runtime and real converter output without skips
+  * Check canonical Windows demo rebuilds
+  * Require unchanged tracked sources
+  * Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  * Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+✓ Provisioned runtime / ubuntu-24.04 / Node 26 in 44s (ID 127658648190)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  ✓ Provision reviewed packages on this disposable runner
+  ✓ Verify runtime and real converter output without skips
+  - Check canonical Windows demo rebuilds
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+Refreshing run status every 20 seconds. Press Ctrl+C to quit.
+
+* main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 8 minutes ago
+
+JOBS
+✓ Structural / ubuntu-24.04 / Node 24 in 41s (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 26 in 1m32s (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / ubuntu-24.04 / Node 26 in 53s (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 24 in 1m19s (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Provisioned runtime / windows-2025 / Node 26 in 4m13s (ID 127658648182)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  ✓ Provision reviewed packages on this disposable runner
+  ✓ Verify runtime and real converter output without skips
+  ✓ Check canonical Windows demo rebuilds
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Provisioned runtime / ubuntu-24.04 / Node 26 in 44s (ID 127658648190)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  ✓ Provision reviewed packages on this disposable runner
+  ✓ Verify runtime and real converter output without skips
+  - Check canonical Windows demo rebuilds
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ main Verify source candidate · 42145892936
+Triggered via workflow_dispatch about 8 minutes ago
+
+JOBS
+✓ Structural / ubuntu-24.04 / Node 24 in 41s (ID 127658094293)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 26 in 1m32s (ID 127658094533)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / ubuntu-24.04 / Node 26 in 53s (ID 127658094604)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Structural / windows-2025 / Node 24 in 1m19s (ID 127658094810)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Verify structural contracts without provisioning packages
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Provisioned runtime / windows-2025 / Node 26 in 4m13s (ID 127658648182)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  ✓ Provision reviewed packages on this disposable runner
+  ✓ Verify runtime and real converter output without skips
+  ✓ Check canonical Windows demo rebuilds
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job
+✓ Provisioned runtime / ubuntu-24.04 / Node 26 in 44s (ID 127658648190)
+  ✓ Set up job
+  ✓ Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+  ✓ Select a disposable runtime
+  ✓ Provision reviewed packages on this disposable runner
+  ✓ Verify runtime and real converter output without skips
+  - Check canonical Windows demo rebuilds
+  ✓ Require unchanged tracked sources
+  ✓ Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+  ✓ Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+  ✓ Complete job

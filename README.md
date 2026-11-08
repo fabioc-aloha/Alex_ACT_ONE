@@ -59,6 +59,14 @@ CLI/VS Code observations and local browser evidence have
 [documented limits](docs/verification/README.md); Scout and Copilot app behavior
 is **not freshly verified** for this release.
 
+Unreleased source guidance requires project deliverables to live in the
+repository, not solely in agent session storage. The
+[recovered artifact index](docs/verification/session-recovery/README.md) preserves
+historical reports and supporting evidence. The
+[storage contract](skills/proactive-awareness/references/project-artifact-storage.md)
+is an instruction-level safeguard; existing installations and host permissions
+are unchanged.
+
 Try the [offline Flint chart gallery](docs/flint-showcase.html) for working examples of semantic data, themes, interactions, linked views, and static exports, or the [experimental interaction lab](docs/flint-experimental.html) for polar brushing, direct reordering, distribution shapes, and reader-driven stories. Open either downloaded HTML in a browser; no server or connection is needed.
 
 ### Source package inventory
@@ -215,7 +223,7 @@ Auditing, extending, and consolidating the agent.
 | [`assess-brain`](skills/assess-brain/SKILL.md) | Assess active Markdown brain files in a local AI agent project or plugin source without changing it. Use before modifying a brain or reviewing declared instructions, skills,... | Node only |
 | [`project-capability-authoring`](skills/project-capability-authoring/SKILL.md) | Create tested project-local skills and scripts from demonstrated repeated work. Use after meditation or when a project workflow recurs and manual execution has caused... | Node only |
 | [`token-waste-elimination`](skills/token-waste-elimination/SKILL.md) | Audit active brain artifacts for context cost, duplicated guidance, oversized routing files, and stale metadata. Use during brain audits, quarterly review, or when instructions... | Node only |
-| [`proactive-awareness`](skills/proactive-awareness/SKILL.md) | Applies cross-session context recovery, uncommitted-work detection, and focus routing once proactive behavior has been judged appropriate. Use when continuity, worktree state,... | Node only |
+| [`proactive-awareness`](skills/proactive-awareness/SKILL.md) | Applies read-only context recovery and project artifact delivery checks. Use when continuity, worktree state, active goals, or repository deliverable verification may change the... | Node only |
 | [`project-status`](skills/project-status/SKILL.md) | Report the current project's repository state, recent work, brain QA health (if applicable), and pending handoff items. Use for session orientation or an on-demand project... | Node only |
 | [`evaluate-before-adopting`](skills/evaluate-before-adopting/SKILL.md) | Decide whether a plugin or skill from a catalog is worth installing. Covers what a trust score does and does not measure, reading the prose and any bundled scripts for unsafe... | Node only |
 

@@ -81,6 +81,35 @@ These commands do not install packages:
 node scripts\verification-gate.mjs --lane structural
 ```
 
+### Repository artifact recovery
+
+On 2026-11-07, the authorized recovery retained 220 historical files
+(9,318,087 recovered bytes) from this repository's local sessions, verified
+their recovered SHA-256 values, and confirmed the originals were unchanged.
+The [index and manifest](verification/session-recovery/README.md) distinguish
+original hashes from privacy/link-edited copies, exclude disposable runtime
+state, and record a byte-identical duplicate session. Empty failed-producer
+JSON outputs remain explicitly classified historical failures.
+
+The scoped run passed 76 tests with no skips across recovery, artifact storage,
+native compatibility, project bootstrap, documentation, and recovery boundaries.
+The local-link check passed 173 links in 14 recovered/policy documents.
+These are recovery-integrity and declared-contract checks, not proof of
+future host enforcement, global activation, or fresh browser acceptance.
+
+```powershell
+node scripts\session-recovery.mjs
+node --test tests\session-recovery.test.mjs tests\artifact-storage.test.mjs
+```
+
+The checker reads only repository evidence. It rejects missing or corrupt files,
+unregistered evidence, unsupported/empty inventories, undeclared edits, and
+path/junction escapes without overwriting a failed historical record.
+Future host enforcement retains its
+[separate acceptance gate](../ROADMAP.md#verify-artifact-delivery-in-supported-hosts).
+
+### Structural and integration isolation
+
 The structural lane gives its child tests a disposable home/profile and an
 absent private runtime. Installation tests must still pass their own explicit
 temporary runtime and reject writes outside that path inside the mock.

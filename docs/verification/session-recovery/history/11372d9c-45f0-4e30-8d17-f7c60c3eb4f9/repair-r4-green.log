@@ -1,0 +1,467 @@
+TAP version 13
+# Subtest: Flint MCP and library are independently exact-pinned at 1.0.1
+ok 1 - Flint MCP and library are independently exact-pinned at 1.0.1
+  ---
+  duration_ms: 1.2748
+  type: 'test'
+  ...
+# Subtest: shared runtime package selection includes the exact library without changing other routes
+ok 2 - shared runtime package selection includes the exact library without changing other routes
+  ---
+  duration_ms: 0.6259
+  type: 'test'
+  ...
+# Subtest: launcher verifies the Flint library before invoking the server: null
+ok 3 - launcher verifies the Flint library before invoking the server: null
+  ---
+  duration_ms: 83.1943
+  type: 'test'
+  ...
+# Subtest: launcher verifies the Flint library before invoking the server: 0.5.1
+ok 4 - launcher verifies the Flint library before invoking the server: 0.5.1
+  ---
+  duration_ms: 74.1161
+  type: 'test'
+  ...
+# Subtest: launcher verifies the Flint library before invoking the server: 1.0.1
+ok 5 - launcher verifies the Flint library before invoking the server: 1.0.1
+  ---
+  duration_ms: 140.1325
+  type: 'test'
+  ...
+# Subtest: provisioner can preview only Flint and library without mutating a runtime
+ok 6 - provisioner can preview only Flint and library without mutating a runtime
+  ---
+  duration_ms: 781.7657
+  type: 'test'
+  ...
+# Subtest: launcher rejects a stale nested Flint dependency even when the root library is current
+ok 7 - launcher rejects a stale nested Flint dependency even when the root library is current
+  ---
+  duration_ms: 83.3986
+  type: 'test'
+  ...
+# Subtest: provisioner rejects unsafe routing and unknown server selection before installing
+ok 8 - provisioner rejects unsafe routing and unknown server selection before installing
+  ---
+  duration_ms: 389.5746
+  type: 'test'
+  ...
+# Subtest: current Flint routes load version-matched skills and use validate then show
+ok 9 - current Flint routes load version-matched skills and use validate then show
+  ---
+  duration_ms: 5.7736
+  type: 'test'
+  ...
+# Subtest: Chart Brief hints use exact chart names instead of unsupported snake_case
+ok 10 - Chart Brief hints use exact chart names instead of unsupported snake_case
+  ---
+  duration_ms: 2.8117
+  type: 'test'
+  ...
+# Subtest: Windows npm launch follows the official shim global-prefix selection without using a shell
+ok 11 - Windows npm launch follows the official shim global-prefix selection without using a shell
+  ---
+  duration_ms: 1.9559
+  type: 'test'
+  ...
+# Subtest: Windows npm uses bundled CLI when no prefix CLI exists, matching the official shim
+ok 12 - Windows npm uses bundled CLI when no prefix CLI exists, matching the official shim
+  ---
+  duration_ms: 0.4072
+  type: 'test'
+  ...
+# Subtest: failed npm prefix discovery is explicit and never launches an unintended CLI
+ok 13 - failed npm prefix discovery is explicit and never launches an unintended CLI
+  ---
+  duration_ms: 0.5479
+  type: 'test'
+  ...
+# Subtest: empty package directories are installed, not ready or launchable
+ok 14 - empty package directories are installed, not ready or launchable
+  ---
+  duration_ms: 10.2919
+  type: 'test'
+  ...
+# Subtest: versions, metadata, and the server-resolved Flint library fail explicitly
+ok 15 - versions, metadata, and the server-resolved Flint library fail explicitly
+  ---
+  duration_ms: 53.8097
+  type: 'test'
+  ...
+# Subtest: a matched but failing entrypoint is not launchable and reports its failure
+ok 16 - a matched but failing entrypoint is not launchable and reports its failure
+  ---
+  duration_ms: 131.4881
+  type: 'test'
+  ...
+# Subtest: readiness launch probes have a real bounded timeout
+ok 17 - readiness launch probes have a real bounded timeout
+  ---
+  duration_ms: 122.1353
+  type: 'test'
+  ...
+# Subtest: a successful version probe does not pretend the host connected
+ok 18 - a successful version probe does not pretend the host connected
+  ---
+  duration_ms: 115.1688
+  type: 'test'
+  ...
+# Subtest: provisioner preview honors the environment runtime without installing
+ok 19 - provisioner preview honors the environment runtime without installing
+  ---
+  duration_ms: 725.1326
+  type: 'test'
+  ...
+# Subtest: the actual flint launcher rejects metadata drift from the shared registry
+ok 20 - the actual flint launcher rejects metadata drift from the shared registry
+  ---
+  duration_ms: 83.4167
+  type: 'test'
+  ...
+# Subtest: the actual playwright launcher rejects metadata drift from the shared registry
+ok 21 - the actual playwright launcher rejects metadata drift from the shared registry
+  ---
+  duration_ms: 90.5973
+  type: 'test'
+  ...
+# Subtest: the actual replicate launcher rejects metadata drift from the shared registry
+ok 22 - the actual replicate launcher rejects metadata drift from the shared registry
+  ---
+  duration_ms: 80.6638
+  type: 'test'
+  ...
+# Subtest: the provisioner verifies installation outcome before success: ready
+ok 23 - the provisioner verifies installation outcome before success: ready
+  ---
+  duration_ms: 732.8747
+  type: 'test'
+  ...
+# Subtest: the provisioner verifies installation outcome before success: empty
+ok 24 - the provisioner verifies installation outcome before success: empty
+  ---
+  duration_ms: 691.891
+  type: 'test'
+  ...
+# Subtest: the provisioner verifies installation outcome before success: wrong-report
+ok 25 - the provisioner verifies installation outcome before success: wrong-report
+  ---
+  duration_ms: 709.388
+  type: 'test'
+  ...
+# Unknown MCP runtime route: no-such-route
+# Subtest: MCP runtime pins
+    # Subtest: every launcher route guards the reviewed pin
+    ok 1 - every launcher route guards the reviewed pin
+      ---
+      duration_ms: 1.0097
+      type: 'test'
+      ...
+    # Subtest: every reviewed server has a launcher route
+    ok 2 - every reviewed server has a launcher route
+      ---
+      duration_ms: 0.2338
+      type: 'test'
+      ...
+    # Subtest: the documented pins match the reviewed pins
+    ok 3 - the documented pins match the reviewed pins
+      ---
+      duration_ms: 2.2319
+      type: 'test'
+      ...
+    1..3
+ok 26 - MCP runtime pins
+  ---
+  duration_ms: 4.3865
+  type: 'suite'
+  ...
+# Subtest: plugin.json
+    # Subtest: every declared server invokes a real launcher route
+    ok 1 - every declared server invokes a real launcher route
+      ---
+      duration_ms: 0.5463
+      type: 'test'
+      ...
+    # Subtest: every declared server points at a launcher that exists
+    ok 2 - every declared server points at a launcher that exists
+      ---
+      duration_ms: 0.9411
+      type: 'test'
+      ...
+    # Subtest: skills and commands directories resolve
+    ok 3 - skills and commands directories resolve
+      ---
+      duration_ms: 0.3874
+      type: 'test'
+      ...
+    1..3
+ok 27 - plugin.json
+  ---
+  duration_ms: 2.184
+  type: 'suite'
+  ...
+# Subtest: Humanizer voice fallback
+    # Subtest: uses the practitioner-editor fallback without overriding an explicit voice
+    ok 1 - uses the practitioner-editor fallback without overriding an explicit voice
+      ---
+      duration_ms: 0.399
+      type: 'test'
+      ...
+    # Subtest: routes default Copywriter rewrites through the practitioner-editor fallback
+    ok 2 - routes default Copywriter rewrites through the practitioner-editor fallback
+      ---
+      duration_ms: 0.1426
+      type: 'test'
+      ...
+    # Subtest: keeps the governance reference aligned to the six-tag taxonomy
+    ok 3 - keeps the governance reference aligned to the six-tag taxonomy
+      ---
+      duration_ms: 0.1373
+      type: 'test'
+      ...
+    # Subtest: preserves current source scope and historical promotional-language caveats
+    ok 4 - preserves current source scope and historical promotional-language caveats
+      ---
+      duration_ms: 5.5726
+      type: 'test'
+      ...
+    1..4
+ok 28 - Humanizer voice fallback
+  ---
+  duration_ms: 6.5348
+  type: 'suite'
+  ...
+# Subtest: Compile Brain customization boundary
+    # Subtest: keeps installed skills canonical and routes project customizations locally
+    ok 1 - keeps installed skills canonical and routes project customizations locally
+      ---
+      duration_ms: 0.3787
+      type: 'test'
+      ...
+    # Subtest: checks whether a process exists before renaming it
+    ok 2 - checks whether a process exists before renaming it
+      ---
+      duration_ms: 0.1851
+      type: 'test'
+      ...
+    1..2
+ok 29 - Compile Brain customization boundary
+  ---
+  duration_ms: 0.6685
+  type: 'suite'
+  ...
+# Subtest: Mutation testing isolation
+    # Subtest: mutates an isolated copy and counter-tests detection rules
+    ok 1 - mutates an isolated copy and counter-tests detection rules
+      ---
+      duration_ms: 0.1594
+      type: 'test'
+      ...
+    1..1
+ok 30 - Mutation testing isolation
+  ---
+  duration_ms: 0.2269
+  type: 'suite'
+  ...
+# Subtest: manifest matches disk
+    # Subtest: every manifest skills entry exists on disk
+    ok 1 - every manifest skills entry exists on disk
+      ---
+      duration_ms: 8.3239
+      type: 'test'
+      ...
+    # Subtest: every skills file on disk is in the manifest
+    ok 2 - every skills file on disk is in the manifest
+      ---
+      duration_ms: 0.601
+      type: 'test'
+      ...
+    # Subtest: every manifest prompts entry exists on disk
+    ok 3 - every manifest prompts entry exists on disk
+      ---
+      duration_ms: 3.0312
+      type: 'test'
+      ...
+    # Subtest: every prompts file on disk is in the manifest
+    ok 4 - every prompts file on disk is in the manifest
+      ---
+      duration_ms: 0.4337
+      type: 'test'
+      ...
+    # Subtest: every manifest instructions entry exists on disk
+    ok 5 - every manifest instructions entry exists on disk
+      ---
+      duration_ms: 3.2595
+      type: 'test'
+      ...
+    # Subtest: every instructions file on disk is in the manifest
+    ok 6 - every instructions file on disk is in the manifest
+      ---
+      duration_ms: 0.4179
+      type: 'test'
+      ...
+    1..6
+ok 31 - manifest matches disk
+  ---
+  duration_ms: 16.4699
+  type: 'suite'
+  ...
+# Subtest: frontmatter
+    # Subtest: every skill declares a name matching its directory, and a description
+    ok 1 - every skill declares a name matching its directory, and a description
+      ---
+      duration_ms: 226.4089
+      type: 'test'
+      ...
+    # Subtest: every instruction declares a description and applyTo
+    ok 2 - every instruction declares a description and applyTo
+      ---
+      duration_ms: 40.7317
+      type: 'test'
+      ...
+    1..2
+ok 32 - frontmatter
+  ---
+  duration_ms: 267.3672
+  type: 'suite'
+  ...
+# Subtest: markdown links
+    # Subtest: no relative link points at a missing file
+    ok 1 - no relative link points at a missing file
+      ---
+      duration_ms: 451.6251
+      type: 'test'
+      ...
+    1..1
+ok 33 - markdown links
+  ---
+  duration_ms: 451.9212
+  type: 'suite'
+  ...
+# Subtest: documented counts
+    # Subtest: README.md quotes the real counts
+    ok 1 - README.md quotes the real counts
+      ---
+      duration_ms: 2.3442
+      type: 'test'
+      ...
+    # Subtest: ROADMAP.md quotes the real counts
+    ok 2 - ROADMAP.md quotes the real counts
+      ---
+      duration_ms: 1.3942
+      type: 'test'
+      ...
+    1..2
+ok 34 - documented counts
+  ---
+  duration_ms: 3.9428
+  type: 'suite'
+  ...
+# Subtest: Microsoft Scout setup guidance
+    # Subtest: uses skills and bundled scripts instead of unavailable slash commands
+    ok 1 - uses skills and bundled scripts instead of unavailable slash commands
+      ---
+      duration_ms: 0.2286
+      type: 'test'
+      ...
+    # Subtest: package metadata and roadmap do not overstate automatic setup
+    ok 2 - package metadata and roadmap do not overstate automatic setup
+      ---
+      duration_ms: 0.3104
+      type: 'test'
+      ...
+    # Subtest: documents host readiness without promising observed activation
+    ok 3 - documents host readiness without promising observed activation
+      ---
+      duration_ms: 0.3805
+      type: 'test'
+      ...
+    # Subtest: documents the Copilot CLI plugin as Scout shared source
+    ok 4 - documents the Copilot CLI plugin as Scout shared source
+      ---
+      duration_ms: 0.3084
+      type: 'test'
+      ...
+    # Subtest: makes duplicate plugin roots and restart requirements checkable
+    ok 5 - makes duplicate plugin roots and restart requirements checkable
+      ---
+      duration_ms: 0.2173
+      type: 'test'
+      ...
+    # Subtest: preserves the historical Scout inventory instead of rewriting it as the current count
+    ok 6 - preserves the historical Scout inventory instead of rewriting it as the current count
+      ---
+      duration_ms: 0.2086
+      type: 'test'
+      ...
+    # Subtest: names every Flint tool expected after Scout restarts
+    ok 7 - names every Flint tool expected after Scout restarts
+      ---
+      duration_ms: 0.3718
+      type: 'test'
+      ...
+    1..7
+ok 35 - Microsoft Scout setup guidance
+  ---
+  duration_ms: 2.3301
+  type: 'suite'
+  ...
+# Subtest: activation
+    # Subtest: previews without error and writes nothing
+    ok 1 - previews without error and writes nothing
+      ---
+      duration_ms: 211.0237
+      type: 'test'
+      ...
+    # Subtest: plans exactly the instructions the manifest declares
+    ok 2 - plans exactly the instructions the manifest declares
+      ---
+      duration_ms: 204.7734
+      type: 'test'
+      ...
+    1..2
+ok 36 - activation
+  ---
+  duration_ms: 415.983
+  type: 'suite'
+  ...
+# Subtest: provisioned runtime
+    # Subtest: flint starts and reports 1.0.1
+    ok 1 - flint starts and reports 1.0.1
+      ---
+      duration_ms: 929.0212
+      type: 'test'
+      ...
+    # Subtest: playwright starts and reports 0.0.80
+    ok 2 - playwright starts and reports 0.0.80
+      ---
+      duration_ms: 414.7912
+      type: 'test'
+      ...
+    # Subtest: replicate starts and reports 0.9.0
+    ok 3 - replicate starts and reports 0.9.0
+      ---
+      duration_ms: 769.8189
+      type: 'test'
+      ...
+    # Subtest: an unknown route fails loudly
+    ok 4 - an unknown route fails loudly
+      ---
+      duration_ms: 74.0827
+      type: 'test'
+      ...
+    1..4
+ok 37 - provisioned runtime
+  ---
+  duration_ms: 2188.0473
+  type: 'suite'
+  ...
+1..37
+# tests 62
+# suites 12
+# pass 62
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3693.5011

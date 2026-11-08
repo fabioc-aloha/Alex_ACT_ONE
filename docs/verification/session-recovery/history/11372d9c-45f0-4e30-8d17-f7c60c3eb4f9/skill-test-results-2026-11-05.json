@@ -1,0 +1,2195 @@
+{
+  "date": "2026-11-05",
+  "pluginVersion": "0.7.0",
+  "cliVersion": "1.0.105",
+  "scope": "Representative live behavior, all-skill structural coverage, and fixture-only script execution",
+  "isolation": {
+    "mode": "plan",
+    "normalInstallationChanged": false,
+    "paidImageGeneration": false,
+    "note": "Read-only cases use native Plan mode and disabled integration MCPs. No-write observations are not proof that each skill independently enforces permissions."
+  },
+  "inventory": [
+    {
+      "skill": "act-tenets",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "instructions/act-pass.instructions.md",
+          "exists": true
+        },
+        {
+          "path": "instructions/problem-framing-audit.instructions.md",
+          "exists": true
+        },
+        {
+          "path": "instructions/critical-thinking.instructions.md",
+          "exists": true
+        },
+        {
+          "path": "instructions/system-prompt-skepticism.instructions.md",
+          "exists": true
+        },
+        {
+          "path": "instructions/epistemic-calibration.instructions.md",
+          "exists": true
+        },
+        {
+          "path": "skills/adversarial-review/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": true,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "adversarial-review",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/critical-thinking/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "annotate-screenshot",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/figure-generator/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/render-verify/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "anti-hallucination",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/critical-thinking/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "instructions/epistemic-calibration.instructions.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "instructions/system-prompt-skepticism.instructions.md",
+          "exists": true
+        },
+        {
+          "path": "instructions/epistemic-calibration.instructions.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/anti-hallucination/references/runtime-epistemic-calibration.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "ascii-chart",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/chart-big-idea/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/chart-vocabulary/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/ascii-chart/references/ascii-gallery.md",
+          "exists": true
+        },
+        {
+          "path": "skills/render-verify/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/flint-chart/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": true,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "assess-brain",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "scripts/assess-brain.cjs",
+          "exists": true
+        }
+      ],
+      "behavioralTested": true,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "big-idea",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/chart-big-idea/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/humanizer/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/humanizer/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/chart-big-idea/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/communication-craft/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/humanizer/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/problem-framing-audit/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": true,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "bootstrap-core",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": true,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "bootstrap-project",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": true,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "browser-tools",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/browser-tools/references/browser-scenarios.md",
+          "exists": true
+        },
+        {
+          "path": "skills/render-verify/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": true,
+      "executionEvidence": true
+    },
+    {
+      "skill": "chart-big-idea",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/big-idea/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/chart-big-idea/references/claim-elicitation.md",
+          "exists": true
+        },
+        {
+          "path": "skills/chart-vocabulary/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/flint-chart/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/render-verify/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/print-svg-style-guide/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/figure-generator/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": true,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "chart-interpretation",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/chart-vocabulary/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/chart-vocabulary/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/chart-vocabulary/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/flint-chart/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/render-verify/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "chart-vocabulary",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/chart-big-idea/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/flint-chart/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/figure-generator/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/print-svg-style-guide/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/replicate-imagery/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/ascii-chart/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/render-verify/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/docs-shell/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/render-verify/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/ascii-chart/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/print-svg-style-guide/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/figure-generator/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "code-review",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/code-review/references/ordinary-review.md",
+          "exists": true
+        },
+        {
+          "path": "skills/code-review/references/deep-review.md",
+          "exists": true
+        },
+        {
+          "path": "skills/code-review/references/advanced-audits.md",
+          "exists": true
+        },
+        {
+          "path": "skills/code-review/references/runtime-lint-discipline.md",
+          "exists": true
+        },
+        {
+          "path": "skills/code-review/references/runtime-no-deferred-debt.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/code-review/references/runtime-lint-discipline.md",
+          "exists": true
+        },
+        {
+          "path": "skills/code-review/references/runtime-no-deferred-debt.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": true,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "communication-craft",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "instructions/emotional-intelligence.instructions.md",
+          "exists": true
+        },
+        {
+          "path": "instructions/emotional-intelligence.instructions.md",
+          "exists": true
+        },
+        {
+          "path": "skills/big-idea/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/status-reporting/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/communication-craft/references/runtime-alex-finch-personality.md",
+          "exists": true
+        },
+        {
+          "path": "skills/communication-craft/references/runtime-emotional-intelligence.md",
+          "exists": true
+        },
+        {
+          "path": "skills/communication-craft/references/runtime-reliance-nudges.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "compile-brain",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [],
+      "behavioralTested": true,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "convert",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [],
+      "behavioralTested": true,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "corpus-qa-sweep",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/render-verify/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/render-verify/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/docs-shell/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/figure-generator/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "critical-thinking",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/act-tenets/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/references/runtime-act-pass.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/references/reasoning-methods.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/references/runtime-critical-thinking.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/references/framing.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/references/runtime-problem-framing-audit.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/references/runtime-system-prompt-skepticism.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/references/adversarial-methods.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/references/curation-risk.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/references/runtime-act-pass.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/references/runtime-critical-thinking.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/references/runtime-problem-framing-audit.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/references/runtime-system-prompt-skepticism.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": true,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "deep-review",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/code-review/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": true,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "doc-hygiene",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "docs-shell",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/docs-shell/references/shell-reference.md",
+          "exists": true
+        },
+        {
+          "path": "skills/docs-shell/references/shell-reference.md",
+          "exists": true
+        },
+        {
+          "path": "skills/docs-shell/starter",
+          "exists": true
+        },
+        {
+          "path": "skills/docs-shell/references/shell-reference.md",
+          "exists": true
+        },
+        {
+          "path": "skills/docs-shell/references/shell-reference.md",
+          "exists": true
+        },
+        {
+          "path": "skills/docs-shell/references/shell-reference.md",
+          "exists": true
+        },
+        {
+          "path": "skills/docs-shell/starter",
+          "exists": true
+        },
+        {
+          "path": "skills/docs-shell/starter/ADOPTION.md",
+          "exists": true
+        },
+        {
+          "path": "skills/docs-shell/references/shell-reference.md",
+          "exists": true
+        },
+        {
+          "path": "skills/docs-shell/references/shell-reference.md",
+          "exists": true
+        },
+        {
+          "path": "skills/docs-shell/starter",
+          "exists": true
+        },
+        {
+          "path": "skills/big-idea/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/markdown-mermaid/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/svg-banner/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "docx-to-md",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/md-to-word/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/md-to-html/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": true,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "ethical-reasoning",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "instructions/worldview.instructions.md",
+          "exists": true
+        },
+        {
+          "path": "instructions/worldview.instructions.md",
+          "exists": true
+        },
+        {
+          "path": "instructions/pii-memory-filter.instructions.md",
+          "exists": true
+        },
+        {
+          "path": "instructions/system-prompt-skepticism.instructions.md",
+          "exists": true
+        },
+        {
+          "path": "skills/ethical-reasoning/references/runtime-pii-memory-filter.md",
+          "exists": true
+        },
+        {
+          "path": "skills/ethical-reasoning/references/runtime-worldview.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "evaluate-before-adopting",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/anti-hallucination/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/security-and-hardening/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/critical-thinking/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/risk-analysis/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "figure-generator",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/print-svg-style-guide/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/render-verify/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/print-svg-style-guide/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/chart-big-idea/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/flint-chart/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/render-verify/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "flint-chart",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/flint-chart/references/flint-language-reference.md",
+          "exists": true
+        },
+        {
+          "path": "skills/print-svg-style-guide/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/figure-generator/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/chart-vocabulary/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/ascii-chart/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": true,
+      "executionEvidence": true
+    },
+    {
+      "skill": "flint-theme",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": true,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "git-workflow",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/git-workflow/references/execution-details.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "html-to-md",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/docx-to-md/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": true,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "humanizer",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/humanizer/references/copywriter-sweep-patterns.md",
+          "exists": true
+        },
+        {
+          "path": "skills/communication-craft/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/humanizer/examples/copywriter-mode-example.md",
+          "exists": true
+        },
+        {
+          "path": "skills/humanizer/references/pattern-catalog.md",
+          "exists": true
+        },
+        {
+          "path": "skills/humanizer/examples/full-example.md",
+          "exists": true
+        },
+        {
+          "path": "skills/humanizer/examples/copywriter-mode-example.md",
+          "exists": true
+        },
+        {
+          "path": "skills/code-review/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/doc-hygiene/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/meditation/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/communication-craft/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/humanizer/references/runtime-audience-copy-review.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": true,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "install-visual-companions",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/install-visual-companions/references/execution-details.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": true,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "lint-clean-markdown",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/markdown-mermaid/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/markdown-mermaid/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "markdown-mermaid",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/markdown-mermaid/references/pitfalls.md",
+          "exists": true
+        },
+        {
+          "path": "skills/svg-banner/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/markdown-mermaid/references/tool-ecosystem.md",
+          "exists": true
+        },
+        {
+          "path": "skills/markdown-mermaid/references/pitfalls.md",
+          "exists": true
+        },
+        {
+          "path": "skills/markdown-mermaid/references/tool-ecosystem.md",
+          "exists": true
+        },
+        {
+          "path": "skills/markdown-mermaid/references/diagram-reference.md",
+          "exists": true
+        },
+        {
+          "path": "skills/markdown-mermaid/references/markdown-best-practices.md",
+          "exists": true
+        },
+        {
+          "path": "skills/lint-clean-markdown/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "markdown-sanitization-chain",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/markdown-mermaid/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/markdown-mermaid/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/lint-clean-markdown/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "md-to-eml",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/md-to-html/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/md-to-word/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": true,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "md-to-html",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/md-to-word/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": true,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "md-to-txt",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/md-to-word/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": true,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "md-to-word",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/md-to-word/<your-diagram>.svg",
+          "exists": false,
+          "classification": "illustrative-template"
+        },
+        {
+          "path": "skills/md-to-word/<your-diagram>.png",
+          "exists": false,
+          "classification": "illustrative-template"
+        },
+        {
+          "path": "skills/md-to-word/references/version-history-and-acceptance.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": true,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": true,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "meditation",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/proactive-awareness/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/meditation/references/execution-details.md",
+          "exists": true
+        },
+        {
+          "path": "skills/project-capability-authoring/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/compile-brain/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "mutation-testing",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/code-review/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "plan",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/plan/references/project-plan-template.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": true,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "platform-awareness",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/platform-awareness/references/platform-history.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "print-svg-style-guide",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/chart-big-idea/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/flint-chart/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/render-verify/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/figure-generator/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "proactive-awareness",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/proactive-awareness/references/project-recovery.md",
+          "exists": true
+        },
+        {
+          "path": "skills/proactive-awareness/references/runtime-session-health-monitoring.md",
+          "exists": true
+        },
+        {
+          "path": "skills/proactive-awareness/references/runtime-session-health-monitoring.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": true,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "problem-framing-audit",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/critical-thinking/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": true,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "project-capability-authoring",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/compile-brain/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": true,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "project-status",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/proactive-awareness/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": true,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "render-chart",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/chart-big-idea/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/flint-chart/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/render-verify/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "render-verify",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/ascii-chart/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/chart-big-idea/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/chart-vocabulary/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/flint-chart/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/print-svg-style-guide/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/figure-generator/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/corpus-qa-sweep/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/annotate-screenshot/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": true,
+      "executionEvidence": true
+    },
+    {
+      "skill": "replicate-imagery",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/flint-chart/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/markdown-mermaid/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/svg-banner/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/figure-generator/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/print-svg-style-guide/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/chart-big-idea/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/render-verify/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "rich-email",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/md-to-eml/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/rich-email/assets/rich-email-template.md",
+          "exists": true
+        },
+        {
+          "path": "skills/rich-email/references/style-guide.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": true,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "risk-analysis",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/critical-thinking/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "security-and-hardening",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/code-review/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/deep-review/SKILL.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "setup-dependencies",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "setup-enterprise-stack",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "prompts/setup-enterprise.prompt.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": true,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "spike",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/spike/references/execution-details.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "status-reporting",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "svg-banner",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/print-svg-style-guide/SKILL.md",
+          "exists": true
+        },
+        {
+          "path": "skills/svg-banner/assets/banner-<slug>.svg",
+          "exists": false,
+          "classification": "illustrative-template"
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": true,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "systematic-debugging",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/systematic-debugging/references/execution-details.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "terminal-command-safety",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/terminal-command-safety/references/runtime-terminal-command-safety.md",
+          "exists": true
+        },
+        {
+          "path": "skills/terminal-command-safety/references/shell-procedures.md",
+          "exists": true
+        },
+        {
+          "path": "skills/terminal-command-safety/references/runtime-terminal-command-safety.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": true,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": true
+    },
+    {
+      "skill": "test-driven-development",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [
+        {
+          "path": "skills/test-driven-development/references/execution-details.md",
+          "exists": true
+        }
+      ],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    },
+    {
+      "skill": "token-waste-elimination",
+      "discovered": true,
+      "sourceExists": true,
+      "directResources": [],
+      "behavioralTested": false,
+      "structuralStatus": "pass",
+      "observedCliInvocation": false,
+      "actualScriptFixture": false,
+      "integrationFixture": false,
+      "executionEvidence": false
+    }
+  ],
+  "behavioral": [
+    {
+      "id": "act-canon",
+      "status": "pass",
+      "exitCode": 0,
+      "guardHit": false,
+      "workspaceUnchanged": true,
+      "expectedLoads": {
+        "act-tenets": true
+      },
+      "observedSkillLoads": [
+        "act-tenets"
+      ],
+      "outputChecks": {
+        "tenCanonical": true,
+        "notNewCanon": true
+      },
+      "evidence": "skill-test-evidence/act-canon.log",
+      "initialMechanicalStatus": "pass",
+      "semanticReview": "Output inspected against the synthetic request and observed tool trace."
+    },
+    {
+      "id": "framing-alias",
+      "status": "pass",
+      "exitCode": 0,
+      "guardHit": false,
+      "workspaceUnchanged": true,
+      "expectedLoads": {
+        "problem-framing-audit": true,
+        "critical-thinking": true
+      },
+      "observedSkillLoads": [
+        "problem-framing-audit",
+        "critical-thinking"
+      ],
+      "outputChecks": {
+        "measuresBeforeChoice": true,
+        "challengesFalseChoice": true
+      },
+      "evidence": "skill-test-evidence/framing-alias.log",
+      "initialMechanicalStatus": "pass",
+      "semanticReview": "Output inspected against the synthetic request and observed tool trace."
+    },
+    {
+      "id": "humanizer-audit",
+      "status": "pass",
+      "exitCode": 0,
+      "guardHit": false,
+      "workspaceUnchanged": true,
+      "expectedLoads": {
+        "humanizer": true
+      },
+      "observedSkillLoads": [
+        "humanizer"
+      ],
+      "outputChecks": {
+        "noInventedFindings": true
+      },
+      "evidence": "skill-test-evidence/humanizer-audit.log",
+      "initialMechanicalStatus": "pass",
+      "semanticReview": "Output inspected against the synthetic request and observed tool trace."
+    },
+    {
+      "id": "deep-review",
+      "status": "pass-with-limitations",
+      "exitCode": 0,
+      "guardHit": false,
+      "workspaceUnchanged": true,
+      "expectedLoads": {
+        "deep-review": true,
+        "code-review": true
+      },
+      "observedSkillLoads": [
+        "deep-review",
+        "code-review"
+      ],
+      "outputChecks": {
+        "realDefect": true,
+        "locatesCode": true
+      },
+      "evidence": "skill-test-evidence/deep-review.log",
+      "initialMechanicalStatus": "pass",
+      "semanticReview": "Output inspected against the synthetic request and observed tool trace. Some additional read-only shell verification was denied in the noninteractive fixture; no runtime verification beyond the executed commands is claimed."
+    },
+    {
+      "id": "copywriter-approval",
+      "status": "pass",
+      "exitCode": 0,
+      "guardHit": false,
+      "workspaceUnchanged": true,
+      "expectedLoads": {
+        "humanizer": true
+      },
+      "observedSkillLoads": [
+        "humanizer",
+        "plan"
+      ],
+      "outputChecks": {
+        "taggedFinding": true,
+        "proposalTable": true,
+        "awaitsApproval": true
+      },
+      "evidence": "skill-test-evidence/copywriter-approval.log",
+      "initialMechanicalStatus": "pass",
+      "semanticReview": "Output inspected against the synthetic request and observed tool trace."
+    },
+    {
+      "id": "native-plan",
+      "status": "pass",
+      "exitCode": 0,
+      "guardHit": false,
+      "workspaceUnchanged": true,
+      "expectedLoads": {
+        "plan": true
+      },
+      "observedSkillLoads": [
+        "plan"
+      ],
+      "outputChecks": {
+        "planAndVerification": true,
+        "preservesCompatibility": true
+      },
+      "evidence": "skill-test-evidence/native-plan.log",
+      "initialMechanicalStatus": "pass",
+      "semanticReview": "Output inspected against the synthetic request and observed tool trace."
+    },
+    {
+      "id": "project-recovery",
+      "status": "pass-with-limitations",
+      "exitCode": 0,
+      "guardHit": false,
+      "workspaceUnchanged": true,
+      "expectedLoads": {
+        "project-status": true,
+        "proactive-awareness": true
+      },
+      "observedSkillLoads": [
+        "project-status",
+        "proactive-awareness"
+      ],
+      "outputChecks": {
+        "realBlocker": true,
+        "realTask": true
+      },
+      "evidence": "skill-test-evidence/project-recovery.log",
+      "initialMechanicalStatus": "pass",
+      "semanticReview": "Output inspected against the synthetic request and observed tool trace. Some additional read-only shell verification was denied in the noninteractive fixture; no runtime verification beyond the executed commands is claimed."
+    },
+    {
+      "id": "compile-preservation",
+      "status": "limited",
+      "exitCode": 0,
+      "guardHit": false,
+      "workspaceUnchanged": true,
+      "expectedLoads": {
+        "compile-brain": true
+      },
+      "observedSkillLoads": [
+        "compile-brain",
+        "assess-brain"
+      ],
+      "outputChecks": {
+        "retainsInstallFloor": true,
+        "retainsPublicationGate": true,
+        "preservationReceipt": true
+      },
+      "evidence": "skill-test-evidence/compile-preservation.log",
+      "initialMechanicalStatus": "pass",
+      "semanticReview": "Source and safety invariants were preserved in a review proposal, and denied verification was disclosed honestly. Required assessment/link/reduction checks were not completed by this invocation."
+    },
+    {
+      "id": "capability-should-not-fire",
+      "status": "pass",
+      "exitCode": 0,
+      "guardHit": false,
+      "workspaceUnchanged": true,
+      "expectedLoads": {
+        "project-capability-authoring": true
+      },
+      "observedSkillLoads": [
+        "project-capability-authoring"
+      ],
+      "outputChecks": {
+        "rejectsUnneededSkill": true
+      },
+      "evidence": "skill-test-evidence/capability-should-not-fire.log",
+      "initialMechanicalStatus": "pass",
+      "semanticReview": "Output inspected against the synthetic request and observed tool trace."
+    },
+    {
+      "id": "chart-brief-route",
+      "status": "needs-correction",
+      "exitCode": 0,
+      "guardHit": false,
+      "workspaceUnchanged": true,
+      "expectedLoads": {
+        "chart-big-idea": true,
+        "big-idea": true
+      },
+      "observedSkillLoads": [
+        "chart-big-idea",
+        "big-idea"
+      ],
+      "outputChecks": {
+        "chartBrief": true,
+        "audienceAndIntent": true,
+        "dataMeaning": true
+      },
+      "evidence": "skill-test-evidence/chart-brief-route.log",
+      "initialMechanicalStatus": "pass",
+      "semanticReview": "Suggested chartType stacked_bar_chart is rejected by the installed Flint validator. The first run also emitted derived percentages after shell denial; an activated-instruction retest used SQL to compute them correctly but repeated the invalid chart identifier."
+    },
+    {
+      "id": "setup-no-install",
+      "status": "pass",
+      "exitCode": 0,
+      "guardHit": false,
+      "workspaceUnchanged": true,
+      "expectedLoads": {
+        "install-visual-companions": true
+      },
+      "observedSkillLoads": [
+        "install-visual-companions"
+      ],
+      "outputChecks": {
+        "declinesExtras": true
+      },
+      "evidence": "skill-test-evidence/setup-no-install.log",
+      "initialMechanicalStatus": "pass",
+      "semanticReview": "Output inspected against the synthetic request and observed tool trace."
+    },
+    {
+      "id": "conversion-dispatch",
+      "status": "pass",
+      "exitCode": 0,
+      "guardHit": false,
+      "workspaceUnchanged": true,
+      "expectedLoads": {
+        "convert": true
+      },
+      "observedSkillLoads": [
+        "convert",
+        "md-to-word",
+        "plan"
+      ],
+      "outputChecks": {
+        "selectsWord": true,
+        "validatesArtifact": true
+      },
+      "evidence": "skill-test-evidence/conversion-dispatch.log",
+      "initialMechanicalStatus": "pass",
+      "semanticReview": "Output inspected against the synthetic request and observed tool trace."
+    }
+  ],
+  "automated": {
+    "installedSuite": {
+      "tests": 261,
+      "pass": 261,
+      "fail": 0,
+      "skipped": 0
+    }
+  },
+  "activatedRetest": {
+    "id": "chart-with-activation",
+    "exitCode": 0,
+    "activatedInstructions": 15,
+    "fixturePreserved": true,
+    "guardHit": false,
+    "evidence": "skill-test-evidence/chart-with-activation.log",
+    "deterministicEvidencePath": "pass: SQL computation after shell denial",
+    "chartTypeMapping": "needs-correction: stacked_bar_chart remains unsupported"
+  },
+  "artifactTests": [
+    {
+      "id": "markdown-to-text",
+      "skill": "md-to-txt",
+      "status": "pass",
+      "evidence": {
+        "outputBytes": 131,
+        "sentinelAndTablePreserved": true
+      }
+    },
+    {
+      "id": "markdown-to-html",
+      "skill": "md-to-html",
+      "status": "pass",
+      "evidence": {
+        "outputBytes": 3521,
+        "headingAndTablePreserved": true
+      }
+    },
+    {
+      "id": "markdown-to-docx",
+      "skill": "md-to-word",
+      "status": "pass",
+      "evidence": {
+        "outputBytes": 11727,
+        "docxXmlSentinelAndTablePreserved": true
+      }
+    },
+    {
+      "id": "docx-to-markdown",
+      "skill": "docx-to-md",
+      "status": "pass",
+      "evidence": {
+        "outputBytes": 386,
+        "roundtripAccepted": true
+      }
+    },
+    {
+      "id": "html-to-markdown",
+      "skill": "html-to-md",
+      "status": "pass",
+      "evidence": {
+        "outputBytes": 49,
+        "headingAndListPreserved": true
+      }
+    },
+    {
+      "id": "markdown-to-eml",
+      "skill": "md-to-eml",
+      "status": "pass",
+      "evidence": {
+        "outputBytes": 1035,
+        "headersVerified": true,
+        "sent": false
+      }
+    },
+    {
+      "id": "rich-email-validation-only",
+      "skill": "rich-email",
+      "status": "pass",
+      "evidence": {
+        "subjectChars": 13,
+        "bodyWords": 7,
+        "unsent": true,
+        "outlookOpened": false
+      }
+    },
+    {
+      "id": "banner-generator",
+      "skill": "svg-banner",
+      "status": "pass",
+      "evidence": {
+        "outputBytes": 24699,
+        "fixedDimensionsAndTextPreserved": true
+      }
+    },
+    {
+      "id": "ascii-bars-roundtrip",
+      "skill": "ascii-chart",
+      "status": "pass",
+      "evidence": {
+        "renderedAndChecked": true
+      }
+    },
+    {
+      "id": "theme-contrast-positive-negative",
+      "skill": "flint-theme",
+      "status": "pass",
+      "evidence": {
+        "contrastingPass": true,
+        "identicalColorsFail": true
+      }
+    },
+    {
+      "id": "enterprise-audit-isolated-settings",
+      "skill": "setup-enterprise-stack",
+      "status": "pass",
+      "evidence": {
+        "auditPrinted": true,
+        "fixtureSettingsPreserved": true,
+        "userSettingsAccessed": false
+      }
+    },
+    {
+      "id": "project-bootstrap-preview",
+      "skill": "bootstrap-project",
+      "status": "pass",
+      "evidence": {
+        "previewOnly": true,
+        "existingFilesPreserved": true
+      }
+    },
+    {
+      "id": "converter-missing-input",
+      "skill": "md-to-txt",
+      "status": "pass",
+      "evidence": {
+        "explicitFailure": true,
+        "noSuccessArtifact": true
+      }
+    }
+  ],
+  "integrations": {
+    "flint": {
+      "compile": "pass",
+      "render": "pass",
+      "format": "svg",
+      "expectedMarks": 2,
+      "actualMarks": 2,
+      "data": [
+        {
+          "category": "Alpha",
+          "value": 12
+        },
+        {
+          "category": "Beta",
+          "value": 7
+        }
+      ],
+      "renderedLabelsMatch": true,
+      "renderedHeightRatioMatchesSource": true,
+      "screenshotInspected": true
+    },
+    "nativeBrowser": {
+      "localFileRead": "pass",
+      "domMeasurement": "pass",
+      "pointerClick": "blocked",
+      "reason": "Tab reported document.visibilityState=hidden; native click APIs timed out waiting for a visible, stable element."
+    },
+    "playwrightFallback": {
+      "localFileRead": "pass",
+      "pointerClick": "pass",
+      "screenshot": "pass",
+      "statusAfterClick": "Verified",
+      "consoleErrors": 0,
+      "observedMarks": 2,
+      "tabClosedAfterTest": true
+    }
+  },
+  "findings": [
+    {
+      "severity": "medium",
+      "skill": "chart-big-idea",
+      "source": "skills/chart-big-idea/SKILL.md:170-182",
+      "issue": "Chart-type hints use identifiers not accepted by the installed Flint runtime.",
+      "reproduction": "Both live chart-brief cases returned suggested chartType stacked_bar_chart. Flint validate_chart rejected it with Unknown chart type: stacked_bar_chart; Stacked Bar Chart with normalize validated.",
+      "scope": "The framing-to-renderer handoff needs explicit normalization. Full render-chart orchestration was not live-tested, so this is not a claim that every end-to-end rendering fails."
+    }
+  ],
+  "harnessTriage": {
+    "initialMechanicalChecks": "All twelve matched the initial lightweight checks. Semantic review narrowed that result; those regex checks were insufficient to certify chart validity.",
+    "illustrativeTemplatePaths": [
+      {
+        "skill": "md-to-word",
+        "path": "skills/md-to-word/<your-diagram>.svg"
+      },
+      {
+        "skill": "md-to-word",
+        "path": "skills/md-to-word/<your-diagram>.png"
+      },
+      {
+        "skill": "svg-banner",
+        "path": "skills/svg-banner/assets/banner-<slug>.svg"
+      }
+    ],
+    "noWriteInterpretation": "All fixture workspaces retained identical file hashes. Native Plan mode permits private plan/session files, which were created in disposable state and removed. This is not standalone proof that each skill enforces permissions without the host.",
+    "standaloneVersusActivated": "The first twelve cases mounted the installed plugin but did not copy its resident instructions into their disposable profiles. The chart retest activated all fifteen and demonstrated SQL fallback; normal user activation was not changed."
+  },
+  "summary": {
+    "discoveredSkills": 63,
+    "structuralPasses": 63,
+    "installedTests": 261,
+    "installedTestFailures": 0,
+    "representativePrimaryScenarios": 12,
+    "activatedRetests": 1,
+    "observedCliSkillNames": 19,
+    "actualScriptCases": 13,
+    "actualScriptPasses": 13,
+    "skillsWithSomeExecutionEvidence": 34,
+    "notIndividuallyExercisedInAdditionalRuns": [
+      "adversarial-review",
+      "annotate-screenshot",
+      "chart-interpretation",
+      "chart-vocabulary",
+      "communication-craft",
+      "corpus-qa-sweep",
+      "doc-hygiene",
+      "docs-shell",
+      "ethical-reasoning",
+      "evaluate-before-adopting",
+      "figure-generator",
+      "git-workflow",
+      "lint-clean-markdown",
+      "markdown-mermaid",
+      "markdown-sanitization-chain",
+      "meditation",
+      "mutation-testing",
+      "platform-awareness",
+      "print-svg-style-guide",
+      "render-chart",
+      "replicate-imagery",
+      "risk-analysis",
+      "security-and-hardening",
+      "setup-dependencies",
+      "spike",
+      "status-reporting",
+      "systematic-debugging",
+      "test-driven-development",
+      "token-waste-elimination"
+    ],
+    "findings": 1,
+    "behavioralStatuses": {
+      "pass": 8,
+      "pass-with-limitations": 2,
+      "limited": 1,
+      "needs-correction": 1
+    }
+  },
+  "notTested": [
+    "No exhaustive behavioral invocation of all 63 skills, all references, or all edge cases.",
+    "No paid image generation or Replicate account/authentication check.",
+    "No real email sending or Outlook draft opening.",
+    "No real plugin/dependency installation, commits, pushes, publication, profile migration, or user-setting changes.",
+    "No full production TDD, mutation, security-hardening, meditation-write, or cloud-integration workflow.",
+    "No Scout or GitHub Copilot app session; representative live skill traces are CLI 1.0.105."
+  ],
+  "postCheck": {
+    "normalActivationUnchanged": true,
+    "instructionsPreserved": 15,
+    "receiptAction": "preserve",
+    "repositoryEdits": false
+  }
+}

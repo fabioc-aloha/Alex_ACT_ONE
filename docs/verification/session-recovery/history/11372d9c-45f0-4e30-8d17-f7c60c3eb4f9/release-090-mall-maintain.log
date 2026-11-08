@@ -1,0 +1,246 @@
+npm notice run maintain
+npm notice run node scripts/maintain-mall.cjs --curated
+Mall maintenance mode: curated
+
+> node scripts/scan-sources.cjs --store plugin-mall
+Scan-sources: walking 1 stores
+SOURCES_DIR: undefined
+REPO_ROOT:   C:\Development\Alex_Skill_Mall
+
+SCAN: plugin-mall... 359 plugins
+
+=== Scan summary ===
+Stores scanned:    1
+Stores with error: 0
+Total plugins:     359
+Output:            C:\Development\Alex_Skill_Mall\catalog\stores/*.json
+
+Top 10 stores by plugin count:
+    359 plugin-mall [first-party]
+
+> node scripts/normalize-frontmatter.cjs --store plugin-mall
+Normalize frontmatter: 1 stores
+Dry run: false
+
+plugin-mall                                359 plugins  std-desc=359  ver=359  cat=358
+
+=== Aggregate (across all stores scanned) ===
+Plugins:                 359
+With standard.name:          359  (100.0%)
+With standard.description:   359  (100.0%)
+With standard.version:       359  (100.0%)
+With standard.lastReviewed:     0 (0.0%)
+With extended.license:        11  (3.1%)
+With extended.tags:          359  (100.0%)
+With extended.category:      358  (99.7%)
+
+> node scripts/list-refs.cjs --store plugin-mall
+list-refs: 1 stores
+SOURCES_DIR: undefined
+REPO_ROOT:   C:\Development\Alex_Skill_Mall
+Dry run: false
+
+OK    plugin-mall                                4 tags  @ main=b865290  (359 plugins)
+
+=== Refs discovery summary ===
+Stores with tags:    1
+Stores without tags: 0
+Stores with errors:  0
+Total tags surfaced: 4
+Total plugins:       359
+
+> node scripts/compute-trust.cjs
+compute-trust: 53 stores
+Dry run: false
+
+ai-research-skills                       store= 35 (100 plugins min=43 max=48)
+alirezarezvani-claude-skills             store= 32 (43 plugins min=32 max=42)
+antigravity-awesome-skills               store= 35 (2626 plugins min=42 max=50)
+awesome-copilot                          store= 35 (539 plugins min=40 max=48)
+azure-functions-skills                   store= 28 (3 plugins min=28 max=38)
+azure-git-ape                            store= 32 (3 plugins min=40 max=42)
+azure-sdk-tools                          store= 30 (29 plugins min=36 max=40)
+buildwithclaude                          store= 35 (122 plugins min=35 max=45)
+claude-code-plugins-plus-skills          store= 35 (24 plugins min=35 max=45)
+claude-skills                            store= 25 (20 plugins min=30 max=30)
+context-engineering-kit                  store= 32 (13 plugins min=42 max=42)
+copilot-agents-dojo                      store= 27 (29 plugins min=32 max=32)
+databricks-agent-skills                  store= 22 (38 plugins min=27 max=32)
+daymade-claude-code-skills               store= 35 (122 plugins min=40 max=45)
+designer-skills                          store= 32 (9 plugins min=42 max=42)
+devexpress-agent-skills                  store= 30 (8 plugins min=43 max=43)
+dotnet-maui-labs                         store= 32 (19 plugins min=40 max=42)
+dotnet-modernize                         store= 22 (2 plugins min=28 max=32)
+dotnet-skills                            store= 35 (20 plugins min=43 max=48)
+elastic-agent-skills                     store= 32 (5 plugins min=40 max=40)
+elevenlabs-skills                        store= 32 (12 plugins min=32 max=37)
+expo-skills                              store= 35 (24 plugins min=40 max=43)
+garden-skills                            store= 32 (6 plugins min=42 max=42)
+github-actions-migrations                store= 20 (3 plugins min=30 max=33)
+github-copilot-plugins                   store= 32 (2 plugins min=42 max=45)
+google-skills                            store= 35 (164 plugins min=35 max=40)
+huggingface-skills                       store= 35 (25 plugins min=40 max=45)
+libukai-awesome-agent-skills             store= 15 (0 plugins )
+marketingskills                          store= 35 (52 plugins min=40 max=45)
+mcp-servers                              store= 25 (7 plugins min=33 max=35)
+microsoft-agentrc                        store= 35 (4 plugins min=43 max=48)
+microsoft-copilot-modernization          store= 27 (1 plugins min=40 max=40)
+microsoft-copilot-studio-skills          store= 32 (31 plugins min=37 max=37)
+microsoft-dataverse-skills               store= 32 (1 plugins min=42 max=42)
+microsoft-devsquad-copilot               store= 30 (1 plugins min=40 max=40)
+microsoft-fabric-skills                  store= 32 (28 plugins min=32 max=42)
+microsoft-fasttrack                      store= 32 (40 plugins min=42 max=43)
+microsoft-finops-toolkit                 store= 32 (3 plugins min=38 max=42)
+microsoft-hve-core                       store= 35 (6 plugins min=41 max=43)
+microsoft-skills                         store= 35 (3 plugins min=41 max=43)
+microsoft-win-dev-skills                 store= 32 (0 plugins )
+microsoft-winapp-cli                     store= 35 (26 plugins min=35 max=45)
+microsoftdocs-agent-skills               store= 29 (201 plugins min=34 max=34)
+mongodb-agent-skills                     store= 30 (12 plugins min=35 max=40)
+n-skills                                 store= 29 (5 plugins min=29 max=29)
+planning-with-files                      store= 35 (6 plugins min=40 max=40)
+plugin-mall                              store= 82 (359 plugins min=90 max=95) [first-party]
+qdrant-skills                            store= 32 (15 plugins min=37 max=42)
+spec-kit                                 store= 35 (8 plugins min=35 max=45)
+styleseed                                store= 32 (1 plugins min=37 max=37)
+vercel-agent-skills                      store= 25 (9 plugins min=30 max=35)
+vercel-skills                            store= 35 (1 plugins min=40 max=40)
+wshobson-agents                          store= 35 (93 plugins min=35 max=45)
+
+=== Trust scoring summary ===
+Total plugins:       4923
+Output:              catalog/stores/*.json + scoring/trust-audit.json
+
+Score distribution (plugin trust_score):
+  0-19       0 (0.0%)
+  20-39    573 (11.6%)
+  40-59   3991 (81.1%)
+  60-79      0 (0.0%)
+  80-100   359 (7.3%)
+
+Top 10 stores by store_score:
+   82  plugin-mall                              (359 plugins) [first-party]
+   35  ai-research-skills                       (100 plugins)
+   35  antigravity-awesome-skills               (2626 plugins)
+   35  awesome-copilot                          (539 plugins)
+   35  buildwithclaude                          (122 plugins)
+   35  claude-code-plugins-plus-skills          (24 plugins)
+   35  daymade-claude-code-skills               (122 plugins)
+   35  dotnet-skills                            (20 plugins)
+   35  expo-skills                              (24 plugins)
+   35  google-skills                            (164 plugins)
+
+> node scripts/render-marketplace.cjs
+{
+  "count": 354,
+  "outputPath": "C:\\Development\\Alex_Skill_Mall\\.github\\plugin\\marketplace.json"
+}
+
+> node scripts/render-catalog.cjs
+render-catalog: 53 stores
+Dry run: false
+
+Wrote: catalog/index.json  (4923 plugins, 2.18 MB)
+Wrote: catalog/INDEX.md
+Wrote: catalog/stores/*.md  (53 files)
+Wrote: catalog/categories/*.md  (22 files)
+Wrote: scoring/TRUST-AUDIT.md
+Wrote: README.md (storefront)
+Wrote: sources/SOURCES.md
+
+=== Render summary ===
+Plugins indexed:    4923
+Stores rendered:    53
+Categories rendered: 22
+index.json size:    2.18 MB
+
+> npm test
+npm notice run test
+npm notice run node --test test/*.test.cjs
+✔ source bootstrap enables Windows long paths and preserves clone arguments as data (0.7961ms)
+✔ source bootstrap tag fetch is shell-free and long-path aware (0.0932ms)
+warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
+✔ valid branch metacharacters remain Git data and never reach a shell (1014.4288ms)
+✔ converter output matches independently authored post fixtures (937.8208ms)
+✔ full migration processes bundles before their component sources (811.7373ms)
+✔ dry run reports selected migrations without writing (326.6069ms)
+✔ dry run exercises conversion logic and fails on an invalid MCP declaration (231.9886ms)
+✔ valid YAML block descriptions and missing skill names normalize from plugin identity (255.0227ms)
+✔ frontmatter delimiters tolerate trailing horizontal whitespace (271.5388ms)
+✔ malformed skill YAML recovers from plugin manifest and records the adaptation (277.3438ms)
+✔ duplicate nested skill manifest is preserved as Mall metadata and not shipped (315.8398ms)
+✔ second migration is byte-idempotent (691.9477ms)
+✔ missing declared artifact fails closed (187.6922ms)
+✔ unshippable relative Markdown links become audited inline references (291.0756ms)
+✔ root skill relocation rewrites links between moved and retained files (351.0392ms)
+✔ post fixtures use the Copilot-native manifest allowlist (15.0621ms)
+✔ standard metadata and removed legacy fields are preserved exactly (40.5624ms)
+✔ post fixture layouts cover skills, agents, commands, MCP, scripts, and bundles (3.7174ms)
+✔ legacy skill and agent frontmatter is normalized (36.9203ms)
+✔ artifact bodies and support resources remain equivalent (52.2353ms)
+✔ adapted command and bundled skill references are plugin-local (3.4203ms)
+✔ all relative Markdown links in post skills and commands resolve (45.1385ms)
+✔ packagePlugin normalizes a source plugin into the curated Mall shape (136.4359ms)
+✔ packagePlugin defaults to dry-run and does not write the destination (62.2549ms)
+✔ packagePlugin advances source delivery without recreating a local payload (39.573ms)
+✔ replacement fails closed when existing bundled resources are omitted (98.8478ms)
+✔ submission validation rejects secrets and payloads above 100 files (249.9759ms)
+✔ maintainer curated plan refreshes first-party state before rendering and checks (1.4469ms)
+✔ maintenance CLI help is side-effect free and npm runs through Node (0.2383ms)
+✔ package scripts expose maintainer and contributor commands (0.78ms)
+✔ admin approval payload requires the plugin check and CODEOWNER review (0.9683ms)
+✔ contributor PR workflow validates without auto-merging (2.8583ms)
+✔ generated storefront advertises the maintained runtime and its install path (2.2368ms)
+✔ storefront keeps internal process and retired surfaces out (1.4898ms)
+✔ storefront advertises Alex ACT ONE at the version the marketplace serves (2.9846ms)
+✔ storefront does not promote withdrawn legacy listings (2.657ms)
+✔ catalog renderers preserve withdrawn plugins and show their replacement command (5.2611ms)
+✔ catalog CLI entry point occurs once after main is defined (16.9664ms)
+✔ renderer emits deterministic strict curated-only marketplace output (222.1418ms)
+✔ renderer fails closed on a legacy string author (151.5243ms)
+✔ renderer fails closed on duplicate manifest names (188.831ms)
+✔ renderer rejects unusable or visibly truncated descriptions (139.7242ms)
+✔ renderer rejects payloads above the Copilot CLI Windows file limit (199.6584ms)
+✔ origin-delivered entries render an object source and skip the vendored payload limit (196.9351ms)
+✔ renderer fails closed on an incomplete origin source (112.154ms)
+✔ withdrawn curated entries stay in the catalog but leave the install marketplace (124.2175ms)
+✔ renderer rejects a withdrawn entry without a safe replacement route (131.949ms)
+✔ mixed component plugins are not mislabeled as skill-only (142.4707ms)
+✔ skill frontmatter preserves folded descriptions and nested metadata (10.7502ms)
+✔ skill frontmatter parses Windows CRLF without a dangling carriage return (6.3153ms)
+✔ scan dedup prefers production plugins over skills and testing copies (0.3202ms)
+✔ snapshot reconciliation uses the same production precedence (1.0846ms)
+✔ self-scan carries withdrawal metadata into the catalog record (15.5295ms)
+✔ valid generated catalog passes (65.2509ms)
+✔ duplicate registry names fail (31.7181ms)
+✔ provenance must identify exactly plugin-mall (31.862ms)
+✔ registry and store JSON sets must agree (33.2075ms)
+✔ index counts must reconcile with store JSON (32.6654ms)
+✔ marketplace is mandatory (33.8098ms)
+✔ store count, names, and refs must be publication-safe (33.7422ms)
+✔ plugin source URLs are mandatory (32.8558ms)
+✔ index installability must match reference-only registry state (33.2722ms)
+✔ every store requires rendered markdown (29.2555ms)
+✔ trust scores and signals are bounded and present (33.085ms)
+✔ marketplace entries must reconcile exactly with curated plugin folders (75.7868ms)
+✔ withdrawn curated entries are absent from the marketplace without a mismatch (46.3707ms)
+✔ withdrawal metadata must reach both catalog surfaces (28.9028ms)
+✔ marketplace sources must stay inside the curated plugins tree (27.9821ms)
+✔ workflow runs tests and validation before immediate merge (1.0849ms)
+ℹ tests 69
+ℹ suites 0
+ℹ pass 69
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5298.9619
+
+> npm run validate
+npm notice run validate
+npm notice run node scripts/validate-catalog.cjs
+Mall validation: PASS
+Stores: 53
+Plugins: 4923
+
+Mall maintenance completed. Review git diff before committing.

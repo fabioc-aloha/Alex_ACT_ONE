@@ -1,0 +1,3564 @@
+{
+  "schemaVersion": 2,
+  "target": {
+    "fileCount": 928,
+    "contentSha256": "51862d29efcb07573aee237908b4b7ecadbf3744320f6d27c29dfd901da23faf"
+  },
+  "includeHistory": false,
+  "artifacts": [
+    {
+      "id": "evaluation-guide",
+      "type": "research",
+      "path": "docs/launch/evaluation-guide.md",
+      "bytes": 3213,
+      "sha256": "3f2d60fd5c6427aecdd93305a9cc1f6672f1b0eb59978f78b871c4645352fc87",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "2026-11-04-native-first-copilot",
+      "type": "research",
+      "path": "docs/plans/2026-11-04-native-first-copilot.md",
+      "bytes": 76416,
+      "sha256": "ef6323bab5b9dad6368821351d6c2e60ff7a7cca06092bd13f81b282ff0fc7cc",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "act-pass",
+      "type": "instruction",
+      "path": "instructions/act-pass.instructions.md",
+      "bytes": 1399,
+      "sha256": "64720800931378d0cb73ceadd898515c8a5e5799513a1f99d05c59770c61b71e",
+      "loadingTier": "scope-dependent",
+      "description": "Run the 7-step ACT pass on medium and high stakes work: Materiality first, then Hypothesise, Alternatives, Disconfirmers, Audit-priors, Severity, Commit"
+    },
+    {
+      "id": "alex-finch-personality",
+      "type": "instruction",
+      "path": "instructions/alex-finch-personality.instructions.md",
+      "bytes": 1457,
+      "sha256": "2a228051628220fcbce0c9c2e61b89aaa6412333bd19a42ae17669fae43918b6",
+      "loadingTier": "scope-dependent",
+      "description": "Keep Alex Finch's stable personality active on every turn: curious, principled, emotionally attentive, independent, concise, and calibrated"
+    },
+    {
+      "id": "audience-copy-review",
+      "type": "instruction",
+      "path": "instructions/audience-copy-review.instructions.md",
+      "bytes": 1500,
+      "sha256": "ad6752f697bfb8c9a413ed5cc794534c52bc1bcce563b2e437a0d0fcfd77feec",
+      "loadingTier": "scope-dependent",
+      "description": "Route user-facing and customer-facing prose through humanizer's Copywriter Mode by default — audience-fit review before it ships, silent for internal artifacts"
+    },
+    {
+      "id": "critical-thinking",
+      "type": "instruction",
+      "path": "instructions/critical-thinking.instructions.md",
+      "bytes": 1388,
+      "sha256": "01143fc8ce7a4ec9fca7a2e1c2ad6c713b9f7ce8a9aa1eb650bd62be521904a8",
+      "loadingTier": "scope-dependent",
+      "description": "Critical thinking framework — challenge assumptions, evaluate evidence, detect bias, and test falsifiability"
+    },
+    {
+      "id": "emotional-intelligence",
+      "type": "instruction",
+      "path": "instructions/emotional-intelligence.instructions.md",
+      "bytes": 1403,
+      "sha256": "6fc936b31235ce92ef4a0f459b0af90cec6bbda5fab00f471e6b8bff7f4e812d",
+      "loadingTier": "scope-dependent",
+      "description": "Unconscious emotional attunement — detect frustration, celebrate success, adapt tone to session health"
+    },
+    {
+      "id": "epistemic-calibration",
+      "type": "instruction",
+      "path": "instructions/epistemic-calibration.instructions.md",
+      "bytes": 1500,
+      "sha256": "8f634ecdeb09e6f7a1915082705fe5502feb0672a68fdeffe35de92618437d55",
+      "loadingTier": "scope-dependent",
+      "description": "Epistemic calibration: confidence matching, hallucination prevention, completion-claim discipline, and self-correction"
+    },
+    {
+      "id": "lint-discipline",
+      "type": "instruction",
+      "path": "instructions/lint-discipline.instructions.md",
+      "bytes": 1371,
+      "sha256": "3f3c04f9dd5b6fd5ec42bd39ba9e8e443ea668360a8c830ebd62bd373eb90339",
+      "loadingTier": "scope-dependent",
+      "description": "Fix lint always — if I edited a file, I own its lint state on exit, even for pre-existing findings"
+    },
+    {
+      "id": "no-deferred-debt",
+      "type": "instruction",
+      "path": "instructions/no-deferred-debt.instructions.md",
+      "bytes": 1445,
+      "sha256": "beb74a845b0318bd6c87e77abe64d594415bbd6b393a01f0e28f4ad90bfe8bf4",
+      "loadingTier": "scope-dependent",
+      "description": "When you spot tech debt, stale references, or outdated content — fix it in the same turn. Do not defer."
+    },
+    {
+      "id": "pii-memory-filter",
+      "type": "instruction",
+      "path": "instructions/pii-memory-filter.instructions.md",
+      "bytes": 1483,
+      "sha256": "abfc6ac025351062eaba7760e782f154012f914413f8306de9b00e7a610def03",
+      "loadingTier": "scope-dependent",
+      "description": "Guards native memory and repository continuity write boundaries against sensitive data on every persistent write"
+    },
+    {
+      "id": "problem-framing-audit",
+      "type": "instruction",
+      "path": "instructions/problem-framing-audit.instructions.md",
+      "bytes": 1419,
+      "sha256": "0047ea5e6b5e6a011c68d9ca7fd364063fa7a2c7281c9c798e0ee1c11d324de9",
+      "loadingTier": "scope-dependent",
+      "description": "Frame audit before solving — restate the problem, flag user-framing mismatches, surface symptom→cause reframes"
+    },
+    {
+      "id": "act-pass.governance",
+      "type": "resource",
+      "path": "instructions/references/act-pass.governance.md",
+      "bytes": 1961,
+      "sha256": "f8cfcb04c5679a595e8c1958224b82e33471ef91b111d0a597ad2cfc94b83100",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "alex-finch-personality.governance",
+      "type": "resource",
+      "path": "instructions/references/alex-finch-personality.governance.md",
+      "bytes": 589,
+      "sha256": "12b80426f7627c63f103d1046775f58340cbe52188692916751a19d1332eb8bb",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "audience-copy-review.governance",
+      "type": "resource",
+      "path": "instructions/references/audience-copy-review.governance.md",
+      "bytes": 1485,
+      "sha256": "61c506778c8639d7df3e214a9751daab2e527dccf511e3857e901779412e8e87",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "critical-thinking.governance",
+      "type": "resource",
+      "path": "instructions/references/critical-thinking.governance.md",
+      "bytes": 1032,
+      "sha256": "62d3f7d830571ec6e042b0d4ca74a20dbc5d002929b7f1a0c731135e3e3ebb67",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "emotional-intelligence.governance",
+      "type": "resource",
+      "path": "instructions/references/emotional-intelligence.governance.md",
+      "bytes": 649,
+      "sha256": "238ba90f7b1987f94f7c625374e53a528c72c1f562b0d6e08ac55c4ba1e377a4",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "epistemic-calibration.governance",
+      "type": "resource",
+      "path": "instructions/references/epistemic-calibration.governance.md",
+      "bytes": 689,
+      "sha256": "aadd8bb74443ab967b53b687c48261d05ccc8634ed9d6d369b9e3b1f58b17807",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "lint-discipline.governance",
+      "type": "resource",
+      "path": "instructions/references/lint-discipline.governance.md",
+      "bytes": 583,
+      "sha256": "ff2bd1adbe1081a711412d6fa55f562ac05e162e7db9ed9a914e4a079cd8c304",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "no-deferred-debt.governance",
+      "type": "resource",
+      "path": "instructions/references/no-deferred-debt.governance.md",
+      "bytes": 683,
+      "sha256": "623a577205c3b1cbad7a390d152c4e19bf4a936afa2387b91c0ff30d6de5ad03",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "pii-memory-filter.governance",
+      "type": "resource",
+      "path": "instructions/references/pii-memory-filter.governance.md",
+      "bytes": 720,
+      "sha256": "5bc1e98e7e2ad5958102bbd2b4410da2f34b4dab2e6d5820b4d6a692ac6cae45",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "problem-framing-audit.governance",
+      "type": "resource",
+      "path": "instructions/references/problem-framing-audit.governance.md",
+      "bytes": 762,
+      "sha256": "3a75a06ff4566d727e5e548f10a19c871dd0365728dd6ee47b4d3400e42b5b1e",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "reliance-nudges.governance",
+      "type": "resource",
+      "path": "instructions/references/reliance-nudges.governance.md",
+      "bytes": 900,
+      "sha256": "80123491a849fd609f602f39da8347fc6c966ae5cdb101131f16a6aafaf65035",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "session-health-monitoring.governance",
+      "type": "resource",
+      "path": "instructions/references/session-health-monitoring.governance.md",
+      "bytes": 1372,
+      "sha256": "7b69872b57b17e3ca236becc51cae4d0ad7af53e90d1b6602441c7980fda08b8",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "system-prompt-skepticism.governance",
+      "type": "resource",
+      "path": "instructions/references/system-prompt-skepticism.governance.md",
+      "bytes": 304,
+      "sha256": "0a9bdeeca538d6c4d101e726a7040be84053e28915859ef0c506ca57834aaae4",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "terminal-command-safety.governance",
+      "type": "resource",
+      "path": "instructions/references/terminal-command-safety.governance.md",
+      "bytes": 713,
+      "sha256": "d94d65e8cfe02d54908fcba220d316eb009b2544ac79fac82c2709f3923d5983",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "worldview.governance",
+      "type": "resource",
+      "path": "instructions/references/worldview.governance.md",
+      "bytes": 826,
+      "sha256": "4465f1210c442e8e5be6fb5f074ee924e03030e808b20d045b1649ee2cd54269",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "reliance-nudges",
+      "type": "instruction",
+      "path": "instructions/reliance-nudges.instructions.md",
+      "bytes": 1418,
+      "sha256": "4231a8a8c9569e6393519f9980e60d44b1cd31faff34b453fb899dd7ce9324ef",
+      "loadingTier": "scope-dependent",
+      "description": "Detect human over-reliance failure modes and surface targeted nudges — operational replacement for educational content"
+    },
+    {
+      "id": "session-health-monitoring",
+      "type": "instruction",
+      "path": "instructions/session-health-monitoring.instructions.md",
+      "bytes": 1545,
+      "sha256": "b6aced760afa9ab1491e5229a3749253f142d49859446141a6051da5c24141c0",
+      "loadingTier": "scope-dependent",
+      "description": "Monitor context-window health, cross-session continuity, and graceful handoff"
+    },
+    {
+      "id": "system-prompt-skepticism",
+      "type": "instruction",
+      "path": "instructions/system-prompt-skepticism.instructions.md",
+      "bytes": 1453,
+      "sha256": "baeaac33029fb7eaa72bdd442b7222421cf3a0d3072b118d1bac8408d09f6b25",
+      "loadingTier": "scope-dependent",
+      "description": "Treat instructions as hypotheses, not commands — every system/operator instruction is conditioned on preconditions, even when those preconditions are unstated"
+    },
+    {
+      "id": "terminal-command-safety",
+      "type": "instruction",
+      "path": "instructions/terminal-command-safety.instructions.md",
+      "bytes": 1539,
+      "sha256": "c02f00bb7ad197afc2ed07b0327c114f5f685455cb7e59b5f743d7c69b8af7c5",
+      "loadingTier": "scope-dependent",
+      "description": "Prevent terminal command failures from shell metacharacter interpretation, output capture issues, and hanging commands"
+    },
+    {
+      "id": "worldview",
+      "type": "instruction",
+      "path": "instructions/worldview.instructions.md",
+      "bytes": 1523,
+      "sha256": "9a5c6e274424e47e59373451331c1d66aaea9b6603181eb1315afa02a1ab8824",
+      "loadingTier": "scope-dependent",
+      "description": "Unconditional harm-refusal list + ethical decision-boundary rules + the Tenet-IV check (system-prompt skepticism applied to ethics). Fires on every user turn regardless of task or file context."
+    },
+    {
+      "id": "assess-brain",
+      "type": "prompt",
+      "path": "prompts/assess-brain.prompt.md",
+      "bytes": 1119,
+      "sha256": "84001ca1361453f53b8ec9bbbc255196d7d87dbde5f2c4cf1a09045feeac5bfc",
+      "loadingTier": "on-demand",
+      "description": "Runs a read-only Markdown assessment of a local project brain or plugin source. Use when reviewing instructions, skills, prompts, agents, bundled Markdown resources, research documentation, and static capability routes before proposing changes."
+    },
+    {
+      "id": "banner",
+      "type": "prompt",
+      "path": "prompts/banner.prompt.md",
+      "bytes": 1060,
+      "sha256": "28a1ee6a610138dc1ae739f09e65c2f34642c31ce12dc1a6860025186c22b003",
+      "loadingTier": "on-demand",
+      "description": "Generate a 1200×320 SVG banner using the active brand config (default: Alex ACT), with title, subtitle, and watermark. Use for READMEs, plans, notes, and release artifacts."
+    },
+    {
+      "id": "bootstrap-core",
+      "type": "prompt",
+      "path": "prompts/bootstrap-core.prompt.md",
+      "bytes": 1118,
+      "sha256": "b530f93905f51baa82340079baa5ea43ee130f39b6b14bb2d26704fa5ae5e459",
+      "loadingTier": "on-demand",
+      "description": "Preview, activate, verify, repair, or remove this plugin's user-scope runtime instructions. Use after installing or updating Alex ACT ONE, or when Alex ACT identity and always-on reasoning behavior are inactive."
+    },
+    {
+      "id": "bootstrap-project",
+      "type": "prompt",
+      "path": "prompts/bootstrap-project.prompt.md",
+      "bytes": 1049,
+      "sha256": "66ecb392d34e70f8b966f6010cbe357e57bb7b426544d2731cc67524ef295f1a",
+      "loadingTier": "on-demand",
+      "description": "Preview and apply this plugin's minimal repository guidance and project VS Code settings. Use for new projects or project-scaffold repair."
+    },
+    {
+      "id": "compile-brain",
+      "type": "prompt",
+      "path": "prompts/compile-brain.prompt.md",
+      "bytes": 1107,
+      "sha256": "56735ad6fe12cd91807facd58313a4622a2b94ac1693f0cd0ad6fe77ccf93136",
+      "loadingTier": "on-demand",
+      "description": "Creates a reviewable optimized instruction, skill, prompt, or agent from an explicitly selected Markdown file or user-identified text. Use when improving an existing brain artifact or turning supplied material into a reusable one."
+    },
+    {
+      "id": "convert",
+      "type": "prompt",
+      "path": "prompts/convert.prompt.md",
+      "bytes": 1059,
+      "sha256": "7fedad9eebc72ae911f16b9c81f53867e3a1399f86362fd32c87882af2b858de",
+      "loadingTier": "on-demand",
+      "description": "Convert a document between Markdown, HTML, Word, email, and plain text using the matching bundled converter. Use when the user asks to transform a supported document format."
+    },
+    {
+      "id": "critical-thinking",
+      "type": "prompt",
+      "path": "prompts/critical-thinking.prompt.md",
+      "bytes": 1065,
+      "sha256": "41d3a19a6ef3b68d1dc0fc6dffc4f120c6314a4b49dcd3ec4bd1f222f07f4bec",
+      "loadingTier": "on-demand",
+      "description": "Run the full critical-thinking pass on a decision, claim, or recommendation — generate alternatives, check evidence, detect bias, test falsifiability"
+    },
+    {
+      "id": "install-visual-companions",
+      "type": "prompt",
+      "path": "prompts/install-visual-companions.prompt.md",
+      "bytes": 1176,
+      "sha256": "b4c1a90445292fe6bd65f4dd7edd3f02d4903b93e979931872fe5a9ef4ca95a9",
+      "loadingTier": "on-demand",
+      "description": "Offer to install marketplace plugins that extend visual authoring: chart rendering, screenshot verification, whiteboard iteration, and PR annotation. Consent-gated, one plugin at a time, never bundled without explicit approval."
+    },
+    {
+      "id": "meditate",
+      "type": "prompt",
+      "path": "prompts/meditate.prompt.md",
+      "bytes": 993,
+      "sha256": "5cd9c2537e3f02e684ee3da2be35f0e35f7c4ccfb0f359c21d45a9ab5249438e",
+      "loadingTier": "on-demand",
+      "description": "Review session outcomes, recommend reusable capabilities, and reconcile project continuity."
+    },
+    {
+      "id": "problem-framing-audit",
+      "type": "prompt",
+      "path": "prompts/problem-framing-audit.prompt.md",
+      "bytes": 1085,
+      "sha256": "19099b2001f3177983818fb45f3b8f31fbe84ef0a86c93e54d2ac3ec58a421ac",
+      "loadingTier": "on-demand",
+      "description": "Audit the framing of a problem before solving — restate, generalize, specialize, invert, ask why, pre-mortem, check stakeholders, surface alternative framings"
+    },
+    {
+      "id": "render-chart",
+      "type": "prompt",
+      "path": "prompts/render-chart.prompt.md",
+      "bytes": 1269,
+      "sha256": "e5f7867d771a4cc83e2765bc54f4484a689b69304c82fec1762dbb5a0a9e155f",
+      "loadingTier": "on-demand",
+      "description": "Orchestrates expert visual storytelling over Flint: frame the claim, inspect data, explore familiar and expressive treatments over one semantic truth layer, select or author a theme, render, compare, iterate, and verify. Use for open-ended chart and data-story requests; preserves fast paths for diagnostic charts, fully formed specs, and explicit treatments."
+    },
+    {
+      "id": "rich-email",
+      "type": "prompt",
+      "path": "prompts/rich-email.prompt.md",
+      "bytes": 1092,
+      "sha256": "3f26255b4e533b08bdccffea9b318e1b4c7e47995564184e18b39fbbb6193342",
+      "loadingTier": "on-demand",
+      "description": "Create and review a polished Markdown-based email, then open an unsent New Outlook draft on Windows. Use when the user asks for a rich stakeholder update, executive email, or formatted email draft."
+    },
+    {
+      "id": "setup-dependencies",
+      "type": "prompt",
+      "path": "prompts/setup-dependencies.prompt.md",
+      "bytes": 1178,
+      "sha256": "7cd5e53fb3ec70339c68eaf3628e5cc3fc94e9052419edb5e007b3a8ab367b38",
+      "loadingTier": "on-demand",
+      "description": "Check which optional dependencies this plugin can use, report what each missing one costs, and install them with consent. Covers Pandoc, render helpers, and the pinned MCP servers. Use after installing the plugin, or when a skill reports a missing tool."
+    },
+    {
+      "id": "setup-enterprise",
+      "type": "prompt",
+      "path": "prompts/setup-enterprise.prompt.md",
+      "bytes": 1114,
+      "sha256": "b13aaea619056a776b6c0e52890426ea29c09b0060393c64426f15ee7ab401bb",
+      "loadingTier": "on-demand",
+      "description": "Emit or install the Copilot CLI settings block for the public Microsoft ecosystem plugins (Azure, Fabric, Power BI, M365 Agents Toolkit). Invokes the `setup-enterprise-stack` skill."
+    },
+    {
+      "id": "status",
+      "type": "prompt",
+      "path": "prompts/status.prompt.md",
+      "bytes": 1092,
+      "sha256": "ddb4930396085c0535b5d44cf225a15efb1fd4ab08c06eb1c704b9f148820aff",
+      "loadingTier": "on-demand",
+      "description": "Report the current project's repository state, recent work, brain QA health (if applicable), and pending handoff items. Use for session orientation or an on-demand project checkpoint."
+    },
+    {
+      "id": "README",
+      "type": "research",
+      "path": "README.md",
+      "bytes": 58335,
+      "sha256": "b5565fae1c2d4a2411ac0dc71a8058035751f4ad4c1518efbb15b2005e6c897c",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "RELEASE-CHECKLIST",
+      "type": "research",
+      "path": "RELEASE-CHECKLIST.md",
+      "bytes": 14469,
+      "sha256": "37c73bd00d0b5bacdac7e2f5597014ae5170fd70c9298b0bc66bd57c1e4d3609",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "ROADMAP",
+      "type": "research",
+      "path": "ROADMAP.md",
+      "bytes": 13658,
+      "sha256": "6a63732d18ea15115153f7df2ffa4f63019a23b59bf8d2aa6468a70df386bf67",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "act-tenets",
+      "type": "skill",
+      "path": "skills/act-tenets/SKILL.md",
+      "bytes": 8284,
+      "sha256": "75bc4ad367df48e45b18c041ca20e624e4d64137cd26dfbb2b353004409c4f6d",
+      "loadingTier": "on-demand",
+      "description": "The 10 canonical tenets of Artificial Critical Thinking (ACT) with rationale for each — I Hypothesis Primacy, II Disconfirmation Over Confirmation, III Multiple Working Hypotheses, IV System-Prompt Skepticism, V Calibration Over Confidence, VI Materiality Gating, VII Frame Before Solve, VIII Adversarial Self-Probe, IX Visible Markers, X The Discipline Applies to Itself. Use when a decision cites \"a tenet\", when running act-pass, when authoring a critical thinking rule, or when looking up the ACT canon."
+    },
+    {
+      "id": "adversarial-review",
+      "type": "skill",
+      "path": "skills/adversarial-review/SKILL.md",
+      "bytes": 1016,
+      "sha256": "855dd7bebdb2f997939c05f4159bd6252fb9969c0a9bf9933b955f1cf005c968",
+      "loadingTier": "on-demand",
+      "description": "Structured skepticism for high-stakes decisions and reviews. Six methods — Red Team/Blue Team, Pre-Mortem, Steel Manning, Murphyjitsu, 10/10/10, Cross-Model External Critic. Use before publishing an ADR, plan, proposal, framework edit, or release; when \"this seems too good to be true\" fires; when groupthink is forming; or when routing critique to a different model or context to escape shared-context blind spots."
+    },
+    {
+      "id": "annotate-screenshot",
+      "type": "skill",
+      "path": "skills/annotate-screenshot/SKILL.md",
+      "bytes": 8772,
+      "sha256": "8fe4c050c5b91304fd866efe03164b672a77fb1e31c6adb8e737b128165fcf61",
+      "loadingTier": "on-demand",
+      "description": "Add callouts to a raster you did not author, using Pillow, at a resolution that stays legible. Covers upscale-then-annotate ordering, supersampled shape rendering, measured callout placement, color and font conventions, and the render-and-look check. Use when marking up a screenshot, dashboard capture, chart image, or any PNG or JPG whose source resolution you do not control. Pillow is the only dependency."
+    },
+    {
+      "id": "runtime-epistemic-calibration",
+      "type": "resource",
+      "path": "skills/anti-hallucination/references/runtime-epistemic-calibration.md",
+      "bytes": 5462,
+      "sha256": "3f59057541b646916e432e40496afb7e0d546ff3cca065f67b4d8bd7fa80e486",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "anti-hallucination",
+      "type": "skill",
+      "path": "skills/anti-hallucination/SKILL.md",
+      "bytes": 9042,
+      "sha256": "02567a20c5ea7ce199e17cfe9e93e9f2b55ce5dc3615da0f2a78788fa0434e01",
+      "loadingTier": "on-demand",
+      "description": "Prevent fabricated facts, invented APIs, and citation confabulation at the point of generation. Use when generating factual claims, code examples, API references, library names, configuration values, error messages, or citations — anything where 'sounds plausible' is not the same as 'is real'."
+    },
+    {
+      "id": "ascii-gallery",
+      "type": "resource",
+      "path": "skills/ascii-chart/references/ascii-gallery.md",
+      "bytes": 18913,
+      "sha256": "14e1de1280f60098fbbb2bddc8d30ded05e352e867288eeb283b1fc8faae0d3b",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "ascii-chart",
+      "type": "skill",
+      "path": "skills/ascii-chart/SKILL.md",
+      "bytes": 15563,
+      "sha256": "639041d1dce020a07251235b6fb268e4dc5065703142cf2fa5798a5401472496",
+      "loadingTier": "on-demand",
+      "description": "Render charts and compact dashboards as pure ASCII in a monospace grid: bar, dot, sparkline, histogram, box plot, scatter, bubble, heatmap, funnel, waterfall, treemap, gauge, KPI card, and more. No rendering engine, no SVG, no browser, no MCP server. Use when the delivery target is a terminal, a log file, a pull request comment, a commit message, a README code block, or a context window where no renderer exists, or when the user asks for a text chart, an ASCII chart, or a plain-text dashboard."
+    },
+    {
+      "id": "assess-brain",
+      "type": "skill",
+      "path": "skills/assess-brain/SKILL.md",
+      "bytes": 3026,
+      "sha256": "c4abd944f89a0528fda8398eff45fa6663bf3470944fe611d992ca854a0f0c23",
+      "loadingTier": "on-demand",
+      "description": "Assess active Markdown brain files in a local AI agent project or plugin source without changing it. Use before modifying a brain or reviewing declared instructions, skills, prompts, agents, bundled Markdown resources, and research documentation."
+    },
+    {
+      "id": "big-idea",
+      "type": "skill",
+      "path": "skills/big-idea/SKILL.md",
+      "bytes": 18871,
+      "sha256": "ddcfe4bb9d32be5d3f7e7d7a8b0149d86f78121e4a6a670084bcde9cd7491b11",
+      "loadingTier": "on-demand",
+      "description": "Distill the central claim before authoring any summary-shaped output: hero copy, commit-message subject, PR title, ADR title, slide title, executive summary, skill description, abstract. Length is format-dependent (1 sentence for titles, up to a short paragraph for complex theses), tested against the Saint-Exupéry rule (remove sentences until removing another would break the claim). Chart summaries use the bundled chart-big-idea skill."
+    },
+    {
+      "id": "bootstrap-core",
+      "type": "skill",
+      "path": "skills/bootstrap-core/SKILL.md",
+      "bytes": 8699,
+      "sha256": "ff4fa9441a419938ca8b2e7b198150fc978b33e8aef10f0e4ae2bd5a31d28e30",
+      "loadingTier": "on-demand",
+      "description": "Activates, verifies, repairs, or removes this plugin's user-scope runtime instructions from canonical installed sources. Use after installing or updating Alex ACT ONE, when ACT behavior or Alex Finch identity is inactive, or when bootstrap receipt hashes drift."
+    },
+    {
+      "id": "AGENTS",
+      "type": "instruction",
+      "path": "skills/bootstrap-project/resources/AGENTS.md",
+      "bytes": 1052,
+      "sha256": "fc22a7c58dba91f33a9dc6a05009db3f6987f594929869ae3fd0a013a1c0af63",
+      "loadingTier": "scope-dependent"
+    },
+    {
+      "id": "CLAUDE",
+      "type": "instruction",
+      "path": "skills/bootstrap-project/resources/CLAUDE.md",
+      "bytes": 43,
+      "sha256": "2e00965aea14919eab1ee456f5eec0d62c8358bb9ed88db4e80e6a5886db2d09",
+      "loadingTier": "scope-dependent"
+    },
+    {
+      "id": "episodic-README",
+      "type": "research",
+      "path": "skills/bootstrap-project/resources/episodic-README.md",
+      "bytes": 269,
+      "sha256": "f105529339c9f3a9aea0ac3f9e287a615b779e3172e2e18bbdab0284f1f17b99",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "GEMINI",
+      "type": "instruction",
+      "path": "skills/bootstrap-project/resources/GEMINI.md",
+      "bytes": 44,
+      "sha256": "bde7cfeba544351ac3636b49a172e57a5a61b296fe15561a2469c6ec752c366d",
+      "loadingTier": "scope-dependent"
+    },
+    {
+      "id": "HANDOFF",
+      "type": "research",
+      "path": "skills/bootstrap-project/resources/HANDOFF.md",
+      "bytes": 561,
+      "sha256": "1a79b607a18be2b7e7f0be2de1d5b1d669c8f9057735917b9dc5e5db2c90236b",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "bootstrap-project",
+      "type": "skill",
+      "path": "skills/bootstrap-project/SKILL.md",
+      "bytes": 2791,
+      "sha256": "945d1a5dce1a84f566f9b9aa96524c23da5adc5a24b7c251f4b2dd0f243950d0",
+      "loadingTier": "on-demand",
+      "description": "Previews and applies this plugin's repository scaffold, portable workspace QoL settings, and project Copilot settings while preserving project-owned files. Use for new repositories, missing AGENTS/HANDOFF/episodic files, or project .vscode setup."
+    },
+    {
+      "id": "browser-scenarios",
+      "type": "resource",
+      "path": "skills/browser-tools/references/browser-scenarios.md",
+      "bytes": 26540,
+      "sha256": "c569e8b1945a5e0c6509fc6670412d09fd565fa022f0b45faf944d3a3b982335",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "embedded-browser-uat",
+      "type": "resource",
+      "path": "skills/browser-tools/references/embedded-browser-uat.md",
+      "bytes": 4677,
+      "sha256": "ed14c1aad3c49c7f80429c76150296d83afc922dcd3ba8d1b834ef82a621c72a",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "browser-tools",
+      "type": "skill",
+      "path": "skills/browser-tools/SKILL.md",
+      "bytes": 2212,
+      "sha256": "826b9e058ea95fae7bdad9be6bbdb1a92a5adc5a33b4f63ff7d09587e411de95",
+      "loadingTier": "on-demand",
+      "description": "Use native browser capabilities first for interactive pages, screenshots, console errors, measured visual checks, local artifacts, and embedded-frame or hidden-tab input troubleshooting. Discover the active host tools; use registered alex-playwright only for missing or unsupported scenarios, with consent boundaries intact."
+    },
+    {
+      "id": "claim-elicitation",
+      "type": "resource",
+      "path": "skills/chart-big-idea/references/claim-elicitation.md",
+      "bytes": 3017,
+      "sha256": "19ab1cecece5e8c970170aa976ff4feb43b9f0d8019ae925b0a59e2c4c3a64ff",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "chart-big-idea",
+      "type": "skill",
+      "path": "skills/chart-big-idea/SKILL.md",
+      "bytes": 29090,
+      "sha256": "3c7897c2bb94e635f2033958b888d166bc5d87358a1365d05558addf1835fa9a",
+      "loadingTier": "on-demand",
+      "description": "Distill the one-sentence Big Idea, story arc, audience, and style stance for a chart BEFORE picking a chart type. Starts by questioning intent — whether the artifact should exist at all, and whether the stated purpose is the real one. Reads the surrounding docs / prose / ticket for an existing Big Idea first, then helps the user articulate one via a 3-question elicitation ladder if none is found. Asks whether the user wants a TRADITIONAL (safe) or INNOVATIVE (higher-impact, higher-risk) treatment. Use before invoking the flint-chart skill or the /render-chart prompt whenever the user's ask is 'chart this', 'visualize', 'make a chart', 'show the data', or when framing is unclear."
+    },
+    {
+      "id": "chart-interpretation",
+      "type": "skill",
+      "path": "skills/chart-interpretation/SKILL.md",
+      "bytes": 12247,
+      "sha256": "6f2ac0e5efadbb93e508bd2a61a549de0c9847ca9940c249684c496f535cfc2a",
+      "loadingTier": "on-demand",
+      "description": "Read a chart someone else made — image, screenshot, HTML, or dashboard — and extract insights, patterns, anomalies, and misleading framing. The reverse of authoring. Use when handed a chart to analyze, when checking whether a chart's visuals support its claim, or when a figure needs a written narrative."
+    },
+    {
+      "id": "chart-vocabulary",
+      "type": "skill",
+      "path": "skills/chart-vocabulary/SKILL.md",
+      "bytes": 15498,
+      "sha256": "251221d3c50686d25748c4d4ea23234da8780e1a520a6b453676ebf5a6021ad6",
+      "loadingTier": "on-demand",
+      "description": "Catalog of chart types organized by seven communication goals (comparison, change over time, proportion, distribution, relationship, flow, deviation), with a selection algorithm, an evaluation loop for AI-suggested charts, and density limits for dashboards. Use when picking a chart type, sanity-checking a suggested one, or reviewing whether a chart matches its story intent."
+    },
+    {
+      "id": "advanced-audits",
+      "type": "resource",
+      "path": "skills/code-review/references/advanced-audits.md",
+      "bytes": 5802,
+      "sha256": "e17f3d90810b46830907301dd64c3ebc182a031bfaf9e3c5de7ba427ae1a2f06",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "deep-review",
+      "type": "resource",
+      "path": "skills/code-review/references/deep-review.md",
+      "bytes": 6640,
+      "sha256": "03c963e3a537653c2abff9ed7f3d9ce4339edd21577f7528410efac4706ef329",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "ordinary-review",
+      "type": "resource",
+      "path": "skills/code-review/references/ordinary-review.md",
+      "bytes": 4801,
+      "sha256": "05d276ed3b35227b74bf3d6e5e20a24d8e7e42d19fab0ae5bfb221df50bd7989",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "runtime-lint-discipline",
+      "type": "resource",
+      "path": "skills/code-review/references/runtime-lint-discipline.md",
+      "bytes": 1912,
+      "sha256": "87a2f6ba62146048c621829189a18f7241852eddf8379806fd89b4e8bfee95b8",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "runtime-no-deferred-debt",
+      "type": "resource",
+      "path": "skills/code-review/references/runtime-no-deferred-debt.md",
+      "bytes": 497,
+      "sha256": "0deaf1e4933a297f3806c098c7d4061c6977fb868056d9af749aee044f783a74",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "code-review",
+      "type": "skill",
+      "path": "skills/code-review/SKILL.md",
+      "bytes": 2088,
+      "sha256": "be4dfbf1c90bdaeded19e2521e514e683ba8f7c4f634e3530b41a0174d946df3",
+      "loadingTier": "on-demand",
+      "description": "Systematic code review for correctness, security, and growth — not just style enforcement"
+    },
+    {
+      "id": "runtime-alex-finch-personality",
+      "type": "resource",
+      "path": "skills/communication-craft/references/runtime-alex-finch-personality.md",
+      "bytes": 3112,
+      "sha256": "6100792afb64020c3ddf2e438c4e451c565657d714b7d9148579595ca64082b5",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "runtime-emotional-intelligence",
+      "type": "resource",
+      "path": "skills/communication-craft/references/runtime-emotional-intelligence.md",
+      "bytes": 1879,
+      "sha256": "9df41af21922597ee2bf1523f60b75c69c391c10549093502c33dea3cd6dd1dc",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "runtime-reliance-nudges",
+      "type": "resource",
+      "path": "skills/communication-craft/references/runtime-reliance-nudges.md",
+      "bytes": 3593,
+      "sha256": "75a75c35a412a3578b4425341cb4689604dc2ff0c6cbf758ba89e5a3535d79fc",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "communication-craft",
+      "type": "skill",
+      "path": "skills/communication-craft/SKILL.md",
+      "bytes": 5695,
+      "sha256": "3c7b3081bacf70a04f93144d78ab71f67fcc1c2d35e6e8e188cd7c37929bfcb5",
+      "loadingTier": "on-demand",
+      "description": "Communication patterns for feedback, cross-audience content, and eliciting needs. SBI feedback model (Situation → Behavior → Impact), stakes-calibrated review voice, So-What/What/Now-What audience lead for PRs and status reports, and the three-layer Need/Solution/Feature elicitation ladder. Use when giving feedback in a review, writing for a mixed audience (decision-makers + peers + newcomers + skeptics), clarifying an ambiguous ask before committing to a solution, or coaching someone else's communication."
+    },
+    {
+      "id": "compile-brain",
+      "type": "skill",
+      "path": "skills/compile-brain/SKILL.md",
+      "bytes": 16551,
+      "sha256": "9881f7493daf7b0480101ec82fe2438c5fec02adb2f2591261ba7417aa6c617f",
+      "loadingTier": "on-demand",
+      "description": "Create or improve a Markdown instruction, skill, prompt, or agent from an explicitly selected file or user-identified text. Use when a user asks to optimize an existing brain artifact or create one for consistent future execution."
+    },
+    {
+      "id": "convert",
+      "type": "skill",
+      "path": "skills/convert/SKILL.md",
+      "bytes": 2102,
+      "sha256": "64f950fab883574f56469a9fcd2817c3d2b644badc0f5f9007ac4100dad8330d",
+      "loadingTier": "on-demand",
+      "description": "Convert a document between Markdown, HTML, Word, email, and plain text using the matching bundled converter. Use when the user asks to transform a supported document format."
+    },
+    {
+      "id": "corpus-qa-sweep",
+      "type": "skill",
+      "path": "skills/corpus-qa-sweep/SKILL.md",
+      "bytes": 8367,
+      "sha256": "809a469b8f4486cfe718f565cf2216229247c4d6f9119902c8ee9e9b9c0cec3a",
+      "loadingTier": "on-demand",
+      "description": "Run a QA sweep across an entire corpus instead of one sample: instrument the real output boundary, assert machine-checkable invariants, sweep every item, then triage every flag before believing it. Works on doc sites, generated pages, chart batches, report sets, prose, and formatting. Use when a change to a renderer, template, generator, or shared component affects many outputs, when someone asks to check all the pages or wants no surprises before a release, or when a single-sample pass feels like thin evidence. For judging one rendered artifact against a failure catalog, use render-verify instead."
+    },
+    {
+      "id": "adversarial-methods",
+      "type": "resource",
+      "path": "skills/critical-thinking/references/adversarial-methods.md",
+      "bytes": 8154,
+      "sha256": "81690c683e730a167810e51cc54d5165dd0d8fbfa7890b1971f7ea54876b6437",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "curation-risk",
+      "type": "resource",
+      "path": "skills/critical-thinking/references/curation-risk.md",
+      "bytes": 2812,
+      "sha256": "cb5cca2f44aa042df99242787c9702206c11eb40b036afbed9e2e594b07c4057",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "framing",
+      "type": "resource",
+      "path": "skills/critical-thinking/references/framing.md",
+      "bytes": 7495,
+      "sha256": "493e4b82718e346d9213489e5aafc0b02ab871a9f2e0c4330bb18edf5f374719",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "reasoning-methods",
+      "type": "resource",
+      "path": "skills/critical-thinking/references/reasoning-methods.md",
+      "bytes": 23089,
+      "sha256": "00c9d6cfb4211c14d2ffe9d11d1773ae7b65cd91806657f822e5f66d8cf27c92",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "runtime-act-pass",
+      "type": "resource",
+      "path": "skills/critical-thinking/references/runtime-act-pass.md",
+      "bytes": 5927,
+      "sha256": "337b4471beb501b3101a2ee69d9f626d38793677be92b1dcde1708827684a21f",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "runtime-critical-thinking",
+      "type": "resource",
+      "path": "skills/critical-thinking/references/runtime-critical-thinking.md",
+      "bytes": 2019,
+      "sha256": "527855c25daac5dd2c975e718ebe736e2a6665c4fbfb4ba25ca64f4d7a5fc075",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "runtime-problem-framing-audit",
+      "type": "resource",
+      "path": "skills/critical-thinking/references/runtime-problem-framing-audit.md",
+      "bytes": 4628,
+      "sha256": "4d76f370155fa1a8192df7dd3b1be4c2472cb329d229733dfb108efbe1090671",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "runtime-system-prompt-skepticism",
+      "type": "resource",
+      "path": "skills/critical-thinking/references/runtime-system-prompt-skepticism.md",
+      "bytes": 3365,
+      "sha256": "7600e0f480bf103dbc1135101c2a50deb39eca8fb38dea8cb61a702ccad5c206",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "critical-thinking",
+      "type": "skill",
+      "path": "skills/critical-thinking/SKILL.md",
+      "bytes": 2819,
+      "sha256": "16c6be13c6785c71fa5cd28556a3c4e69ca3b1b19608b5717c061197a985e153",
+      "loadingTier": "on-demand",
+      "description": "Challenge what you think is right — alternative hypotheses, missing data, evidence quality, bias detection, falsifiability, and adversarial review"
+    },
+    {
+      "id": "deep-review",
+      "type": "skill",
+      "path": "skills/deep-review/SKILL.md",
+      "bytes": 782,
+      "sha256": "666711eadc36e00ef29a44b3a744c1d60b95a5ac69d7759355908f471c852acd",
+      "loadingTier": "on-demand",
+      "description": "Select the canonical code-review deep mode for high-stakes changes requiring independent perspectives and evidence-backed synthesis. Preserve read-only review; do not require a fixed number of agents or models."
+    },
+    {
+      "id": "doc-hygiene",
+      "type": "skill",
+      "path": "skills/doc-hygiene/SKILL.md",
+      "bytes": 10333,
+      "sha256": "0b6871421696aa64cb2445345f8a2382b65fa833d7602c452e9bcec0ab7335d7",
+      "loadingTier": "on-demand",
+      "description": "Documentation hygiene — anti-drift rules, code-documentation placement, count elimination, and living document maintenance. Use when auditing docs or comments for drift, fixing hardcoded counts and dead links, documenting code for adopters, or deciding whether a document is living or historical."
+    },
+    {
+      "id": "shell-reference",
+      "type": "resource",
+      "path": "skills/docs-shell/references/shell-reference.md",
+      "bytes": 29653,
+      "sha256": "e446edabe064104a0c897796b15b7224fe57867954ce386ceafb7c239c4426de",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "docs-shell",
+      "type": "skill",
+      "path": "skills/docs-shell/SKILL.md",
+      "bytes": 28493,
+      "sha256": "9bcd764b0436c3c29697edd6cc4509591d792799d0ac0535d959f17bdd877961",
+      "loadingTier": "on-demand",
+      "description": "The single-page HTML shell (index.html + manifest.json at a repository root or stable subfolder) that renders concatenated markdown as browsable, GitHub-styled documentation with a two-line topnav, per-doc emoji icons, sticky page header, and sidebar TOC. Use when the user says 'shell', 'add a doc', 'add a chapter', 'landing page', 'sidebar', 'manifest', 'hero', 'nav-strip', 'shell theme', 'color scheme', 'polish the pages', 'render preview', 'add an area', or when authoring/editing content that appears in the root manifest. Also invoke when the shell misrenders (raw frontmatter visible, links broken across folders, missing hero, doc button not switching content, sticky header overlap)."
+    },
+    {
+      "id": "about",
+      "type": "research",
+      "path": "skills/docs-shell/starter/about.md",
+      "bytes": 5118,
+      "sha256": "553231a8e4bbfc4e5ef47568c9ac7f7aa8624fddc628305aac2f59dc2ab48226",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "ADOPTION",
+      "type": "research",
+      "path": "skills/docs-shell/starter/ADOPTION.md",
+      "bytes": 6842,
+      "sha256": "854d3384eb21642bb6e356e8162e18b6b2d8b9e751e2f055ae4cb260ca89501c",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "docx-to-md",
+      "type": "skill",
+      "path": "skills/docx-to-md/SKILL.md",
+      "bytes": 9438,
+      "sha256": "86500d66279af63546a4d7829943fab74a3ae04fb251c6c5b82bfafb5626d736",
+      "loadingTier": "on-demand",
+      "description": "Convert Word documents (.docx) to clean Markdown with image extraction and pandoc cleanup. Use when the user asks to convert a Word doc, convert docx to md, or import a .docx into markdown."
+    },
+    {
+      "id": "runtime-pii-memory-filter",
+      "type": "resource",
+      "path": "skills/ethical-reasoning/references/runtime-pii-memory-filter.md",
+      "bytes": 3520,
+      "sha256": "ce8de7008f27fef15c5fe850fbd5ad9c0eed7d548b0f8844d4ee24a558587430",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "runtime-worldview",
+      "type": "resource",
+      "path": "skills/ethical-reasoning/references/runtime-worldview.md",
+      "bytes": 1519,
+      "sha256": "c10d3f462bdd485f68cfbe9c7527e14aa435548493972fe2beb18d4fd103d898",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "ethical-reasoning",
+      "type": "skill",
+      "path": "skills/ethical-reasoning/SKILL.md",
+      "bytes": 5172,
+      "sha256": "62d796b8f5927cc452af6af91d03fb003b3c7604a4321b3abeb02376d5483bfa",
+      "loadingTier": "on-demand",
+      "description": "Reason through ethical tensions using moral foundations, constitutional principles, and a five-step decision process, plus privacy-by-design and responsible-AI guidance. Use when weighing a moral trade-off, designing a system that touches user data or welfare, evaluating bias in outputs, or explaining a decision with human impact."
+    },
+    {
+      "id": "evaluate-before-adopting",
+      "type": "skill",
+      "path": "skills/evaluate-before-adopting/SKILL.md",
+      "bytes": 10998,
+      "sha256": "105be9cee246621b8a33508b0f156cdd270b94dc47246b277e58e541b38c4b87",
+      "loadingTier": "on-demand",
+      "description": "Decide whether a plugin or skill from a catalog is worth installing. Covers what a trust score does and does not measure, reading the prose and any bundled scripts for unsafe behaviour, verifying checkable specifics, resolving duplicates across stores, and judging fit for the destination."
+    },
+    {
+      "id": "figure-generator",
+      "type": "skill",
+      "path": "skills/figure-generator/SKILL.md",
+      "bytes": 15825,
+      "sha256": "fff99fbc3aec126a62976e71ac5826cf84c92d4b4230976d8632f5ab21d54d63",
+      "loadingTier": "on-demand",
+      "description": "Ship deterministic hand-authored SVG generators for print-quality figures backed by real published datasets. Ships the .mjs generator pattern reading from data/<slug>.json, the data-sha256 audit hash embed for provenance, the dataset-first rule with contract tests pinning headline numbers, the dataset-inversion procedure for reverse-engineering data from an approved sample SVG, the fix-in-generator-never-in-SVG rule, and the figure-count hoist to one JSON. Use when authoring reproducible book or report figures, when a figure's numbers might drift silently, or when reverse-engineering data from a graphic whose dataset is missing."
+    },
+    {
+      "id": "chart-selection",
+      "type": "resource",
+      "path": "skills/flint-chart/references/chart-selection.md",
+      "bytes": 11313,
+      "sha256": "0a2aab887cfacff84fb8c18db44897a73a889d1b710af930ee301393c091f644",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "flint-language-reference",
+      "type": "resource",
+      "path": "skills/flint-chart/references/flint-language-reference.md",
+      "bytes": 2699,
+      "sha256": "7d9f48754462daf706e7b16efe6b1a8bc20ee5c0796ff949fcd856576b137c92",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "publication-preset",
+      "type": "resource",
+      "path": "skills/flint-chart/references/publication-preset.md",
+      "bytes": 3445,
+      "sha256": "af49d9c38bab664350bee52cc0f486a60864621c2a2a21edf675f3d96035870d",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "flint-chart",
+      "type": "skill",
+      "path": "skills/flint-chart/SKILL.md",
+      "bytes": 6763,
+      "sha256": "654f13736b007bdde83df6dd13fbe6a4324c1cf3987953dca65fad0c4107680e",
+      "loadingTier": "on-demand",
+      "description": "Use when the user wants to visualize data — from 'which chart should I use?' to 'render this'. Helps pick the right chart from the analytical question (comparison / trend / distribution / relationship / proportion / flow / KPI), then authors a ChartAssemblyInput and renders via the flint-chart-mcp server (Vega-Lite / ECharts / Chart.js). Transform data before Flint; style tweaks after Flint."
+    },
+    {
+      "id": "behavioral-acceptance",
+      "type": "resource",
+      "path": "skills/flint-interactions/references/behavioral-acceptance.md",
+      "bytes": 5271,
+      "sha256": "8c0a93947d014e3e746d6b85e056c2cfc4b4d51a4a230cf492b9da3a4353b191",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "flint-interactions",
+      "type": "skill",
+      "path": "skills/flint-interactions/SKILL.md",
+      "bytes": 8274,
+      "sha256": "531982f362c4124b9d23e85c3b8e284bd55a0a6b4f4c15876ac581abe79235c5",
+      "loadingTier": "on-demand",
+      "description": "Choose and verify interactive Flint chart behavior: highlight, brush, zoom, legend toggles, filters, annotations, keyboard navigation, linked views, and reset. Use when a reader should explore a chart, an agent updates its state, or an app connects to it. Route to Flint's installed interaction grammar; distinguish behavior, state, boards, and application code. Do not add interactions to static-only output."
+    },
+    {
+      "id": "flint-theme",
+      "type": "skill",
+      "path": "skills/flint-theme/SKILL.md",
+      "bytes": 4581,
+      "sha256": "5de234a0d6cbc3416cd82a6d96f1e652dbf7d580cb53d39316d5bbbda16b72a9",
+      "loadingTier": "on-demand",
+      "description": "Creates and refines reusable Flint ThemeSpec visual systems from brand guidance, websites, decks, design tokens, or publication references. Use when a user asks for a custom Flint theme, wants to translate a visual identity into charts, or needs to test theme behavior across a chart corpus."
+    },
+    {
+      "id": "execution-details",
+      "type": "resource",
+      "path": "skills/git-workflow/references/execution-details.md",
+      "bytes": 7194,
+      "sha256": "acea1bbc19e87d0a638509a1fb27177fad6bcdf3c7de3851119fbf411cbd5e55",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "git-workflow",
+      "type": "skill",
+      "path": "skills/git-workflow/SKILL.md",
+      "bytes": 1408,
+      "sha256": "1b91c4ead104f606468d176d1a035f514ff1d23ce355e588e7343512b08b01f9",
+      "loadingTier": "on-demand",
+      "description": "Apply consistent git practices for branch hygiene, safe commits, and recovery from common mishaps (lost commits, bad merges, accidental pushes). Use when authoring or reviewing a git workflow, recovering broken local state, or sequencing a commit/push that needs explicit user approval before destructive steps."
+    },
+    {
+      "id": "html-to-md",
+      "type": "skill",
+      "path": "skills/html-to-md/SKILL.md",
+      "bytes": 1827,
+      "sha256": "d42f6065ce13e4863cb49fbe6a8fdfdf847b125bdf06582ee43c034d46bd6f9c",
+      "loadingTier": "on-demand",
+      "description": "Convert HTML documents to clean Markdown via pandoc. Use when the user asks to convert HTML to markdown or import a .html file into markdown."
+    },
+    {
+      "id": "copywriter-mode-example",
+      "type": "resource",
+      "path": "skills/humanizer/examples/copywriter-mode-example.md",
+      "bytes": 4157,
+      "sha256": "35efd38e5448f8ebc46922cfe5fc69d911b3cb84e98518f3ebc48f46ac61da45",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "full-example",
+      "type": "resource",
+      "path": "skills/humanizer/examples/full-example.md",
+      "bytes": 6504,
+      "sha256": "1af700078b4274f52ab8a46cb2d88349db9a729f9d35690ab3ee680ffca58866",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "copywriter-sweep-patterns",
+      "type": "resource",
+      "path": "skills/humanizer/references/copywriter-sweep-patterns.md",
+      "bytes": 5613,
+      "sha256": "7a7ea22662e6a6cd6a10d237ba7d8f6b94ecef6d2432fbda769d14bf304aaacd",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "pattern-catalog",
+      "type": "resource",
+      "path": "skills/humanizer/references/pattern-catalog.md",
+      "bytes": 20741,
+      "sha256": "53832f826712e79ed6a715495eb02bdbc4fc9805b6a8682ee7f724d2e1a447f6",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "runtime-audience-copy-review",
+      "type": "resource",
+      "path": "skills/humanizer/references/runtime-audience-copy-review.md",
+      "bytes": 3858,
+      "sha256": "9df3daee2022534427f11a846b380c70af4e922586067e354b0d6cc115b7b0d2",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "humanizer",
+      "type": "skill",
+      "path": "skills/humanizer/SKILL.md",
+      "bytes": 37538,
+      "sha256": "e8f81d5a0e408026a21ae4361d97da1a78bc52297c9373976f574309b3d26d98",
+      "loadingTier": "on-demand",
+      "description": "Use when the user wants to humanize, de-AI, de-slop, or un-ChatGPT a piece of text — review AI-associated patterns and add real voice — or wants a copywriter pass that reviews existing copy for a named audience (e.g., non-native English readers) using an idiom/tone/register/ambiguity/grammar/naturalness taxonomy and an approval-gated before/after table workflow. Uses a contextual catalog informed by Wikipedia's \"Signs of AI writing\" and produces a draft → self-audit → final rewrite. Optional voice-calibration from a user-provided writing sample. Adapted from Hermes Agent / blader/humanizer."
+    },
+    {
+      "id": "execution-details",
+      "type": "resource",
+      "path": "skills/install-visual-companions/references/execution-details.md",
+      "bytes": 10244,
+      "sha256": "b49a7ea5faff25ea90bc684f2537ee2f156fed5010360673f91dc36084d1f232",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "install-visual-companions",
+      "type": "skill",
+      "path": "skills/install-visual-companions/SKILL.md",
+      "bytes": 1835,
+      "sha256": "29af79b853475d742ac5c1403242fd14ad57cce6a1e0a124822c8a4653d74e24",
+      "loadingTier": "on-demand",
+      "description": "Offer to install marketplace plugins that extend visual-authoring workflows: chart rendering, screenshot verification, whiteboard iteration, and PR annotation. Consent-gated, one plugin at a time, never bundled without explicit approval. Use when the user asks to enable visual-workflow tooling, or when chart, figure, or print-SVG authoring produces artifacts that need runtime verification."
+    },
+    {
+      "id": "lint-clean-markdown",
+      "type": "skill",
+      "path": "skills/lint-clean-markdown/SKILL.md",
+      "bytes": 6172,
+      "sha256": "a6b5ed1533a436bf928c8e5da9370086544d98924a54ff854c62e64e3b5e58a1",
+      "loadingTier": "on-demand",
+      "description": "Write markdown that passes markdownlint on first attempt — encode the most common rules as muscle memory"
+    },
+    {
+      "id": "diagram-reference",
+      "type": "resource",
+      "path": "skills/markdown-mermaid/references/diagram-reference.md",
+      "bytes": 9843,
+      "sha256": "282f851b26a86a252f77137169e6e6709c57272c4717a2dfb8a571cbf243cc98",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "markdown-best-practices",
+      "type": "resource",
+      "path": "skills/markdown-mermaid/references/markdown-best-practices.md",
+      "bytes": 2107,
+      "sha256": "508ace3acf9b3d48e5488c1408844f82c32eec1345025840fad2ef28c5f73ff1",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "pitfalls",
+      "type": "resource",
+      "path": "skills/markdown-mermaid/references/pitfalls.md",
+      "bytes": 26515,
+      "sha256": "13b95ff1c71bae317bea6c05858da02fd75f9c4f9a3bfd10de8d731cf3f18bf7",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "tool-ecosystem",
+      "type": "resource",
+      "path": "skills/markdown-mermaid/references/tool-ecosystem.md",
+      "bytes": 2146,
+      "sha256": "6fc108127b48e5f36fb91cfc960272cda36576fc11d491fe423353fb9b0749cc",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "markdown-mermaid",
+      "type": "skill",
+      "path": "skills/markdown-mermaid/SKILL.md",
+      "bytes": 10842,
+      "sha256": "ca5fccf7371f62d982c45c45ae81cb7f2480f79f89d9dd5e825443443f9855a8",
+      "loadingTier": "on-demand",
+      "description": "Author Mermaid diagrams that render correctly in GitHub, VS Code, and Mermaid 10+ consumers. Applies a config-driven init directive + linkStyle + semantic classDef vocabulary from `.github/config/brand-palette.json` (default: 6-role semantic palette + typography). Covers renderer pitfalls, mode fragility, and diagram-tool selection. Use when embedding Mermaid in markdown, debugging silent render failures, or choosing between Mermaid / Excalidraw / D2 / PlantUML."
+    },
+    {
+      "id": "markdown-sanitization-chain",
+      "type": "skill",
+      "path": "skills/markdown-sanitization-chain/SKILL.md",
+      "bytes": 4129,
+      "sha256": "8829bfecc6aeae173392c00574f18960ebfa44afad3d16a2d2bd567fd310863b",
+      "loadingTier": "on-demand",
+      "description": "Render user-supplied markdown safely — marked.js → DOMPurify → Mermaid (order matters; skipping the sanitizer is XSS)"
+    },
+    {
+      "id": "md-to-eml",
+      "type": "skill",
+      "path": "skills/md-to-eml/SKILL.md",
+      "bytes": 8027,
+      "sha256": "5d2b5bef699d1727b881ac53afdf677c0158faafa0e1ab0ab616f8f1e73dfdd4",
+      "loadingTier": "on-demand",
+      "description": "Convert Markdown to RFC 5322 email (.eml) with inline CSS and CID images. Use when the user asks to convert to email, make an eml, or export markdown as an .eml file."
+    },
+    {
+      "id": "md-to-html",
+      "type": "skill",
+      "path": "skills/md-to-html/SKILL.md",
+      "bytes": 8472,
+      "sha256": "b176337be2df1211bef0f583c059d75300d6b75ccdb306c00f78fadf5b2a654a",
+      "loadingTier": "on-demand",
+      "description": "Convert Markdown to standalone HTML pages with embedded CSS, images, and Mermaid diagrams. Use when the user asks to convert to HTML, make a webpage, or export markdown as an .html file."
+    },
+    {
+      "id": "md-to-txt",
+      "type": "skill",
+      "path": "skills/md-to-txt/SKILL.md",
+      "bytes": 2052,
+      "sha256": "ee3bfe6bdfb2f6861630e2e3637604110f175a69ee1b8e9f4b298b2f36f6425b",
+      "loadingTier": "on-demand",
+      "description": "Strip Markdown formatting and produce clean plain text via pandoc. Use when the user asks to convert to plain text or export markdown as a .txt file."
+    },
+    {
+      "id": "version-history-and-acceptance",
+      "type": "resource",
+      "path": "skills/md-to-word/references/version-history-and-acceptance.md",
+      "bytes": 2799,
+      "sha256": "b5e7dd57c41ce38607aebb6bf6bcd1078489e5704ea6dfcca6cb61f3eeae2de7",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "md-to-word",
+      "type": "skill",
+      "path": "skills/md-to-word/SKILL.md",
+      "bytes": 17225,
+      "sha256": "c085b733031c913d70e5fa9e4b153a2f68028e76fc4d83b626725a4ca98fe3fc",
+      "loadingTier": "on-demand",
+      "description": "Convert Markdown with Mermaid diagrams and SVG illustrations to professional Word documents. Use when the user asks to convert to Word, make a docx, or export markdown as a .docx file."
+    },
+    {
+      "id": "execution-details",
+      "type": "resource",
+      "path": "skills/meditation/references/execution-details.md",
+      "bytes": 18492,
+      "sha256": "3ed30006c1e5a09548104fb5712451c98facfbf8c66e20c362106cfc9f46dc8e",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "meditation",
+      "type": "skill",
+      "path": "skills/meditation/SKILL.md",
+      "bytes": 1827,
+      "sha256": "4a8dab45f4dfecf6c4607a50e9bc55f98d7f0fa8cb226097f37f0639a584d368",
+      "loadingTier": "on-demand",
+      "description": "Review session outcomes, recommend reusable skills or automation, and reconcile project guidance, handoff, tasks, and change history."
+    },
+    {
+      "id": "mutation-testing",
+      "type": "skill",
+      "path": "skills/mutation-testing/SKILL.md",
+      "bytes": 12227,
+      "sha256": "2d67cf78d99cc8a7610b155c56c6804a427db53682f2ddb24c8a27b79ca5b701",
+      "loadingTier": "on-demand",
+      "description": "Meta-test your test harness — apply small intentional defects to production code, expect the suite to catch each one. Surfaces silent coverage gaps that 100% line coverage hides."
+    },
+    {
+      "id": "project-plan-template",
+      "type": "resource",
+      "path": "skills/plan/references/project-plan-template.md",
+      "bytes": 9020,
+      "sha256": "de87f432343093be61b5c378403424bad078084177286395dd62723f9397395e",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "plan",
+      "type": "skill",
+      "path": "skills/plan/SKILL.md",
+      "bytes": 1711,
+      "sha256": "79c547c43bd84dd6ee3205d80deaca248c83281964680c9f46bdf211c3d5cebe",
+      "loadingTier": "on-demand",
+      "description": "Use native planning for uncertain or consequential implementation work. Preserve read-only discussion, approval before execution, and task-specific verification without compulsory repository files or prewritten implementation."
+    },
+    {
+      "id": "platform-history",
+      "type": "resource",
+      "path": "skills/platform-awareness/references/platform-history.md",
+      "bytes": 14294,
+      "sha256": "69b555e1756e79754130a2656174b5eede0e74a7ad69442e6df8b7a77dd4b09a",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "platform-awareness",
+      "type": "skill",
+      "path": "skills/platform-awareness/SKILL.md",
+      "bytes": 1529,
+      "sha256": "9f8b284fffeaa522cd8c1b24800d8307ec1393d05a4bddc7b3b227c7e894a132",
+      "loadingTier": "on-demand",
+      "description": "Discover current host capabilities and verify Copilot CLI/VS Code platform claims against native help and official documentation. Use for deferred tools, harness differences, native features, MCP/browser availability, and reproduced compatibility exceptions; do not assume historical settings or tool names."
+    },
+    {
+      "id": "print-svg-style-guide",
+      "type": "skill",
+      "path": "skills/print-svg-style-guide/SKILL.md",
+      "bytes": 23437,
+      "sha256": "a96d0637722e12de36b3ae59e1d4cd095aff2d4ca6cdbfb2c50563175cd03b09",
+      "loadingTier": "on-demand",
+      "description": "Author print-quality SVG figures for books, reports, and exec-facing documents: canvas and typography grammar with a legibility floor, a semantic color palette where color carries meaning, and four composition idioms. Use when authoring or reviewing a figure destined for paper or PDF, or when picking colors that must read consistently across a document."
+    },
+    {
+      "id": "project-recovery",
+      "type": "resource",
+      "path": "skills/proactive-awareness/references/project-recovery.md",
+      "bytes": 5499,
+      "sha256": "0269d0689a1118817f76f06756bd5df6c0f6090723a5e5d0313db3af1b373048",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "runtime-session-health-monitoring",
+      "type": "resource",
+      "path": "skills/proactive-awareness/references/runtime-session-health-monitoring.md",
+      "bytes": 4074,
+      "sha256": "205031fab2b33e6eac34132bf4aad142577499497ed28f4c41d466c5fac2a6ed",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "proactive-awareness",
+      "type": "skill",
+      "path": "skills/proactive-awareness/SKILL.md",
+      "bytes": 1985,
+      "sha256": "7749d440f401dd9806a6338f8b9a7b09fac1e1849fd4d1716f5bbbd19aaf095e",
+      "loadingTier": "on-demand",
+      "description": "Applies cross-session context recovery, uncommitted-work detection, and focus routing once proactive behavior has been judged appropriate. Use when continuity, worktree state, or active goals may change the response."
+    },
+    {
+      "id": "problem-framing-audit",
+      "type": "skill",
+      "path": "skills/problem-framing-audit/SKILL.md",
+      "bytes": 921,
+      "sha256": "2e73f7374b846b36372f5611d744c5a54f7063c8ae0b800581add196216ec093",
+      "loadingTier": "on-demand",
+      "description": "Step-back protocol — restate, generalize, specialize, invert, ask why, pre-mortem, check stakeholders, and audit framings before solving"
+    },
+    {
+      "id": "project-capability-authoring",
+      "type": "skill",
+      "path": "skills/project-capability-authoring/SKILL.md",
+      "bytes": 3989,
+      "sha256": "050ec33a18b65b4f5b55b0d737618fcc0ac7e9c937e55d4640f1c049f42e58fa",
+      "loadingTier": "on-demand",
+      "description": "Create tested project-local skills and scripts from demonstrated repeated work. Use after meditation or when a project workflow recurs and manual execution has caused inconsistency."
+    },
+    {
+      "id": "project-status",
+      "type": "skill",
+      "path": "skills/project-status/SKILL.md",
+      "bytes": 2493,
+      "sha256": "dcdba6d81abf59f06b2cd3c0d5df49de56ffc5764a87459c0a2be175654008a0",
+      "loadingTier": "on-demand",
+      "description": "Report the current project's repository state, recent work, brain QA health (if applicable), and pending handoff items. Use for session orientation or an on-demand project checkpoint."
+    },
+    {
+      "id": "render-chart",
+      "type": "skill",
+      "path": "skills/render-chart/SKILL.md",
+      "bytes": 8414,
+      "sha256": "a3cc8d30ac2efe66d5582874a493d9e16eb3872e3bc264cea86de732653fb373",
+      "loadingTier": "on-demand",
+      "description": "Orchestrates expert visual storytelling over Flint: frame the claim, inspect data, explore familiar and expressive treatments over one semantic truth layer, select or author a theme, render, compare, iterate, and verify. Use for open-ended chart and data-story requests; preserves fast paths for diagnostic charts, fully formed specs, and explicit treatments."
+    },
+    {
+      "id": "render-verify",
+      "type": "skill",
+      "path": "skills/render-verify/SKILL.md",
+      "bytes": 40085,
+      "sha256": "2b126364f3f805adcb529478c935787e917f7303d91494fb55dbb94a46da78c8",
+      "loadingTier": "on-demand",
+      "description": "Verify a rendered visual artifact actually says what it was supposed to say — open it, read console errors, walk a failure catalog, and check its claim. Works on charts, reports, SVG, dashboards, diagrams, and printable output. Use after render_chart or Flint show, after backend edits, and before committing generated HTML/SVG/PNG. Prefer native browser tools; retain registered fallback for missing scenarios."
+    },
+    {
+      "id": "replicate-imagery",
+      "type": "skill",
+      "path": "skills/replicate-imagery/SKILL.md",
+      "bytes": 11281,
+      "sha256": "2aa09cf274c61fab8fb1e592677c2e515f59e3b7fc028da5f51b909dcaa21b39",
+      "loadingTier": "on-demand",
+      "description": "Route AI image generation and editing requests to Replicate (FLUX, Ideogram, Recraft, SDXL, imagen) via the bundled `replicate` MCP server. Use when a document, book, or report needs an illustration, hero image, character/concept art, photorealistic scene, or style-transferred image that neither Flint (data charts), Mermaid (technical diagrams), nor svg-banner (brand banners) can produce. Composes with Replicate's upstream agent skills (prompt-images, find-models, run-models, compare-models, prompt-videos) installable via `npx skills add replicate/skills`. Requires `REPLICATE_API_TOKEN`."
+    },
+    {
+      "id": "rich-email-template",
+      "type": "resource",
+      "path": "skills/rich-email/assets/rich-email-template.md",
+      "bytes": 1085,
+      "sha256": "09de6a49ae008b50585e3d206c42e068164cdf634c124709884419f20b74caaa",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "style-guide",
+      "type": "resource",
+      "path": "skills/rich-email/references/style-guide.md",
+      "bytes": 2070,
+      "sha256": "289ba254a2b236fb1ef0448c15af6a8f2442dfde44e206004efa33831a252ed3",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "rich-email",
+      "type": "skill",
+      "path": "skills/rich-email/SKILL.md",
+      "bytes": 5095,
+      "sha256": "b8fa70bce9799ba377b9f111bea477145ed000a30f136cb8c2c2ae20e484aefa",
+      "loadingTier": "on-demand",
+      "description": "Create and validate polished HTML email drafts from Markdown, then open an unsent New Outlook draft on Windows. Use for rich stakeholder updates, executive summaries, or formatted email requests; do not use for automated, transactional, or bulk delivery."
+    },
+    {
+      "id": "risk-analysis",
+      "type": "skill",
+      "path": "skills/risk-analysis/SKILL.md",
+      "bytes": 962,
+      "sha256": "4a9bdea7e2fc474b6579a21fa4fff20759a0dcf34ded006843c4fc87d439ea19",
+      "loadingTier": "on-demand",
+      "description": "Probability × impact risk assessment for curation and planning decisions. Categorize risks (quality, coherence, scope creep, token budget, breaking change, staleness), score by likelihood × impact, and route by risk score to ship / gate / ADR. Use before shipping a change, when accepting an external artifact, when running a pre-release gate, or when triaging findings."
+    },
+    {
+      "id": "security-and-hardening",
+      "type": "skill",
+      "path": "skills/security-and-hardening/SKILL.md",
+      "bytes": 13112,
+      "sha256": "0d3212a08bd02ca6e7f379a4642a237eb74fd8d04a0b520ff4a6d093f383985f",
+      "loadingTier": "on-demand",
+      "description": "Hardens code against vulnerabilities. Use when handling user input, authentication, data storage, or external integrations. OWASP-aware, language-agnostic principles with TypeScript examples — applies to any feature that accepts untrusted data, manages user sessions, or interacts with third-party services."
+    },
+    {
+      "id": "setup-dependencies",
+      "type": "skill",
+      "path": "skills/setup-dependencies/SKILL.md",
+      "bytes": 14013,
+      "sha256": "44d96704cd7e4547e918bd83d317e4d348f8dbb58f9cbf7f3394df1f6c9da970",
+      "loadingTier": "on-demand",
+      "description": "Check which optional dependencies this plugin can use, report what each missing one costs, and install them with consent. Covers Pandoc, Mermaid CLI, svgexport, jszip, and the pinned MCP servers for charts, image generation, and browser verification. Use after installing the plugin, when a skill reports a missing tool, or when checking for MCP updates."
+    },
+    {
+      "id": "setup-enterprise-stack",
+      "type": "skill",
+      "path": "skills/setup-enterprise-stack/SKILL.md",
+      "bytes": 13149,
+      "sha256": "0595445e3cffdee974214b42c8ef341c1324fc7d73af0ff22be77c504276dffa",
+      "loadingTier": "on-demand",
+      "description": "Emit and (with consent) install the Copilot CLI settings block for the public Microsoft ecosystem: Azure, Fabric, Power BI, and Microsoft 365 Agents Toolkit. Defaults to **repo scope** (`.github/copilot/settings.json`) because these are project-specific tools; a Python data-analysis workspace does not need Azure skills loaded. Use `--user` to make the plugins available in every workspace. Use when someone on a Microsoft-subscribed tenant wants these public plugins enabled for the current project, or when auditing / repairing the Microsoft ecosystem enablement in a workspace or user profile."
+    },
+    {
+      "id": "execution-details",
+      "type": "resource",
+      "path": "skills/spike/references/execution-details.md",
+      "bytes": 8272,
+      "sha256": "24dea69979ba78135b7f612aafaced47cab8461c1fab5ef5b0619933546e9755",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "spike",
+      "type": "skill",
+      "path": "skills/spike/SKILL.md",
+      "bytes": 1594,
+      "sha256": "0883f8049260732e8fc1cdcdff55b2876c1b50eff07c6f53555303ec6d28e3a4",
+      "loadingTier": "on-demand",
+      "description": "Use when the user wants to feel out an idea before committing to a real build — \"spike this out\", \"try it\", \"is this even possible?\", \"compare A vs B\". Throwaway experiments that decompose into 2-5 feasibility questions, build minimal observable prototypes, and return VALIDATED / PARTIAL / INVALIDATED verdicts. Disposable by design. Adapted from Hermes Agent / GSD."
+    },
+    {
+      "id": "status-reporting",
+      "type": "skill",
+      "path": "skills/status-reporting/SKILL.md",
+      "bytes": 7993,
+      "sha256": "dcc6fa33978084692921f921d3fc21f2c3a48c374151da750779e25f35916057",
+      "loadingTier": "on-demand",
+      "description": "Create stakeholder-friendly project status updates and progress reports. Use when writing a status update, progress report, weekly or milestone recap, release summary, or any stakeholder-facing account of where work stands."
+    },
+    {
+      "id": "svg-banner",
+      "type": "skill",
+      "path": "skills/svg-banner/SKILL.md",
+      "bytes": 10476,
+      "sha256": "7705b28043d429908b18ae128132f7de1c9600af37bf8342509baffaabefed5b",
+      "loadingTier": "on-demand",
+      "description": "Generate 1200x320 SVG banners for READMEs, plans, notes, and release artifacts, using a pluggable brand config that any project can override. Use when a document needs a hero banner, a section header, or brand-stamped consistency at the top of a markdown file."
+    },
+    {
+      "id": "condition-based-waiting",
+      "type": "resource",
+      "path": "skills/systematic-debugging/references/condition-based-waiting.md",
+      "bytes": 2850,
+      "sha256": "c022c7a782d27746be997a8dd3e03cdb3cedeab481e260b34e986238319a39d0",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "defense-in-depth",
+      "type": "resource",
+      "path": "skills/systematic-debugging/references/defense-in-depth.md",
+      "bytes": 3779,
+      "sha256": "b75a36e8b4f3a7e2fcfdc9f01015db4c012ef8944f4486054178268baa94fc3f",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "execution-details",
+      "type": "resource",
+      "path": "skills/systematic-debugging/references/execution-details.md",
+      "bytes": 11455,
+      "sha256": "58865b5aa337e476c307d2d6aed8b23787c3961669bda3b421eafc662eb516f0",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "root-cause-tracing",
+      "type": "resource",
+      "path": "skills/systematic-debugging/references/root-cause-tracing.md",
+      "bytes": 4052,
+      "sha256": "a8076d1a8c0302403b7d264ef2250422fcb17535859f9f0c6d5817c7bb99ba95",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "systematic-debugging",
+      "type": "skill",
+      "path": "skills/systematic-debugging/SKILL.md",
+      "bytes": 1604,
+      "sha256": "00defbc6d097e38aeb9d819e0e468809de5544577fd9b9f25a4ebf5914cfd736",
+      "loadingTier": "on-demand",
+      "description": "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes. Four-phase root-cause-first method (investigate → pattern-analyze → hypothesize → implement) that beats guess-and-check thrashing."
+    },
+    {
+      "id": "runtime-terminal-command-safety",
+      "type": "resource",
+      "path": "skills/terminal-command-safety/references/runtime-terminal-command-safety.md",
+      "bytes": 1649,
+      "sha256": "7e43efc5fc42412bee715c2bd8d61de7b37cf919a0307ea0fc13f4dce579007c",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "shell-procedures",
+      "type": "resource",
+      "path": "skills/terminal-command-safety/references/shell-procedures.md",
+      "bytes": 3257,
+      "sha256": "5c054dc85db43e738dc1cdd56f780d4e06d678f3f4e858911024197709108307",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "terminal-command-safety",
+      "type": "skill",
+      "path": "skills/terminal-command-safety/SKILL.md",
+      "bytes": 1821,
+      "sha256": "46d940d8d2d915bf0cbbca1f03bc925c1824456e0a80b3afb7172a3790768a39",
+      "loadingTier": "on-demand",
+      "description": "Provides terminal output-capture, hung-command, and platform-behavior procedures while the resident instruction retains the Backtick Hazard floor. Use when a command may lose output, hang, need interaction, or depend on host execution behavior."
+    },
+    {
+      "id": "execution-details",
+      "type": "resource",
+      "path": "skills/test-driven-development/references/execution-details.md",
+      "bytes": 10517,
+      "sha256": "602cc5295fe826f5484451d267fe77310bc3ac27c7ddbea395712c19be6b293a",
+      "loadingTier": "deferred"
+    },
+    {
+      "id": "test-driven-development",
+      "type": "skill",
+      "path": "skills/test-driven-development/SKILL.md",
+      "bytes": 1633,
+      "sha256": "a91cfa603040b456ff5d080c4a4073c7bfd4e05635c87c2f5431a6a907bc136a",
+      "loadingTier": "on-demand",
+      "description": "Use for any feature, bug fix, refactor, or behavior change — enforces RED-GREEN-REFACTOR. Write the failing test first, watch it fail, write minimal code to pass, refactor. Carve out only throwaway prototypes, generated code, configuration files. Adapted from Hermes Agent / obra/superpowers."
+    },
+    {
+      "id": "token-waste-elimination",
+      "type": "skill",
+      "path": "skills/token-waste-elimination/SKILL.md",
+      "bytes": 4315,
+      "sha256": "6f9c10f844505e73565c92f91c29913c38178493cbd675fc09298dc13b981592",
+      "loadingTier": "on-demand",
+      "description": "Audit active brain artifacts for context cost, duplicated guidance, oversized routing files, and stale metadata. Use during brain audits, quarterly review, or when instructions feel heavy."
+    }
+  ],
+  "relationships": [
+    {
+      "from": "instructions/act-pass.instructions.md",
+      "to": "skills/critical-thinking/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "instructions/alex-finch-personality.instructions.md",
+      "to": "skills/communication-craft/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "instructions/audience-copy-review.instructions.md",
+      "to": "skills/humanizer/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "instructions/critical-thinking.instructions.md",
+      "to": "skills/critical-thinking/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "instructions/emotional-intelligence.instructions.md",
+      "to": "skills/communication-craft/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "instructions/epistemic-calibration.instructions.md",
+      "to": "skills/anti-hallucination/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "instructions/lint-discipline.instructions.md",
+      "to": "skills/code-review/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "instructions/no-deferred-debt.instructions.md",
+      "to": "skills/code-review/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "instructions/pii-memory-filter.instructions.md",
+      "to": "skills/ethical-reasoning/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "instructions/problem-framing-audit.instructions.md",
+      "to": "skills/critical-thinking/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "instructions/reliance-nudges.instructions.md",
+      "to": "skills/communication-craft/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "instructions/session-health-monitoring.instructions.md",
+      "to": "skills/proactive-awareness/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "instructions/system-prompt-skepticism.instructions.md",
+      "to": "skills/critical-thinking/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "instructions/terminal-command-safety.instructions.md",
+      "to": "skills/terminal-command-safety/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "instructions/worldview.instructions.md",
+      "to": "skills/ethical-reasoning/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "prompts/assess-brain.prompt.md",
+      "to": "skills/assess-brain/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "prompts/banner.prompt.md",
+      "to": "skills/svg-banner/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "prompts/bootstrap-core.prompt.md",
+      "to": "skills/bootstrap-core/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "prompts/bootstrap-project.prompt.md",
+      "to": "skills/bootstrap-project/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "prompts/compile-brain.prompt.md",
+      "to": "skills/compile-brain/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "prompts/convert.prompt.md",
+      "to": "skills/convert/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "prompts/critical-thinking.prompt.md",
+      "to": "skills/critical-thinking/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "prompts/install-visual-companions.prompt.md",
+      "to": "skills/install-visual-companions/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "prompts/meditate.prompt.md",
+      "to": "skills/meditation/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "prompts/problem-framing-audit.prompt.md",
+      "to": "skills/problem-framing-audit/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "prompts/render-chart.prompt.md",
+      "to": "skills/render-chart/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "prompts/rich-email.prompt.md",
+      "to": "skills/rich-email/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "prompts/setup-dependencies.prompt.md",
+      "to": "skills/setup-dependencies/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "prompts/setup-enterprise.prompt.md",
+      "to": "skills/setup-enterprise-stack/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "prompts/status.prompt.md",
+      "to": "skills/project-status/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/act-tenets/SKILL.md",
+      "to": "instructions/act-pass.instructions.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/act-tenets/SKILL.md",
+      "to": "instructions/problem-framing-audit.instructions.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/act-tenets/SKILL.md",
+      "to": "instructions/critical-thinking.instructions.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/act-tenets/SKILL.md",
+      "to": "instructions/system-prompt-skepticism.instructions.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/act-tenets/SKILL.md",
+      "to": "instructions/epistemic-calibration.instructions.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/act-tenets/SKILL.md",
+      "to": "skills/adversarial-review/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/adversarial-review/SKILL.md",
+      "to": "skills/critical-thinking/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/annotate-screenshot/SKILL.md",
+      "to": "skills/figure-generator/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/annotate-screenshot/SKILL.md",
+      "to": "skills/render-verify/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/anti-hallucination/SKILL.md",
+      "to": "skills/critical-thinking/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/anti-hallucination/SKILL.md",
+      "to": "instructions/epistemic-calibration.instructions.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/anti-hallucination/SKILL.md",
+      "to": "skills/critical-thinking/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/anti-hallucination/SKILL.md",
+      "to": "instructions/system-prompt-skepticism.instructions.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/anti-hallucination/SKILL.md",
+      "to": "instructions/epistemic-calibration.instructions.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/anti-hallucination/SKILL.md",
+      "to": "skills/critical-thinking/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/anti-hallucination/SKILL.md",
+      "to": "skills/anti-hallucination/references/runtime-epistemic-calibration.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/ascii-chart/SKILL.md",
+      "to": "skills/chart-big-idea/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/ascii-chart/SKILL.md",
+      "to": "skills/chart-vocabulary/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/ascii-chart/SKILL.md",
+      "to": "skills/ascii-chart/references/ascii-gallery.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/ascii-chart/SKILL.md",
+      "to": "skills/render-verify/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/ascii-chart/SKILL.md",
+      "to": "skills/flint-chart/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/assess-brain/SKILL.md",
+      "to": "scripts/assess-brain.cjs",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/big-idea/SKILL.md",
+      "to": "skills/chart-big-idea/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/big-idea/SKILL.md",
+      "to": "skills/humanizer/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/big-idea/SKILL.md",
+      "to": "skills/humanizer/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/big-idea/SKILL.md",
+      "to": "skills/chart-big-idea/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/big-idea/SKILL.md",
+      "to": "skills/communication-craft/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/big-idea/SKILL.md",
+      "to": "skills/humanizer/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/big-idea/SKILL.md",
+      "to": "skills/problem-framing-audit/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/browser-tools/SKILL.md",
+      "to": "skills/browser-tools/references/embedded-browser-uat.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/browser-tools/SKILL.md",
+      "to": "skills/browser-tools/references/browser-scenarios.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/browser-tools/SKILL.md",
+      "to": "skills/render-verify/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-big-idea/SKILL.md",
+      "to": "skills/big-idea/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-big-idea/SKILL.md",
+      "to": "skills/chart-big-idea/references/claim-elicitation.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/chart-big-idea/SKILL.md",
+      "to": "skills/chart-vocabulary/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-big-idea/SKILL.md",
+      "to": "skills/flint-chart/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-big-idea/SKILL.md",
+      "to": "skills/render-verify/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-big-idea/SKILL.md",
+      "to": "skills/print-svg-style-guide/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-big-idea/SKILL.md",
+      "to": "skills/figure-generator/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-interpretation/SKILL.md",
+      "to": "skills/chart-vocabulary/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-interpretation/SKILL.md",
+      "to": "skills/critical-thinking/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-interpretation/SKILL.md",
+      "to": "skills/chart-vocabulary/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-interpretation/SKILL.md",
+      "to": "skills/chart-vocabulary/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-interpretation/SKILL.md",
+      "to": "skills/critical-thinking/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-interpretation/SKILL.md",
+      "to": "skills/flint-chart/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-interpretation/SKILL.md",
+      "to": "skills/render-verify/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-vocabulary/SKILL.md",
+      "to": "skills/chart-big-idea/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-vocabulary/SKILL.md",
+      "to": "skills/flint-chart/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-vocabulary/SKILL.md",
+      "to": "skills/figure-generator/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-vocabulary/SKILL.md",
+      "to": "skills/print-svg-style-guide/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-vocabulary/SKILL.md",
+      "to": "skills/replicate-imagery/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-vocabulary/SKILL.md",
+      "to": "skills/ascii-chart/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-vocabulary/SKILL.md",
+      "to": "skills/render-verify/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-vocabulary/SKILL.md",
+      "to": "skills/docs-shell/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-vocabulary/SKILL.md",
+      "to": "skills/render-verify/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-vocabulary/SKILL.md",
+      "to": "skills/ascii-chart/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-vocabulary/SKILL.md",
+      "to": "skills/print-svg-style-guide/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/chart-vocabulary/SKILL.md",
+      "to": "skills/figure-generator/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/code-review/SKILL.md",
+      "to": "skills/code-review/references/ordinary-review.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/code-review/SKILL.md",
+      "to": "skills/code-review/references/deep-review.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/code-review/SKILL.md",
+      "to": "skills/code-review/references/advanced-audits.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/code-review/SKILL.md",
+      "to": "skills/code-review/references/runtime-lint-discipline.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/code-review/SKILL.md",
+      "to": "skills/code-review/references/runtime-no-deferred-debt.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/code-review/SKILL.md",
+      "to": "skills/critical-thinking/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/code-review/SKILL.md",
+      "to": "skills/code-review/references/runtime-lint-discipline.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/code-review/SKILL.md",
+      "to": "skills/code-review/references/runtime-no-deferred-debt.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/communication-craft/SKILL.md",
+      "to": "instructions/emotional-intelligence.instructions.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/communication-craft/SKILL.md",
+      "to": "instructions/emotional-intelligence.instructions.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/communication-craft/SKILL.md",
+      "to": "skills/big-idea/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/communication-craft/SKILL.md",
+      "to": "skills/status-reporting/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/communication-craft/SKILL.md",
+      "to": "skills/communication-craft/references/runtime-alex-finch-personality.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/communication-craft/SKILL.md",
+      "to": "skills/communication-craft/references/runtime-emotional-intelligence.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/communication-craft/SKILL.md",
+      "to": "skills/communication-craft/references/runtime-reliance-nudges.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/corpus-qa-sweep/SKILL.md",
+      "to": "skills/render-verify/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/corpus-qa-sweep/SKILL.md",
+      "to": "skills/render-verify/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/corpus-qa-sweep/SKILL.md",
+      "to": "skills/docs-shell/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/corpus-qa-sweep/SKILL.md",
+      "to": "skills/figure-generator/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/critical-thinking/SKILL.md",
+      "to": "skills/act-tenets/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/critical-thinking/SKILL.md",
+      "to": "skills/critical-thinking/references/runtime-act-pass.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/critical-thinking/SKILL.md",
+      "to": "skills/critical-thinking/references/reasoning-methods.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/critical-thinking/SKILL.md",
+      "to": "skills/critical-thinking/references/runtime-critical-thinking.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/critical-thinking/SKILL.md",
+      "to": "skills/critical-thinking/references/framing.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/critical-thinking/SKILL.md",
+      "to": "skills/critical-thinking/references/runtime-problem-framing-audit.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/critical-thinking/SKILL.md",
+      "to": "skills/critical-thinking/references/runtime-system-prompt-skepticism.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/critical-thinking/SKILL.md",
+      "to": "skills/critical-thinking/references/adversarial-methods.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/critical-thinking/SKILL.md",
+      "to": "skills/critical-thinking/references/curation-risk.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/critical-thinking/SKILL.md",
+      "to": "skills/critical-thinking/references/runtime-act-pass.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/critical-thinking/SKILL.md",
+      "to": "skills/critical-thinking/references/runtime-critical-thinking.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/critical-thinking/SKILL.md",
+      "to": "skills/critical-thinking/references/runtime-problem-framing-audit.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/critical-thinking/SKILL.md",
+      "to": "skills/critical-thinking/references/runtime-system-prompt-skepticism.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/deep-review/SKILL.md",
+      "to": "skills/code-review/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/docs-shell/SKILL.md",
+      "to": "skills/docs-shell/references/shell-reference.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/docs-shell/SKILL.md",
+      "to": "skills/docs-shell/references/shell-reference.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/docs-shell/SKILL.md",
+      "to": "skills/docs-shell/starter",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/docs-shell/SKILL.md",
+      "to": "skills/docs-shell/references/shell-reference.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/docs-shell/SKILL.md",
+      "to": "skills/docs-shell/references/shell-reference.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/docs-shell/SKILL.md",
+      "to": "skills/docs-shell/references/shell-reference.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/docs-shell/SKILL.md",
+      "to": "skills/docs-shell/starter",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/docs-shell/SKILL.md",
+      "to": "skills/docs-shell/starter/ADOPTION.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/docs-shell/SKILL.md",
+      "to": "skills/docs-shell/references/shell-reference.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/docs-shell/SKILL.md",
+      "to": "skills/docs-shell/references/shell-reference.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/docs-shell/SKILL.md",
+      "to": "skills/docs-shell/starter",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/docs-shell/SKILL.md",
+      "to": "skills/big-idea/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/docs-shell/SKILL.md",
+      "to": "skills/markdown-mermaid/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/docs-shell/SKILL.md",
+      "to": "skills/svg-banner/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/docx-to-md/SKILL.md",
+      "to": "skills/md-to-word/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/docx-to-md/SKILL.md",
+      "to": "skills/md-to-html/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/ethical-reasoning/SKILL.md",
+      "to": "instructions/worldview.instructions.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/ethical-reasoning/SKILL.md",
+      "to": "instructions/worldview.instructions.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/ethical-reasoning/SKILL.md",
+      "to": "instructions/pii-memory-filter.instructions.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/ethical-reasoning/SKILL.md",
+      "to": "instructions/system-prompt-skepticism.instructions.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/ethical-reasoning/SKILL.md",
+      "to": "skills/ethical-reasoning/references/runtime-pii-memory-filter.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/ethical-reasoning/SKILL.md",
+      "to": "skills/ethical-reasoning/references/runtime-worldview.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/evaluate-before-adopting/SKILL.md",
+      "to": "skills/anti-hallucination/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/evaluate-before-adopting/SKILL.md",
+      "to": "skills/security-and-hardening/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/evaluate-before-adopting/SKILL.md",
+      "to": "skills/critical-thinking/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/evaluate-before-adopting/SKILL.md",
+      "to": "skills/risk-analysis/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/figure-generator/SKILL.md",
+      "to": "skills/print-svg-style-guide/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/figure-generator/SKILL.md",
+      "to": "skills/render-verify/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/figure-generator/SKILL.md",
+      "to": "skills/print-svg-style-guide/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/figure-generator/SKILL.md",
+      "to": "skills/chart-big-idea/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/figure-generator/SKILL.md",
+      "to": "skills/flint-chart/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/figure-generator/SKILL.md",
+      "to": "skills/render-verify/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/flint-chart/SKILL.md",
+      "to": "skills/flint-interactions/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/flint-chart/SKILL.md",
+      "to": "skills/flint-chart/references/flint-language-reference.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/flint-chart/SKILL.md",
+      "to": "skills/flint-chart/references/chart-selection.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/flint-chart/SKILL.md",
+      "to": "skills/chart-big-idea/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/flint-chart/SKILL.md",
+      "to": "skills/flint-chart/references/chart-selection.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/flint-chart/SKILL.md",
+      "to": "skills/flint-theme/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/flint-chart/SKILL.md",
+      "to": "skills/flint-interactions/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/flint-chart/SKILL.md",
+      "to": "skills/render-verify/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/flint-chart/SKILL.md",
+      "to": "skills/flint-chart/references/publication-preset.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/flint-chart/SKILL.md",
+      "to": "skills/print-svg-style-guide/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/flint-chart/SKILL.md",
+      "to": "skills/figure-generator/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/flint-chart/SKILL.md",
+      "to": "skills/setup-dependencies/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/flint-interactions/SKILL.md",
+      "to": "skills/render-verify/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/flint-interactions/SKILL.md",
+      "to": "skills/flint-interactions/references/behavioral-acceptance.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/flint-theme/SKILL.md",
+      "to": "skills/flint-interactions/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/git-workflow/SKILL.md",
+      "to": "skills/git-workflow/references/execution-details.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/html-to-md/SKILL.md",
+      "to": "skills/docx-to-md/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/humanizer/SKILL.md",
+      "to": "skills/humanizer/references/copywriter-sweep-patterns.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/humanizer/SKILL.md",
+      "to": "skills/communication-craft/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/humanizer/SKILL.md",
+      "to": "skills/humanizer/examples/copywriter-mode-example.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/humanizer/SKILL.md",
+      "to": "skills/humanizer/references/pattern-catalog.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/humanizer/SKILL.md",
+      "to": "skills/humanizer/examples/full-example.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/humanizer/SKILL.md",
+      "to": "skills/humanizer/examples/copywriter-mode-example.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/humanizer/SKILL.md",
+      "to": "skills/code-review/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/humanizer/SKILL.md",
+      "to": "skills/doc-hygiene/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/humanizer/SKILL.md",
+      "to": "skills/meditation/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/humanizer/SKILL.md",
+      "to": "skills/communication-craft/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/humanizer/SKILL.md",
+      "to": "skills/humanizer/references/runtime-audience-copy-review.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/install-visual-companions/SKILL.md",
+      "to": "skills/install-visual-companions/references/execution-details.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/lint-clean-markdown/SKILL.md",
+      "to": "skills/markdown-mermaid/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/lint-clean-markdown/SKILL.md",
+      "to": "skills/markdown-mermaid/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/markdown-mermaid/SKILL.md",
+      "to": "skills/markdown-mermaid/references/pitfalls.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/markdown-mermaid/SKILL.md",
+      "to": "skills/svg-banner/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/markdown-mermaid/SKILL.md",
+      "to": "skills/markdown-mermaid/references/tool-ecosystem.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/markdown-mermaid/SKILL.md",
+      "to": "skills/markdown-mermaid/references/pitfalls.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/markdown-mermaid/SKILL.md",
+      "to": "skills/markdown-mermaid/references/tool-ecosystem.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/markdown-mermaid/SKILL.md",
+      "to": "skills/markdown-mermaid/references/diagram-reference.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/markdown-mermaid/SKILL.md",
+      "to": "skills/markdown-mermaid/references/markdown-best-practices.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/markdown-mermaid/SKILL.md",
+      "to": "skills/lint-clean-markdown/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/markdown-sanitization-chain/SKILL.md",
+      "to": "skills/markdown-mermaid/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/markdown-sanitization-chain/SKILL.md",
+      "to": "skills/markdown-mermaid/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/markdown-sanitization-chain/SKILL.md",
+      "to": "skills/lint-clean-markdown/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/md-to-eml/SKILL.md",
+      "to": "skills/md-to-html/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/md-to-eml/SKILL.md",
+      "to": "skills/md-to-word/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/md-to-html/SKILL.md",
+      "to": "skills/md-to-word/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/md-to-txt/SKILL.md",
+      "to": "skills/md-to-word/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/md-to-word/SKILL.md",
+      "to": "skills/md-to-word/references/version-history-and-acceptance.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/meditation/SKILL.md",
+      "to": "skills/proactive-awareness/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/meditation/SKILL.md",
+      "to": "skills/meditation/references/execution-details.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/meditation/SKILL.md",
+      "to": "skills/project-capability-authoring/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/meditation/SKILL.md",
+      "to": "skills/compile-brain/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/mutation-testing/SKILL.md",
+      "to": "skills/code-review/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/plan/SKILL.md",
+      "to": "skills/plan/references/project-plan-template.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/platform-awareness/SKILL.md",
+      "to": "skills/platform-awareness/references/platform-history.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/print-svg-style-guide/SKILL.md",
+      "to": "skills/chart-big-idea/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/print-svg-style-guide/SKILL.md",
+      "to": "skills/flint-chart/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/print-svg-style-guide/SKILL.md",
+      "to": "skills/render-verify/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/print-svg-style-guide/SKILL.md",
+      "to": "skills/figure-generator/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/proactive-awareness/SKILL.md",
+      "to": "skills/proactive-awareness/references/project-recovery.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/proactive-awareness/SKILL.md",
+      "to": "skills/proactive-awareness/references/runtime-session-health-monitoring.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/proactive-awareness/SKILL.md",
+      "to": "skills/proactive-awareness/references/runtime-session-health-monitoring.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/problem-framing-audit/SKILL.md",
+      "to": "skills/critical-thinking/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/project-capability-authoring/SKILL.md",
+      "to": "skills/compile-brain/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/project-status/SKILL.md",
+      "to": "skills/proactive-awareness/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/render-chart/SKILL.md",
+      "to": "skills/chart-big-idea/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/render-chart/SKILL.md",
+      "to": "skills/flint-chart/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/render-chart/SKILL.md",
+      "to": "skills/flint-interactions/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/render-chart/SKILL.md",
+      "to": "skills/render-verify/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/render-verify/SKILL.md",
+      "to": "skills/flint-interactions/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/render-verify/SKILL.md",
+      "to": "skills/ascii-chart/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/render-verify/SKILL.md",
+      "to": "skills/browser-tools/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/render-verify/SKILL.md",
+      "to": "skills/chart-big-idea/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/render-verify/SKILL.md",
+      "to": "skills/chart-vocabulary/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/render-verify/SKILL.md",
+      "to": "skills/flint-chart/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/render-verify/SKILL.md",
+      "to": "skills/print-svg-style-guide/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/render-verify/SKILL.md",
+      "to": "skills/figure-generator/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/render-verify/SKILL.md",
+      "to": "skills/corpus-qa-sweep/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/render-verify/SKILL.md",
+      "to": "skills/annotate-screenshot/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/replicate-imagery/SKILL.md",
+      "to": "skills/flint-chart/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/replicate-imagery/SKILL.md",
+      "to": "skills/markdown-mermaid/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/replicate-imagery/SKILL.md",
+      "to": "skills/svg-banner/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/replicate-imagery/SKILL.md",
+      "to": "skills/figure-generator/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/replicate-imagery/SKILL.md",
+      "to": "skills/print-svg-style-guide/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/replicate-imagery/SKILL.md",
+      "to": "skills/chart-big-idea/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/replicate-imagery/SKILL.md",
+      "to": "skills/render-verify/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/rich-email/SKILL.md",
+      "to": "skills/md-to-eml/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/rich-email/SKILL.md",
+      "to": "skills/rich-email/assets/rich-email-template.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/rich-email/SKILL.md",
+      "to": "skills/rich-email/references/style-guide.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/risk-analysis/SKILL.md",
+      "to": "skills/critical-thinking/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/security-and-hardening/SKILL.md",
+      "to": "skills/code-review/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/security-and-hardening/SKILL.md",
+      "to": "skills/deep-review/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/setup-enterprise-stack/SKILL.md",
+      "to": "prompts/setup-enterprise.prompt.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/spike/SKILL.md",
+      "to": "skills/spike/references/execution-details.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/svg-banner/SKILL.md",
+      "to": "skills/print-svg-style-guide/SKILL.md",
+      "state": "explicitly-routed-skill"
+    },
+    {
+      "from": "skills/systematic-debugging/SKILL.md",
+      "to": "skills/systematic-debugging/references/execution-details.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/terminal-command-safety/SKILL.md",
+      "to": "skills/terminal-command-safety/references/runtime-terminal-command-safety.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/terminal-command-safety/SKILL.md",
+      "to": "skills/terminal-command-safety/references/shell-procedures.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/terminal-command-safety/SKILL.md",
+      "to": "skills/terminal-command-safety/references/runtime-terminal-command-safety.md",
+      "state": "explicit-local-link"
+    },
+    {
+      "from": "skills/test-driven-development/SKILL.md",
+      "to": "skills/test-driven-development/references/execution-details.md",
+      "state": "explicit-local-link"
+    }
+  ],
+  "findings": [],
+  "counts": {
+    "research": 9,
+    "instruction": 18,
+    "resource": 70,
+    "prompt": 15,
+    "skill": 64
+  },
+  "bytes": {
+    "research": 178881,
+    "instruction": 22982,
+    "resource": 417108,
+    "prompt": 16576,
+    "skill": 558585
+  },
+  "skillImportance": [
+    {
+      "id": "anti-hallucination",
+      "path": "skills/anti-hallucination/SKILL.md",
+      "staticImportanceScore": 60,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 2,
+        "outboundRoutes": 7,
+        "bundledResources": 1,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "ascii-chart",
+      "path": "skills/ascii-chart/SKILL.md",
+      "staticImportanceScore": 60,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 3,
+        "outboundRoutes": 5,
+        "bundledResources": 1,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "chart-big-idea",
+      "path": "skills/chart-big-idea/SKILL.md",
+      "staticImportanceScore": 60,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 10,
+        "outboundRoutes": 7,
+        "bundledResources": 1,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "code-review",
+      "path": "skills/code-review/SKILL.md",
+      "staticImportanceScore": 60,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 6,
+        "outboundRoutes": 8,
+        "bundledResources": 5,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "communication-craft",
+      "path": "skills/communication-craft/SKILL.md",
+      "staticImportanceScore": 60,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 6,
+        "outboundRoutes": 7,
+        "bundledResources": 3,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "critical-thinking",
+      "path": "skills/critical-thinking/SKILL.md",
+      "staticImportanceScore": 60,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 15,
+        "outboundRoutes": 13,
+        "bundledResources": 8,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "docs-shell",
+      "path": "skills/docs-shell/SKILL.md",
+      "staticImportanceScore": 60,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 2,
+        "outboundRoutes": 14,
+        "bundledResources": 1,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "ethical-reasoning",
+      "path": "skills/ethical-reasoning/SKILL.md",
+      "staticImportanceScore": 60,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 2,
+        "outboundRoutes": 6,
+        "bundledResources": 2,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "flint-chart",
+      "path": "skills/flint-chart/SKILL.md",
+      "staticImportanceScore": 60,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 9,
+        "outboundRoutes": 12,
+        "bundledResources": 3,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "flint-interactions",
+      "path": "skills/flint-interactions/SKILL.md",
+      "staticImportanceScore": 60,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 5,
+        "outboundRoutes": 2,
+        "bundledResources": 1,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "humanizer",
+      "path": "skills/humanizer/SKILL.md",
+      "staticImportanceScore": 60,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 4,
+        "outboundRoutes": 11,
+        "bundledResources": 5,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "markdown-mermaid",
+      "path": "skills/markdown-mermaid/SKILL.md",
+      "staticImportanceScore": 60,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 6,
+        "outboundRoutes": 8,
+        "bundledResources": 4,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "meditation",
+      "path": "skills/meditation/SKILL.md",
+      "staticImportanceScore": 60,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 2,
+        "outboundRoutes": 4,
+        "bundledResources": 1,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "proactive-awareness",
+      "path": "skills/proactive-awareness/SKILL.md",
+      "staticImportanceScore": 60,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 3,
+        "outboundRoutes": 3,
+        "bundledResources": 2,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "big-idea",
+      "path": "skills/big-idea/SKILL.md",
+      "staticImportanceScore": 55,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 3,
+        "outboundRoutes": 7,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "chart-vocabulary",
+      "path": "skills/chart-vocabulary/SKILL.md",
+      "staticImportanceScore": 55,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 6,
+        "outboundRoutes": 12,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "figure-generator",
+      "path": "skills/figure-generator/SKILL.md",
+      "staticImportanceScore": 55,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 9,
+        "outboundRoutes": 6,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "lint-clean-markdown",
+      "path": "skills/lint-clean-markdown/SKILL.md",
+      "staticImportanceScore": 55,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 2,
+        "outboundRoutes": 2,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "md-to-word",
+      "path": "skills/md-to-word/SKILL.md",
+      "staticImportanceScore": 55,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 4,
+        "outboundRoutes": 1,
+        "bundledResources": 1,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "print-svg-style-guide",
+      "path": "skills/print-svg-style-guide/SKILL.md",
+      "staticImportanceScore": 55,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 9,
+        "outboundRoutes": 4,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "render-verify",
+      "path": "skills/render-verify/SKILL.md",
+      "staticImportanceScore": 55,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 16,
+        "outboundRoutes": 10,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "md-to-html",
+      "path": "skills/md-to-html/SKILL.md",
+      "staticImportanceScore": 50,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 2,
+        "outboundRoutes": 1,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "problem-framing-audit",
+      "path": "skills/problem-framing-audit/SKILL.md",
+      "staticImportanceScore": 50,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 2,
+        "outboundRoutes": 1,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "svg-banner",
+      "path": "skills/svg-banner/SKILL.md",
+      "staticImportanceScore": 50,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 4,
+        "outboundRoutes": 1,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "compile-brain",
+      "path": "skills/compile-brain/SKILL.md",
+      "staticImportanceScore": 45,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 3,
+        "outboundRoutes": 0,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "setup-dependencies",
+      "path": "skills/setup-dependencies/SKILL.md",
+      "staticImportanceScore": 45,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 2,
+        "outboundRoutes": 0,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "browser-tools",
+      "path": "skills/browser-tools/SKILL.md",
+      "staticImportanceScore": 40,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 3,
+        "bundledResources": 2,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "rich-email",
+      "path": "skills/rich-email/SKILL.md",
+      "staticImportanceScore": 40,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 3,
+        "bundledResources": 2,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "terminal-command-safety",
+      "path": "skills/terminal-command-safety/SKILL.md",
+      "staticImportanceScore": 40,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 3,
+        "bundledResources": 2,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "act-tenets",
+      "path": "skills/act-tenets/SKILL.md",
+      "staticImportanceScore": 35,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 6,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "annotate-screenshot",
+      "path": "skills/annotate-screenshot/SKILL.md",
+      "staticImportanceScore": 35,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 2,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "corpus-qa-sweep",
+      "path": "skills/corpus-qa-sweep/SKILL.md",
+      "staticImportanceScore": 35,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 4,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "docx-to-md",
+      "path": "skills/docx-to-md/SKILL.md",
+      "staticImportanceScore": 35,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 2,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "install-visual-companions",
+      "path": "skills/install-visual-companions/SKILL.md",
+      "staticImportanceScore": 35,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 1,
+        "bundledResources": 1,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "md-to-eml",
+      "path": "skills/md-to-eml/SKILL.md",
+      "staticImportanceScore": 35,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 2,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "render-chart",
+      "path": "skills/render-chart/SKILL.md",
+      "staticImportanceScore": 35,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 4,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "replicate-imagery",
+      "path": "skills/replicate-imagery/SKILL.md",
+      "staticImportanceScore": 35,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 7,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "security-and-hardening",
+      "path": "skills/security-and-hardening/SKILL.md",
+      "staticImportanceScore": 35,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 2,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "adversarial-review",
+      "path": "skills/adversarial-review/SKILL.md",
+      "staticImportanceScore": 30,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 1,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "assess-brain",
+      "path": "skills/assess-brain/SKILL.md",
+      "staticImportanceScore": 30,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 1,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "deep-review",
+      "path": "skills/deep-review/SKILL.md",
+      "staticImportanceScore": 30,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 1,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "flint-theme",
+      "path": "skills/flint-theme/SKILL.md",
+      "staticImportanceScore": 30,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 1,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "project-capability-authoring",
+      "path": "skills/project-capability-authoring/SKILL.md",
+      "staticImportanceScore": 30,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 1,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "project-status",
+      "path": "skills/project-status/SKILL.md",
+      "staticImportanceScore": 30,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 1,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "risk-analysis",
+      "path": "skills/risk-analysis/SKILL.md",
+      "staticImportanceScore": 30,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 1,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "setup-enterprise-stack",
+      "path": "skills/setup-enterprise-stack/SKILL.md",
+      "staticImportanceScore": 30,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 1,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "bootstrap-core",
+      "path": "skills/bootstrap-core/SKILL.md",
+      "staticImportanceScore": 25,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 0,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "bootstrap-project",
+      "path": "skills/bootstrap-project/SKILL.md",
+      "staticImportanceScore": 25,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 0,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "convert",
+      "path": "skills/convert/SKILL.md",
+      "staticImportanceScore": 25,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 0,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "doc-hygiene",
+      "path": "skills/doc-hygiene/SKILL.md",
+      "staticImportanceScore": 25,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 0,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "status-reporting",
+      "path": "skills/status-reporting/SKILL.md",
+      "staticImportanceScore": 25,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 1,
+        "outboundRoutes": 0,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "chart-interpretation",
+      "path": "skills/chart-interpretation/SKILL.md",
+      "staticImportanceScore": 15,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 0,
+        "outboundRoutes": 7,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "evaluate-before-adopting",
+      "path": "skills/evaluate-before-adopting/SKILL.md",
+      "staticImportanceScore": 15,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 0,
+        "outboundRoutes": 4,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "git-workflow",
+      "path": "skills/git-workflow/SKILL.md",
+      "staticImportanceScore": 15,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 0,
+        "outboundRoutes": 1,
+        "bundledResources": 1,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "markdown-sanitization-chain",
+      "path": "skills/markdown-sanitization-chain/SKILL.md",
+      "staticImportanceScore": 15,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 0,
+        "outboundRoutes": 3,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "plan",
+      "path": "skills/plan/SKILL.md",
+      "staticImportanceScore": 15,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 0,
+        "outboundRoutes": 1,
+        "bundledResources": 1,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "platform-awareness",
+      "path": "skills/platform-awareness/SKILL.md",
+      "staticImportanceScore": 15,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 0,
+        "outboundRoutes": 1,
+        "bundledResources": 1,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "spike",
+      "path": "skills/spike/SKILL.md",
+      "staticImportanceScore": 15,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 0,
+        "outboundRoutes": 1,
+        "bundledResources": 1,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "systematic-debugging",
+      "path": "skills/systematic-debugging/SKILL.md",
+      "staticImportanceScore": 15,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 0,
+        "outboundRoutes": 1,
+        "bundledResources": 4,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "test-driven-development",
+      "path": "skills/test-driven-development/SKILL.md",
+      "staticImportanceScore": 15,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 0,
+        "outboundRoutes": 1,
+        "bundledResources": 1,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "html-to-md",
+      "path": "skills/html-to-md/SKILL.md",
+      "staticImportanceScore": 10,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 0,
+        "outboundRoutes": 1,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "md-to-txt",
+      "path": "skills/md-to-txt/SKILL.md",
+      "staticImportanceScore": 10,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 0,
+        "outboundRoutes": 1,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "mutation-testing",
+      "path": "skills/mutation-testing/SKILL.md",
+      "staticImportanceScore": 10,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 0,
+        "outboundRoutes": 1,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    },
+    {
+      "id": "token-waste-elimination",
+      "path": "skills/token-waste-elimination/SKILL.md",
+      "staticImportanceScore": 5,
+      "maximumScore": 60,
+      "signals": {
+        "inboundRoutes": 0,
+        "outboundRoutes": 0,
+        "bundledResources": 0,
+        "uniqueBody": true
+      }
+    }
+  ],
+  "immutability": {
+    "preserved": true,
+    "beforeSha256": "51862d29efcb07573aee237908b4b7ecadbf3744320f6d27c29dfd901da23faf",
+    "afterSha256": "51862d29efcb07573aee237908b4b7ecadbf3744320f6d27c29dfd901da23faf"
+  }
+}

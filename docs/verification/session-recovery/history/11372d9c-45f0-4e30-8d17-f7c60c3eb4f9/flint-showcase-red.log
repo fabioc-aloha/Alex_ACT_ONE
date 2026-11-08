@@ -1,0 +1,142 @@
+TAP version 13
+# Subtest: showcase is a self-contained HTML document with explicit offline and synthetic-data boundaries
+not ok 1 - showcase is a self-contained HTML document with explicit offline and synthetic-data boundaries
+  ---
+  duration_ms: 1.7799
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\flint-showcase.test.mjs:22:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing the requested offline Flint showcase'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    document (file:///C:/Development/Alex_ACT_ONE/tests/flint-showcase.test.mjs:12:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/flint-showcase.test.mjs:23:18)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: showcase embeds the actual pinned App UI and preserves third-party notices
+not ok 2 - showcase embeds the actual pinned App UI and preserves third-party notices
+  ---
+  duration_ms: 0.3281
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\flint-showcase.test.mjs:35:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing the requested offline Flint showcase'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    document (file:///C:/Development/Alex_ACT_ONE/tests/flint-showcase.test.mjs:12:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/flint-showcase.test.mjs:36:18)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: samples cover chart families, semantic types, gestures, themes, state updates, and links
+not ok 3 - samples cover chart families, semantic types, gestures, themes, state updates, and links
+  ---
+  duration_ms: 0.2059
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\flint-showcase.test.mjs:50:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing the requested offline Flint showcase'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    document (file:///C:/Development/Alex_ACT_ONE/tests/flint-showcase.test.mjs:12:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/flint-showcase.test.mjs:51:28)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: one semantic input is actually rendered by the three supported MCP backends
+not ok 4 - one semantic input is actually rendered by the three supported MCP backends
+  ---
+  duration_ms: 0.1894
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\flint-showcase.test.mjs:74:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing the requested offline Flint showcase'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    document (file:///C:/Development/Alex_ACT_ONE/tests/flint-showcase.test.mjs:12:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/flint-showcase.test.mjs:75:28)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: the offline host bridge restricts messages and does not pretend to run a backend
+not ok 5 - the offline host bridge restricts messages and does not pretend to run a backend
+  ---
+  duration_ms: 0.1822
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\flint-showcase.test.mjs:83:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing the requested offline Flint showcase'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    document (file:///C:/Development/Alex_ACT_ONE/tests/flint-showcase.test.mjs:12:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/flint-showcase.test.mjs:84:18)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: gallery generation is reproducible and pinned rather than fetching a moving library
+not ok 6 - gallery generation is reproducible and pinned rather than fetching a moving library
+  ---
+  duration_ms: 0.2223
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\flint-showcase.test.mjs:99:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open 'C:\\Development\\Alex_ACT_ONE\\scripts\\build-flint-showcase.mjs'"
+  code: 'ENOENT'
+  stack: |-
+    readFileSync (node:fs:624:20)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/flint-showcase.test.mjs:100:20)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 0
+# fail 6
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 86.4684

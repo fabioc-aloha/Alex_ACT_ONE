@@ -1,0 +1,128 @@
+{
+  "date": "2026-11-05",
+  "version": "0.7.0",
+  "syntheticFixtures": true,
+  "realUserArtifactsChanged": false,
+  "results": [
+    {
+      "id": "markdown-to-text",
+      "skill": "md-to-txt",
+      "status": "pass",
+      "evidence": {
+        "outputBytes": 131,
+        "sentinelAndTablePreserved": true
+      }
+    },
+    {
+      "id": "markdown-to-html",
+      "skill": "md-to-html",
+      "status": "pass",
+      "evidence": {
+        "outputBytes": 3521,
+        "headingAndTablePreserved": true
+      }
+    },
+    {
+      "id": "markdown-to-docx",
+      "skill": "md-to-word",
+      "status": "pass",
+      "evidence": {
+        "outputBytes": 11727,
+        "docxXmlSentinelAndTablePreserved": true
+      }
+    },
+    {
+      "id": "docx-to-markdown",
+      "skill": "docx-to-md",
+      "status": "pass",
+      "evidence": {
+        "outputBytes": 386,
+        "roundtripAccepted": true
+      }
+    },
+    {
+      "id": "html-to-markdown",
+      "skill": "html-to-md",
+      "status": "pass",
+      "evidence": {
+        "outputBytes": 49,
+        "headingAndListPreserved": true
+      }
+    },
+    {
+      "id": "markdown-to-eml",
+      "skill": "md-to-eml",
+      "status": "pass",
+      "evidence": {
+        "outputBytes": 1035,
+        "headersVerified": true,
+        "sent": false
+      }
+    },
+    {
+      "id": "rich-email-validation-only",
+      "skill": "rich-email",
+      "status": "pass",
+      "evidence": {
+        "subjectChars": 13,
+        "bodyWords": 7,
+        "unsent": true,
+        "outlookOpened": false
+      }
+    },
+    {
+      "id": "banner-generator",
+      "skill": "svg-banner",
+      "status": "pass",
+      "evidence": {
+        "outputBytes": 24699,
+        "fixedDimensionsAndTextPreserved": true
+      }
+    },
+    {
+      "id": "ascii-bars-roundtrip",
+      "skill": "ascii-chart",
+      "status": "pass",
+      "evidence": {
+        "renderedAndChecked": true
+      }
+    },
+    {
+      "id": "theme-contrast-positive-negative",
+      "skill": "flint-theme",
+      "status": "pass",
+      "evidence": {
+        "contrastingPass": true,
+        "identicalColorsFail": true
+      }
+    },
+    {
+      "id": "enterprise-audit-isolated-settings",
+      "skill": "setup-enterprise-stack",
+      "status": "pass",
+      "evidence": {
+        "auditPrinted": true,
+        "fixtureSettingsPreserved": true,
+        "userSettingsAccessed": false
+      }
+    },
+    {
+      "id": "project-bootstrap-preview",
+      "skill": "bootstrap-project",
+      "status": "pass",
+      "evidence": {
+        "previewOnly": true,
+        "existingFilesPreserved": true
+      }
+    },
+    {
+      "id": "converter-missing-input",
+      "skill": "md-to-txt",
+      "status": "pass",
+      "evidence": {
+        "explicitFailure": true,
+        "noSuccessArtifact": true
+      }
+    }
+  ]
+}

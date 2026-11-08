@@ -1,0 +1,148 @@
+TAP version 13
+# Subtest: gate rejects failures, skipped/todo/cancelled tests, empty runs, and absent or inconsistent totals
+ok 1 - gate rejects failures, skipped/todo/cancelled tests, empty runs, and absent or inconsistent totals
+  ---
+  duration_ms: 12.1501
+  type: 'test'
+  ...
+# Subtest: lane selection covers every test file and explicitly records platform exclusions
+ok 2 - lane selection covers every test file and explicitly records platform exclusions
+  ---
+  duration_ms: 5.1408
+  type: 'test'
+  ...
+# Subtest: the actual gate runner cannot turn a real skipped test into success
+ok 3 - the actual gate runner cannot turn a real skipped test into success
+  ---
+  duration_ms: 528.0231
+  type: 'test'
+  ...
+# Subtest: integration gate fails before tests when the selected runtime is not provisioned
+ok 4 - integration gate fails before tests when the selected runtime is not provisioned
+  ---
+  duration_ms: 112.6075
+  type: 'test'
+  ...
+# Subtest: workflow uses reviewed immutable actions, read-only permissions, direct-main triggers, and both lanes
+ok 5 - workflow uses reviewed immutable actions, read-only permissions, direct-main triggers, and both lanes
+  ---
+  duration_ms: 1.2092
+  type: 'test'
+  ...
+# Subtest: Word optional-module loading honors an explicitly provisioned CI runtime
+ok 6 - Word optional-module loading honors an explicitly provisioned CI runtime
+  ---
+  duration_ms: 119.1647
+  type: 'test'
+  ...
+# Subtest: runnable rich-email commands are marked, portable, and backed by real shipped targets
+ok 7 - runnable rich-email commands are marked, portable, and backed by real shipped targets
+  ---
+  duration_ms: 1.8441
+  type: 'test'
+  ...
+# Subtest: new executable markers cannot silently bypass the curated safe command tests
+ok 8 - new executable markers cannot silently bypass the curated safe command tests
+  ---
+  duration_ms: 480.5901
+  type: 'test'
+  ...
+# Subtest: documented commands run against an installed copy from an unrelated adopter directory
+ok 9 - documented commands run against an installed copy from an unrelated adopter directory
+  ---
+  duration_ms: 418.0541
+  type: 'test'
+  ...
+# Subtest: Replicate documentation points to the real manifest and environment reference
+ok 10 - Replicate documentation points to the real manifest and environment reference
+  ---
+  duration_ms: 2.3975
+  type: 'test'
+  ...
+# Subtest: README skills table lists every declared asset exactly once with its source link
+ok 11 - README skills table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 2.2794
+  type: 'test'
+  ...
+# Subtest: README prompts table lists every declared asset exactly once with its source link
+ok 12 - README prompts table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 48.1419
+  type: 'test'
+  ...
+# Subtest: README instructions table lists every declared asset exactly once with its source link
+ok 13 - README instructions table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 36.2815
+  type: 'test'
+  ...
+# Subtest: one generated inventory derives source counts from the manifest and server registrations
+ok 14 - one generated inventory derives source counts from the manifest and server registrations
+  ---
+  duration_ms: 4.4751
+  type: 'test'
+  ...
+# Subtest: the documentation generator has no drift and --check performs no writes
+ok 15 - the documentation generator has no drift and --check performs no writes
+  ---
+  duration_ms: 695.8766
+  type: 'test'
+  ...
+# Subtest: instruction role metadata is derived from canonical descriptions, not an independent procedure
+ok 16 - instruction role metadata is derived from canonical descriptions, not an independent procedure
+  ---
+  duration_ms: 75.1895
+  type: 'test'
+  ...
+# Subtest: stale instruction role metadata fails the read-only drift check
+ok 17 - stale instruction role metadata fails the read-only drift check
+  ---
+  duration_ms: 159.0414
+  type: 'test'
+  ...
+# Subtest: generation rejects a prompt routed to a missing owner before producing misleading tables
+ok 18 - generation rejects a prompt routed to a missing owner before producing misleading tables
+  ---
+  duration_ms: 1108.298
+  type: 'test'
+  ...
+# Subtest: current docs distinguish shipped optimization from source-only chart additions
+ok 19 - current docs distinguish shipped optimization from source-only chart additions
+  ---
+  duration_ms: 2.4335
+  type: 'test'
+  ...
+# Subtest: draft preparation is unsent, preserves content, and inserts the spacer only once
+ok 20 - draft preparation is unsent, preserves content, and inserts the spacer only once
+  ---
+  duration_ms: 3.7325
+  type: 'test'
+  ...
+# Subtest: unsupported multipart and malformed recipient headers fail explicitly
+ok 21 - unsupported multipart and malformed recipient headers fail explicitly
+  ---
+  duration_ms: 0.6311
+  type: 'test'
+  ...
+# Subtest: word counting excludes styles and script bodies
+ok 22 - word counting excludes styles and script bodies
+  ---
+  duration_ms: 0.5391
+  type: 'test'
+  ...
+# Subtest: validation-only CLI runs without Outlook, does not alter the EML, and creates no draft
+ok 23 - validation-only CLI runs without Outlook, does not alter the EML, and creates no draft
+  ---
+  duration_ms: 103.8973
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2290.8081

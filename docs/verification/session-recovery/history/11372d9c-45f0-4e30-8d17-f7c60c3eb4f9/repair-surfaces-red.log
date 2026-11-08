@@ -1,0 +1,186 @@
+TAP version 13
+# Subtest: foreign instruction blocks the whole activation and does not create other files or a receipt
+ok 1 - foreign instruction blocks the whole activation and does not create other files or a receipt
+  ---
+  duration_ms: 370.6098
+  type: 'test'
+  ...
+# Subtest: modified owned instructions and their receipt are preserved on blocked apply
+ok 2 - modified owned instructions and their receipt are preserved on blocked apply
+  ---
+  duration_ms: 634.7467
+  type: 'test'
+  ...
+# Subtest: explicit conflict overwrite has a read-only preview and then verifies canonical bytes
+ok 3 - explicit conflict overwrite has a read-only preview and then verifies canonical bytes
+  ---
+  duration_ms: 624.4277
+  type: 'test'
+  ...
+# Subtest: an unchanged receipt-owned older instruction upgrades without an overwrite flag
+ok 4 - an unchanged receipt-owned older instruction upgrades without an overwrite flag
+  ---
+  duration_ms: 704.7558
+  type: 'test'
+  ...
+# Subtest: receipt migration cannot claim mixed or foreign ownership, even with overwrite enabled
+ok 5 - receipt migration cannot claim mixed or foreign ownership, even with overwrite enabled
+  ---
+  duration_ms: 487.5572
+  type: 'test'
+  ...
+# Subtest: a late destination change invalidates an in-memory plan before any writes
+ok 6 - a late destination change invalidates an in-memory plan before any writes
+  ---
+  duration_ms: 55.7232
+  type: 'test'
+  ...
+# Subtest: overwrite policy does not bypass removal ownership rules
+ok 7 - overwrite policy does not bypass removal ownership rules
+  ---
+  duration_ms: 107.8481
+  type: 'test'
+  ...
+# Subtest: a failed apply does not claim incomplete ownership and can be explicitly recovered
+ok 8 - a failed apply does not claim incomplete ownership and can be explicitly recovered
+  ---
+  duration_ms: 587.3453
+  type: 'test'
+  ...
+# Subtest: host readiness reports activation conflicts as blocked rather than ready to apply
+not ok 9 - host readiness reports activation conflicts as blocked rather than ready to apply
+  ---
+  duration_ms: 258.2975
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\activation-conflicts.test.mjs:156:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'ready-to-apply'
+    - 'blocked'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'blocked'
+  actual: 'ready-to-apply'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/activation-conflicts.test.mjs:165:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: empty package directories are installed, not ready or launchable
+ok 10 - empty package directories are installed, not ready or launchable
+  ---
+  duration_ms: 8.9326
+  type: 'test'
+  ...
+# Subtest: versions, metadata, and the server-resolved Flint library fail explicitly
+ok 11 - versions, metadata, and the server-resolved Flint library fail explicitly
+  ---
+  duration_ms: 19.8887
+  type: 'test'
+  ...
+# Subtest: a matched but failing entrypoint is not launchable and reports its failure
+ok 12 - a matched but failing entrypoint is not launchable and reports its failure
+  ---
+  duration_ms: 100.7486
+  type: 'test'
+  ...
+# Subtest: readiness launch probes have a real bounded timeout
+ok 13 - readiness launch probes have a real bounded timeout
+  ---
+  duration_ms: 124.0695
+  type: 'test'
+  ...
+# Subtest: a successful version probe does not pretend the host connected
+ok 14 - a successful version probe does not pretend the host connected
+  ---
+  duration_ms: 102.0417
+  type: 'test'
+  ...
+# Subtest: provisioner preview honors the environment runtime without installing
+ok 15 - provisioner preview honors the environment runtime without installing
+  ---
+  duration_ms: 632.0174
+  type: 'test'
+  ...
+# Subtest: dependency CLI reports the explicitly selected runtime and rejects empty packages
+not ok 16 - dependency CLI reports the explicitly selected runtime and rejects empty packages
+  ---
+  duration_ms: 74.7623
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\runtime-readiness.test.mjs:104:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'C:\\Users\\<USER>\\AppData\\Local\\Temp\\one readiness-nWi9t1\\.copilot\\plugin-data\\alex-act-one\\runtime'
+    - 'C:\\Users\\<USER>\\AppData\\Local\\Temp\\one readiness-nWi9t1'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'C:\\Users\\<USER>\\AppData\\Local\\Temp\\one readiness-nWi9t1'
+  actual: 'C:\\Users\\<USER>\\AppData\\Local\\Temp\\one readiness-nWi9t1\\.copilot\\plugin-data\\alex-act-one\\runtime'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/runtime-readiness.test.mjs:116:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: the actual flint launcher rejects metadata drift from the shared registry
+ok 17 - the actual flint launcher rejects metadata drift from the shared registry
+  ---
+  duration_ms: 71.7597
+  type: 'test'
+  ...
+# Subtest: the actual playwright launcher rejects metadata drift from the shared registry
+ok 18 - the actual playwright launcher rejects metadata drift from the shared registry
+  ---
+  duration_ms: 66.6908
+  type: 'test'
+  ...
+# Subtest: the actual replicate launcher rejects metadata drift from the shared registry
+ok 19 - the actual replicate launcher rejects metadata drift from the shared registry
+  ---
+  duration_ms: 63.122
+  type: 'test'
+  ...
+# Subtest: the provisioner verifies installation outcome before success: ready
+ok 20 - the provisioner verifies installation outcome before success: ready
+  ---
+  duration_ms: 716.2234
+  type: 'test'
+  ...
+# Subtest: the provisioner verifies installation outcome before success: empty
+ok 21 - the provisioner verifies installation outcome before success: empty
+  ---
+  duration_ms: 580.3058
+  type: 'test'
+  ...
+# Subtest: the provisioner verifies installation outcome before success: wrong-report
+ok 22 - the provisioner verifies installation outcome before success: wrong-report
+  ---
+  duration_ms: 692.5855
+  type: 'test'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 20
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3927.2517

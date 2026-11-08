@@ -1,0 +1,695 @@
+TAP version 13
+# Subtest: runnable rich-email commands are marked, portable, and backed by real shipped targets
+ok 1 - runnable rich-email commands are marked, portable, and backed by real shipped targets
+  ---
+  duration_ms: 2.0889
+  type: 'test'
+  ...
+# Subtest: additional flags or commands cannot masquerade as a reviewed executable example
+ok 2 - additional flags or commands cannot masquerade as a reviewed executable example
+  ---
+  duration_ms: 1.1786
+  type: 'test'
+  ...
+# Subtest: new executable markers cannot silently bypass the curated safe command tests
+ok 3 - new executable markers cannot silently bypass the curated safe command tests
+  ---
+  duration_ms: 376.1441
+  type: 'test'
+  ...
+# Subtest: documented commands run against an installed copy from an unrelated adopter directory
+ok 4 - documented commands run against an installed copy from an unrelated adopter directory
+  ---
+  duration_ms: 477.0504
+  type: 'test'
+  ...
+# Subtest: Replicate documentation points to the real manifest and environment reference
+ok 5 - Replicate documentation points to the real manifest and environment reference
+  ---
+  duration_ms: 3.1385
+  type: 'test'
+  ...
+# Subtest: README skills table lists every declared asset exactly once with its source link
+ok 6 - README skills table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 2.2019
+  type: 'test'
+  ...
+# Subtest: README prompts table lists every declared asset exactly once with its source link
+ok 7 - README prompts table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 43.685
+  type: 'test'
+  ...
+# Subtest: README instructions table lists every declared asset exactly once with its source link
+ok 8 - README instructions table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 24.4547
+  type: 'test'
+  ...
+# Subtest: one generated inventory derives source counts from the manifest and server registrations
+ok 9 - one generated inventory derives source counts from the manifest and server registrations
+  ---
+  duration_ms: 2.6495
+  type: 'test'
+  ...
+# Subtest: the documentation generator has no drift and --check performs no writes
+ok 10 - the documentation generator has no drift and --check performs no writes
+  ---
+  duration_ms: 393.6919
+  type: 'test'
+  ...
+# Subtest: instruction role metadata is derived from canonical descriptions, not an independent procedure
+ok 11 - instruction role metadata is derived from canonical descriptions, not an independent procedure
+  ---
+  duration_ms: 63.9248
+  type: 'test'
+  ...
+# Subtest: stale instruction role metadata fails the read-only drift check
+ok 12 - stale instruction role metadata fails the read-only drift check
+  ---
+  duration_ms: 212.9825
+  type: 'test'
+  ...
+# Subtest: generation rejects a prompt routed to a missing owner before producing misleading tables
+ok 13 - generation rejects a prompt routed to a missing owner before producing misleading tables
+  ---
+  duration_ms: 1281.2616
+  type: 'test'
+  ...
+# Subtest: current docs distinguish shipped optimization from source-only chart additions
+ok 14 - current docs distinguish shipped optimization from source-only chart additions
+  ---
+  duration_ms: 2.7581
+  type: 'test'
+  ...
+# Subtest: install reference separates repository source, Mall release, and optional runtime state
+ok 15 - install reference separates repository source, Mall release, and optional runtime state
+  ---
+  duration_ms: 3.1522
+  type: 'test'
+  ...
+# Subtest: release and testing docs cover the relocated host reference and current onboarding boundary
+ok 16 - release and testing docs cover the relocated host reference and current onboarding boundary
+  ---
+  duration_ms: 5.3568
+  type: 'test'
+  ...
+# Subtest: roadmap is a pending-work plan with evidence links and explicit decision gates
+ok 17 - roadmap is a pending-work plan with evidence links and explicit decision gates
+  ---
+  duration_ms: 1.8468
+  type: 'test'
+  ...
+# Subtest: repository candidate notices match package metadata and keep the manual install switch explicit
+ok 18 - repository candidate notices match package metadata and keep the manual install switch explicit
+  ---
+  duration_ms: 8.4307
+  type: 'test'
+  ...
+# Subtest: evaluation names its reference host, isolation limits, and comparison hypotheses
+ok 19 - evaluation names its reference host, isolation limits, and comparison hypotheses
+  ---
+  duration_ms: 12.5005
+  type: 'test'
+  ...
+# Subtest: evaluation results are task-local with sample size, counterevidence, and limitations
+ok 20 - evaluation results are task-local with sample size, counterevidence, and limitations
+  ---
+  duration_ms: 4.686
+  type: 'test'
+  ...
+# Subtest: manual release evidence distinguishes scenario observations from delivery support
+ok 21 - manual release evidence distinguishes scenario observations from delivery support
+  ---
+  duration_ms: 2.1916
+  type: 'test'
+  ...
+# Subtest: one short guide covers install, consented activation, verification, and a dependency-free first workflow
+not ok 22 - one short guide covers install, consented activation, verification, and a dependency-free first workflow
+  ---
+  duration_ms: 6.2897
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\onboarding.test.mjs:22:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /repository source/. Input:
+    
+    '# Your first session with Alex ACT ONE\n' +
+      '\n' +
+      'Install the pack, approve activation in one app, then try a read-only reasoning\n' +
+      'workflow. You need a working GitHub Copilot setup and Node 24 or newer, but\n' +
+      '**no optional runtime tools**, API tokens, or paid services for this example.\n' +
+      'Copilot CLI is the reference path below; VS Code also exposes the activation\n' +
+      'command. Other hosts have [their own setup steps](install.md#where-alex-act-one-works).\n' +
+      '\n' +
+      '## 1. Install\n' +
+      '\n' +
+      'If Alex Mall is not registered, add it in your terminal:\n' +
+      '\n' +
+      '```powershell\n' +
+      'copilot plugin marketplace add fabioc-aloha/Alex_Skill_Mall\n' +
+      '```\n' +
+      '\n' +
+      'Then install the reviewed release:\n' +
+      '\n' +
+      '```powershell\n' +
+      'copilot plugin install alex-act-one@alex-mall\n' +
+      '```\n' +
+      '\n' +
+      'See the [Mall option](install.md#mall-option) for details. Direct repository\n' +
+      'source installs can include unreleased changes and are deprecated.\n' +
+      'The repository test candidate is `0.9.0-rc.1`, not a tagged or Mall release;\n' +
+      'the [temporary candidate procedure](install.md#testing-the-repository-candidate)\n' +
+      'is separate from normal onboarding.\n' +
+      '\n' +
+      'Open a Copilot session and confirm it discovers the installed `bootstrap-core`\n' +
+      'and `critical-thinking` skills. If either is missing, stop and check the loaded\n' +
+      'plugin root and version; do not activate from an unrelated checkout.\n' +
+      'See [installation options](install.md#1-install-the-plugin).\n' +
+      '\n' +
+      '## 2. Activate\n' +
+      '\n' +
+      'In the app where you want the always-on instructions, run:\n' +
+      '\n' +
+      '```text\n' +
+      '/alex-act-one bootstrap-core\n' +
+      '```\n' +
+      '\n' +
+      'If that command is unavailable, ask: "Use the installed Alex ACT ONE\n' +
+      'bootstrap-core skill to preview activation. Do not apply it yet."\n' +
+      '\n' +
+      'Review the installed version, target profile, and proposed file actions.\n' +
+      'Activation affects every workspace using that profile, not just this project.\n' +
+      'Give approval only for the target and actions you want. Installing the plugin\n' +
+      'alone does not activate instructions; repeat activation in each app you use.\n' +
+      '\n' +
+      'The source-only conflict guard is not in published `v0.8.0`. Review existing\n' +
+      'files before approving replacements; do not assume the release will block them.\n' +
+      'If blocked in the source candidate, stop and review the\n' +
+      '[conflict procedure](../skills/bootstrap-core/SKILL.md#instruction-conflicts);\n' +
+      'do not add an overwrite flag to get past it.\n' +
+      '\n' +
+      '## 3. Verify\n' +
+      '\n' +
+      'After the approved apply, ask the agent:\n' +
+      '\n' +
+      '```text\n' +
+      'Use bootstrap-core to preview the same installed version and target again.\n' +
+      'Do not apply or repair anything. Report expectedFiles, every file action,\n' +
+      'and the receipt action.\n' +
+      '```\n' +
+      '\n' +
+      'Success means every current instruction is `preserve`, the receipt action is\n' +
+      '`preserve`, and the version and target match the approved preview. After apply,\n' +
+      'the script also checks destination hashes and reports `receiptCurrent: true`.\n' +
+      'Missing files, replacement actions, or a stale receipt need investigation.\n' +
+      '\n' +
+      'This verifies files, not that the host has loaded them. Start a new session\n' +
+      '(fully restart Scout), then ask the host to list the active Alex instructions\n' +
+      'and their source paths. If it cannot expose that evidence, record host loading\n' +
+      'as **unverified**. A plausible answer to the next exercise does not prove it.\n' +
+      '\n' +
+      '## 4. Try one workflow\n' +
+      '\n' +
+      'Paste this into that session:\n' +
+      '\n' +
+      '<!-- first-workflow -->\n' +
+      '```text\n' +
+      'Use the critical-thinking skill in act-pass mode.\n' +
+      'This is a synthetic dashboard case: someone reports that loading takes\n' +
+      '8 seconds and proposes a Rust rewrite or Redis caching. No timings have\n' +
+      'been measured beyond that report.\n' +
+      'Do not edit or write files. Apart from loading the skill guidance,\n' +
+      'do not use tools or commands for this exercise.\n' +
+      'Give two plausible explanations, evidence that would disconfirm each,\n' +
+      'and the next measurement to collect. Mark what remains unknown rather\n' +
+      'than choosing a rewrite or cache without evidence.\n' +
+      '```\n' +
+      '\n' +
+      'Look for competing explanations, evidence that could rule each out, and a\n' +
+      'specific next measurement. The response should distinguish the reported delay\n' +
+      'from measured facts and leave files unchanged. Exact wording is not the test.\n' +
+      'This is one practice case, not evidence of general reliability gains.\n' +
+      '\n' +
+      '## What to try next\n' +
+      '\n' +
+      '- [Skills and commands](../README.md#the-skills): choose a workflow for your work.\n' +
+      '- [Install and host reference](install.md): Scout, other hosts, optional tools,\n' +
+      '  and reinstall boundaries.\n' +
+      '- [Roadmap](../ROADMAP.md): the published baseline is `v0.8.0`; repository installs\n' +
+      '  can include later source-only repairs and the interaction skill, which are not\n' +
+      '  yet released through Mall. The offline galleries are demo-only files to open\n' +
+      '  in a browser, not proof your MCP runtime is ready.\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    # Your first session with Alex ACT ONE
+    
+    Install the pack, approve activation in one app, then try a read-only reasoning
+    workflow. You need a working GitHub Copilot setup and Node 24 or newer, but
+    **no optional runtime tools**, API tokens, or paid services for this example.
+    Copilot CLI is the reference path below; VS Code also exposes the activation
+    command. Other hosts have [their own setup steps](install.md#where-alex-act-one-works).
+    
+    ## 1. Install
+    
+    If Alex Mall is not registered, add it in your terminal:
+    
+    ```powershell
+    copilot plugin marketplace add fabioc-aloha/Alex_Skill_Mall
+    ```
+    
+    Then install the reviewed release:
+    
+    ```powershell
+    copilot plugin install alex-act-one@alex-mall
+    ```
+    
+    See the [Mall option](install.md#mall-option) for details. Direct repository
+    source installs can include unreleased changes and are deprecated.
+    The repository test candidate is `0.9.0-rc.1`, not a tagged or Mall release;
+    the [temporary candidate procedure](install.md#testing-the-repository-candidate)
+    is separate from normal onboarding.
+    
+    Open a Copilot session and confirm it discovers the installed `bootstrap-core`
+    and `critical-thinking` skills. If either is missing, stop and check the loaded
+    plugin root and version; do not activate from an unrelated checkout.
+    See [installation options](install.md#1-install-the-plugin).
+    
+    ## 2. Activate
+    
+    In the app where you want the always-on instructions, run:
+    
+    ```text
+    /alex-act-one bootstrap-core
+    ```
+    
+    If that command is unavailable, ask: "Use the installed Alex ACT ONE
+    bootstrap-core skill to preview activation. Do not apply it yet."
+    
+    Review the installed version, target profile, and proposed file actions.
+    Activation affects every workspace using that profile, not just this project.
+    Give approval only for the target and actions you want. Installing the plugin
+    alone does not activate instructions; repeat activation in each app you use.
+    
+    The source-only conflict guard is not in published `v0.8.0`. Review existing
+    files before approving replacements; do not assume the release will block them.
+    If blocked in the source candidate, stop and review the
+    [conflict procedure](../skills/bootstrap-core/SKILL.md#instruction-conflicts);
+    do not add an overwrite flag to get past it.
+    
+    ## 3. Verify
+    
+    After the approved apply, ask the agent:
+    
+    ```text
+    Use bootstrap-core to preview the same installed version and target again.
+    Do not apply or repair anything. Report expectedFiles, every file action,
+    and the receipt action.
+    ```
+    
+    Success means every current instruction is `preserve`, the receipt action is
+    `preserve`, and the version and target match the approved preview. After apply,
+    the script also checks destination hashes and reports `receiptCurrent: true`.
+    Missing files, replacement actions, or a stale receipt need investigation.
+    
+    This verifies files, not that the host has loaded them. Start a new session
+    (fully restart Scout), then ask the host to list the active Alex instructions
+    and their source paths. If it cannot expose that evidence, record host loading
+    as **unverified**. A plausible answer to the next exercise does not prove it.
+    
+    ## 4. Try one workflow
+    
+    Paste this into that session:
+    
+    <!-- first-workflow -->
+    ```text
+    Use the critical-thinking skill in act-pass mode.
+    This is a synthetic dashboard case: someone reports that loading takes
+    8 seconds and proposes a Rust rewrite or Redis caching. No timings have
+    been measured beyond that report.
+    Do not edit or write files. Apart from loading the skill guidance,
+    do not use tools or commands for this exercise.
+    Give two plausible explanations, evidence that would disconfirm each,
+    and the next measurement to collect. Mark what remains unknown rather
+    than choosing a rewrite or cache without evidence.
+    ```
+    
+    Look for competing explanations, evidence that could rule each out, and a
+    specific next measurement. The response should distinguish the reported delay
+    from measured facts and leave files unchanged. Exact wording is not the test.
+    This is one practice case, not evidence of general reliability gains.
+    
+    ## What to try next
+    
+    - [Skills and commands](../README.md#the-skills): choose a workflow for your work.
+    - [Install and host reference](install.md): Scout, other hosts, optional tools,
+      and reinstall boundaries.
+    - [Roadmap](../ROADMAP.md): the published baseline is `v0.8.0`; repository installs
+      can include later source-only repairs and the interaction skill, which are not
+      yet released through Mall. The offline galleries are demo-only files to open
+      in a browser, not proof your MCP runtime is ready.
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/onboarding.test.mjs:45:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: the first-workflow prompt is synthetic and read-only with a semantic success rubric
+ok 23 - the first-workflow prompt is synthetic and read-only with a semantic success rubric
+  ---
+  duration_ms: 1.4005
+  type: 'test'
+  ...
+# Subtest: README routes to onboarding before its catalogs and keeps setup reference separate
+ok 24 - README routes to onboarding before its catalogs and keeps setup reference separate
+  ---
+  duration_ms: 2.9404
+  type: 'test'
+  ...
+# Subtest: install guidance preserves observed deprecation instead of treating command availability as a support promise
+ok 25 - install guidance preserves observed deprecation instead of treating command availability as a support promise
+  ---
+  duration_ms: 4.0693
+  type: 'test'
+  ...
+# Subtest: onboarding links and legacy README setup anchors still resolve
+ok 26 - onboarding links and legacy README setup anchors still resolve
+  ---
+  duration_ms: 54.8195
+  type: 'test'
+  ...
+# Subtest: documented activation signals work from an installed copy without touching an adopter workspace
+ok 27 - documented activation signals work from an installed copy without touching an adopter workspace
+  ---
+  duration_ms: 1644.1427
+  type: 'test'
+  ...
+# Subtest: versioned scenarios cover every representative family and failure/consent boundary
+ok 28 - versioned scenarios cover every representative family and failure/consent boundary
+  ---
+  duration_ms: 3.8957
+  type: 'test'
+  ...
+# Subtest: scenario instructions require fresh observed evidence rather than synthetic expected answers
+ok 29 - scenario instructions require fresh observed evidence rather than synthetic expected answers
+  ---
+  duration_ms: 1.9451
+  type: 'test'
+  ...
+# Subtest: MCP runtime pins
+    # Subtest: every launcher route guards the reviewed pin
+    ok 1 - every launcher route guards the reviewed pin
+      ---
+      duration_ms: 0.7032
+      type: 'test'
+      ...
+    # Subtest: every reviewed server has a launcher route
+    ok 2 - every reviewed server has a launcher route
+      ---
+      duration_ms: 0.1481
+      type: 'test'
+      ...
+    # Subtest: the documented pins match the reviewed pins
+    ok 3 - the documented pins match the reviewed pins
+      ---
+      duration_ms: 1.0354
+      type: 'test'
+      ...
+    1..3
+ok 30 - MCP runtime pins
+  ---
+  duration_ms: 2.6011
+  type: 'suite'
+  ...
+# Subtest: plugin.json
+    # Subtest: every declared server invokes a real launcher route
+    ok 1 - every declared server invokes a real launcher route
+      ---
+      duration_ms: 0.3203
+      type: 'test'
+      ...
+    # Subtest: every declared server points at a launcher that exists
+    ok 2 - every declared server points at a launcher that exists
+      ---
+      duration_ms: 0.447
+      type: 'test'
+      ...
+    # Subtest: skills and commands directories resolve
+    ok 3 - skills and commands directories resolve
+      ---
+      duration_ms: 0.3912
+      type: 'test'
+      ...
+    1..3
+ok 31 - plugin.json
+  ---
+  duration_ms: 1.3702
+  type: 'suite'
+  ...
+# Subtest: Humanizer voice fallback
+    # Subtest: uses the practitioner-editor fallback without overriding an explicit voice
+    ok 1 - uses the practitioner-editor fallback without overriding an explicit voice
+      ---
+      duration_ms: 0.4165
+      type: 'test'
+      ...
+    # Subtest: routes default Copywriter rewrites through the practitioner-editor fallback
+    ok 2 - routes default Copywriter rewrites through the practitioner-editor fallback
+      ---
+      duration_ms: 0.11
+      type: 'test'
+      ...
+    # Subtest: keeps the governance reference aligned to the six-tag taxonomy
+    ok 3 - keeps the governance reference aligned to the six-tag taxonomy
+      ---
+      duration_ms: 0.1279
+      type: 'test'
+      ...
+    # Subtest: preserves current source scope and historical promotional-language caveats
+    ok 4 - preserves current source scope and historical promotional-language caveats
+      ---
+      duration_ms: 2.4853
+      type: 'test'
+      ...
+    1..4
+ok 32 - Humanizer voice fallback
+  ---
+  duration_ms: 3.3731
+  type: 'suite'
+  ...
+# Subtest: Compile Brain customization boundary
+    # Subtest: keeps installed skills canonical and routes project customizations locally
+    ok 1 - keeps installed skills canonical and routes project customizations locally
+      ---
+      duration_ms: 0.2741
+      type: 'test'
+      ...
+    # Subtest: checks whether a process exists before renaming it
+    ok 2 - checks whether a process exists before renaming it
+      ---
+      duration_ms: 0.1708
+      type: 'test'
+      ...
+    1..2
+ok 33 - Compile Brain customization boundary
+  ---
+  duration_ms: 0.5289
+  type: 'suite'
+  ...
+# Subtest: Mutation testing isolation
+    # Subtest: mutates an isolated copy and counter-tests detection rules
+    ok 1 - mutates an isolated copy and counter-tests detection rules
+      ---
+      duration_ms: 0.1289
+      type: 'test'
+      ...
+    1..1
+ok 34 - Mutation testing isolation
+  ---
+  duration_ms: 0.1731
+  type: 'suite'
+  ...
+# Subtest: manifest matches disk
+    # Subtest: every manifest skills entry exists on disk
+    ok 1 - every manifest skills entry exists on disk
+      ---
+      duration_ms: 5.1095
+      type: 'test'
+      ...
+    # Subtest: every skills file on disk is in the manifest
+    ok 2 - every skills file on disk is in the manifest
+      ---
+      duration_ms: 0.5939
+      type: 'test'
+      ...
+    # Subtest: every manifest prompts entry exists on disk
+    ok 3 - every manifest prompts entry exists on disk
+      ---
+      duration_ms: 1.1519
+      type: 'test'
+      ...
+    # Subtest: every prompts file on disk is in the manifest
+    ok 4 - every prompts file on disk is in the manifest
+      ---
+      duration_ms: 0.2712
+      type: 'test'
+      ...
+    # Subtest: every manifest instructions entry exists on disk
+    ok 5 - every manifest instructions entry exists on disk
+      ---
+      duration_ms: 1.1128
+      type: 'test'
+      ...
+    # Subtest: every instructions file on disk is in the manifest
+    ok 6 - every instructions file on disk is in the manifest
+      ---
+      duration_ms: 0.2717
+      type: 'test'
+      ...
+    1..6
+ok 35 - manifest matches disk
+  ---
+  duration_ms: 9.3996
+  type: 'suite'
+  ...
+# Subtest: frontmatter
+    # Subtest: every skill declares a name matching its directory, and a description
+    ok 1 - every skill declares a name matching its directory, and a description
+      ---
+      duration_ms: 59.6544
+      type: 'test'
+      ...
+    # Subtest: every instruction declares a description and applyTo
+    ok 2 - every instruction declares a description and applyTo
+      ---
+      duration_ms: 30.1605
+      type: 'test'
+      ...
+    1..2
+ok 36 - frontmatter
+  ---
+  duration_ms: 89.9994
+  type: 'suite'
+  ...
+# Subtest: markdown links
+    # Subtest: no relative link points at a missing file
+    ok 1 - no relative link points at a missing file
+      ---
+      duration_ms: 458.4892
+      type: 'test'
+      ...
+    1..1
+ok 37 - markdown links
+  ---
+  duration_ms: 458.6337
+  type: 'suite'
+  ...
+# Subtest: documented counts
+    # Subtest: README.md quotes the real counts
+    ok 1 - README.md quotes the real counts
+      ---
+      duration_ms: 1.5758
+      type: 'test'
+      ...
+    # Subtest: ROADMAP.md quotes the real counts
+    ok 2 - ROADMAP.md quotes the real counts
+      ---
+      duration_ms: 1.406
+      type: 'test'
+      ...
+    # Subtest: docs/install.md quotes the real counts
+    ok 3 - docs/install.md quotes the real counts
+      ---
+      duration_ms: 1.246
+      type: 'test'
+      ...
+    1..3
+ok 38 - documented counts
+  ---
+  duration_ms: 4.5179
+  type: 'suite'
+  ...
+# Subtest: Microsoft Scout setup guidance
+    # Subtest: uses skills and bundled scripts instead of unavailable slash commands
+    ok 1 - uses skills and bundled scripts instead of unavailable slash commands
+      ---
+      duration_ms: 0.3914
+      type: 'test'
+      ...
+    # Subtest: package metadata and roadmap do not overstate automatic setup
+    ok 2 - package metadata and roadmap do not overstate automatic setup
+      ---
+      duration_ms: 0.302
+      type: 'test'
+      ...
+    # Subtest: documents host readiness without promising observed activation
+    ok 3 - documents host readiness without promising observed activation
+      ---
+      duration_ms: 0.2953
+      type: 'test'
+      ...
+    # Subtest: documents the Copilot CLI plugin as Scout shared source
+    ok 4 - documents the Copilot CLI plugin as Scout shared source
+      ---
+      duration_ms: 0.301
+      type: 'test'
+      ...
+    # Subtest: makes duplicate plugin roots and restart requirements checkable
+    ok 5 - makes duplicate plugin roots and restart requirements checkable
+      ---
+      duration_ms: 0.1784
+      type: 'test'
+      ...
+    # Subtest: preserves the historical Scout inventory instead of rewriting it as the current count
+    ok 6 - preserves the historical Scout inventory instead of rewriting it as the current count
+      ---
+      duration_ms: 0.191
+      type: 'test'
+      ...
+    # Subtest: names every Flint tool expected after Scout restarts
+    ok 7 - names every Flint tool expected after Scout restarts
+      ---
+      duration_ms: 0.4066
+      type: 'test'
+      ...
+    1..7
+ok 39 - Microsoft Scout setup guidance
+  ---
+  duration_ms: 2.4638
+  type: 'suite'
+  ...
+# Subtest: activation
+    # Subtest: previews without error and writes nothing
+    ok 1 - previews without error and writes nothing
+      ---
+      duration_ms: 221.9591
+      type: 'test'
+      ...
+    # Subtest: plans exactly the instructions the manifest declares
+    ok 2 - plans exactly the instructions the manifest declares
+      ---
+      duration_ms: 116.3684
+      type: 'test'
+      ...
+    1..2
+ok 40 - activation
+  ---
+  duration_ms: 338.5217
+  type: 'suite'
+  ...
+1..40
+# tests 63
+# suites 11
+# pass 62
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2202.9237

@@ -7,10 +7,13 @@
   profile activation receipt is current. The
   [0.9.2 release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.2)
   owns final source, publication, CI, and Mall-delivery evidence.
-- Current local changes are continuity documentation only. Dependency pins,
-  installed packages, credentials, profile instructions, and host configuration
-  were not changed. Replicate retirement remains a proposal, not an approved
-  removal.
+- Current source changes recover stranded reports and supporting evidence in
+  [the repository recovery index](docs/verification/session-recovery/README.md)
+  and add shared instruction-level artifact-storage safeguards. The recovery
+  manifest and tests own integrity evidence; historical reports are not an
+  active backlog. Dependency pins, installed packages, credentials, profile
+  instructions, and host configuration were not changed. Replicate retirement
+  remains a proposal, not an approved removal.
 
 ## Blockers
 
@@ -20,6 +23,9 @@
 - Remaining host evidence, accessibility coverage, and runtime rollback design
   retain their existing acceptance gates. Local readiness is not an all-host
   production certification.
+- The storage policy is effective repository guidance, not a tested host
+  permission boundary. Installed-package activation and hook enforcement retain
+  the [artifact-delivery gate](ROADMAP.md#verify-artifact-delivery-in-supported-hosts).
 
 ## Next Action
 
@@ -40,6 +46,10 @@ separately approved operations.
 - Prior release and pre-upgrade activation evidence is preserved in
   [CHANGELOG.md](CHANGELOG.md) and [docs/testing.md](docs/testing.md). This session
   did not repeat the demonstration rebuilds or full browser acceptance.
+- [Artifact recovery verification](docs/testing.md#repository-artifact-recovery)
+  records exact recovered hashes, original preservation, and targeted
+  policy/routing/bootstrap regressions. The checker can run without external
+  session storage.
 
 ## References
 

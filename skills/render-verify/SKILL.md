@@ -21,6 +21,12 @@ picture.
 **The rule:** if you rendered it, opened it, or edited it, look at it before you
 say it is done.
 
+For project deliverables, apply the
+[shared storage contract](../proactive-awareness/references/project-artifact-storage.md):
+inspect the final repository copy and its resources, not only a temporary
+preview or MCP display. Preserve required supporting sources and report blocked
+delivery explicitly. This check grants no relocation or publication authority.
+
 **Scope.** The method below — open, read the console first, walk a catalog, check
 the claim — is general. It applies to charts, generated HTML reports, SVG
 figures, dashboards, diagrams, and printable output. Charts are the

@@ -1,0 +1,167 @@
+Environment: win32/x64, Node 26.13.0; lane=integration
+Excluded C:\Development\Alex_ACT_ONE\tests\activation-conflicts.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\activation-readiness.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\activation-routing.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\brain-tools.test.cjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\ci-gate.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\ci-runtime-lock.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\deterministic-helpers.test.cjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\documentation-examples.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\documentation.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\evaluation-guide.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\flint-browser-acceptance.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\flint-experimental.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\flint-interactions.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\flint-showcase.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\flint-upgrade.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\install-optional-dependencies.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\markdown-inline-code.test.cjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\md-to-word.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\native-compatibility.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\onboarding.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\powershell-diagnostics.test.cjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\process-launch.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\recovery-boundaries.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\reinstall-release.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\rich-email.test.cjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\runtime-readiness.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\showcase-environment.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\showcase-provenance.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\skill-scenario-runner.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\skill-scenarios.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\smoke.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\svg-position-precision.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\tool-shims.test.cjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\visual-uat-guidance.test.mjs: Structural lane
+flint: exact versions and launch probe verified; host connection not observed.
+playwright: exact versions and launch probe verified; host connection not observed.
+replicate: exact versions and launch probe verified; host connection not observed.
+Converter prerequisites: pandoc 3.13; mmdc 11.17.0; jszip 3.10.1.
+TAP version 13
+# Subtest: real md-to-html preserves literal inline/fenced code and renders tables and links
+ok 1 - real md-to-html preserves literal inline/fenced code and renders tables and links
+  ---
+  duration_ms: 1473.25
+  type: 'test'
+  ...
+# Subtest: real md-to-word preserves literal inline/fenced code and renders tables and links
+ok 2 - real md-to-word preserves literal inline/fenced code and renders tables and links
+  ---
+  duration_ms: 2473.1874
+  type: 'test'
+  ...
+# Subtest: the installed Mermaid npm CLI starts through the shared tool runner
+ok 3 - the installed Mermaid npm CLI starts through the shared tool runner
+  ---
+  duration_ms: 937.0464
+  type: 'test'
+  ...
+# Subtest: provisioned Flint 1.0.1 preserves the MCP and three-backend output contracts
+    # Subtest: vegalite: catalog, validation, compilation, and real render
+    ok 1 - vegalite: catalog, validation, compilation, and real render
+      ---
+      duration_ms: 2753.9395
+      type: 'test'
+      ...
+    # Subtest: echarts: catalog, validation, compilation, and real render
+    ok 2 - echarts: catalog, validation, compilation, and real render
+      ---
+      duration_ms: 2421.7268
+      type: 'test'
+      ...
+    # Subtest: chartjs: catalog, validation, compilation, and real render
+    ok 3 - chartjs: catalog, validation, compilation, and real render
+      ---
+      duration_ms: 95.2539
+      type: 'test'
+      ...
+    # Subtest: validated show accepts the complete chart input
+    ok 4 - validated show accepts the complete chart input
+      ---
+      duration_ms: 11.5625
+      type: 'test'
+      ...
+    # Subtest: interaction grammar and chart-compatible discovery admit highlight plus keyboard navigation
+    ok 5 - interaction grammar and chart-compatible discovery admit highlight plus keyboard navigation
+      ---
+      duration_ms: 21.3715
+      type: 'test'
+      ...
+    # Subtest: a dropped interaction remains a warning even when the chart is valid
+    ok 6 - a dropped interaction remains a warning even when the chart is valid
+      ---
+      duration_ms: 5.6916
+      type: 'test'
+      ...
+    # Subtest: unknown reset gestures are explicit errors rather than neutral-state fallbacks
+    ok 7 - unknown reset gestures are explicit errors rather than neutral-state fallbacks
+      ---
+      duration_ms: 5.3169
+      type: 'test'
+      ...
+    # Subtest: initial state and linked boards use their separate supported input surfaces
+    ok 8 - initial state and linked boards use their separate supported input surfaces
+      ---
+      duration_ms: 34.497
+      type: 'test'
+      ...
+    # Subtest: offline export CLI is independent of the caller timezone and uses UTC date annotations
+    ok 9 - offline export CLI is independent of the caller timezone and uses UTC date annotations
+      ---
+      duration_ms: 17771.8358
+      type: 'test'
+      ...
+    # Subtest: invalid snake_case names and missing fields remain explicit failures
+    ok 10 - invalid snake_case names and missing fields remain explicit failures
+      ---
+      duration_ms: 2.7634
+      type: 'test'
+      ...
+    1..10
+ok 4 - provisioned Flint 1.0.1 preserves the MCP and three-backend output contracts
+  ---
+  duration_ms: 24275.4682
+  type: 'test'
+  ...
+# Unknown MCP runtime route: no-such-route
+# Subtest: provisioned runtime
+    # Subtest: flint starts and reports 1.0.1
+    ok 1 - flint starts and reports 1.0.1
+      ---
+      duration_ms: 1136.9639
+      type: 'test'
+      ...
+    # Subtest: playwright starts and reports 0.0.80
+    ok 2 - playwright starts and reports 0.0.80
+      ---
+      duration_ms: 562.7846
+      type: 'test'
+      ...
+    # Subtest: replicate starts and reports 0.9.0
+    ok 3 - replicate starts and reports 0.9.0
+      ---
+      duration_ms: 990.0362
+      type: 'test'
+      ...
+    # Subtest: an unknown route fails loudly
+    ok 4 - an unknown route fails loudly
+      ---
+      duration_ms: 110.8215
+      type: 'test'
+      ...
+    1..4
+ok 5 - provisioned runtime
+  ---
+  duration_ms: 2802.1715
+  type: 'suite'
+  ...
+1..5
+# tests 18
+# suites 1
+# pass 18
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 24501.9405
+Verified integration lane: 18 passed; no skips, todos, or cancellations.

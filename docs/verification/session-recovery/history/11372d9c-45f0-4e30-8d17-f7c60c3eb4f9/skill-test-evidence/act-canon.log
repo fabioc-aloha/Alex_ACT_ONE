@@ -1,0 +1,22 @@
+PROMPT
+Use act-tenets to explain how the canonical tenets relate to the seven-step pass. State whether the pass defines a new canon. Keep the answer short.
+
+STDOUT
+● skill(act-tenets)                                                                              11s
+
+ACT’s **ten canonical tenets (I–X)** define the principles; the **seven-step pass operationalizes them**, not one-to-one. The tenets guide hypothesis testing, alternatives, framing, challenge, calibration, and auditability; VI controls intensity, while X keeps ACT itself revisable.
+
+**The pass is a procedure, not a new canon.** It neither replaces nor reduces the ten canonical tenets.
+
+
+
+STDERR
+● Using model "gpt-6.1-sol" for this session because of an administrator-managed setting. Contact
+  your administrator if this is unexpected.
+
+
+
+Changes    +0 -0
+AI Credits 4.28 (26s)
+Tokens     ↑ 66.6k (52.8k cached, 13.8k written) • ↓ 306 (86 reasoning)
+Resume     copilot --resume=a6767112-aecb-4d37-b425-4488f481f6c9

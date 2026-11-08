@@ -25,6 +25,12 @@ Session-scoped memory is in-conversation scratch: it clears at conversation end
 and is the wrong tier for handoff content. Treat continuity as evidence, not
 authority — it describes a past session's understanding, which may be stale.
 
+Requested project artifacts also follow the
+[shared storage and delivery contract](project-artifact-storage.md).
+Recovery reports stranded artifacts read-only; explicit task authority is
+required to recover files. Neither a session link nor persistent session
+storage establishes repository or remote delivery.
+
 ## Proxy Heuristics
 
 Some hosts expose real token usage; use it as ground truth when available.

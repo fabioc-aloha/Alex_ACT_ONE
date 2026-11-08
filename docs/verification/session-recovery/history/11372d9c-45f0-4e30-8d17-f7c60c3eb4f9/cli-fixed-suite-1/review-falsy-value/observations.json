@@ -1,0 +1,22 @@
+{
+  "response": "## Review: `lookup(items, index)`\n\n**Pass 2 (Logic)** — the `||` operator treats any falsy return value as \"absent,\" not just `undefined`.\n\n**[blocking] Contract violation: falsy values collapse to `null`**\n\n- **Counterexample**: `lookup([0, false, \"\", 42], 0)` → expected `0` (per contract, preserved), actual returns `null`, since `items[0] || null` evaluates `0 || null`. Same failure for index `1` (`false`) and `2` (`\"\"`).\n- **Consequence**: Any caller relying on `0`, `false`, or `\"\"` as valid stored values will silently receive `null` instead, indistinguishable from a genuinely absent index — e.g., a UI rendering a quantity of `0` would show a fallback/placeholder instead of `0`.\n- **Confidence**: High — deterministic, reproducible for any falsy element; follows directly from JS `||` semantics, not an edge-case assumption.\n\n**Root cause**: `||` can't distinguish \"falsy but present\" from \"absent.\" The contract requires an explicit presence check (e.g., `index >= 0 && index < items.length ? items[index] : null`, or `Object.hasOwn`/`in` style check) rather than relying on truthiness.\n\nNo fix applied per read-only scope.",
+  "models": [
+    "claude-sonnet-5"
+  ],
+  "toolCalls": [
+    {
+      "name": "skill",
+      "skill": "code-review"
+    },
+    {
+      "name": "view",
+      "path": "code-review/references/ordinary-review.md"
+    }
+  ],
+  "codeChanges": {
+    "linesAdded": 0,
+    "linesRemoved": 0,
+    "filesModified": []
+  },
+  "semanticStatus": "not-reviewed"
+}

@@ -1,0 +1,23 @@
+{
+  "response": "**Recovery summary (read-only):**\n\n**Known:**\n- Branch: `main`\n- One user-authored file is modified (count only; exact staged/unstaged status, filename, and change age are unobserved — not inferable from \"modified\")\n- The authoritative `HANDOFF.md` read was denied by policy\n\n**Unknown:**\n- Current state, blockers, next action, or verification criteria (normally sourced from HANDOFF)\n- Task list status — no authoritative backlog is available to consult\n- Whether the modified file relates to any in-progress task\n\nPer the denied-source boundary, I won't ask you to paste or reupload HANDOFF contents, nor attempt to recover it through another channel or tool.\n\n**Smallest clarification needed:** What's the task goal or next action you'd like me to work on right now?",
+  "models": [
+    "claude-sonnet-5"
+  ],
+  "toolCalls": [
+    {
+      "name": "skill",
+      "skill": "proactive-awareness"
+    },
+    {
+      "name": "view",
+      "path": "proactive-awareness/references/project-recovery.md",
+      "sha256": "9dfd6e90f518a5dfaf7865ff65e6ceae8b979778de5d35ac2e793341e17db0d2"
+    }
+  ],
+  "codeChanges": {
+    "linesAdded": 0,
+    "linesRemoved": 0,
+    "filesModified": []
+  },
+  "semanticStatus": "not-reviewed"
+}

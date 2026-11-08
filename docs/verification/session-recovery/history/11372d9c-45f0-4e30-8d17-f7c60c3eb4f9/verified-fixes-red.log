@@ -1,0 +1,769 @@
+TAP version 13
+# Subtest: network/device image paths fail before filesystem access: \\\\review.invalid\\share\\pixel.png
+not ok 1 - network/device image paths fail before filesystem access: \\\\review.invalid\\share\\pixel.png
+  ---
+  duration_ms: 4.0636
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:43:5'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:49:20)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: network/device image paths fail before filesystem access: %5C%5Creview.invalid%5Cshare%5Cpixel.png
+not ok 2 - network/device image paths fail before filesystem access: %5C%5Creview.invalid%5Cshare%5Cpixel.png
+  ---
+  duration_ms: 0.9122
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:43:5'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:49:20)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: network/device image paths fail before filesystem access: \\\\?\\UNC\\review.invalid\\share\\pixel.png
+not ok 3 - network/device image paths fail before filesystem access: \\\\?\\UNC\\review.invalid\\share\\pixel.png
+  ---
+  duration_ms: 0.6959
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:43:5'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:49:20)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: network/device image paths fail before filesystem access: \\\\.\\pipe\\review
+not ok 4 - network/device image paths fail before filesystem access: \\\\.\\pipe\\review
+  ---
+  duration_ms: 0.654
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:43:5'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:49:20)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: network/device image paths fail before filesystem access: %2F%2Freview.invalid/share/pixel.png
+not ok 5 - network/device image paths fail before filesystem access: %2F%2Freview.invalid/share/pixel.png
+  ---
+  duration_ms: 0.6253
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:43:5'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:49:20)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: email rejects header controls before conversion: subject, []
+not ok 6 - email rejects header controls before conversion: subject, []
+  ---
+  duration_ms: 176.8778
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:65:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /header.*control|control.*header/i. Input:
+    
+    'FATAL: Command failed: C:\\Program Files\\nodejs\\node.exe C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-4gtojD\\pandoc.cjs C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-4gtojD\\md-to-eml-ED3Q7r\\email.md -o C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-4gtojD\\md-to-eml-ED3Q7r\\email.html --from markdown --to html5 --standalone=false\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    FATAL: Command failed: C:\Program Files\nodejs\node.exe C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-4gtojD\pandoc.cjs C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-4gtojD\md-to-eml-ED3Q7r\email.md -o C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-4gtojD\md-to-eml-ED3Q7r\email.html --from markdown --to html5 --standalone=false
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:77:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: email rejects header controls before conversion: subject, ["--test"]
+not ok 7 - email rejects header controls before conversion: subject, ["--test"]
+  ---
+  duration_ms: 163.0752
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:65:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /header.*control|control.*header/i. Input:
+    
+    'FATAL: Command failed: C:\\Program Files\\nodejs\\node.exe C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-J5cpLB\\pandoc.cjs C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-J5cpLB\\md-to-eml-jdlzfQ\\email.md -o C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-J5cpLB\\md-to-eml-jdlzfQ\\email.html --from markdown --to html5 --standalone=false\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    FATAL: Command failed: C:\Program Files\nodejs\node.exe C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-J5cpLB\pandoc.cjs C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-J5cpLB\md-to-eml-jdlzfQ\email.md -o C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-J5cpLB\md-to-eml-jdlzfQ\email.html --from markdown --to html5 --standalone=false
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:77:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: email rejects header controls before conversion: from, []
+not ok 8 - email rejects header controls before conversion: from, []
+  ---
+  duration_ms: 200.5511
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:65:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /header.*control|control.*header/i. Input:
+    
+    'FATAL: Command failed: C:\\Program Files\\nodejs\\node.exe C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-TgvZQr\\pandoc.cjs C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-TgvZQr\\md-to-eml-K97Jt9\\email.md -o C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-TgvZQr\\md-to-eml-K97Jt9\\email.html --from markdown --to html5 --standalone=false\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    FATAL: Command failed: C:\Program Files\nodejs\node.exe C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-TgvZQr\pandoc.cjs C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-TgvZQr\md-to-eml-K97Jt9\email.md -o C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-TgvZQr\md-to-eml-K97Jt9\email.html --from markdown --to html5 --standalone=false
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:77:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: email rejects header controls before conversion: to, ["--test"]
+not ok 9 - email rejects header controls before conversion: to, ["--test"]
+  ---
+  duration_ms: 178.3007
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:65:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /header.*control|control.*header/i. Input:
+    
+    'FATAL: Command failed: C:\\Program Files\\nodejs\\node.exe C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-jsK3Ka\\pandoc.cjs C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-jsK3Ka\\md-to-eml-aWxXqN\\email.md -o C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-jsK3Ka\\md-to-eml-aWxXqN\\email.html --from markdown --to html5 --standalone=false\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    FATAL: Command failed: C:\Program Files\nodejs\node.exe C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-jsK3Ka\pandoc.cjs C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-jsK3Ka\md-to-eml-aWxXqN\email.md -o C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-jsK3Ka\md-to-eml-aWxXqN\email.html --from markdown --to html5 --standalone=false
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:77:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: email rejects header controls before conversion: reply-to, []
+not ok 10 - email rejects header controls before conversion: reply-to, []
+  ---
+  duration_ms: 178.8101
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:65:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /header.*control|control.*header/i. Input:
+    
+    'FATAL: Command failed: C:\\Program Files\\nodejs\\node.exe C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-Vrc4N0\\pandoc.cjs C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-Vrc4N0\\md-to-eml-TCto9m\\email.md -o C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-Vrc4N0\\md-to-eml-TCto9m\\email.html --from markdown --to html5 --standalone=false\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    FATAL: Command failed: C:\Program Files\nodejs\node.exe C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-Vrc4N0\pandoc.cjs C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-Vrc4N0\md-to-eml-TCto9m\email.md -o C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-Vrc4N0\md-to-eml-TCto9m\email.html --from markdown --to html5 --standalone=false
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:77:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: email rejects header controls before conversion: subject, ["--test-to","<EMAIL>\\rBcc: <EMAIL>"]
+not ok 11 - email rejects header controls before conversion: subject, ["--test-to","<EMAIL>\\rBcc: <EMAIL>"]
+  ---
+  duration_ms: 172.6296
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:65:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /header.*control|control.*header/i. Input:
+    
+    'FATAL: Command failed: C:\\Program Files\\nodejs\\node.exe C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-8aSuSV\\pandoc.cjs C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-8aSuSV\\md-to-eml-t4vvBE\\email.md -o C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-8aSuSV\\md-to-eml-t4vvBE\\email.html --from markdown --to html5 --standalone=false\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    FATAL: Command failed: C:\Program Files\nodejs\node.exe C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-8aSuSV\pandoc.cjs C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-8aSuSV\md-to-eml-t4vvBE\email.md -o C:\Users\<USER>\AppData\Local\Temp\one-converter-safety-8aSuSV\md-to-eml-t4vvBE\email.html --from markdown --to html5 --standalone=false
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:77:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: email rejects active rendered HTML: <script>/* review */</script>
+not ok 12 - email rejects active rendered HTML: <script>/* review */</script>
+  ---
+  duration_ms: 202.5937
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:85:5'
+  failureType: 'testCodeFailure'
+  error: 'Expected "actual" to be strictly unequal to: 0'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 0
+  operator: 'notStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:94:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: email rejects active rendered HTML: <img src="x" onerror="review()">
+not ok 13 - email rejects active rendered HTML: <img src="x" onerror="review()">
+  ---
+  duration_ms: 181.7128
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:85:5'
+  failureType: 'testCodeFailure'
+  error: 'Expected "actual" to be strictly unequal to: 0'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 0
+  operator: 'notStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:94:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: email rejects active rendered HTML: <a href="jav&\#x61;script:review()">review</a>
+not ok 14 - email rejects active rendered HTML: <a href="jav&\#x61;script:review()">review</a>
+  ---
+  duration_ms: 159.9035
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:85:5'
+  failureType: 'testCodeFailure'
+  error: 'Expected "actual" to be strictly unequal to: 0'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 0
+  operator: 'notStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:94:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: email preserves ordinary Unicode headers and escaped literal HTML
+ok 15 - email preserves ordinary Unicode headers and escaped literal HTML
+  ---
+  duration_ms: 169.8509
+  type: 'test'
+  ...
+# Subtest: image extraction preserves container fences: "> ~~~markdown\\n> ![Example](missing.png)\\n> ~~~\\n"
+not ok 16 - image extraction preserves container fences: "> ~~~markdown\\n> ![Example](missing.png)\\n> ~~~\\n"
+  ---
+  duration_ms: 2.1142
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:115:5'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, stat 'C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-vW7aJ7\\missing.png'"
+  code: 'ENOENT'
+  stack: |-
+    Object.statSync (node:fs:2187:25)
+    resolveLocalImagePath (C:\Development\Alex_ACT_ONE\scripts\shared\local-image-path.cjs:25:11)
+    C:\Development\Alex_ACT_ONE\skills\docx-to-md\scripts\docx-to-md.cjs:175:27
+    String.replace (<anonymous>)
+    C:\Development\Alex_ACT_ONE\skills\docx-to-md\scripts\docx-to-md.cjs:171:19
+    transformOutsideInlineCode (C:\Development\Alex_ACT_ONE\scripts\shared\markdown-preprocessor.cjs:411:19)
+    flush (C:\Development\Alex_ACT_ONE\scripts\shared\markdown-preprocessor.cjs:428:37)
+    C:\Development\Alex_ACT_ONE\scripts\shared\markdown-preprocessor.cjs:468:5
+    flushProse (C:\Development\Alex_ACT_ONE\scripts\shared\markdown-preprocessor.cjs:354:19)
+    transformOutsideCodeFences (C:\Development\Alex_ACT_ONE\scripts\shared\markdown-preprocessor.cjs:385:8)
+  ...
+# Subtest: image extraction preserves container fences: "- A list\\n\\n  ~~~markdown\\n  ![Example](missing.png)\\n  ~~~\\n"
+ok 17 - image extraction preserves container fences: "- A list\\n\\n  ~~~markdown\\n  ![Example](missing.png)\\n  ~~~\\n"
+  ---
+  duration_ms: 1.2108
+  type: 'test'
+  ...
+# Subtest: image extraction preserves container fences: "> - A list\\n>\\n>   ~~~markdown\\n>   ![Example](missing.png)\\n>   ~~~\\n"
+not ok 18 - image extraction preserves container fences: "> - A list\\n>\\n>   ~~~markdown\\n>   ![Example](missing.png)\\n>   ~~~\\n"
+  ---
+  duration_ms: 1.4257
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:115:5'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, stat 'C:\\Users\\<USER>\\AppData\\Local\\Temp\\one-converter-safety-DZJpoy\\missing.png'"
+  code: 'ENOENT'
+  stack: |-
+    Object.statSync (node:fs:2187:25)
+    resolveLocalImagePath (C:\Development\Alex_ACT_ONE\scripts\shared\local-image-path.cjs:25:11)
+    C:\Development\Alex_ACT_ONE\skills\docx-to-md\scripts\docx-to-md.cjs:175:27
+    String.replace (<anonymous>)
+    C:\Development\Alex_ACT_ONE\skills\docx-to-md\scripts\docx-to-md.cjs:171:19
+    transformOutsideInlineCode (C:\Development\Alex_ACT_ONE\scripts\shared\markdown-preprocessor.cjs:411:19)
+    flush (C:\Development\Alex_ACT_ONE\scripts\shared\markdown-preprocessor.cjs:428:37)
+    C:\Development\Alex_ACT_ONE\scripts\shared\markdown-preprocessor.cjs:468:5
+    flushProse (C:\Development\Alex_ACT_ONE\scripts\shared\markdown-preprocessor.cjs:354:19)
+    transformOutsideCodeFences (C:\Development\Alex_ACT_ONE\scripts\shared\markdown-preprocessor.cjs:385:8)
+  ...
+# Subtest: HTML screening accepts block code: "    <script>/* literal */</script>\\n"
+not ok 19 - HTML screening accepts block code: "    <script>/* literal */</script>\\n"
+  ---
+  duration_ms: 80.2255
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:125:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    [31m[FATAL] Unsafe executable HTML found in Markdown; sanitize external content before conversion[0m
+    
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:130:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: HTML screening accepts block code: "> ~~~html\\n> <script>/* literal */</script>\\n> ~~~\\n"
+not ok 20 - HTML screening accepts block code: "> ~~~html\\n> <script>/* literal */</script>\\n> ~~~\\n"
+  ---
+  duration_ms: 78.8881
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:125:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    [31m[FATAL] Unsafe executable HTML found in Markdown; sanitize external content before conversion[0m
+    
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:130:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: HTML screening accepts block code: "- A list\\n\\n      <script>/* literal */</script>\\n"
+not ok 21 - HTML screening accepts block code: "- A list\\n\\n      <script>/* literal */</script>\\n"
+  ---
+  duration_ms: 89.1386
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:125:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    [31m[FATAL] Unsafe executable HTML found in Markdown; sanitize external content before conversion[0m
+    
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:130:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: Word preserves the complete prior output set on later-render
+not ok 22 - Word preserves the complete prior output set on later-render
+  ---
+  duration_ms: 501.2262
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:135:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + '�PNG\r\n\x1A\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\b\x06\x00\x00\x00\x1F\x15ĉ\x00\x00\x00\rIDATx�c```�\x0F\x00\x01\x04\x01\x00_��K\x00\x00\x00\x00IEND�B`�'
+    - 'prior one'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'prior one'
+  actual: |-
+    �PNG
+    
+       
+IHDR         ĉ   
+IDATx�c```�  _��K    IEND�B`�
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:160:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: Word preserves the complete prior output set on partial-pandoc
+not ok 23 - Word preserves the complete prior output set on partial-pandoc
+  ---
+  duration_ms: 524.9287
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:135:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'partial DOCX'
+    - 'prior DOCX'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'prior DOCX'
+  actual: 'partial DOCX'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:159:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: Word preserves the complete prior output set on oversize-png
+not ok 24 - Word preserves the complete prior output set on oversize-png
+  ---
+  duration_ms: 401.6315
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:135:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /PNG.*(?:budget|limit)|(?:budget|limit).*PNG/i. Input:
+    
+    '   💡 Diagram 1 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.\n' +
+      '   💡 Diagram 2 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.\n' +
+      'FATAL: Mermaid rendering failed; original source preserved: Invalid rendered PNG: compressed raster length\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+       💡 Diagram 1 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.
+       💡 Diagram 2 (flowchart) has no classDef; injecting default pastel palette. Author classDef to override, or pass --no-default-palette to disable.
+    FATAL: Mermaid rendering failed; original source preserved: Invalid rendered PNG: compressed raster length
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:158:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: DOCX conversion preserves document and media after late failure, extraction=true
+not ok 25 - DOCX conversion preserves document and media after late failure, extraction=true
+  ---
+  duration_ms: 158.908
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:166:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'new image'
+    - 'prior image'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'prior image'
+  actual: 'new image'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:185:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: DOCX conversion preserves document and media after late failure, extraction=false
+not ok 26 - DOCX conversion preserves document and media after late failure, extraction=false
+  ---
+  duration_ms: 148.4259
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\converter-safety.test.cjs:166:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'partial Markdown'
+    - 'prior Markdown'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'prior Markdown'
+  actual: 'partial Markdown'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\converter-safety.test.cjs:184:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: html preserves literal single- and multi-backtick inline code
+ok 27 - html preserves literal single- and multi-backtick inline code
+  ---
+  duration_ms: 2.2386
+  type: 'test'
+  ...
+# Subtest: docx preserves literal single- and multi-backtick inline code
+ok 28 - docx preserves literal single- and multi-backtick inline code
+  ---
+  duration_ms: 0.6107
+  type: 'test'
+  ...
+# Subtest: email preserves literal single- and multi-backtick inline code
+ok 29 - email preserves literal single- and multi-backtick inline code
+  ---
+  duration_ms: 0.3002
+  type: 'test'
+  ...
+# Subtest: txt preserves literal single- and multi-backtick inline code
+ok 30 - txt preserves literal single- and multi-backtick inline code
+  ---
+  duration_ms: 0.2051
+  type: 'test'
+  ...
+# Subtest: multiline inline code and escaped backticks inside it stay literal
+ok 31 - multiline inline code and escaped backticks inside it stay literal
+  ---
+  duration_ms: 0.3327
+  type: 'test'
+  ...
+# Subtest: an escaped opener and an unmatched delimiter remain prose, not protected code spans
+ok 32 - an escaped opener and an unmatched delimiter remain prose, not protected code spans
+  ---
+  duration_ms: 1.6575
+  type: 'test'
+  ...
+# Subtest: real prose still receives math, highlight, superscript, and em-dash transformations
+ok 33 - real prose still receives math, highlight, superscript, and em-dash transformations
+  ---
+  duration_ms: 0.4727
+  type: 'test'
+  ...
+# Subtest: standalone math conversion preserves inline and fenced code
+ok 34 - standalone math conversion preserves inline and fenced code
+  ---
+  duration_ms: 0.5283
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts literal code/prose: "Ordinary prose: const one = 1.\\n"
+ok 35 - HTML screening accepts literal code/prose: "Ordinary prose: const one = 1.\\n"
+  ---
+  duration_ms: 94.3226
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts literal code/prose: "`<script>alert(1)</script>` and ``<img src=x onerror=\\"oops()\\">``\\n"
+ok 36 - HTML screening accepts literal code/prose: "`<script>alert(1)</script>` and ``<img src=x onerror=\\"oops()\\">``\\n"
+  ---
+  duration_ms: 97.4243
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts literal code/prose: "~~~html\\n<script>alert(1)</script>\\n<img src=x onerror=\\"oops()\\">\\n~~~\\n"
+ok 37 - HTML screening accepts literal code/prose: "~~~html\\n<script>alert(1)</script>\\n<img src=x onerror=\\"oops()\\">\\n~~~\\n"
+  ---
+  duration_ms: 83.6306
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts literal code/prose: "````html\\n```html\\n<script>alert(1)</script>\\n```\\n````\\n"
+ok 38 - HTML screening accepts literal code/prose: "````html\\n```html\\n<script>alert(1)</script>\\n```\\n````\\n"
+  ---
+  duration_ms: 109.1598
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts literal code/prose: "Literal ``<img\\nonerror=\\"oops()\\">`` across lines.\\n"
+ok 39 - HTML screening accepts literal code/prose: "Literal ``<img\\nonerror=\\"oops()\\">`` across lines.\\n"
+  ---
+  duration_ms: 95.922
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <script>alert(1)</script>
+ok 40 - HTML screening still rejects active HTML: <script>alert(1)</script>
+  ---
+  duration_ms: 88.7973
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <img src=x onerror="oops()">
+ok 41 - HTML screening still rejects active HTML: <img src=x onerror="oops()">
+  ---
+  duration_ms: 98.1296
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <iframe srcdoc="<p>active</p>"></iframe>
+ok 42 - HTML screening still rejects active HTML: <iframe srcdoc="<p>active</p>"></iframe>
+  ---
+  duration_ms: 92.1053
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <a href="jav&\#x61;script:alert(1)">link</a>
+ok 43 - HTML screening still rejects active HTML: <a href="jav&\#x61;script:alert(1)">link</a>
+  ---
+  duration_ms: 96.4204
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <a href="java&Tab;script&colon;alert(1)">link</a>
+ok 44 - HTML screening still rejects active HTML: <a href="java&Tab;script&colon;alert(1)">link</a>
+  ---
+  duration_ms: 91.484
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <a href="data:text/html;base64,xxx">link</a>
+ok 45 - HTML screening still rejects active HTML: <a href="data:text/html;base64,xxx">link</a>
+  ---
+  duration_ms: 87.3862
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <img title="`" onerror="`">
+ok 46 - HTML screening still rejects active HTML: <img title="`" onerror="`">
+  ---
+  duration_ms: 91.3296
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: `literal`\\n\\n<img\\nonload=active()>
+ok 47 - HTML screening still rejects active HTML: `literal`\\n\\n<img\\nonload=active()>
+  ---
+  duration_ms: 108.2338
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: > ~~~html\\n> literal\\n> ~~~\\n\\n<script>/* active */</script>
+ok 48 - HTML screening still rejects active HTML: > ~~~html\\n> literal\\n> ~~~\\n\\n<script>/* active */</script>
+  ---
+  duration_ms: 103.1857
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML:     literal code\\n\\n<script>/* active */</script>
+ok 49 - HTML screening still rejects active HTML:     literal code\\n\\n<script>/* active */</script>
+  ---
+  duration_ms: 99.2901
+  type: 'test'
+  ...
+1..49
+# tests 49
+# suites 0
+# pass 25
+# fail 24
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3892.3278

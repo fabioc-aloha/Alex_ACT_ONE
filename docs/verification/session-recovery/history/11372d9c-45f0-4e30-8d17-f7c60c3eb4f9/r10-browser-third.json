@@ -1,0 +1,374 @@
+{
+  "browser": "156.0.4314.58",
+  "channel": "msedge",
+  "reports": [
+    {
+      "url": "file:///C:/Development/Alex_ACT_ONE/docs/flint-showcase.html",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+      "input": "Playwright",
+      "limitations": [
+        "Sampled shell contrast, not all SVG text or chart colors",
+        "Live-region DOM checked; screen-reader speech not observed",
+        "Representative keyboard and linked-selection checks, not every gesture preset"
+      ],
+      "passed": false,
+      "checks": [
+        {
+          "id": "provenance",
+          "status": "passed",
+          "details": {
+            "schemaVersion": 1,
+            "sourceStatus": "repository-source-demo",
+            "sourceInputs": {
+              "scripts/build-flint-showcase.mjs": "39d8719daea42b166c46a4df34833bea1c847a8dfe3e1ca74a83c0a98549a11c",
+              "scripts/shared/dependencies.cjs": "e794248fe28674250182b04d6606ca8843456388eb647832327a113407ea4f44",
+              "ci/runtime/package.json": "e4011951f2de2a30ef758dd7ff5b6a40d2d6046d0d06353420e8dfa786da01b9",
+              "ci/runtime/package-lock.json": "aa718fb624b276687f4b8c0abf32e344b390bf05eef1e2f8fe3ba611c08c56c3",
+              "plugin.json": "bc1174fa19f29a2f9cd21c6952bf8540d73027bb9e8c0e1f1929230e7ad92c1f"
+            },
+            "dataSha256": "a478d06fb4c67db70e26c18535355d1aaa6c3df7266188694c8e8492943364d4",
+            "appUiSha256": "510665bfd6f495cbbb2ba33790187f239c08f5203f4c8fdf9ab4c8a366cb9034",
+            "packages": {
+              "flint-chart-mcp": "1.0.1",
+              "flint-chart": "1.0.1",
+              "vega": "6.4.0",
+              "vega-lite": "6.5.0",
+              "echarts": "6.1.0",
+              "chart.js": "4.5.1",
+              "@napi-rs/canvas": "1.0.10",
+              "@modelcontextprotocol/sdk": "1.32.1",
+              "@modelcontextprotocol/ext-apps": "1.7.5"
+            },
+            "fonts": {
+              "DejaVuSans-Bold.ttf": "d1c3ff99f1e1ce1827a33efd4dad81f40babda06bff9e43bd7591c86662a287b",
+              "DejaVuSans.ttf": "690243adfefe0ce154b547db6205794bd30ac4277275179517a90994f4980648",
+              "LiberationSans-Bold.ttf": "788abee4c806d660e8aee46689dd8540cd4bb98da03dcc9d171ce3efd99a9173",
+              "LiberationSans-Regular.ttf": "76d04c18ea243f426b7de1f3ad208e927008f961dc5945e5aad352d0dfde8ee8"
+            }
+          }
+        },
+        {
+          "id": "images",
+          "status": "passed",
+          "details": [
+            {
+              "width": 343,
+              "height": 368
+            },
+            {
+              "width": 756,
+              "height": 417
+            },
+            {
+              "width": 712,
+              "height": 400
+            }
+          ]
+        },
+        {
+          "id": "matrix",
+          "status": "passed",
+          "details": {
+            "cases": 24,
+            "samples": 8,
+            "themes": 3
+          }
+        },
+        {
+          "id": "keyboard",
+          "status": "passed",
+          "details": {
+            "input": "Playwright key",
+            "before": "Bar Chart: West fulfils the most orders. Orders by region; one synthetic week. X axis region. 4 bars. Press Enter to explore 1 parts, or H for help.",
+            "after": "Data. 4 bars, orders from 96 to 154."
+          }
+        },
+        {
+          "id": "focus",
+          "status": "passed",
+          "details": {
+            "active": true,
+            "outline": "solid",
+            "width": 3,
+            "color": "rgb(154, 92, 0)",
+            "background": "rgba(0, 0, 0, 0)"
+          }
+        },
+        {
+          "id": "live-regions",
+          "status": "passed",
+          "details": {
+            "chartRegions": 1,
+            "screenReaderAnnouncement": "not observed; DOM contract only"
+          }
+        },
+        {
+          "id": "contrast",
+          "status": "passed",
+          "details": [
+            {
+              "selector": "body",
+              "ratio": 13.097045418552971
+            },
+            {
+              "selector": ".lede",
+              "ratio": 5.8517253200547446
+            },
+            {
+              "selector": ".helper",
+              "ratio": 5.8517253200547446
+            },
+            {
+              "selector": "label",
+              "ratio": 12.21832473664451
+            },
+            {
+              "selector": "button",
+              "ratio": 14.404833637877616
+            },
+            {
+              "selector": "select",
+              "ratio": 14.404833637877616
+            },
+            {
+              "selector": "summary",
+              "ratio": 14.404833637877616
+            }
+          ]
+        },
+        {
+          "id": "linked-selection",
+          "status": "passed",
+          "details": {
+            "field": "region",
+            "selected": "North",
+            "recipients": [
+              {
+                "id": "flint-board-regions",
+                "population": [
+                  "region: East; orders: 112",
+                  "region: North; orders: 128",
+                  "region: South; orders: 96",
+                  "region: West; orders: 154"
+                ],
+                "selected": 0.9,
+                "other": 0.25
+              },
+              {
+                "id": "flint-board-stores",
+                "population": [
+                  "hours: 14; orders: 44; region: South; store: S1",
+                  "hours: 16; orders: 48; region: East; store: E1",
+                  "hours: 18; orders: 58; region: North; store: N1",
+                  "hours: 20; orders: 52; region: South; store: S2",
+                  "hours: 24; orders: 64; region: East; store: E2",
+                  "hours: 26; orders: 70; region: North; store: N2",
+                  "hours: 28; orders: 72; region: West; store: W1",
+                  "hours: 34; orders: 82; region: West; store: W2"
+                ],
+                "selected": 0.7,
+                "other": 0.25
+              }
+            ]
+          }
+        },
+        {
+          "id": "reset",
+          "status": "passed",
+          "details": "Escape and Reset example restored semantic populations and emphasis"
+        },
+        {
+          "id": "resize",
+          "status": "failed",
+          "details": "frame.waitForFunction: Timeout 10000ms exceeded.\n    at C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:277:29\n    at async check (C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:72:58)\n    at async verifyShowcasePage (C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:273:9)\n    at async main (C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:357:30)"
+        },
+        {
+          "id": "saved-spec",
+          "status": "passed",
+          "details": {
+            "filename": "flint-linked-swiss.json",
+            "savedAndValidated": true
+          }
+        },
+        {
+          "id": "offline",
+          "status": "passed",
+          "details": {
+            "networkRequests": 0,
+            "browserErrors": 0
+          }
+        }
+      ]
+    },
+    {
+      "url": "file:///C:/Development/Alex_ACT_ONE/docs/flint-experimental.html",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+      "input": "Playwright",
+      "limitations": [
+        "Sampled shell contrast, not all SVG text or chart colors",
+        "Live-region DOM checked; screen-reader speech not observed",
+        "Representative keyboard and linked-selection checks, not every gesture preset"
+      ],
+      "passed": false,
+      "checks": [
+        {
+          "id": "provenance",
+          "status": "passed",
+          "details": {
+            "schemaVersion": 1,
+            "sourceStatus": "repository-source-demo",
+            "sourceInputs": {
+              "scripts/build-flint-showcase.mjs": "39d8719daea42b166c46a4df34833bea1c847a8dfe3e1ca74a83c0a98549a11c",
+              "scripts/shared/dependencies.cjs": "e794248fe28674250182b04d6606ca8843456388eb647832327a113407ea4f44",
+              "ci/runtime/package.json": "e4011951f2de2a30ef758dd7ff5b6a40d2d6046d0d06353420e8dfa786da01b9",
+              "ci/runtime/package-lock.json": "aa718fb624b276687f4b8c0abf32e344b390bf05eef1e2f8fe3ba611c08c56c3",
+              "plugin.json": "bc1174fa19f29a2f9cd21c6952bf8540d73027bb9e8c0e1f1929230e7ad92c1f"
+            },
+            "dataSha256": "34e2b45b07ef646fbdfb0ff1eb16c1da44c3f0f9adaea63e2e612f253df36686",
+            "appUiSha256": "510665bfd6f495cbbb2ba33790187f239c08f5203f4c8fdf9ab4c8a366cb9034",
+            "packages": {
+              "flint-chart-mcp": "1.0.1",
+              "flint-chart": "1.0.1",
+              "vega": "6.4.0",
+              "vega-lite": "6.5.0",
+              "echarts": "6.1.0",
+              "chart.js": "4.5.1",
+              "@napi-rs/canvas": "1.0.10",
+              "@modelcontextprotocol/sdk": "1.32.1",
+              "@modelcontextprotocol/ext-apps": "1.7.5"
+            },
+            "fonts": {
+              "DejaVuSans-Bold.ttf": "d1c3ff99f1e1ce1827a33efd4dad81f40babda06bff9e43bd7591c86662a287b",
+              "DejaVuSans.ttf": "690243adfefe0ce154b547db6205794bd30ac4277275179517a90994f4980648",
+              "LiberationSans-Bold.ttf": "788abee4c806d660e8aee46689dd8540cd4bb98da03dcc9d171ce3efd99a9173",
+              "LiberationSans-Regular.ttf": "76d04c18ea243f426b7de1f3ad208e927008f961dc5945e5aad352d0dfde8ee8"
+            }
+          }
+        },
+        {
+          "id": "images",
+          "status": "passed",
+          "details": [
+            {
+              "width": 343,
+              "height": 368
+            },
+            {
+              "width": 756,
+              "height": 417
+            },
+            {
+              "width": 712,
+              "height": 400
+            }
+          ]
+        },
+        {
+          "id": "matrix",
+          "status": "passed",
+          "details": {
+            "cases": 27,
+            "samples": 7,
+            "themes": 3
+          }
+        },
+        {
+          "id": "keyboard",
+          "status": "failed",
+          "details": "locator.getAttribute: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-flint-accessible-focus]').first()\u001b[22m\n\n    at C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:179:41\n    at async check (C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:72:58)\n    at async verifyShowcasePage (C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:174:9)\n    at async main (C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:357:30)"
+        },
+        {
+          "id": "focus",
+          "status": "passed",
+          "details": {
+            "active": true,
+            "outline": "solid",
+            "width": 3,
+            "color": "rgb(154, 92, 0)",
+            "background": "rgba(0, 0, 0, 0)"
+          }
+        },
+        {
+          "id": "live-regions",
+          "status": "failed",
+          "details": "AssertionError [ERR_ASSERTION]: No keyboard feedback live region in the actual chart\n    at file:///C:/Development/Alex_ACT_ONE/scripts/flint-browser-acceptance.mjs:201:20\n    at async check (file:///C:/Development/Alex_ACT_ONE/scripts/flint-browser-acceptance.mjs:72:58)\n    at async verifyShowcasePage (file:///C:/Development/Alex_ACT_ONE/scripts/flint-browser-acceptance.mjs:197:9)\n    at async main (file:///C:/Development/Alex_ACT_ONE/scripts/flint-browser-acceptance.mjs:357:30)"
+        },
+        {
+          "id": "contrast",
+          "status": "passed",
+          "details": [
+            {
+              "selector": "body",
+              "ratio": 15.368965177147416
+            },
+            {
+              "selector": ".lede",
+              "ratio": 9.636114122512623
+            },
+            {
+              "selector": ".helper",
+              "ratio": 9.636114122512623
+            },
+            {
+              "selector": "label",
+              "ratio": 11.709985908639942
+            },
+            {
+              "selector": "button",
+              "ratio": 11.835607083449615
+            },
+            {
+              "selector": "select",
+              "ratio": 13.03938159798534
+            },
+            {
+              "selector": "summary",
+              "ratio": 13.03938159798534
+            }
+          ]
+        },
+        {
+          "id": "linked-selection",
+          "status": "failed",
+          "details": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('svg.marks path[role=\"graphics-symbol\"][aria-label]').first()\u001b[22m\n\u001b[2m    - locator resolved to <path opacity=\"1\" stroke=\"#d40f0f\" stroke-width=\"2\" role=\"graphics-symbol\" stroke-linecap=\"square\" stroke-linejoin=\"miter\" aria-roledescription=\"line mark\" d=\"M20,70L60,50L100,30L140,50L180,30L220,50\" aria-label=\"checkpoint: 1; rank: 1; cohort: Atlas\"></path>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <path opacity=\"1\" stroke=\"#1f4a94\" stroke-width=\"2\" role=\"graphics-symbol\" stroke-linecap=\"square\" stroke-linejoin=\"miter\" aria-roledescription=\"line mark\" d=\"M20,50L60,70L100,70L140,30L180,50L220,30\" aria-label=\"checkpoint: 1; rank: 2; cohort: Drift\"></path> from <g transform=\"translate(0,0)\">…</g> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <path opacity=\"1\" stroke=\"#1f4a94\" stroke-width=\"2\" role=\"graphics-symbol\" stroke-linecap=\"square\" stroke-linejoin=\"miter\" aria-roledescription=\"line mark\" d=\"M20,50L60,70L100,70L140,30L180,50L220,30\" aria-label=\"checkpoint: 1; rank: 2; cohort: Drift\"></path> from <g transform=\"translate(0,0)\">…</g> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    37 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <path opacity=\"1\" stroke=\"#1f4a94\" stroke-width=\"2\" role=\"graphics-symbol\" stroke-linecap=\"square\" stroke-linejoin=\"miter\" aria-roledescription=\"line mark\" d=\"M20,50L60,70L100,70L140,30L180,50L220,30\" aria-label=\"checkpoint: 1; rank: 2; cohort: Drift\"></path> from <g transform=\"translate(0,0)\">…</g> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:250:31\n    at async check (C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:72:58)\n    at async verifyShowcasePage (C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:229:9)\n    at async main (C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:357:30)"
+        },
+        {
+          "id": "reset",
+          "status": "failed",
+          "details": "locator.focus: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-flint-accessible-focus]').first()\u001b[22m\n\n    at C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:264:74\n    at check (C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:72:64)\n    at verifyShowcasePage (C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:263:15)\n    at async main (C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:357:30)"
+        },
+        {
+          "id": "resize",
+          "status": "passed",
+          "details": [
+            {
+              "width": 1440,
+              "charts": 3
+            },
+            {
+              "width": 768,
+              "charts": 3
+            },
+            {
+              "width": 390,
+              "charts": 3
+            }
+          ]
+        },
+        {
+          "id": "saved-spec",
+          "status": "failed",
+          "details": "page.waitForEvent: Timeout 10000ms exceeded while waiting for event \"download\"\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================\n    at C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:303:22\n    at async check (C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:72:58)\n    at async verifyShowcasePage (C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:299:14)\n    at async main (C:\\Development\\Alex_ACT_ONE\\scripts\\flint-browser-acceptance.mjs:357:30)"
+        },
+        {
+          "id": "offline",
+          "status": "passed",
+          "details": {
+            "networkRequests": 0,
+            "browserErrors": 0
+          }
+        }
+      ]
+    }
+  ]
+}

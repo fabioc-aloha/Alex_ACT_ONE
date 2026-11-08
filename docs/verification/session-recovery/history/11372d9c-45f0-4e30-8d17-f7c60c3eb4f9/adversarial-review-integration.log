@@ -1,0 +1,373 @@
+Environment: win32/x64, Node 26.13.0; lane=integration
+Excluded C:\Development\Alex_ACT_ONE\tests\activation-conflicts.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\activation-readiness.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\activation-routing.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\bootstrap-project.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\brain-tools.test.cjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\ci-gate.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\ci-runtime-lock.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\deterministic-helpers.test.cjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\documentation-examples.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\documentation.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\evaluation-guide.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\flint-browser-acceptance.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\flint-experimental.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\flint-interactions.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\flint-showcase.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\flint-upgrade.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\install-optional-dependencies.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\markdown-inline-code.test.cjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\md-to-word.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\native-compatibility.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\onboarding.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\powershell-diagnostics.test.cjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\process-launch.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\recovery-boundaries.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\reinstall-release.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\rich-email.test.cjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\runtime-readiness.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\showcase-environment.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\showcase-provenance.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\skill-scenario-runner.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\skill-scenarios.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\smoke.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\svg-position-precision.test.mjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\tool-shims.test.cjs: Structural lane
+Excluded C:\Development\Alex_ACT_ONE\tests\visual-uat-guidance.test.mjs: Structural lane
+flint: exact versions and launch probe verified; host connection not observed.
+playwright: exact versions and launch probe verified; host connection not observed.
+replicate: exact versions and launch probe verified; host connection not observed.
+Converter prerequisites: pandoc 3.13; mmdc 11.17.0; jszip 3.10.1.
+TAP version 13
+#   🖼️  Extracted 1 image(s) to images/
+# Subtest: real md-to-html preserves literal inline/fenced code and renders tables and links
+ok 1 - real md-to-html preserves literal inline/fenced code and renders tables and links
+  ---
+  duration_ms: 1185.8334
+  type: 'test'
+  ...
+# Subtest: real md-to-word preserves literal inline/fenced code and renders tables and links
+ok 2 - real md-to-word preserves literal inline/fenced code and renders tables and links
+  ---
+  duration_ms: 1496.5574
+  type: 'test'
+  ...
+# Subtest: the installed Mermaid npm CLI starts through the shared tool runner
+ok 3 - the installed Mermaid npm CLI starts through the shared tool runner
+  ---
+  duration_ms: 600.4823
+  type: 'test'
+  ...
+# Subtest: real Pandoc DOCX media survive extraction cleanup with original PNG bytes
+ok 4 - real Pandoc DOCX media survive extraction cleanup with original PNG bytes
+  ---
+  duration_ms: 447.4424
+  type: 'test'
+  ...
+# Subtest: DOCX extraction handles encoded absolute media paths; missing=false
+ok 5 - DOCX extraction handles encoded absolute media paths; missing=false
+  ---
+  duration_ms: 24.1462
+  type: 'test'
+  ...
+# Subtest: DOCX extraction handles encoded absolute media paths; missing=true
+ok 6 - DOCX extraction handles encoded absolute media paths; missing=true
+  ---
+  duration_ms: 5.0571
+  type: 'test'
+  ...
+# Subtest: real HTML TOC links target headings, marker=false, flag=true
+ok 7 - real HTML TOC links target headings, marker=false, flag=true
+  ---
+  duration_ms: 265.6789
+  type: 'test'
+  ...
+# Subtest: real HTML TOC links target headings, marker=true, flag=false
+ok 8 - real HTML TOC links target headings, marker=true, flag=false
+  ---
+  duration_ms: 269.8285
+  type: 'test'
+  ...
+# Subtest: real HTML TOC links target headings, marker=false, flag=false
+ok 9 - real HTML TOC links target headings, marker=false, flag=false
+  ---
+  duration_ms: 271.3026
+  type: 'test'
+  ...
+# Subtest: real md-to-html embeds URL-encoded local image bytes
+ok 10 - real md-to-html embeds URL-encoded local image bytes
+  ---
+  duration_ms: 254.358
+  type: 'test'
+  ...
+# Subtest: md-to-html propagates real Pandoc failure without writing output
+ok 11 - md-to-html propagates real Pandoc failure without writing output
+  ---
+  duration_ms: 177.425
+  type: 'test'
+  ...
+# Subtest: real md-to-eml embeds URL-encoded local image bytes
+ok 12 - real md-to-eml embeds URL-encoded local image bytes
+  ---
+  duration_ms: 267.7696
+  type: 'test'
+  ...
+# Subtest: md-to-eml propagates real Pandoc failure without writing output
+ok 13 - md-to-eml propagates real Pandoc failure without writing output
+  ---
+  duration_ms: 169.6919
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination missing%20image.png
+ok 14 - md-to-html rejects invalid local image destination missing%20image.png
+  ---
+  duration_ms: 202.3388
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination bad%ZZ.png
+ok 15 - md-to-html rejects invalid local image destination bad%ZZ.png
+  ---
+  duration_ms: 164.1411
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination file:///private/image.png
+ok 16 - md-to-html rejects invalid local image destination file:///private/image.png
+  ---
+  duration_ms: 166.7939
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination ftp://example.invalid/image.png
+ok 17 - md-to-html rejects invalid local image destination ftp://example.invalid/image.png
+  ---
+  duration_ms: 204.688
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination directory.png
+ok 18 - md-to-html rejects invalid local image destination directory.png
+  ---
+  duration_ms: 179.7695
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination unsupported.bmp
+ok 19 - md-to-html rejects invalid local image destination unsupported.bmp
+  ---
+  duration_ms: 184.9114
+  type: 'test'
+  ...
+# Subtest: md-to-html leaves remote and data image URLs unchanged without fetching
+ok 20 - md-to-html leaves remote and data image URLs unchanged without fetching
+  ---
+  duration_ms: 188.3807
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination missing%20image.png
+ok 21 - md-to-eml rejects invalid local image destination missing%20image.png
+  ---
+  duration_ms: 179.368
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination bad%ZZ.png
+ok 22 - md-to-eml rejects invalid local image destination bad%ZZ.png
+  ---
+  duration_ms: 175.6294
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination file:///private/image.png
+ok 23 - md-to-eml rejects invalid local image destination file:///private/image.png
+  ---
+  duration_ms: 179.7973
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination ftp://example.invalid/image.png
+ok 24 - md-to-eml rejects invalid local image destination ftp://example.invalid/image.png
+  ---
+  duration_ms: 171.2341
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination directory.png
+ok 25 - md-to-eml rejects invalid local image destination directory.png
+  ---
+  duration_ms: 180.5372
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination unsupported.bmp
+ok 26 - md-to-eml rejects invalid local image destination unsupported.bmp
+  ---
+  duration_ms: 219.9315
+  type: 'test'
+  ...
+# Subtest: md-to-eml leaves remote and data image URLs unchanged without fetching
+ok 27 - md-to-eml leaves remote and data image URLs unchanged without fetching
+  ---
+  duration_ms: 189.3048
+  type: 'test'
+  ...
+# Subtest: Mermaid fallback preserves labeled edges, implicit endpoints, chains, and node labels
+ok 28 - Mermaid fallback preserves labeled edges, implicit endpoints, chains, and node labels
+  ---
+  duration_ms: 1.0573
+  type: 'test'
+  ...
+# Subtest: real detached Word converter loads the documented shared closure and creates a readable DOCX
+ok 29 - real detached Word converter loads the documented shared closure and creates a readable DOCX
+  ---
+  duration_ms: 487.467
+  type: 'test'
+  ...
+# Subtest: Word accepts only a fresh successful Mermaid render and embeds its current PNG bytes
+ok 30 - Word accepts only a fresh successful Mermaid render and embeds its current PNG bytes
+  ---
+  duration_ms: 858.9849
+  type: 'test'
+  ...
+# Subtest: shared image paths decode once, honor HTML entities, and ignore URL query/fragment suffixes
+ok 31 - shared image paths decode once, honor HTML entities, and ignore URL query/fragment suffixes
+  ---
+  duration_ms: 8.5483
+  type: 'test'
+  ...
+# Subtest: DOCX extraction missing-media preserves existing Markdown and cleans staging
+ok 32 - DOCX extraction missing-media preserves existing Markdown and cleans staging
+  ---
+  duration_ms: 176.8577
+  type: 'test'
+  ...
+# Subtest: DOCX extraction pandoc-failure preserves existing Markdown and cleans staging
+ok 33 - DOCX extraction pandoc-failure preserves existing Markdown and cleans staging
+  ---
+  duration_ms: 173.982
+  type: 'test'
+  ...
+# Subtest: real HTML preserves literal HTML code while rejecting active HTML hidden among raw backticks
+ok 34 - real HTML preserves literal HTML code while rejecting active HTML hidden among raw backticks
+  ---
+  duration_ms: 592.4971
+  type: 'test'
+  ...
+# Subtest: unsupported Mermaid fallback retains complete source: sequenceDiagram
+ok 35 - unsupported Mermaid fallback retains complete source: sequenceDiagram
+  ---
+  duration_ms: 0.4621
+  type: 'test'
+  ...
+# Subtest: unsupported Mermaid fallback retains complete source: flowchart TD
+ok 36 - unsupported Mermaid fallback retains complete source: flowchart TD
+  ---
+  duration_ms: 0.1935
+  type: 'test'
+  ...
+# Subtest: unsupported Mermaid fallback retains complete source: pie title Votes
+ok 37 - unsupported Mermaid fallback retains complete source: pie title Votes
+  ---
+  duration_ms: 0.1044
+  type: 'test'
+  ...
+# Subtest: provisioned Flint 1.0.1 preserves the MCP and three-backend output contracts
+    # Subtest: vegalite: catalog, validation, compilation, and real render
+    ok 1 - vegalite: catalog, validation, compilation, and real render
+      ---
+      duration_ms: 1963.7457
+      type: 'test'
+      ...
+    # Subtest: echarts: catalog, validation, compilation, and real render
+    ok 2 - echarts: catalog, validation, compilation, and real render
+      ---
+      duration_ms: 2027.1113
+      type: 'test'
+      ...
+    # Subtest: chartjs: catalog, validation, compilation, and real render
+    ok 3 - chartjs: catalog, validation, compilation, and real render
+      ---
+      duration_ms: 72.181
+      type: 'test'
+      ...
+    # Subtest: validated show accepts the complete chart input
+    ok 4 - validated show accepts the complete chart input
+      ---
+      duration_ms: 10.5668
+      type: 'test'
+      ...
+    # Subtest: interaction grammar and chart-compatible discovery admit highlight plus keyboard navigation
+    ok 5 - interaction grammar and chart-compatible discovery admit highlight plus keyboard navigation
+      ---
+      duration_ms: 16.1082
+      type: 'test'
+      ...
+    # Subtest: a dropped interaction remains a warning even when the chart is valid
+    ok 6 - a dropped interaction remains a warning even when the chart is valid
+      ---
+      duration_ms: 4.6322
+      type: 'test'
+      ...
+    # Subtest: unknown reset gestures are explicit errors rather than neutral-state fallbacks
+    ok 7 - unknown reset gestures are explicit errors rather than neutral-state fallbacks
+      ---
+      duration_ms: 4.1332
+      type: 'test'
+      ...
+    # Subtest: initial state and linked boards use their separate supported input surfaces
+    ok 8 - initial state and linked boards use their separate supported input surfaces
+      ---
+      duration_ms: 22.3903
+      type: 'test'
+      ...
+    # Subtest: offline export CLI is independent of the caller timezone and uses UTC date annotations
+    ok 9 - offline export CLI is independent of the caller timezone and uses UTC date annotations
+      ---
+      duration_ms: 12996.2141
+      type: 'test'
+      ...
+    # Subtest: invalid snake_case names and missing fields remain explicit failures
+    ok 10 - invalid snake_case names and missing fields remain explicit failures
+      ---
+      duration_ms: 2.5316
+      type: 'test'
+      ...
+    1..10
+ok 38 - provisioned Flint 1.0.1 preserves the MCP and three-backend output contracts
+  ---
+  duration_ms: 18143.5516
+  type: 'test'
+  ...
+# Unknown MCP runtime route: no-such-route
+# Subtest: provisioned runtime
+    # Subtest: flint starts and reports 1.0.1
+    ok 1 - flint starts and reports 1.0.1
+      ---
+      duration_ms: 1090.0856
+      type: 'test'
+      ...
+    # Subtest: playwright starts and reports 0.0.80
+    ok 2 - playwright starts and reports 0.0.80
+      ---
+      duration_ms: 431.1153
+      type: 'test'
+      ...
+    # Subtest: replicate starts and reports 0.9.0
+    ok 3 - replicate starts and reports 0.9.0
+      ---
+      duration_ms: 876.8866
+      type: 'test'
+      ...
+    # Subtest: an unknown route fails loudly
+    ok 4 - an unknown route fails loudly
+      ---
+      duration_ms: 80.6884
+      type: 'test'
+      ...
+    1..4
+ok 39 - provisioned runtime
+  ---
+  duration_ms: 2479.9648
+  type: 'suite'
+  ...
+1..39
+# tests 52
+# suites 1
+# pass 52
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 18311.3489
+Verified integration lane: 52 passed; no skips, todos, or cancellations.

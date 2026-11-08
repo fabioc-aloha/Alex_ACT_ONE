@@ -1,0 +1,26 @@
+{
+  "response": "**Recovery summary (read-only):**\n\n**Known (per fixture):**\n- Branch: main\n- One user-authored file is modified (uncommitted, unstaged) — count/age not independently verifiable since I'm working only from the stated fixture, not a live `git` check\n- `HANDOFF.md` read attempt was denied by policy — no current state/blockers/next-action/verification available from that source\n\n**Unknown:**\n- Which file is modified, and its change age\n- Authoritative task list contents (`TODO.md` / linked backlog) — not read in this pass\n- Any active goal (`.github/config/goals.json`) — not read in this pass\n- Whether session memory holds a relevant prior summary — not checked in this pass\n\n**Not done (per boundaries):** no commands run, no alternate route to the denied HANDOFF content, no backlog invented, no continuity files written.\n\n**Smallest clarification needed:** confirm whether I should proceed by reading the authoritative task list / `TODO.md` and session memory as fallback signals, or whether you can supply the HANDOFF content (or the reason for denial) directly so recovery isn't based solely on the modified-file signal.",
+  "models": [
+    "claude-sonnet-5"
+  ],
+  "toolCalls": [
+    {
+      "name": "skill",
+      "skill": "proactive-awareness"
+    },
+    {
+      "name": "view",
+      "path": "proactive-awareness/references/project-recovery.md"
+    },
+    {
+      "name": "view",
+      "path": "proactive-awareness/references/runtime-session-health-monitoring.md"
+    }
+  ],
+  "codeChanges": {
+    "linesAdded": 0,
+    "linesRemoved": 0,
+    "filesModified": []
+  },
+  "semanticStatus": "not-reviewed"
+}

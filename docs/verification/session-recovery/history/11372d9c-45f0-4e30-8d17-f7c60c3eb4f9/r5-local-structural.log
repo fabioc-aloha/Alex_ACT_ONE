@@ -1,0 +1,2238 @@
+Environment: win32/x64, Node 26.13.0; lane=structural
+Excluded C:\Development\Alex_ACT_ONE\tests\conversion-runtime.test.cjs: Provisioned integration lane
+Excluded C:\Development\Alex_ACT_ONE\tests\flint-runtime.test.mjs: Provisioned integration lane
+Excluded C:\Development\Alex_ACT_ONE\tests\installed-runtime.test.mjs: Provisioned integration lane
+README inventory, asset tables, owner routes, and instruction role metadata match the source.
+Structural assessment: 0 findings; assessed bytes preserved.
+TAP version 13
+# Subtest: foreign instruction blocks the whole activation and does not create other files or a receipt
+ok 1 - foreign instruction blocks the whole activation and does not create other files or a receipt
+  ---
+  duration_ms: 264.9102
+  type: 'test'
+  ...
+# Subtest: modified owned instructions and their receipt are preserved on blocked apply
+ok 2 - modified owned instructions and their receipt are preserved on blocked apply
+  ---
+  duration_ms: 498.3075
+  type: 'test'
+  ...
+# Subtest: explicit conflict overwrite has a read-only preview and then verifies canonical bytes
+ok 3 - explicit conflict overwrite has a read-only preview and then verifies canonical bytes
+  ---
+  duration_ms: 412.4398
+  type: 'test'
+  ...
+# Subtest: an unchanged receipt-owned older instruction upgrades without an overwrite flag
+ok 4 - an unchanged receipt-owned older instruction upgrades without an overwrite flag
+  ---
+  duration_ms: 432.2523
+  type: 'test'
+  ...
+# Subtest: receipt migration cannot claim mixed or foreign ownership, even with overwrite enabled
+ok 5 - receipt migration cannot claim mixed or foreign ownership, even with overwrite enabled
+  ---
+  duration_ms: 291.948
+  type: 'test'
+  ...
+# Subtest: a late destination change invalidates an in-memory plan before any writes
+ok 6 - a late destination change invalidates an in-memory plan before any writes
+  ---
+  duration_ms: 40.3693
+  type: 'test'
+  ...
+# Subtest: overwrite policy does not bypass removal ownership rules
+ok 7 - overwrite policy does not bypass removal ownership rules
+  ---
+  duration_ms: 69.0326
+  type: 'test'
+  ...
+# Subtest: a failed apply does not claim incomplete ownership and can be explicitly recovered
+ok 8 - a failed apply does not claim incomplete ownership and can be explicitly recovered
+  ---
+  duration_ms: 291.5649
+  type: 'test'
+  ...
+# Subtest: host readiness reports activation conflicts as blocked rather than ready to apply
+ok 9 - host readiness reports activation conflicts as blocked rather than ready to apply
+  ---
+  duration_ms: 163.5391
+  type: 'test'
+  ...
+# Subtest: foreign ownership in a retired receipt entry cannot bypass activation or removal validation
+ok 10 - foreign ownership in a retired receipt entry cannot bypass activation or removal validation
+  ---
+  duration_ms: 418.1734
+  type: 'test'
+  ...
+# Subtest: upgrading preserves retired ownership for later removal: legacy=false
+ok 11 - upgrading preserves retired ownership for later removal: legacy=false
+  ---
+  duration_ms: 582.9301
+  type: 'test'
+  ...
+# Subtest: upgrading preserves retired ownership for later removal: legacy=true
+ok 12 - upgrading preserves retired ownership for later removal: legacy=true
+  ---
+  duration_ms: 629.0413
+  type: 'test'
+  ...
+# Subtest: rejects an unknown host without writing
+ok 13 - rejects an unknown host without writing
+  ---
+  duration_ms: 67.9512
+  type: 'test'
+  ...
+# Subtest: reports a no-write Copilot CLI instruction preview
+ok 14 - reports a no-write Copilot CLI instruction preview
+  ---
+  duration_ms: 201.0786
+  type: 'test'
+  ...
+# Subtest: reports Scout discovery, registry preview, and restart separately
+ok 15 - reports Scout discovery, registry preview, and restart separately
+  ---
+  duration_ms: 267.2035
+  type: 'test'
+  ...
+# Subtest: reports an absent Scout registry without pretending activation succeeded
+ok 16 - reports an absent Scout registry without pretending activation succeeded
+  ---
+  duration_ms: 252.2681
+  type: 'test'
+  ...
+# Subtest: migrates a legacy Core receipt to ONE ownership without rewriting instructions
+ok 17 - migrates a legacy Core receipt to ONE ownership without rewriting instructions
+  ---
+  duration_ms: 478.6583
+  type: 'test'
+  ...
+# Subtest: rejects a mixed Core and ONE receipt during migration
+ok 18 - rejects a mixed Core and ONE receipt during migration
+  ---
+  duration_ms: 241.3199
+  type: 'test'
+  ...
+# Subtest: applies, removes, and idempotently reapplies every declared instruction
+ok 19 - applies, removes, and idempotently reapplies every declared instruction
+  ---
+  duration_ms: 620.7312
+  type: 'test'
+  ...
+# Subtest: chart prompt selects the owner that links all bundled activation dependencies
+ok 20 - chart prompt selects the owner that links all bundled activation dependencies
+  ---
+  duration_ms: 5.0382
+  type: 'test'
+  ...
+# Subtest: chart routes resolve from an installed package without adopter skill folders
+ok 21 - chart routes resolve from an installed package without adopter skill folders
+  ---
+  duration_ms: 23.9397
+  type: 'test'
+  ...
+# Subtest: continuity consumers read current handoff state and the authoritative task list
+ok 22 - continuity consumers read current handoff state and the authoritative task list
+  ---
+  duration_ms: 3.6267
+  type: 'test'
+  ...
+# Subtest: brain command guidance resolves executables from the plugin rather than the target
+ok 23 - brain command guidance resolves executables from the plugin rather than the target
+  ---
+  duration_ms: 4.2438
+  type: 'test'
+  ...
+# Subtest: Big Idea routes chart work to the bundled owner
+ok 24 - Big Idea routes chart work to the bundled owner
+  ---
+  duration_ms: 1.8572
+  type: 'test'
+  ...
+# Subtest: assesses a plugin-shaped target deterministically without target mutation
+ok 25 - assesses a plugin-shaped target deterministically without target mutation
+  ---
+  duration_ms: 248.1502
+  type: 'test'
+  ...
+# Subtest: reports explainable structural importance for each skill
+ok 26 - reports explainable structural importance for each skill
+  ---
+  duration_ms: 103.1398
+  type: 'test'
+  ...
+# Subtest: reports broken local links without executing target code
+ok 27 - reports broken local links without executing target code
+  ---
+  duration_ms: 117.8742
+  type: 'test'
+  ...
+# Subtest: reports prompts that have no explicit route to a known skill
+ok 28 - reports prompts that have no explicit route to a known skill
+  ---
+  duration_ms: 117.3867
+  type: 'test'
+  ...
+# Subtest: classifies root Markdown but excludes non-Markdown files from assessed artifacts
+ok 29 - classifies root Markdown but excludes non-Markdown files from assessed artifacts
+  ---
+  duration_ms: 107.9144
+  type: 'test'
+  ...
+# Subtest: classifies direct children of a skill-library root as skills
+ok 30 - classifies direct children of a skill-library root as skills
+  ---
+  duration_ms: 77.4956
+  type: 'test'
+  ...
+# Subtest: classifies visual skill directories as skills
+ok 31 - classifies visual skill directories as skills
+  ---
+  duration_ms: 70.567
+  type: 'test'
+  ...
+# Subtest: treats Markdown under documentation trees as research regardless of filename
+ok 32 - treats Markdown under documentation trees as research regardless of filename
+  ---
+  duration_ms: 126.0133
+  type: 'test'
+  ...
+# Subtest: excludes backups and test fixtures while retaining bundled resources as resources
+ok 33 - excludes backups and test fixtures while retaining bundled resources as resources
+  ---
+  duration_ms: 123.131
+  type: 'test'
+  ...
+# Subtest: does not validate external file links or research-document links as runtime closure
+ok 34 - does not validate external file links or research-document links as runtime closure
+  ---
+  duration_ms: 135.8679
+  type: 'test'
+  ...
+# Subtest: does not treat Markdown link examples in fenced code as live routes
+ok 35 - does not treat Markdown link examples in fenced code as live routes
+  ---
+  duration_ms: 119.1608
+  type: 'test'
+  ...
+# Subtest: rejects an output path inside the assessed target
+ok 36 - rejects an output path inside the assessed target
+  ---
+  duration_ms: 68.013
+  type: 'test'
+  ...
+# Subtest: rejects an output path that reaches the target through a junction
+ok 37 - rejects an output path that reaches the target through a junction
+  ---
+  duration_ms: 73.2342
+  type: 'test'
+  ...
+# Subtest: does not modify a target file when the output path is an external hard link
+ok 38 - does not modify a target file when the output path is an external hard link
+  ---
+  duration_ms: 130.8726
+  type: 'test'
+  ...
+# Subtest: reports manifest component paths that escape through a junction
+ok 39 - reports manifest component paths that escape through a junction
+  ---
+  duration_ms: 82.34
+  type: 'test'
+  ...
+# Subtest: validates manifest asset arrays and rejects invalid entries
+ok 40 - validates manifest asset arrays and rejects invalid entries
+  ---
+  duration_ms: 133.1694
+  type: 'test'
+  ...
+# Subtest: reports manifest asset paths that escape through a junction
+ok 41 - reports manifest asset paths that escape through a junction
+  ---
+  duration_ms: 72.0775
+  type: 'test'
+  ...
+# Subtest: parses titled and escaped Markdown destinations while ignoring inline code
+ok 42 - parses titled and escaped Markdown destinations while ignoring inline code
+  ---
+  duration_ms: 146.8659
+  type: 'test'
+  ...
+# Subtest: reports local links that escape through a junction
+ok 43 - reports local links that escape through a junction
+  ---
+  duration_ms: 129.338
+  type: 'test'
+  ...
+# Subtest: recognizes case-variant skill links on case-insensitive filesystems
+ok 44 - recognizes case-variant skill links on case-insensitive filesystems
+  ---
+  duration_ms: 105.8374
+  type: 'test'
+  ...
+# Subtest: classifies and validates a portable brain contract
+ok 45 - classifies and validates a portable brain contract
+  ---
+  duration_ms: 236.3513
+  type: 'test'
+  ...
+# Subtest: does not accept fenced examples as brain contract sections
+ok 46 - does not accept fenced examples as brain contract sections
+  ---
+  duration_ms: 137.2495
+  type: 'test'
+  ...
+# Subtest: previews and scaffolds native platform skill locations without overwriting by default
+ok 47 - previews and scaffolds native platform skill locations without overwriting by default
+  ---
+  duration_ms: 206.1831
+  type: 'test'
+  ...
+# Subtest: scaffolds Copilot and instruction-file adapters with their supported shapes
+ok 48 - scaffolds Copilot and instruction-file adapters with their supported shapes
+  ---
+  duration_ms: 163.6725
+  type: 'test'
+  ...
+# Subtest: scaffolds every supported platform when all is explicitly requested
+ok 49 - scaffolds every supported platform when all is explicitly requested
+  ---
+  duration_ms: 111.5613
+  type: 'test'
+  ...
+# Subtest: scaffolds from the normalized Mall package layout
+ok 50 - scaffolds from the normalized Mall package layout
+  ---
+  duration_ms: 94.8061
+  type: 'test'
+  ...
+# Subtest: compile contract requires semantic preservation review before approval
+ok 51 - compile contract requires semantic preservation review before approval
+  ---
+  duration_ms: 3.3927
+  type: 'test'
+  ...
+# Subtest: accepts ONE object-based manifest assets alongside string paths
+ok 52 - accepts ONE object-based manifest assets alongside string paths
+  ---
+  duration_ms: 128.4733
+  type: 'test'
+  ...
+# Subtest: rejects malformed and escaping object-based assets without losing their index
+ok 53 - rejects malformed and escaping object-based assets without losing their index
+  ---
+  duration_ms: 133.7952
+  type: 'test'
+  ...
+# Subtest: runs both commands by absolute path from an unrelated adopter directory
+ok 54 - runs both commands by absolute path from an unrelated adopter directory
+  ---
+  duration_ms: 190.9247
+  type: 'test'
+  ...
+# Subtest: preflights all scaffold destinations before rejecting an escaping directory junction
+ok 55 - preflights all scaffold destinations before rejecting an escaping directory junction
+  ---
+  duration_ms: 70.4478
+  type: 'test'
+  ...
+# Subtest: rejects a dangling destination link before applying any scaffold files
+ok 56 - rejects a dangling destination link before applying any scaffold files
+  ---
+  duration_ms: 79.488
+  type: 'test'
+  ...
+# Subtest: forced scaffold replacement does not change an external hard-linked file
+ok 57 - forced scaffold replacement does not change an external hard-linked file
+  ---
+  duration_ms: 79.4095
+  type: 'test'
+  ...
+# Subtest: invalid scaffold flags fail without creating files
+ok 58 - invalid scaffold flags fail without creating files
+  ---
+  duration_ms: 212.1926
+  type: 'test'
+  ...
+# Subtest: loading restored command modules does not run either CLI
+ok 59 - loading restored command modules does not run either CLI
+  ---
+  duration_ms: 59.5904
+  type: 'test'
+  ...
+# Subtest: an incompatible late scaffold destination blocks the whole write set
+ok 60 - an incompatible late scaffold destination blocks the whole write set
+  ---
+  duration_ms: 73.6089
+  type: 'test'
+  ...
+# Subtest: default apply preserves a file created after the initial overwrite check
+ok 61 - default apply preserves a file created after the initial overwrite check
+  ---
+  duration_ms: 77.1009
+  type: 'test'
+  ...
+# Subtest: gate rejects failures, skipped/todo/cancelled tests, empty runs, and absent or inconsistent totals
+ok 62 - gate rejects failures, skipped/todo/cancelled tests, empty runs, and absent or inconsistent totals
+  ---
+  duration_ms: 5.5812
+  type: 'test'
+  ...
+# Subtest: lane selection covers every test file and explicitly records platform exclusions
+ok 63 - lane selection covers every test file and explicitly records platform exclusions
+  ---
+  duration_ms: 2.5486
+  type: 'test'
+  ...
+# Subtest: the actual gate runner cannot turn a real skipped test into success
+ok 64 - the actual gate runner cannot turn a real skipped test into success
+  ---
+  duration_ms: 380.7044
+  type: 'test'
+  ...
+# Subtest: integration gate fails before tests when the selected runtime is not provisioned
+ok 65 - integration gate fails before tests when the selected runtime is not provisioned
+  ---
+  duration_ms: 80.3725
+  type: 'test'
+  ...
+# Subtest: workflow uses reviewed immutable actions, read-only permissions, direct-main triggers, and both lanes
+ok 66 - workflow uses reviewed immutable actions, read-only permissions, direct-main triggers, and both lanes
+  ---
+  duration_ms: 0.8931
+  type: 'test'
+  ...
+# Subtest: Word optional-module loading honors an explicitly provisioned CI runtime
+ok 67 - Word optional-module loading honors an explicitly provisioned CI runtime
+  ---
+  duration_ms: 79.8119
+  type: 'test'
+  ...
+# Subtest: generated offline pages retain LF endings on Windows checkouts for reproducible builds
+ok 68 - generated offline pages retain LF endings on Windows checkouts for reproducible builds
+  ---
+  duration_ms: 80.0542
+  type: 'test'
+  ...
+# Subtest: HTML scan accepts a complete supported expression: '<p>static</p>'
+ok 69 - HTML scan accepts a complete supported expression: '<p>static</p>'
+  ---
+  duration_ms: 77.6635
+  type: 'test'
+  ...
+# Subtest: HTML scan accepts a complete supported expression: DOMPurify.sanitize(input)
+ok 70 - HTML scan accepts a complete supported expression: DOMPurify.sanitize(input)
+  ---
+  duration_ms: 68.9667
+  type: 'test'
+  ...
+# Subtest: HTML scan accepts a complete supported expression: DOMPurify.sanitize(makeHtml(")"))
+ok 71 - HTML scan accepts a complete supported expression: DOMPurify.sanitize(makeHtml(")"))
+  ---
+  duration_ms: 70.7761
+  type: 'test'
+  ...
+# Subtest: HTML scan flags partially sanitized expressions: '<p>' + untrusted
+ok 72 - HTML scan flags partially sanitized expressions: '<p>' + untrusted
+  ---
+  duration_ms: 72.07
+  type: 'test'
+  ...
+# Subtest: HTML scan flags partially sanitized expressions: DOMPurify.sanitize(prefix) + untrusted
+ok 73 - HTML scan flags partially sanitized expressions: DOMPurify.sanitize(prefix) + untrusted
+  ---
+  duration_ms: 65.9798
+  type: 'test'
+  ...
+# Subtest: HTML scan flags partially sanitized expressions: untrusted || DOMPurify.sanitize(fallback)
+ok 74 - HTML scan flags partially sanitized expressions: untrusted || DOMPurify.sanitize(fallback)
+  ---
+  duration_ms: 72.7039
+  type: 'test'
+  ...
+# Subtest: HTML scan flags partially sanitized expressions: DOMPurify.sanitize(prefix), untrusted
+ok 75 - HTML scan flags partially sanitized expressions: DOMPurify.sanitize(prefix), untrusted
+  ---
+  duration_ms: 76.7908
+  type: 'test'
+  ...
+# Subtest: HTML scan flags partially sanitized expressions: `<p>${untrusted}</p>`
+ok 76 - HTML scan flags partially sanitized expressions: `<p>${untrusted}</p>`
+  ---
+  duration_ms: 69.1768
+  type: 'test'
+  ...
+# Subtest: HTML scan does not trust a previously sanitized identifier after reassignment
+ok 77 - HTML scan does not trust a previously sanitized identifier after reassignment
+  ---
+  duration_ms: 70.1009
+  type: 'test'
+  ...
+# Subtest: print floor accepts readable 12 text
+ok 78 - print floor accepts readable 12 text
+  ---
+  duration_ms: 68.9165
+  type: 'test'
+  ...
+# Subtest: print floor accepts readable 12px text
+ok 79 - print floor accepts readable 12px text
+  ---
+  duration_ms: 67.7866
+  type: 'test'
+  ...
+# Subtest: print floor rejects tiny px-unit text
+ok 80 - print floor rejects tiny px-unit text
+  ---
+  duration_ms: 64.1549
+  type: 'test'
+  ...
+# Subtest: print floor reads single quotes and inherited root font size
+ok 81 - print floor reads single quotes and inherited root font size
+  ---
+  duration_ms: 67.5457
+  type: 'test'
+  ...
+# Subtest: print floor explicitly rejects unsupported sizing: <text font-size="1em">Relative</text>
+ok 82 - print floor explicitly rejects unsupported sizing: <text font-size="1em">Relative</text>
+  ---
+  duration_ms: 67.9217
+  type: 'test'
+  ...
+# Subtest: print floor explicitly rejects unsupported sizing: <g transform="scale(0.1)"><text font-size="12">Scaled</text></g>
+ok 83 - print floor explicitly rejects unsupported sizing: <g transform="scale(0.1)"><text font-size="12">Scaled</text></g>
+  ---
+  duration_ms: 69.8781
+  type: 'test'
+  ...
+# Subtest: print floor explicitly rejects unsupported sizing: <text font-size="12"><tspan font-size="1">Small span</tspan></text>
+ok 84 - print floor explicitly rejects unsupported sizing: <text font-size="12"><tspan font-size="1">Small span</tspan></text>
+  ---
+  duration_ms: 67.4823
+  type: 'test'
+  ...
+# Subtest: print floor explicitly rejects unsupported sizing: <style>text { font-size: 1px; }</style><text font-size="12">Styled</text>
+ok 85 - print floor explicitly rejects unsupported sizing: <style>text { font-size: 1px; }</style><text font-size="12">Styled</text>
+  ---
+  duration_ms: 70.6678
+  type: 'test'
+  ...
+# Subtest: numeric membership preserves signs: Change: -10%. against -0.1
+ok 86 - numeric membership preserves signs: Change: -10%. against -0.1
+  ---
+  duration_ms: 79.9391
+  type: 'test'
+  ...
+# Subtest: numeric membership preserves signs: Change: -10%. against 0.1
+ok 87 - numeric membership preserves signs: Change: -10%. against 0.1
+  ---
+  duration_ms: 68.9092
+  type: 'test'
+  ...
+# Subtest: numeric membership preserves signs: Loss: -$4.2M. against -4200000
+ok 88 - numeric membership preserves signs: Loss: -$4.2M. against -4200000
+  ---
+  duration_ms: 75.5245
+  type: 'test'
+  ...
+# Subtest: numeric membership preserves signs: Change: −10%. against -0.1
+ok 89 - numeric membership preserves signs: Change: −10%. against -0.1
+  ---
+  duration_ms: 69.526
+  type: 'test'
+  ...
+# Subtest: numeric membership preserves signs: Change: 10%. against 0.1
+ok 90 - numeric membership preserves signs: Change: 10%. against 0.1
+  ---
+  duration_ms: 71.2154
+  type: 'test'
+  ...
+# Subtest: ratio check distinguishes pass, failure and invalid input: whole=10
+ok 91 - ratio check distinguishes pass, failure and invalid input: whole=10
+  ---
+  duration_ms: 59.8014
+  type: 'test'
+  ...
+# Subtest: ratio check distinguishes pass, failure and invalid input: whole=2
+ok 92 - ratio check distinguishes pass, failure and invalid input: whole=2
+  ---
+  duration_ms: 58.8726
+  type: 'test'
+  ...
+# Subtest: ratio check distinguishes pass, failure and invalid input: whole=0
+ok 93 - ratio check distinguishes pass, failure and invalid input: whole=0
+  ---
+  duration_ms: 60.5122
+  type: 'test'
+  ...
+# Subtest: Mermaid class checker accepts suffixes on A[Start]
+ok 94 - Mermaid class checker accepts suffixes on A[Start]
+  ---
+  duration_ms: 66.3135
+  type: 'test'
+  ...
+# Subtest: Mermaid class checker accepts suffixes on A((Start))
+ok 95 - Mermaid class checker accepts suffixes on A((Start))
+  ---
+  duration_ms: 65.3498
+  type: 'test'
+  ...
+# Subtest: Mermaid class checker accepts suffixes on A[[Start]]
+ok 96 - Mermaid class checker accepts suffixes on A[[Start]]
+  ---
+  duration_ms: 89.4675
+  type: 'test'
+  ...
+# Subtest: Mermaid class checker accepts suffixes on A[(Start)]
+ok 97 - Mermaid class checker accepts suffixes on A[(Start)]
+  ---
+  duration_ms: 78.8093
+  type: 'test'
+  ...
+# Subtest: Mermaid class checker accepts suffixes on A([Start])
+ok 98 - Mermaid class checker accepts suffixes on A([Start])
+  ---
+  duration_ms: 71.4148
+  type: 'test'
+  ...
+# Subtest: Mermaid class checker accepts suffixes on A{{Start}}
+ok 99 - Mermaid class checker accepts suffixes on A{{Start}}
+  ---
+  duration_ms: 77.3495
+  type: 'test'
+  ...
+# Subtest: Mermaid class checker accepts suffixes on A(((Start)))
+ok 100 - Mermaid class checker accepts suffixes on A(((Start)))
+  ---
+  duration_ms: 71.2875
+  type: 'test'
+  ...
+# Subtest: Mermaid class statements satisfy class coverage
+ok 101 - Mermaid class statements satisfy class coverage
+  ---
+  duration_ms: 113.351
+  type: 'test'
+  ...
+# Subtest: Mermaid checker still rejects an unclassed endpoint
+ok 102 - Mermaid checker still rejects an unclassed endpoint
+  ---
+  duration_ms: 84.7533
+  type: 'test'
+  ...
+# Subtest: conversion validator rejects nonportable image paths: C:\\media\\missing.png
+ok 103 - conversion validator rejects nonportable image paths: C:\\media\\missing.png
+  ---
+  duration_ms: 83.2134
+  type: 'test'
+  ...
+# Subtest: conversion validator rejects nonportable image paths: C:/media/missing.png
+ok 104 - conversion validator rejects nonportable image paths: C:/media/missing.png
+  ---
+  duration_ms: 101.9095
+  type: 'test'
+  ...
+# Subtest: conversion validator rejects nonportable image paths: file:///C:/media/missing.png
+ok 105 - conversion validator rejects nonportable image paths: file:///C:/media/missing.png
+  ---
+  duration_ms: 64.0175
+  type: 'test'
+  ...
+# Subtest: conversion validator checks existing relative images
+ok 106 - conversion validator checks existing relative images
+  ---
+  duration_ms: 137.9861
+  type: 'test'
+  ...
+# Subtest: conversion validator preserves protocol-relative remote image URLs
+ok 107 - conversion validator preserves protocol-relative remote image URLs
+  ---
+  duration_ms: 70.2993
+  type: 'test'
+  ...
+# Subtest: SVG inversion selects tick labels from the requested y axis
+ok 108 - SVG inversion selects tick labels from the requested y axis
+  ---
+  duration_ms: 70.9873
+  type: 'test'
+  ...
+# Subtest: SVG inversion selects tick labels from the requested x axis
+ok 109 - SVG inversion selects tick labels from the requested x axis
+  ---
+  duration_ms: 74.184
+  type: 'test'
+  ...
+# Subtest: SVG inversion reports ambiguous axis labels instead of guessing
+ok 110 - SVG inversion reports ambiguous axis labels instead of guessing
+  ---
+  duration_ms: 71.7944
+  type: 'test'
+  ...
+# Subtest: SVG inversion does not write off-grid values as a usable dataset
+ok 111 - SVG inversion does not write off-grid values as a usable dataset
+  ---
+  duration_ms: 62.1179
+  type: 'test'
+  ...
+# Subtest: SVG inversion reports unsupported transformed coordinates
+ok 112 - SVG inversion reports unsupported transformed coordinates
+  ---
+  duration_ms: 62.2021
+  type: 'test'
+  ...
+# Subtest: link checker resolves reference syntax: [Caption][target]
+ok 113 - link checker resolves reference syntax: [Caption][target]
+  ---
+  duration_ms: 114.9151
+  type: 'test'
+  ...
+# Subtest: link checker resolves reference syntax: [target][]
+ok 114 - link checker resolves reference syntax: [target][]
+  ---
+  duration_ms: 112.6383
+  type: 'test'
+  ...
+# Subtest: link checker resolves reference syntax: [target]
+ok 115 - link checker resolves reference syntax: [target]
+  ---
+  duration_ms: 128.8806
+  type: 'test'
+  ...
+# Subtest: link checker resolves reference syntax: ![target][]
+ok 116 - link checker resolves reference syntax: ![target][]
+  ---
+  duration_ms: 123.4708
+  type: 'test'
+  ...
+# Subtest: link checker ignores example references inside code
+ok 117 - link checker ignores example references inside code
+  ---
+  duration_ms: 73.2471
+  type: 'test'
+  ...
+# Subtest: rejection tally keeps sweep rates separate from close-read findings
+ok 118 - rejection tally keeps sweep rates separate from close-read findings
+  ---
+  duration_ms: 66.639
+  type: 'test'
+  ...
+# Subtest: rejection tally rejects invalid origins instead of silently counting them
+ok 119 - rejection tally rejects invalid origins instead of silently counting them
+  ---
+  duration_ms: 62.81
+  type: 'test'
+  ...
+# Subtest: rejection tally does not invent a sweep rate when no sweep ran
+ok 120 - rejection tally does not invent a sweep rate when no sweep ran
+  ---
+  duration_ms: 64.2997
+  type: 'test'
+  ...
+# Subtest: active guidance does not require retired semantic telemetry
+ok 121 - active guidance does not require retired semantic telemetry
+  ---
+  duration_ms: 148.0392
+  type: 'test'
+  ...
+# Subtest: runnable rich-email commands are marked, portable, and backed by real shipped targets
+ok 122 - runnable rich-email commands are marked, portable, and backed by real shipped targets
+  ---
+  duration_ms: 1.7669
+  type: 'test'
+  ...
+# Subtest: new executable markers cannot silently bypass the curated safe command tests
+ok 123 - new executable markers cannot silently bypass the curated safe command tests
+  ---
+  duration_ms: 410.9748
+  type: 'test'
+  ...
+# Subtest: documented commands run against an installed copy from an unrelated adopter directory
+ok 124 - documented commands run against an installed copy from an unrelated adopter directory
+  ---
+  duration_ms: 366.7988
+  type: 'test'
+  ...
+# Subtest: Replicate documentation points to the real manifest and environment reference
+ok 125 - Replicate documentation points to the real manifest and environment reference
+  ---
+  duration_ms: 2.5831
+  type: 'test'
+  ...
+# Subtest: README skills table lists every declared asset exactly once with its source link
+ok 126 - README skills table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 1.6945
+  type: 'test'
+  ...
+# Subtest: README prompts table lists every declared asset exactly once with its source link
+ok 127 - README prompts table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 21.5556
+  type: 'test'
+  ...
+# Subtest: README instructions table lists every declared asset exactly once with its source link
+ok 128 - README instructions table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 22.9352
+  type: 'test'
+  ...
+# Subtest: one generated inventory derives source counts from the manifest and server registrations
+ok 129 - one generated inventory derives source counts from the manifest and server registrations
+  ---
+  duration_ms: 2.8166
+  type: 'test'
+  ...
+# Subtest: the documentation generator has no drift and --check performs no writes
+ok 130 - the documentation generator has no drift and --check performs no writes
+  ---
+  duration_ms: 402.2802
+  type: 'test'
+  ...
+# Subtest: instruction role metadata is derived from canonical descriptions, not an independent procedure
+ok 131 - instruction role metadata is derived from canonical descriptions, not an independent procedure
+  ---
+  duration_ms: 44.3483
+  type: 'test'
+  ...
+# Subtest: stale instruction role metadata fails the read-only drift check
+ok 132 - stale instruction role metadata fails the read-only drift check
+  ---
+  duration_ms: 135.3728
+  type: 'test'
+  ...
+# Subtest: generation rejects a prompt routed to a missing owner before producing misleading tables
+ok 133 - generation rejects a prompt routed to a missing owner before producing misleading tables
+  ---
+  duration_ms: 1013.2553
+  type: 'test'
+  ...
+# Subtest: current docs distinguish shipped optimization from source-only chart additions
+ok 134 - current docs distinguish shipped optimization from source-only chart additions
+  ---
+  duration_ms: 2.0363
+  type: 'test'
+  ...
+# Subtest: experimental page is a distinct offline lab, not a replacement for the editorial gallery
+ok 135 - experimental page is a distinct offline lab, not a replacement for the editorial gallery
+  ---
+  duration_ms: 16.7674
+  type: 'test'
+  ...
+# Subtest: lab uses less-conventional actual chart types and meaningful gesture contracts
+ok 136 - lab uses less-conventional actual chart types and meaningful gesture contracts
+  ---
+  duration_ms: 10.2637
+  type: 'test'
+  ...
+# Subtest: reader-driven story beats are real prevalidated ChartUpdate layers, not a CSS animation
+ok 137 - reader-driven story beats are real prevalidated ChartUpdate layers, not a CSS animation
+  ---
+  duration_ms: 15.1995
+  type: 'test'
+  ...
+# Subtest: linked scene uses three views of an explicit shared synthetic population
+ok 138 - linked scene uses three views of an explicit shared synthetic population
+  ---
+  duration_ms: 9.3897
+  type: 'test'
+  ...
+# Subtest: cohort instructions describe the rendered toggle buttons rather than nonexistent checkboxes
+ok 139 - cohort instructions describe the rendered toggle buttons rather than nonexistent checkboxes
+  ---
+  duration_ms: 9.5517
+  type: 'test'
+  ...
+# Subtest: interaction workflow is a declared discoverable skill, not another prompt or runtime
+ok 140 - interaction workflow is a declared discoverable skill, not another prompt or runtime
+  ---
+  duration_ms: 5.2144
+  type: 'test'
+  ...
+# Subtest: interaction workflow delegates grammar and preset discovery to the installed Flint runtime
+ok 141 - interaction workflow delegates grammar and preset discovery to the installed Flint runtime
+  ---
+  duration_ms: 1.7591
+  type: 'test'
+  ...
+# Subtest: workflow separates behavior, state, linked boards, and application-only custom handlers
+ok 142 - workflow separates behavior, state, linked boards, and application-only custom handlers
+  ---
+  duration_ms: 1.8025
+  type: 'test'
+  ...
+# Subtest: verification requires gestures, reset, keyboard behavior, and explicitly scoped evidence
+ok 143 - verification requires gestures, reset, keyboard behavior, and explicitly scoped evidence
+  ---
+  duration_ms: 2.2845
+  type: 'test'
+  ...
+# Subtest: chart owners explicitly load the interaction workflow without making static charts interactive
+ok 144 - chart owners explicitly load the interaction workflow without making static charts interactive
+  ---
+  duration_ms: 7.4482
+  type: 'test'
+  ...
+# Subtest: installed interaction routes resolve without an adopter skills directory
+ok 145 - installed interaction routes resolve without an adopter skills directory
+  ---
+  duration_ms: 46.1847
+  type: 'test'
+  ...
+# Subtest: showcase is a self-contained HTML document with explicit offline and synthetic-data boundaries
+ok 146 - showcase is a self-contained HTML document with explicit offline and synthetic-data boundaries
+  ---
+  duration_ms: 15.6686
+  type: 'test'
+  ...
+# Subtest: showcase embeds the actual pinned App UI and preserves third-party notices
+ok 147 - showcase embeds the actual pinned App UI and preserves third-party notices
+  ---
+  duration_ms: 17.378
+  type: 'test'
+  ...
+# Subtest: samples cover chart families, semantic types, gestures, themes, state updates, and links
+ok 148 - samples cover chart families, semantic types, gestures, themes, state updates, and links
+  ---
+  duration_ms: 8.6985
+  type: 'test'
+  ...
+# Subtest: one semantic input is actually rendered by the three supported MCP backends
+ok 149 - one semantic input is actually rendered by the three supported MCP backends
+  ---
+  duration_ms: 9.0032
+  type: 'test'
+  ...
+# Subtest: legend-toggle examples keep a persistent visible key across editorial themes
+ok 150 - legend-toggle examples keep a persistent visible key across editorial themes
+  ---
+  duration_ms: 8.2625
+  type: 'test'
+  ...
+# Subtest: the offline host bridge restricts messages and does not pretend to run a backend
+ok 151 - the offline host bridge restricts messages and does not pretend to run a backend
+  ---
+  duration_ms: 8.103
+  type: 'test'
+  ...
+# Subtest: gallery generation is reproducible and pinned rather than fetching a moving library
+ok 152 - gallery generation is reproducible and pinned rather than fetching a moving library
+  ---
+  duration_ms: 60.4714
+  type: 'test'
+  ...
+# Subtest: Flint MCP and library are independently exact-pinned at 1.0.1
+ok 153 - Flint MCP and library are independently exact-pinned at 1.0.1
+  ---
+  duration_ms: 0.8858
+  type: 'test'
+  ...
+# Subtest: shared runtime package selection includes the exact library without changing other routes
+ok 154 - shared runtime package selection includes the exact library without changing other routes
+  ---
+  duration_ms: 0.4848
+  type: 'test'
+  ...
+# Subtest: launcher verifies the Flint library before invoking the server: null
+ok 155 - launcher verifies the Flint library before invoking the server: null
+  ---
+  duration_ms: 80.6233
+  type: 'test'
+  ...
+# Subtest: launcher verifies the Flint library before invoking the server: 0.5.1
+ok 156 - launcher verifies the Flint library before invoking the server: 0.5.1
+  ---
+  duration_ms: 63.218
+  type: 'test'
+  ...
+# Subtest: launcher verifies the Flint library before invoking the server: 1.0.1
+ok 157 - launcher verifies the Flint library before invoking the server: 1.0.1
+  ---
+  duration_ms: 114.5078
+  type: 'test'
+  ...
+# Subtest: provisioner can preview only Flint and library without mutating a runtime
+ok 158 - provisioner can preview only Flint and library without mutating a runtime
+  ---
+  duration_ms: 626.8391
+  type: 'test'
+  ...
+# Subtest: launcher rejects a stale nested Flint dependency even when the root library is current
+ok 159 - launcher rejects a stale nested Flint dependency even when the root library is current
+  ---
+  duration_ms: 83.4109
+  type: 'test'
+  ...
+# Subtest: provisioner rejects unsafe routing and unknown server selection before installing
+ok 160 - provisioner rejects unsafe routing and unknown server selection before installing
+  ---
+  duration_ms: 381.8892
+  type: 'test'
+  ...
+# Subtest: current Flint routes load version-matched skills and use validate then show
+ok 161 - current Flint routes load version-matched skills and use validate then show
+  ---
+  duration_ms: 6.3195
+  type: 'test'
+  ...
+# Subtest: Chart Brief hints use exact chart names instead of unsupported snake_case
+ok 162 - Chart Brief hints use exact chart names instead of unsupported snake_case
+  ---
+  duration_ms: 3.087
+  type: 'test'
+  ...
+# Subtest: pwsh: previews shared pins and scopes without writes or package network requests
+ok 163 - pwsh: previews shared pins and scopes without writes or package network requests
+  ---
+  duration_ms: 1302.4768
+  type: 'test'
+  ...
+# Subtest: pwsh: checks every pin first, installs in correct scopes, and verifies versions
+ok 164 - pwsh: checks every pin first, installs in correct scopes, and verifies versions
+  ---
+  duration_ms: 1924.2789
+  type: 'test'
+  ...
+# Subtest: pwsh: unavailable proxy pin prevents all installations
+ok 165 - pwsh: unavailable proxy pin prevents all installations
+  ---
+  duration_ms: 1257.3979
+  type: 'test'
+  ...
+# Subtest: pwsh: unexpected proxy version prevents all installations
+ok 166 - pwsh: unexpected proxy version prevents all installations
+  ---
+  duration_ms: 1206.4112
+  type: 'test'
+  ...
+# Subtest: pwsh: npm policy failure stops the batch without overrides
+ok 167 - pwsh: npm policy failure stops the batch without overrides
+  ---
+  duration_ms: 1351.887
+  type: 'test'
+  ...
+# Subtest: pwsh: installed version mismatch is not reported as success
+ok 168 - pwsh: installed version mismatch is not reported as success
+  ---
+  duration_ms: 1363.5262
+  type: 'test'
+  ...
+# Subtest: pwsh: MCP version output mismatch is not reported as success
+ok 169 - pwsh: MCP version output mismatch is not reported as success
+  ---
+  duration_ms: 1535.7472
+  type: 'test'
+  ...
+# Subtest: pwsh: explicit backend prefix is routed only during installs without policy changes
+ok 170 - pwsh: explicit backend prefix is routed only during installs without policy changes
+  ---
+  duration_ms: 1770.2788
+  type: 'test'
+  ...
+# Subtest: pwsh: explicit routing preview still performs no installs
+ok 171 - pwsh: explicit routing preview still performs no installs
+  ---
+  duration_ms: 951.5622
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects unsafe or ambiguous tarball prefix http://feed.example.invalid/
+ok 172 - pwsh: rejects unsafe or ambiguous tarball prefix http://feed.example.invalid/
+  ---
+  duration_ms: 560.0781
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects unsafe or ambiguous tarball prefix https://user:<EMAIL>/
+ok 173 - pwsh: rejects unsafe or ambiguous tarball prefix https://user:<EMAIL>/
+  ---
+  duration_ms: 518.8636
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects unsafe or ambiguous tarball prefix https://feed.example.invalid/?query=1
+ok 174 - pwsh: rejects unsafe or ambiguous tarball prefix https://feed.example.invalid/?query=1
+  ---
+  duration_ms: 527.8989
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects unsafe or ambiguous tarball prefix https://feed.example.invalid/\#fragment
+ok 175 - pwsh: rejects unsafe or ambiguous tarball prefix https://feed.example.invalid/\#fragment
+  ---
+  duration_ms: 525.4215
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects unsafe or ambiguous tarball prefix https://feed.example.invalid/path
+ok 176 - pwsh: rejects unsafe or ambiguous tarball prefix https://feed.example.invalid/path
+  ---
+  duration_ms: 513.3564
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects unsafe or ambiguous tarball prefix not-a-url
+ok 177 - pwsh: rejects unsafe or ambiguous tarball prefix not-a-url
+  ---
+  duration_ms: 533.6427
+  type: 'test'
+  ...
+# Subtest: pwsh: older npm cannot silently ignore full-prefix routing
+ok 178 - pwsh: older npm cannot silently ignore full-prefix routing
+  ---
+  duration_ms: 927.6785
+  type: 'test'
+  ...
+# Subtest: pwsh: routing does not mask a continued fetch-policy failure
+ok 179 - pwsh: routing does not mask a continued fetch-policy failure
+  ---
+  duration_ms: 1198.7432
+  type: 'test'
+  ...
+# Subtest: pwsh: native stderr warnings remain visible text without PowerShell error records
+ok 180 - pwsh: native stderr warnings remain visible text without PowerShell error records
+  ---
+  duration_ms: 2079.5479
+  type: 'test'
+  ...
+# Subtest: pwsh: VerifyOnly checks existing packages and renderers without another install
+ok 181 - pwsh: VerifyOnly checks existing packages and renderers without another install
+  ---
+  duration_ms: 3076.7829
+  type: 'test'
+  ...
+# Subtest: pwsh: mmdc missing browser prevents a readiness success claim
+ok 182 - pwsh: mmdc missing browser prevents a readiness success claim
+  ---
+  duration_ms: 1719.9038
+  type: 'test'
+  ...
+# Subtest: pwsh: mmdc exit zero without output is not success
+ok 183 - pwsh: mmdc exit zero without output is not success
+  ---
+  duration_ms: 1865.1581
+  type: 'test'
+  ...
+# Subtest: pwsh: mmdc invalid output is not success
+ok 184 - pwsh: mmdc invalid output is not success
+  ---
+  duration_ms: 1877.5976
+  type: 'test'
+  ...
+# Subtest: pwsh: svgexport missing browser prevents a readiness success claim
+ok 185 - pwsh: svgexport missing browser prevents a readiness success claim
+  ---
+  duration_ms: 1859.24
+  type: 'test'
+  ...
+# Subtest: pwsh: svgexport exit zero without output is not success
+ok 186 - pwsh: svgexport exit zero without output is not success
+  ---
+  duration_ms: 2367.5688
+  type: 'test'
+  ...
+# Subtest: pwsh: svgexport invalid output is not success
+ok 187 - pwsh: svgexport invalid output is not success
+  ---
+  duration_ms: 2265.4638
+  type: 'test'
+  ...
+# Subtest: pwsh: Replicate opt-in preview uses the shared pin without installs
+ok 188 - pwsh: Replicate opt-in preview uses the shared pin without installs
+  ---
+  duration_ms: 1008.9302
+  type: 'test'
+  ...
+# Subtest: pwsh: Replicate opt-in installs privately and verifies all three MCP launchers
+ok 189 - pwsh: Replicate opt-in installs privately and verifies all three MCP launchers
+  ---
+  duration_ms: 3901.8559
+  type: 'test'
+  ...
+# Subtest: pwsh: unavailable Replicate pin prevents all opt-in installations
+ok 190 - pwsh: unavailable Replicate pin prevents all opt-in installations
+  ---
+  duration_ms: 1245.9544
+  type: 'test'
+  ...
+# Subtest: pwsh: wrong Replicate installed version prevents success
+ok 191 - pwsh: wrong Replicate installed version prevents success
+  ---
+  duration_ms: 1451.77
+  type: 'test'
+  ...
+# Subtest: pwsh: wrong Replicate launcher output prevents success
+ok 192 - pwsh: wrong Replicate launcher output prevents success
+  ---
+  duration_ms: 2014.5459
+  type: 'test'
+  ...
+# Subtest: powershell: previews shared pins and scopes without writes or package network requests
+ok 193 - powershell: previews shared pins and scopes without writes or package network requests
+  ---
+  duration_ms: 1082.7027
+  type: 'test'
+  ...
+# Subtest: powershell: checks every pin first, installs in correct scopes, and verifies versions
+ok 194 - powershell: checks every pin first, installs in correct scopes, and verifies versions
+  ---
+  duration_ms: 1838.2086
+  type: 'test'
+  ...
+# Subtest: powershell: unavailable proxy pin prevents all installations
+ok 195 - powershell: unavailable proxy pin prevents all installations
+  ---
+  duration_ms: 1220.0424
+  type: 'test'
+  ...
+# Subtest: powershell: unexpected proxy version prevents all installations
+ok 196 - powershell: unexpected proxy version prevents all installations
+  ---
+  duration_ms: 1164.6753
+  type: 'test'
+  ...
+# Subtest: powershell: npm policy failure stops the batch without overrides
+ok 197 - powershell: npm policy failure stops the batch without overrides
+  ---
+  duration_ms: 1333.4307
+  type: 'test'
+  ...
+# Subtest: powershell: installed version mismatch is not reported as success
+ok 198 - powershell: installed version mismatch is not reported as success
+  ---
+  duration_ms: 1334.6084
+  type: 'test'
+  ...
+# Subtest: powershell: MCP version output mismatch is not reported as success
+ok 199 - powershell: MCP version output mismatch is not reported as success
+  ---
+  duration_ms: 1521.4275
+  type: 'test'
+  ...
+# Subtest: powershell: explicit backend prefix is routed only during installs without policy changes
+ok 200 - powershell: explicit backend prefix is routed only during installs without policy changes
+  ---
+  duration_ms: 1814.3298
+  type: 'test'
+  ...
+# Subtest: powershell: explicit routing preview still performs no installs
+ok 201 - powershell: explicit routing preview still performs no installs
+  ---
+  duration_ms: 1030.3493
+  type: 'test'
+  ...
+# Subtest: powershell: rejects unsafe or ambiguous tarball prefix http://feed.example.invalid/
+ok 202 - powershell: rejects unsafe or ambiguous tarball prefix http://feed.example.invalid/
+  ---
+  duration_ms: 502.8245
+  type: 'test'
+  ...
+# Subtest: powershell: rejects unsafe or ambiguous tarball prefix https://user:<EMAIL>/
+ok 203 - powershell: rejects unsafe or ambiguous tarball prefix https://user:<EMAIL>/
+  ---
+  duration_ms: 442.0795
+  type: 'test'
+  ...
+# Subtest: powershell: rejects unsafe or ambiguous tarball prefix https://feed.example.invalid/?query=1
+ok 204 - powershell: rejects unsafe or ambiguous tarball prefix https://feed.example.invalid/?query=1
+  ---
+  duration_ms: 392.7913
+  type: 'test'
+  ...
+# Subtest: powershell: rejects unsafe or ambiguous tarball prefix https://feed.example.invalid/\#fragment
+ok 205 - powershell: rejects unsafe or ambiguous tarball prefix https://feed.example.invalid/\#fragment
+  ---
+  duration_ms: 380.4427
+  type: 'test'
+  ...
+# Subtest: powershell: rejects unsafe or ambiguous tarball prefix https://feed.example.invalid/path
+ok 206 - powershell: rejects unsafe or ambiguous tarball prefix https://feed.example.invalid/path
+  ---
+  duration_ms: 385.8423
+  type: 'test'
+  ...
+# Subtest: powershell: rejects unsafe or ambiguous tarball prefix not-a-url
+ok 207 - powershell: rejects unsafe or ambiguous tarball prefix not-a-url
+  ---
+  duration_ms: 359.8604
+  type: 'test'
+  ...
+# Subtest: powershell: older npm cannot silently ignore full-prefix routing
+ok 208 - powershell: older npm cannot silently ignore full-prefix routing
+  ---
+  duration_ms: 927.7758
+  type: 'test'
+  ...
+# Subtest: powershell: routing does not mask a continued fetch-policy failure
+ok 209 - powershell: routing does not mask a continued fetch-policy failure
+  ---
+  duration_ms: 1122.9357
+  type: 'test'
+  ...
+# Subtest: powershell: native stderr warnings remain visible text without PowerShell error records
+ok 210 - powershell: native stderr warnings remain visible text without PowerShell error records
+  ---
+  duration_ms: 1901.3601
+  type: 'test'
+  ...
+# Subtest: powershell: VerifyOnly checks existing packages and renderers without another install
+ok 211 - powershell: VerifyOnly checks existing packages and renderers without another install
+  ---
+  duration_ms: 2951.1492
+  type: 'test'
+  ...
+# Subtest: powershell: mmdc missing browser prevents a readiness success claim
+ok 212 - powershell: mmdc missing browser prevents a readiness success claim
+  ---
+  duration_ms: 1681.3797
+  type: 'test'
+  ...
+# Subtest: powershell: mmdc exit zero without output is not success
+ok 213 - powershell: mmdc exit zero without output is not success
+  ---
+  duration_ms: 1542.0084
+  type: 'test'
+  ...
+# Subtest: powershell: mmdc invalid output is not success
+ok 214 - powershell: mmdc invalid output is not success
+  ---
+  duration_ms: 1519.8307
+  type: 'test'
+  ...
+# Subtest: powershell: svgexport missing browser prevents a readiness success claim
+ok 215 - powershell: svgexport missing browser prevents a readiness success claim
+  ---
+  duration_ms: 1589.4039
+  type: 'test'
+  ...
+# Subtest: powershell: svgexport exit zero without output is not success
+ok 216 - powershell: svgexport exit zero without output is not success
+  ---
+  duration_ms: 1583.0136
+  type: 'test'
+  ...
+# Subtest: powershell: svgexport invalid output is not success
+ok 217 - powershell: svgexport invalid output is not success
+  ---
+  duration_ms: 1619.4044
+  type: 'test'
+  ...
+# Subtest: powershell: Replicate opt-in preview uses the shared pin without installs
+ok 218 - powershell: Replicate opt-in preview uses the shared pin without installs
+  ---
+  duration_ms: 964.0584
+  type: 'test'
+  ...
+# Subtest: powershell: Replicate opt-in installs privately and verifies all three MCP launchers
+ok 219 - powershell: Replicate opt-in installs privately and verifies all three MCP launchers
+  ---
+  duration_ms: 3414.9116
+  type: 'test'
+  ...
+# Subtest: powershell: unavailable Replicate pin prevents all opt-in installations
+ok 220 - powershell: unavailable Replicate pin prevents all opt-in installations
+  ---
+  duration_ms: 1041.0575
+  type: 'test'
+  ...
+# Subtest: powershell: wrong Replicate installed version prevents success
+ok 221 - powershell: wrong Replicate installed version prevents success
+  ---
+  duration_ms: 1213.0021
+  type: 'test'
+  ...
+# Subtest: powershell: wrong Replicate launcher output prevents success
+ok 222 - powershell: wrong Replicate launcher output prevents success
+  ---
+  duration_ms: 1880.8133
+  type: 'test'
+  ...
+# Subtest: html preserves literal single- and multi-backtick inline code
+ok 223 - html preserves literal single- and multi-backtick inline code
+  ---
+  duration_ms: 2.9585
+  type: 'test'
+  ...
+# Subtest: docx preserves literal single- and multi-backtick inline code
+ok 224 - docx preserves literal single- and multi-backtick inline code
+  ---
+  duration_ms: 0.5097
+  type: 'test'
+  ...
+# Subtest: email preserves literal single- and multi-backtick inline code
+ok 225 - email preserves literal single- and multi-backtick inline code
+  ---
+  duration_ms: 0.2254
+  type: 'test'
+  ...
+# Subtest: txt preserves literal single- and multi-backtick inline code
+ok 226 - txt preserves literal single- and multi-backtick inline code
+  ---
+  duration_ms: 0.2016
+  type: 'test'
+  ...
+# Subtest: multiline inline code and escaped backticks inside it stay literal
+ok 227 - multiline inline code and escaped backticks inside it stay literal
+  ---
+  duration_ms: 0.2528
+  type: 'test'
+  ...
+# Subtest: an escaped opener and an unmatched delimiter remain prose, not protected code spans
+ok 228 - an escaped opener and an unmatched delimiter remain prose, not protected code spans
+  ---
+  duration_ms: 0.7791
+  type: 'test'
+  ...
+# Subtest: real prose still receives math, highlight, superscript, and em-dash transformations
+ok 229 - real prose still receives math, highlight, superscript, and em-dash transformations
+  ---
+  duration_ms: 0.4257
+  type: 'test'
+  ...
+# Subtest: standalone math conversion preserves inline and fenced code
+ok 230 - standalone math conversion preserves inline and fenced code
+  ---
+  duration_ms: 0.4593
+  type: 'test'
+  ...
+# WARNING: jszip not found. Post-processing (formatting, centering) will be limited.
+#   Install it with: /alex-act-one setup-dependencies
+# Subtest: professional headings apply the configured treatment to bare and styled runs
+ok 231 - professional headings apply the configured treatment to bare and styled runs
+  ---
+  duration_ms: 3.3646
+  type: 'test'
+  ...
+# Subtest: table formatting removes fixed layouts while retaining professional table styling
+ok 232 - table formatting removes fixed layouts while retaining professional table styling
+  ---
+  duration_ms: 0.9248
+  type: 'test'
+  ...
+# Subtest: compatibility command assess-brain is a thin route to assess-brain
+ok 233 - compatibility command assess-brain is a thin route to assess-brain
+  ---
+  duration_ms: 3.4688
+  type: 'test'
+  ...
+# Subtest: compatibility command banner is a thin route to svg-banner
+ok 234 - compatibility command banner is a thin route to svg-banner
+  ---
+  duration_ms: 2.5871
+  type: 'test'
+  ...
+# Subtest: compatibility command bootstrap-core is a thin route to bootstrap-core
+ok 235 - compatibility command bootstrap-core is a thin route to bootstrap-core
+  ---
+  duration_ms: 2.1548
+  type: 'test'
+  ...
+# Subtest: compatibility command bootstrap-project is a thin route to bootstrap-project
+ok 236 - compatibility command bootstrap-project is a thin route to bootstrap-project
+  ---
+  duration_ms: 1.8872
+  type: 'test'
+  ...
+# Subtest: compatibility command compile-brain is a thin route to compile-brain
+ok 237 - compatibility command compile-brain is a thin route to compile-brain
+  ---
+  duration_ms: 2.3533
+  type: 'test'
+  ...
+# Subtest: compatibility command convert is a thin route to convert
+ok 238 - compatibility command convert is a thin route to convert
+  ---
+  duration_ms: 1.9552
+  type: 'test'
+  ...
+# Subtest: compatibility command critical-thinking is a thin route to critical-thinking
+ok 239 - compatibility command critical-thinking is a thin route to critical-thinking
+  ---
+  duration_ms: 2.09
+  type: 'test'
+  ...
+# Subtest: compatibility command install-visual-companions is a thin route to install-visual-companions
+ok 240 - compatibility command install-visual-companions is a thin route to install-visual-companions
+  ---
+  duration_ms: 2.1425
+  type: 'test'
+  ...
+# Subtest: compatibility command meditate is a thin route to meditation
+ok 241 - compatibility command meditate is a thin route to meditation
+  ---
+  duration_ms: 2.015
+  type: 'test'
+  ...
+# Subtest: compatibility command problem-framing-audit is a thin route to problem-framing-audit
+ok 242 - compatibility command problem-framing-audit is a thin route to problem-framing-audit
+  ---
+  duration_ms: 3.0511
+  type: 'test'
+  ...
+# Subtest: compatibility command render-chart is a thin route to render-chart
+ok 243 - compatibility command render-chart is a thin route to render-chart
+  ---
+  duration_ms: 1.9461
+  type: 'test'
+  ...
+# Subtest: compatibility command rich-email is a thin route to rich-email
+ok 244 - compatibility command rich-email is a thin route to rich-email
+  ---
+  duration_ms: 2.596
+  type: 'test'
+  ...
+# Subtest: compatibility command setup-dependencies is a thin route to setup-dependencies
+ok 245 - compatibility command setup-dependencies is a thin route to setup-dependencies
+  ---
+  duration_ms: 2.4852
+  type: 'test'
+  ...
+# Subtest: compatibility command setup-enterprise is a thin route to setup-enterprise-stack
+ok 246 - compatibility command setup-enterprise is a thin route to setup-enterprise-stack
+  ---
+  duration_ms: 2.5221
+  type: 'test'
+  ...
+# Subtest: compatibility command status is a thin route to project-status
+ok 247 - compatibility command status is a thin route to project-status
+  ---
+  duration_ms: 2.5819
+  type: 'test'
+  ...
+# Subtest: all resident instructions are short activation contracts with installed-source routing
+ok 248 - all resident instructions are short activation contracts with installed-source routing
+  ---
+  duration_ms: 33.5616
+  type: 'test'
+  ...
+# Subtest: problem-framing-audit selects a canonical mode without a second procedure
+ok 249 - problem-framing-audit selects a canonical mode without a second procedure
+  ---
+  duration_ms: 4.3779
+  type: 'test'
+  ...
+# Subtest: adversarial-review selects a canonical mode without a second procedure
+ok 250 - adversarial-review selects a canonical mode without a second procedure
+  ---
+  duration_ms: 4.7777
+  type: 'test'
+  ...
+# Subtest: risk-analysis selects a canonical mode without a second procedure
+ok 251 - risk-analysis selects a canonical mode without a second procedure
+  ---
+  duration_ms: 4.3787
+  type: 'test'
+  ...
+# Subtest: deep-review selects a canonical mode without a second procedure
+ok 252 - deep-review selects a canonical mode without a second procedure
+  ---
+  duration_ms: 4.0599
+  type: 'test'
+  ...
+# Subtest: ACT has a materiality-first procedure and optional non-code critique methods
+ok 253 - ACT has a materiality-first procedure and optional non-code critique methods
+  ---
+  duration_ms: 2.7728
+  type: 'test'
+  ...
+# Subtest: native planning has no compulsory project file or prewritten implementation
+ok 254 - native planning has no compulsory project file or prewritten implementation
+  ---
+  duration_ms: 2.9092
+  type: 'test'
+  ...
+# Subtest: browser routing prefers native tools but retains an honest fallback
+ok 255 - browser routing prefers native tools but retains an honest fallback
+  ---
+  duration_ms: 2.4255
+  type: 'test'
+  ...
+# Subtest: Humanizer keeps its modes and loads its catalog as a reference
+ok 256 - Humanizer keeps its modes and loads its catalog as a reference
+  ---
+  duration_ms: 4.5819
+  type: 'test'
+  ...
+# Subtest: ordinary code review does not inline deep or specialist checklists
+ok 257 - ordinary code review does not inline deep or specialist checklists
+  ---
+  duration_ms: 2.6407
+  type: 'test'
+  ...
+# Subtest: read-only recovery is shared without inheriting meditation writes
+ok 258 - read-only recovery is shared without inheriting meditation writes
+  ---
+  duration_ms: 8.5189
+  type: 'test'
+  ...
+# Subtest: new workflow owners are declared without retiring the original commands
+ok 259 - new workflow owners are declared without retiring the original commands
+  ---
+  duration_ms: 7.7248
+  type: 'test'
+  ...
+# Subtest: activated copies expose canonical skill routes from an arbitrary working directory
+ok 260 - activated copies expose canonical skill routes from an arbitrary working directory
+  ---
+  duration_ms: 1706.8509
+  type: 'test'
+  ...
+# Subtest: native availability does not silently remove legacy integrations
+ok 261 - native availability does not silently remove legacy integrations
+  ---
+  duration_ms: 3.9585
+  type: 'test'
+  ...
+# Subtest: activation rejects an externally redirected owner before writing instructions
+ok 262 - activation rejects an externally redirected owner before writing instructions
+  ---
+  duration_ms: 1291.7386
+  type: 'test'
+  ...
+# Subtest: git-workflow retains its contract without loading its entire execution essay
+ok 263 - git-workflow retains its contract without loading its entire execution essay
+  ---
+  duration_ms: 1.9611
+  type: 'test'
+  ...
+# Subtest: systematic-debugging retains its contract without loading its entire execution essay
+ok 264 - systematic-debugging retains its contract without loading its entire execution essay
+  ---
+  duration_ms: 1.6838
+  type: 'test'
+  ...
+# Subtest: test-driven-development retains its contract without loading its entire execution essay
+ok 265 - test-driven-development retains its contract without loading its entire execution essay
+  ---
+  duration_ms: 1.8382
+  type: 'test'
+  ...
+# Subtest: spike retains its contract without loading its entire execution essay
+ok 266 - spike retains its contract without loading its entire execution essay
+  ---
+  duration_ms: 1.55
+  type: 'test'
+  ...
+# Subtest: meditation retains its contract without loading its entire execution essay
+ok 267 - meditation retains its contract without loading its entire execution essay
+  ---
+  duration_ms: 1.9569
+  type: 'test'
+  ...
+# Subtest: install-visual-companions retains its contract without loading its entire execution essay
+ok 268 - install-visual-companions retains its contract without loading its entire execution essay
+  ---
+  duration_ms: 2.3665
+  type: 'test'
+  ...
+# Subtest: Windows npm launch follows the official shim global-prefix selection without using a shell
+ok 269 - Windows npm launch follows the official shim global-prefix selection without using a shell
+  ---
+  duration_ms: 1.3749
+  type: 'test'
+  ...
+# Subtest: Windows npm uses bundled CLI when no prefix CLI exists, matching the official shim
+ok 270 - Windows npm uses bundled CLI when no prefix CLI exists, matching the official shim
+  ---
+  duration_ms: 0.2605
+  type: 'test'
+  ...
+# Subtest: failed npm prefix discovery is explicit and never launches an unintended CLI
+ok 271 - failed npm prefix discovery is explicit and never launches an unintended CLI
+  ---
+  duration_ms: 0.3396
+  type: 'test'
+  ...
+# Subtest: pwsh: registers all missing public marketplaces, reinstalls ONE and applies bootstrap migration
+ok 272 - pwsh: registers all missing public marketplaces, reinstalls ONE and applies bootstrap migration
+  ---
+  duration_ms: 3161.2029
+  type: 'test'
+  ...
+# Subtest: pwsh: preserves existing/default and unrelated marketplace registrations without re-adding them
+ok 273 - pwsh: preserves existing/default and unrelated marketplace registrations without re-adding them
+  ---
+  duration_ms: 1230.0854
+  type: 'test'
+  ...
+# Subtest: pwsh: adds only missing marketplaces when some are already registered
+ok 274 - pwsh: adds only missing marketplaces when some are already registered
+  ---
+  duration_ms: 1417.3683
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects a mismatched alex-mall source before uninstalling
+ok 275 - pwsh: rejects a mismatched alex-mall source before uninstalling
+  ---
+  duration_ms: 995.3834
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects a mismatched awesome-copilot source before uninstalling
+ok 276 - pwsh: rejects a mismatched awesome-copilot source before uninstalling
+  ---
+  duration_ms: 995.5614
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects a mismatched copilot-plugins source before uninstalling
+ok 277 - pwsh: rejects a mismatched copilot-plugins source before uninstalling
+  ---
+  duration_ms: 1015.2967
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects a mismatched azure-skills source before uninstalling
+ok 278 - pwsh: rejects a mismatched azure-skills source before uninstalling
+  ---
+  duration_ms: 1043.3217
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects a mismatched fabric-collection source before uninstalling
+ok 279 - pwsh: rejects a mismatched fabric-collection source before uninstalling
+  ---
+  duration_ms: 1098.0876
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects duplicate marketplace names before uninstalling
+ok 280 - pwsh: rejects duplicate marketplace names before uninstalling
+  ---
+  duration_ms: 975.8336
+  type: 'test'
+  ...
+# Subtest: pwsh: stops on a failed marketplace add before uninstalling
+ok 281 - pwsh: stops on a failed marketplace add before uninstalling
+  ---
+  duration_ms: 1385.1093
+  type: 'test'
+  ...
+# Subtest: pwsh: verifies a successful add actually registered the expected marketplace
+ok 282 - pwsh: verifies a successful add actually registered the expected marketplace
+  ---
+  duration_ms: 1158.1819
+  type: 'test'
+  ...
+# Subtest: pwsh: rejects a wrong source returned after marketplace add
+ok 283 - pwsh: rejects a wrong source returned after marketplace add
+  ---
+  duration_ms: 1417.3656
+  type: 'test'
+  ...
+# Subtest: powershell: registers all missing public marketplaces, reinstalls ONE and applies bootstrap migration
+ok 284 - powershell: registers all missing public marketplaces, reinstalls ONE and applies bootstrap migration
+  ---
+  duration_ms: 2445.9357
+  type: 'test'
+  ...
+# Subtest: powershell: preserves existing/default and unrelated marketplace registrations without re-adding them
+ok 285 - powershell: preserves existing/default and unrelated marketplace registrations without re-adding them
+  ---
+  duration_ms: 1158.1757
+  type: 'test'
+  ...
+# Subtest: powershell: adds only missing marketplaces when some are already registered
+ok 286 - powershell: adds only missing marketplaces when some are already registered
+  ---
+  duration_ms: 1241.5179
+  type: 'test'
+  ...
+# Subtest: powershell: rejects a mismatched alex-mall source before uninstalling
+ok 287 - powershell: rejects a mismatched alex-mall source before uninstalling
+  ---
+  duration_ms: 1051.9668
+  type: 'test'
+  ...
+# Subtest: powershell: rejects a mismatched awesome-copilot source before uninstalling
+ok 288 - powershell: rejects a mismatched awesome-copilot source before uninstalling
+  ---
+  duration_ms: 1101.268
+  type: 'test'
+  ...
+# Subtest: powershell: rejects a mismatched copilot-plugins source before uninstalling
+ok 289 - powershell: rejects a mismatched copilot-plugins source before uninstalling
+  ---
+  duration_ms: 1029.4028
+  type: 'test'
+  ...
+# Subtest: powershell: rejects a mismatched azure-skills source before uninstalling
+ok 290 - powershell: rejects a mismatched azure-skills source before uninstalling
+  ---
+  duration_ms: 997.1556
+  type: 'test'
+  ...
+# Subtest: powershell: rejects a mismatched fabric-collection source before uninstalling
+ok 291 - powershell: rejects a mismatched fabric-collection source before uninstalling
+  ---
+  duration_ms: 1078.7837
+  type: 'test'
+  ...
+# Subtest: powershell: rejects duplicate marketplace names before uninstalling
+ok 292 - powershell: rejects duplicate marketplace names before uninstalling
+  ---
+  duration_ms: 1354.1657
+  type: 'test'
+  ...
+# Subtest: powershell: stops on a failed marketplace add before uninstalling
+ok 293 - powershell: stops on a failed marketplace add before uninstalling
+  ---
+  duration_ms: 1718.1798
+  type: 'test'
+  ...
+# Subtest: powershell: verifies a successful add actually registered the expected marketplace
+ok 294 - powershell: verifies a successful add actually registered the expected marketplace
+  ---
+  duration_ms: 1281.9142
+  type: 'test'
+  ...
+# Subtest: powershell: rejects a wrong source returned after marketplace add
+ok 295 - powershell: rejects a wrong source returned after marketplace add
+  ---
+  duration_ms: 1242.9221
+  type: 'test'
+  ...
+# Subtest: draft preparation is unsent, preserves content, and inserts the spacer only once
+ok 296 - draft preparation is unsent, preserves content, and inserts the spacer only once
+  ---
+  duration_ms: 1.6911
+  type: 'test'
+  ...
+# Subtest: unsupported multipart and malformed recipient headers fail explicitly
+ok 297 - unsupported multipart and malformed recipient headers fail explicitly
+  ---
+  duration_ms: 0.4842
+  type: 'test'
+  ...
+# Subtest: word counting excludes styles and script bodies
+ok 298 - word counting excludes styles and script bodies
+  ---
+  duration_ms: 0.4717
+  type: 'test'
+  ...
+# Subtest: validation-only CLI runs without Outlook, does not alter the EML, and creates no draft
+ok 299 - validation-only CLI runs without Outlook, does not alter the EML, and creates no draft
+  ---
+  duration_ms: 69.669
+  type: 'test'
+  ...
+# Subtest: empty package directories are installed, not ready or launchable
+ok 300 - empty package directories are installed, not ready or launchable
+  ---
+  duration_ms: 9.0439
+  type: 'test'
+  ...
+# Subtest: versions, metadata, and the server-resolved Flint library fail explicitly
+ok 301 - versions, metadata, and the server-resolved Flint library fail explicitly
+  ---
+  duration_ms: 36.1225
+  type: 'test'
+  ...
+# Subtest: a matched but failing entrypoint is not launchable and reports its failure
+ok 302 - a matched but failing entrypoint is not launchable and reports its failure
+  ---
+  duration_ms: 115.8531
+  type: 'test'
+  ...
+# Subtest: readiness launch probes have a real bounded timeout
+ok 303 - readiness launch probes have a real bounded timeout
+  ---
+  duration_ms: 113.4694
+  type: 'test'
+  ...
+# Subtest: a successful version probe does not pretend the host connected
+ok 304 - a successful version probe does not pretend the host connected
+  ---
+  duration_ms: 156.5695
+  type: 'test'
+  ...
+# Subtest: provisioner preview honors the environment runtime without installing
+ok 305 - provisioner preview honors the environment runtime without installing
+  ---
+  duration_ms: 657.6273
+  type: 'test'
+  ...
+# Subtest: dependency CLI reports the explicitly selected runtime and rejects empty packages
+ok 306 - dependency CLI reports the explicitly selected runtime and rejects empty packages
+  ---
+  duration_ms: 73.5675
+  type: 'test'
+  ...
+# Subtest: the actual flint launcher rejects metadata drift from the shared registry
+ok 307 - the actual flint launcher rejects metadata drift from the shared registry
+  ---
+  duration_ms: 73.839
+  type: 'test'
+  ...
+# Subtest: the actual playwright launcher rejects metadata drift from the shared registry
+ok 308 - the actual playwright launcher rejects metadata drift from the shared registry
+  ---
+  duration_ms: 77.0158
+  type: 'test'
+  ...
+# Subtest: the actual replicate launcher rejects metadata drift from the shared registry
+ok 309 - the actual replicate launcher rejects metadata drift from the shared registry
+  ---
+  duration_ms: 64.6626
+  type: 'test'
+  ...
+# Subtest: the provisioner verifies installation outcome before success: ready
+ok 310 - the provisioner verifies installation outcome before success: ready
+  ---
+  duration_ms: 663.9284
+  type: 'test'
+  ...
+# Subtest: the provisioner verifies installation outcome before success: empty
+ok 311 - the provisioner verifies installation outcome before success: empty
+  ---
+  duration_ms: 614.3326
+  type: 'test'
+  ...
+# Subtest: the provisioner verifies installation outcome before success: wrong-report
+ok 312 - the provisioner verifies installation outcome before success: wrong-report
+  ---
+  duration_ms: 670.2831
+  type: 'test'
+  ...
+# Subtest: MCP runtime pins
+    # Subtest: every launcher route guards the reviewed pin
+    ok 1 - every launcher route guards the reviewed pin
+      ---
+      duration_ms: 0.6355
+      type: 'test'
+      ...
+    # Subtest: every reviewed server has a launcher route
+    ok 2 - every reviewed server has a launcher route
+      ---
+      duration_ms: 0.1248
+      type: 'test'
+      ...
+    # Subtest: the documented pins match the reviewed pins
+    ok 3 - the documented pins match the reviewed pins
+      ---
+      duration_ms: 0.9196
+      type: 'test'
+      ...
+    1..3
+ok 313 - MCP runtime pins
+  ---
+  duration_ms: 2.3185
+  type: 'suite'
+  ...
+# Subtest: plugin.json
+    # Subtest: every declared server invokes a real launcher route
+    ok 1 - every declared server invokes a real launcher route
+      ---
+      duration_ms: 0.2087
+      type: 'test'
+      ...
+    # Subtest: every declared server points at a launcher that exists
+    ok 2 - every declared server points at a launcher that exists
+      ---
+      duration_ms: 0.331
+      type: 'test'
+      ...
+    # Subtest: skills and commands directories resolve
+    ok 3 - skills and commands directories resolve
+      ---
+      duration_ms: 0.2521
+      type: 'test'
+      ...
+    1..3
+ok 314 - plugin.json
+  ---
+  duration_ms: 0.929
+  type: 'suite'
+  ...
+# Subtest: Humanizer voice fallback
+    # Subtest: uses the practitioner-editor fallback without overriding an explicit voice
+    ok 1 - uses the practitioner-editor fallback without overriding an explicit voice
+      ---
+      duration_ms: 0.2945
+      type: 'test'
+      ...
+    # Subtest: routes default Copywriter rewrites through the practitioner-editor fallback
+    ok 2 - routes default Copywriter rewrites through the practitioner-editor fallback
+      ---
+      duration_ms: 0.2474
+      type: 'test'
+      ...
+    # Subtest: keeps the governance reference aligned to the six-tag taxonomy
+    ok 3 - keeps the governance reference aligned to the six-tag taxonomy
+      ---
+      duration_ms: 0.1936
+      type: 'test'
+      ...
+    # Subtest: preserves current source scope and historical promotional-language caveats
+    ok 4 - preserves current source scope and historical promotional-language caveats
+      ---
+      duration_ms: 2.7279
+      type: 'test'
+      ...
+    1..4
+ok 315 - Humanizer voice fallback
+  ---
+  duration_ms: 3.746
+  type: 'suite'
+  ...
+# Subtest: Compile Brain customization boundary
+    # Subtest: keeps installed skills canonical and routes project customizations locally
+    ok 1 - keeps installed skills canonical and routes project customizations locally
+      ---
+      duration_ms: 0.2289
+      type: 'test'
+      ...
+    # Subtest: checks whether a process exists before renaming it
+    ok 2 - checks whether a process exists before renaming it
+      ---
+      duration_ms: 0.1685
+      type: 'test'
+      ...
+    1..2
+ok 316 - Compile Brain customization boundary
+  ---
+  duration_ms: 0.5202
+  type: 'suite'
+  ...
+# Subtest: Mutation testing isolation
+    # Subtest: mutates an isolated copy and counter-tests detection rules
+    ok 1 - mutates an isolated copy and counter-tests detection rules
+      ---
+      duration_ms: 0.1207
+      type: 'test'
+      ...
+    1..1
+ok 317 - Mutation testing isolation
+  ---
+  duration_ms: 0.1655
+  type: 'suite'
+  ...
+# Subtest: manifest matches disk
+    # Subtest: every manifest skills entry exists on disk
+    ok 1 - every manifest skills entry exists on disk
+      ---
+      duration_ms: 3.8844
+      type: 'test'
+      ...
+    # Subtest: every skills file on disk is in the manifest
+    ok 2 - every skills file on disk is in the manifest
+      ---
+      duration_ms: 0.5272
+      type: 'test'
+      ...
+    # Subtest: every manifest prompts entry exists on disk
+    ok 3 - every manifest prompts entry exists on disk
+      ---
+      duration_ms: 0.9189
+      type: 'test'
+      ...
+    # Subtest: every prompts file on disk is in the manifest
+    ok 4 - every prompts file on disk is in the manifest
+      ---
+      duration_ms: 0.2057
+      type: 'test'
+      ...
+    # Subtest: every manifest instructions entry exists on disk
+    ok 5 - every manifest instructions entry exists on disk
+      ---
+      duration_ms: 1.5462
+      type: 'test'
+      ...
+    # Subtest: every instructions file on disk is in the manifest
+    ok 6 - every instructions file on disk is in the manifest
+      ---
+      duration_ms: 0.2416
+      type: 'test'
+      ...
+    1..6
+ok 318 - manifest matches disk
+  ---
+  duration_ms: 7.5135
+  type: 'suite'
+  ...
+# Subtest: frontmatter
+    # Subtest: every skill declares a name matching its directory, and a description
+    ok 1 - every skill declares a name matching its directory, and a description
+      ---
+      duration_ms: 75.3959
+      type: 'test'
+      ...
+    # Subtest: every instruction declares a description and applyTo
+    ok 2 - every instruction declares a description and applyTo
+      ---
+      duration_ms: 21.2582
+      type: 'test'
+      ...
+    1..2
+ok 319 - frontmatter
+  ---
+  duration_ms: 96.819
+  type: 'suite'
+  ...
+# Subtest: markdown links
+    # Subtest: no relative link points at a missing file
+    ok 1 - no relative link points at a missing file
+      ---
+      duration_ms: 427.8225
+      type: 'test'
+      ...
+    1..1
+ok 320 - markdown links
+  ---
+  duration_ms: 428.3027
+  type: 'suite'
+  ...
+# Subtest: documented counts
+    # Subtest: README.md quotes the real counts
+    ok 1 - README.md quotes the real counts
+      ---
+      duration_ms: 0.827
+      type: 'test'
+      ...
+    # Subtest: ROADMAP.md quotes the real counts
+    ok 2 - ROADMAP.md quotes the real counts
+      ---
+      duration_ms: 0.7237
+      type: 'test'
+      ...
+    1..2
+ok 321 - documented counts
+  ---
+  duration_ms: 1.6435
+  type: 'suite'
+  ...
+# Subtest: Microsoft Scout setup guidance
+    # Subtest: uses skills and bundled scripts instead of unavailable slash commands
+    ok 1 - uses skills and bundled scripts instead of unavailable slash commands
+      ---
+      duration_ms: 0.1458
+      type: 'test'
+      ...
+    # Subtest: package metadata and roadmap do not overstate automatic setup
+    ok 2 - package metadata and roadmap do not overstate automatic setup
+      ---
+      duration_ms: 0.1308
+      type: 'test'
+      ...
+    # Subtest: documents host readiness without promising observed activation
+    ok 3 - documents host readiness without promising observed activation
+      ---
+      duration_ms: 0.0996
+      type: 'test'
+      ...
+    # Subtest: documents the Copilot CLI plugin as Scout shared source
+    ok 4 - documents the Copilot CLI plugin as Scout shared source
+      ---
+      duration_ms: 0.2013
+      type: 'test'
+      ...
+    # Subtest: makes duplicate plugin roots and restart requirements checkable
+    ok 5 - makes duplicate plugin roots and restart requirements checkable
+      ---
+      duration_ms: 0.0668
+      type: 'test'
+      ...
+    # Subtest: preserves the historical Scout inventory instead of rewriting it as the current count
+    ok 6 - preserves the historical Scout inventory instead of rewriting it as the current count
+      ---
+      duration_ms: 0.0834
+      type: 'test'
+      ...
+    # Subtest: names every Flint tool expected after Scout restarts
+    ok 7 - names every Flint tool expected after Scout restarts
+      ---
+      duration_ms: 0.1642
+      type: 'test'
+      ...
+    1..7
+ok 322 - Microsoft Scout setup guidance
+  ---
+  duration_ms: 1.0216
+  type: 'suite'
+  ...
+# Subtest: activation
+    # Subtest: previews without error and writes nothing
+    ok 1 - previews without error and writes nothing
+      ---
+      duration_ms: 92.7191
+      type: 'test'
+      ...
+    # Subtest: plans exactly the instructions the manifest declares
+    ok 2 - plans exactly the instructions the manifest declares
+      ---
+      duration_ms: 103.3525
+      type: 'test'
+      ...
+    1..2
+ok 323 - activation
+  ---
+  duration_ms: 196.2476
+  type: 'suite'
+  ...
+# Subtest: Windows sync tool launch resolves the installed package bin: {}
+ok 324 - Windows sync tool launch resolves the installed package bin: {}
+  ---
+  duration_ms: 123.9633
+  type: 'test'
+  ...
+# Subtest: Windows sync tool launch resolves the installed package bin: {"local":true}
+ok 325 - Windows sync tool launch resolves the installed package bin: {"local":true}
+  ---
+  duration_ms: 80.0805
+  type: 'test'
+  ...
+# Subtest: Windows sync tool launch resolves the installed package bin: {"tool":"svgexport"}
+ok 326 - Windows sync tool launch resolves the installed package bin: {"tool":"svgexport"}
+  ---
+  duration_ms: 69.6112
+  type: 'test'
+  ...
+# Subtest: Windows async tool launch uses the same shell-free package resolution
+ok 327 - Windows async tool launch uses the same shell-free package resolution
+  ---
+  duration_ms: 80.433
+  type: 'test'
+  ...
+# Subtest: a package bin escaping its package is rejected instead of running a shell
+ok 328 - a package bin escaping its package is rejected instead of running a shell
+  ---
+  duration_ms: 20.2107
+  type: 'test'
+  ...
+# Subtest: native executables still receive literal arguments
+ok 329 - native executables still receive literal arguments
+  ---
+  duration_ms: 56.6146
+  type: 'test'
+  ...
+# Subtest: Flint static output guidance distinguishes the artifact from MCP report text
+ok 330 - Flint static output guidance distinguishes the artifact from MCP report text
+  ---
+  duration_ms: 3.9367
+  type: 'test'
+  ...
+# Subtest: Flint acceptance tests use semantic identity and actual rendered controls
+ok 331 - Flint acceptance tests use semantic identity and actual rendered controls
+  ---
+  duration_ms: 4.3272
+  type: 'test'
+  ...
+# Subtest: native-browser troubleshooting diagnoses visibility and frame targeting before retrying
+ok 332 - native-browser troubleshooting diagnoses visibility and frame targeting before retrying
+  ---
+  duration_ms: 3.5085
+  type: 'test'
+  ...
+# Subtest: render verification checks actual decode and geometry without frozen host assumptions
+ok 333 - render verification checks actual decode and geometry without frozen host assumptions
+  ---
+  duration_ms: 3.7954
+  type: 'test'
+  ...
+# Subtest: theme verification includes persistent controls and does not silence native compiler warnings
+ok 334 - theme verification includes persistent controls and does not silence native compiler warnings
+  ---
+  duration_ms: 3.3291
+  type: 'test'
+  ...
+# Subtest: UAT references are shipped behind thin, installed-package skill routes
+ok 335 - UAT references are shipped behind thin, installed-package skill routes
+  ---
+  duration_ms: 34.4253
+  type: 'test'
+  ...
+1..335
+# tests 357
+# suites 11
+# pass 357
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 94299.6934
+Verified structural lane: 357 passed; no skips, todos, or cancellations.

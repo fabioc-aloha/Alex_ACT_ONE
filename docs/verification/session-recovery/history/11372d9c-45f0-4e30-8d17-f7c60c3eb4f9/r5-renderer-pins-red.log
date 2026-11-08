@@ -1,0 +1,297 @@
+TAP version 13
+# Subtest: canonical demo builds have explicit reviewed renderer and protocol pins, separate from runtime upgrades
+not ok 1 - canonical demo builds have explicit reviewed renderer and protocol pins, separate from runtime upgrades
+  ---
+  duration_ms: 2.2376
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\showcase-environment.test.mjs:17:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+    + undefined
+    - [
+    -   {
+    -     package: '@napi-rs/canvas',
+    -     version: '1.0.10'
+    -   },
+    -   {
+    -     package: 'chart.js',
+    -     version: '4.5.1'
+    -   },
+    -   {
+    -     package: '@modelcontextprotocol/sdk',
+    -     version: '1.32.1'
+    -   }
+    - ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      package: '@napi-rs/canvas'
+      version: '1.0.10'
+    1:
+      package: 'chart.js'
+      version: '4.5.1'
+    2:
+      package: '@modelcontextprotocol/sdk'
+      version: '1.32.1'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/showcase-environment.test.mjs:18:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: demo environment validation rejects floating renderer drift before generating any artifacts
+not ok 2 - demo environment validation rejects floating renderer drift before generating any artifacts
+  ---
+  duration_ms: 0.5771
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\showcase-environment.test.mjs:24:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'undefined'
+    - 'function'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'function'
+  actual: 'undefined'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/showcase-environment.test.mjs:25:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: CI installs demo build pins only on the disposable runner before exact artifact checks
+not ok 3 - CI installs demo build pins only on the disposable runner before exact artifact checks
+  ---
+  duration_ms: 2.162
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\showcase-environment.test.mjs:35:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /SHOWCASE_PACKAGES/. Input:
+    
+    'name: Verify source candidate\r\n' +
+      '\r\n' +
+      'on:\r\n' +
+      '  push:\r\n' +
+      '    branches: [main]\r\n' +
+      '  workflow_dispatch:\r\n' +
+      '\r\n' +
+      'permissions:\r\n' +
+      '  contents: read\r\n' +
+      '\r\n' +
+      'concurrency:\r\n' +
+      '  group: verify-${{ github.ref }}\r\n' +
+      '  cancel-in-progress: true\r\n' +
+      '\r\n' +
+      'jobs:\r\n' +
+      '  structural:\r\n' +
+      '    name: Structural / ${{ matrix.os }} / Node ${{ matrix.node }}\r\n' +
+      '    runs-on: ${{ matrix.os }}\r\n' +
+      '    timeout-minutes: 15\r\n' +
+      '    strategy:\r\n' +
+      '      fail-fast: false\r\n' +
+      '      matrix:\r\n' +
+      '        os: [windows-2025, ubuntu-24.04]\r\n' +
+      "        node: ['24', '26']\r\n" +
+      '    steps:\r\n' +
+      '      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1\r\n' +
+      '        with:\r\n' +
+      '          persist-credentials: false\r\n' +
+      '      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0\r\n' +
+      '        with:\r\n' +
+      '          node-version: ${{ matrix.node }}\r\n' +
+      '          package-manager-cache: false\r\n' +
+      '      - name: Verify structural contracts without provisioning packages\r\n' +
+      '        shell: pwsh\r\n' +
+      "        run: node (Join-Path $PWD 'scripts' 'verification-gate.mjs') --lane structural\r\n" +
+      '      - name: Require unchanged tracked sources\r\n' +
+      '        shell: pwsh\r\n' +
+      '        run: git diff --exit-code\r\n' +
+      '\r\n' +
+      '  integration:\r\n' +
+      '    name: Provisioned runtime / ${{ matrix.os }} / Node 26\r\n' +
+      '    needs: structural\r\n' +
+      '    runs-on: ${{ matrix.os }}\r\n' +
+      '    timeout-minutes: 20\r\n' +
+      '    strategy:\r\n' +
+      '      fail-fast: false\r\n' +
+      '      matrix:\r\n' +
+      '        os: [windows-2025, ubuntu-24.04]\r\n' +
+      '    env:\r\n' +
+      "      NPM_CONFIG_IGNORE_SCRIPTS: 'true'\r\n" +
+      "      NPM_CONFIG_PROGRESS: 'false'\r\n" +
+      '    steps:\r\n' +
+      '      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1\r\n' +
+      '        with:\r\n' +
+      '          persist-credentials: false\r\n' +
+      '      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0\r\n' +
+      '        with:\r\n' +
+      "          node-version: '26'\r\n" +
+      '          package-manager-cache: false\r\n' +
+      '      - uses: r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2\r\n' +
+      '        with:\r\n' +
+      "          pandoc-version: '3.13'\r\n" +
+      '      - name: Select a disposable runtime\r\n' +
+      '        shell: pwsh\r\n' +
+      '        run: |\r\n' +
+      "          $runtime = Join-Path $env:RUNNER_TEMP 'alex-act-one-runtime'\r\n" +
+      '          "ALEX_ACT_ONE_RUNTIME_ROOT=$runtime" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append\r\n' +
+      '      - name: Provision reviewed packages on this disposable runner\r\n' +
+      '        shell: pwsh\r\n' +
+      '        run: |\r\n' +
+      "          node (Join-Path $PWD 'skills' 'setup-dependencies' 'scripts' 'provision-runtime.mjs') --runtime-root $env:ALEX_ACT_ONE_RUNTIME_ROOT --apply\r\n" +
+      '          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\r\n' +
+      `          $zip = node -p "const d=require('./scripts/shared/dependencies.cjs').TOOLS.jszip; d.package+'@'+d.version"\r\n` +
+      '          npm install --prefix $env:ALEX_ACT_ONE_RUNTIME_ROOT --save-exact --ignore-scripts --no-audit --no-fund $zip\r\n' +
+      '          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\r\n' +
+      `          $mermaid = node -p "const d=require('./scripts/shared/dependencies.cjs').TOOLS.mmdc; d.package+'@'+d.version"\r\n` +
+      '          npm install --global --ignore-scripts --no-audit --no-fund $mermaid\r\n' +
+      '          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\r\n' +
+      '      - name: Verify runtime and real converter output without skips\r\n' +
+      '        shell: pwsh\r\n' +
+      "        run: node (Join-Path $PWD 'scripts' 'verification-gate.mjs') --lane integration\r\n" +
+      '      - name: Check canonical Windows demo rebuilds\r\n' +
+      "        if: runner.os == 'Windows'\r\n" +
+      '        shell: pwsh\r\n' +
+      '        run: |\r\n' +
+      "          node (Join-Path $PWD 'scripts' 'build-flint-showcase.mjs') --describe-runtime\r\n" +
+      '          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\r\n' +
+      "          node (Join-Path $PWD 'scripts' 'build-flint-showcase.mjs') --check\r\n" +
+      '          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }\r\n' +
+      "          node (Join-Path $PWD 'scripts' 'build-flint-showcase.mjs') --experimental --check\r\n" +
+      '      - name: Require unchanged tracked sources\r\n' +
+      '        shell: pwsh\r\n' +
+      '        run: git diff --exit-code\r\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    name: Verify source candidate
+    
+    on:
+      push:
+        branches: [main]
+      workflow_dispatch:
+    
+    permissions:
+      contents: read
+    
+    concurrency:
+      group: verify-${{ github.ref }}
+      cancel-in-progress: true
+    
+    jobs:
+      structural:
+        name: Structural / ${{ matrix.os }} / Node ${{ matrix.node }}
+        runs-on: ${{ matrix.os }}
+        timeout-minutes: 15
+        strategy:
+          fail-fast: false
+          matrix:
+            os: [windows-2025, ubuntu-24.04]
+            node: ['24', '26']
+        steps:
+          - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+            with:
+              persist-credentials: false
+          - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+            with:
+              node-version: ${{ matrix.node }}
+              package-manager-cache: false
+          - name: Verify structural contracts without provisioning packages
+            shell: pwsh
+            run: node (Join-Path $PWD 'scripts' 'verification-gate.mjs') --lane structural
+          - name: Require unchanged tracked sources
+            shell: pwsh
+            run: git diff --exit-code
+    
+      integration:
+        name: Provisioned runtime / ${{ matrix.os }} / Node 26
+        needs: structural
+        runs-on: ${{ matrix.os }}
+        timeout-minutes: 20
+        strategy:
+          fail-fast: false
+          matrix:
+            os: [windows-2025, ubuntu-24.04]
+        env:
+          NPM_CONFIG_IGNORE_SCRIPTS: 'true'
+          NPM_CONFIG_PROGRESS: 'false'
+        steps:
+          - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+            with:
+              persist-credentials: false
+          - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+            with:
+              node-version: '26'
+              package-manager-cache: false
+          - uses: r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+            with:
+              pandoc-version: '3.13'
+          - name: Select a disposable runtime
+            shell: pwsh
+            run: |
+              $runtime = Join-Path $env:RUNNER_TEMP 'alex-act-one-runtime'
+              "ALEX_ACT_ONE_RUNTIME_ROOT=$runtime" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          - name: Provision reviewed packages on this disposable runner
+            shell: pwsh
+            run: |
+              node (Join-Path $PWD 'skills' 'setup-dependencies' 'scripts' 'provision-runtime.mjs') --runtime-root $env:ALEX_ACT_ONE_RUNTIME_ROOT --apply
+              if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+              $zip = node -p "const d=require('./scripts/shared/dependencies.cjs').TOOLS.jszip; d.package+'@'+d.version"
+              npm install --prefix $env:ALEX_ACT_ONE_RUNTIME_ROOT --save-exact --ignore-scripts --no-audit --no-fund $zip
+              if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+              $mermaid = node -p "const d=require('./scripts/shared/dependencies.cjs').TOOLS.mmdc; d.package+'@'+d.version"
+              npm install --global --ignore-scripts --no-audit --no-fund $mermaid
+              if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          - name: Verify runtime and real converter output without skips
+            shell: pwsh
+            run: node (Join-Path $PWD 'scripts' 'verification-gate.mjs') --lane integration
+          - name: Check canonical Windows demo rebuilds
+            if: runner.os == 'Windows'
+            shell: pwsh
+            run: |
+              node (Join-Path $PWD 'scripts' 'build-flint-showcase.mjs') --describe-runtime
+              if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+              node (Join-Path $PWD 'scripts' 'build-flint-showcase.mjs') --check
+              if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+              node (Join-Path $PWD 'scripts' 'build-flint-showcase.mjs') --experimental --check
+          - name: Require unchanged tracked sources
+            shell: pwsh
+            run: git diff --exit-code
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/showcase-environment.test.mjs:37:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 0
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 99.8419

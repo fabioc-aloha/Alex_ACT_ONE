@@ -375,7 +375,7 @@
         "name": "session-health-monitoring",
         "path": "instructions/session-health-monitoring.instructions.md",
         "install_to": ".github/instructions/session-health-monitoring.instructions.md",
-        "role": "Monitor context-window health, cross-session continuity, and graceful handoff",
+        "role": "Monitor context-window health, cross-session continuity, repository artifact delivery, and graceful handoff",
         "applyTo": "**"
       }
     ],

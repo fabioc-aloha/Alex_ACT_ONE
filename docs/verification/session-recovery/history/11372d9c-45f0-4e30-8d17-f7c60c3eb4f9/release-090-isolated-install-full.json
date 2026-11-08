@@ -1,0 +1,14 @@
+{
+  "installedVersion": "0.9.0",
+  "marketplace": "alex-mall",
+  "installedSkills": 64,
+  "payloadMatchesFrozenSource": true,
+  "payloadFilesVerified": 291,
+  "activationPreviewWroteNothing": true,
+  "temporaryInstructionsVerified": 15,
+  "temporaryReceiptCurrent": true,
+  "secondPreview": "preserve",
+  "optionalDependenciesInstalled": false,
+  "activeCandidateAndProfileUnchanged": true,
+  "temporaryProfileRemoved": true
+}

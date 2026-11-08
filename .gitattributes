@@ -1,1 +1,3 @@
 docs/flint-*.html text eol=lf
+docs/verification/session-recovery/history/** -text -whitespace
+docs/verification/session-recovery/manifest.json text eol=lf

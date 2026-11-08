@@ -1,0 +1,640 @@
+TAP version 13
+# Subtest: real md-to-html preserves literal inline/fenced code and renders tables and links
+ok 1 - real md-to-html preserves literal inline/fenced code and renders tables and links
+  ---
+  duration_ms: 1691.899
+  type: 'test'
+  ...
+# Subtest: real md-to-word preserves literal inline/fenced code and renders tables and links
+ok 2 - real md-to-word preserves literal inline/fenced code and renders tables and links
+  ---
+  duration_ms: 2343.61
+  type: 'test'
+  ...
+# Subtest: the installed Mermaid npm CLI starts through the shared tool runner
+ok 3 - the installed Mermaid npm CLI starts through the shared tool runner
+  ---
+  duration_ms: 885.4892
+  type: 'test'
+  ...
+# Subtest: real Pandoc DOCX media survive extraction cleanup with original PNG bytes
+ok 4 - real Pandoc DOCX media survive extraction cleanup with original PNG bytes
+  ---
+  duration_ms: 619.9387
+  type: 'test'
+  ...
+# Subtest: DOCX extraction handles encoded absolute media paths; missing=false
+ok 5 - DOCX extraction handles encoded absolute media paths; missing=false
+  ---
+  duration_ms: 33.7339
+  type: 'test'
+  ...
+# Subtest: DOCX extraction handles encoded absolute media paths; missing=true
+ok 6 - DOCX extraction handles encoded absolute media paths; missing=true
+  ---
+  duration_ms: 5.6429
+  type: 'test'
+  ...
+# Subtest: DOCX extraction preserves image syntax in inline, fenced, and indented code while copying real images
+ok 7 - DOCX extraction preserves image syntax in inline, fenced, and indented code while copying real images
+  ---
+  duration_ms: 43.1845
+  type: 'test'
+  ...
+# Subtest: real DOCX roundtrip preserves literal image examples alongside extracted media
+ok 8 - real DOCX roundtrip preserves literal image examples alongside extracted media
+  ---
+  duration_ms: 653.6572
+  type: 'test'
+  ...
+# Subtest: real HTML TOC links target headings, marker=false, flag=true
+ok 9 - real HTML TOC links target headings, marker=false, flag=true
+  ---
+  duration_ms: 323.0014
+  type: 'test'
+  ...
+# Subtest: real HTML TOC links target headings, marker=true, flag=false
+ok 10 - real HTML TOC links target headings, marker=true, flag=false
+  ---
+  duration_ms: 331.7517
+  type: 'test'
+  ...
+# Subtest: real HTML TOC links target headings, marker=false, flag=false
+ok 11 - real HTML TOC links target headings, marker=false, flag=false
+  ---
+  duration_ms: 331.437
+  type: 'test'
+  ...
+# Subtest: real md-to-html embeds URL-encoded local image bytes
+ok 12 - real md-to-html embeds URL-encoded local image bytes
+  ---
+  duration_ms: 311.9294
+  type: 'test'
+  ...
+# Subtest: md-to-html propagates real Pandoc failure without writing output
+ok 13 - md-to-html propagates real Pandoc failure without writing output
+  ---
+  duration_ms: 210.3942
+  type: 'test'
+  ...
+# Subtest: real md-to-eml embeds URL-encoded local image bytes
+ok 14 - real md-to-eml embeds URL-encoded local image bytes
+  ---
+  duration_ms: 314.9571
+  type: 'test'
+  ...
+# Subtest: md-to-eml propagates real Pandoc failure without writing output
+ok 15 - md-to-eml propagates real Pandoc failure without writing output
+  ---
+  duration_ms: 188.7028
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination missing%20image.png
+ok 16 - md-to-html rejects invalid local image destination missing%20image.png
+  ---
+  duration_ms: 239.5147
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination bad%ZZ.png
+ok 17 - md-to-html rejects invalid local image destination bad%ZZ.png
+  ---
+  duration_ms: 206.2401
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination file:///private/image.png
+ok 18 - md-to-html rejects invalid local image destination file:///private/image.png
+  ---
+  duration_ms: 209.0746
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination ftp://example.invalid/image.png
+ok 19 - md-to-html rejects invalid local image destination ftp://example.invalid/image.png
+  ---
+  duration_ms: 203.8274
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination directory.png
+ok 20 - md-to-html rejects invalid local image destination directory.png
+  ---
+  duration_ms: 195.1188
+  type: 'test'
+  ...
+# Subtest: md-to-html rejects invalid local image destination unsupported.bmp
+ok 21 - md-to-html rejects invalid local image destination unsupported.bmp
+  ---
+  duration_ms: 240.0947
+  type: 'test'
+  ...
+# Subtest: md-to-html leaves remote and data image URLs unchanged without fetching
+ok 22 - md-to-html leaves remote and data image URLs unchanged without fetching
+  ---
+  duration_ms: 235.0305
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination missing%20image.png
+ok 23 - md-to-eml rejects invalid local image destination missing%20image.png
+  ---
+  duration_ms: 243.3754
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination bad%ZZ.png
+ok 24 - md-to-eml rejects invalid local image destination bad%ZZ.png
+  ---
+  duration_ms: 222.6988
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination file:///private/image.png
+ok 25 - md-to-eml rejects invalid local image destination file:///private/image.png
+  ---
+  duration_ms: 223.3888
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination ftp://example.invalid/image.png
+ok 26 - md-to-eml rejects invalid local image destination ftp://example.invalid/image.png
+  ---
+  duration_ms: 261.6791
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination directory.png
+ok 27 - md-to-eml rejects invalid local image destination directory.png
+  ---
+  duration_ms: 188.1834
+  type: 'test'
+  ...
+# Subtest: md-to-eml rejects invalid local image destination unsupported.bmp
+ok 28 - md-to-eml rejects invalid local image destination unsupported.bmp
+  ---
+  duration_ms: 215.0691
+  type: 'test'
+  ...
+# Subtest: md-to-eml leaves remote and data image URLs unchanged without fetching
+ok 29 - md-to-eml leaves remote and data image URLs unchanged without fetching
+  ---
+  duration_ms: 209.0497
+  type: 'test'
+  ...
+# Subtest: Mermaid fallback preserves labeled edges, implicit endpoints, chains, and node labels
+ok 30 - Mermaid fallback preserves labeled edges, implicit endpoints, chains, and node labels
+  ---
+  duration_ms: 1.5951
+  type: 'test'
+  ...
+# Subtest: real detached Word converter loads the documented shared closure and creates a readable DOCX
+ok 31 - real detached Word converter loads the documented shared closure and creates a readable DOCX
+  ---
+  duration_ms: 546.6414
+  type: 'test'
+  ...
+# Subtest: Word accepts only a fresh successful Mermaid render and embeds its current PNG bytes
+ok 32 - Word accepts only a fresh successful Mermaid render and embeds its current PNG bytes
+  ---
+  duration_ms: 952.6596
+  type: 'test'
+  ...
+# Subtest: shared image paths decode once, honor HTML entities, and ignore URL query/fragment suffixes
+ok 33 - shared image paths decode once, honor HTML entities, and ignore URL query/fragment suffixes
+  ---
+  duration_ms: 6.6679
+  type: 'test'
+  ...
+# Subtest: DOCX extraction missing-media preserves existing Markdown and cleans staging
+ok 34 - DOCX extraction missing-media preserves existing Markdown and cleans staging
+  ---
+  duration_ms: 212.2453
+  type: 'test'
+  ...
+# Subtest: DOCX extraction pandoc-failure preserves existing Markdown and cleans staging
+ok 35 - DOCX extraction pandoc-failure preserves existing Markdown and cleans staging
+  ---
+  duration_ms: 211.1235
+  type: 'test'
+  ...
+# Subtest: real HTML preserves literal HTML code while rejecting active HTML hidden among raw backticks
+ok 36 - real HTML preserves literal HTML code while rejecting active HTML hidden among raw backticks
+  ---
+  duration_ms: 554.0116
+  type: 'test'
+  ...
+# Subtest: unsupported Mermaid fallback retains complete source: sequenceDiagram
+ok 37 - unsupported Mermaid fallback retains complete source: sequenceDiagram
+  ---
+  duration_ms: 0.3631
+  type: 'test'
+  ...
+# Subtest: unsupported Mermaid fallback retains complete source: flowchart TD
+ok 38 - unsupported Mermaid fallback retains complete source: flowchart TD
+  ---
+  duration_ms: 0.1766
+  type: 'test'
+  ...
+# Subtest: unsupported Mermaid fallback retains complete source: pie title Votes
+ok 39 - unsupported Mermaid fallback retains complete source: pie title Votes
+  ---
+  duration_ms: 0.0708
+  type: 'test'
+  ...
+# Subtest: network/device image paths fail before filesystem access: \\\\review.invalid\\share\\pixel.png
+ok 40 - network/device image paths fail before filesystem access: \\\\review.invalid\\share\\pixel.png
+  ---
+  duration_ms: 6.6268
+  type: 'test'
+  ...
+# Subtest: network/device image paths fail before filesystem access: %5C%5Creview.invalid%5Cshare%5Cpixel.png
+ok 41 - network/device image paths fail before filesystem access: %5C%5Creview.invalid%5Cshare%5Cpixel.png
+  ---
+  duration_ms: 2.2209
+  type: 'test'
+  ...
+# Subtest: network/device image paths fail before filesystem access: \\\\?\\UNC\\review.invalid\\share\\pixel.png
+ok 42 - network/device image paths fail before filesystem access: \\\\?\\UNC\\review.invalid\\share\\pixel.png
+  ---
+  duration_ms: 1.7143
+  type: 'test'
+  ...
+# Subtest: network/device image paths fail before filesystem access: \\\\.\\pipe\\review
+ok 43 - network/device image paths fail before filesystem access: \\\\.\\pipe\\review
+  ---
+  duration_ms: 1.914
+  type: 'test'
+  ...
+# Subtest: network/device image paths fail before filesystem access: %2F%2Freview.invalid/share/pixel.png
+ok 44 - network/device image paths fail before filesystem access: %2F%2Freview.invalid/share/pixel.png
+  ---
+  duration_ms: 2.138
+  type: 'test'
+  ...
+# Subtest: email rejects header controls before conversion: subject, []
+ok 45 - email rejects header controls before conversion: subject, []
+  ---
+  duration_ms: 208.1787
+  type: 'test'
+  ...
+# Subtest: email rejects header controls before conversion: subject, ["--test"]
+ok 46 - email rejects header controls before conversion: subject, ["--test"]
+  ---
+  duration_ms: 161.6611
+  type: 'test'
+  ...
+# Subtest: email rejects header controls before conversion: from, []
+ok 47 - email rejects header controls before conversion: from, []
+  ---
+  duration_ms: 144.0434
+  type: 'test'
+  ...
+# Subtest: email rejects header controls before conversion: to, ["--test"]
+ok 48 - email rejects header controls before conversion: to, ["--test"]
+  ---
+  duration_ms: 155.0175
+  type: 'test'
+  ...
+# Subtest: email rejects header controls before conversion: reply-to, []
+ok 49 - email rejects header controls before conversion: reply-to, []
+  ---
+  duration_ms: 151.0141
+  type: 'test'
+  ...
+# Subtest: email rejects header controls before conversion: subject, ["--test-to","<EMAIL>\\rBcc: <EMAIL>"]
+ok 50 - email rejects header controls before conversion: subject, ["--test-to","<EMAIL>\\rBcc: <EMAIL>"]
+  ---
+  duration_ms: 140.8253
+  type: 'test'
+  ...
+# Subtest: email rejects active rendered HTML: <script>/* review */</script>
+ok 51 - email rejects active rendered HTML: <script>/* review */</script>
+  ---
+  duration_ms: 309.6029
+  type: 'test'
+  ...
+# Subtest: email rejects active rendered HTML: <img src="x" onerror="review()">
+ok 52 - email rejects active rendered HTML: <img src="x" onerror="review()">
+  ---
+  duration_ms: 271.6753
+  type: 'test'
+  ...
+# Subtest: email rejects active rendered HTML: <a href="jav&\#x61;script:review()">review</a>
+ok 53 - email rejects active rendered HTML: <a href="jav&\#x61;script:review()">review</a>
+  ---
+  duration_ms: 264.4282
+  type: 'test'
+  ...
+# Subtest: email preserves ordinary Unicode headers and escaped literal HTML
+ok 54 - email preserves ordinary Unicode headers and escaped literal HTML
+  ---
+  duration_ms: 304.6792
+  type: 'test'
+  ...
+# Subtest: image extraction preserves container fences: "> ~~~markdown\\n> ![Example](missing.png)\\n> ~~~\\n"
+ok 55 - image extraction preserves container fences: "> ~~~markdown\\n> ![Example](missing.png)\\n> ~~~\\n"
+  ---
+  duration_ms: 3.6564
+  type: 'test'
+  ...
+# Subtest: image extraction preserves container fences: "- A list\\n\\n  ~~~markdown\\n  ![Example](missing.png)\\n  ~~~\\n"
+ok 56 - image extraction preserves container fences: "- A list\\n\\n  ~~~markdown\\n  ![Example](missing.png)\\n  ~~~\\n"
+  ---
+  duration_ms: 2.2038
+  type: 'test'
+  ...
+# Subtest: image extraction preserves container fences: "> - A list\\n>\\n>   ~~~markdown\\n>   ![Example](missing.png)\\n>   ~~~\\n"
+ok 57 - image extraction preserves container fences: "> - A list\\n>\\n>   ~~~markdown\\n>   ![Example](missing.png)\\n>   ~~~\\n"
+  ---
+  duration_ms: 2.4548
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts block code: "    <script>/* literal */</script>\\n"
+ok 58 - HTML screening accepts block code: "    <script>/* literal */</script>\\n"
+  ---
+  duration_ms: 150.2895
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts block code: "> ~~~html\\n> <script>/* literal */</script>\\n> ~~~\\n"
+ok 59 - HTML screening accepts block code: "> ~~~html\\n> <script>/* literal */</script>\\n> ~~~\\n"
+  ---
+  duration_ms: 148.307
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts block code: "- A list\\n\\n      <script>/* literal */</script>\\n"
+ok 60 - HTML screening accepts block code: "- A list\\n\\n      <script>/* literal */</script>\\n"
+  ---
+  duration_ms: 128.6101
+  type: 'test'
+  ...
+# Subtest: Word preserves the complete prior output set on later-render
+ok 61 - Word preserves the complete prior output set on later-render
+  ---
+  duration_ms: 736.8579
+  type: 'test'
+  ...
+# Subtest: Word preserves the complete prior output set on partial-pandoc
+ok 62 - Word preserves the complete prior output set on partial-pandoc
+  ---
+  duration_ms: 836.0039
+  type: 'test'
+  ...
+# Subtest: Word preserves the complete prior output set on oversize-png
+ok 63 - Word preserves the complete prior output set on oversize-png
+  ---
+  duration_ms: 561.665
+  type: 'test'
+  ...
+# Subtest: DOCX conversion preserves document and media after late failure, extraction=true
+ok 64 - DOCX conversion preserves document and media after late failure, extraction=true
+  ---
+  duration_ms: 259.6074
+  type: 'test'
+  ...
+# Subtest: DOCX conversion preserves document and media after late failure, extraction=false
+ok 65 - DOCX conversion preserves document and media after late failure, extraction=false
+  ---
+  duration_ms: 226.9039
+  type: 'test'
+  ...
+# Subtest: html preserves literal single- and multi-backtick inline code
+ok 66 - html preserves literal single- and multi-backtick inline code
+  ---
+  duration_ms: 6.4169
+  type: 'test'
+  ...
+# Subtest: docx preserves literal single- and multi-backtick inline code
+ok 67 - docx preserves literal single- and multi-backtick inline code
+  ---
+  duration_ms: 0.9151
+  type: 'test'
+  ...
+# Subtest: email preserves literal single- and multi-backtick inline code
+ok 68 - email preserves literal single- and multi-backtick inline code
+  ---
+  duration_ms: 0.3914
+  type: 'test'
+  ...
+# Subtest: txt preserves literal single- and multi-backtick inline code
+ok 69 - txt preserves literal single- and multi-backtick inline code
+  ---
+  duration_ms: 0.3688
+  type: 'test'
+  ...
+# Subtest: multiline inline code and escaped backticks inside it stay literal
+ok 70 - multiline inline code and escaped backticks inside it stay literal
+  ---
+  duration_ms: 1.4508
+  type: 'test'
+  ...
+# Subtest: an escaped opener and an unmatched delimiter remain prose, not protected code spans
+ok 71 - an escaped opener and an unmatched delimiter remain prose, not protected code spans
+  ---
+  duration_ms: 1.6125
+  type: 'test'
+  ...
+# Subtest: real prose still receives math, highlight, superscript, and em-dash transformations
+ok 72 - real prose still receives math, highlight, superscript, and em-dash transformations
+  ---
+  duration_ms: 0.9024
+  type: 'test'
+  ...
+# Subtest: standalone math conversion preserves inline and fenced code
+ok 73 - standalone math conversion preserves inline and fenced code
+  ---
+  duration_ms: 1.7567
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts literal code/prose: "Ordinary prose: const one = 1.\\n"
+ok 74 - HTML screening accepts literal code/prose: "Ordinary prose: const one = 1.\\n"
+  ---
+  duration_ms: 190.5154
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts literal code/prose: "`<script>alert(1)</script>` and ``<img src=x onerror=\\"oops()\\">``\\n"
+ok 75 - HTML screening accepts literal code/prose: "`<script>alert(1)</script>` and ``<img src=x onerror=\\"oops()\\">``\\n"
+  ---
+  duration_ms: 156.2279
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts literal code/prose: "~~~html\\n<script>alert(1)</script>\\n<img src=x onerror=\\"oops()\\">\\n~~~\\n"
+ok 76 - HTML screening accepts literal code/prose: "~~~html\\n<script>alert(1)</script>\\n<img src=x onerror=\\"oops()\\">\\n~~~\\n"
+  ---
+  duration_ms: 149.2697
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts literal code/prose: "````html\\n```html\\n<script>alert(1)</script>\\n```\\n````\\n"
+ok 77 - HTML screening accepts literal code/prose: "````html\\n```html\\n<script>alert(1)</script>\\n```\\n````\\n"
+  ---
+  duration_ms: 161.2168
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts literal code/prose: "Literal ``<img\\nonerror=\\"oops()\\">`` across lines.\\n"
+ok 78 - HTML screening accepts literal code/prose: "Literal ``<img\\nonerror=\\"oops()\\">`` across lines.\\n"
+  ---
+  duration_ms: 167.1166
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <script>alert(1)</script>
+ok 79 - HTML screening still rejects active HTML: <script>alert(1)</script>
+  ---
+  duration_ms: 140.2236
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <img src=x onerror="oops()">
+ok 80 - HTML screening still rejects active HTML: <img src=x onerror="oops()">
+  ---
+  duration_ms: 140.5017
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <iframe srcdoc="<p>active</p>"></iframe>
+ok 81 - HTML screening still rejects active HTML: <iframe srcdoc="<p>active</p>"></iframe>
+  ---
+  duration_ms: 161.8883
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <a href="jav&\#x61;script:alert(1)">link</a>
+ok 82 - HTML screening still rejects active HTML: <a href="jav&\#x61;script:alert(1)">link</a>
+  ---
+  duration_ms: 141.5668
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <a href="java&Tab;script&colon;alert(1)">link</a>
+ok 83 - HTML screening still rejects active HTML: <a href="java&Tab;script&colon;alert(1)">link</a>
+  ---
+  duration_ms: 133.9936
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <a href="data:text/html;base64,xxx">link</a>
+ok 84 - HTML screening still rejects active HTML: <a href="data:text/html;base64,xxx">link</a>
+  ---
+  duration_ms: 118.5354
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <img title="`" onerror="`">
+ok 85 - HTML screening still rejects active HTML: <img title="`" onerror="`">
+  ---
+  duration_ms: 141.5993
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: `literal`\\n\\n<img\\nonload=active()>
+ok 86 - HTML screening still rejects active HTML: `literal`\\n\\n<img\\nonload=active()>
+  ---
+  duration_ms: 154.4954
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: > ~~~html\\n> literal\\n> ~~~\\n\\n<script>/* active */</script>
+ok 87 - HTML screening still rejects active HTML: > ~~~html\\n> literal\\n> ~~~\\n\\n<script>/* active */</script>
+  ---
+  duration_ms: 136.347
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML:     literal code\\n\\n<script>/* active */</script>
+ok 88 - HTML screening still rejects active HTML:     literal code\\n\\n<script>/* active */</script>
+  ---
+  duration_ms: 139.7365
+  type: 'test'
+  ...
+# Subtest: professional headings apply the configured treatment to bare and styled runs
+ok 89 - professional headings apply the configured treatment to bare and styled runs
+  ---
+  duration_ms: 3.0992
+  type: 'test'
+  ...
+# Subtest: table formatting removes fixed layouts while retaining professional table styling
+ok 90 - table formatting removes fixed layouts while retaining professional table styling
+  ---
+  duration_ms: 2.1289
+  type: 'test'
+  ...
+# Subtest: Word refuses stale Mermaid PNG on failure and preserves source and prior output
+ok 91 - Word refuses stale Mermaid PNG on failure and preserves source and prior output
+  ---
+  duration_ms: 757.1618
+  type: 'test'
+  ...
+# Subtest: Word refuses stale Mermaid PNG on partial-failure and preserves source and prior output
+ok 92 - Word refuses stale Mermaid PNG on partial-failure and preserves source and prior output
+  ---
+  duration_ms: 687.2576
+  type: 'test'
+  ...
+# Subtest: Word refuses stale Mermaid PNG on empty-success and preserves source and prior output
+ok 93 - Word refuses stale Mermaid PNG on empty-success and preserves source and prior output
+  ---
+  duration_ms: 627.1091
+  type: 'test'
+  ...
+# Subtest: Word refuses stale Mermaid PNG on corrupt-success and preserves source and prior output
+ok 94 - Word refuses stale Mermaid PNG on corrupt-success and preserves source and prior output
+  ---
+  duration_ms: 608.502
+  type: 'test'
+  ...
+# Subtest: Word refuses stale Mermaid PNG on signature-only and preserves source and prior output
+ok 95 - Word refuses stale Mermaid PNG on signature-only and preserves source and prior output
+  ---
+  duration_ms: 813.4675
+  type: 'test'
+  ...
+# Subtest: Word refuses stale Mermaid PNG on zero-size and preserves source and prior output
+ok 96 - Word refuses stale Mermaid PNG on zero-size and preserves source and prior output
+  ---
+  duration_ms: 624.9003
+  type: 'test'
+  ...
+# Subtest: Word refuses stale Mermaid PNG on bad-filter and preserves source and prior output
+ok 97 - Word refuses stale Mermaid PNG on bad-filter and preserves source and prior output
+  ---
+  duration_ms: 605.8845
+  type: 'test'
+  ...
+# Subtest: Word refuses stale Mermaid PNG on short-raster and preserves source and prior output
+ok 98 - Word refuses stale Mermaid PNG on short-raster and preserves source and prior output
+  ---
+  duration_ms: 549.2913
+  type: 'test'
+  ...
+# Subtest: Word refuses stale Mermaid PNG on bad-deflate and preserves source and prior output
+ok 99 - Word refuses stale Mermaid PNG on bad-deflate and preserves source and prior output
+  ---
+  duration_ms: 588.8142
+  type: 'test'
+  ...
+# Subtest: Word refuses stale Mermaid PNG on bad-crc and preserves source and prior output
+ok 100 - Word refuses stale Mermaid PNG on bad-crc and preserves source and prior output
+  ---
+  duration_ms: 575.5723
+  type: 'test'
+  ...
+# Subtest: Word refuses stale Mermaid PNG on missing-iend and preserves source and prior output
+ok 101 - Word refuses stale Mermaid PNG on missing-iend and preserves source and prior output
+  ---
+  duration_ms: 550.4785
+  type: 'test'
+  ...
+# Subtest: a later publication failure rolls back the complete file set, existing=false
+ok 102 - a later publication failure rolls back the complete file set, existing=false
+  ---
+  duration_ms: 33.488
+  type: 'test'
+  ...
+# Subtest: a later publication failure rolls back the complete file set, existing=true
+ok 103 - a later publication failure rolls back the complete file set, existing=true
+  ---
+  duration_ms: 44.0497
+  type: 'test'
+  ...
+# Subtest: publication validates every destination before replacing prior files
+ok 104 - publication validates every destination before replacing prior files
+  ---
+  duration_ms: 22.7959
+  type: 'test'
+  ...
+# Subtest: successful publication replaces only selected files and leaves no recovery debris
+ok 105 - successful publication replaces only selected files and leaves no recovery debris
+  ---
+  duration_ms: 17.9421
+  type: 'test'
+  ...
+1..105
+# tests 105
+# suites 0
+# pass 105
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 14371.5918

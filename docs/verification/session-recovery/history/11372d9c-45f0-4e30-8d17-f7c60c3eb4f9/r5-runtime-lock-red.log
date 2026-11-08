@@ -1,0 +1,77 @@
+TAP version 13
+# Subtest: isolated CI/runtime manifest agrees with every reviewed runtime and demo build pin
+not ok 1 - isolated CI/runtime manifest agrees with every reviewed runtime and demo build pin
+  ---
+  duration_ms: 0.8714
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\ci-runtime-lock.test.mjs:18:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing isolated CI/demo build manifest'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    profile (file:///C:/Development/Alex_ACT_ONE/tests/ci-runtime-lock.test.mjs:11:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/ci-runtime-lock.test.mjs:19:32)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: locked transitive graph has portable registry resolution and integrity without local paths or links
+not ok 2 - locked transitive graph has portable registry resolution and integrity without local paths or links
+  ---
+  duration_ms: 0.2255
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\ci-runtime-lock.test.mjs:34:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing isolated CI/demo build manifest'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    profile (file:///C:/Development/Alex_ACT_ONE/tests/ci-runtime-lock.test.mjs:11:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/ci-runtime-lock.test.mjs:35:22)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: hosted jobs consume the locked profile with npm ci, not drifting install resolution
+not ok 3 - hosted jobs consume the locked profile with npm ci, not drifting install resolution
+  ---
+  duration_ms: 0.1489
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\ci-runtime-lock.test.mjs:46:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing isolated CI/demo build manifest'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    profile (file:///C:/Development/Alex_ACT_ONE/tests/ci-runtime-lock.test.mjs:11:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/ci-runtime-lock.test.mjs:47:5)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 0
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 79.7401

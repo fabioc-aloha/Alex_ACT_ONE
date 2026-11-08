@@ -1,0 +1,160 @@
+TAP version 13
+# Subtest: foreign instruction blocks the whole activation and does not create other files or a receipt
+ok 1 - foreign instruction blocks the whole activation and does not create other files or a receipt
+  ---
+  duration_ms: 491.9402
+  type: 'test'
+  ...
+# Subtest: modified owned instructions and their receipt are preserved on blocked apply
+ok 2 - modified owned instructions and their receipt are preserved on blocked apply
+  ---
+  duration_ms: 931.541
+  type: 'test'
+  ...
+# Subtest: explicit conflict overwrite has a read-only preview and then verifies canonical bytes
+ok 3 - explicit conflict overwrite has a read-only preview and then verifies canonical bytes
+  ---
+  duration_ms: 860.0343
+  type: 'test'
+  ...
+# Subtest: an unchanged receipt-owned older instruction upgrades without an overwrite flag
+ok 4 - an unchanged receipt-owned older instruction upgrades without an overwrite flag
+  ---
+  duration_ms: 1066.8257
+  type: 'test'
+  ...
+# Subtest: receipt migration cannot claim mixed or foreign ownership, even with overwrite enabled
+ok 5 - receipt migration cannot claim mixed or foreign ownership, even with overwrite enabled
+  ---
+  duration_ms: 682.3905
+  type: 'test'
+  ...
+# Subtest: a late destination change invalidates an in-memory plan before any writes
+ok 6 - a late destination change invalidates an in-memory plan before any writes
+  ---
+  duration_ms: 80.0606
+  type: 'test'
+  ...
+# Subtest: overwrite policy does not bypass removal ownership rules
+ok 7 - overwrite policy does not bypass removal ownership rules
+  ---
+  duration_ms: 143.6894
+  type: 'test'
+  ...
+# Subtest: a failed apply does not claim incomplete ownership and can be explicitly recovered
+ok 8 - a failed apply does not claim incomplete ownership and can be explicitly recovered
+  ---
+  duration_ms: 620.6648
+  type: 'test'
+  ...
+# Subtest: host readiness reports activation conflicts as blocked rather than ready to apply
+ok 9 - host readiness reports activation conflicts as blocked rather than ready to apply
+  ---
+  duration_ms: 311.2854
+  type: 'test'
+  ...
+# Subtest: real md-to-html preserves literal inline/fenced code and renders tables and links
+ok 10 - real md-to-html preserves literal inline/fenced code and renders tables and links
+  ---
+  duration_ms: 1337.4366
+  type: 'test'
+  ...
+# Subtest: real md-to-word preserves literal inline/fenced code and renders tables and links
+ok 11 - real md-to-word preserves literal inline/fenced code and renders tables and links
+  ---
+  duration_ms: 1801.8948
+  type: 'test'
+  ...
+# Subtest: the installed Mermaid npm CLI starts through the shared tool runner
+ok 12 - the installed Mermaid npm CLI starts through the shared tool runner
+  ---
+  duration_ms: 1715.9849
+  type: 'test'
+  ...
+# Subtest: empty package directories are installed, not ready or launchable
+ok 13 - empty package directories are installed, not ready or launchable
+  ---
+  duration_ms: 9.3171
+  type: 'test'
+  ...
+# Subtest: versions, metadata, and the server-resolved Flint library fail explicitly
+ok 14 - versions, metadata, and the server-resolved Flint library fail explicitly
+  ---
+  duration_ms: 23.2386
+  type: 'test'
+  ...
+# Subtest: a matched but failing entrypoint is not launchable and reports its failure
+ok 15 - a matched but failing entrypoint is not launchable and reports its failure
+  ---
+  duration_ms: 115.3145
+  type: 'test'
+  ...
+# Subtest: readiness launch probes have a real bounded timeout
+ok 16 - readiness launch probes have a real bounded timeout
+  ---
+  duration_ms: 125.7685
+  type: 'test'
+  ...
+# Subtest: a successful version probe does not pretend the host connected
+ok 17 - a successful version probe does not pretend the host connected
+  ---
+  duration_ms: 117.58
+  type: 'test'
+  ...
+# Subtest: provisioner preview honors the environment runtime without installing
+ok 18 - provisioner preview honors the environment runtime without installing
+  ---
+  duration_ms: 909.3096
+  type: 'test'
+  ...
+# Subtest: dependency CLI reports the explicitly selected runtime and rejects empty packages
+ok 19 - dependency CLI reports the explicitly selected runtime and rejects empty packages
+  ---
+  duration_ms: 105.7401
+  type: 'test'
+  ...
+# Subtest: the actual flint launcher rejects metadata drift from the shared registry
+ok 20 - the actual flint launcher rejects metadata drift from the shared registry
+  ---
+  duration_ms: 96.2193
+  type: 'test'
+  ...
+# Subtest: the actual playwright launcher rejects metadata drift from the shared registry
+ok 21 - the actual playwright launcher rejects metadata drift from the shared registry
+  ---
+  duration_ms: 98.0004
+  type: 'test'
+  ...
+# Subtest: the actual replicate launcher rejects metadata drift from the shared registry
+ok 22 - the actual replicate launcher rejects metadata drift from the shared registry
+  ---
+  duration_ms: 99.5697
+  type: 'test'
+  ...
+# Subtest: the provisioner verifies installation outcome before success: ready
+ok 23 - the provisioner verifies installation outcome before success: ready
+  ---
+  duration_ms: 998.4072
+  type: 'test'
+  ...
+# Subtest: the provisioner verifies installation outcome before success: empty
+ok 24 - the provisioner verifies installation outcome before success: empty
+  ---
+  duration_ms: 881.6435
+  type: 'test'
+  ...
+# Subtest: the provisioner verifies installation outcome before success: wrong-report
+ok 25 - the provisioner verifies installation outcome before success: wrong-report
+  ---
+  duration_ms: 932.2743
+  type: 'test'
+  ...
+1..25
+# tests 25
+# suites 0
+# pass 25
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 5313.5748

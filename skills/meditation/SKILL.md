@@ -15,3 +15,9 @@ Use existing authoritative records: changelog for completed history, task system
 Load and follow [execution details](references/execution-details.md) for the selected review/reconciliation steps. Search prior art before recommending new capabilities; proof of need, local scope, and implementation approval remain with [project-capability-authoring](../project-capability-authoring/SKILL.md), which uses [compile-brain](../compile-brain/SKILL.md) for shared authoring mechanics.
 
 Verify saved records, links, and task accounting before pruning or compaction. Failed preservation blocks pruning. Report exact writes, skipped duplicates, remaining tasks, and blocked approvals; do not collect cross-session effectiveness or skill-firing telemetry.
+
+Reconcile relevant artifact locations and indexes under the
+[shared storage contract](../proactive-awareness/references/project-artifact-storage.md)
+only within the request's approved repository scope. Preserve historical
+reports and frozen evidence as artifacts, not handoff prose. Ask before
+recovering materially uncertain or sensitive external content.

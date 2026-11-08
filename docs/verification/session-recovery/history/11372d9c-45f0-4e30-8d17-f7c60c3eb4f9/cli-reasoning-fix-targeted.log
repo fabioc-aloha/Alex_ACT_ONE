@@ -1,0 +1,459 @@
+TAP version 13
+# Subtest: README skills table lists every declared asset exactly once with its source link
+ok 1 - README skills table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 3.2939
+  type: 'test'
+  ...
+# Subtest: README prompts table lists every declared asset exactly once with its source link
+ok 2 - README prompts table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 58.2089
+  type: 'test'
+  ...
+# Subtest: README instructions table lists every declared asset exactly once with its source link
+ok 3 - README instructions table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 36.849
+  type: 'test'
+  ...
+# Subtest: one generated inventory derives source counts from the manifest and server registrations
+ok 4 - one generated inventory derives source counts from the manifest and server registrations
+  ---
+  duration_ms: 7.4139
+  type: 'test'
+  ...
+# Subtest: the documentation generator has no drift and --check performs no writes
+ok 5 - the documentation generator has no drift and --check performs no writes
+  ---
+  duration_ms: 470.2887
+  type: 'test'
+  ...
+# Subtest: instruction role metadata is derived from canonical descriptions, not an independent procedure
+ok 6 - instruction role metadata is derived from canonical descriptions, not an independent procedure
+  ---
+  duration_ms: 69.6149
+  type: 'test'
+  ...
+# Subtest: stale instruction role metadata fails the read-only drift check
+ok 7 - stale instruction role metadata fails the read-only drift check
+  ---
+  duration_ms: 205.4545
+  type: 'test'
+  ...
+# Subtest: generation rejects a prompt routed to a missing owner before producing misleading tables
+ok 8 - generation rejects a prompt routed to a missing owner before producing misleading tables
+  ---
+  duration_ms: 1534.1462
+  type: 'test'
+  ...
+# Subtest: current docs distinguish shipped optimization from source-only chart additions
+ok 9 - current docs distinguish shipped optimization from source-only chart additions
+  ---
+  duration_ms: 5.2407
+  type: 'test'
+  ...
+# Subtest: install reference separates repository source, Mall release, and optional runtime state
+ok 10 - install reference separates repository source, Mall release, and optional runtime state
+  ---
+  duration_ms: 15.0236
+  type: 'test'
+  ...
+# Subtest: release and testing docs cover the relocated host reference and current onboarding boundary
+ok 11 - release and testing docs cover the relocated host reference and current onboarding boundary
+  ---
+  duration_ms: 13.8441
+  type: 'test'
+  ...
+# Subtest: roadmap is a pending-work plan with evidence links and explicit decision gates
+ok 12 - roadmap is a pending-work plan with evidence links and explicit decision gates
+  ---
+  duration_ms: 7.4387
+  type: 'test'
+  ...
+# Subtest: repository candidate notices match package metadata and keep the manual install switch explicit
+ok 13 - repository candidate notices match package metadata and keep the manual install switch explicit
+  ---
+  duration_ms: 28.6967
+  type: 'test'
+  ...
+# Subtest: evaluation names its reference host, isolation limits, and comparison hypotheses
+ok 14 - evaluation names its reference host, isolation limits, and comparison hypotheses
+  ---
+  duration_ms: 4.1946
+  type: 'test'
+  ...
+# Subtest: evaluation results are task-local with sample size, counterevidence, and limitations
+ok 15 - evaluation results are task-local with sample size, counterevidence, and limitations
+  ---
+  duration_ms: 5.4585
+  type: 'test'
+  ...
+# Subtest: manual release evidence distinguishes scenario observations from delivery support
+ok 16 - manual release evidence distinguishes scenario observations from delivery support
+  ---
+  duration_ms: 6.9288
+  type: 'test'
+  ...
+# Subtest: one short guide covers install, consented activation, verification, and a dependency-free first workflow
+ok 17 - one short guide covers install, consented activation, verification, and a dependency-free first workflow
+  ---
+  duration_ms: 5.782
+  type: 'test'
+  ...
+# Subtest: the first-workflow prompt is synthetic and read-only with a semantic success rubric
+ok 18 - the first-workflow prompt is synthetic and read-only with a semantic success rubric
+  ---
+  duration_ms: 1.899
+  type: 'test'
+  ...
+# Subtest: README routes to onboarding before its catalogs and keeps setup reference separate
+ok 19 - README routes to onboarding before its catalogs and keeps setup reference separate
+  ---
+  duration_ms: 4.1159
+  type: 'test'
+  ...
+# Subtest: install guidance preserves observed deprecation instead of treating command availability as a support promise
+ok 20 - install guidance preserves observed deprecation instead of treating command availability as a support promise
+  ---
+  duration_ms: 11.4654
+  type: 'test'
+  ...
+# Subtest: onboarding links and legacy README setup anchors still resolve
+ok 21 - onboarding links and legacy README setup anchors still resolve
+  ---
+  duration_ms: 73.7827
+  type: 'test'
+  ...
+# Subtest: documented activation signals work from an installed copy without touching an adopter workspace
+ok 22 - documented activation signals work from an installed copy without touching an adopter workspace
+  ---
+  duration_ms: 2108.6328
+  type: 'test'
+  ...
+# Subtest: version-bound CLI invocation uses stdin and only flags that the selected executable actually supports
+ok 23 - version-bound CLI invocation uses stdin and only flags that the selected executable actually supports
+  ---
+  duration_ms: 7.5869
+  type: 'test'
+  ...
+# Subtest: capability and version probes use the same selected executable with automatic updates disabled
+ok 24 - capability and version probes use the same selected executable with automatic updates disabled
+  ---
+  duration_ms: 1.5963
+  type: 'test'
+  ...
+# Subtest: CLI evidence requires the exact prompt, completed guidance tools, final response, and no mutations
+ok 25 - CLI evidence requires the exact prompt, completed guidance tools, final response, and no mutations
+  ---
+  duration_ms: 4.4012
+  type: 'test'
+  ...
+# Subtest: versioned scenarios cover every representative family and failure/consent boundary
+ok 26 - versioned scenarios cover every representative family and failure/consent boundary
+  ---
+  duration_ms: 4.4802
+  type: 'test'
+  ...
+# Subtest: scenario instructions require fresh observed evidence rather than synthetic expected answers
+ok 27 - scenario instructions require fresh observed evidence rather than synthetic expected answers
+  ---
+  duration_ms: 2.6404
+  type: 'test'
+  ...
+# Subtest: every scenario explicitly permits the required skill references without granting commands or writes
+ok 28 - every scenario explicitly permits the required skill references without granting commands or writes
+  ---
+  duration_ms: 1.1974
+  type: 'test'
+  ...
+# Subtest: MCP runtime pins
+    # Subtest: every launcher route guards the reviewed pin
+    ok 1 - every launcher route guards the reviewed pin
+      ---
+      duration_ms: 1.5625
+      type: 'test'
+      ...
+    # Subtest: every reviewed server has a launcher route
+    ok 2 - every reviewed server has a launcher route
+      ---
+      duration_ms: 0.2739
+      type: 'test'
+      ...
+    # Subtest: the documented pins match the reviewed pins
+    ok 3 - the documented pins match the reviewed pins
+      ---
+      duration_ms: 1.4804
+      type: 'test'
+      ...
+    1..3
+ok 29 - MCP runtime pins
+  ---
+  duration_ms: 4.5963
+  type: 'suite'
+  ...
+# Subtest: plugin.json
+    # Subtest: every declared server invokes a real launcher route
+    ok 1 - every declared server invokes a real launcher route
+      ---
+      duration_ms: 0.3611
+      type: 'test'
+      ...
+    # Subtest: every declared server points at a launcher that exists
+    ok 2 - every declared server points at a launcher that exists
+      ---
+      duration_ms: 0.4837
+      type: 'test'
+      ...
+    # Subtest: skills and commands directories resolve
+    ok 3 - skills and commands directories resolve
+      ---
+      duration_ms: 0.3712
+      type: 'test'
+      ...
+    1..3
+ok 30 - plugin.json
+  ---
+  duration_ms: 1.475
+  type: 'suite'
+  ...
+# Subtest: Humanizer voice fallback
+    # Subtest: uses the practitioner-editor fallback without overriding an explicit voice
+    ok 1 - uses the practitioner-editor fallback without overriding an explicit voice
+      ---
+      duration_ms: 0.3509
+      type: 'test'
+      ...
+    # Subtest: routes default Copywriter rewrites through the practitioner-editor fallback
+    ok 2 - routes default Copywriter rewrites through the practitioner-editor fallback
+      ---
+      duration_ms: 0.1198
+      type: 'test'
+      ...
+    # Subtest: keeps the governance reference aligned to the six-tag taxonomy
+    ok 3 - keeps the governance reference aligned to the six-tag taxonomy
+      ---
+      duration_ms: 0.1532
+      type: 'test'
+      ...
+    # Subtest: preserves current source scope and historical promotional-language caveats
+    ok 4 - preserves current source scope and historical promotional-language caveats
+      ---
+      duration_ms: 2.5078
+      type: 'test'
+      ...
+    1..4
+ok 31 - Humanizer voice fallback
+  ---
+  duration_ms: 3.4084
+  type: 'suite'
+  ...
+# Subtest: Compile Brain customization boundary
+    # Subtest: keeps installed skills canonical and routes project customizations locally
+    ok 1 - keeps installed skills canonical and routes project customizations locally
+      ---
+      duration_ms: 0.5221
+      type: 'test'
+      ...
+    # Subtest: checks whether a process exists before renaming it
+    ok 2 - checks whether a process exists before renaming it
+      ---
+      duration_ms: 0.2951
+      type: 'test'
+      ...
+    1..2
+ok 32 - Compile Brain customization boundary
+  ---
+  duration_ms: 1.0134
+  type: 'suite'
+  ...
+# Subtest: Mutation testing isolation
+    # Subtest: mutates an isolated copy and counter-tests detection rules
+    ok 1 - mutates an isolated copy and counter-tests detection rules
+      ---
+      duration_ms: 0.3535
+      type: 'test'
+      ...
+    1..1
+ok 33 - Mutation testing isolation
+  ---
+  duration_ms: 0.4685
+  type: 'suite'
+  ...
+# Subtest: manifest matches disk
+    # Subtest: every manifest skills entry exists on disk
+    ok 1 - every manifest skills entry exists on disk
+      ---
+      duration_ms: 5.6796
+      type: 'test'
+      ...
+    # Subtest: every skills file on disk is in the manifest
+    ok 2 - every skills file on disk is in the manifest
+      ---
+      duration_ms: 0.523
+      type: 'test'
+      ...
+    # Subtest: every manifest prompts entry exists on disk
+    ok 3 - every manifest prompts entry exists on disk
+      ---
+      duration_ms: 1.2029
+      type: 'test'
+      ...
+    # Subtest: every prompts file on disk is in the manifest
+    ok 4 - every prompts file on disk is in the manifest
+      ---
+      duration_ms: 0.2715
+      type: 'test'
+      ...
+    # Subtest: every manifest instructions entry exists on disk
+    ok 5 - every manifest instructions entry exists on disk
+      ---
+      duration_ms: 2.1088
+      type: 'test'
+      ...
+    # Subtest: every instructions file on disk is in the manifest
+    ok 6 - every instructions file on disk is in the manifest
+      ---
+      duration_ms: 0.5126
+      type: 'test'
+      ...
+    1..6
+ok 34 - manifest matches disk
+  ---
+  duration_ms: 10.663
+  type: 'suite'
+  ...
+# Subtest: frontmatter
+    # Subtest: every skill declares a name matching its directory, and a description
+    ok 1 - every skill declares a name matching its directory, and a description
+      ---
+      duration_ms: 82.1803
+      type: 'test'
+      ...
+    # Subtest: every instruction declares a description and applyTo
+    ok 2 - every instruction declares a description and applyTo
+      ---
+      duration_ms: 25.1206
+      type: 'test'
+      ...
+    1..2
+ok 35 - frontmatter
+  ---
+  duration_ms: 107.5857
+  type: 'suite'
+  ...
+# Subtest: markdown links
+    # Subtest: no relative link points at a missing file
+    ok 1 - no relative link points at a missing file
+      ---
+      duration_ms: 521.8459
+      type: 'test'
+      ...
+    1..1
+ok 36 - markdown links
+  ---
+  duration_ms: 522.0985
+  type: 'suite'
+  ...
+# Subtest: documented counts
+    # Subtest: README.md quotes the real counts
+    ok 1 - README.md quotes the real counts
+      ---
+      duration_ms: 1.7077
+      type: 'test'
+      ...
+    # Subtest: ROADMAP.md quotes the real counts
+    ok 2 - ROADMAP.md quotes the real counts
+      ---
+      duration_ms: 1.3758
+      type: 'test'
+      ...
+    # Subtest: docs/install.md quotes the real counts
+    ok 3 - docs/install.md quotes the real counts
+      ---
+      duration_ms: 1.2253
+      type: 'test'
+      ...
+    1..3
+ok 37 - documented counts
+  ---
+  duration_ms: 4.596
+  type: 'suite'
+  ...
+# Subtest: Microsoft Scout setup guidance
+    # Subtest: uses skills and bundled scripts instead of unavailable slash commands
+    ok 1 - uses skills and bundled scripts instead of unavailable slash commands
+      ---
+      duration_ms: 0.3135
+      type: 'test'
+      ...
+    # Subtest: package metadata and roadmap do not overstate automatic setup
+    ok 2 - package metadata and roadmap do not overstate automatic setup
+      ---
+      duration_ms: 0.2406
+      type: 'test'
+      ...
+    # Subtest: documents host readiness without promising observed activation
+    ok 3 - documents host readiness without promising observed activation
+      ---
+      duration_ms: 0.1716
+      type: 'test'
+      ...
+    # Subtest: documents the Copilot CLI plugin as Scout shared source
+    ok 4 - documents the Copilot CLI plugin as Scout shared source
+      ---
+      duration_ms: 0.2875
+      type: 'test'
+      ...
+    # Subtest: makes duplicate plugin roots and restart requirements checkable
+    ok 5 - makes duplicate plugin roots and restart requirements checkable
+      ---
+      duration_ms: 0.1209
+      type: 'test'
+      ...
+    # Subtest: preserves the historical Scout inventory instead of rewriting it as the current count
+    ok 6 - preserves the historical Scout inventory instead of rewriting it as the current count
+      ---
+      duration_ms: 0.1044
+      type: 'test'
+      ...
+    # Subtest: names every Flint tool expected after Scout restarts
+    ok 7 - names every Flint tool expected after Scout restarts
+      ---
+      duration_ms: 0.2651
+      type: 'test'
+      ...
+    1..7
+ok 38 - Microsoft Scout setup guidance
+  ---
+  duration_ms: 1.7482
+  type: 'suite'
+  ...
+# Subtest: activation
+    # Subtest: previews without error and writes nothing
+    ok 1 - previews without error and writes nothing
+      ---
+      duration_ms: 228.1729
+      type: 'test'
+      ...
+    # Subtest: plans exactly the instructions the manifest declares
+    ok 2 - plans exactly the instructions the manifest declares
+      ---
+      duration_ms: 201.7455
+      type: 'test'
+      ...
+    1..2
+ok 39 - activation
+  ---
+  duration_ms: 430.109
+  type: 'suite'
+  ...
+1..39
+# tests 62
+# suites 11
+# pass 62
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2586.216

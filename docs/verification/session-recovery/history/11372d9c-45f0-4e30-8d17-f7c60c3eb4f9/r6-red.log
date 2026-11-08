@@ -1,0 +1,227 @@
+TAP version 13
+# Subtest: runnable rich-email commands are marked, portable, and backed by real shipped targets
+not ok 1 - runnable rich-email commands are marked, portable, and backed by real shipped targets
+  ---
+  duration_ms: 1.8704
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\documentation-examples.test.mjs:22:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing explicit runnable example rich-email-tests'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    block (file:///C:/Development/Alex_ACT_ONE/tests/documentation-examples.test.mjs:17:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/documentation-examples.test.mjs:24:25)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: new executable markers cannot silently bypass the curated safe command tests
+not ok 2 - new executable markers cannot silently bypass the curated safe command tests
+  ---
+  duration_ms: 251.5056
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\documentation-examples.test.mjs:33:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+    + []
+    - [
+    -   'rich-email-tests',
+    -   'rich-email-validate'
+    - ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'rich-email-tests'
+    1: 'rich-email-validate'
+  actual:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/documentation-examples.test.mjs:48:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: documented commands run against an installed copy from an unrelated adopter directory
+not ok 3 - documented commands run against an installed copy from an unrelated adopter directory
+  ---
+  duration_ms: 0.2018
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\documentation-examples.test.mjs:50:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing explicit runnable example rich-email-tests'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    block (file:///C:/Development/Alex_ACT_ONE/tests/documentation-examples.test.mjs:17:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/documentation-examples.test.mjs:51:5)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: Replicate documentation points to the real manifest and environment reference
+not ok 4 - Replicate documentation points to the real manifest and environment reference
+  ---
+  duration_ms: 6.2583
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\documentation-examples.test.mjs:74:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+    
+      assert.ok(source.includes('](../../plugin.json)'))
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/documentation-examples.test.mjs:77:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: README skills table lists every declared asset exactly once with its source link
+ok 5 - README skills table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 4.414
+  type: 'test'
+  ...
+# Subtest: README prompts table lists every declared asset exactly once with its source link
+ok 6 - README prompts table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 31.9939
+  type: 'test'
+  ...
+# Subtest: README instructions table lists every declared asset exactly once with its source link
+ok 7 - README instructions table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 75.1074
+  type: 'test'
+  ...
+# Subtest: one generated inventory derives source counts from the manifest and server registrations
+ok 8 - one generated inventory derives source counts from the manifest and server registrations
+  ---
+  duration_ms: 3.8613
+  type: 'test'
+  ...
+# Subtest: the documentation generator has no drift and --check performs no writes
+ok 9 - the documentation generator has no drift and --check performs no writes
+  ---
+  duration_ms: 523.2121
+  type: 'test'
+  ...
+# Subtest: instruction role metadata is derived from canonical descriptions, not an independent procedure
+not ok 10 - instruction role metadata is derived from canonical descriptions, not an independent procedure
+  ---
+  duration_ms: 1.229
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\documentation.test.mjs:71:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'undefined'
+    - 'function'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'function'
+  actual: 'undefined'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/documentation.test.mjs:73:12)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: stale instruction role metadata fails the read-only drift check
+not ok 11 - stale instruction role metadata fails the read-only drift check
+  ---
+  duration_ms: 0.2643
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\documentation.test.mjs:83:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'undefined'
+    - 'function'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'function'
+  actual: 'undefined'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/documentation.test.mjs:85:12)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: generation rejects a prompt routed to a missing owner before producing misleading tables
+ok 12 - generation rejects a prompt routed to a missing owner before producing misleading tables
+  ---
+  duration_ms: 1019.0014
+  type: 'test'
+  ...
+# Subtest: current docs distinguish shipped optimization from source-only chart additions
+ok 13 - current docs distinguish shipped optimization from source-only chart additions
+  ---
+  duration_ms: 3.4803
+  type: 'test'
+  ...
+# Subtest: draft preparation is unsent, preserves content, and inserts the spacer only once
+ok 14 - draft preparation is unsent, preserves content, and inserts the spacer only once
+  ---
+  duration_ms: 1.7504
+  type: 'test'
+  ...
+# Subtest: unsupported multipart and malformed recipient headers fail explicitly
+ok 15 - unsupported multipart and malformed recipient headers fail explicitly
+  ---
+  duration_ms: 0.6469
+  type: 'test'
+  ...
+# Subtest: word counting excludes styles and script bodies
+ok 16 - word counting excludes styles and script bodies
+  ---
+  duration_ms: 0.4404
+  type: 'test'
+  ...
+# Subtest: validation-only CLI runs without Outlook, does not alter the EML, and creates no draft
+ok 17 - validation-only CLI runs without Outlook, does not alter the EML, and creates no draft
+  ---
+  duration_ms: 65.2331
+  type: 'test'
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 11
+# fail 6
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1777.301

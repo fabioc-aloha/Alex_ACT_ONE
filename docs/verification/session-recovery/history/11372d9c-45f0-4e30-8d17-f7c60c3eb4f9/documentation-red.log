@@ -1,0 +1,1089 @@
+TAP version 13
+# Subtest: README skills table lists every declared asset exactly once with its source link
+not ok 1 - README skills table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 4.9373
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\documentation.test.mjs:24:5'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+    + []
+    - [
+    -   'act-tenets',
+    -   'adversarial-review',
+    -   'annotate-screenshot',
+    -   'anti-hallucination',
+    -   'ascii-chart',
+    -   'assess-brain',
+    -   'big-idea',
+    -   'bootstrap-core',
+    -   'bootstrap-project',
+    -   'browser-tools',
+    -   'chart-big-idea',
+    -   'chart-interpretation',
+    -   'chart-vocabulary',
+    -   'code-review',
+    -   'communication-craft',
+    -   'compile-brain',
+    -   'convert',
+    -   'corpus-qa-sweep',
+    -   'critical-thinking',
+    -   'deep-review',
+    -   'doc-hygiene',
+    -   'docs-shell',
+    -   'docx-to-md',
+    -   'ethical-reasoning',
+    -   'evaluate-before-adopting',
+    -   'figure-generator',
+    -   'flint-chart',
+    -   'flint-interactions',
+    -   'flint-theme',
+    -   'git-workflow',
+    -   'html-to-md',
+    -   'humanizer',
+    -   'install-visual-companions',
+    -   'lint-clean-markdown',
+    -   'markdown-mermaid',
+    -   'markdown-sanitization-chain',
+    -   'md-to-eml',
+    -   'md-to-html',
+    -   'md-to-txt',
+    -   'md-to-word',
+    -   'meditation',
+    -   'mutation-testing',
+    -   'plan',
+    -   'platform-awareness',
+    -   'print-svg-style-guide',
+    -   'proactive-awareness',
+    -   'problem-framing-audit',
+    -   'project-capability-authoring',
+    -   'project-status',
+    -   'render-chart',
+    -   'render-verify',
+    -   'replicate-imagery',
+    -   'rich-email',
+    -   'risk-analysis',
+    -   'security-and-hardening',
+    -   'setup-dependencies',
+    -   'setup-enterprise-stack',
+    -   'spike',
+    -   'status-reporting',
+    -   'svg-banner',
+    -   'systematic-debugging',
+    -   'terminal-command-safety',
+    -   'test-driven-development',
+    -   'token-waste-elimination'
+    - ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'act-tenets'
+    1: 'adversarial-review'
+    2: 'annotate-screenshot'
+    3: 'anti-hallucination'
+    4: 'ascii-chart'
+    5: 'assess-brain'
+    6: 'big-idea'
+    7: 'bootstrap-core'
+    8: 'bootstrap-project'
+    9: 'browser-tools'
+    10: 'chart-big-idea'
+    11: 'chart-interpretation'
+    12: 'chart-vocabulary'
+    13: 'code-review'
+    14: 'communication-craft'
+    15: 'compile-brain'
+    16: 'convert'
+    17: 'corpus-qa-sweep'
+    18: 'critical-thinking'
+    19: 'deep-review'
+    20: 'doc-hygiene'
+    21: 'docs-shell'
+    22: 'docx-to-md'
+    23: 'ethical-reasoning'
+    24: 'evaluate-before-adopting'
+    25: 'figure-generator'
+    26: 'flint-chart'
+    27: 'flint-interactions'
+    28: 'flint-theme'
+    29: 'git-workflow'
+    30: 'html-to-md'
+    31: 'humanizer'
+    32: 'install-visual-companions'
+    33: 'lint-clean-markdown'
+    34: 'markdown-mermaid'
+    35: 'markdown-sanitization-chain'
+    36: 'md-to-eml'
+    37: 'md-to-html'
+    38: 'md-to-txt'
+    39: 'md-to-word'
+    40: 'meditation'
+    41: 'mutation-testing'
+    42: 'plan'
+    43: 'platform-awareness'
+    44: 'print-svg-style-guide'
+    45: 'proactive-awareness'
+    46: 'problem-framing-audit'
+    47: 'project-capability-authoring'
+    48: 'project-status'
+    49: 'render-chart'
+    50: 'render-verify'
+    51: 'replicate-imagery'
+    52: 'rich-email'
+    53: 'risk-analysis'
+    54: 'security-and-hardening'
+    55: 'setup-dependencies'
+    56: 'setup-enterprise-stack'
+    57: 'spike'
+    58: 'status-reporting'
+    59: 'svg-banner'
+    60: 'systematic-debugging'
+    61: 'terminal-command-safety'
+    62: 'test-driven-development'
+    63: 'token-waste-elimination'
+  actual:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/documentation.test.mjs:27:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: README prompts table lists every declared asset exactly once with its source link
+not ok 2 - README prompts table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 2.0322
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\documentation.test.mjs:24:5'
+  failureType: 'testCodeFailure'
+  error: 'Missing generated PROMPT TABLE'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    section (file:///C:/Development/Alex_ACT_ONE/tests/documentation.test.mjs:19:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/documentation.test.mjs:25:23)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: README instructions table lists every declared asset exactly once with its source link
+not ok 3 - README instructions table lists every declared asset exactly once with its source link
+  ---
+  duration_ms: 0.9204
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\documentation.test.mjs:24:5'
+  failureType: 'testCodeFailure'
+  error: 'Missing generated INSTRUCTION TABLE'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    section (file:///C:/Development/Alex_ACT_ONE/tests/documentation.test.mjs:19:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/documentation.test.mjs:25:23)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: one generated inventory derives source counts from the manifest and server registrations
+not ok 4 - one generated inventory derives source counts from the manifest and server registrations
+  ---
+  duration_ms: 0.8786
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\documentation.test.mjs:44:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing generated INVENTORY'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    section (file:///C:/Development/Alex_ACT_ONE/tests/documentation.test.mjs:19:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/documentation.test.mjs:45:23)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: the documentation generator has no drift and --check performs no writes
+not ok 5 - the documentation generator has no drift and --check performs no writes
+  ---
+  duration_ms: 0.3312
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\documentation.test.mjs:57:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing reproducible documentation generation'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/documentation.test.mjs:58:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: generation rejects a prompt routed to a missing owner before producing misleading tables
+not ok 6 - generation rejects a prompt routed to a missing owner before producing misleading tables
+  ---
+  duration_ms: 0.2143
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\documentation.test.mjs:69:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing reproducible documentation generation'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/documentation.test.mjs:70:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: current docs distinguish shipped optimization from source-only chart additions
+not ok 7 - current docs distinguish shipped optimization from source-only chart additions
+  ---
+  duration_ms: 1.9799
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\documentation.test.mjs:82:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /## Native-first.*optimization/i. Input:
+    
+    '# Alex ACT ONE\n' +
+      '\n' +
+      '![Alex ACT ONE](assets/banner.svg)\n' +
+      '\n' +
+      '**Your coding agent is fast, confident, and too often wrong. Give it a discipline.**\n' +
+      '\n' +
+      'Alex ACT ONE is a pack of 64 skills for GitHub Copilot that changes how the agent works: frame the problem before solving it, look for evidence against its first answer, check a plan against its risks, and verify what it produced before calling it done.\n' +
+      '\n' +
+      '**See the difference:** the same loaded prompt, "Our dashboard takes 8 seconds to load. Rust rewrite, or Redis caching?", handled two ways. Try it yourself with [the evaluation guide](docs/launch/evaluation-guide.md).\n' +
+      '\n' +
+      '|  | Without Alex ACT ONE | With Alex ACT ONE |\n' +
+      '|---|---|---|\n' +
+      '| First move | Jumps straight to an answer | Stops and checks the question first |\n' +
+      '| The answer | Picks Rust or Redis, and sounds sure | Asks where the 8 seconds are actually spent |\n' +
+      '| Evidence | Does not ask for any | Says what to measure, and what result would change the answer |\n' +
+      '| Confidence | Sounds certain either way | Marks what is known, reported, estimated, or guessed |\n' +
+      '| The result | A plan, handed over as final | The work gets checked before it ships |\n' +
+      '\n' +
+      '## Quick install\n' +
+      '\n' +
+      'Install the plugin once, at the user level:\n' +
+      '\n' +
+      '```powershell\n' +
+      'copilot plugin install alex-act-one@alex-mall\n' +
+      '```\n' +
+      '\n' +
+      'Then, in each app where you want the always-on behavior, run:\n' +
+      '\n' +
+      '```text\n' +
+      '/alex-act-one bootstrap-core\n' +
+      '```\n' +
+      '\n' +
+      'One installed copy serves Copilot CLI, VS Code, Microsoft Scout, and the GitHub Copilot app. Full install notes, the from-source option, and the Scout specifics are in [Install](#install).\n' +
+      '\n' +
+      '64 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers in this source checkout. MIT licensed. Published version: `v0.8.0`; the new interaction workflow is not yet released or installed. Existing command names, bootstrap activation, and optional browser fallback remain available.\n' +
+      '\n' +
+      'Try the [offline Flint chart gallery](docs/flint-showcase.html) for working examples of semantic data, themes, interactions, linked views, and static exports, or the [experimental interaction lab](docs/flint-experimental.html) for polar brushing, direct reordering, distribution shapes, and reader-driven stories. Open either downloaded HTML in a browser; no server or connection is needed.\n' +
+      '\n' +
+      'Using Muse instead of Copilot? The Muse edition lives at [Alex_ACT_ONE_Muse](https://github.com/fabioc-aloha/Alex_ACT_ONE_Muse)\n' +
+      '\n' +
+      'Using Claude Code? The skills install there too, by hand: see [Using Claude Code instead?](#using-claude-code-instead) under Install..\n' +
+      '\n' +
+      '## What You Can Do With Alex ACT ONE\n' +
+      '\n' +
+      '**Think before building.** Frame the real problem, weigh competing explanations,\n' +
+      'name what would prove you wrong, and check a decision against its risks before\n' +
+      'committing to it.\n' +
+      '\n' +
+      '**Write code that survives review.** Test-first workflows, root-cause debugging,\n' +
+      'security hardening, adversarial code review from three opposing perspectives, and\n' +
+      'safe Git practice with recovery paths.\n' +
+      '\n' +
+      '**Produce prose people finish reading.** Strip AI writing patterns, find the one\n' +
+      'sentence a document is actually making, adapt a draft for a named audience, and\n' +
+      'write Markdown that passes lint on the first attempt.\n' +
+      '\n' +
+      '**Turn drafts into deliverables.** Convert between Markdown, Word, HTML, plain\n' +
+      'text, and formatted email. Build charts, diagrams, print-quality figures, and\n' +
+      'banners, then check that what rendered says what you meant.\n' +
+      '\n' +
+      '**Improve the agent itself.** Audit which instructions earn their context cost,\n' +
+      'write project-specific skills from work you keep repeating, and consolidate what\n' +
+      'a session learned into something reusable.\n' +
+      '\n' +
+      '64 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers.\n' +
+      'Not every surface reaches every app — see [Where Alex ACT ONE Works](#where-alex-act-one-works).\n' +
+      '\n' +
+      'Large package by design: one install brings all of it, so expect noticeably\n' +
+      'more files on disk and a longer first sync than a single-purpose plugin.\n' +
+      '\n' +
+      '## The Skills\n' +
+      '\n' +
+      'Grouped by what you are trying to do. The **Needs** column lists anything beyond\n' +
+      'Node — most skills need nothing, and a skill only appears there if it genuinely\n' +
+      'cannot run without that dependency. See [Optional extras](#optional-extra-tools-for-a-few-skills)\n' +
+      'for how to get them.\n' +
+      '\n' +
+      '<!-- BEGIN GENERATED SKILL TABLE -->\n' +
+      '\n' +
+      '### Reasoning and judgment\n' +
+      '\n' +
+      'How to think through a problem before acting on it.\n' +
+      '\n' +
+      '| Skill | What it does | Needs |\n' +
+      '| --- | --- | --- |\n' +
+      '| `act-tenets` | The 10 canonical tenets of Artificial Critical Thinking (ACT) with rationale for each | — |\n' +
+      '| `critical-thinking` | Challenge what you think is right — alternative hypotheses, missing data, evidence quality, bias detection,… | — |\n' +
+      '| `problem-framing-audit` | Step-back protocol — restate, generalize, specialize, invert, ask why, pre-mortem, check stakeholders, and audit… | — |\n' +
+      '| `adversarial-review` | Structured skepticism for high-stakes decisions and reviews | — |\n' +
+      '| `deep-review` | Select the canonical code-review deep mode without requiring a fixed agent topology | — |\n' +
+      '| `anti-hallucination` | Prevent fabricated facts, invented APIs, and citation confabulation at the point of generation | — |\n' +
+      '| `risk-analysis` | Probability × impact risk assessment for curation and planning decisions | — |\n' +
+      '| `ethical-reasoning` | Reason through ethical tensions using moral foundations, constitutional principles, and a five-step decision… | — |\n' +
+      '| `mutation-testing` | Meta-test your test harness — apply small intentional defects to production code, expect the suite to catch each… | — |\n' +
+      '\n' +
+      '### Engineering\n' +
+      '\n' +
+      'Writing and changing code that survives review.\n' +
+      '\n' +
+      '| Skill | What it does | Needs |\n' +
+      '| --- | --- | --- |\n' +
+      '| `code-review` | Systematic code review for correctness, security, and growth — not just style enforcement | — |\n' +
+      '| `security-and-hardening` | Hardens code against vulnerabilities | — |\n' +
+      '| `test-driven-development` | Use for any feature, bug fix, refactor, or behavior change — enforces RED-GREEN-REFACTOR | — |\n' +
+      '| `systematic-debugging` | Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes | — |\n' +
+      '| `git-workflow` | Apply consistent git practices for branch hygiene, safe commits, and recovery from common mishaps (lost commits,… | — |\n' +
+      '| `plan` | Use native planning with explicit approval and verification, without compulsory repository plan files | — |\n' +
+      '| `spike` | Use when the user wants to feel out an idea before committing to a real build | — |\n' +
+      '\n' +
+      '### Prose and documentation\n' +
+      '\n' +
+      'Writing people finish reading.\n' +
+      '\n' +
+      '| Skill | What it does | Needs |\n' +
+      '| --- | --- | --- |\n' +
+      '| `big-idea` | Distill the central claim before authoring any summary-shaped output: hero copy, commit-message subject, PR title,… | — |\n' +
+      '| `humanizer` | Use when the user wants to humanize, de-AI, de-slop, or un-ChatGPT a piece of text | — |\n' +
+      '| `communication-craft` | Communication patterns for feedback, cross-audience content, and eliciting needs | — |\n' +
+      '| `doc-hygiene` | Documentation hygiene — anti-drift rules, code-documentation placement, count elimination, and living document… | — |\n' +
+      '| `lint-clean-markdown` | Write markdown that passes markdownlint on first attempt — encode the most common rules as muscle memory | — |\n' +
+      '| `status-reporting` | Create stakeholder-friendly project status updates and progress reports | — |\n' +
+      '| `markdown-sanitization-chain` | Render user-supplied markdown safely — marked.js → DOMPurify → Mermaid (order matters; skipping the sanitizer is… | — |\n' +
+      '| `corpus-qa-sweep` | Run a QA sweep across an entire corpus instead of one sample: instrument the real output boundary, assert… | — |\n' +
+      '\n' +
+      '### Charts and figures\n' +
+      '\n' +
+      'Deciding what to draw, drawing it, and checking it says what you meant.\n' +
+      '\n' +
+      '| Skill | What it does | Needs |\n' +
+      '| --- | --- | --- |\n' +
+      '| `render-chart` | Orchestrate the Chart Brief, data-preserving treatments, rendering, and verification | Flint MCP |\n' +
+      '| `chart-big-idea` | Distill the one-sentence Big Idea, story arc, audience, and style stance for a chart BEFORE picking a chart type | — |\n' +
+      '| `chart-vocabulary` | Catalog of chart types organized by seven communication goals (comparison, change over time, proportion,… | — |\n' +
+      '| `chart-interpretation` | Read a chart someone else made — image, screenshot, HTML, or dashboard — and extract insights, patterns,… | — |\n' +
+      "| `flint-chart` | Use when the user wants to visualize data — from 'which chart should I use?' to 'render this' | Flint MCP |\n" +
+      '| `flint-interactions` | Choose reader behavior, state updates, or linked views; verify gestures, reset, and keyboard behavior | Flint MCP |\n' +
+      '| `flint-theme` | Creates and refines reusable Flint ThemeSpec visual systems from brand guidance, websites, decks, design tokens,… | Flint MCP |\n' +
+      '| `ascii-chart` | Render charts and compact dashboards as pure ASCII in a monospace grid: bar, dot, sparkline, histogram, box plot,… | — |\n' +
+      '| `print-svg-style-guide` | Author print-quality SVG figures for books, reports, and exec-facing documents: canvas and typography grammar with… | — |\n' +
+      '| `figure-generator` | Ship deterministic hand-authored SVG generators for print-quality figures backed by real published datasets | — |\n' +
+      '| `svg-banner` | Generate 1200x320 SVG banners for READMEs, plans, notes, and release artifacts, using a pluggable brand config… | — |\n' +
+      '| `markdown-mermaid` | Author Mermaid diagrams that render correctly in GitHub, VS Code, and Mermaid 10+ consumers | — |\n' +
+      '| `annotate-screenshot` | Add callouts to a raster you did not author, using Pillow, at a resolution that stays legible | Pillow |\n' +
+      '| `render-verify` | Verify a rendered visual artifact actually says what it was supposed to say | — |\n' +
+      '| `replicate-imagery` | Route AI image generation and editing requests to Replicate (FLUX, Ideogram, Recraft, SDXL, imagen) via the… | Replicate MCP |\n' +
+      '| `docs-shell` | The single-page HTML shell (index.html + manifest.json at a repository root or stable subfolder) that renders… | — |\n' +
+      '\n' +
+      '### Document conversion\n' +
+      '\n' +
+      'Moving a document between formats without losing its structure.\n' +
+      '\n' +
+      '| Skill | What it does | Needs |\n' +
+      '| --- | --- | --- |\n' +
+      '| `convert` | Select the existing format'... 23397 more characters
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    # Alex ACT ONE
+    
+    ![Alex ACT ONE](assets/banner.svg)
+    
+    **Your coding agent is fast, confident, and too often wrong. Give it a discipline.**
+    
+    Alex ACT ONE is a pack of 64 skills for GitHub Copilot that changes how the agent works: frame the problem before solving it, look for evidence against its first answer, check a plan against its risks, and verify what it produced before calling it done.
+    
+    **See the difference:** the same loaded prompt, "Our dashboard takes 8 seconds to load. Rust rewrite, or Redis caching?", handled two ways. Try it yourself with [the evaluation guide](docs/launch/evaluation-guide.md).
+    
+    |  | Without Alex ACT ONE | With Alex ACT ONE |
+    |---|---|---|
+    | First move | Jumps straight to an answer | Stops and checks the question first |
+    | The answer | Picks Rust or Redis, and sounds sure | Asks where the 8 seconds are actually spent |
+    | Evidence | Does not ask for any | Says what to measure, and what result would change the answer |
+    | Confidence | Sounds certain either way | Marks what is known, reported, estimated, or guessed |
+    | The result | A plan, handed over as final | The work gets checked before it ships |
+    
+    ## Quick install
+    
+    Install the plugin once, at the user level:
+    
+    ```powershell
+    copilot plugin install alex-act-one@alex-mall
+    ```
+    
+    Then, in each app where you want the always-on behavior, run:
+    
+    ```text
+    /alex-act-one bootstrap-core
+    ```
+    
+    One installed copy serves Copilot CLI, VS Code, Microsoft Scout, and the GitHub Copilot app. Full install notes, the from-source option, and the Scout specifics are in [Install](#install).
+    
+    64 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers in this source checkout. MIT licensed. Published version: `v0.8.0`; the new interaction workflow is not yet released or installed. Existing command names, bootstrap activation, and optional browser fallback remain available.
+    
+    Try the [offline Flint chart gallery](docs/flint-showcase.html) for working examples of semantic data, themes, interactions, linked views, and static exports, or the [experimental interaction lab](docs/flint-experimental.html) for polar brushing, direct reordering, distribution shapes, and reader-driven stories. Open either downloaded HTML in a browser; no server or connection is needed.
+    
+    Using Muse instead of Copilot? The Muse edition lives at [Alex_ACT_ONE_Muse](https://github.com/fabioc-aloha/Alex_ACT_ONE_Muse)
+    
+    Using Claude Code? The skills install there too, by hand: see [Using Claude Code instead?](#using-claude-code-instead) under Install..
+    
+    ## What You Can Do With Alex ACT ONE
+    
+    **Think before building.** Frame the real problem, weigh competing explanations,
+    name what would prove you wrong, and check a decision against its risks before
+    committing to it.
+    
+    **Write code that survives review.** Test-first workflows, root-cause debugging,
+    security hardening, adversarial code review from three opposing perspectives, and
+    safe Git practice with recovery paths.
+    
+    **Produce prose people finish reading.** Strip AI writing patterns, find the one
+    sentence a document is actually making, adapt a draft for a named audience, and
+    write Markdown that passes lint on the first attempt.
+    
+    **Turn drafts into deliverables.** Convert between Markdown, Word, HTML, plain
+    text, and formatted email. Build charts, diagrams, print-quality figures, and
+    banners, then check that what rendered says what you meant.
+    
+    **Improve the agent itself.** Audit which instructions earn their context cost,
+    write project-specific skills from work you keep repeating, and consolidate what
+    a session learned into something reusable.
+    
+    64 skills, 15 always-on instructions, 15 slash commands, and 3 MCP servers.
+    Not every surface reaches every app — see [Where Alex ACT ONE Works](#where-alex-act-one-works).
+    
+    Large package by design: one install brings all of it, so expect noticeably
+    more files on disk and a longer first sync than a single-purpose plugin.
+    
+    ## The Skills
+    
+    Grouped by what you are trying to do. The **Needs** column lists anything beyond
+    Node — most skills need nothing, and a skill only appears there if it genuinely
+    cannot run without that dependency. See [Optional extras](#optional-extra-tools-for-a-few-skills)
+    for how to get them.
+    
+    <!-- BEGIN GENERATED SKILL TABLE -->
+    
+    ### Reasoning and judgment
+    
+    How to think through a problem before acting on it.
+    
+    | Skill | What it does | Needs |
+    | --- | --- | --- |
+    | `act-tenets` | The 10 canonical tenets of Artificial Critical Thinking (ACT) with rationale for each | — |
+    | `critical-thinking` | Challenge what you think is right — alternative hypotheses, missing data, evidence quality, bias detection,… | — |
+    | `problem-framing-audit` | Step-back protocol — restate, generalize, specialize, invert, ask why, pre-mortem, check stakeholders, and audit… | — |
+    | `adversarial-review` | Structured skepticism for high-stakes decisions and reviews | — |
+    | `deep-review` | Select the canonical code-review deep mode without requiring a fixed agent topology | — |
+    | `anti-hallucination` | Prevent fabricated facts, invented APIs, and citation confabulation at the point of generation | — |
+    | `risk-analysis` | Probability × impact risk assessment for curation and planning decisions | — |
+    | `ethical-reasoning` | Reason through ethical tensions using moral foundations, constitutional principles, and a five-step decision… | — |
+    | `mutation-testing` | Meta-test your test harness — apply small intentional defects to production code, expect the suite to catch each… | — |
+    
+    ### Engineering
+    
+    Writing and changing code that survives review.
+    
+    | Skill | What it does | Needs |
+    | --- | --- | --- |
+    | `code-review` | Systematic code review for correctness, security, and growth — not just style enforcement | — |
+    | `security-and-hardening` | Hardens code against vulnerabilities | — |
+    | `test-driven-development` | Use for any feature, bug fix, refactor, or behavior change — enforces RED-GREEN-REFACTOR | — |
+    | `systematic-debugging` | Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes | — |
+    | `git-workflow` | Apply consistent git practices for branch hygiene, safe commits, and recovery from common mishaps (lost commits,… | — |
+    | `plan` | Use native planning with explicit approval and verification, without compulsory repository plan files | — |
+    | `spike` | Use when the user wants to feel out an idea before committing to a real build | — |
+    
+    ### Prose and documentation
+    
+    Writing people finish reading.
+    
+    | Skill | What it does | Needs |
+    | --- | --- | --- |
+    | `big-idea` | Distill the central claim before authoring any summary-shaped output: hero copy, commit-message subject, PR title,… | — |
+    | `humanizer` | Use when the user wants to humanize, de-AI, de-slop, or un-ChatGPT a piece of text | — |
+    | `communication-craft` | Communication patterns for feedback, cross-audience content, and eliciting needs | — |
+    | `doc-hygiene` | Documentation hygiene — anti-drift rules, code-documentation placement, count elimination, and living document… | — |
+    | `lint-clean-markdown` | Write markdown that passes markdownlint on first attempt — encode the most common rules as muscle memory | — |
+    | `status-reporting` | Create stakeholder-friendly project status updates and progress reports | — |
+    | `markdown-sanitization-chain` | Render user-supplied markdown safely — marked.js → DOMPurify → Mermaid (order matters; skipping the sanitizer is… | — |
+    | `corpus-qa-sweep` | Run a QA sweep across an entire corpus instead of one sample: instrument the real output boundary, assert… | — |
+    
+    ### Charts and figures
+    
+    Deciding what to draw, drawing it, and checking it says what you meant.
+    
+    | Skill | What it does | Needs |
+    | --- | --- | --- |
+    | `render-chart` | Orchestrate the Chart Brief, data-preserving treatments, rendering, and verification | Flint MCP |
+    | `chart-big-idea` | Distill the one-sentence Big Idea, story arc, audience, and style stance for a chart BEFORE picking a chart type | — |
+    | `chart-vocabulary` | Catalog of chart types organized by seven communication goals (comparison, change over time, proportion,… | — |
+    | `chart-interpretation` | Read a chart someone else made — image, screenshot, HTML, or dashboard — and extract insights, patterns,… | — |
+    | `flint-chart` | Use when the user wants to visualize data — from 'which chart should I use?' to 'render this' | Flint MCP |
+    | `flint-interactions` | Choose reader behavior, state updates, or linked views; verify gestures, reset, and keyboard behavior | Flint MCP |
+    | `flint-theme` | Creates and refines reusable Flint ThemeSpec visual systems from brand guidance, websites, decks, design tokens,… | Flint MCP |
+    | `ascii-chart` | Render charts and compact dashboards as pure ASCII in a monospace grid: bar, dot, sparkline, histogram, box plot,… | — |
+    | `print-svg-style-guide` | Author print-quality SVG figures for books, reports, and exec-facing documents: canvas and typography grammar with… | — |
+    | `figure-generator` | Ship deterministic hand-authored SVG generators for print-quality figures backed by real published datasets | — |
+    | `svg-banner` | Generate 1200x320 SVG banners for READMEs, plans, notes, and release artifacts, using a pluggable brand config… | — |
+    | `markdown-mermaid` | Author Mermaid diagrams that render correctly in GitHub, VS Code, and Mermaid 10+ consumers | — |
+    | `annotate-screenshot` | Add callouts to a raster you did not author, using Pillow, at a resolution that stays legible | Pillow |
+    | `render-verify` | Verify a rendered visual artifact actually says what it was supposed to say | — |
+    | `replicate-imagery` | Route AI image generation and editing requests to Replicate (FLUX, Ideogram, Recraft, SDXL, imagen) via the… | Replicate MCP |
+    | `docs-shell` | The single-page HTML shell (index.html + manifest.json at a repository root or stable subfolder) that renders… | — |
+    
+    ### Document conversion
+    
+    Moving a document between formats without losing its structure.
+    
+    | Skill | What it does | Needs |
+    | --- | --- | --- |
+    | `convert` | Select the existing format-specific converter and validate its output | Pandoc |
+    | `docx-to-md` | Convert Word documents (.docx) to clean Markdown with image extraction and pandoc cleanup | Pandoc |
+    | `html-to-md` | Convert HTML documents to clean Markdown via pandoc | Pandoc |
+    | `md-to-html` | Convert Markdown to standalone HTML pages with embedded CSS, images, and Mermaid diagrams | Pandoc |
+    | `md-to-word` | Convert Markdown with Mermaid diagrams and SVG illustrations to professional Word documents | Pandoc |
+    | `md-to-eml` | Convert Markdown to RFC 5322 email (.eml) with inline CSS and CID images | Pandoc |
+    | `md-to-txt` | Strip Markdown formatting and produce clean plain text via pandoc | Pandoc |
+    | `rich-email` | Create and validate polished HTML email drafts from Markdown, then open an unsent New Outlook draft on Windows | Pandoc |
+    
+    ### Working on the agent itself
+    
+    Auditing, extending, and consolidating the agent.
+    
+    | Skill | What it does | Needs |
+    | --- | --- | --- |
+    | `meditation` | Review session outcomes, recommend reusable skills or automation, and reconcile project guidance, handoff, tasks,… | — |
+    | `compile-brain` | Create or improve a Markdown instruction, skill, prompt, or agent from an explicitly selected file or… | — |
+    | `assess-brain` | Assess active Markdown brain files in a local AI agent project or plugin source without changing it | — |
+    | `project-capability-authoring` | Create tested project-local skills and scripts from demonstrated repeated work | — |
+    | `token-waste-elimination` | Audit active brain artifacts for context cost, duplicated guidance, oversized routing files, and stale metadata | — |
+    | `proactive-awareness` | Applies cross-session context recovery, uncommitted-work detection, and focus routing once proactive behavior has… | — |
+    | `project-status` | Report a read-only project checkpoint using current Git, handoff, tasks, and applicable QA | — |
+    | `evaluate-before-adopting` | Decide whether a plugin or skill from a catalog is worth installing | — |
+    
+    ### Setup and platform
+    
+    Getting the plugin and its dependencies working.
+    
+    | Skill | What it does | Needs |
+    | --- | --- | --- |
+    | `bootstrap-core` | Activates, verifies, repairs, or removes this plugin's user-scope runtime instructions from canonical installed… | — |
+    | `bootstrap-project` | Previews and applies this plugin's repository scaffold, portable workspace QoL settings, and project Copilot… | — |
+    | `setup-dependencies` | Check which optional dependencies this plugin can use, report what each missing one costs, and install them with… | — |
+    | `platform-awareness` | Discover current host capabilities and verify platform claims against native help and official documentation | — |
+    | `browser-tools` | Use native browser capabilities first, retaining registered fallback tools for missing scenarios | — |
+    | `terminal-command-safety` | Provides terminal output-capture, hung-command, and platform-behavior procedures while the resident instruction… | — |
+    | `install-visual-companions` | Offer to install marketplace plugins that extend visual-authoring workflows: chart rendering, screenshot… | — |
+    | `setup-enterprise-stack` | Emit and (with consent) install the Copilot CLI settings block for the public Microsoft ecosystem: Azure, Fabric,… | — |
+    
+    <!-- END GENERATED SKILL TABLE -->
+    
+    ### Check a draft or rewrite it
+    
+    Ask "Audit this draft for AI tells; don't edit it" for a read-only report with
+    locations, reasons, and optional recasts. Ask "Humanize this draft" for a
+    rewrite. Ask "Review this for [audience]" for a before/after proposal that
+    waits for your approval.
+    
+    Supply your house terms or a preferred voice. The [humanizer](skills/humanizer/SKILL.md)
+    keeps deliberate vocabulary and treats AI-writing patterns as editing cues,
+    not proof of authorship.
+    
+    ### Check a plugin before installing it
+    
+    Every other skill here assumes it belongs on your machine. This one asks whether
+    it does.
+    
+    Plugin catalogs score the **source** — who published it, how recently the
+    repository was updated, whether the license is clear. None of that says the
+    plugin is correct, and nothing in a typical publishing pipeline reads the
+    content: scanning indexes what exists, packaging validates structure, and no step
+    compiles a code sample or follows a link.
+    
+    So a plugin can sit in the highest trust band and still tell you to install a
+    package that does not exist. That is not hypothetical. One top-band,
+    first-party plugin claimed a NuGet package that returns zero registry results,
+    an SDK API that was never published, and a cited file absent from the entire
+    source repository. One registry query was enough to catch the package.
+    
+    [`evaluate-before-adopting`](skills/evaluate-before-adopting/SKILL.md) does that
+    checking, by reading the content rather than measuring the repository around it.
+    
+    It reads the artifact the way your agent will — as instructions that run with your
+    tools, your files, and your credentials — and looks for directives aimed at the
+    agent, exfiltration paths, destructive defaults, and unpinned installs. Roughly
+    one skill in five ships actual scripts, so it reads those too, and checks what
+    they do against what the description says they do. It resolves which copy you
+    have when several stores carry the same name, verifies the checkable specifics
+    against registries and SDK documentation, follows every reference, weighs what
+    the freshness stamp actually covers, and judges whether it fits where you are
+    putting it.
+    
+    Safe to run, correct, and worth relying on are three separate questions. A trust
+    score answers none of them.
+    
+    The usual path installs first and asks later:
+    
+    ```bash
+    copilot plugin install copilot-sdk@alex-mall
+    ```
+    
+    That gives a package access to your agent environment on the strength of a
+    description. This reads it first:
+    
+    ```text
+    Evaluate copilot-sdk@alex-mall before I install it.
+    ```
+    
+    Any marketplace works, not only this one. Name whatever plugin you were about to
+    install and the skill goes and looks at it.
+    
+    Use it before an install that is hard to reverse or far-reaching: a runtime
+    every project loads or a plugin that will hold credentials. Skip it for a
+    per-project install you can remove in a second. Judge by what it costs to be
+    wrong.
+    
+    ## Where Alex ACT ONE Works
+    
+    Skills sit at the package root, so each app can load them directly. Scout can
+    use the plugin installed for Copilot CLI under `~/.copilot`; a Scout-local ONE
+    copy is duplicate state and can drift independently. Verify the loaded root and
+    version before activation or Scout MCP registration. The other three surfaces
+    are not automatic in the same way, and this table says which are.
+    
+    For `v0.7.0`, automated installed-package checks and a live CLI project-checkpoint
+    probe passed. VS Code 1.145.0 was detected, but new-release activation in VS Code,
+    Scout, and the Copilot app has not yet been rechecked. The table describes
+    supported delivery; the dated observations below remain historical evidence.
+    
+    | Where you use Copilot | Skills | Instructions | Slash commands | MCP servers |
+    | --- | --- | --- | --- | --- |
+    | Copilot CLI | All | All, after activation | All | All, from the manifest |
+    | VS Code with GitHub Copilot Chat | All | All, after activation | All | All, from the manifest |
+    | Microsoft Scout | All, after enabling **Load Copilot CLI skills** | All, after activation | **None** | All, after registration |
+    | GitHub Copilot app | All, discovered and invoked | All, active after activation | All, exposed | Registered; Flint and Playwright verified in the `v0.2.0` baseline; Replicate requires an API token |
+    
+    The GitHub Copilot app test on 2026-09-13 found all 15 instructions active and
+    at hash parity with the installed `v0.2.0` sources. The app discovered the skill
+    catalog and prompt aliases; `bootstrap-core`, `platform-awareness`,
+    `proactive-awareness`, and `humanizer` were invoked. Playwright listed the
+    active browser tabs, and Flint validated a Vega-Lite chart with no warnings or
+    errors. Replicate reached its MCP server but returned `401 Unauthenticated`
+    because this app did not have a Replicate API token. Individual skills and
+    slash commands were not exhaustively invoked. This is historical host evidence,
+    not a `v0.3.5` activation claim.
+    
+    The Scout row was re-checked against `v0.2.0` on 2026-09-13 inside a live session:
+    
+    > all 60 skills surfaced, all 15 instructions were active in context, none of the 15 slash
+    commands were reachable, and both registered MCP servers answered a protocol
+    handshake — 6 tools from Flint, 24 from Playwright.
+    
+    Scout-specific notes, last verified 2026-09-13:
+    
+    - **Slash commands do not reach Scout.** It has no command surface for plugin
+      prompts. Every command has an equivalent skill you can ask for by name, so
+      nothing is lost in capability — but the commands themselves are absent rather
+      than merely undocumented.
+    - **Scout should use the Copilot CLI installation.** A test found a stale
+      Scout-local `v0.1.0` alongside the then-current `v0.2.0` Mall installation under
+      `~/.copilot`. The duplicate was removed. Enable **Load Copilot CLI skills**
+      in Scout's UI, then confirm Scout loaded the shared path and version before
+      activation or MCP registration.
+    - **MCP servers need one extra step.** CLI and VS Code read `plugin.json`
+      directly. Scout keeps its own registry and ignores that manifest, so the
+      servers must be registered from the loaded `setup-dependencies` skill.
+      Skipping it leaves every skill loaded and every server it calls missing.
+    
+    ## Install
+    
+    Two steps. The first runs once per machine, the second once per app. Scout needs
+    a few extra steps of its own, and a final section covers optional tools; none of
+    those tools are needed to get started.
+    
+    ### 1. Install the plugin
+    
+    From the Alex ACT Mall:
+    
+    ```powershell
+    copilot plugin install alex-act-one@alex-mall
+    ```
+    
+    The Mall entry tracks the reviewed release and keeps the installed name stable.
+    
+    Installing from source remains available:
+    
+    ```powershell
+    copilot plugin install fabioc-aloha/Alex_ACT_ONE
+    ```
+    
+    Copilot prints a deprecation notice for repository installs. The install still
+    works, but the Mall command is preferred.
+    
+    Every skill is available in Copilot CLI, VS Code, Microsoft Scout, and the
+    GitHub Copilot app from the user-level installation. Scout should reuse the
+    Copilot CLI plugin under `~/.copilot`; do not maintain a second ONE installation
+    under `~/.scout/copilot`. Enable **Load Copilot CLI skills** in Scout's UI so it
+    discovers the shared plugin.
+    
+    ### 2. Turn on the always-on instructions, once in each app
+    
+    Skills wait until something calls them. Instructions are different: they shape
+    every response, so they are written into the profile of the app you are using
+    rather than loaded from the plugin. Each app keeps its own profile, so run
+    activation in each app where you want the behavior.
+    
+    | App | What to run |
+    | --- | --- |
+    | Copilot CLI | `/alex-act-one bootstrap-core` |
+    | VS Code with GitHub Copilot Chat | `/alex-act-one bootstrap-core` |
+    | Microsoft Scout | Ask for the `bootstrap-core` skill, or invoke it by name from the skill list |
+    | GitHub Copilot app | Ask for the `bootstrap-core` skill, or invoke it by name from the skill list |
+    
+    When a host's setup requirements are unclear, start with its no-write readiness
+    report. It names the activation target and the steps that only the host can
+    complete; it does not turn on instructions or claim the host observed them.
+    
+    ```text
+    node <this-skill>/scripts/host-readiness.cjs --host scout
+    ```
+    
+    Activation previews every instruction file and waits for your approval before
+    writing anything. Running it again reports no changes.
+    
+    To check where a given app writes them, run activation without approving. It
+    prints the exact target directory first.
+    
+    ### What you get after each step
+    
+    | After | Skills available | Instructions active |
+    | --- | --- | --- |
+    | Step 1 | Every app | None |
+    | Step 2 in one app | Every app | That app only |
+    | Step 2 in each app you use | Every app | Every app you ran it in |
+    
+    Step 1 alone is a complete, working install. Step 2 adds the always-on
+    behavior, and skipping it costs you nothing else.
+    
+    ### Using Claude Code instead?
+    
+    The skills travel. They follow the Agent Skills open standard, which Claude
+    Code also implements: each skill is a folder holding a `SKILL.md` whose
+    frontmatter carries a `name` and a `description`, and that is the shape Claude
+    Code loads. (Claude Code is Anthropic's terminal agent, a different tool from
+    the Muse assistant; the separate Muse edition of this pack lives at
+    [Alex_ACT_ONE_Muse](https://github.com/fabioc-aloha/Alex_ACT_ONE_Muse).)
+    
+    Clone this repo, then copy the skill folders into Claude Code's personal
+    skills directory, plus the shared scripts where the skill scripts look for
+    them:
+    
+    ```bash
+    git clone https://github.com/fabioc-aloha/Alex_ACT_ONE.git
+    mkdir -p ~/.claude/skills ~/.claude/scripts
+    cp -r Alex_ACT_ONE/skills/* ~/.claude/skills/
+    cp -r Alex_ACT_ONE/scripts/* ~/.claude/scripts/
+    ```
+    
+    For a single project, copy into that project's `.claude/skills/` instead,
+    with `scripts/` beside it at `.claude/scripts/`. Claude Code loads a skill
+    automatically when a request matches its description, or you invoke one
+    directly as `/skill-name`.
+    
+    What does not transfer: the plugin install, the 15 always-on instructions,
+    and the 15 slash commands are Copilot-format. Claude Code's always-on
+    equivalent is `CLAUDE.md`; the texts in `instructions/` can be adapted into
+    one by hand. The three MCP servers are standard stdio servers and can be
+    registered with `claude mcp add`, using the commands in `plugin.json` pointed
+    at your clone. Until they are, the chart, browser-check, and image skills
+    still guide the work but have no rendering back end to call.
+    
+    One honesty note: this pack is tested on its Copilot hosts, not on Claude
+    Code. The format is shared and the skills are plain markdown and scripts, so
+    they load; treat your first runs as an evaluation anyway. The evaluation
+    guide in `docs/launch/evaluation-guide.md` works here too.
+    
+    ### On Microsoft Scout, register the MCP servers
+    
+    Only on Scout, and only if you want charts, browser verification, or image
+    generation. Copilot CLI and VS Code read the servers from `plugin.json` and need
+    nothing extra; Scout keeps its own registry and ignores that manifest.
+    
+    Ask Scout for the `setup-dependencies` skill by name. Slash commands do not
+    exist on this surface. From the skill copy Scout loaded, run the registration
+    preview:
+    
+    ```text
+    node <this-skill>/scripts/register-scout-mcp.mjs
+    ```
+    
+    The preview prints its resolved plugin root, the Scout registry path, and one
+    line per server. Confirm that plugin root is the same copy and version Scout
+    served above. If it is not, stop rather than registering servers from the wrong
+    version.
+    
+    After reviewing the preview, apply it:
+    
+    ```text
+    node <this-skill>/scripts/register-scout-mcp.mjs --apply
+    ```
+    
+    The script backs up the existing registry and merges rather than replaces, so
+    other servers remain untouched. Fully quit and restart Scout afterwards. A new
+    conversation is not enough because tools are discovered during the launch
+    handshake.
+    
+    After upgrading to the reviewed Flint 1.0.1 runtime, confirm its expected tools:
+    
+    - `compile_chart`
+    - `show`
+    - `list_chart_types`
+    - `list_themes`
+    - `render_chart`
+    - `validate_chart`
+    - `validate_board`
+    - `list_interaction_presets`
+    - `get_flint_skill`
+    
+    `replicate` is skipped unless `REPLICATE_API_TOKEN` is set in the environment.
+    That is deliberate: a clear omission now beats an opaque authentication failure
+    at call time.
+    
+    Without this step every skill still loads, but the tools those skills call are
+    missing, which looks like a broken package rather than an unregistered one.
+    
+    ### Optional: extra tools for a few skills
+    
+    Most of this plugin needs nothing but Node. The large majority of its skills run
+    with no external tools at all, and nothing below is needed to start.
+    
+    Flint is reviewed at `flint-chart-mcp@1.0.1` with independently exact-pinned
+    `flint-chart@1.0.1`. Upgrade the plugin before the shared runtime: older launchers
+    correctly refuse a mismatched version. From the updated installed package,
+    preview `skills/setup-dependencies/scripts/provision-runtime.mjs --server flint`,
+    then apply the same selection after consent. This changes neither Playwright nor
+    Replicate. Reload the host to discover the new validated `show` interface.
+    
+    If Microsoft proxy metadata points tarballs at a backend feed that npm policy
+    blocks directly, do not enable remote fetching or edit npm configuration. With
+    explicit approval, npm 12+ can route an exact HTTPS backend prefix through the
+    configured proxy using the provisioner's `--registry-tarball-prefix` option.
+    Its preview names the prefix, registry, runtime, and selected packages.
+    
+    | If you want to... | You also need | Get it |
+    | --- | --- | --- |
+    | Convert documents (Word, HTML, email, plain text) | Pandoc | `winget install JohnMacFarlane.Pandoc`, `brew install pandoc`, or `apt install pandoc` |
+    | Render Mermaid diagrams into Word or HTML output | Mermaid CLI | `npm install -g @mermaid-js/mermaid-cli@11.17.0` |
+    | Export SVG banners and figures as PNG | svgexport | `npm install -g svgexport@0.4.2` |
+    | Annotate a screenshot | Pillow | `pip install Pillow` |
+    | Render charts | Flint MCP server | Ask for the `setup-dependencies` skill |
+    | Check rendered output in a browser | The `alex-playwright` MCP server, or your host's own browser tools | Ask for the `setup-dependencies` skill |
+    | Generate images with AI | Replicate MCP server, plus a paid account and API token | Ask for the `setup-dependencies` skill |
+    
+    The three MCP servers are not equally important. Only Flint is required for the
+    skill that uses it: without it, chart rendering cannot run and there is no
+    substitute. Playwright has one — several hosts provide their own browser tools —
+    and Replicate adds a capability rather than unblocking one.
+    
+    That fallback has a limit worth knowing before you rely on it. A host can have a
+    browser and still refuse to open `file://`, which is the case that matters for
+    checking an artifact you just wrote to disk. VS Code documents native browser
+    verification, and current Copilot CLI releases include a browser-use plugin.
+    Local-file, console, remote, and authentication parity still depend on the
+    host, harness, and policy; retain the fallback for unavailable or unverified cases.
+    The package registers its own server as `alex-playwright` — a distinct name, so
+    it sits alongside a host's built-in browser tools rather than shadowing them.
+    
+    To see what you already have and what any gap costs you, ask for the
+    `setup-dependencies` skill by name. Copilot CLI and VS Code also expose it as
+    `/alex-act-one setup-dependencies`.
+    
+    It reports what is present, what is missing, and what each missing piece
+    unlocks. It installs nothing without asking, and it never runs a system package
+    manager on your behalf.
+    
+    If you skip this entirely, every skill that needs one of these will tell you
+    exactly which tool it wants and how to install it, at the moment you need it.
+    
+    ### Scripts for reinstalling and optional setup
+    
+    Run these scripts from the repository checkout. The optional installer and
+    expanded marketplace checks ship in `v0.5.0`.
+    
+    #### Reinstall and verify ONE
+    
+    Close hosts that may lock the installed plugin before running
+    [`reinstall-and-check.ps1`](reinstall-and-check.ps1):
+    
+    ```powershell
+    .\reinstall-and-check.ps1
+    ```
+    
+    This is not a preview. It registers missing public marketplaces (`alex-mall`,
+    `awesome-copilot`, `copilot-plugins`, `azure-skills`, and `fabric-collection`),
+    rejects conflicting sources, and reinstalls ONE from the Mall's release tag,
+    not the working checkout. It verifies the installed version and applies the
+    canonical instructions to the default Copilot profile, checking their
+    bootstrap receipt afterward. It does not install optional plugins or prove
+    that a host has observed activation after restart.
+    
+    #### Install or check optional dependencies
+    
+    [`install-optional-dependencies.ps1`](install-optional-dependencies.ps1)
+    previews by default. Review its package list, configured registry, and
+    installation paths before applying:
+    
+    ```powershell
+    .\install-optional-dependencies.ps1
+    .\install-optional-dependencies.ps1 -Apply
+    ```
+    
+    The installer reads the shared version pins. Flint, Playwright, and JSZip go
+    into ONE's private runtime; Mermaid CLI and svgexport use npm's global prefix.
+    It leaves the registry and npm policy unchanged and does not install
+    companion plugins or system packages.
+    
+    Replicate is optional. Add `-IncludeReplicate` to preview or apply to include
+    its pinned MCP package. Image generation separately requires a paid account
+    and `REPLICATE_API_TOKEN`; the script does not read or store credentials or
+    make paid API calls.
+    
+    ```powershell
+    .\install-optional-dependencies.ps1 -IncludeReplicate
+    .\install-optional-dependencies.ps1 -Apply -IncludeReplicate
+    ```
+    
+    Check existing package versions, MCP launchers, and actual Mermaid/SVG-to-PNG
+    rendering without reinstalling:
+    
+    ```powershell
+    .\install-optional-dependencies.ps1 -VerifyOnly
+    # Include Replicate in verification only if you selected it for installation.
+    .\install-optional-dependencies.ps1 -VerifyOnly -IncludeReplicate
+    ```
+    
+    With npm 12, the Microsoft proxy can advertise tarball URLs on a different
+    Microsoft host and trigger `EALLOWREMOTE`. For the verified feed prefix below,
+    route those URLs back through your configured proxy. Preview first, then
+    repeat with `-Apply`; add `-IncludeReplicate` if wanted.
+    
+    ```powershell
+    $feed = 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/'
+    .\install-optional-dependencies.ps1 -RegistryTarballPrefix $feed
+    .\install-optional-dependencies.ps1 -Apply -RegistryTarballPrefix $feed
+    ```
+    
+    This routing does not switch registries or relax `allow-remote`. A failed
+    install may leave partial package state. If npm blocks Puppeteer's browser
+    setup scripts, package installation can succeed while rendering still fails.
+    The readiness check reports that failure rather than claiming success.
+    Browser setup is a separate decision: its downloads do not use the npm feed,
+    and svgexport's pinned dependency requests an old, deprecated browser build.
+    Do not enable lifecycle scripts globally to suppress the warning.
+    
+    See the [release checklist](RELEASE-CHECKLIST.md) for the verification steps
+    and installation boundaries.
+    
+    ## Tests
+    
+    ```text
+    node --test
+    ```
+    
+    The suite runs on Node alone: no package manager, no test framework, and no
+    `package.json` required. That matches the package's installation claim.
+    
+    They assert the things this README states: that every MCP server starts and
+    reports its pinned version, that activation runs and plans exactly what the
+    manifest declares, that the manifest and the files on disk agree in both
+    directions, that each skill and instruction carries the frontmatter its host
+    reads, that the counts quoted above are real, and that no relative link is dead.
+    
+    The checks that need a provisioned runtime skip rather than fail when
+    `setup-dependencies` has not been run, so a clean checkout does not report red
+    for a step it was never asked to perform.
+    
+    They exist because of specific defects, each of which passed unnoticed until
+    something ran the code rather than reading about it. Release steps and the
+    failures that motivated them are in the
+    [release checklist](RELEASE-CHECKLIST.md).
+    
+    ## What Is Next
+    
+    See the [roadmap](ROADMAP.md).
+    
+    ## License
+    
+    MIT. See [LICENSE](LICENSE).
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/documentation.test.mjs:84:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 0
+# fail 7
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 181.446

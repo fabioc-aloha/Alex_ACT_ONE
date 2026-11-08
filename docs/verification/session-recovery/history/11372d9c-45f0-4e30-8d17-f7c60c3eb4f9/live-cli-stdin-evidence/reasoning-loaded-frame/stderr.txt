@@ -1,0 +1,7 @@
+error: unexpected argument '--disable-client-telemetry' found
+
+  tip: a similar argument exists: '--disable-builtin-mcps'
+
+Usage: copilot --output-format <format> --stream <mode> --no-ask-user --no-auto-update --disable-builtin-mcps
+
+For more information, try '--help'.

@@ -1,0 +1,185 @@
+TAP version 13
+# Subtest: foreign instruction blocks the whole activation and does not create other files or a receipt
+not ok 1 - foreign instruction blocks the whole activation and does not create other files or a receipt
+  ---
+  duration_ms: 201.7903
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\activation-conflicts.test.mjs:36:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + undefined
+    - true
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/activation-conflicts.test.mjs:43:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: modified owned instructions and their receipt are preserved on blocked apply
+not ok 2 - modified owned instructions and their receipt are preserved on blocked apply
+  ---
+  duration_ms: 528.9502
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\activation-conflicts.test.mjs:52:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of undefined (reading 'find')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/activation-conflicts.test.mjs:58:33)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: explicit conflict overwrite has a read-only preview and then verifies canonical bytes
+not ok 3 - explicit conflict overwrite has a read-only preview and then verifies canonical bytes
+  ---
+  duration_ms: 74.7148
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\activation-conflicts.test.mjs:63:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    ERROR: unknown argument: --overwrite-conflicts
+    
+    
+    1 !== 0
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 0
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/activation-conflicts.test.mjs:68:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: an unchanged receipt-owned older instruction upgrades without an overwrite flag
+not ok 4 - an unchanged receipt-owned older instruction upgrades without an overwrite flag
+  ---
+  duration_ms: 428.0306
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\activation-conflicts.test.mjs:82:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + undefined
+    - false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/activation-conflicts.test.mjs:93:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: receipt migration cannot claim mixed or foreign ownership, even with overwrite enabled
+not ok 5 - receipt migration cannot claim mixed or foreign ownership, even with overwrite enabled
+  ---
+  duration_ms: 339.6928
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\activation-conflicts.test.mjs:99:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /receipt|unowned/i. Input:
+    
+    'ERROR: unknown argument: --overwrite-conflicts\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    ERROR: unknown argument: --overwrite-conflicts
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/activation-conflicts.test.mjs:109:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: a late destination change invalidates an in-memory plan before any writes
+not ok 6 - a late destination change invalidates an in-memory plan before any writes
+  ---
+  duration_ms: 156.3319
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\activation-conflicts.test.mjs:113:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected exception.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/activation-conflicts.test.mjs:119:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: overwrite policy does not bypass removal ownership rules
+not ok 7 - overwrite policy does not bypass removal ownership rules
+  ---
+  duration_ms: 113.9522
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\activation-conflicts.test.mjs:124:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /overwrite-conflicts.*remov|remov.*overwrite-conflicts/i. Input:
+    
+    'ERROR: unknown argument: --overwrite-conflicts\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    ERROR: unknown argument: --overwrite-conflicts
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/activation-conflicts.test.mjs:128:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 0
+# fail 7
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1935.5579

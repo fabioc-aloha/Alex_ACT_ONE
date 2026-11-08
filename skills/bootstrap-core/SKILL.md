@@ -12,6 +12,13 @@ legacy package's instructions are active. Until the native-delivery compatibilit
 gate passes on supported hosts, this skill copies only manifest-declared
 canonical instructions and their receipt after explicit consent.
 
+The session-health instruction carries the
+[shared artifact storage contract](../proactive-awareness/references/project-artifact-storage.md).
+Verify its inclusion in the selected installed package and activation preview.
+A canonical-source edit does not update an installed cache or user profile;
+installation and activation remain separately approved steps. Instruction
+parity is not proof of host-enforced delivery.
+
 ## Preview First
 
 Run the bundled script without `--apply`:

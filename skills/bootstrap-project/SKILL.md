@@ -34,6 +34,11 @@ The minimal scaffold is `AGENTS.md`, thin Claude/Gemini adapters, `HANDOFF.md`,
 `.github/episodic/README.md`, `.vscode/settings.json`, and a narrow
 `.gitignore` exception for the managed settings file.
 
+New `AGENTS.md` scaffolds include repository artifact storage guidance derived
+from the [shared contract](../proactive-awareness/references/project-artifact-storage.md).
+Existing guidance remains preserved; propose a scoped manual merge rather than
+silently overwriting it. Project adoption is not global instruction activation.
+
 ## Boundaries
 
 - One explicit repository root per invocation.

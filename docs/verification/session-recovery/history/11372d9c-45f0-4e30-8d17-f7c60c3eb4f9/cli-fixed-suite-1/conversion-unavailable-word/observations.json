@@ -1,0 +1,22 @@
+{
+  "response": "This is a fixture/feasibility check, not a conversion — here's the assessment, no files written.\n\n**Missing prerequisite:** `md-to-word` requires Pandoc to do the Markdown→Word conversion. The fixture states Pandoc is unavailable and installation is denied, so `node skills/md-to-word/scripts/md-to-word.cjs` cannot run. There's no cross-platform fallback without Pandoc (only an optional macOS `textutil` path, which itself needs pre-rendered HTML and still can't satisfy the next requirement).\n\n**Unsupported requirement:** \"editable Mermaid diagram in Word\" isn't something this pipeline (or Word itself) does — Mermaid blocks are rendered to a static PNG and embedded as an image, never as an editable diagram object. Separately, the supplied Markdown contains no Mermaid code block at all, so there's no diagram source to render even if Pandoc were present.\n\n**No output exists.** I have not produced a .docx, .png, or any converted file.\n\n**Labeled alternative (not the requested output):** If useful, I could manually draft the converted content as a plain-text preview of what the Word body would contain (heading + bold text), explicitly marked as a *text preview, not a Word document*, and separately provide Mermaid *source* for a diagram (e.g., a simple flowchart) as editable text that a user could later render once Pandoc/mermaid-cli are available. Let me know if you'd like either of those as clearly-labeled scratch artifacts.",
+  "models": [
+    "claude-sonnet-5"
+  ],
+  "toolCalls": [
+    {
+      "name": "skill",
+      "skill": "convert"
+    },
+    {
+      "name": "view",
+      "path": "md-to-word/SKILL.md"
+    }
+  ],
+  "codeChanges": {
+    "linesAdded": 0,
+    "linesRemoved": 0,
+    "filesModified": []
+  },
+  "semanticStatus": "not-reviewed"
+}

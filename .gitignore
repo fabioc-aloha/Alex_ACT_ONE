@@ -6,3 +6,6 @@ node_modules/
 # working directory during render-verify. Produced on every host, so ignoring
 # them here keeps a verification run from staging its own scratch output.
 .playwright-mcp/
+
+# Frozen, reviewed recovery evidence is a deliverable, not disposable run output.
+!docs/verification/session-recovery/history/**/*.log

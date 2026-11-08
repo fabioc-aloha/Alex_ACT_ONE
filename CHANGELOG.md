@@ -5,6 +5,18 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+- 2026-11-07: Recovered stranded project reports, a useful release-verification
+  helper, and related historical evidence into the
+  [repository recovery index](docs/verification/session-recovery/README.md).
+  Original and recovered hashes, declared privacy/link edits, duplicate
+  verification, and runtime exclusions are retained in its manifest. Originals
+  remain untouched; frozen recovered bytes have an independent tested checker.
+- Added a [shared artifact-storage contract](skills/proactive-awareness/references/project-artifact-storage.md)
+  to repository guidance, the resident session-health floor, new project
+  scaffolds, and planning/bootstrap/recovery/meditation/rendering/Git owners.
+  Requested plans are no longer classified as private planning scratch.
+  Instructions do not claim universal filesystem enforcement. Installed
+  packages, user-profile activation, global settings, and releases are unchanged.
 - 2026-11-06: Recorded the local `0.9.2` installation and dependency audit in
   [verification history](docs/testing.md#092-local-installation-verification),
   including installed-package integration checks, source structural checks,

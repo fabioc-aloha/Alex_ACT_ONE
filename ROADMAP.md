@@ -1,6 +1,6 @@
 # Roadmap
 
-Updated 2026-11-06. This is the forward plan for pending work, not a history of
+Updated 2026-11-07. This is the forward plan for pending work, not a history of
 completed repairs. Require same-commit release evidence for the source repairs
 before delivery. R8 remaining-host evidence is next for host coverage; the
 dependency-audit repair is the immediate maintenance follow-up. Runtime upgrade
@@ -122,6 +122,33 @@ activation, and runtime upgrade are separate operations requiring their own
 approval. No publication or installation is authorized by this roadmap.
 
 ## Next
+
+### Verify artifact delivery in supported hosts
+
+**Status:** stranded project artifacts are recovered and indexed in
+[repository evidence](docs/verification/session-recovery/README.md).
+Canonical guidance now requires repository storage and final-file delivery
+checks. This is instruction-level behavior, not installed activation or
+host-enforced prevention.
+
+**Next actions**
+
+- Deliver and activate the updated canonical instructions only after the
+  separately approved source/package and exact-target bootstrap operations.
+- Exercise the [storage contract](skills/proactive-awareness/references/project-artifact-storage.md)
+  in fresh supported-host sessions: requested plans, shell/MCP output,
+  subagents, ignored deliverables, and explicit external destinations.
+- If stronger enforcement is approved, implement the bounded ledger/checker
+  and host adapters from the
+  [persistence guide](ARTIFACT-PERSISTENCE-FOR-ALEX-ACT-ONE.md).
+  First prove supported hook schemas, invocation, and blocking decisions with
+  harmless fixtures. Name arbitrary-write and unavailable-host gaps.
+- Keep repository storage, frozen recovery integrity, remote backup, installed
+  activation, and runtime enforcement as separate verification claims.
+
+**Done when:** available-host observations prove the claimed instruction
+behavior and any approved runtime enforcement; unsupported operations remain
+explicitly unverified. The recovery checker does not certify future writes.
 
 ### R9. Make runtime upgrades reproducible and recoverable
 

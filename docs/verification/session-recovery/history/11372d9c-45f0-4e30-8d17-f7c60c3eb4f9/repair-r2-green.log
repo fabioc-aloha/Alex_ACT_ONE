@@ -1,0 +1,136 @@
+TAP version 13
+# Subtest: Flint MCP and library are independently exact-pinned at 1.0.1
+ok 1 - Flint MCP and library are independently exact-pinned at 1.0.1
+  ---
+  duration_ms: 1.2013
+  type: 'test'
+  ...
+# Subtest: shared runtime package selection includes the exact library without changing other routes
+ok 2 - shared runtime package selection includes the exact library without changing other routes
+  ---
+  duration_ms: 0.5661
+  type: 'test'
+  ...
+# Subtest: launcher verifies the Flint library before invoking the server: null
+ok 3 - launcher verifies the Flint library before invoking the server: null
+  ---
+  duration_ms: 75.0031
+  type: 'test'
+  ...
+# Subtest: launcher verifies the Flint library before invoking the server: 0.5.1
+ok 4 - launcher verifies the Flint library before invoking the server: 0.5.1
+  ---
+  duration_ms: 69.356
+  type: 'test'
+  ...
+# Subtest: launcher verifies the Flint library before invoking the server: 1.0.1
+ok 5 - launcher verifies the Flint library before invoking the server: 1.0.1
+  ---
+  duration_ms: 139.0762
+  type: 'test'
+  ...
+# Subtest: provisioner can preview only Flint and library without mutating a runtime
+ok 6 - provisioner can preview only Flint and library without mutating a runtime
+  ---
+  duration_ms: 2062.8581
+  type: 'test'
+  ...
+# Subtest: launcher rejects a stale nested Flint dependency even when the root library is current
+ok 7 - launcher rejects a stale nested Flint dependency even when the root library is current
+  ---
+  duration_ms: 67.9931
+  type: 'test'
+  ...
+# Subtest: provisioner rejects unsafe routing and unknown server selection before installing
+ok 8 - provisioner rejects unsafe routing and unknown server selection before installing
+  ---
+  duration_ms: 299.5779
+  type: 'test'
+  ...
+# Subtest: current Flint routes load version-matched skills and use validate then show
+ok 9 - current Flint routes load version-matched skills and use validate then show
+  ---
+  duration_ms: 5.4343
+  type: 'test'
+  ...
+# Subtest: Chart Brief hints use exact chart names instead of unsupported snake_case
+ok 10 - Chart Brief hints use exact chart names instead of unsupported snake_case
+  ---
+  duration_ms: 1.8855
+  type: 'test'
+  ...
+# Subtest: professional headings apply the configured treatment to bare and styled runs
+ok 11 - professional headings apply the configured treatment to bare and styled runs
+  ---
+  duration_ms: 1.1633
+  type: 'test'
+  ...
+# Subtest: table formatting removes fixed layouts while retaining professional table styling
+ok 12 - table formatting removes fixed layouts while retaining professional table styling
+  ---
+  duration_ms: 0.8153
+  type: 'test'
+  ...
+# Subtest: Windows npm launch follows the official shim global-prefix selection without using a shell
+ok 13 - Windows npm launch follows the official shim global-prefix selection without using a shell
+  ---
+  duration_ms: 1.3542
+  type: 'test'
+  ...
+# Subtest: Windows npm uses bundled CLI when no prefix CLI exists, matching the official shim
+ok 14 - Windows npm uses bundled CLI when no prefix CLI exists, matching the official shim
+  ---
+  duration_ms: 0.2279
+  type: 'test'
+  ...
+# Subtest: failed npm prefix discovery is explicit and never launches an unintended CLI
+ok 15 - failed npm prefix discovery is explicit and never launches an unintended CLI
+  ---
+  duration_ms: 0.3245
+  type: 'test'
+  ...
+# Subtest: Windows sync tool launch resolves the installed package bin: {}
+ok 16 - Windows sync tool launch resolves the installed package bin: {}
+  ---
+  duration_ms: 82.6667
+  type: 'test'
+  ...
+# Subtest: Windows sync tool launch resolves the installed package bin: {"local":true}
+ok 17 - Windows sync tool launch resolves the installed package bin: {"local":true}
+  ---
+  duration_ms: 72.1017
+  type: 'test'
+  ...
+# Subtest: Windows sync tool launch resolves the installed package bin: {"tool":"svgexport"}
+ok 18 - Windows sync tool launch resolves the installed package bin: {"tool":"svgexport"}
+  ---
+  duration_ms: 77.7832
+  type: 'test'
+  ...
+# Subtest: Windows async tool launch uses the same shell-free package resolution
+ok 19 - Windows async tool launch uses the same shell-free package resolution
+  ---
+  duration_ms: 73.8136
+  type: 'test'
+  ...
+# Subtest: a package bin escaping its package is rejected instead of running a shell
+ok 20 - a package bin escaping its package is rejected instead of running a shell
+  ---
+  duration_ms: 8.6391
+  type: 'test'
+  ...
+# Subtest: native executables still receive literal arguments
+ok 21 - native executables still receive literal arguments
+  ---
+  duration_ms: 56.4513
+  type: 'test'
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 21
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2824.0202

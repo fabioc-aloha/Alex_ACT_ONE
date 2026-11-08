@@ -1,0 +1,8 @@
+{
+  "id": "chart-with-activation",
+  "exitCode": 0,
+  "activatedInstructions": 15,
+  "fixturePreserved": true,
+  "guardHit": false,
+  "evidence": "skill-test-evidence/chart-with-activation.log"
+}

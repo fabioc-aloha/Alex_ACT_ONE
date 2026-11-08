@@ -1,0 +1,232 @@
+TAP version 13
+# Subtest: network/device image paths fail before filesystem access: \\\\review.invalid\\share\\pixel.png
+ok 1 - network/device image paths fail before filesystem access: \\\\review.invalid\\share\\pixel.png
+  ---
+  duration_ms: 3.782
+  type: 'test'
+  ...
+# Subtest: network/device image paths fail before filesystem access: %5C%5Creview.invalid%5Cshare%5Cpixel.png
+ok 2 - network/device image paths fail before filesystem access: %5C%5Creview.invalid%5Cshare%5Cpixel.png
+  ---
+  duration_ms: 1.4466
+  type: 'test'
+  ...
+# Subtest: network/device image paths fail before filesystem access: \\\\?\\UNC\\review.invalid\\share\\pixel.png
+ok 3 - network/device image paths fail before filesystem access: \\\\?\\UNC\\review.invalid\\share\\pixel.png
+  ---
+  duration_ms: 0.6441
+  type: 'test'
+  ...
+# Subtest: network/device image paths fail before filesystem access: \\\\.\\pipe\\review
+ok 4 - network/device image paths fail before filesystem access: \\\\.\\pipe\\review
+  ---
+  duration_ms: 0.6045
+  type: 'test'
+  ...
+# Subtest: network/device image paths fail before filesystem access: %2F%2Freview.invalid/share/pixel.png
+ok 5 - network/device image paths fail before filesystem access: %2F%2Freview.invalid/share/pixel.png
+  ---
+  duration_ms: 0.7133
+  type: 'test'
+  ...
+# Subtest: email rejects header controls before conversion: subject, []
+ok 6 - email rejects header controls before conversion: subject, []
+  ---
+  duration_ms: 90.7137
+  type: 'test'
+  ...
+# Subtest: email rejects header controls before conversion: subject, ["--test"]
+ok 7 - email rejects header controls before conversion: subject, ["--test"]
+  ---
+  duration_ms: 87.8383
+  type: 'test'
+  ...
+# Subtest: email rejects header controls before conversion: from, []
+ok 8 - email rejects header controls before conversion: from, []
+  ---
+  duration_ms: 106.3864
+  type: 'test'
+  ...
+# Subtest: email rejects header controls before conversion: to, ["--test"]
+ok 9 - email rejects header controls before conversion: to, ["--test"]
+  ---
+  duration_ms: 101.2629
+  type: 'test'
+  ...
+# Subtest: email rejects header controls before conversion: reply-to, []
+ok 10 - email rejects header controls before conversion: reply-to, []
+  ---
+  duration_ms: 101.1758
+  type: 'test'
+  ...
+# Subtest: email rejects header controls before conversion: subject, ["--test-to","<EMAIL>\\rBcc: <EMAIL>"]
+ok 11 - email rejects header controls before conversion: subject, ["--test-to","<EMAIL>\\rBcc: <EMAIL>"]
+  ---
+  duration_ms: 98.4616
+  type: 'test'
+  ...
+# Subtest: email rejects active rendered HTML: <script>/* review */</script>
+ok 12 - email rejects active rendered HTML: <script>/* review */</script>
+  ---
+  duration_ms: 243.6519
+  type: 'test'
+  ...
+# Subtest: email rejects active rendered HTML: <img src="x" onerror="review()">
+ok 13 - email rejects active rendered HTML: <img src="x" onerror="review()">
+  ---
+  duration_ms: 184.311
+  type: 'test'
+  ...
+# Subtest: email rejects active rendered HTML: <a href="jav&\#x61;script:review()">review</a>
+ok 14 - email rejects active rendered HTML: <a href="jav&\#x61;script:review()">review</a>
+  ---
+  duration_ms: 179.2043
+  type: 'test'
+  ...
+# Subtest: email preserves ordinary Unicode headers and escaped literal HTML
+ok 15 - email preserves ordinary Unicode headers and escaped literal HTML
+  ---
+  duration_ms: 161.7201
+  type: 'test'
+  ...
+# Subtest: image extraction preserves container fences: "> ~~~markdown\\n> ![Example](missing.png)\\n> ~~~\\n"
+ok 16 - image extraction preserves container fences: "> ~~~markdown\\n> ![Example](missing.png)\\n> ~~~\\n"
+  ---
+  duration_ms: 1.4357
+  type: 'test'
+  ...
+# Subtest: image extraction preserves container fences: "- A list\\n\\n  ~~~markdown\\n  ![Example](missing.png)\\n  ~~~\\n"
+ok 17 - image extraction preserves container fences: "- A list\\n\\n  ~~~markdown\\n  ![Example](missing.png)\\n  ~~~\\n"
+  ---
+  duration_ms: 1.2142
+  type: 'test'
+  ...
+# Subtest: image extraction preserves container fences: "> - A list\\n>\\n>   ~~~markdown\\n>   ![Example](missing.png)\\n>   ~~~\\n"
+ok 18 - image extraction preserves container fences: "> - A list\\n>\\n>   ~~~markdown\\n>   ![Example](missing.png)\\n>   ~~~\\n"
+  ---
+  duration_ms: 1.1349
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts block code: "    <script>/* literal */</script>\\n"
+ok 19 - HTML screening accepts block code: "    <script>/* literal */</script>\\n"
+  ---
+  duration_ms: 89.1726
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts block code: "> ~~~html\\n> <script>/* literal */</script>\\n> ~~~\\n"
+ok 20 - HTML screening accepts block code: "> ~~~html\\n> <script>/* literal */</script>\\n> ~~~\\n"
+  ---
+  duration_ms: 84.2774
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts block code: "- A list\\n\\n      <script>/* literal */</script>\\n"
+ok 21 - HTML screening accepts block code: "- A list\\n\\n      <script>/* literal */</script>\\n"
+  ---
+  duration_ms: 80.5466
+  type: 'test'
+  ...
+# Subtest: email preserves literal single- and multi-backtick inline code
+ok 22 - email preserves literal single- and multi-backtick inline code
+  ---
+  duration_ms: 2.2779
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts literal code/prose: "Ordinary prose: const one = 1.\\n"
+ok 23 - HTML screening accepts literal code/prose: "Ordinary prose: const one = 1.\\n"
+  ---
+  duration_ms: 85.9012
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts literal code/prose: "`<script>alert(1)</script>` and ``<img src=x onerror=\\"oops()\\">``\\n"
+ok 24 - HTML screening accepts literal code/prose: "`<script>alert(1)</script>` and ``<img src=x onerror=\\"oops()\\">``\\n"
+  ---
+  duration_ms: 86.7606
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts literal code/prose: "~~~html\\n<script>alert(1)</script>\\n<img src=x onerror=\\"oops()\\">\\n~~~\\n"
+ok 25 - HTML screening accepts literal code/prose: "~~~html\\n<script>alert(1)</script>\\n<img src=x onerror=\\"oops()\\">\\n~~~\\n"
+  ---
+  duration_ms: 116.3521
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts literal code/prose: "````html\\n```html\\n<script>alert(1)</script>\\n```\\n````\\n"
+ok 26 - HTML screening accepts literal code/prose: "````html\\n```html\\n<script>alert(1)</script>\\n```\\n````\\n"
+  ---
+  duration_ms: 94.0188
+  type: 'test'
+  ...
+# Subtest: HTML screening accepts literal code/prose: "Literal ``<img\\nonerror=\\"oops()\\">`` across lines.\\n"
+ok 27 - HTML screening accepts literal code/prose: "Literal ``<img\\nonerror=\\"oops()\\">`` across lines.\\n"
+  ---
+  duration_ms: 100.6152
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <script>alert(1)</script>
+ok 28 - HTML screening still rejects active HTML: <script>alert(1)</script>
+  ---
+  duration_ms: 98.0315
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <img src=x onerror="oops()">
+ok 29 - HTML screening still rejects active HTML: <img src=x onerror="oops()">
+  ---
+  duration_ms: 89.6786
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <iframe srcdoc="<p>active</p>"></iframe>
+ok 30 - HTML screening still rejects active HTML: <iframe srcdoc="<p>active</p>"></iframe>
+  ---
+  duration_ms: 81.704
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <a href="jav&\#x61;script:alert(1)">link</a>
+ok 31 - HTML screening still rejects active HTML: <a href="jav&\#x61;script:alert(1)">link</a>
+  ---
+  duration_ms: 76.5388
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <a href="java&Tab;script&colon;alert(1)">link</a>
+ok 32 - HTML screening still rejects active HTML: <a href="java&Tab;script&colon;alert(1)">link</a>
+  ---
+  duration_ms: 79.9823
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <a href="data:text/html;base64,xxx">link</a>
+ok 33 - HTML screening still rejects active HTML: <a href="data:text/html;base64,xxx">link</a>
+  ---
+  duration_ms: 94.6371
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: <img title="`" onerror="`">
+ok 34 - HTML screening still rejects active HTML: <img title="`" onerror="`">
+  ---
+  duration_ms: 91.9365
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: `literal`\\n\\n<img\\nonload=active()>
+ok 35 - HTML screening still rejects active HTML: `literal`\\n\\n<img\\nonload=active()>
+  ---
+  duration_ms: 88.1558
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML: > ~~~html\\n> literal\\n> ~~~\\n\\n<script>/* active */</script>
+ok 36 - HTML screening still rejects active HTML: > ~~~html\\n> literal\\n> ~~~\\n\\n<script>/* active */</script>
+  ---
+  duration_ms: 85.655
+  type: 'test'
+  ...
+# Subtest: HTML screening still rejects active HTML:     literal code\\n\\n<script>/* active */</script>
+ok 37 - HTML screening still rejects active HTML:     literal code\\n\\n<script>/* active */</script>
+  ---
+  duration_ms: 78.4018
+  type: 'test'
+  ...
+1..37
+# tests 37
+# suites 0
+# pass 37
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1722.8648

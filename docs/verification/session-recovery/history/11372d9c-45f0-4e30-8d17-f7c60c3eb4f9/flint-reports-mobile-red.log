@@ -1,0 +1,61 @@
+TAP version 13
+# Subtest: experimental page is a distinct offline lab, not a replacement for the editorial gallery
+ok 1 - experimental page is a distinct offline lab, not a replacement for the editorial gallery
+  ---
+  duration_ms: 12.6895
+  type: 'test'
+  ...
+# Subtest: lab uses less-conventional actual chart types and meaningful gesture contracts
+ok 2 - lab uses less-conventional actual chart types and meaningful gesture contracts
+  ---
+  duration_ms: 12.3849
+  type: 'test'
+  ...
+# Subtest: reader-driven story beats are real prevalidated ChartUpdate layers, not a CSS animation
+ok 3 - reader-driven story beats are real prevalidated ChartUpdate layers, not a CSS animation
+  ---
+  duration_ms: 19.6714
+  type: 'test'
+  ...
+# Subtest: linked scene uses three views of an explicit shared synthetic population
+not ok 4 - linked scene uses three views of an explicit shared synthetic population
+  ---
+  duration_ms: 11.2734
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\flint-experimental.test.mjs:78:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Fixed tall cells prevent the three-view board from fitting a narrow screen
+    + actual - expected
+    
+    + 'tall'
+    - undefined
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  actual: 'tall'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/flint-experimental.test.mjs:85:16)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: cohort instructions describe the rendered toggle buttons rather than nonexistent checkboxes
+ok 5 - cohort instructions describe the rendered toggle buttons rather than nonexistent checkboxes
+  ---
+  duration_ms: 9.8217
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 4
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 216.235

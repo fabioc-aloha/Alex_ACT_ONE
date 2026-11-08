@@ -1,0 +1,131 @@
+TAP version 13
+# Subtest: Windows sync tool launch resolves the installed package bin: {}
+not ok 1 - Windows sync tool launch resolves the installed package bin: {}
+  ---
+  duration_ms: 10.606
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\tool-shims.test.cjs:30:5'
+  failureType: 'testCodeFailure'
+  error: 'spawnSync C:\\Users\\<USER>\\AppData\\Local\\Temp\\one tool-shims-F0qF2R\\prefix with spaces\\mmdc.cmd EINVAL'
+  code: 'EINVAL'
+  stack: |-
+    Object.spawnSync (node:internal/child_process:1175:20)
+    spawnSync (node:child_process:976:24)
+    execFileSync (node:child_process:1019:15)
+    runTool (C:\Development\Alex_ACT_ONE\scripts\shared\tool-runner.cjs:48:12)
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\tool-shims.test.cjs:32:24)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: Windows sync tool launch resolves the installed package bin: {"local":true}
+not ok 2 - Windows sync tool launch resolves the installed package bin: {"local":true}
+  ---
+  duration_ms: 5.6904
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\tool-shims.test.cjs:30:5'
+  failureType: 'testCodeFailure'
+  error: 'spawnSync C:\\Users\\<USER>\\AppData\\Local\\Temp\\one tool-shims-ndjdLa\\prefix with spaces\\node_modules\\.bin\\mmdc.cmd EINVAL'
+  code: 'EINVAL'
+  stack: |-
+    Object.spawnSync (node:internal/child_process:1175:20)
+    spawnSync (node:child_process:976:24)
+    execFileSync (node:child_process:1019:15)
+    runTool (C:\Development\Alex_ACT_ONE\scripts\shared\tool-runner.cjs:48:12)
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\tool-shims.test.cjs:32:24)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+  ...
+# Subtest: Windows sync tool launch resolves the installed package bin: {"tool":"svgexport"}
+not ok 3 - Windows sync tool launch resolves the installed package bin: {"tool":"svgexport"}
+  ---
+  duration_ms: 6.6632
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\tool-shims.test.cjs:30:5'
+  failureType: 'testCodeFailure'
+  error: 'spawnSync C:\\Users\\<USER>\\AppData\\Local\\Temp\\one tool-shims-dhpqKe\\prefix with spaces\\svgexport.cmd EINVAL'
+  code: 'EINVAL'
+  stack: |-
+    Object.spawnSync (node:internal/child_process:1175:20)
+    spawnSync (node:child_process:976:24)
+    execFileSync (node:child_process:1019:15)
+    runTool (C:\Development\Alex_ACT_ONE\scripts\shared\tool-runner.cjs:48:12)
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\tool-shims.test.cjs:32:24)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+  ...
+# Subtest: Windows async tool launch uses the same shell-free package resolution
+not ok 4 - Windows async tool launch uses the same shell-free package resolution
+  ---
+  duration_ms: 58.9118
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\tool-shims.test.cjs:36:1'
+  failureType: 'testCodeFailure'
+  error: 'refusing shell execution for unsupported command shim: C:\\Users\\<USER>\\AppData\\Local\\Temp\\one tool-shims-FcNnaU\\prefix with spaces\\mmdc.cmd'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    spawnCommand (file:///C:/Development/Alex_ACT_ONE/scripts/process-launch.mjs:39:13)
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\tool-shims.test.cjs:39:19)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: a package bin escaping its package is rejected instead of running a shell
+not ok 5 - a package bin escaping its package is rejected instead of running a shell
+  ---
+  duration_ms: 6.6188
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\tool-shims.test.cjs:48:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /bin.*(?:outside|escap)|(?:outside|escap).*bin/i. Input:
+    
+    'Error: spawnSync C:\\Users\\<USER>\\AppData\\Local\\Temp\\one tool-shims-Pn0bCx\\prefix with spaces\\mmdc.cmd EINVAL'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual:
+  error: 'spawnSync C:\\Users\\<USER>\\AppData\\Local\\Temp\\one tool-shims-Pn0bCx\\prefix with spaces\\mmdc.cmd EINVAL'
+  stack: |-
+    Object.spawnSync (node:internal/child_process:1175:20)
+    spawnSync (node:child_process:976:24)
+    execFileSync (node:child_process:1019:15)
+    runTool (C:\Development\Alex_ACT_ONE\scripts\shared\tool-runner.cjs:48:12)
+    C:\Development\Alex_ACT_ONE\tests\tool-shims.test.cjs:50:25
+    getActual (node:assert:580:5)
+    strict.throws (node:assert:728:24)
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\tool-shims.test.cjs:50:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+  operator: 'throws'
+  stack: |-
+    TestContext.<anonymous> (C:\Development\Alex_ACT_ONE\tests\tool-shims.test.cjs:50:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: native executables still receive literal arguments
+ok 6 - native executables still receive literal arguments
+  ---
+  duration_ms: 60.306
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 1
+# fail 5
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 233.0699

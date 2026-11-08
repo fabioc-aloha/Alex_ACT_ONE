@@ -1,0 +1,114 @@
+TAP version 13
+# Subtest: experimental page is a distinct offline lab, not a replacement for the editorial gallery
+ok 1 - experimental page is a distinct offline lab, not a replacement for the editorial gallery
+  ---
+  duration_ms: 17.7229
+  type: 'test'
+  ...
+# Subtest: lab uses less-conventional actual chart types and meaningful gesture contracts
+ok 2 - lab uses less-conventional actual chart types and meaningful gesture contracts
+  ---
+  duration_ms: 13.8753
+  type: 'test'
+  ...
+# Subtest: reader-driven story beats are real prevalidated ChartUpdate layers, not a CSS animation
+ok 3 - reader-driven story beats are real prevalidated ChartUpdate layers, not a CSS animation
+  ---
+  duration_ms: 17.7978
+  type: 'test'
+  ...
+# Subtest: linked scene uses three views of an explicit shared synthetic population
+ok 4 - linked scene uses three views of an explicit shared synthetic population
+  ---
+  duration_ms: 10.7308
+  type: 'test'
+  ...
+# Subtest: cohort instructions describe the rendered toggle buttons rather than nonexistent checkboxes
+not ok 5 - cohort instructions describe the rendered toggle buttons rather than nonexistent checkboxes
+  ---
+  duration_ms: 11.4194
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\flint-experimental.test.mjs:91:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input was expected to not match the regular expression /checkbox|uncheck/i. Input:
+    
+    'Team checkboxes and a latency range control the displayed population. Filtering removes marks from the view, not records from the embedded source. Uncheck a team, then narrow the latency range. Inspect Live state to see the filter. Reset example restores all 32 source rows.'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: 'Team checkboxes and a latency range control the displayed population. Filtering removes marks from the view, not records from the embedded source. Uncheck a team, then narrow the latency range. Inspect Live state to see the filter. Reset example restores all 32 source rows.'
+  operator: 'doesNotMatch'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/flint-experimental.test.mjs:93:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: showcase is a self-contained HTML document with explicit offline and synthetic-data boundaries
+ok 6 - showcase is a self-contained HTML document with explicit offline and synthetic-data boundaries
+  ---
+  duration_ms: 21.0254
+  type: 'test'
+  ...
+# Subtest: showcase embeds the actual pinned App UI and preserves third-party notices
+ok 7 - showcase embeds the actual pinned App UI and preserves third-party notices
+  ---
+  duration_ms: 16.0327
+  type: 'test'
+  ...
+# Subtest: samples cover chart families, semantic types, gestures, themes, state updates, and links
+ok 8 - samples cover chart families, semantic types, gestures, themes, state updates, and links
+  ---
+  duration_ms: 8.8024
+  type: 'test'
+  ...
+# Subtest: one semantic input is actually rendered by the three supported MCP backends
+not ok 9 - one semantic input is actually rendered by the three supported MCP backends
+  ---
+  duration_ms: 9.856
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\flint-showcase.test.mjs:75:1'
+  failureType: 'testCodeFailure'
+  error: 'vegalite image contains report text outside the XML root'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="marks" width="343" height="368" viewBox="0 0 343 368"><rect width="343" height="368" fill="white"/><g fill="none" stroke-miterlimit="4" transform="translate(47,50)"><g class="mark-group role-frame root" role="graphics-object" aria-roledescription="group mark container"><g transform="translate(0,0)"><path class="background" aria-hidden="true" d="M0.5,0.5h288v253h-288Z" stroke="#ddd"/><g><g class="mark-group role-axis" aria-hidden="true"><g transform="translate(0.5,0.5)"><path class="background" aria-hidden="true" d="M0,0h0v0h0Z" pointer-events="none"/><g><g class="mark-rule role-axis-grid" pointer-events="none"><line transform="translate(0,253)" x2="288" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,221)" x2="288" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,190)" x2="288" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,158)" x2="288" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,127)" x2="288" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,95)" x2="288" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,63)" x2="288" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,32)" x2="288" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/><line transform="translate(0,0)" x2="288" y2="0" stroke="#ddd" stroke-width="1" opacity="1"/></g></g><path class="foreground" aria-hidden="true" d="" pointer-events="none" display="none"/></g></g><g class="mark-group role-axis" role="graphics-symbol" aria-roledescription="axis" aria-label="X-axis titled 'region' for a discrete scale with 4 values: North, South, East, West"><g transform="translate(0.5,253.5)"><path class="background" aria-hidden="true" d="M0,0h0v0h0Z" pointer-events="none"/><g><g class="mark-rule role-axis-tick" pointer-events="none"><line transform="translate(35,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(108,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(180,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(252,0)" x2="0" y2="5" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-label" pointer-events="none"><text text-anchor="middle" transform="translate(35.49999999999999,15)" font-family="Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', Roboto, sans-serif" font-size="10px" fill="#000" opacity="1">North</text><text text-anchor="middle" transform="translate(107.5,15)" font-family="Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', Roboto, sans-serif" font-size="10px" fill="#000" opacity="1">South</text><text text-anchor="middle" transform="translate(179.5,15)" font-family="Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', Roboto, sans-serif" font-size="10px" fill="#000" opacity="1">East</text><text text-anchor="middle" transform="translate(251.5,15)" font-family="Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', Roboto, sans-serif" font-size="10px" fill="#000" opacity="1">West</text></g><g class="mark-rule role-axis-domain" pointer-events="none"><line transform="translate(0,0)" x2="288" y2="0" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-title" pointer-events="none"><text text-anchor="middle" transform="translate(144,30)" font-family="Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', Roboto, sans-serif" font-size="11px" font-weight="bold" fill="#000" opacity="1">region</text></g></g><path class="foreground" aria-hidden="true" d="" pointer-events="none" display="none"/></g></g><g class="mark-group role-axis" role="graphics-symbol" aria-roledescription="axis" aria-label="Y-axis titled 'orders' for a linear scale with values from 0 to 160"><g transform="translate(0.5,0.5)"><path class="background" aria-hidden="true" d="M0,0h0v0h0Z" pointer-events="none"/><g><g class="mark-rule role-axis-tick" pointer-events="none"><line transform="translate(0,253)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,221)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,190)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,158)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,127)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,95)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,63)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,32)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/><line transform="translate(0,0)" x2="-5" y2="0" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-label" pointer-events="none"><text text-anchor="end" transform="translate(-7,256)" font-family="Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', Roboto, sans-serif" font-size="10px" fill="#000" opacity="1">0</text><text text-anchor="end" transform="translate(-7,224.375)" font-family="Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', Roboto, sans-serif" font-size="10px" fill="#000" opacity="1">20</text><text text-anchor="end" transform="translate(-7,192.75)" font-family="Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', Roboto, sans-serif" font-size="10px" fill="#000" opacity="1">40</text><text text-anchor="end" transform="translate(-7,161.125)" font-family="Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', Roboto, sans-serif" font-size="10px" fill="#000" opacity="1">60</text><text text-anchor="end" transform="translate(-7,129.5)" font-family="Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', Roboto, sans-serif" font-size="10px" fill="#000" opacity="1">80</text><text text-anchor="end" transform="translate(-7,97.875)" font-family="Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', Roboto, sans-serif" font-size="10px" fill="#000" opacity="1">100</text><text text-anchor="end" transform="translate(-7,66.25)" font-family="Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', Roboto, sans-serif" font-size="10px" fill="#000" opacity="1">120</text><text text-anchor="end" transform="translate(-7,34.625)" font-family="Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', Roboto, sans-serif" font-size="10px" fill="#000" opacity="1">140</text><text text-anchor="end" transform="translate(-7,3)" font-family="Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', Roboto, sans-serif" font-size="10px" fill="#000" opacity="1">160</text></g><g class="mark-rule role-axis-domain" pointer-events="none"><line transform="translate(0,253)" x2="0" y2="-253" stroke="#888" stroke-width="1" opacity="1"/></g><g class="mark-text role-axis-title" pointer-events="none"><text text-anchor="middle" transform="translate(-27.68000030517578,126.5) rotate(-90) translate(0,-2)" font-family="Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', Roboto, sans-serif" font-size="11px" font-weight="bold" fill="#000" opacity="1">orders</text></g></g><path class="foreground" aria-hidden="true" d="" pointer-events="none" display="none"/></g></g><g class="mark-rect role-mark marks" role="graphics-object" aria-roledescription="rect mark container"><path aria-label="region: North; orders: 128" role="graphics-symbol" aria-roledescription="bar" d="M3.5999999999999943,50.59999999999999h64.8v202.4h-64.8Z" fill="#4c78a8"/><path aria-label="region: South; orders: 96" role="graphics-symbol" aria-roledescription="bar" d="M75.6,101.2h64.8v151.8h-64.8Z" fill="#4c78a8"/><path aria-label="region: East; orders: 112" role="graphics-symbol" aria-roledescription="bar" d="M147.6,75.9h64.8v177.1h-64.8Z" fill="#4c78a8"/><path aria-label="region: West; orders: 154" role="graphics-symbol" aria-roledescription="bar" d="M219.6,9.487499999999994h64.8v243.51250000000002h-64.8Z" fill="#4c78a8"/></g><g class="mark-group role-title"><g transform="translate(144,-42)"><path class="background" aria-hidden="true" d="M0,0h0v0h0Z" pointer-events="none"/><g><g class="mark-text role-title-text" role="graphics-symbol" aria-roledescription="title" aria-label="Title text 'West fulfils the most orders'" pointer-events="none"><text text-anchor="middle" transform="translate(0,10)" font-family="Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', Roboto, sans-serif" font-size="13px" font-weight="bold" fill="#000" opacity="1">West fulfils the most orders</text></g><g class="mark-text role-title-subtitle" role="graphics-symbol" aria-roledescription="subtitle" aria-label="Subtitle text 'Orders by region; one synthetic week'" pointer-events="none"><text text-anchor="middle" transform="translate(0,25)" font-family="Arial, 'Helvetica Neue', Helvetica, 'Liberation Sans', Roboto, sans-serif" font-size="12px" fill="#000" opacity="1">Orders by region; one synthetic week</text></g></g><path class="foreground" aria-hidden="true" d="" pointer-events="none" display="none"/></g></g></g><path class="foreground" aria-hidden="true" d="" display="none"/></g></g></g><text x="8" y="355.66" font-size="13" fill="#8c8c8c">Source: Synthetic demonstration data</text></svg>
+    vegalite · svg · 343×368px
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/flint-showcase.test.mjs:83:20)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: the offline host bridge restricts messages and does not pretend to run a backend
+ok 10 - the offline host bridge restricts messages and does not pretend to run a backend
+  ---
+  duration_ms: 8.7729
+  type: 'test'
+  ...
+# Subtest: gallery generation is reproducible and pinned rather than fetching a moving library
+ok 11 - gallery generation is reproducible and pinned rather than fetching a moving library
+  ---
+  duration_ms: 3.1397
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 9
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 222.7035

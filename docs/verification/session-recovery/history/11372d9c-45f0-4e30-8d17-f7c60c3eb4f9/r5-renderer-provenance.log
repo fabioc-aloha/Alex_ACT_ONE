@@ -1,0 +1,433 @@
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	﻿2026-11-05T20:04:57.8512024Z Current runner version: '2.338.2'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8538296Z ##[group]Runner Image Provisioner
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8539088Z Hosted Compute Agent
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8539693Z Version: 20261021.618
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8540300Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8541048Z Build Date: 2026-10-21T00:45:21Z
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8541762Z Worker ID: {fe7cc9c8-a443-4fcf-9b8e-1c3af70ace16}
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8542508Z Region: northcentralus
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8543048Z Cloud: Azure
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8543546Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8544905Z ##[group]Operating System
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8545561Z Microsoft Windows Server 2025
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8546148Z 10.0.26100
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8546652Z Datacenter
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8547159Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8547687Z ##[group]Runner Image
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8548263Z Image: windows-2025-vs2026
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8548828Z Version: 20261030.294.1
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8550582Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20261030.294/images/windows/Windows2025-VS2026-Readme.md
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8552540Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20261030.294
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8553524Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8554532Z ##[group]GITHUB_TOKEN Permissions
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8556338Z Contents: read
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8556871Z Metadata: read
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8557335Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8559296Z Secret source: Actions
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8560169Z Cache mode: write
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.8560846Z Prepare workflow directory
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.9011813Z Prepare all required actions
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:57.9077086Z Getting action download info
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:58.1304117Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:58.2676493Z Download action repository 'actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1' (SHA:949feb2413d6458794dcd2491c4babbbce0c15c1)
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:58.4266213Z Download action repository 'r-lib/actions@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05' (SHA:f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05)
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:58.9397584Z Complete job name: Provisioned runtime / windows-2025 / Node 26
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1313251Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1314426Z with:
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1314831Z   persist-credentials: false
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1315333Z   repository: fabioc-aloha/Alex_ACT_ONE
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1319701Z   token: ***
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1320084Z   ssh-strict: true
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1320484Z   ssh-user: git
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1320894Z   clean: true
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1321292Z   sparse-checkout-cone-mode: true
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1321771Z   fetch-depth: 1
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1322157Z   fetch-tags: false
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1322548Z   show-progress: true
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1323385Z   lfs: false
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1323779Z   submodules: false
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1324174Z   set-safe-directory: true
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1324632Z   allow-unsafe-pr-checkout: false
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1325369Z env:
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1325762Z   NPM_CONFIG_IGNORE_SCRIPTS: true
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1326273Z   NPM_CONFIG_PROGRESS: false
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.1326719Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.2782696Z Syncing repository: fabioc-aloha/Alex_ACT_ONE
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.2784624Z ##[group]Getting Git version info
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.2785301Z Working directory is 'D:\a\Alex_ACT_ONE\Alex_ACT_ONE'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.3849229Z [command]"C:\Program Files\Git\bin\git.exe" version
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.7361265Z git version 2.56.0.windows.4
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.7419601Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.7439365Z Temporarily overriding HOME='D:\a\_temp\f29cc1c5-b953-4da2-95ea-0fd34d274123' before making global git config changes
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.7441905Z Adding repository directory to the temporary git global config as a safe directory
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.7453370Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\Alex_ACT_ONE\Alex_ACT_ONE
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.8082359Z Deleting the contents of 'D:\a\Alex_ACT_ONE\Alex_ACT_ONE'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.8087998Z ##[group]Determining repository object format
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.8090039Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.8091232Z ##[group]Initializing the repository
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.8099025Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\Alex_ACT_ONE\Alex_ACT_ONE
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.9171153Z Initialized empty Git repository in D:/a/Alex_ACT_ONE/Alex_ACT_ONE/.git/
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.9223523Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/fabioc-aloha/Alex_ACT_ONE
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.9890498Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.9891493Z ##[group]Disabling automatic garbage collection
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:04:59.9900889Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:00.0331631Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:00.0333412Z ##[group]Setting up auth
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:00.0334574Z Removing SSH command configuration
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:00.0343146Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:00.0726045Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:01.6940653Z Removing HTTP extra header
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:01.6950388Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:01.7332470Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:02.3604991Z Removing includeIf entries pointing to credentials config files
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:02.3615884Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:02.4062283Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:02.9587266Z [command]"C:\Program Files\Git\bin\git.exe" config --file D:\a\_temp\git-credentials-2be3ad34-4aeb-4fd1-a920-dbe34c5eac4d.config http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:02.9967253Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/Alex_ACT_ONE/Alex_ACT_ONE/.git.path D:\a\_temp\git-credentials-2be3ad34-4aeb-4fd1-a920-dbe34c5eac4d.config
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:03.0337003Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:D:/a/Alex_ACT_ONE/Alex_ACT_ONE/.git/worktrees/*.path D:\a\_temp\git-credentials-2be3ad34-4aeb-4fd1-a920-dbe34c5eac4d.config
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:03.0754681Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-2be3ad34-4aeb-4fd1-a920-dbe34c5eac4d.config
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:03.1129395Z [command]"C:\Program Files\Git\bin\git.exe" config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-2be3ad34-4aeb-4fd1-a920-dbe34c5eac4d.config
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:03.1497559Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:03.1498187Z ##[group]Fetching the repository
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:03.1508850Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +6b36ff6cd53c33cf739d96e6830d6096d64d5d56:refs/remotes/origin/main
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:04.5664439Z From https://github.com/fabioc-aloha/Alex_ACT_ONE
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:04.5665538Z  * [new ref]         6b36ff6cd53c33cf739d96e6830d6096d64d5d56 -> origin/main
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:04.5732168Z [command]"C:\Program Files\Git\bin\git.exe" branch --list --remote origin/main
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:04.6133163Z   origin/main
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:04.6181162Z [command]"C:\Program Files\Git\bin\git.exe" rev-parse refs/remotes/origin/main
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:04.6600670Z 6b36ff6cd53c33cf739d96e6830d6096d64d5d56
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:04.6636362Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:04.6637944Z ##[group]Determining the checkout info
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:04.6639061Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:04.6646345Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:04.7169914Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:04.7541321Z ##[group]Checking out the ref
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:04.7549186Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:04.9470184Z Switched to a new branch 'main'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:04.9493014Z branch 'main' set up to track 'origin/main'.
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:04.9546388Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:05.0033053Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:05.0387220Z 6b36ff6cd53c33cf739d96e6830d6096d64d5d56
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:05.0430425Z ##[group]Removing auth
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:05.0431048Z Removing SSH command configuration
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:05.0439581Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:05.0820326Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:05.6405517Z Removing HTTP extra header
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:05.6413591Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:05.6790647Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.2049735Z Removing includeIf entries pointing to credentials config files
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.2061021Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.2394262Z includeif.gitdir:D:/a/Alex_ACT_ONE/Alex_ACT_ONE/.git.path
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.2395752Z includeif.gitdir:D:/a/Alex_ACT_ONE/Alex_ACT_ONE/.git/worktrees/*.path
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.2397342Z includeif.gitdir:/github/workspace/.git.path
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.2398618Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.2440655Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/Alex_ACT_ONE/Alex_ACT_ONE/.git.path
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.2774237Z D:\a\_temp\git-credentials-2be3ad34-4aeb-4fd1-a920-dbe34c5eac4d.config
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.2815998Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/Alex_ACT_ONE/Alex_ACT_ONE/.git.path D\:\\a\\_temp\\git\-credentials\-2be3ad34\-4aeb\-4fd1\-a920\-dbe34c5eac4d\.config
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.3213852Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:D:/a/Alex_ACT_ONE/Alex_ACT_ONE/.git/worktrees/*.path
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.3546796Z D:\a\_temp\git-credentials-2be3ad34-4aeb-4fd1-a920-dbe34c5eac4d.config
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.3592973Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:D:/a/Alex_ACT_ONE/Alex_ACT_ONE/.git/worktrees/*.path D\:\\a\\_temp\\git\-credentials\-2be3ad34\-4aeb\-4fd1\-a920\-dbe34c5eac4d\.config
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.3965080Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.4295542Z /github/runner_temp/git-credentials-2be3ad34-4aeb-4fd1-a920-dbe34c5eac4d.config
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.4335679Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-2be3ad34\-4aeb\-4fd1\-a920\-dbe34c5eac4d\.config
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.4749824Z [command]"C:\Program Files\Git\bin\git.exe" config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.5089476Z /github/runner_temp/git-credentials-2be3ad34-4aeb-4fd1-a920-dbe34c5eac4d.config
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.5132817Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-2be3ad34\-4aeb\-4fd1\-a920\-dbe34c5eac4d\.config
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:06.5529023Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:07.0976215Z Removing credentials config 'D:\a\_temp\git-credentials-2be3ad34-4aeb-4fd1-a920-dbe34c5eac4d.config'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:07.0988961Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:07.1481447Z ##[group]Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:07.1481882Z with:
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:07.1482059Z   node-version: 26
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:07.1482265Z   package-manager-cache: false
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:07.1482499Z   check-latest: false
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:07.1485141Z   token: ***
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:07.1485315Z env:
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:07.1485484Z   NPM_CONFIG_IGNORE_SCRIPTS: true
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:07.1485728Z   NPM_CONFIG_PROGRESS: false
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:07.1485937Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:07.3183117Z Attempting to download 26...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:08.0162029Z Acquiring 26.13.0 - x64 from https://github.com/actions/node-versions/releases/download/26.13.0-41378513395/node-26.13.0-win32-x64.7z
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:08.5312086Z Extracting ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:10.9326724Z Adding to the cache ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:14.9078632Z ##[group]Environment details
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:16.0254474Z node: v26.13.0
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:16.0254893Z npm: 11.20.0
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:16.0255626Z yarn: 1.22.22
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:16.0256218Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:16.0853559Z ##[group]Run r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:16.0854242Z with:
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:16.0854517Z   pandoc-version: 3.13
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:16.0854816Z env:
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:16.0855085Z   NPM_CONFIG_IGNORE_SCRIPTS: true
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:16.0855460Z   NPM_CONFIG_PROGRESS: false
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:16.0855801Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:16.9373549Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command "$ErrorActionPreference = 'Stop' ; try { Add-Type -AssemblyName System.IO.Compression.ZipFile } catch { } ; try { [System.IO.Compression.ZipFile]::ExtractToDirectory('D:\a\_temp\ee180ec5-e151-4fa5-b12a-ac1de90f2a27', 'D:\a\_temp\4644086b-4e81-436c-86d9-b0e98662c0d7', $true) } catch { if (($_.Exception.GetType().FullName -eq 'System.Management.Automation.MethodException') -or ($_.Exception.GetType().FullName -eq 'System.Management.Automation.RuntimeException') ){ Expand-Archive -LiteralPath 'D:\a\_temp\ee180ec5-e151-4fa5-b12a-ac1de90f2a27' -DestinationPath 'D:\a\_temp\4644086b-4e81-436c-86d9-b0e98662c0d7' -Force } else { throw $_ } } ;"
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:17.8235374Z ##[group]Run $runtime = Join-Path $env:RUNNER_TEMP 'alex-act-one-runtime'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:17.8235990Z ^[[36;1m$runtime = Join-Path $env:RUNNER_TEMP 'alex-act-one-runtime'^[[0m
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:17.8236562Z ^[[36;1m"ALEX_ACT_ONE_RUNTIME_ROOT=$runtime" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append^[[0m
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:17.8819784Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:17.8820250Z env:
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:17.8820496Z   NPM_CONFIG_IGNORE_SCRIPTS: true
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:17.8820833Z   NPM_CONFIG_PROGRESS: false
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:17.8821128Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:18.4236017Z ##[group]Run node (Join-Path $PWD 'skills' 'setup-dependencies' 'scripts' 'provision-runtime.mjs') --runtime-root $env:ALEX_ACT_ONE_RUNTIME_ROOT --apply
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:18.4237360Z ^[[36;1mnode (Join-Path $PWD 'skills' 'setup-dependencies' 'scripts' 'provision-runtime.mjs') --runtime-root $env:ALEX_ACT_ONE_RUNTIME_ROOT --apply^[[0m
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:18.4238067Z ^[[36;1mif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }^[[0m
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:18.4238629Z ^[[36;1m$zip = node -p "const d=require('./scripts/shared/dependencies.cjs').TOOLS.jszip; d.package+'@'+d.version"^[[0m
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:18.4239387Z ^[[36;1mnpm install --prefix $env:ALEX_ACT_ONE_RUNTIME_ROOT --save-exact --ignore-scripts --no-audit --no-fund $zip^[[0m
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:18.4239948Z ^[[36;1mif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }^[[0m
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:18.4240505Z ^[[36;1m$mermaid = node -p "const d=require('./scripts/shared/dependencies.cjs').TOOLS.mmdc; d.package+'@'+d.version"^[[0m
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:18.4241165Z ^[[36;1mnpm install --global --ignore-scripts --no-audit --no-fund $mermaid^[[0m
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:18.4241590Z ^[[36;1mif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }^[[0m
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:18.4312456Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:18.4312791Z env:
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:18.4312974Z   NPM_CONFIG_IGNORE_SCRIPTS: true
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:18.4313215Z   NPM_CONFIG_PROGRESS: false
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:18.4313499Z   ALEX_ACT_ONE_RUNTIME_ROOT: D:\a\_temp\alex-act-one-runtime
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:18.4313804Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:19.7158640Z mode:     apply
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:19.7160698Z registry: https://registry.npmjs.org/
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:19.7161578Z runtime:  D:\a\_temp\alex-act-one-runtime
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:19.7162233Z packages:
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:19.7162618Z   - flint-chart-mcp@1.0.1
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:19.7163100Z   - flint-chart@1.0.1
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:19.7163560Z   - @playwright/mcp@0.0.80
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:19.7164020Z   - replicate-mcp@0.9.0
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:19.7165029Z policy:   exact versions; configured registry install; direct Node runtime
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:23.6530278Z installing: flint-chart-mcp@1.0.1, flint-chart@1.0.1, @playwright/mcp@0.0.80, replicate-mcp@0.9.0
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:40.6792673Z 
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:40.6793282Z added 210 packages in 17s
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:41.5333536Z verified flint: exact versions and successful launch probe; host connection not observed
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:41.8511668Z verified playwright: exact versions and successful launch probe; host connection not observed
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:42.0766734Z verified replicate: exact versions and successful launch probe; host connection not observed
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:42.0767565Z 
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:42.0768354Z Provisioned direct runtime. Reload the host, then verify its MCP connection in a new session.
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:43.4197116Z 
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:05:43.4197906Z added 12 packages in 1s
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.0698871Z 
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.0700052Z added 190 packages in 4m
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.1400637Z ##[group]Run node (Join-Path $PWD 'scripts' 'verification-gate.mjs') --lane integration
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.1401409Z ^[[36;1mnode (Join-Path $PWD 'scripts' 'verification-gate.mjs') --lane integration^[[0m
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.1481970Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.1482364Z env:
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.1482607Z   NPM_CONFIG_IGNORE_SCRIPTS: true
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.1482922Z   NPM_CONFIG_PROGRESS: false
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.1483273Z   ALEX_ACT_ONE_RUNTIME_ROOT: D:\a\_temp\alex-act-one-runtime
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.1483636Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5396996Z Environment: win32/x64, Node 26.13.0; lane=integration
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5399345Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\activation-conflicts.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5400897Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\activation-readiness.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5402839Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\activation-routing.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5404339Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\brain-tools.test.cjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5406991Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\ci-gate.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5408320Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\deterministic-helpers.test.cjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5409542Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\documentation-examples.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5410762Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\documentation.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5411551Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\flint-experimental.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5412282Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\flint-interactions.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5413017Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\flint-showcase.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5413789Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\flint-upgrade.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5414553Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\install-optional-dependencies.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5415340Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\markdown-inline-code.test.cjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5416031Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\md-to-word.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5416798Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\native-compatibility.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5418035Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\powershell-diagnostics.test.cjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5419280Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\process-launch.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5420516Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\reinstall-release.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5421372Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\rich-email.test.cjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5422402Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\runtime-readiness.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5423489Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\smoke.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5424213Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\svg-position-precision.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5424921Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\tool-shims.test.cjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.5425604Z Excluded D:\a\Alex_ACT_ONE\Alex_ACT_ONE\tests\visual-uat-guidance.test.mjs: Structural lane
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:48.8501262Z flint: exact versions and launch probe verified; host connection not observed.
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:49.1535043Z playwright: exact versions and launch probe verified; host connection not observed.
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:49.3828303Z replicate: exact versions and launch probe verified; host connection not observed.
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:49.8481473Z Converter prerequisites: pandoc 3.13; mmdc 11.17.0; jszip 3.10.1.
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:49.9188951Z TAP version 13
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4419631Z # Subtest: real md-to-html preserves literal inline/fenced code and renders tables and links
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4423901Z ok 1 - real md-to-html preserves literal inline/fenced code and renders tables and links
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4427722Z   ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4428450Z   duration_ms: 855.2164
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4429217Z   type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4439827Z   ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4440952Z # Subtest: real md-to-word preserves literal inline/fenced code and renders tables and links
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4442556Z ok 2 - real md-to-word preserves literal inline/fenced code and renders tables and links
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4443682Z   ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4444103Z   duration_ms: 1116.8057
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4444582Z   type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4444994Z   ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4446095Z # Subtest: the installed Mermaid npm CLI starts through the shared tool runner
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4447306Z ok 3 - the installed Mermaid npm CLI starts through the shared tool runner
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4448056Z   ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4448806Z   duration_ms: 318.2314
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4449371Z   type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:52.4449789Z   ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:53.5399330Z # Subtest: provisioned Flint 1.0.1 preserves the MCP and three-backend output contracts
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:53.5400424Z     # Subtest: vegalite: catalog, validation, compilation, and real render
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:53.5401277Z     ok 1 - vegalite: catalog, validation, compilation, and real render
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:53.5402815Z       ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:53.5403160Z       duration_ms: 3218.8821
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:53.5403566Z       type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:53.5404014Z       ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.1461567Z     # Subtest: echarts: catalog, validation, compilation, and real render
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.1462572Z     ok 2 - echarts: catalog, validation, compilation, and real render
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.1463205Z       ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.1463642Z       duration_ms: 594.0788
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.1464107Z       type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.1464533Z       ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2116804Z     # Subtest: chartjs: catalog, validation, compilation, and real render
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2117869Z     ok 3 - chartjs: catalog, validation, compilation, and real render
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2118640Z       ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2119085Z       duration_ms: 77.9244
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2119625Z       type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2120040Z       ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2196155Z     # Subtest: validated show accepts the complete chart input
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2197152Z     ok 4 - validated show accepts the complete chart input
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2197867Z       ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2198465Z       duration_ms: 7.7289
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2199064Z       type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2199450Z       ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2312061Z     # Subtest: interaction grammar and chart-compatible discovery admit highlight plus keyboard navigation
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2314034Z     ok 5 - interaction grammar and chart-compatible discovery admit highlight plus keyboard navigation
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2315061Z       ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2315899Z       duration_ms: 11.5939
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2316393Z       type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2316776Z       ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2346013Z     # Subtest: a dropped interaction remains a warning even when the chart is valid
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2346767Z     ok 6 - a dropped interaction remains a warning even when the chart is valid
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2347220Z       ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2347465Z       duration_ms: 3.1076
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2347733Z       type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2347970Z       ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2374603Z     # Subtest: unknown reset gestures are explicit errors rather than neutral-state fallbacks
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2375573Z     ok 7 - unknown reset gestures are explicit errors rather than neutral-state fallbacks
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2376005Z       ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2377953Z       duration_ms: 2.5512
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2378611Z       type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:54.2379009Z       ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9483088Z     # Subtest: initial state and linked boards use their separate supported input surfaces
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9486150Z     ok 8 - initial state and linked boards use their separate supported input surfaces
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9488050Z       ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9489888Z       duration_ms: 10.7161
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9490458Z       type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9490853Z       ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9491654Z     # Subtest: offline export CLI is independent of the caller timezone and uses UTC date annotations
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9494086Z     ok 9 - offline export CLI is independent of the caller timezone and uses UTC date annotations
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9494989Z       ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9495318Z       duration_ms: 3699.7893
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9495606Z       type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9495845Z       ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9538727Z     # Subtest: invalid snake_case names and missing fields remain explicit failures
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9540006Z     ok 10 - invalid snake_case names and missing fields remain explicit failures
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9541186Z       ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9541768Z       duration_ms: 2.6367
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9542644Z       type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9543183Z       ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9543558Z     1..10
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9544360Z ok 4 - provisioned Flint 1.0.1 preserves the MCP and three-backend output contracts
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9545153Z   ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9545423Z   duration_ms: 7986.4281
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9545714Z   type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9545977Z   ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9800438Z # Unknown MCP runtime route: no-such-route
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9801248Z # Subtest: provisioned runtime
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9801874Z     # Subtest: flint starts and reports 1.0.1
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9802561Z     ok 1 - flint starts and reports 1.0.1
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9803163Z       ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9803569Z       duration_ms: 347.7555
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9804495Z       type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9807246Z       ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9808118Z     # Subtest: playwright starts and reports 0.0.80
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9809585Z     ok 2 - playwright starts and reports 0.0.80
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9810228Z       ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9810637Z       duration_ms: 348.9098
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9811123Z       type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9811507Z       ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9812299Z     # Subtest: replicate starts and reports 0.9.0
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9812940Z     ok 3 - replicate starts and reports 0.9.0
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9813298Z       ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9813539Z       duration_ms: 294.9864
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9813860Z       type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9814102Z       ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9814376Z     # Subtest: an unknown route fails loudly
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9814718Z     ok 4 - an unknown route fails loudly
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9815032Z       ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9815263Z       duration_ms: 50.0625
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9815553Z       type: 'test'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9815798Z       ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9816011Z     1..4
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9816265Z ok 5 - provisioned runtime
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9816524Z   ---
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9816752Z   duration_ms: 1042.9626
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9817011Z   type: 'suite'
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9817254Z   ...
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9817458Z 1..5
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9817668Z # tests 18
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9817883Z # suites 1
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9818091Z # pass 18
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9818351Z # fail 0
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9818575Z # cancelled 0
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9818832Z # skipped 0
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9819044Z # todo 0
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9819277Z # duration_ms 8081.5841
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:57.9899325Z Verified integration lane: 18 passed; no skips, todos, or cancellations.
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.0668973Z ##[group]Run node (Join-Path $PWD 'scripts' 'build-flint-showcase.mjs') --describe-runtime
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.0669756Z ^[[36;1mnode (Join-Path $PWD 'scripts' 'build-flint-showcase.mjs') --describe-runtime^[[0m
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.0670329Z ^[[36;1mif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }^[[0m
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.0670804Z ^[[36;1mnode (Join-Path $PWD 'scripts' 'build-flint-showcase.mjs') --check^[[0m
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.0671245Z ^[[36;1mif ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }^[[0m
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.0671692Z ^[[36;1mnode (Join-Path $PWD 'scripts' 'build-flint-showcase.mjs') --experimental --check^[[0m
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.0744357Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.0744746Z env:
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.0744983Z   NPM_CONFIG_IGNORE_SCRIPTS: true
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.0745287Z   NPM_CONFIG_PROGRESS: false
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.0745618Z   ALEX_ACT_ONE_RUNTIME_ROOT: D:\a\_temp\alex-act-one-runtime
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.0746061Z ##[endgroup]
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4966087Z {
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4966597Z   "platform": "win32",
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4967116Z   "architecture": "x64",
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4967617Z   "node": "v26.13.0",
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4968038Z   "packages": {
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4968874Z     "flint-chart-mcp": "1.0.1",
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4969402Z     "flint-chart": "1.0.1",
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4969842Z     "vega": "6.4.0",
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4971779Z     "vega-lite": "6.5.0",
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4972283Z     "echarts": "6.1.0",
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4972655Z     "chart.js": "4.6.1",
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4972957Z     "@napi-rs/canvas": "1.1.0",
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4973311Z     "@modelcontextprotocol/sdk": "1.32.2",
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4974142Z     "@modelcontextprotocol/ext-apps": "1.7.5"
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4974505Z   },
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4974718Z   "fonts": {
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4975272Z     "DejaVuSans-Bold.ttf": "d1c3ff99f1e1ce1827a33efd4dad81f40babda06bff9e43bd7591c86662a287b",
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4976148Z     "DejaVuSans.ttf": "690243adfefe0ce154b547db6205794bd30ac4277275179517a90994f4980648",
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4977021Z     "LiberationSans-Bold.ttf": "788abee4c806d660e8aee46689dd8540cd4bb98da03dcc9d171ce3efd99a9173",
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4977987Z     "LiberationSans-Regular.ttf": "76d04c18ea243f426b7de1f3ad208e927008f961dc5945e5aad352d0dfde8ee8"
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4978591Z   },
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4978803Z   "metrics": {
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4979034Z     "Core": 26.009765625,
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4979303Z     "Services": 46.013671875,
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4979562Z     "North": 29.34375,
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4979783Z     "South": 31.359375
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4979985Z   }
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:09:58.4980153Z }
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:00.3531488Z Showcase is stale at UTF-16 offset 37395. Expected (4497730 bytes): "rk container\"><g transform=\"translate(0,0)\"><path class=\"background\" aria-hidden=\"true\" d=\"M0,0h42.009765625v12h-42.009765625Z\" pointer-events=\"none\" opacity=\"1\"/><g><g class=\"mark-symbol role-legend-symbol\" pointer-events=\"none\"><path transform=\"translate(6,6)\" d=\"M-5,-5h10v10h-". Actual (4496025 bytes): "rk container\"><g transform=\"translate(0,0)\"><path class=\"background\" aria-hidden=\"true\" d=\"M0,0h42.010000228881836v12h-42.010000228881836Z\" pointer-events=\"none\" opacity=\"1\"/><g><g class=\"mark-symbol role-legend-symbol\" pointer-events=\"none\"><path transform=\"translate(6,6)\" d=\"M-". Use the reviewed runtime/environment; inspect this difference before rebuilding.
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:00.4233021Z ##[error]Process completed with exit code 1.
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:00.4490482Z Post job cleanup.
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:00.6461896Z [command]"C:\Program Files\Git\bin\git.exe" version
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:00.6824955Z git version 2.56.0.windows.4
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:00.6902673Z Temporarily overriding HOME='D:\a\_temp\c31bc2be-c487-4b65-9f55-8326fcd740a7' before making global git config changes
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:00.6904288Z Adding repository directory to the temporary git global config as a safe directory
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:00.6917328Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\Alex_ACT_ONE\Alex_ACT_ONE
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:00.7335672Z Removing SSH command configuration
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:00.7348466Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:00.7712860Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:01.3229758Z Removing HTTP extra header
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:01.3240300Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:01.3681523Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:01.9297337Z Removing includeIf entries pointing to credentials config files
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:01.9308527Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:01.9681491Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+Provisioned runtime / windows-2025 / Node 26	UNKNOWN STEP	2026-11-05T20:10:02.5549468Z Cleaning up orphan processes

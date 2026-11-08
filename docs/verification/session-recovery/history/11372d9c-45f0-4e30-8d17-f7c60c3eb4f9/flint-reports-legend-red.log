@@ -1,0 +1,87 @@
+TAP version 13
+# Subtest: showcase is a self-contained HTML document with explicit offline and synthetic-data boundaries
+ok 1 - showcase is a self-contained HTML document with explicit offline and synthetic-data boundaries
+  ---
+  duration_ms: 19.2722
+  type: 'test'
+  ...
+# Subtest: showcase embeds the actual pinned App UI and preserves third-party notices
+ok 2 - showcase embeds the actual pinned App UI and preserves third-party notices
+  ---
+  duration_ms: 21.6462
+  type: 'test'
+  ...
+# Subtest: samples cover chart families, semantic types, gestures, themes, state updates, and links
+ok 3 - samples cover chart families, semantic types, gestures, themes, state updates, and links
+  ---
+  duration_ms: 9.1847
+  type: 'test'
+  ...
+# Subtest: one semantic input is actually rendered by the three supported MCP backends
+ok 4 - one semantic input is actually rendered by the three supported MCP backends
+  ---
+  duration_ms: 10.3373
+  type: 'test'
+  ...
+# Subtest: legend-toggle examples keep a persistent visible key across editorial themes
+not ok 5 - legend-toggle examples keep a persistent visible key across editorial themes
+  ---
+  duration_ms: 11.1051
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\flint-showcase.test.mjs:91:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    trend/nyt must retain a key after a series is hidden
+    + actual - expected
+    
+    + 'nyt'
+    - {
+    -   extends: 'nyt',
+    -   legend: {
+    -     placement: [
+    -       'top'
+    -     ],
+    -     show: 'always'
+    -   }
+    - }
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    extends: 'nyt'
+    legend:
+      show: 'always'
+      placement:
+        0: 'top'
+  actual: 'nyt'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/flint-showcase.test.mjs:96:20)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: the offline host bridge restricts messages and does not pretend to run a backend
+ok 6 - the offline host bridge restricts messages and does not pretend to run a backend
+  ---
+  duration_ms: 51.8776
+  type: 'test'
+  ...
+# Subtest: gallery generation is reproducible and pinned rather than fetching a moving library
+ok 7 - gallery generation is reproducible and pinned rather than fetching a moving library
+  ---
+  duration_ms: 3.1931
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 6
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 233.3895

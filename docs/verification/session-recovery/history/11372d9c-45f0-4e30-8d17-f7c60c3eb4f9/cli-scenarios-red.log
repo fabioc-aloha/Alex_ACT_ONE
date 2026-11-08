@@ -1,0 +1,95 @@
+TAP version 13
+# Subtest: version-bound CLI invocation uses stdin and only flags that the selected executable actually supports
+not ok 1 - version-bound CLI invocation uses stdin and only flags that the selected executable actually supports
+  ---
+  duration_ms: 1.0873
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\skill-scenario-runner.test.mjs:15:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing reproducible CLI scenario runner'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    api (file:///C:/Development/Alex_ACT_ONE/tests/skill-scenario-runner.test.mjs:6:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/skill-scenario-runner.test.mjs:16:41)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.start (node:internal/test_runner/test:1262:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: capability and version probes use the same selected executable with automatic updates disabled
+not ok 2 - capability and version probes use the same selected executable with automatic updates disabled
+  ---
+  duration_ms: 0.2103
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\skill-scenario-runner.test.mjs:30:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing reproducible CLI scenario runner'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    api (file:///C:/Development/Alex_ACT_ONE/tests/skill-scenario-runner.test.mjs:6:12)
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/skill-scenario-runner.test.mjs:31:34)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: versioned scenarios cover every representative family and failure/consent boundary
+ok 3 - versioned scenarios cover every representative family and failure/consent boundary
+  ---
+  duration_ms: 3.4938
+  type: 'test'
+  ...
+# Subtest: scenario instructions require fresh observed evidence rather than synthetic expected answers
+ok 4 - scenario instructions require fresh observed evidence rather than synthetic expected answers
+  ---
+  duration_ms: 1.4281
+  type: 'test'
+  ...
+# Subtest: every scenario explicitly permits the required skill references without granting commands or writes
+not ok 5 - every scenario explicitly permits the required skill references without granting commands or writes
+  ---
+  duration_ms: 1.2825
+  type: 'test'
+  location: 'C:\\Development\\Alex_ACT_ONE\\tests\\skill-scenarios.test.mjs:47:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + '2026-11-05.1'
+    - '2026-11-05.2'
+                  ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '2026-11-05.2'
+  actual: '2026-11-05.1'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Development/Alex_ACT_ONE/tests/skill-scenarios.test.mjs:49:12)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1402:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+    Test.postRun (node:internal/test_runner/test:1542:19)
+    Test.run (node:internal/test_runner/test:1467:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 2
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 125.8139

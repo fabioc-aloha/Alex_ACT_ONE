@@ -13,3 +13,9 @@ Inspect status and preserve unrelated/uncommitted work. Destructive reset/restor
 Load only the applicable recovery or release procedure in [execution details](references/execution-details.md). Commands there illustrate effects, not permission to run them. Prefer a scoped, reversible action; when unsure, inspect or dry-run and report the decision needed. A fetch does not merge; a requested fast-forward must refuse divergence.
 
 Return the actual command result and resulting branch/worktree state. Do not equate an exit code with broader integration or test success.
+
+Apply the [shared artifact storage contract](../proactive-awareness/references/project-artifact-storage.md)
+to project deliverables: check that final files and dependencies are discoverable
+and not ignored. Repository presence, staging, a local commit, a push, and a
+verified remote commit are separate states. Report the observed state; storage
+requirements alone do not authorize commits or pushes.
