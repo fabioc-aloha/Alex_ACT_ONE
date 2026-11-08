@@ -392,8 +392,12 @@ are unchanged.
 
 With npm 12, a proxy that advertises a different tarball host can trigger
 `EALLOWREMOTE` even when the exact package version is available.
-For the Microsoft proxy feed prefix verified on 2026-10-16, explicitly route
-those URLs back through the configured proxy:
+The source helpers detect the configured HTTPS Microsoft packagefeedproxy npm
+endpoint and preview the confirmed backend-prefix routing. Other registries
+are unchanged. Verify automatic private/global routing, explicit precedence,
+no-write preview, npm 12+ rejection, and failure without automatic retries.
+The published `0.9.5` payload retains explicit-only routing. To override the
+detected mapping or select another confirmed backend prefix:
 
 ```powershell
 .\install-optional-dependencies.ps1 -RegistryTarballPrefix 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/'

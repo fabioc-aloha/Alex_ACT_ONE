@@ -221,4 +221,11 @@ function mcpPackages(routes = Object.keys(MCP_SERVERS)) {
     });
 }
 
-module.exports = { TOOLS, MCP_SERVERS, SHOWCASE_PACKAGES, PLUGINS, mcpPackages, platformKey, remedyFor, specOf, installMap };
+function registryTarballPrefix(registry) {
+    const url = new URL(registry);
+    if (url.protocol !== 'https:' || url.host !== 'packagefeedproxy.microsoft.io'
+        || !/^\/npm\/?$/.test(url.pathname) || url.username || url.password || url.search || url.hash) return null;
+    return 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/';
+}
+
+module.exports = { TOOLS, MCP_SERVERS, SHOWCASE_PACKAGES, PLUGINS, mcpPackages, platformKey, remedyFor, specOf, installMap, registryTarballPrefix };

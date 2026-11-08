@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, mkdirSync, rmSync, writeFileSync, chmodSync } from 'node:fs';
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync, chmodSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve, delimiter } from 'node:path';
 import { createRequire } from 'node:module';
@@ -173,8 +173,17 @@ for (const route of Object.keys(deps.MCP_SERVERS)) {
         assert.match(result.stderr, /mismatch/i);
     });
 }
-for (const mode of ['ready', 'empty', 'wrong-report']) {
-    test(`the provisioner verifies installation outcome before success: ${mode}`, t => {
+for (const [mode, registry, prefix, explicitPrefix, npmVersion = '12.0.2'] of [
+    ['ready', 'https://fixture.invalid/npm/', null],
+    ['empty', 'https://fixture.invalid/npm/', null],
+    ['wrong-report', 'https://fixture.invalid/npm/', null],
+    ['ready', 'https://packagefeedproxy.microsoft.io/npm/',
+        'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/'],
+    ['ready', 'https://packagefeedproxy.microsoft.io/npm/', 'https://fixture.invalid/feed/',
+        'https://fixture.invalid/feed/'],
+    ['old-npm', 'https://packagefeedproxy.microsoft.io/npm/', null, null, '11.0.0'],
+]) {
+    test(`the provisioner verifies installation outcome before success: ${mode}, ${registry}, explicit=${Boolean(explicitPrefix)}`, t => {
         const root = fixture(t);
         const bin = join(root, 'bin');
         const npm = process.platform === 'win32' ? join(bin, 'node_modules', 'npm', 'bin', 'npm-cli.js') : join(bin, 'npm');
@@ -183,7 +192,9 @@ for (const mode of ['ready', 'empty', 'wrong-report']) {
         writeFileSync(npm, `${process.platform === 'win32' ? '' : '#!' + process.execPath + '\n'}
 const fs=require('node:fs'),path=require('node:path'),args=process.argv.slice(2);
 const pins=${JSON.stringify(deps.mcpPackages(['flint']))};
-if(args[0]==='config'){console.log('https://fixture.invalid/npm/');}
+fs.appendFileSync(process.env.FIXTURE_COMMAND_LOG,JSON.stringify(args)+'\\n');
+if(args[0]==='config'){console.log(${JSON.stringify(registry)});}
+else if(args[0]==='--version'){console.log(${JSON.stringify(npmVersion)});}
 else if(args[0]==='view'){console.log(JSON.stringify(args[1].slice(args[1].lastIndexOf('@')+1)));}
 else if(args[0]==='install'){
  const root=args[args.indexOf('--prefix')+1];
@@ -195,11 +206,27 @@ else if(args[0]==='install'){
 `);
         if (process.platform !== 'win32') chmodSync(npm, 0o755);
         const runtime = join(root, 'selected runtime');
-        const result = spawnSync(process.execPath, [provisioner, '--server', 'flint', '--runtime-root', runtime, '--apply'], {
+        const commandLog = join(root, 'npm-commands.jsonl');
+        const result = spawnSync(process.execPath, [provisioner, '--server', 'flint', '--runtime-root', runtime,
+            ...(explicitPrefix ? ['--registry-tarball-prefix', explicitPrefix] : []), '--apply'], {
             encoding: 'utf8', timeout: 15000,
             env: { ...process.env, PATH: bin + delimiter + process.env.PATH,
-                ALEX_ACT_ONE_RUNTIME_ROOT: runtime, FIXTURE_RUNTIME: runtime, FIXTURE_MODE: mode },
+                ALEX_ACT_ONE_RUNTIME_ROOT: runtime, FIXTURE_RUNTIME: runtime, FIXTURE_MODE: mode,
+                FIXTURE_COMMAND_LOG: commandLog },
         });
+        const commands = readFileSync(commandLog, 'utf8').trim().split(/\r?\n/).map(line => JSON.parse(line));
+        for (const args of commands) {
+            assert.deepEqual(args.filter(arg => arg.startsWith('--replace-registry-host=')),
+                args[0] === 'install' && prefix ? [`--replace-registry-host=${prefix}`] : []);
+            assert.ok(!args.some(arg => /^--registry(?:=|$)|allow-remote|strict-ssl/.test(arg)));
+        }
+        if (mode === 'old-npm') {
+            assert.notEqual(result.status, 0);
+            assert.match(result.stderr, /requires npm 12 or later/);
+            assert.equal(existsSync(runtime), false);
+            assert.equal(commands.filter(args => args[0] === 'install' || args[0] === 'view').length, 0);
+            return;
+        }
         assert.equal(existsSync(runtime), true, 'Provisioner did not honor the selected environment runtime');
         if (mode === 'ready') {
             assert.equal(result.status, 0, result.stderr);

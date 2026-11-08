@@ -519,9 +519,14 @@ prefix. It honors `ALEX_ACT_ONE_RUNTIME_ROOT` unless `-RuntimeRoot` is supplied.
 It preserves npm registry/policy settings and checks real rendering; package
 presence alone is not success.
 
-If npm reports `EALLOWREMOTE`, stop. The current Microsoft proxy advertised
-the following backend prefix during release verification. Preview and apply
-explicit per-command routing only after confirming it matches the rejected URL:
+The checkout's installer now recognizes the configured
+`https://packagefeedproxy.microsoft.io/npm/` registry and previews its confirmed
+backend-prefix routing automatically. `-Apply` uses that routing for every
+private/global npm install with npm 12+. No extra proxy flag is needed.
+This source improvement is not yet in the immutable `0.9.5` Mall payload.
+
+Other registries are unchanged. To override the detected prefix or configure
+another confirmed backend, preview an explicit per-command routing prefix:
 
 ```powershell
 $feed = 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/'
@@ -529,7 +534,10 @@ $feed = 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-publ
 .\install-optional-dependencies.ps1 -Apply -RegistryTarballPrefix $feed
 ```
 
-Do not change registries, enable remote fetching, or continue after an error.
+`-RegistryTarballPrefix` takes precedence over detection. If a routed install
+still reports `EALLOWREMOTE`, stop and inspect the actual rejected URL; the
+helper does not retry or broaden routing. Do not change registries, enable
+remote fetching, or continue after an error.
 
 Pandoc and Pillow are separate, explicitly invoked prerequisites for the
 converter and screenshot workflows:

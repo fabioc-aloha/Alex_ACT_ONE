@@ -16,10 +16,18 @@
   Both Flint demonstrations are retained and rebuilt with reviewed newer pins.
   Replicate support is removed; old user state is not deleted. The root helpers
   now support explicit safe refresh and selected-runtime verification.
-- Local installation remains enabled `0.9.3`. The attached CLI's apparent
-  install success did not yield an installed entry or skill discovery.
-  The user explicitly approved publication and will run the manual reinstall.
-  No `0.9.5` local upgrade, activation, or refreshed host cache is claimed.
+- After the user's manual reinstall, native inventory reports enabled `0.9.5`
+  from `alex-mall`. The loaded installed cache reports `0.9.5`; consented
+  bootstrap verification matched all 15 instruction hashes and the unchanged
+  current receipt. This does not prove every host loaded the instructions.
+- The user's dependency installation succeeded with explicit proxy routing.
+  A later no-install check verified all six selected pins, both MCP launchers,
+  Mermaid SVG, and SVG-to-PNG rendering with existing Edge. Host MCP
+  connectivity remains separate.
+- Unreleased source now detects the exact configured Microsoft npm proxy and
+  selects its confirmed tarball prefix automatically. Explicit routing wins;
+  npm settings/security policy are unchanged. The installed/released `0.9.5`
+  payload remains immutable and does not contain this source improvement.
 - Completed recovery, retention, and synchronization records are preserved
   in [the archive](archive/README.md). That work is closed historical context,
   not an active product goal. Dependency pins and unresolved product decisions
@@ -27,9 +35,9 @@
 
 ## Blockers
 
-- The deferred local installation/activation gate remains open. Verify one
-  enabled `0.9.5` Mall entry and actual installed bytes before running the
-  activation helper. Do not treat cached source or enabled flags as installation.
+- Full installed-payload byte parity and broader live-host observations remain
+  separate from the verified inventory, instruction parity, and dependency
+  checks. Do not treat an enabled flag alone as complete host verification.
 - Later delivery changes require their own reviewed commit and fresh
   same-commit release evidence. The dated manual-install exceptions do not
   relax future release gates.
@@ -40,13 +48,13 @@
 
 ## Next Action
 
-The user will run [the reinstall/activation helper](reinstall-and-check.ps1)
-with `-Refresh -ExpectedVersion 0.9.5` from a standalone terminal, then preview
-and apply [optional dependencies](install-optional-dependencies.ps1).
-Refresh never uninstalls first or forces instruction conflicts. Preserve
-profile conflicts and reviewed runtime pins; verify the loaded root after a
-host restart. The [release notes](archive/verification/release-0.9.5/release-notes.md)
-contain the command sequence. Continue product maintenance from
+Qualify the unreleased proxy-routing source change through the existing
+release gates before separately approved publication. The 107 focused
+routing/runtime tests passed in disposable fixtures; real configured-proxy
+previews and no-install dependency/render checks also passed. The
+[optional installer](install-optional-dependencies.ps1) needs no explicit
+prefix for the recognized proxy in this checkout. Preserve profile conflicts,
+reviewed pins, and the frozen release payload. Continue product maintenance from
 [ROADMAP.md](ROADMAP.md); R8 remains open. The scalar/array stable-version audit
 repair is complete and tested.
 Do not resume adopter-recovery operations from this handoff.

@@ -93,7 +93,7 @@ node <this-skill>/scripts/check-dependencies.cjs --apply
 
 ## MCP Servers
 
-Three pinned servers, provisioned together but tiered differently. They install
+Two pinned servers, provisioned together but tiered differently. They install
 into plugin-private state and are launched by a direct Node shim, never by npm
 or npx.
 
@@ -125,10 +125,17 @@ timeout/startup failures remain explicit. A failed install or verification can
 leave partial package state and must not be reported as provisioned successfully.
 
 If registry metadata advertises backend tarballs that npm policy cannot fetch
-directly, do not enable remote fetching or change the registry. With explicit
-approval and npm 12+, `--registry-tarball-prefix <HTTPS-prefix/>` routes matching
-tarball URLs through the configured registry for that command only. Preview the
-exact prefix first; the installer does not invent it or persist npm settings.
+directly, do not enable remote fetching or change the registry. The source
+helpers recognize only the configured `https://packagefeedproxy.microsoft.io/npm/`
+endpoint and preview its confirmed Microsoft backend prefix automatically.
+With npm 12+ and normal installation consent, matching tarballs are routed
+through that registry for the install command only. No corporate-network
+inference, persistent npm edits, retries, or broader routing occur.
+`--registry-tarball-prefix <HTTPS-prefix/>` overrides detection with a separately
+confirmed explicit prefix. Other registries require that explicit selection.
+The root PowerShell helper uses the same detection and previews it; its
+`-VerifyOnly` mode applies no routing and fetches no packages. The immutable
+`0.9.5` package predates automatic detection.
 
 The provisioner installs nothing globally and never passes `--registry` or edits
 `.npmrc`. Whatever registry the user has configured is the one it uses.
@@ -198,7 +205,7 @@ them. Private runtime state must never run ahead of reviewed source.
 | A skill reports a missing tool | Run the dependency check; it names the install command for the current platform |
 | A plugin shows as missing but the user installed it | Check the store line in the report. Apps read different stores; the plugin may be installed for a different one |
 | Registry is unexpected | Stop. Correct npm configuration outside this skill, then preview again |
-| Provisioning fails | Report npm's error without adding a registry override |
+| Provisioning fails | Report npm's error; stop rather than changing registries, broadening prefix routing, or retrying automatically |
 | Runtime reports missing private state | Run the provisioner again; do not substitute npx |
 | Runtime reports a version mismatch | Re-provision from the reviewed source version; never launch stale state |
 | Skills load on Scout but their MCP tools are absent | Provisioning and registration are separate. Run `register-scout-mcp.mjs`, then restart Scout fully |

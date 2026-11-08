@@ -5,7 +5,13 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
-Post-publication evidence does not change the immutable `v0.9.5` payload.
+- Detect the configured Microsoft packagefeedproxy npm endpoint in the root
+  optional installer and MCP provisioner, using one shared exact-endpoint
+  matcher. Preview reports the confirmed backend prefix; npm 12+ apply uses
+  per-command routing without changing registry/security policy. Other
+  registries remain unchanged, explicit prefixes take precedence, and continued
+  fetch-policy failures stop without retries. The immutable `v0.9.5` payload
+  is unchanged; this source improvement requires separate release delivery.
 
 ## 0.9.5 - 2026-11-08
 

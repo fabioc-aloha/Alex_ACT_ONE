@@ -97,6 +97,13 @@ try {
   const registryResult = await run('npm', ['config', 'get', 'registry'], { capture: true });
   const registry = registryResult.stdout.trim();
   if (!registry) throw new Error('npm returned an empty configured registry');
+  const tarballPrefix = options.tarballPrefix || deps.registryTarballPrefix(registry);
+  if (!options.tarballPrefix && tarballPrefix && !CHECK_UPDATES) {
+    const version = (await run('npm', ['--version'], { capture: true })).stdout.trim();
+    if (!/^\d+\.\d+\.\d+/.test(version) || Number(version.split('.')[0]) < 12) {
+      throw new Error('Detected Microsoft proxy routing requires npm 12 or later');
+    }
+  }
 
   console.log(`mode:     ${APPLY ? 'apply' : 'preview'}`);
   console.log(`registry: ${registry}`);
@@ -104,7 +111,9 @@ try {
   console.log('packages:');
   for (const packageSpec of PACKAGES) console.log(`  - ${packageSpec}`);
   console.log('policy:   exact versions; configured registry install; direct Node runtime');
-  if (options.tarballPrefix) console.log(`tarballs: ${options.tarballPrefix} -> ${registry} (per-command routing only)`);
+  if (tarballPrefix && !CHECK_UPDATES) {
+    console.log(`tarballs: ${tarballPrefix} -> ${registry} (${options.tarballPrefix ? 'explicit prefix' : 'detected Microsoft proxy'}; per-command routing only)`);
+  }
 
   if (CHECK_UPDATES) {
     console.log('\nstable version audit:');
@@ -153,7 +162,7 @@ try {
       '--loglevel=error',
       '--prefix',
       RUNTIME_ROOT,
-      ...(options.tarballPrefix ? [`--replace-registry-host=${options.tarballPrefix}`] : []),
+      ...(tarballPrefix ? [`--replace-registry-host=${tarballPrefix}`] : []),
       ...PACKAGES,
     ], {
       env: { NPM_CONFIG_REGISTRY: registry }, timeout: 180000,

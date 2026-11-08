@@ -20,6 +20,8 @@ const packages = [
     })),
 ];
 const feedPrefix = 'https://feed.example.invalid/npm/registry/';
+const microsoftProxy = 'https://packagefeedproxy.microsoft.io/npm/';
+const microsoftFeed = 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/';
 
 function runInstaller(t, shell, options = {}) {
     const root = realpathSync.native(mkdtempSync(join(ROOT, '.test-optional-deps-')));
@@ -46,7 +48,7 @@ if (($Arguments -join ' ') -eq '--version') {
     exit 0
 }
 if (($Arguments -join ' ') -eq 'config get registry') {
-    Write-Output 'https://proxy.example.invalid/npm/'
+    Write-Output $env:FAKE_REGISTRY
     exit 0
 }
 if (($Arguments -join ' ') -eq 'prefix --global') {
@@ -184,6 +186,7 @@ exit 1
             FAKE_METADATA_MISMATCH: options.metadataMismatch || '',
             FAKE_LAUNCHER_MISMATCH: options.launcherMismatch || '',
             FAKE_NPM_VERSION: options.npmVersion || '12.0.2',
+            FAKE_REGISTRY: options.registry || 'https://proxy.example.invalid/npm/',
             FAKE_NODE: process.execPath,
             FAKE_STDERR_WARNING: options.stderrWarning ? '1' : '',
             FAKE_RENDER_FAILURE: options.renderFailure || '',
@@ -226,8 +229,9 @@ exit 1
         assert.ok(!command.some(arg => /replicate/.test(arg)));
         assert.ok(!command.includes('set'));
         const routing = command.filter(arg => arg.startsWith('--replace-registry-host='));
-        assert.deepEqual(routing, command[0] === 'install' && options.tarballPrefix
-            ? [`--replace-registry-host=${options.tarballPrefix}`] : []);
+        const prefix = options.tarballPrefix || (options.registry === microsoftProxy ? microsoftFeed : '');
+        assert.deepEqual(routing, command[0] === 'install' && prefix
+            ? [`--replace-registry-host=${prefix}`] : []);
     }
     const renderers = existsSync(renderLog)
         ? readFileSync(renderLog, 'utf8').trim().split(/\r?\n/).map(line => JSON.parse(line))
@@ -268,6 +272,57 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
         for (const command of commands.filter(args => args[0] === 'install' && args.includes('--prefix'))) {
             assert.equal(command[command.indexOf('--prefix') + 1], runtime);
         }
+    });
+
+    test(`${shell}: detects the configured Microsoft proxy in a no-write preview`, t => {
+        const { commands, output, runtime, globalPrefix } = runInstaller(t, shell, { registry: microsoftProxy });
+        assert.ok(output.includes(`${microsoftFeed} -> ${microsoftProxy}`));
+        assert.match(output, /detected Microsoft proxy/);
+        assert.equal(commands.filter(args => args[0] === 'view' || args[0] === 'install').length, 0);
+        assert.equal(existsSync(runtime), false);
+        assert.equal(existsSync(globalPrefix), false);
+        assert.deepEqual(commands, [['config', 'get', 'registry'], ['prefix', '--global'], ['--version']]);
+    });
+
+    test(`${shell}: routes every private and global install for the configured Microsoft proxy`, t => {
+        const { commands, output } = runInstaller(t, shell, { registry: microsoftProxy, apply: true });
+        assert.equal(commands.filter(args => args[0] === 'install').length, packages.length);
+        assert.match(output, /detected Microsoft proxy/);
+    });
+
+    test(`${shell}: explicit routing overrides detected Microsoft proxy routing`, t => {
+        runInstaller(t, shell, { registry: microsoftProxy, tarballPrefix: feedPrefix, apply: true });
+    });
+
+    test(`${shell}: proxy verification fetches nothing and does not require routing support`, t => {
+        const { commands } = runInstaller(t, shell, { registry: microsoftProxy, apply: true, verifyAgain: true });
+        assert.equal(commands.filter(args => args[0] === 'view').length, packages.length);
+        assert.equal(commands.filter(args => args[0] === 'install').length, packages.length);
+        assert.equal(commands.filter(args => args[0] === '--version').length, 1);
+    });
+
+    test(`${shell}: a lookalike proxy host gets no automatic routing`, t => {
+        const { commands } = runInstaller(t, shell, {
+            registry: 'https://packagefeedproxy.microsoft.io.example.invalid/npm/',
+        });
+        assert.deepEqual(commands, [['config', 'get', 'registry'], ['prefix', '--global']]);
+    });
+
+    test(`${shell}: detected routing refuses older npm before package writes`, t => {
+        const { commands } = runInstaller(t, shell, {
+            registry: microsoftProxy, npmVersion: '11.0.0', apply: true, error: /requires npm 12 or later/,
+        });
+        assert.equal(commands.filter(args => args[0] === 'view' || args[0] === 'install').length, 0);
+    });
+
+    test(`${shell}: detected routing does not retry or broaden a rejected tarball prefix`, t => {
+        const { commands, output } = runInstaller(t, shell, {
+            registry: microsoftProxy, apply: true,
+            installFailure: `${packages[0].name}@${packages[0].version}`, error: /EALLOWREMOTE/,
+        });
+        assert.match(output, /routing was already/);
+        assert.match(output, /No automatic retry/);
+        assert.equal(commands.filter(args => args[0] === 'install').length, 1);
     });
 
     test(`${shell}: unavailable proxy pin prevents all installations`, (t) => {
@@ -366,7 +421,7 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
             apply: true, tarballPrefix: feedPrefix,
             installFailure: `${packages[0].name}@${packages[0].version}`, error: /EALLOWREMOTE/,
         });
-        assert.match(output, /Explicit tarball routing was already requested/);
+        assert.match(output, /Tarball routing was already selected/);
         assert.match(output, /No automatic retry/);
         assert.equal(commands.filter(command => command[0] === 'install').length, 1);
     });

@@ -13,6 +13,25 @@ Node 26 structural jobs for the full release matrix.
 These are verification targets, not certification of every Copilot host or OS.
 macOS and other Node versions are not covered by this workflow.
 
+## Post-release proxy-routing source verification
+
+The unreleased checkout recognizes only the configured HTTPS Microsoft
+packagefeedproxy npm endpoint and its confirmed backend prefix. Shared
+detection is exercised through both the optional PowerShell installer and
+Node MCP provisioner. The focused routing/runtime run passed 107 tests without
+failures, skips, or todos, including private/global routing, explicit precedence,
+read-only previews/verification, npm 12 guards, lookalike registries, and
+failure without retries or policy changes. This is not a new full release matrix.
+
+After the user's manual setup, native inventory reports enabled `0.9.5` from
+Mall, and installed-source bootstrap verification matched all 15 instructions
+and the current receipt. The root dependency helper's no-install `-VerifyOnly`
+check passed all six selected pins, both MCP launchers, real Mermaid SVG, and
+SVG-to-PNG output using installed Edge. User packages were not reinstalled
+by these checks. Full installed payload parity and live-host loading remain
+separate observations. Published `v0.9.5` bytes are unchanged; automatic proxy
+detection is still a source-only improvement pending release delivery.
+
 ## What runs where
 
 The [candidate package gate](package.md) separately checks the explicit
@@ -299,9 +318,11 @@ The configured npm registry returned array-wrapped metadata and a prerelease
 value for Playwright's `latest` tag. The bundled update audit incorrectly
 reported equal versions as updates and called the prerelease stable. An
 independent normalized, fresh-metadata check identified newer stable npm pins;
-Pillow also had a newer upstream release. These remain review candidates, not
-approved upgrades. Track the correction and regression cases in the
-[dependency-audit task](../ROADMAP.md#repair-the-dependency-update-audit).
+Pillow also had a newer upstream release. At the time, these were review
+candidates, not approved upgrades. The audit correction and reviewed npm pin
+upgrades subsequently shipped in
+[0.9.5](../archive/verification/release-0.9.5/README.md); Pillow remains a
+separate manual setup choice.
 
 No dependencies, credentials, profile instructions, or host configuration were
 changed, and no paid image generation was attempted. Replicate launchability
