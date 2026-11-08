@@ -1,0 +1,137 @@
+{
+  "status": "historical-recovery-with-separate-verified-synchronization-record",
+  "scope": "top-level C:\\Development Git worktrees; matching local session files only",
+  "repositories": [
+    {
+      "repository": "aipi-workshop",
+      "copied": 0,
+      "accounted": 0,
+      "excluded": 0,
+      "existingEvidencePreserved": true
+    },
+    {
+      "repository": "AlexBooks",
+      "copied": 0,
+      "accounted": 180,
+      "excluded": 12,
+      "existingEvidencePreserved": true
+    },
+    {
+      "repository": "Alex_ACT_ONE",
+      "copied": 0,
+      "accounted": 221,
+      "excluded": 49,
+      "existingEvidencePreserved": true
+    },
+    {
+      "repository": "Alex_ACT_ONE_Architect",
+      "copied": 1,
+      "accounted": 0,
+      "excluded": 0,
+      "hashesVerified": true,
+      "index": "docs/session-artifact-recovery/2026-11-08/README.md"
+    },
+    {
+      "repository": "Alex_ACT_ONE_Steward",
+      "copied": 47,
+      "accounted": 1,
+      "excluded": 1,
+      "hashesVerified": true,
+      "index": "operations/evidence/session-recovery/2026-11-08/README.md"
+    },
+    {
+      "repository": "Alex_Skill_Mall",
+      "copied": 0,
+      "accounted": 0,
+      "excluded": 0,
+      "existingEvidencePreserved": true
+    },
+    {
+      "repository": "arch-pursuit-collection",
+      "copied": 0,
+      "accounted": 0,
+      "excluded": 0,
+      "existingEvidencePreserved": true
+    },
+    {
+      "repository": "architecture-code-review",
+      "copied": 7,
+      "accounted": 0,
+      "excluded": 2,
+      "hashesVerified": true,
+      "index": "docs/session-artifact-recovery/2026-11-08/README.md"
+    },
+    {
+      "repository": "btsp-experience-practice-assessment",
+      "copied": 34,
+      "accounted": 4,
+      "excluded": 7,
+      "hashesVerified": true,
+      "index": "docs/session-artifact-recovery/2026-11-08/README.md"
+    },
+    {
+      "repository": "circuit-breaker",
+      "copied": 2,
+      "accounted": 0,
+      "excluded": 0,
+      "hashesVerified": true,
+      "index": "docs/session-artifact-recovery/2026-11-08/README.md"
+    },
+    {
+      "repository": "CodeQuality",
+      "copied": 0,
+      "accounted": 0,
+      "excluded": 0,
+      "existingEvidencePreserved": true
+    },
+    {
+      "repository": "QualtricsPipeline",
+      "copied": 1,
+      "accounted": 0,
+      "excluded": 20,
+      "hashesVerified": true,
+      "index": "docs/session-artifact-recovery/2026-11-08/README.md"
+    },
+    {
+      "repository": "QuestionnaireFlow",
+      "copied": 5,
+      "accounted": 0,
+      "excluded": 2,
+      "hashesVerified": true,
+      "index": "docs/session-artifact-recovery/2026-11-08/README.md"
+    },
+    {
+      "repository": "QuestionnaireFlow_7570607b93b056da",
+      "copied": 0,
+      "accounted": 0,
+      "excluded": 0,
+      "existingEvidencePreserved": true
+    },
+    {
+      "repository": "seo-monitor",
+      "copied": 0,
+      "accounted": 0,
+      "excluded": 0,
+      "existingEvidencePreserved": true
+    },
+    {
+      "repository": "SurveyFunnel",
+      "copied": 31,
+      "accounted": 0,
+      "excluded": 0,
+      "hashesVerified": true,
+      "index": "docs/session-artifact-recovery/2026-11-08/README.md"
+    },
+    {
+      "repository": "TheEditor",
+      "copied": 0,
+      "accounted": 0,
+      "excluded": 2,
+      "existingEvidencePreserved": true
+    }
+  ],
+  "totalCopied": 128,
+  "copiedRepositories": 8,
+  "originalsPreserved": true,
+  "synchronizationRecord": "sync-results.json"
+}

@@ -5,7 +5,15 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
-No unreleased changes.
+- 2026-11-08: Added a task-local, preview-first
+  [local recovery helper](scripts/recover-local-artifacts.mjs) and regression
+  controls for authorized development-repository artifact recovery.
+  The [local inspection and results](docs/verification/development-recovery/2026-11-08/README.md)
+  record 128 copied artifacts in eight owning repositories, preserved existing
+  archives and originals, portable guidance additions, and explicit privacy/raw
+  data exclusions. The user subsequently authorized source synchronization
+  through each repository's upstream and required policies. This is not an
+  installed update or release; unrelated changes remain outside the commits.
 
 ## 0.9.3 - 2026-11-07
 

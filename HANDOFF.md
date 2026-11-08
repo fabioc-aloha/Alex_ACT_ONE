@@ -14,6 +14,12 @@
   [session-artifact detection](skills/proactive-awareness/scripts/check-session-artifacts.cjs)
   and [multi-account GitHub credential pinning](skills/git-workflow/scripts/check-git-auth.cjs).
   Dependency pins and Replicate retirement proposal status are unchanged.
+- Source maintenance adds a scoped recovery helper and
+  [development-repository recovery evidence](docs/verification/development-recovery/2026-11-08/README.md).
+  The user approved local recovery, then separately authorized synchronizing
+  its scoped changes through each repository's upstream and required policies.
+  The synchronization snapshot owns per-repository results and blockers.
+  This does not authorize installation, production deployment, or a release.
 
 ## Blockers
 

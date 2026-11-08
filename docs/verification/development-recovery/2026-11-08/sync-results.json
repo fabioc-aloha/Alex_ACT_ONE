@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-11-08T14:20:16.570Z",
+  "scope": "17 top-level development worktrees; configured current upstreams, not legacy mirrors",
+  "verifiedOtherWorktrees": 16,
+  "currentRepositoryVerification": "Final live Git verification after committing this snapshot",
+  "repositories": [
+    {
+      "repository": "aipi-workshop",
+      "branch": "main",
+      "upstream": "origin/main",
+      "state": "verified-aligned",
+      "head": "0ff942807ced2004e65dec28c8ba088e505b873a",
+      "remoteHead": "0ff942807ced2004e65dec28c8ba088e505b873a",
+      "clean": true,
+      "unrelatedChangesPreserved": []
+    },
+    {
+      "repository": "AlexBooks",
+      "branch": "main",
+      "upstream": "origin/main",
+      "state": "verified-aligned",
+      "head": "be1cf1266e058f492c074064cd0d06a08cfa2fa0",
+      "remoteHead": "be1cf1266e058f492c074064cd0d06a08cfa2fa0",
+      "clean": true,
+      "unrelatedChangesPreserved": []
+    },
+    {
+      "repository": "Alex_ACT_ONE",
+      "branch": "main",
+      "upstream": "origin/main",
+      "state": "snapshot-owning-commit-verified-separately-after-push",
+      "note": "This snapshot does not self-reference its containing commit SHA. Verify current HEAD against origin/main after the final source push."
+    },
+    {
+      "repository": "Alex_ACT_ONE_Architect",
+      "branch": "main",
+      "upstream": "origin/main",
+      "state": "verified-aligned",
+      "head": "ba8bb77b8234331e25708b0b08b50b144be8e382",
+      "remoteHead": "ba8bb77b8234331e25708b0b08b50b144be8e382",
+      "clean": true,
+      "unrelatedChangesPreserved": []
+    },
+    {
+      "repository": "Alex_ACT_ONE_Steward",
+      "branch": "main",
+      "upstream": "origin/main",
+      "state": "verified-aligned",
+      "head": "1217bc92665ad6e39ddecac6b107cba920f0e98c",
+      "remoteHead": "1217bc92665ad6e39ddecac6b107cba920f0e98c",
+      "clean": true,
+      "unrelatedChangesPreserved": []
+    },
+    {
+      "repository": "Alex_Skill_Mall",
+      "branch": "main",
+      "upstream": "origin/main",
+      "state": "verified-aligned",
+      "head": "58d18877c53b8fdf4fc473c3867e35f179c6bae2",
+      "remoteHead": "58d18877c53b8fdf4fc473c3867e35f179c6bae2",
+      "clean": true,
+      "unrelatedChangesPreserved": []
+    },
+    {
+      "repository": "arch-pursuit-collection",
+      "branch": "main",
+      "upstream": "origin/main",
+      "state": "verified-aligned",
+      "head": "369f330d78dfa423e2c09630d14cc22cdd8ad3f3",
+      "remoteHead": "369f330d78dfa423e2c09630d14cc22cdd8ad3f3",
+      "clean": true,
+      "unrelatedChangesPreserved": []
+    },
+    {
+      "repository": "architecture-code-review",
+      "branch": "main",
+      "upstream": "origin/main",
+      "state": "verified-aligned",
+      "head": "9a8a8e1fc4ad0ed1a1720dc1b88a9a9c7aa05816",
+      "remoteHead": "9a8a8e1fc4ad0ed1a1720dc1b88a9a9c7aa05816",
+      "clean": true,
+      "unrelatedChangesPreserved": []
+    },
+    {
+      "repository": "btsp-experience-practice-assessment",
+      "branch": "main",
+      "upstream": "origin/main",
+      "state": "verified-aligned",
+      "head": "b421a0807fc133c5d2185a150dad2bb4e15c9980",
+      "remoteHead": "b421a0807fc133c5d2185a150dad2bb4e15c9980",
+      "clean": true,
+      "unrelatedChangesPreserved": []
+    },
+    {
+      "repository": "circuit-breaker",
+      "branch": "main",
+      "upstream": "origin/main",
+      "state": "verified-aligned",
+      "head": "37807ee9f1fe1d3a12177813099474776dfbc9f4",
+      "remoteHead": "37807ee9f1fe1d3a12177813099474776dfbc9f4",
+      "clean": true,
+      "unrelatedChangesPreserved": []
+    },
+    {
+      "repository": "CodeQuality",
+      "branch": "FabricV2",
+      "upstream": "origin/FabricV2",
+      "state": "verified-aligned",
+      "head": "5f78cc1571a821186d584e3a5d8f1449a7febc89",
+      "remoteHead": "5f78cc1571a821186d584e3a5d8f1449a7febc89",
+      "clean": true,
+      "unrelatedChangesPreserved": []
+    },
+    {
+      "repository": "QualtricsPipeline",
+      "branch": "docs/vendor-development-guidance",
+      "upstream": "origin/docs/vendor-development-guidance",
+      "state": "verified-aligned",
+      "head": "7f7fc25bb0e1ac2fb0f7e15dae71a68e713c2ee6",
+      "remoteHead": "7f7fc25bb0e1ac2fb0f7e15dae71a68e713c2ee6",
+      "clean": true,
+      "unrelatedChangesPreserved": []
+    },
+    {
+      "repository": "QuestionnaireFlow",
+      "branch": "main",
+      "upstream": "origin/main",
+      "state": "verified-aligned",
+      "head": "64e3060fcdd9b3d31424378bc9b608c23381bf5d",
+      "remoteHead": "64e3060fcdd9b3d31424378bc9b608c23381bf5d",
+      "clean": false,
+      "unrelatedChangesPreserved": [
+        "word-reports/DIRECTORY_LANGUAGE_CANDIDATES.docx"
+      ]
+    },
+    {
+      "repository": "QuestionnaireFlow_7570607b93b056da",
+      "branch": "main",
+      "upstream": "origin/main",
+      "state": "verified-aligned",
+      "head": "64e3060fcdd9b3d31424378bc9b608c23381bf5d",
+      "remoteHead": "64e3060fcdd9b3d31424378bc9b608c23381bf5d",
+      "clean": true,
+      "unrelatedChangesPreserved": []
+    },
+    {
+      "repository": "seo-monitor",
+      "branch": "main",
+      "upstream": "origin/main",
+      "state": "verified-aligned",
+      "head": "ba17c0969d85ed010b28588ce2b3eacd4cdc6643",
+      "remoteHead": "ba17c0969d85ed010b28588ce2b3eacd4cdc6643",
+      "clean": true,
+      "unrelatedChangesPreserved": []
+    },
+    {
+      "repository": "SurveyFunnel",
+      "branch": "main",
+      "upstream": "origin/main",
+      "state": "verified-aligned",
+      "head": "56011efd6d4667f224fff650506ba8abca2f21f0",
+      "remoteHead": "56011efd6d4667f224fff650506ba8abca2f21f0",
+      "clean": true,
+      "unrelatedChangesPreserved": []
+    },
+    {
+      "repository": "TheEditor",
+      "branch": "main",
+      "upstream": "origin/main",
+      "state": "verified-aligned",
+      "head": "b17da18735fc60019f64d52a9fedccfaa7bdd565",
+      "remoteHead": "b17da18735fc60019f64d52a9fedccfaa7bdd565",
+      "clean": true,
+      "unrelatedChangesPreserved": []
+    }
+  ],
+  "azurePolicyPRs": [
+    {
+      "id": 357,
+      "status": "completed",
+      "mergeCommit": "b421a0807fc133c5d2185a150dad2bb4e15c9980"
+    },
+    {
+      "id": 358,
+      "status": "completed",
+      "mergeCommit": "64e3060fcdd9b3d31424378bc9b608c23381bf5d",
+      "requiredBuildId": 928
+    }
+  ],
+  "workItem": 10399,
+  "noForcePush": true,
+  "globalGithubAccountUnchanged": true,
+  "productionDeploymentNotRequested": true
+}
