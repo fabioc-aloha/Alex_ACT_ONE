@@ -1,0 +1,12 @@
+{
+  "id": "review-falsy-value",
+  "suiteVersion": "2026-11-05.2",
+  "pluginVersion": "0.9.5",
+  "cliVersion": "1.0.107",
+  "prompt": "Use code-review in ordinary read-only mode on this synthetic JavaScript function: function lookup(items, index) { return items[index] || null; }. Contract: return the indexed value, preserving 0, false, and an empty string; return null only for an absent value. Report a concrete counterexample, consequence, and confidence. Do not edit files or implement a fix. Loading guidance includes reading the skill and its required bundled references. This does not permit commands, file writes, installation, or external actions. Apart from those guidance reads, do not use tools.",
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "workspaceFiles": [],
+  "semanticStatus": "not-reviewed"
+}

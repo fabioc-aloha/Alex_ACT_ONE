@@ -1,5 +1,8 @@
 import assert from 'node:assert/strict';
-import { existsSync } from 'node:fs';
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 
 async function api() {
@@ -85,4 +88,22 @@ test('CLI evidence requires the exact prompt, completed guidance tools, final re
     const outside = structuredClone(events);
     outside[3].data.arguments.path = fileURLToPath(new URL('../README.md', import.meta.url));
     assert.throws(() => parseScenarioEvidence(encode(outside), options), /guidance/);
+});
+
+test('explicit repository evidence paths are accepted without overwriting earlier results', async t => {
+    const { validateEvidenceOutput } = await api();
+    const root = mkdtempSync(join(fileURLToPath(new URL('..', import.meta.url)), '.test-scenario-output-'));
+    const external = mkdtempSync(join(tmpdir(), 'one-scenario-output-'));
+    t.after(() => {
+        rmSync(root, { recursive: true, force: true });
+        rmSync(external, { recursive: true, force: true });
+    });
+    assert.doesNotThrow(() => validateEvidenceOutput(join(root, 'new-evidence')));
+    assert.doesNotThrow(() => validateEvidenceOutput(join(external, 'explicit-evidence')));
+    const prior = join(root, 'prior');
+    mkdirSync(prior);
+    writeFileSync(join(prior, 'proof.json'), '{"frozen":true}\n');
+    assert.throws(() => validateEvidenceOutput(prior), /already exists/);
+    assert.equal(readFileSync(join(prior, 'proof.json'), 'utf8'), '{"frozen":true}\n');
+    assert.throws(() => validateEvidenceOutput('relative-evidence'), /absolute/);
 });

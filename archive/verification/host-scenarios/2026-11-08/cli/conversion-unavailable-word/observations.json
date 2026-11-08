@@ -1,0 +1,28 @@
+{
+  "response": "**The requested conversion is blocked.** Pandoc is required but unavailable, and installation is denied. The converter embeds Mermaid as PNG images—not editable Word diagrams—and no diagram source was supplied. No commands were run or files created.\n\n**Alternative—not a Word file:** manually paste the following into Word, applying Heading 1 to “Fixture” and bold to “literal.” An editable diagram would need a supplied design and manual creation using Word shapes.\n\n# Fixture\n\nA **literal** draft.",
+  "models": [
+    "gpt-6.1-sol"
+  ],
+  "toolCalls": [
+    {
+      "name": "skill",
+      "skill": "convert"
+    },
+    {
+      "name": "view",
+      "path": "md-to-word/SKILL.md",
+      "sha256": "b2b43aad91037ea89bc069d51cce37279d9888dcdf86fa3fc50537ae939bfb79"
+    },
+    {
+      "name": "view",
+      "path": "md-to-word/references/version-history-and-acceptance.md",
+      "sha256": "1e9d856f837480919a188aea24c8265d30455a5331c75659f0cfb732e3d63ea4"
+    }
+  ],
+  "codeChanges": {
+    "linesAdded": 0,
+    "linesRemoved": 0,
+    "filesModified": []
+  },
+  "semanticStatus": "not-reviewed"
+}

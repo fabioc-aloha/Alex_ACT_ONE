@@ -1,0 +1,23 @@
+{
+  "response": "**[blocking] Medium severity — `items[index] || null` discards valid falsy values.** Counterexample: `lookup([0], 0)` returns `null`, but the contract requires `0`. Likewise, `[false]` and `['']` return `null` at index `0`.\n\n**Consequence:** callers cannot distinguish these present values from absence. Truthiness is not an absence check; the explicit contract rules out treating these values as missing. **Confidence: high**, based on JavaScript’s `||` semantics. Scope: supplied function only; static, read-only review, with no execution or edits.",
+  "models": [
+    "gpt-6.1-sol"
+  ],
+  "toolCalls": [
+    {
+      "name": "skill",
+      "skill": "code-review"
+    },
+    {
+      "name": "view",
+      "path": "code-review/references/ordinary-review.md",
+      "sha256": "07a90b67c3d1f8b3bf1bd8df39bd4442e940c2ffa0518f7d204a4f70c7c36a75"
+    }
+  ],
+  "codeChanges": {
+    "linesAdded": 0,
+    "linesRemoved": 0,
+    "filesModified": []
+  },
+  "semanticStatus": "not-reviewed"
+}

@@ -5,6 +5,14 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+- Ran fresh installed `0.9.5` CLI/native VS Code scenarios and actual
+  plan/agent/shell/MCP artifact-delivery checks.
+  [Task evidence](archive/verification/host-scenarios/2026-11-08/README.md)
+  separates complete CLI response review from native transcript/missing-input
+  limits, and repository file parity from host enforcement. Scout and Copilot
+  app remain not run. Repaired the source CLI runner's forced outside-repository
+  output restriction while preserving existing-evidence rejection; no new
+  release or installed-package modification is implied.
 - Detect the configured Microsoft packagefeedproxy npm endpoint in the root
   optional installer and MCP provisioner, using one shared exact-endpoint
   matcher. Preview reports the confirmed backend prefix; npm 12+ apply uses

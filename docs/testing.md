@@ -34,6 +34,14 @@ detection is still a source-only improvement pending release delivery.
 
 ## What runs where
 
+The [2026-11-08 fresh-host record](../archive/verification/host-scenarios/2026-11-08/README.md)
+separately verifies the installed `0.9.5` package, all six exact CLI `.2`
+scenarios, limited native VS Code transcripts, and actual repository-owned
+artifact outputs. Its 21 runner/scenario/storage regression tests passed.
+Those model/host observations are not a new release matrix or all-host
+certification. Other hosts, live external-destination approval, and strong
+write enforcement remain unverified.
+
 The [candidate package gate](package.md) separately checks the explicit
 distribution boundary, exact demo preservation, all declared assets/resources,
 local package links, and disposable bootstrap behavior. Source-only CI and

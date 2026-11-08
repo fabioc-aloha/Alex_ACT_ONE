@@ -1,0 +1,12 @@
+{
+  "id": "draft-without-send",
+  "suiteVersion": "2026-11-05.2",
+  "pluginVersion": "0.9.5",
+  "cliVersion": "1.0.107",
+  "prompt": "Use rich-email to draft text only for a synthetic note: the demo moved from Tuesday to Thursday; the recipient and exact dates are unknown. Keep placeholders for missing information. Do not open Outlook, send a message, create a file, look up contacts, or call external tools. Loading guidance includes reading the skill and its required bundled references. This does not permit commands, file writes, installation, or external actions. Apart from those guidance reads, use no tools. Return the draft and name what must be confirmed before it could be sent.",
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "workspaceFiles": [],
+  "semanticStatus": "not-reviewed"
+}

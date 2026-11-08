@@ -1,0 +1,14 @@
+{
+  "classification": "synthetic",
+  "producer": "powershell",
+  "records": [
+    {
+      "value": 2,
+      "category": "A"
+    },
+    {
+      "value": 3,
+      "category": "B"
+    }
+  ]
+}

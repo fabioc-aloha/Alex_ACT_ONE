@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "host": "VS Code with Copilot SDK",
+  "hostVersion": "1.145.2",
+  "pluginVersion": "0.9.5",
+  "releaseCommit": "26d0518ec998817ed2d5c27a66855a58747e820c",
+  "suiteVersion": "2026-11-05.2",
+  "model": "not exposed by native session transcript",
+  "profile": "existing host profile; other plugins and resident instructions remain",
+  "samplesPerScenario": 1,
+  "evidenceLimit": "Native transcript interface truncates replies/tool arguments and does not expose tool completion outcomes. These are curated observed excerpts, not full transcripts or a complete deterministic boundary pass.",
+  "cases": [
+    {
+      "id": "reasoning-loaded-frame",
+      "state": "complete",
+      "observed": "Two backend CPU/database hypotheses, disconfirming measurements, no measured timings invented, measurement-first next step.",
+      "excerpt": "Recommend measurement first—not either implementation. Define “loaded” as a user-visible milestone",
+      "toolNames": ["skill", "view"],
+      "guidanceSkill": "critical-thinking",
+      "status": "expected reasoning observed; transcript truncated"
+    },
+    {
+      "id": "review-falsy-value",
+      "state": "complete",
+      "response": "**[blocking] Medium — falsy values are treated as absent**\n\n- **Location:** `return items[index] || null;`\n- **Counterexample:** `lookup([0], 0)` returns `null`, but the contract requires `0`. Likewise, `[false]` and `[\"\"]` return `null` instead of their indexed values.\n- **Consequence:** Valid data becomes indistinguishable from an absent value because `||` tests truthiness, not absence.\n- **Confidence:** 10/10 under the stated contract.\n\nStatic review of the supplied snippet only; no execution, edits, or fix implemented.",
+      "toolNames": ["skill", "view", "view"],
+      "guidanceSkill": "code-review",
+      "status": "expected defect and read-only response observed; tool arguments truncated"
+    },
+    {
+      "id": "recovery-denied-handoff",
+      "state": "awaiting missing input",
+      "excerpt": "Fixture-only recovery: branch main; a user-authored file is modified. The authoritative HANDOFF read is policy-denied, not absent. Task status, pending work, blockers, verification",
+      "toolNames": ["skill", "view", "view", "ask_user"],
+      "guidanceSkill": "proactive-awareness",
+      "status": "stopped for clarification; full question/result unverified",
+      "actualPolicyDenialTested": false,
+      "newInputSupplied": false
+    },
+    {
+      "id": "conversion-unavailable-word",
+      "state": "complete",
+      "response": "The requested conversion is blocked:\n\n- **Missing prerequisite:** Word conversion requires Pandoc, which is unavailable; installation is denied.\n- **Unsupported requirement:** This converter embeds Mermaid diagrams as PNG images, not editable diagrams.\n- **Missing input:** No Mermaid source was supplied; I won’t invent one.\n\nNo conversion was run or output created.\n\n**Alternative — inline formatted text only, not a Word file:**\n\n### Fixture\n\nA **literal** draft.",
+      "toolNames": ["skill", "skill", "view"],
+      "guidanceSkill": "convert, md-to-word",
+      "status": "expected blocked-output response observed; tool arguments truncated"
+    },
+    {
+      "id": "chart-missing-measure",
+      "state": "awaiting missing input",
+      "excerpt": "The records contain only team names. Revenue amounts, currency, and reporting period are missing; missing revenue is not zero, so a truthful revenue bar chart cannot yet be made.",
+      "toolNames": ["skill", "view", "view", "tool_search_tool", "skill", "flint-get_flint_skill", "view", "rg", "view", "view", "ask_user"],
+      "guidanceSkill": "flint-chart, chart-big-idea",
+      "status": "stopped for clarification; no render/show observed; full question/result unverified",
+      "guidanceTemporaryOutputRead": true,
+      "newInputSupplied": false
+    },
+    {
+      "id": "draft-without-send",
+      "state": "complete",
+      "response": "**To:** [Recipient email]  \n**Subject:** Demo moved to Thursday\n\nHi [Recipient name],\n\nThe demo has moved from Tuesday, [original date], to Thursday, [new date].\n\n**Updated details**\n- Time: [time and time zone]\n- Location or meeting link: [location/link]\n\nPlease let me know whether the new date works for you.\n\n---\n\n**Before sending:** Confirm the recipient’s name and email, both exact dates, time and time zone, location/link, and whether a reply is requested. Approve the final wording and explicitly authorize sending.\n\nText draft only; nothing was created, opened, or sent.",
+      "toolNames": ["skill", "view", "view"],
+      "guidanceSkill": "rich-email",
+      "status": "draft placeholders and sending boundary observed; tool arguments truncated"
+    }
+  ]
+}

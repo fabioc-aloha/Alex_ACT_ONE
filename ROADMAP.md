@@ -24,14 +24,14 @@ to this backlog.
 
 ### R8. Run fresh live-host scenarios
 
-**Status:** the CLI invocation is fixed and the revised suite has real model
-results in [scenario evidence](docs/verification/README.md). Fresh `.2` reasoning
-also loaded the required references in VS Code without coaching.
-The recovery finding has a canonical correction, a passing scoped CLI source
-retest, and frozen/delivered-package evidence in the
-[v0.9.0 release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.0).
-The original finding and isolated retest remain preserved. Scout and the Copilot app remain not run. Existing candidate
-installations require an explicitly approved upgrade to receive new source.
+**Status:** fresh installed `0.9.5` CLI and VS Code `.2` cases ran on 2026-11-08.
+[The task-local evidence](archive/verification/host-scenarios/2026-11-08/README.md)
+records six complete CLI responses with successful guidance-only process gates
+and separately reviewed expected observations. Native VS Code responses show
+the representative boundaries, but transcript truncation and two unanswered
+clarification forms prevent a complete native verdict. Scout and Copilot app
+remain not run by explicit user scope. Historical findings/retests remain
+in [scenario evidence](docs/verification/README.md), not rewritten as new passes.
 
 Use the [versioned cases and run guide](docs/verification/README.md) to exercise
 reasoning, review, recovery, conversion, chart, and draft-only workflows.
@@ -66,9 +66,11 @@ provides a [lean package](docs/package.md), with both Flint demonstrations and
 runtime owners retained. Its source-path delivery, publication and installed
 parity require separate exact-candidate observations.
 [Source and Mall 0.9.5 publication are complete](archive/verification/release-0.9.5/README.md);
-local installation/activation remain deferred to the user's manual reinstall
-after an explicit publication exception. Enabled flags and a Git-cache copy
-did not establish an installed plugin in the attached environment.
+after an explicit manual-install publication exception.
+The subsequent [host verification](archive/verification/host-scenarios/2026-11-08/README.md)
+matched every installed/cache payload file and the preserved instruction
+preview against the release. This establishes exact installed bytes, not
+complete host semantics or future delivery behavior.
 Later changes cannot
 inherit those results or move an existing release tag.
 The [verification record](docs/testing.md) owns source and package observations;
@@ -80,15 +82,13 @@ local Windows results are not a replacement for a green same-commit matrix.
   preservation regressions, and corrected browser settling checks to pass
   for the selected candidate. Keep actual browser observations separate from
   structural tests, as described in the [browser evidence](docs/verification/flint-browser.md).
-- Keep Mall-first onboarding. Direct installs succeeded for this candidate but
-  emitted a deprecation warning covering repositories, URLs, and local paths.
-  Plan a separately approved marketplace-based candidate route rather than
-  relying on direct installs for future CLI versions. This is future delivery
-  planning, not an additional implementation blocker for `0.9.0`. Preserve the observed
-  warning in the [install reference](docs/install.md#testing-the-repository-candidate).
-  No Mall publication or installation switch is implied by this correction.
-- Validate the exact marketplace source-subdirectory schema/adapter or another
-  supported delivery mechanism before switching to the lean package.
+- Keep Mall-first onboarding and preserve the historical direct-install
+  deprecation warning in the
+  [install reference](docs/install.md#testing-the-repository-candidate).
+  Later candidate-route changes need separately approved native installation
+  evidence; source mounting or a version string alone is not enough.
+- Revalidate the exact marketplace source-subdirectory schema/adapter when
+  changing the currently published lean route or another delivery mechanism.
   Preserve all required runtime owners/resources and both exact Flint demos,
   while keeping maintainer archive and source-only CI tooling out of that package.
   Disposable plugin-directory discovery is not marketplace-install verification.
@@ -104,7 +104,9 @@ local Windows results are not a replacement for a green same-commit matrix.
   Do not move existing published tags.
 - Before enabling automatic plugin replacement, design and test staged delivery
   and rollback without overwriting unrelated profile state. The source helper
-  currently verifies matching installations and refuses automatic upgrades.
+  verifies matching installations by default; explicit `-Refresh` invokes native
+  update without uninstalling first. That is not staged/transactional rollback
+  or standing authority for automatic replacement.
 
 **Done when:** the selected delivery operation is verified end to end.
 A source push, tagged release, Mall update, plugin installation, profile
@@ -115,15 +117,19 @@ approval. No publication or installation is authorized by this roadmap.
 
 ### Verify artifact delivery in supported hosts
 
-**Status:** the product has a shared artifact-delivery contract and local
-checker corrections with regression coverage. Verify their behavior in
-supported hosts as product capabilities. The completed incident recovery is
-historical evidence, not the remaining work or proof of host enforcement.
+**Status:** [fresh VS Code artifact observations](archive/verification/host-scenarios/2026-11-08/README.md)
+verify a requested plan, native agent JSON, shell output, and direct MCP file
+output in Git-visible repository destinations. Ignored-copy and changed-source
+controls failed as expected; copying to a Git-visible destination resolved the
+synthetic stranded result. Native browser rendering is observed, while its
+inline screenshot did not establish file delivery. Scout/Copilot app,
+user-approved live external destinations, and strong host enforcement remain
+unverified. Synthetic checker metadata is not a natural host-stranding incident.
 
 **Next actions**
 
-- Deliver and activate the updated canonical instructions only after the
-  separately approved source/package and exact-target bootstrap operations.
+- Later canonical instruction updates still require separately approved
+  source/package delivery and exact-target bootstrap operations.
 - Exercise the [storage contract](skills/proactive-awareness/references/project-artifact-storage.md)
   in fresh supported-host sessions: requested plans, shell/MCP output,
   subagents, ignored deliverables, and explicit external destinations.

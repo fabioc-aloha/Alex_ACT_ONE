@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "classification": "synthetic",
+  "host": "VS Code with Copilot SDK",
+  "hostVersion": "1.145.2",
+  "pluginVersion": "0.9.5",
+  "sourceBaseline": "7255d6f4ea9eb36f64e4410735ed8ce4fd4a5334",
+  "producerCases": [
+    {
+      "id": "requested-plan-and-agent-output",
+      "invocation": "Fresh native session: use plan; save a synthetic HTML delivery plan to archive/verification/host-scenarios/2026-11-08/agent-plan.md and exactly {\"classification\":\"synthetic\",\"records\":[{\"category\":\"A\",\"value\":2},{\"category\":\"B\",\"value\":3}]} to agent-output.json; only these writes, no implementation/installation/commits/pushes/further delegation.",
+      "result": "Both files created by apply_patch; JSON shape/values and Git-visible untracked state independently verified.",
+      "evidence": ["agent-plan.md", "agent-output.json", "artifact-checks.json"],
+      "nativeTranscriptTruncated": true,
+      "implementationClaimed": false
+    },
+    {
+      "id": "shell-output",
+      "invocation": "PowerShell creates synthetic A=2/B=3 JSON and pipes it to Tee-Object at the repository-owned shell-output.json destination.",
+      "result": "The persisted JSON matches both records and is visible to Git.",
+      "evidence": ["shell-output.json", "artifact-checks.json"]
+    },
+    {
+      "id": "native-local-file-browser",
+      "invocation": "openBrowserPage(file:///.../artifact-input.html); screenshotPage; focused Playwright row/resource read.",
+      "result": "Actual local HTML rendered; native accessible rows contain Category/Value, A/2 and B/3. No HTTP resources were observed. The native screenshot tool returned an inline image but no repository file/destination capability.",
+      "repositoryScreenshotDelivered": false,
+      "evidence": ["artifact-input.html"],
+      "limitation": "Inline image return is observation, not repository delivery; no saved-file claim is made for the native screenshot."
+    },
+    {
+      "id": "mcp-output",
+      "invocation": "Registered alex-playwright MCP creates a task-isolated tab for artifact-input.html; browser_take_screenshot uses an absolute repository destination; browser_snapshot and console errors are saved there.",
+      "result": "MCP directly wrote the PNG to the approved repository destination; PNG signature/hash and Git visibility passed. Snapshot includes A=2/B=3; console report has zero errors.",
+      "evidence": ["mcp-artifact.png", "mcp-snapshot.txt", "mcp-console.txt", "artifact-checks.json"],
+      "fallbackReason": "Native screenshot tool has no file-destination parameter.",
+      "browserInstallOrConfigurationChanged": false
+    }
+  ],
+  "checkerCases": {
+    "positiveRepositoryCopies": "Five actual produced files were copied into disposable synthetic session metadata; checker accounted for all five.",
+    "ignoredArtifact": "One unique synthetic JSON in the repository's ignored dist/alex-act-one path did not satisfy delivery; checker reported one stranded file.",
+    "repositoryDelivery": "Copying that exact JSON to Git-visible ignored-control.json accounted for all six.",
+    "changedOriginal": "Changing only the disposable session original restored one stranded-file result.",
+    "initialHarnessCorrection": "An initial control used dist/ directly, which is not ignored in this repository. The assumption failed explicitly; the corrected control uses the existing /dist/alex-act-one/ ignore rule. No Git ignore configuration was changed."
+  },
+  "limits": [
+    "Synthetic session metadata is not a naturally occurring host-stranding incident.",
+    "Explicit within-repository destinations were tested; a live user-approved external deliverable was not requested/tested.",
+    "No host blocking hook, ledger, filesystem permission enforcement or strong arbitrary-write containment was implemented.",
+    "No inferred cross-host parity; Scout and GitHub Copilot app remain not run."
+  ]
+}

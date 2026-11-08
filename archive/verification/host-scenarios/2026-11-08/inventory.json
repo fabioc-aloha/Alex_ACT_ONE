@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "classification": "synthetic",
+  "scope": "This task only; excludes this inventory file itself",
+  "files": [
+    {
+      "path": "agent-output.json",
+      "bytes": 98,
+      "sha256": "edf553e9565b9f20415532fdaaf9ffa241bcdb620043751fa79440904da142a5"
+    },
+    {
+      "path": "agent-plan.md",
+      "bytes": 1636,
+      "sha256": "9d53b64ff92702c5f35e7d666dca61db182a6236a0c50f705ca445e453f3b75b"
+    },
+    {
+      "path": "artifact-checks.json",
+      "bytes": 1686,
+      "sha256": "89984dc5c1682adb887061735652a1d9bb53b4d0a9ccbad156304e78d4add78d"
+    },
+    {
+      "path": "artifact-input.html",
+      "bytes": 726,
+      "sha256": "6b3b30727c6f76833e11b15028e2547412f8ded466b6113e3241014033ee2a05"
+    },
+    {
+      "path": "artifact-observations.json",
+      "bytes": 3973,
+      "sha256": "e1b0f35dcf5083c6743fe88d46a595692c8099f7037f16e57ec9e56f1d1fbdde"
+    },
+    {
+      "path": "cli/chart-missing-measure/invocation.json",
+      "bytes": 846,
+      "sha256": "2c7811c933fa7bece8488dcd137bf4aa57166e7d7949d7d0f2e89a34967854ee"
+    },
+    {
+      "path": "cli/chart-missing-measure/observations.json",
+      "bytes": 983,
+      "sha256": "85c747e10977c416de69e7483ae32adb70729520d62a89c8803c86ba00ea99b3"
+    },
+    {
+      "path": "cli/conversion-unavailable-word/invocation.json",
+      "bytes": 880,
+      "sha256": "69e3ad3abdde297b3f47c01c02c2da9f06e7a858f45f8dfeb33cebaab00ae0b6"
+    },
+    {
+      "path": "cli/conversion-unavailable-word/observations.json",
+      "bytes": 1132,
+      "sha256": "74cb318c9cfcccb683d44fdb88e1e9fa25d02d0576ffd50a5090a968cc1ca7e5"
+    },
+    {
+      "path": "cli/draft-without-send/invocation.json",
+      "bytes": 806,
+      "sha256": "5ced598ad5645c4124963d91b4dae83b7ccc59c78b74a7f243c84935d1068816"
+    },
+    {
+      "path": "cli/draft-without-send/observations.json",
+      "bytes": 892,
+      "sha256": "094a291660f1ff459cd42c5dc5316572013435bb1ad35db7122d9e6c005368b0"
+    },
+    {
+      "path": "cli/reasoning-loaded-frame/invocation.json",
+      "bytes": 819,
+      "sha256": "c9116046d574f11e2d52f2d41dcc7baaf8088e2a24d177ca1ec8993e28a3d935"
+    },
+    {
+      "path": "cli/reasoning-loaded-frame/observations.json",
+      "bytes": 2432,
+      "sha256": "bfa463f13f9cdfbf96e856b9e6b4ce88e6089d5d34801fe49aa59c2799e805ae"
+    },
+    {
+      "path": "cli/recovery-denied-handoff/invocation.json",
+      "bytes": 923,
+      "sha256": "b75df34fed1cd7cc9f92209dbdc53588eb8bb4d4774959f5555f139598937fe8"
+    },
+    {
+      "path": "cli/recovery-denied-handoff/observations.json",
+      "bytes": 1179,
+      "sha256": "20c3b622018b7ed025f24f720f8f5bc449a94c8bbd7f6dd751670dd5a2ab2bd2"
+    },
+    {
+      "path": "cli/review-falsy-value/invocation.json",
+      "bytes": 822,
+      "sha256": "6b39ff86ecf9e6a9140eb0770767d279a0bcbf5018aa47a9833666c55c40c00c"
+    },
+    {
+      "path": "cli/review-falsy-value/observations.json",
+      "bytes": 1004,
+      "sha256": "b8b2baad79ff885e8fd95181817eeb84c11f013834a9347a8b7890fa4ee697ed"
+    },
+    {
+      "path": "cli/summary.json",
+      "bytes": 5650,
+      "sha256": "490f5e881795c7c13ea0f26c5278db643fc075828baedac764590e0e1eccd2e5"
+    },
+    {
+      "path": "ignored-control.json",
+      "bytes": 115,
+      "sha256": "40573e2320166099e6f7a513dbcc5d1fe97140dd18ed6605db110dd4b0d86e76"
+    },
+    {
+      "path": "mcp-artifact.png",
+      "bytes": 18799,
+      "sha256": "1d0bb01b8a2c1e814d92dc21cbd053e71e038ec70d5d3f856190c95c01299493"
+    },
+    {
+      "path": "mcp-console.txt",
+      "bytes": 43,
+      "sha256": "8244bba88be0b62a7e4395f5ad8839ee394e16c040dcd709e31a5bdd12a704a7"
+    },
+    {
+      "path": "mcp-snapshot.txt",
+      "bytes": 552,
+      "sha256": "cfe80c54f20979da643bc9d80280347d11dc667ffd5c19521e740bdca57b3de4"
+    },
+    {
+      "path": "native-observations.json",
+      "bytes": 4857,
+      "sha256": "0d1467cef30baaa3b7a450110344863557a2f001579e735f1032a5497316410e"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7666,
+      "sha256": "2e1db8692574cac7e7ce1f7b32cfbff60298afbb89309a6086062172448daff5"
+    },
+    {
+      "path": "semantic-review.json",
+      "bytes": 3215,
+      "sha256": "6a795d86c671753887695e4351f854fed25a7e43f8bd9f79e2c11bcff25ec3de"
+    },
+    {
+      "path": "shell-output.json",
+      "bytes": 203,
+      "sha256": "2301520c0f02427d9295328a89cc99502fa2c045d0b20faecd868fdd718b2411"
+    }
+  ],
+  "validation": {
+    "targetedTestsPassed": 75,
+    "relativeLinksChecked": 108,
+    "brokenLinks": 0,
+    "rawRuntimeStreamsExcluded": true
+  }
+}

@@ -1,0 +1,16 @@
+- generic [active] [ref=e1]:
+  - heading "Synthetic artifact-delivery fixture" [level=1] [ref=e2]
+  - paragraph [ref=e3]: These values are test data, not product performance.
+  - table [ref=e4]:
+    - caption [ref=e5]: Fixture records
+    - rowgroup [ref=e6]:
+      - row [ref=e7]:
+        - columnheader "Category" [ref=e8]
+        - columnheader "Value" [ref=e9]
+    - rowgroup [ref=e10]:
+      - row [ref=e11]:
+        - cell "A" [ref=e12]
+        - cell "2" [ref=e13]
+      - row [ref=e14]:
+        - cell "B" [ref=e15]
+        - cell "3" [ref=e16]

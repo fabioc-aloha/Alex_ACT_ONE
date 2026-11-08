@@ -28,6 +28,17 @@
   selects its confirmed tarball prefix automatically. Explicit routing wins;
   npm settings/security policy are unchanged. The installed/released `0.9.5`
   payload remains immutable and does not contain this source improvement.
+- Fresh installed `0.9.5` host evidence is in
+  [the task record](archive/verification/host-scenarios/2026-11-08/README.md).
+  Exact installed/cache payload parity passed. All six CLI `.2` responses have
+  complete guidance-only evidence and separately reviewed expected behavior.
+  Native VS Code excerpts show the boundaries but remain truncated; two
+  missing-input forms stop at clarification. Scout/Copilot app were not run.
+- Actual plan/agent/shell/MCP artifact files are repository-owned and Git-visible.
+  Ignored and changed-source synthetic controls exposed stranded artifacts.
+  No host write-blocking hooks, stronger enforcement, installation changes,
+  or external publication occurred. The source CLI runner now accepts a new
+  explicit repository evidence directory instead of forcing output outside it.
 - Completed recovery, retention, and synchronization records are preserved
   in [the archive](archive/README.md). That work is closed historical context,
   not an active product goal. Dependency pins and unresolved product decisions
@@ -35,9 +46,10 @@
 
 ## Blockers
 
-- Full installed-payload byte parity and broader live-host observations remain
-  separate from the verified inventory, instruction parity, and dependency
-  checks. Do not treat an enabled flag alone as complete host verification.
+- Exact installed/cache bytes are verified; native transcript completeness,
+  unanswered clarification flows, additional hosts, approved external
+  artifact destinations, and stronger write enforcement remain separate gaps.
+  Do not treat file parity alone as complete host behavior.
 - Later delivery changes require their own reviewed commit and fresh
   same-commit release evidence. The dated manual-install exceptions do not
   relax future release gates.
@@ -48,8 +60,11 @@
 
 ## Next Action
 
-Qualify the unreleased proxy-routing source change through the existing
-release gates before separately approved publication. The 107 focused
+Qualify the unreleased proxy-routing and repository-evidence runner source changes
+through the existing release gates before separately approved publication.
+Continue R8/artifact-host observations only for the remaining authorized gaps
+in [ROADMAP.md](ROADMAP.md), using the frozen task evidence rather than rerunning
+known cases and calling them broader coverage. The 107 focused
 routing/runtime tests passed in disposable fixtures; real configured-proxy
 previews and no-install dependency/render checks also passed. The
 [optional installer](install-optional-dependencies.ps1) needs no explicit
@@ -64,7 +79,9 @@ Do not resume adopter-recovery operations from this handoff.
 - [Testing](docs/testing.md) owns verification environments and dated limits;
   structural release checks require a Git checkout, not an installed cache.
 - [0.9.5 verification](archive/verification/release-0.9.5/README.md) records
-  passing source gates and publication separately from deferred installation.
+  passing source gates and publication separately from its then-deferred installation.
+  [Fresh host evidence](archive/verification/host-scenarios/2026-11-08/README.md)
+  owns the subsequent installed-package observations and their limits.
   Earlier [candidate package verification](docs/verification/package/README.md)
   is historical; rebuild a payload after changing its included source.
 - [CHANGELOG.md](CHANGELOG.md) and the archive preserve completed history.

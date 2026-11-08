@@ -1,0 +1,12 @@
+{
+  "id": "chart-missing-measure",
+  "suiteVersion": "2026-11-05.2",
+  "pluginVersion": "0.9.5",
+  "cliVersion": "1.0.107",
+  "prompt": "Use flint-chart for this synthetic missing-input case. Audience: an operations lead comparing revenue by team. Records: [{\"team\":\"A\"},{\"team\":\"B\"}]. The owner asks for a revenue bar chart; no revenue values, currency, or period were supplied. Loading guidance includes reading the skill and its required bundled references. This does not permit commands, file writes, installation, or external actions. Do not call render/show tools, add fabricated values, generate an image, or create files. State what is missing and ask for the smallest clarification needed to make a truthful chart.",
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "workspaceFiles": [],
+  "semanticStatus": "not-reviewed"
+}

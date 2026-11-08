@@ -1,0 +1,55 @@
+{
+  "classification": "synthetic",
+  "host": "VS Code with Copilot SDK",
+  "records": [
+    {
+      "path": "archive/verification/host-scenarios/2026-11-08/artifact-input.html",
+      "bytes": 726,
+      "sha256": "6b3b30727c6f76833e11b15028e2547412f8ded466b6113e3241014033ee2a05",
+      "gitVisible": true
+    },
+    {
+      "path": "archive/verification/host-scenarios/2026-11-08/shell-output.json",
+      "bytes": 203,
+      "sha256": "2301520c0f02427d9295328a89cc99502fa2c045d0b20faecd868fdd718b2411",
+      "gitVisible": true
+    },
+    {
+      "path": "archive/verification/host-scenarios/2026-11-08/mcp-artifact.png",
+      "bytes": 18799,
+      "sha256": "1d0bb01b8a2c1e814d92dc21cbd053e71e038ec70d5d3f856190c95c01299493",
+      "gitVisible": true
+    },
+    {
+      "path": "archive/verification/host-scenarios/2026-11-08/agent-plan.md",
+      "bytes": 1636,
+      "sha256": "9d53b64ff92702c5f35e7d666dca61db182a6236a0c50f705ca445e453f3b75b",
+      "gitVisible": true
+    },
+    {
+      "path": "archive/verification/host-scenarios/2026-11-08/agent-output.json",
+      "bytes": 98,
+      "sha256": "edf553e9565b9f20415532fdaaf9ffa241bcdb620043751fa79440904da142a5",
+      "gitVisible": true
+    }
+  ],
+  "positive": {
+    "status": "clean",
+    "accounted": 5
+  },
+  "ignoredCopy": {
+    "status": "stranded-artifacts-found",
+    "stranded": 1,
+    "ignoredCopyRejected": true
+  },
+  "repositoryDelivery": {
+    "status": "clean",
+    "accounted": 6
+  },
+  "changedSource": {
+    "stranded": 1
+  },
+  "scope": "Actual host filesystem/Git checks with synthetic session metadata; not a host write-blocking hook",
+  "temporarySessionRemoved": true,
+  "ignoredFileRemoved": true
+}

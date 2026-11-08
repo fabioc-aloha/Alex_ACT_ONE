@@ -1,0 +1,12 @@
+{
+  "id": "recovery-denied-handoff",
+  "suiteVersion": "2026-11-05.2",
+  "pluginVersion": "0.9.5",
+  "cliVersion": "1.0.107",
+  "prompt": "Use proactive-awareness for read-only recovery of this synthetic project. Fixture facts only: branch main; a user-authored file is modified; the authoritative HANDOFF read was denied by policy and no task status is available. The denial is supplied fixture data, not a request to trigger or bypass a real policy. Loading guidance includes reading the skill and its required bundled references. This does not permit commands, file writes, installation, or external actions. Do not use another tool to recover the denied contents, invent a backlog, run commands, or write continuity files. State what is known, what remains unknown, and the smallest clarification needed.",
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "workspaceFiles": [],
+  "semanticStatus": "not-reviewed"
+}

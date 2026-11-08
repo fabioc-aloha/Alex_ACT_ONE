@@ -1,0 +1,12 @@
+{
+  "id": "conversion-unavailable-word",
+  "suiteVersion": "2026-11-05.2",
+  "pluginVersion": "0.9.5",
+  "cliVersion": "1.0.107",
+  "prompt": "Use convert to assess this synthetic request: convert '# Fixture\\n\\nA **literal** draft.' to Word with an editable Mermaid diagram. Fixture environment: Pandoc is unavailable; installation is denied; no diagram source was supplied. Loading guidance includes reading the skill and its required bundled references. This does not permit commands, file writes, installation, or external actions. Apart from those guidance reads, do not use tools or claim an output exists. Explain the missing prerequisite and unsupported requirement, and offer a clearly labeled alternative without presenting it as the requested Word file.",
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "workspaceFiles": [],
+  "semanticStatus": "not-reviewed"
+}

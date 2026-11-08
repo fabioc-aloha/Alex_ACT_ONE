@@ -1,0 +1,28 @@
+{
+  "response": "**To:** [Recipient email]\n**Subject:** Demo moved to Thursday\n\nHi [Recipient name],\n\nThe demo has moved from Tuesday, [original date], to Thursday, [new date].\n\n**Confirm before sending:** Recipient name and email, both exact dates, and approval of the final message.",
+  "models": [
+    "gpt-6.1-sol"
+  ],
+  "toolCalls": [
+    {
+      "name": "skill",
+      "skill": "rich-email"
+    },
+    {
+      "name": "view",
+      "path": "rich-email/assets/rich-email-template.md",
+      "sha256": "7922ba0de4d136f1cb7f76ed35d35f0d0ad65e47381e2e766e91075aad6a711c"
+    },
+    {
+      "name": "view",
+      "path": "rich-email/references/style-guide.md",
+      "sha256": "71501bc5dfb35b30292e99d7ad89e7cf0e07797163ce375025eb0eda99d8e6d5"
+    }
+  ],
+  "codeChanges": {
+    "linesAdded": 0,
+    "linesRemoved": 0,
+    "filesModified": []
+  },
+  "semanticStatus": "not-reviewed"
+}
