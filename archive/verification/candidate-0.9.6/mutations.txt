@@ -1,0 +1,6 @@
+[text-threshold] CAUGHT
+[paint-validation] CAUGHT
+[transparent-backdrop] CAUGHT
+[numeric-heatmap] CAUGHT
+[proxy-host-guard] CAUGHT
+[repository-evidence] CAUGHT

@@ -26,7 +26,7 @@
     "relativePathRegression": "Former code timed out in the bounded child process; normalized roots pass"
   },
   "faultControls": {
-    "log": "mutations.log",
+    "log": "mutations.txt",
     "caught": 6,
     "survived": 0,
     "preconditionNotFound": 0,
