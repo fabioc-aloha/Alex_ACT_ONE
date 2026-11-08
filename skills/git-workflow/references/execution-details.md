@@ -32,6 +32,32 @@ before a risky operation rather than relying on a version claim in this guide.
 | Reset to remote state | `git reset --hard origin/main` | Destructive, syncs to remote |
 | Save work temporarily | `git stash` → `git stash pop` | For quick context switch |
 | Isolated experimental work | `git worktree add ../feature branch` | Agent-friendly isolation |
+| Non-interactive push / multi-account `gh` failure | `node <this-skill>/scripts/check-git-auth.cjs --repository-root <repo>` | Preview first; `--apply` pins `.git/config` to the repo's `gh` account |
+
+---
+
+## Non-Interactive and Multi-Account GitHub Auth
+
+Copilot CLI and VS Code Agent Host shells run with `credential.interactive=never` so background Git commands never hang on modal login prompts. That exposes two failure modes on GitHub HTTPS remotes:
+
+1. **Missing `gh` credential helper:** Git falls back to the system Git Credential Manager (`manager`), which fails with `fatal: Cannot prompt because user interactivity has been disabled` / `fatal: unable to get password from user`.
+2. **Multi-account `gh` drift:** `gh auth switch` sets a single global active account per host. When a user has both work (e.g. `user_corp`) and personal (`user-personal`) accounts in `gh`, switching accounts in any terminal flips global state, and `gh auth git-credential get` exits `1` or serves the wrong account's token even if Git passes `username=`.
+
+Diagnose before pushing or after a credential failure:
+
+```powershell
+node "<this-skill>\scripts\check-git-auth.cjs" --repository-root "<repo-root>"
+```
+
+The preview writes nothing and reports whether `gh` is authenticated for the remote owner, whether multiple `gh` accounts exist, and whether `.git/config` pins the repository account.
+
+With user approval, pin the repository's `.git/config` credential helper to the target `gh` account without writing any token to disk or changing global `gh` state:
+
+```powershell
+node "<this-skill>\scripts\check-git-auth.cjs" --repository-root "<repo-root>" --user "<github-account>" --apply
+```
+
+This resets `credential.https://<host>.helper` locally and adds `!GH_TOKEN=$('<gh>' auth token --hostname <host> --user <account>) '<gh>' auth git-credential`, so tokens remain in the OS keyring while pushes in `<repo-root>` always use `<github-account>`.
 
 ---
 

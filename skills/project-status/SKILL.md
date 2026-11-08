@@ -19,7 +19,7 @@ Load and follow [proactive-awareness](../proactive-awareness/SKILL.md) for read-
 ## Steps
 
 1. **Identity**: Confirm which project this is and read the active branch (`git branch --show-current`).
-2. **Git state**: Report uncommitted file count and the latest commit subject.
+2. **Git & artifact state**: Report uncommitted file count and the latest commit subject. Run the read-only [Git auth preview](../git-workflow/scripts/check-git-auth.cjs) (`node <plugin-root>/skills/git-workflow/scripts/check-git-auth.cjs --repository-root <repo>`) and [session-artifact check](../proactive-awareness/scripts/check-session-artifacts.cjs) (`node <plugin-root>/skills/proactive-awareness/scripts/check-session-artifacts.cjs --repository-root <repo>`) to surface multi-account Git credential mismatches or deliverables stranded in `~/.copilot/session-state`.
 3. **Continuity**: Read `HANDOFF.md` if present for current state, blockers,
    next action, and verification. Read the authoritative task list linked from
    handoff or `AGENTS.md`; otherwise use root `TODO.md` if present. Report

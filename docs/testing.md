@@ -91,15 +91,18 @@ original hashes from privacy/link-edited copies, exclude disposable runtime
 state, and record a byte-identical duplicate session. Empty failed-producer
 JSON outputs remain explicitly classified historical failures.
 
-The scoped run passed 76 tests with no skips across recovery, artifact storage,
-native compatibility, project bootstrap, documentation, and recovery boundaries.
-The local-link check passed 173 links in 14 recovered/policy documents.
+The scoped run passed 79 tests with no skips across recovery, artifact storage,
+multi-account Git auth, native compatibility, project bootstrap, documentation,
+and recovery boundaries.
+The local-link check passed 197 links in 14 recovered/policy documents.
 These are recovery-integrity and declared-contract checks, not proof of
-future host enforcement, global activation, or fresh browser acceptance.
+future host enforcement or fresh browser acceptance.
 
 ```powershell
 node scripts\session-recovery.mjs
-node --test tests\session-recovery.test.mjs tests\artifact-storage.test.mjs
+node skills\proactive-awareness\scripts\check-session-artifacts.cjs --repository-root .
+node skills\git-workflow\scripts\check-git-auth.cjs --repository-root .
+node --test tests\session-recovery.test.mjs tests\artifact-storage.test.mjs tests\git-auth.test.mjs
 ```
 
 The checker reads only repository evidence. It rejects missing or corrupt files,

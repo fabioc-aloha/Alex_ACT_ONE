@@ -332,14 +332,17 @@ Hooks that cannot observe arbitrary writes cannot provide that guarantee.
 
 This document is the requested root-level implementation guide. Alex ACT ONE now
 has indexed repository copies of its stranded project reports, helper, and
-supporting evidence, a tested recovery-integrity checker, and a
-[shared instruction-level storage contract](skills/proactive-awareness/references/project-artifact-storage.md).
+supporting evidence, a tested recovery-integrity checker, a read-only
+[session-artifact detector](skills/proactive-awareness/scripts/check-session-artifacts.cjs),
+a preview-first [multi-account Git auth checker](skills/git-workflow/scripts/check-git-auth.cjs),
+and a [shared instruction-level storage contract](skills/proactive-awareness/references/project-artifact-storage.md).
 The repository guidance, resident session-health contract, bootstrap scaffold,
 and directly coupled workflow owners route delivery through that contract.
 
-This is not the proposed ongoing ledger/hook enforcement gate. Installed packages,
-profile activation, global settings, other repositories, and published releases
-were not changed. Fresh-host enforcement and later activation remain separate
+This is not the proposed ongoing hook enforcement gate. Local user-profile
+instructions (`~/.copilot/instructions`) were refreshed with explicit approval;
+installed plugin caches, other repositories, and published releases were not
+changed. Fresh-host hook enforcement retains its separate
 [pending delivery work](ROADMAP.md#verify-artifact-delivery-in-supported-hosts).
 
 Official references consulted on 2026-11-07:

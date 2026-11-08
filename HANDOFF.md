@@ -8,12 +8,14 @@
   [0.9.2 release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.2)
   owns final source, publication, CI, and Mall-delivery evidence.
 - Current source changes recover stranded reports and supporting evidence in
-  [the repository recovery index](docs/verification/session-recovery/README.md)
-  and add shared instruction-level artifact-storage safeguards. The recovery
-  manifest and tests own integrity evidence; historical reports are not an
-  active backlog. Dependency pins, installed packages, credentials, profile
-  instructions, and host configuration were not changed. Replicate retirement
-  remains a proposal, not an approved removal.
+  [the repository recovery index](docs/verification/session-recovery/README.md),
+  add shared instruction-level artifact-storage safeguards, and provide
+  deterministic helpers for
+  [session-artifact detection](skills/proactive-awareness/scripts/check-session-artifacts.cjs)
+  and [multi-account GitHub credential pinning](skills/git-workflow/scripts/check-git-auth.cjs).
+  The local user instruction profile (`~/.copilot/instructions`) was refreshed
+  from this checkout with explicit approval. Dependency pins, installed plugin
+  caches, and Replicate retirement status were not changed.
 
 ## Blockers
 

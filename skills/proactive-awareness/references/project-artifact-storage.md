@@ -42,6 +42,10 @@ Before presenting a project artifact or declaring completion:
    written, staged, committed, pushed, and remotely verified states.
 5. Report each missing, blocked, deliberately excluded, or unverified item.
    A stale hash or a successful temporary preview is not final-file evidence.
+   Run the read-only [session-artifact checker](../scripts/check-session-artifacts.cjs)
+   (`node <proactive-awareness>/scripts/check-session-artifacts.cjs --repository-root <repo>`)
+   to confirm no deliverables for the active repository were left unaccounted in
+   `~/.copilot/session-state/<id>/files/`.
 
 These are instruction-level safeguards and an explicit verification procedure,
 not universal filesystem enforcement. Tests establish only their stated scope.

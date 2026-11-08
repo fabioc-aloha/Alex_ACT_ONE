@@ -21,6 +21,10 @@ For session/context mechanics use native controls and the [session boundary](ref
 Load and follow the [shared storage and delivery contract](references/project-artifact-storage.md)
 to verify the approved task's artifact inventory, final repository files,
 dependencies, discoverability, ignore state, and actual Git state.
+Run the read-only [session-artifact checker](scripts/check-session-artifacts.cjs)
+(`node <this-skill>/scripts/check-session-artifacts.cjs --repository-root <repo>`)
+to detect deliverables stranded in `~/.copilot/session-state/<id>/files/` for
+the active repository.
 This mode is also read-only: report missing delivery rather than relocating,
 archiving, committing, or activating files without the task's write authority.
 Recovery should report relevant externally stranded artifacts, not silently

@@ -20,7 +20,11 @@ At the start of every relevant conversation:
 4. **Check dream reports (if available)** — If `.github/quality/dream-report.json` exists, note the last dream date and any issues. Skip silently if absent — not every project ships a dream pipeline.
 5. **Summarize briefly** — If relevant prior context exists in handoff, the task
    list, or session memory, offer a one-line recovery summary subject to the
-   inhibition rules. These checks are read-only; do not rewrite continuity
+   inhibition rules. Run the read-only
+   [session-artifact checker](../scripts/check-session-artifacts.cjs)
+   (`node <this-skill>/scripts/check-session-artifacts.cjs --repository-root <repo>`)
+   when checking whether prior sessions stranded project deliverables outside
+   the repository. These checks are read-only; do not rewrite continuity
    records or create episodic/native memory as part of recovery.
 
 ### Denied sources and unknown worktree state

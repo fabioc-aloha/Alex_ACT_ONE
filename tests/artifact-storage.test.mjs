@@ -1,10 +1,14 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const require = createRequire(import.meta.url);
+const { checkSessionArtifacts } = require(join(ROOT, 'skills', 'proactive-awareness', 'scripts', 'check-session-artifacts.cjs'));
 const read = path => readFileSync(join(ROOT, path), 'utf8');
 const contract = 'skills/proactive-awareness/references/project-artifact-storage.md';
 
@@ -52,4 +56,40 @@ test('all directly coupled workflow owners explicitly route to the shared storag
 test('frozen log evidence is discoverable in Git and protected from newline rewriting', () => {
     assert.match(read('.gitignore'), /!docs\/verification\/session-recovery\/history\/\*\*\/\*\.log/);
     assert.match(read('.gitattributes'), /docs\/verification\/session-recovery\/history\/\*\* -text -whitespace/);
+});
+
+test('session-artifact checker detects stranded deliverables and recognizes recovered or repository-owned files', t => {
+    const temp = mkdtempSync(join(tmpdir(), 'one-session-check-'));
+    t.after(() => rmSync(temp, { recursive: true, force: true }));
+    const repo = join(temp, 'repo');
+    const sessions = join(temp, 'sessions');
+    mkdirSync(repo, { recursive: true });
+    writeFileSync(join(repo, 'saved-report.md'), '# Already in repo\r\n');
+
+    const matchingSession = join(sessions, 'session-1');
+    mkdirSync(join(matchingSession, 'files', 'logs'), { recursive: true });
+    writeFileSync(join(matchingSession, 'workspace.yaml'), `cwd: ${repo}\nrepository: fabioc-aloha/example\n`);
+    writeFileSync(join(matchingSession, 'files', 'saved-report.md'), '# Already in repo\n');
+    writeFileSync(join(matchingSession, 'files', 'stranded-plan.md'), '# Left in session storage\n');
+    writeFileSync(join(matchingSession, 'files', 'logs', 'process.log'), 'disposable runtime log\n');
+    writeFileSync(join(matchingSession, 'files', 'stdout.jsonl'), '{"type":"ephemeral"}\n');
+
+    const otherSession = join(sessions, 'session-2');
+    mkdirSync(join(otherSession, 'files'), { recursive: true });
+    writeFileSync(join(otherSession, 'workspace.yaml'), 'cwd: C:\\Other\\Repo\nrepository: fabioc-aloha/other\n');
+    writeFileSync(join(otherSession, 'files', 'other-project.md'), '# Unrelated repo\n');
+
+    const report = checkSessionArtifacts({ repositoryRoot: repo, sessionRoot: sessions });
+    assert.equal(report.status, 'stranded-artifacts-found');
+    assert.equal(report.matchedSessions, 1);
+    assert.equal(report.totalCandidates, 2);
+    assert.equal(report.accountedCount, 1);
+    assert.equal(report.strandedCount, 1);
+    assert.equal(report.stranded[0].sessionId, 'session-1');
+    assert.equal(report.stranded[0].relativePath, 'stranded-plan.md');
+
+    writeFileSync(join(repo, 'stranded-plan.md'), '# Left in session storage\n');
+    const cleanReport = checkSessionArtifacts({ repositoryRoot: repo, sessionRoot: sessions });
+    assert.equal(cleanReport.status, 'clean');
+    assert.equal(cleanReport.strandedCount, 0);
 });

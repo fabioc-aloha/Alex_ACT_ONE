@@ -38,6 +38,9 @@ New `AGENTS.md` scaffolds include repository artifact storage guidance derived
 from the [shared contract](../proactive-awareness/references/project-artifact-storage.md).
 Existing guidance remains preserved; propose a scoped manual merge rather than
 silently overwriting it. Project adoption is not global instruction activation.
+For GitHub HTTPS remotes where multiple `gh` accounts are used, also preview
+[repository Git auth pinning](../git-workflow/scripts/check-git-auth.cjs) so
+non-interactive agent pushes do not fail on global account switches.
 
 ## Boundaries
 

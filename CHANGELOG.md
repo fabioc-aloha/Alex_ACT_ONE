@@ -5,6 +5,18 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+- 2026-11-07: Added deterministic safeguards for both non-interactive multi-account
+  GitHub authentication and session-state artifact stranding:
+  - [`skills/git-workflow/scripts/check-git-auth.cjs`](skills/git-workflow/scripts/check-git-auth.cjs)
+    detects missing `gh` credential helpers (`credential.interactive=never`
+    failures in Copilot shells) and multi-account `gh` drift (including
+    Enterprise Managed User underscore logins), and pins `.git/config` to the
+    repository's GitHub account after consent without storing tokens on disk.
+  - [`skills/proactive-awareness/scripts/check-session-artifacts.cjs`](skills/proactive-awareness/scripts/check-session-artifacts.cjs)
+    scans matching `~/.copilot/session-state` folders read-only to surface any
+    deliverables not accounted for in the repository working tree or recovery
+    manifest, wired into `proactive-awareness`, `project-status`,
+    `git-workflow`, and `bootstrap-project`.
 - 2026-11-07: Recovered stranded project reports, a useful release-verification
   helper, and related historical evidence into the
   [repository recovery index](docs/verification/session-recovery/README.md).
