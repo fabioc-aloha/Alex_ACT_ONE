@@ -1,0 +1,28 @@
+# Maintainer archive
+
+Historical plans, recovery custody records, source synchronization snapshots,
+and retention decisions belong here rather than in the user-documentation tree.
+These records are not current operating instructions, an active backlog, or
+authorization to execute old helpers.
+
+The active project's mission is to maintain and ship Alex ACT ONE.
+Cross-repository recovery and synchronization snapshots describe completed,
+explicitly authorized incidents. They do not establish a fleet-management
+service, expand product scope, or move adopter backlogs into this repository.
+Their value here is traceability for the reusable safeguards and release
+decisions that the product owns.
+
+- [Recovered engineering evidence](verification/session-recovery/README.md).
+- [Development-repository recovery](verification/development-recovery/2026-11-08/README.md).
+- [Retention review and implementation](verification/recovery-retention-review/2026-11-08/README.md).
+- [Native-first implementation history](plans/2026-11-04-native-first-copilot.md).
+- [Relocation hashes and declared link edits](relocation.json).
+
+The retained frozen engineering artifacts moved without content changes.
+Relocated historical plans and living indexes had only declared link rebasing.
+Earlier bytes and approved pruned files remain recoverable from Git history;
+original external session files were not changed.
+
+The candidate package builder excludes this entire tree. That tested package
+boundary does not change the existing Mall source route or installed caches:
+publishing and switching distribution remain separate operations.

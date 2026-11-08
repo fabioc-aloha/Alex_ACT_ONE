@@ -5,10 +5,48 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+No unreleased source changes beyond the selected `0.9.4` release candidate.
+
+## 0.9.4 - 2026-11-08
+
+- Selected the lean `package/alex-act-one` source-path payload for release
+  delivery, preserving every declared runtime owner/resource and both Flint
+  demonstrations. Source and payload hashes distinguish checkout line endings
+  from exact delivered bytes. The release record owns the final same-commit
+  gates, disposable marketplace route proof, Mall publication, and local
+  installation/activation results; assembly alone is not any of those checks.
+- 2026-11-08: Refocused repository guidance, product README, handoff, roadmap,
+  and documentation/package indexes on maintaining and shipping Alex ACT ONE.
+  Completed recovery and synchronization remain historical incident evidence,
+  not active fleet operations or a parallel backlog. The next action is
+  qualifying the reusable safeguards and lean package for verified delivery;
+  existing dependency, host, accessibility, rollback and provider decisions
+  remain open. No publication or installed update is implied.
+- 2026-11-08: Separated maintainer history into
+  [the archive](archive/README.md) and added a lean
+  [documentation index](docs/README.md). The retained frozen recovery artifacts
+  moved without content changes; relocation receipts declare index/link edits.
+  Added an explicit [candidate package boundary](docs/package.md), retaining
+  both exact Flint demonstrations, all runtime owners/resources, user guides,
+  reusable verification inputs and the documented standalone email test.
+  Packaging excludes maintainer evidence and source-only CI/recovery tooling.
+  Tests verify custody, local links, disposable activation/idempotency and
+  missing-file rejection. Mall, published versions and live installations are
+  unchanged; candidate distribution remains separately approved.
+- 2026-11-08: Applied the approved [lean retention review](archive/verification/recovery-retention-review/2026-11-08/README.md):
+  pruned 127 redundant/empty/provisional historical files, retained 93
+  historical artifacts and all 99 archive recommendations, and preserved
+  hashes, decisions and the recovery commit in the manifest. Repaired session
+  accounting to validate actual Git-visible bytes and supported manifests,
+  detect changed originals, and distinguish unavailable/unsupported scope.
+  Repaired Git authentication checks with explicit account selection,
+  structured no-refresh status, actual helper/token identity verification,
+  read-access probes, prepared configuration validation and atomic rollback.
+  These source changes do not publish a release or update installed caches.
 - 2026-11-08: Added a task-local, preview-first
   [local recovery helper](scripts/recover-local-artifacts.mjs) and regression
   controls for authorized development-repository artifact recovery.
-  The [local inspection and results](docs/verification/development-recovery/2026-11-08/README.md)
+  The [local inspection and results](archive/verification/development-recovery/2026-11-08/README.md)
   record 128 copied artifacts in eight owning repositories, preserved existing
   archives and originals, portable guidance additions, and explicit privacy/raw
   data exclusions. The user subsequently authorized source synchronization
@@ -31,7 +69,7 @@ An Unreleased entry does not imply publication, installation, or activation.
     `git-workflow`, and `bootstrap-project`.
 - Recovered stranded project reports, a useful release-verification
   helper, and related historical evidence into the
-  [repository recovery index](docs/verification/session-recovery/README.md)
+  [repository recovery index](archive/verification/session-recovery/README.md)
   (`bf74451`). Original and recovered hashes, declared privacy/link edits,
   duplicate verification, and runtime exclusions are retained in its manifest.
   Originals remain untouched; frozen recovered bytes have an independent tested

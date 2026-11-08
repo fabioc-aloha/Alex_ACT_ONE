@@ -1,0 +1,60 @@
+{
+  "name": "alex-act-one",
+  "version": "0.9.4",
+  "description": "Alex ACT ONE. A user-level runtime for GitHub Copilot covering critical thinking and problem framing, engineering craft, prose and documentation, document conversion, visual authoring, and agent brain authoring. Copilot CLI, VS Code with GitHub Copilot Chat, the GitHub Copilot app, and Microsoft Scout can use the plugin from the Copilot CLI user store; Scout must enable Load Copilot CLI skills, activation is per app, and Scout requires separate MCP registration.",
+  "keywords": [
+    "alex-act",
+    "critical-thinking",
+    "epistemic-discipline",
+    "problem-framing",
+    "visual-authoring",
+    "document-conversion"
+  ],
+  "category": "foundation",
+  "author": {
+    "name": "Fabio Correa",
+    "url": "https://github.com/fabioc-aloha"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fabioc-aloha/Alex_ACT_ONE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fabioc-aloha/Alex_ACT_ONE.git"
+  },
+  "skills": "skills",
+  "commands": "prompts",
+  "mcpServers": {
+    "flint": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "skills/setup-dependencies/scripts/runtime-launcher.mjs",
+        "flint"
+      ]
+    },
+    "replicate": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "skills/setup-dependencies/scripts/runtime-launcher.mjs",
+        "replicate"
+      ],
+      "env": {
+        "REPLICATE_API_TOKEN": "${env:REPLICATE_API_TOKEN}"
+      }
+    },
+    "alex-playwright": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "skills/setup-dependencies/scripts/runtime-launcher.mjs",
+        "playwright",
+        "--headless",
+        "--isolated",
+        "--browser",
+        "msedge",
+        "--allow-unrestricted-file-access"
+      ]
+    }
+  }
+}

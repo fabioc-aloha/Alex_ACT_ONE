@@ -1,5 +1,20 @@
 # Repository Agent Guidance
 
+## Mission and scope
+
+This repository maintains and ships Alex ACT ONE. It owns the canonical plugin
+skills, instructions, commands, runtime helpers, user documentation, tests,
+verification tooling, packaging, and release evidence.
+
+Prioritize product correctness, compatibility, reproducibility, and safe
+delivery through the existing release gates. Apply incident lessons as reusable
+product safeguards; do not turn this repository into an adopter-recovery
+service, fleet dashboard, or governance workspace.
+Other repositories own their files, backlogs, and operations. Cross-project
+work requires explicit scope and does not become this project's mission.
+Completed recovery and synchronization records are historical evidence, not
+active goals or standing authorization.
+
 <!-- alex-act-continuity:start -->
 ## Continuity
 

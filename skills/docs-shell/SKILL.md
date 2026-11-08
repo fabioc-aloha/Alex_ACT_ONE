@@ -8,7 +8,7 @@ lastReviewed: 2026-08-07
 
 Load-on-demand pointer for the parent agent. Full technical reference lives at [`references/shell-reference.md`](references/shell-reference.md); this file carries the essentials so the agent can reason about the shell without re-reading the reference every time.
 
-> **Adopting the shell in another project?** Go straight to [`references/shell-reference.md § Adopting the shell in another project`](references/shell-reference.md#adopting-the-shell-in-another-project). The starter kit at [`starter/`](starter/) alongside this file is the copy-paste bundle.
+> **Adopting the shell in another project?** Go straight to [`references/shell-reference.md § Adopting the shell in another project`](references/shell-reference.md#adopting-the-shell-in-another-project). The starter kit at [`starter/`](starter) alongside this file is the copy-paste bundle.
 
 ## When to invoke
 
@@ -297,7 +297,7 @@ See [`references/shell-reference.md § Optional features`](references/shell-refe
 
 ## Starter kit for adopters
 
-The complete adopter bundle lives at [`starter/`](starter/):
+The complete adopter bundle lives at [`starter/`](starter):
 
 ```text
 starter/
@@ -343,7 +343,7 @@ Authored 2026-07-26, evolved through a per-folder pattern, and unified into a si
 ## Cross-links
 
 - [`references/shell-reference.md`](references/shell-reference.md) — canonical technical reference (manifest schema, theme, path rewriting, optional features, adoption, local rendering, troubleshooting)
-- [`starter/`](starter/) — the adopter-facing starter kit
+- [`starter/`](starter) — the adopter-facing starter kit
 - **Related skills**:
   - [big-idea](../big-idea/SKILL.md) — how to author `hero.subtitle` copy
   - [markdown-mermaid](../markdown-mermaid/SKILL.md) — Mermaid diagram authoring rules that fire when a doc contains a `mermaid` code block

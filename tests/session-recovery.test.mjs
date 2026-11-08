@@ -8,7 +8,7 @@ import { test } from 'node:test';
 import { recoverArchive, sanitizeText, verifyArchive } from '../scripts/session-recovery.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const archivePath = 'docs/verification/session-recovery';
+const archivePath = 'archive/verification/session-recovery';
 const hash = value => createHash('sha256').update(value).digest('hex');
 
 function fixture(t) {
@@ -111,6 +111,26 @@ test('authorized recovery preserves originals, deduplicates evidence, and refuse
 
 test('repository recovery is complete and independently verifiable without external session storage', () => {
     const result = verifyArchive(ROOT);
-    assert.ok(result.artifacts > 0);
+    assert.equal(result.artifacts, 93);
+    assert.equal(result.prunedArtifacts, 127);
+    assert.equal(result.originalArtifacts, 220);
     assert.equal(result.hashesVerified, true);
+});
+
+test('pruned custody entries require an approved decision, safe path, hash, and recovery commit', t => {
+    const { root, archive, manifest, save } = fixture(t);
+    const record = { ...manifest.artifacts[0], path: 'history/pruned.txt', reason: 'Approved redundant output',
+        recommendation: 'PRUNE', sourceCommit: '1'.repeat(40) };
+    manifest.pruned = [record];
+    manifest.originalArtifactCount = 2;
+    save();
+    assert.equal(verifyArchive(root).prunedArtifacts, 1);
+    record.path = 'history/../../outside';
+    save();
+    assert.throws(() => verifyArchive(root), /pruned artifact path/);
+    record.path = 'history/pruned.txt';
+    record.sourceCommit = '';
+    save();
+    assert.throws(() => verifyArchive(root), /recovery commit/);
+    assert.ok(existsSync(join(archive, 'history', 'proof.txt')));
 });

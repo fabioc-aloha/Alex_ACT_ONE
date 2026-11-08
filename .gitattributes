@@ -1,3 +1,4 @@
 docs/flint-*.html text eol=lf
-docs/verification/session-recovery/history/** -text -whitespace
-docs/verification/session-recovery/manifest.json text eol=lf
+archive/verification/session-recovery/history/** -text -whitespace
+archive/verification/session-recovery/manifest.json text eol=lf
+package/alex-act-one/** -text -whitespace

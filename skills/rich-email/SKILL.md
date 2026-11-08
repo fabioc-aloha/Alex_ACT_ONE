@@ -28,7 +28,7 @@ Outlook supplies the default signature. Do not add a generated signoff or sender
 ## Procedure
 
 1. Confirm the audience, recipients, purpose, requested action, tone, and whether the user wants a draft or a send.
-2. Copy [the email template](./assets/rich-email-template.md) to a temporary file outside the repository and adapt it using [the style guide](./references/style-guide.md).
+2. Copy [the email template](assets/rich-email-template.md) to a temporary file outside the repository and adapt it using [the style guide](references/style-guide.md).
 3. Keep `to`, `from`, and `subject` frontmatter values unquoted. The converter copies those values into EML headers verbatim.
 4. Use the existing `md-to-eml` converter without `--inline-images`. This first Outlook helper accepts single-part `text/html` EML and rejects multipart output rather than risking attachment corruption.
 5. Validate the EML:

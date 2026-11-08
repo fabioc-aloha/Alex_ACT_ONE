@@ -8,4 +8,7 @@ node_modules/
 .playwright-mcp/
 
 # Frozen, reviewed recovery evidence is a deliverable, not disposable run output.
-!docs/verification/session-recovery/history/**/*.log
+!archive/verification/session-recovery/history/**/*.log
+
+# Reproducible candidate runtime package; delivery still requires a separate release.
+/dist/alex-act-one/

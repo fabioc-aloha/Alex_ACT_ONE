@@ -5,7 +5,7 @@ import { existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, realpathSy
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const ARCHIVE = 'docs/verification/session-recovery';
+const ARCHIVE = 'archive/verification/session-recovery';
 const SOURCES = [
     '11372d9c-45f0-4e30-8d17-f7c60c3eb4f9',
     '3e832a77-ed36-4c86-a4ee-070100b1c775',
@@ -210,7 +210,21 @@ export function verifyArchive(root) {
     const actual = filesIn(join(root, ARCHIVE, 'history'));
     assert.deepEqual(actual.map(path => `history/${path}`).sort(),
         manifest.artifacts.map(artifact => artifact.path).sort(), 'Recovery has unregistered or missing files');
-    return { artifacts: manifest.artifacts.length, bytes, hashesVerified: true, status: manifest.status };
+    for (const entry of manifest.pruned || []) {
+        assert.ok(entry.path.startsWith('history/') && !entry.path.includes('\\')
+            && !entry.path.split('/').includes('..'), 'Invalid pruned artifact path');
+        const key = process.platform === 'win32' ? entry.path.toLowerCase() : entry.path;
+        assert.ok(!paths.has(key), 'Duplicate retained/pruned artifact');
+        paths.add(key);
+        assert.match(entry.sourceSha256, /^[a-f0-9]{64}$/, 'Missing pruned original hash');
+        assert.match(entry.sha256, /^[a-f0-9]{64}$/, 'Missing pruned recovered hash');
+        assert.match(entry.sourceCommit, /^[a-f0-9]{40}$/, 'Missing pruning recovery commit');
+        assert.ok(entry.reason && ['DELETE', 'PRUNE'].includes(entry.recommendation), 'Pruning lacks an approved retention decision');
+        assert.ok(!existsSync(join(root, ARCHIVE, entry.path)), 'Pruned artifact unexpectedly exists');
+    }
+    if (manifest.pruned) assert.equal(manifest.originalArtifactCount, paths.size, 'Pruning inventory is incomplete');
+    return { artifacts: manifest.artifacts.length, bytes, hashesVerified: true, status: manifest.status,
+        ...(manifest.pruned ? { prunedArtifacts: manifest.pruned.length, originalArtifacts: paths.size } : {}) };
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

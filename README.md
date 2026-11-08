@@ -6,6 +6,17 @@
 
 Alex ACT ONE is a pack of skills for GitHub Copilot that changes how the agent works: frame the problem before solving it, look for evidence against its first answer, check a plan against its risks, and verify what it produced before calling it done.
 
+## Repository mission
+
+This source repository **maintains and ships Alex ACT ONE**. It owns the
+plugin's capabilities, runtime helpers, documentation, compatibility tests,
+packaging, and verified releases. The [roadmap](ROADMAP.md) is the product
+backlog; the [release checklist](RELEASE-CHECKLIST.md) governs delivery.
+
+Lessons from incidents become reusable safeguards and regression tests.
+Adopter projects retain their own files and operations; completed recovery work
+is historical evidence, not an ongoing service or this repository's backlog.
+
 **Try the discipline:** "Our dashboard takes 8 seconds to load. Rust rewrite, or Redis caching?" The comparison below is illustrative: these are hypotheses to test, not recorded outcomes. Try it yourself with [the evaluation guide](docs/launch/evaluation-guide.md).
 
 |  | Possible unexamined response | Response to look for |
@@ -43,15 +54,11 @@ covers temporary candidate testing, Scout setup, and optional tools.
 Already set up? Browse the
 [skill catalog](#the-skills).
 
-**Release version: `v0.9.3`**, prepared 2026-11-07. This emergency patch recovers
-stranded session-state project artifacts into the repository index, adds a
-shared repository artifact-storage contract across instructions and workflows,
-and ships deterministic helpers for detecting stranded session files
-([`check-session-artifacts.cjs`](skills/proactive-awareness/scripts/check-session-artifacts.cjs))
-and diagnosing or repository-pinning multi-account `gh` / non-interactive Git
-credentials ([`check-git-auth.cjs`](skills/git-workflow/scripts/check-git-auth.cjs)).
-It retains the `0.9.2` optional-installer diagnostics and `0.9.1` conversion,
-fixture, and browser-verification repairs; runtime package pins are unchanged.
+**Release version: `v0.9.4`**, prepared 2026-11-08. This update hardens artifact
+accounting and multi-account Git authentication, keeps incident history outside
+the runtime package, and restores the source repository's maintain-and-ship
+focus. The lean payload retains every declared runtime owner/resource and both
+Flint demonstrations. Runtime dependency pins are unchanged.
 
 Existing installations do not update automatically. Use the reviewed Mall
 release, verify the loaded version/root, and preview activation again before
@@ -61,13 +68,18 @@ CLI/VS Code observations and local browser evidence have
 [documented limits](docs/verification/README.md); Scout and Copilot app behavior
 is **not freshly verified** for this release.
 
-The [recovered artifact index](docs/verification/session-recovery/README.md) preserves
-historical reports and supporting evidence. The
-[storage contract](skills/proactive-awareness/references/project-artifact-storage.md)
-is an instruction-level safeguard plus explicit checker, not host-enforced
-filesystem isolation.
+The [storage contract](skills/proactive-awareness/references/project-artifact-storage.md)
+and its checker support reliable artifact delivery. They do not constitute
+host-enforced filesystem isolation. Incident and recovery history is maintained
+separately from the product's user documentation and runtime package.
 
 Try the [offline Flint chart gallery](docs/flint-showcase.html) for working examples of semantic data, themes, interactions, linked views, and static exports, or the [experimental interaction lab](docs/flint-experimental.html) for polar brushing, direct reordering, distribution shapes, and reader-driven stories. Open either downloaded HTML in a browser; no server or connection is needed.
+
+The [documentation index](docs/README.md) separates user guides and reusable
+verification from maintainer history. The [lean package contract](docs/package.md)
+defines the `package/alex-act-one` release payload and its exact-file checks.
+Release publication, Mall selection and local installation are verified
+separately; a generated directory or version string is not delivery evidence.
 
 ### Source package inventory
 
@@ -330,7 +342,7 @@ skill telemetry or behavioral scoring.
 Compatibility aliases and the legacy preview/receipt-based bootstrap remain.
 Native skill discovery is not evidence that native rules activated, and a
 workflow loaded by name is not proof that its checks ran. The
-[native-first plan and receipts](docs/plans/2026-11-04-native-first-copilot.md)
+[native-first plan and receipts](archive/plans/2026-11-04-native-first-copilot.md)
 record the dated comparison and rollout decisions. Smaller source files do
 not, by themselves, establish token, latency, or quality improvements.
 

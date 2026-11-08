@@ -32,8 +32,8 @@ storage and GitHub backup were incorrectly treated as equivalent.
 The original TheEditor case motivated this guide. This canonical repository's
 own recovery evidence is now indexed in:
 
-- [Recovered reports, helper, and supporting evidence](docs/verification/session-recovery/README.md).
-- [Original/recovered hashes and declared edits](docs/verification/session-recovery/manifest.json).
+- [Recovered reports, helper, and supporting evidence](archive/verification/session-recovery/README.md).
+- [Original/recovered hashes and declared edits](archive/verification/session-recovery/manifest.json).
 - [Current project storage policy](AGENTS.md#project-artifact-storage).
 
 These are local case evidence, not material to copy wholesale into the plugin.

@@ -46,6 +46,13 @@ Before presenting a project artifact or declaring completion:
    (`node <proactive-awareness>/scripts/check-session-artifacts.cjs --repository-root <repo>`)
    to confirm no deliverables for the active repository were left unaccounted in
    `~/.copilot/session-state/<id>/files/`.
+   Bound the scope with `--session <id>` when appropriate. The checker verifies
+   actual Git-visible bytes, source hashes, and supported recovery manifests,
+   not merely a remembered session/path pair. It reports linked or unsupported
+   inputs and unavailable/empty session scope separately from clean results.
+   Explicit approved pruning records may retire exact original hashes; they
+   must retain their decision and recovery commit. Changed originals still
+   require delivery or a new retention decision.
 
 These are instruction-level safeguards and an explicit verification procedure,
 not universal filesystem enforcement. Tests establish only their stated scope.

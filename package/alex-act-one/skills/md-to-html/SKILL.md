@@ -1,0 +1,247 @@
+---
+name: "md-to-html"
+description: "Convert Markdown to standalone HTML pages with embedded CSS, images, and Mermaid diagrams. Use when the user asks to convert to HTML, make a webpage, or export markdown as an .html file."
+lastReviewed: 2026-11-06
+---
+
+
+
+# Md To Html
+
+> Write in Markdown, share as a polished web page — zero dependencies for viewers
+
+Convert Markdown documents into self-contained HTML files with embedded CSS, base64 images, and Mermaid diagram rendering. Ready for quick-share distribution, offline viewing, print, or email attachment.
+
+> [!WARNING]
+> This converter rejects executable raw HTML such as `<script>`, event-handler
+> attributes, and `javascript:` URLs. Sanitize externally supplied Markdown
+> before conversion; do not weaken this boundary to make an untrusted document
+> render.
+
+The source and rendered HTML are both screened. Fenced and indented code,
+including examples inside blockquotes and lists, remain literal. Local image
+embedding rejects Windows UNC/network and device paths, including encoded forms,
+before filesystem access. Remote image URLs remain linked rather than fetched.
+Default HTML and debug filenames handle `.md` case-insensitively. Output and
+debug destinations that alias the source, including hard links, are rejected
+before conversion or writes.
+
+---
+
+## When to Use
+
+- Sharing formatted documents without requiring Word or PDF viewers
+- Creating self-contained HTML pages for offline distribution
+- Generating printable web pages from Markdown sources
+- Quick previews of documentation with professional styling
+- Email attachments that open in any browser
+- Static site generation from Markdown sources
+
+---
+
+
+
+## Supported Formatting
+
+| Format | Status | Notes |
+|--------|--------|-------|
+| **Headings** | ✅ | H1-H6 with styled colors |
+| **Bold/Italic** | ✅ | Standard emphasis |
+| **Links** | ✅ | Styled with underline on hover |
+| **Images** | ✅ | Base64 embedded or linked |
+| **Code blocks** | ✅ | Monospace styling |
+| **Inline code** | ✅ | Background highlight |
+| **Tables** | ✅ | Striped rows, header styling |
+| **Blockquotes** | ✅ | Left border, italic style |
+| **Lists** | ✅ | Ordered, unordered, nested |
+| **Task lists** | ✅ | Checkbox rendering |
+| **Mermaid diagrams** | ✅ | PNG or table fallback |
+| **SVG** | ✅ | Local SVG images embedded; raw inline SVG rejected |
+| **Horizontal rules** | ✅ | Styled dividers |
+| **Footnotes** | ✅ | Via pandoc |
+
+---
+
+## Key Features
+
+| Feature | Details |
+|---------|---------|
+| Style presets | professional, academic, minimal, dark |
+| Self-contained | All CSS embedded in `<style>` block, no external deps |
+| Image embedding | Local images converted to base64 data URIs |
+| Mermaid support | PNG rendering or table fallback for diagrams |
+| Print-ready | CSS `@media print` rules included |
+| TOC generation | Optional table of contents via `--toc` |
+| Frontmatter | Extracted for title, stripped from output |
+
+## Usage
+
+```bash
+# Basic conversion (professional style)
+node skills/md-to-html/scripts/md-to-html.cjs report.md
+
+# Academic style with TOC
+node skills/md-to-html/scripts/md-to-html.cjs thesis.md --style academic --toc
+
+# Dark mode output
+node skills/md-to-html/scripts/md-to-html.cjs docs.md --style dark
+
+# Mermaid diagrams rendered as PNG (high quality)
+node skills/md-to-html/scripts/md-to-html.cjs architecture.md --mermaid-png
+
+# Custom output path
+node skills/md-to-html/scripts/md-to-html.cjs README.md output/readme.html
+
+# Dry run (validate without generating)
+node skills/md-to-html/scripts/md-to-html.cjs report.md --dry-run
+
+# Debug mode (save preprocessed markdown)
+node skills/md-to-html/scripts/md-to-html.cjs report.md --debug
+```
+
+---
+
+
+
+## Options Reference
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `--style PRESET` | professional | Style preset: professional, academic, minimal, dark |
+| `--toc` | off | Generate table of contents from headings |
+| `--embed-images` | true | Convert local images to base64 data URIs |
+| `--no-embed-images` | - | Keep image paths as-is (external references) |
+| `--strip-frontmatter` | true | Remove YAML frontmatter from output |
+| `--mermaid-png` | off | Render Mermaid as PNG (requires mmdc) |
+| `--mermaid-fallback` | default | Convert Mermaid to table representation |
+| `--debug` | off | Save preprocessed markdown as _debug_combined.md |
+| `--dry-run` | off | Validate only, no HTML output |
+
+---
+
+## Style Presets
+
+| Preset | Font | Max Width | Colors | Best For |
+|--------|------|-----------|--------|----------|
+| **professional** | Segoe UI | 900px | Blue headings, white bg | Business docs, reports |
+| **academic** | Palatino Linotype | 750px | Dark headings, cream bg | Papers, theses |
+| **minimal** | Inter | 800px | Black/gray, white bg | Clean, modern pages |
+| **dark** | Segoe UI | 900px | Light text, dark bg | Dark mode preference |
+
+---
+
+
+
+## Mermaid Diagram Support
+
+| Diagram Type | PNG Mode | Fallback Mode |
+|--------------|----------|---------------|
+| Flowchart | ✅ Full render | ✅ Table |
+| Sequence | ✅ Full render | Source retained |
+| Class | ✅ Full render | Source retained |
+| State | ✅ Full render | Source retained |
+| ER | ✅ Full render | Source retained |
+| Gantt | ✅ Full render | Source retained |
+| Pie | ✅ Full render | Source retained |
+| Journey | ✅ Full render | Source retained |
+
+**PNG Mode** (`--mermaid-png`): Requires mermaid-cli (`mmdc`). Renders at scale 3 and 1200px width. Diagrams are embedded as base64 PNGs.
+
+**Fallback Mode** (default): No renderer dependency. The supported simple
+`graph`/`flowchart` subset becomes node and relationship tables. Unsupported
+types or syntax retain the complete original source in a labeled code block;
+they are not rendered diagrams or successful table conversions. Use PNG mode
+when the reader needs a visual diagram.
+
+---
+
+## Print Styling
+
+HTML output includes `@media print` CSS rules:
+
+- Full-width body with page padding removed
+- Text-colored links without underlines
+- Code blocks with borders instead of background
+
+---
+
+
+
+## Batch Processing
+
+```bash
+# Convert all markdown files in a directory
+for file in docs/*.md; do
+  node skills/md-to-html/scripts/md-to-html.cjs "$file" --style professional
+done
+
+# PowerShell equivalent
+Get-ChildItem docs/*.md | ForEach-Object {
+  node skills/md-to-html/scripts/md-to-html.cjs $_.FullName --style professional
+}
+```
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| "pandoc not found" | pandoc not installed | Run `/alex-act-one setup-dependencies` |
+| Mermaid not rendering | mmdc not installed | Run `/alex-act-one setup-dependencies`, or use the fallback |
+| Images missing | Relative paths broken | Use `--embed-images` (default) |
+| Output too wide on print | Style preset issue | Use academic style for print |
+| Special characters garbled | Encoding issue | Ensure source is UTF-8 |
+
+---
+
+
+
+## Requirements
+
+- Node.js 24+
+- pandoc — run `/alex-act-one setup-dependencies` to check and install
+- mermaid-cli (optional, only for `--mermaid-png`)
+
+---
+
+## Muscle Script
+
+`skills/md-to-html/scripts/md-to-html.cjs`
+
+---
+
+
+
+## Conversion Acceptance Decision Table
+
+| Condition | Verdict | Action |
+|-----------|---------|--------|
+| All headings, lists, tables, code blocks render correctly | Accept | Ship as-is |
+| Mermaid diagrams rendered as PNG/SVG with correct layout | Accept | Verify diagram labels readable |
+| Mermaid diagrams missing or show raw syntax | Reject | Check mermaid-cli installed; re-run with `--mermaid-png` |
+| Embedded images display at correct size | Accept | Confirm no broken `<img>` tags |
+| Images missing or show broken placeholders | Reject | Check paths are relative and files exist |
+| CSS custom properties resolve (colors, fonts) | Accept | Visual spot-check against brand |
+| Inline styles lost or overridden by browser defaults | Warning | Add `!important` or inline fallbacks |
+| Output file size >5MB for a simple document | Warning | Check for unoptimized base64 images |
+| HTML validates (no unclosed tags, no script injection) | Accept | Required for security |
+| HTML contains `<script>` from untrusted source | Reject | Sanitize; only allow known libraries |
+
+---
+
+## Related Skills
+
+- [md-to-word](../md-to-word/SKILL.md) - sister converter for Word output
+- Mermaid authoring - use a Mermaid-capable skill; when Core is installed, its `markdown-mermaid` skill provides diagram guidance
+- Markdown linting - validate the source with the project's linter or the `lint-clean-markdown` skill
+
+---
+
+
+
+## Falsifiability
+
+- This skill is wrong if generated HTML fails W3C validation on structural elements the skill explicitly handles
+- The conversion flags are stale if Pandoc changes default HTML5 output behavior in a major version
+- Not earning tokens if the output loses semantic structure (headings, lists, code blocks) that raw Pandoc preserves without the documented options

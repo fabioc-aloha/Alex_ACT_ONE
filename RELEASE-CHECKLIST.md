@@ -6,6 +6,17 @@ when, so a step nobody can justify can be removed rather than cargo-culted.
 Work top to bottom. A failure stops the release; it does not become a note in
 the release announcement.
 
+## Candidate packaging boundary
+
+When a release proposes lean distribution, use the
+[candidate package contract](docs/package.md) and its existing packaging tests.
+Require every manifest owner/resource, exact Flint demonstration, documented
+runtime dependency, and local adoption link to survive the package allowlist.
+Keep maintainer history outside the generated package. Validate a real
+disposable marketplace installation through the precise approved source route
+before changing Mall or a normal user store. The current published root route
+does not become lean merely because history moved to an archive.
+
 ## 1. The suite passes on a fresh clone
 
 Use the [verification environments and release gates](docs/testing.md). The

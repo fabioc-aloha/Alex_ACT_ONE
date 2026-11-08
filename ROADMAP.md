@@ -1,12 +1,13 @@
 # Roadmap
 
-Updated 2026-11-07. This is the forward plan for pending work, not a history of
-completed repairs. Require same-commit release evidence for the source repairs
-before delivery. R8 remaining-host evidence is next for host coverage; the
-dependency-audit repair is the immediate maintenance follow-up. Runtime upgrade
-recovery needs a design decision before implementation.
+Updated 2026-11-08. This is the product backlog for maintaining and shipping
+Alex ACT ONE, not a history of incidents or an adopter-fleet work queue.
+The current priority is to prepare the local candidate for verified delivery.
+The dependency-audit repair remains a maintenance follow-up; R8 remains next
+for host evidence as access permits. Runtime upgrade recovery requires a
+design decision before implementation.
 
-Release version: `v0.9.3`. This roadmap describes work beyond its scoped
+Release version: `v0.9.4`. This roadmap describes work beyond its scoped
 verification, not an instruction to reopen completed repairs or automatically
 change existing installations. See
 [installation sources](docs/install.md#installation-sources) for the distinction.
@@ -15,6 +16,11 @@ Current verification belongs in [testing](docs/testing.md),
 [browser evidence](docs/verification/flint-browser.md), not duplicated here.
 
 ## Now
+
+**Product focus:** review and qualify the next candidate through the
+[delivery gate](#verify-future-delivery-changes). Completed cross-repository
+recovery and synchronization are archived; they do not add ongoing operations
+to this backlog.
 
 ### R8. Run fresh live-host scenarios
 
@@ -85,9 +91,13 @@ The audit remains read-only and no package upgrade is implied by its results.
 **Status:** release verification follows the
 [release checklist](RELEASE-CHECKLIST.md). Each later source or delivery change
 needs its own evidence; an earlier candidate's green CI is not transferable.
-The [verification record](docs/testing.md) preserves the earlier failed Ubuntu
-fixture-copy gate and the source corrections. Local Windows results are not a
-replacement for a green same-commit matrix.
+The `0.9.4` source hardens reusable artifact/authentication safeguards and
+provides a [lean package](docs/package.md), with both Flint demonstrations and
+runtime owners retained. Its source-path delivery, publication and installed
+parity require separate exact-candidate observations. Later changes cannot
+inherit those results or move an existing release tag.
+The [verification record](docs/testing.md) owns source and package observations;
+local Windows results are not a replacement for a green same-commit matrix.
 
 **Next actions**
 
@@ -102,6 +112,11 @@ replacement for a green same-commit matrix.
   planning, not an additional implementation blocker for `0.9.0`. Preserve the observed
   warning in the [install reference](docs/install.md#testing-the-repository-candidate).
   No Mall publication or installation switch is implied by this correction.
+- Validate the exact marketplace source-subdirectory schema/adapter or another
+  supported delivery mechanism before switching to the lean package.
+  Preserve all required runtime owners/resources and both exact Flint demos,
+  while keeping maintainer archive and source-only CI tooling out of that package.
+  Disposable plugin-directory discovery is not marketplace-install verification.
 - For each approved source change, commit and push the reviewed candidate to main.
 - Require the Windows/Ubuntu structural matrix, provisioned integration lanes,
   and exact demo rebuilds for that same commit. Verify from a clean clone using
@@ -125,11 +140,10 @@ approval. No publication or installation is authorized by this roadmap.
 
 ### Verify artifact delivery in supported hosts
 
-**Status:** stranded project artifacts are recovered and indexed in
-[repository evidence](docs/verification/session-recovery/README.md).
-Canonical guidance now requires repository storage and final-file delivery
-checks. This is instruction-level behavior, not installed activation or
-host-enforced prevention.
+**Status:** the product has a shared artifact-delivery contract and local
+checker corrections with regression coverage. Verify their behavior in
+supported hosts as product capabilities. The completed incident recovery is
+historical evidence, not the remaining work or proof of host enforcement.
 
 **Next actions**
 
@@ -240,6 +254,9 @@ blocked or unverified; they must not be hidden behind a passing aggregate.
 
 ## Completion rules
 
+- Keep this repository focused on maintaining and shipping Alex ACT ONE.
+  Adopter files/backlogs and fleet or governance operations remain in their
+  owning repositories; a past authorized recovery grants no standing scope.
 - Close work against its stated acceptance evidence, not implementation alone.
 - Keep evidence with the candidate/task; collect no cross-session skill telemetry
   or standing behavioral ledger.

@@ -1,0 +1,74 @@
+---
+name: bootstrap-project
+description: "Previews and applies this plugin's repository scaffold, portable workspace QoL settings, and project Copilot settings while preserving project-owned files. Use for new repositories, missing AGENTS/HANDOFF/episodic files, or project .vscode setup."
+lastReviewed: 2026-08-18
+---
+
+# Bootstrap Project
+
+Set up one repository with this plugin's project-local guidance and a portable VS Code
+workspace baseline. The baseline covers editor, diff, Markdown, file/search,
+terminal, and Git QoL preferences. Its PowerShell profile keys are
+Windows-scoped and are ignored on macOS, where the system default shell
+applies. It never edits user settings, configures extensions, or configures
+shared continuity.
+
+## Preview First
+
+```text
+node <this-skill>/scripts/bootstrap-project.cjs --repository-root <path>
+```
+
+The preview classifies agent guidance, nested contracts, missing scaffold files,
+settings additions and `.gitignore` changes. It writes nothing.
+
+## Apply After Consent
+
+After explicit repository consent, rerun with `--apply`. Existing files are
+preserved. Settings are additive: missing keys and nested map entries are added,
+while project values remain authoritative. Markdown Preview uses VS Code's
+user-level defaults; optional personal styling belongs in the user profile, not
+project configuration.
+
+The minimal scaffold is `AGENTS.md`, thin Claude/Gemini adapters, `HANDOFF.md`,
+`.github/episodic/README.md`, `.vscode/settings.json`, and a narrow
+`.gitignore` exception for the managed settings file.
+
+New `AGENTS.md` scaffolds include repository artifact storage guidance derived
+from the [shared contract](../proactive-awareness/references/project-artifact-storage.md).
+Existing guidance remains preserved; propose a scoped manual merge rather than
+silently overwriting it. Project adoption is not global instruction activation.
+For GitHub HTTPS remotes where multiple `gh` accounts are used, also preview
+[repository Git auth pinning](../git-workflow/scripts/check-git-auth.cjs) so
+non-interactive agent pushes do not fail on global account switches.
+
+## Boundaries
+
+- One explicit repository root per invocation.
+- Divergent root `AGENT.md` and `AGENTS.md` block apply.
+- A lone legacy `AGENT.md` also blocks apply pending an explicit migration
+  decision; bootstrap does not create a competing `AGENTS.md`.
+- Existing handoff, episodic, agent, and settings files are preserved.
+- Post-apply verification must be unblocked with no pending scaffold, settings,
+  or `.gitignore` changes.
+- Comment-rich JSONC requiring changes fails closed for manual merge.
+- Do not create `MEMORY.md`, README, license, framework, package manager, or Git.
+- Do not edit VS Code user settings or configure shared continuity.
+
+## Anti-Patterns
+
+| Anti-pattern | Correction |
+| --- | --- |
+| Route this through another plugin | This plugin owns required project setup |
+| Replace custom project settings | Add only missing baseline entries |
+| Configure a project Markdown stylesheet | Use VS Code's user-level defaults instead |
+| Configure shared continuity | Keep work in repository continuity until a separately approved capability exists |
+
+## Would Revise If
+
+Revise if project bytes are overwritten, a second preview is
+not idempotent, user settings are touched, or the baseline proves non-portable.
+
+## Compatibility command constraints: bootstrap-project
+
+Use one explicit repository root. Preview first; preserve existing project files and settings. Apply only after repository consent.

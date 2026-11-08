@@ -1,7 +1,7 @@
 <!-- markdownlint-disable-file MD060 MD041 -->
 <!-- MD060: compact tables are intentional in this file. MD041: the nav-strip is the standard first line for this document type. -->
 <!-- nav-strip -->
-**Illustrator Plugin · docs-shell reference** · [▲ Docs index](../SKILL.md) · [Skill body](../SKILL.md) · [Starter kit](../starter/)
+**Illustrator Plugin · docs-shell reference** · [▲ Docs index](../SKILL.md) · [Skill body](../SKILL.md) · [Starter kit](../starter)
 <!-- /nav-strip -->
 
 # The docs-shell pattern
@@ -25,7 +25,7 @@ The shell reads `manifest.json`, resolves which area + doc is active from the UR
 
 ## Current state (2026-08-07)
 
-The pattern is **one stable shell root** with adjacent `index.html` and `manifest.json`. Repository root is recommended because links and deployment are simplest there. A deliberate subfolder such as `docs/` is also supported: source and report paths remain relative to that manifest. Before 2026-07-28, an earlier iteration generated multiple folder shells and manifests from one repository; that multi-root pattern was retired. The starter at [`../starter/`](../starter/) is location-neutral.
+The pattern is **one stable shell root** with adjacent `index.html` and `manifest.json`. Repository root is recommended because links and deployment are simplest there. A deliberate subfolder such as `docs/` is also supported: source and report paths remain relative to that manifest. Before 2026-07-28, an earlier iteration generated multiple folder shells and manifests from one repository; that multi-root pattern was retired. The starter at [`../starter/`](../starter) is location-neutral.
 
 ## Audit an adopter before upgrade
 
@@ -413,7 +413,7 @@ QuickJumps are opt-in. The starter keeps example data, CSS, and anchor wiring, b
 
 ## Adopting the shell in another project
 
-The starter kit at [`../starter/`](../starter/) is a ready-to-adopt bundle:
+The starter kit at [`../starter/`](../starter) is a ready-to-adopt bundle:
 
 ```text
 starter/
@@ -463,11 +463,11 @@ Deep-link to a specific doc by appending `?area=<id>&doc=<slug>`.
 ## Cross-links
 
 - [`../SKILL.md`](../SKILL.md) — concise skill body invoked by the parent agent
-- [`../starter/`](../starter/) — the complete starter bundle adopters copy
+- [`../starter/`](../starter) — the complete starter bundle adopters copy
 - Brand palette: define one in your own project and map it through the root manifest theme block
 - Related skill: [big-idea](../../big-idea/SKILL.md) — how to author `hero.subtitle` copy
 
 
 <!-- nav-strip -->
-**Illustrator Plugin · docs-shell reference** · [▲ Docs index](../SKILL.md) · [Skill body](../SKILL.md) · [Starter kit](../starter/)
+**Illustrator Plugin · docs-shell reference** · [▲ Docs index](../SKILL.md) · [Skill body](../SKILL.md) · [Starter kit](../starter)
 <!-- /nav-strip -->

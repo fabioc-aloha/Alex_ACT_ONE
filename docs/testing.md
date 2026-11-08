@@ -1,7 +1,7 @@
 # Verification environments and release gates
 
-Release version: `0.9.3`. Use the
-[release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.3)
+Release version: `0.9.4`. Use the
+[release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.4)
 for the frozen commit's CI, clean-clone, artifact, and delivered-package results.
 The dated baseline runs below do not substitute for same-commit release evidence.
 Live-host and browser observations retain their separately documented limits.
@@ -14,6 +14,12 @@ These are verification targets, not certification of every Copilot host or OS.
 macOS and other Node versions are not covered by this workflow.
 
 ## What runs where
+
+The [candidate package gate](package.md) separately checks the explicit
+distribution boundary, exact demo preservation, all declared assets/resources,
+local package links, and disposable bootstrap behavior. Source-only CI and
+maintainer archive verification remain source-checkout responsibilities; a
+lean runtime package is not a Git checkout or all-host certification.
 
 | Lane | Prerequisites | Required evidence |
 | --- | --- | --- |
@@ -83,10 +89,21 @@ node scripts\verification-gate.mjs --lane structural
 
 ### Repository artifact recovery
 
+The `0.9.4` source retention cleanup keeps 93 historical artifacts
+(5,016,321 bytes) and records 127 approved pruned entries in the custody
+manifest. The [retention implementation](../archive/verification/recovery-retention-review/2026-11-08/implementation.json)
+and [approval inventory](../archive/verification/recovery-retention-review/2026-11-08/README.md)
+preserve reasons, original/recovered hashes, and the prior Git commit.
+The initial recovery counts below are historical, not the current physical
+archive size. Current checker regressions include missing, corrupt, ignored,
+stale and alternate-manifest evidence, explicit login selection, real synthetic
+helper execution, and configuration rollback. Source results are not installed-package verification; the release record
+owns the separately observed publication and installation evidence.
+
 On 2026-11-07, the authorized recovery retained 220 historical files
 (9,318,096 recovered bytes) from this repository's local sessions, verified
 their recovered SHA-256 values, and confirmed the originals were unchanged.
-The [index and manifest](verification/session-recovery/README.md) distinguish
+The [index and manifest](../archive/verification/session-recovery/README.md) distinguish
 original hashes from privacy/link-edited copies, exclude disposable runtime
 state, and record a byte-identical duplicate session. Empty failed-producer
 JSON outputs remain explicitly classified historical failures.
@@ -110,6 +127,13 @@ unregistered evidence, unsupported/empty inventories, undeclared edits, and
 path/junction escapes without overwriting a failed historical record.
 Future host enforcement retains its
 [separate acceptance gate](../ROADMAP.md#verify-artifact-delivery-in-supported-hosts).
+
+The live session detector additionally reads explicitly scoped local session
+files and Git-visible repository artifacts. It does not classify unavailable
+scope, unsupported formats or links as a clean result. Deliberate pruning can
+account for exact source hashes without recreating discarded scratch; changed
+originals cannot reuse that decision. The Git auth preview uses read-only
+identity/access probes; branch protection remains unverified by that preview.
 
 ### Structural and integration isolation
 

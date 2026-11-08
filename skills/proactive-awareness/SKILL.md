@@ -25,6 +25,12 @@ Run the read-only [session-artifact checker](scripts/check-session-artifacts.cjs
 (`node <this-skill>/scripts/check-session-artifacts.cjs --repository-root <repo>`)
 to detect deliverables stranded in `~/.copilot/session-state/<id>/files/` for
 the active repository.
+Use `--session <id>` to bound a task-specific check when its session is known.
+The checker verifies Git-visible copies and supported recovery manifests;
+ignored copies do not satisfy delivery. Missing/corrupt manifests fail explicitly.
+Absent sessions, linked paths, unsupported formats, and no matching scope are
+not reported as clean. Exact-hash pruning decisions in a custody manifest can
+account for deliberately retired artifacts, not changed source content.
 This mode is also read-only: report missing delivery rather than relocating,
 archiving, committing, or activating files without the task's write authority.
 Recovery should report relevant externally stranded artifacts, not silently

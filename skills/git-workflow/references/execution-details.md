@@ -38,7 +38,10 @@ before a risky operation rather than relying on a version claim in this guide.
 
 ## Non-Interactive and Multi-Account GitHub Auth
 
-Copilot CLI and VS Code Agent Host shells run with `credential.interactive=never` so background Git commands never hang on modal login prompts. That exposes two failure modes on GitHub HTTPS remotes:
+In the diagnosed agent environment, Git received `credential.interactive=never`.
+Other hosts may configure non-interactivity differently; inspect the actual
+configuration rather than assuming every Copilot/VS Code shell behaves alike.
+Non-interactive GitHub HTTPS operations expose two common failure modes:
 
 1. **Missing `gh` credential helper:** Git falls back to the system Git Credential Manager (`manager`), which fails with `fatal: Cannot prompt because user interactivity has been disabled` / `fatal: unable to get password from user`.
 2. **Multi-account `gh` drift:** `gh auth switch` sets a single global active account per host. When a user has both work (e.g. `user_corp`) and personal (`user-personal`) accounts in `gh`, switching accounts in any terminal flips global state, and `gh auth git-credential get` exits `1` or serves the wrong account's token even if Git passes `username=`.
@@ -49,7 +52,17 @@ Diagnose before pushing or after a credential failure:
 node "<this-skill>\scripts\check-git-auth.cjs" --repository-root "<repo-root>"
 ```
 
-The preview writes nothing and reports whether `gh` is authenticated for the remote owner, whether multiple `gh` accounts exist, and whether `.git/config` pins the repository account.
+The preview performs read-only network/authentication probes using structured
+`gh auth status --json hosts --no-refresh`, so it does not refresh tokens.
+It verifies the selected token's login, repository read access, and the token
+returned by actual Git credential-helper execution without logging credentials.
+Use `--user` to select the authenticating account; repository owners may be
+organizations or unrelated collaborators. An existing local account pin or a
+single authenticated account may supply the selection; ambiguous multi-account
+state is reported as `account-selection-required`, not guessed.
+GitHub Enterprise requires an explicit `--hostname`; Azure DevOps and other
+HTTPS providers remain not applicable. Repository push permission and branch
+protection are separate from read/helper verification.
 
 With user approval, pin the repository's `.git/config` credential helper to the target `gh` account without writing any token to disk or changing global `gh` state:
 
@@ -57,7 +70,13 @@ With user approval, pin the repository's `.git/config` credential helper to the 
 node "<this-skill>\scripts\check-git-auth.cjs" --repository-root "<repo-root>" --user "<github-account>" --apply
 ```
 
-This resets `credential.https://<host>.helper` locally and adds `!GH_TOKEN=$('<gh>' auth token --hostname <host> --user <account>) '<gh>' auth git-credential`, so tokens remain in the OS keyring while pushes in `<repo-root>` always use `<github-account>`.
+Apply validates the selected identity and prepared helper before mutation.
+It resets the host helper chain in a staged configuration, selects the account's
+token at execution time, and stops if lookup fails rather than falling back to
+another active account. The entire local configuration is replaced atomically
+under its Git config lock. Stale previews fail, and a failed post-apply probe
+restores the prior bytes; an unsuccessful rollback explicitly retains recovery
+material. No global account switch or plaintext token persistence is performed.
 
 ---
 

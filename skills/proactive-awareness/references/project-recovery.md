@@ -27,6 +27,12 @@ At the start of every relevant conversation:
    the repository. These checks are read-only; do not rewrite continuity
    records or create episodic/native memory as part of recovery.
 
+For recovery scans, use the explicit session scope when known. Supported
+manifests include the repository recovery index and the existing project-local
+artifact recovery layouts. Validate recovered bytes before using their original
+hashes for accounting. An ignored copy, malformed record, unavailable session
+store, linked source, or unsupported format is not proof of clean delivery.
+
 ### Denied sources and unknown worktree state
 
 - Distinguish an **absent** record from a **policy-denied** source. Report the
