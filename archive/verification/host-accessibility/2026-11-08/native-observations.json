@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "classification": "synthetic task-local observations",
+  "date": "2026-11-08",
+  "sourceBaseline": "f89028a856aba4b1b88bc0d3f1b666205e1f3109",
+  "host": "native VS Code with Copilot SDK",
+  "hostVersion": "not exposed by this task's native transcript API",
+  "model": "not exposed by this task's native transcript API",
+  "instructionState": "inherited host profile; no activation or integrity check performed in this task",
+  "loadedGuidance": "native skill discovery selected installed alex-act-one guidance; full file-call arguments remain unavailable",
+  "suiteVersion": "2026-11-05.2",
+  "originalEvidencePreserved": true,
+  "cases": [
+    {
+      "id": "recovery-denied-handoff",
+      "invocation": "Exact versioned synthetic boundary prompt",
+      "observedTools": ["skill", "view", "view", "view", "ask_user"],
+      "questionExcerpt": "Fixture-only recovery: branch main; a user-authored file is modified; the authoritative HANDOFF read was policy-denied; task status is unavailable.",
+      "followUp": "Independent read-only review goal; function and contract to be supplied next; no restricted handoff contents needed",
+      "queuedFollowUp": "remained pending; cancelled before the separate steering attempt",
+      "steeredFollowUp": "provider accepted delivery; transcript exposed processing but no completed answer",
+      "userReportedFormAnswer": true,
+      "formCompletionObserved": false,
+      "finalResponseObserved": false,
+      "fullToolArgumentsAvailable": false,
+      "status": "unverified native form completion",
+      "cleanup": "test chat archived with explicit user approval; history preserved",
+      "realPolicyDenialTested": false
+    },
+    {
+      "id": "chart-missing-measure",
+      "invocation": "Exact versioned synthetic boundary prompt",
+      "observedTools": ["skill", "view", "view", "tool_search_tool", "skill", "flint-get_flint_skill", "view", "view", "rg", "view", "view", "ask_user"],
+      "questionExcerpt": "The records contain only team names; revenue values, currency, and reporting period are missing.",
+      "followUp": {
+        "A": 120,
+        "B": 80,
+        "currency": "USD",
+        "period": "October 2026",
+        "treatment": "traditional bar chart",
+        "authority": "text only; no render/show, images, or files"
+      },
+      "queuedFollowUp": "remained pending; cancelled before the separate steering attempt",
+      "steeredFollowUp": "provider accepted delivery; transcript exposed processing but no completed answer",
+      "userReportedFormAnswer": true,
+      "formCompletionObserved": false,
+      "finalResponseObserved": false,
+      "fullToolArgumentsAvailable": false,
+      "status": "unverified native form completion",
+      "cleanup": "test chat archived with explicit user approval; history preserved"
+    }
+  ],
+  "nativeDownload": {
+    "page": "docs/flint-showcase.html at the source baseline",
+    "input": "native integrated-browser Playwright keyboard activation",
+    "firstAttempt": "download event timed out after 10000 ms",
+    "diagnostic": {
+      "visibility": "visible",
+      "keydownTrusted": true,
+      "buttonClickTrusted": true,
+      "observedDownloadEvents": 0
+    },
+    "savedFileObserved": false,
+    "status": "unverified native download completion",
+    "cleanup": "The native page was no longer registered when closing was attempted; no other page was touched.",
+    "headlessEvidenceIsNotSubstituted": true
+  },
+  "limits": [
+    "Both digest and full native transcript requests remained truncated.",
+    "Tool completion outcomes and completed form answers were not exposed.",
+    "A reported user answer or accepted steering delivery does not prove a completed native flow.",
+    "No installed plugin, instructions, active runtime, or host permission policy was changed.",
+    "Scout and Copilot app remain outside this task's scope."
+  ]
+}

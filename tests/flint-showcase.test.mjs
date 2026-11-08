@@ -97,10 +97,30 @@ test('legend-toggle examples keep a persistent visible key across editorial them
         sample.input.chart?.interaction_spec?.interactions.some(item => item.type === 'legend-toggle'))) {
         for (const theme of data.themes) {
             assert.deepEqual(sample.inputs[theme.id].chart.theme_spec,
-                { extends: theme.id, legend: { show: 'always', placement: ['top'] } },
+                { extends: theme.id, ink: { series: { minContrast: { fill: 3, stroke: 3 } } },
+                    geometry: { point: { opacity: 1 } },
+                    dataLabels: { minContrast: 4.5 }, legend: { show: 'always', placement: ['top'] } },
                 `${sample.id}/${theme.id} must retain a key after a series is hidden`);
         }
     }
+});
+
+test('bounded heatmap scores use numeric mapping and readable same-hue ramps', async () => {
+    const { createSamples, demoTheme } = await import('../scripts/build-flint-showcase.mjs');
+    const { contrastRatio } = await import('../scripts/flint-browser-acceptance.mjs');
+    const input = createSamples().find(sample => sample.id === 'heatmap').input.chart;
+    assert.equal(input.chart_spec.encodings.color.type, 'quantitative');
+    assert.deepEqual(input.semantic_types.workload.intrinsicDomain, [1, 5]);
+    for (const id of ['nyt', 'economist', 'swiss']) {
+        const theme = demoTheme(id, 'Heatmap');
+        assert.equal(theme.ink.series.sequential.space, 'rgb');
+        const channels = theme.ink.series.sequential.stops.map(color =>
+            [1, 3, 5].map(index => parseInt(color.slice(index, index + 2), 16)));
+        assert.ok(channels.every(color => contrastRatio(color, [255, 255, 255]) >= 4.5));
+        assert.ok(channels[1].every((channel, index) => channel <= channels[0][index]),
+            'RGB interpolation must not introduce a lighter interior stop');
+    }
+    assert.throws(() => demoTheme('unreviewed', 'Heatmap'), /reviewed/);
 });
 
 test('the offline host bridge restricts messages and does not pretend to run a backend', () => {

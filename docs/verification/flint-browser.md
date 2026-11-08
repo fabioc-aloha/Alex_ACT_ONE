@@ -40,14 +40,35 @@ run below therefore used the direct Node CLI, not an integrated-browser run.
 | Images | Every backend image decodes to nonzero dimensions |
 | Matrix | Every sample/theme/story variant mounts its expected real charts |
 | Keyboard | Shell Tab order and an actual chart Enter step change the announced focus target |
+| Keyboard matrix | Baseline keyboard-enabled examples enter chart navigation and restore its root label and actual focus with Escape |
 | Focus | Visible indicator and measured contrast of at least 3:1 against its adjacent shell background |
 | Live regions | Shell and chart feedback regions exist; speech itself is not observed |
 | Contrast | Sampled shell text and controls measure at least 4.5:1 |
+| Chart contrast | Observed baseline SVG text measures at least 4.5:1 (3:1 for large text); painted marks or their visible outlines measure at least 3:1 |
 | Linked selection | Selected semantic identities are emphasized in every recipient; base populations stay intact |
 | Reset | Escape and Reset example restore populations and emphasis |
 | Resize | Settled plots fit their nearest clipping containers at desktop, tablet, and narrow widths |
 | Saved spec | Trusted keyboard activation produces a download event and actual saved file, equal to the selected starting input |
 | Provenance | Embedded data and upstream App digests match their actual payloads |
+
+The chart audit resolves value labels against underlying painted marks rather
+than the canvas alone, ignores fully transparent hit-test overlays, and
+composites opacity before measuring. Unsupported paints and out-of-viewport
+targets fail explicitly. Coverage is baseline keyboard-enabled examples and
+their themes, excluding intentional update-layer dimming; color-to-color
+distinguishability, gradients, complex paint stacks and all chart families are
+not certified. Additional keyboard traversal uses the first theme on each page.
+
+The [2026-11-08 hardening evidence](../../archive/verification/host-accessibility/2026-11-08/browser.json)
+records passing expanded checks. Demo themes retain their inherited visual
+systems with focused contrast overrides and opaque points. Heatmap colors use
+numeric mapping over the original bounded score domain and darker same-hue
+ramps, avoiding missing intermediate values and unreadable in-cell labels.
+Static previews use the same contrast settings; they are not separate
+browser-contrast certification. The bundled upstream App remains unchanged.
+[Native download observations](../../archive/verification/host-accessibility/2026-11-08/native-observations.json)
+record trusted activation without a download event or saved file; the passing
+headless saved-file check does not close that integrated-host gap.
 
 After each viewport change, resize checks bring the viewer onscreen so
 Chromium does not suspend offscreen cross-origin frame work. Resize settling

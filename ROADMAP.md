@@ -2,8 +2,9 @@
 
 Updated 2026-11-08. This is the product backlog for maintaining and shipping
 Alex ACT ONE, not a history of incidents or an adopter-fleet work queue.
-The source and Mall `0.9.5` release is published. R8 remains next for host
-evidence as access permits; manual installation is deferred to the user.
+The source and Mall `0.9.5` release is published and installed-package parity
+is recorded. R8 remains next for host evidence as access permits; subsequent
+candidate installation requires separate approval.
 Runtime upgrade recovery requires a
 design decision before implementation.
 
@@ -32,6 +33,12 @@ the representative boundaries, but transcript truncation and two unanswered
 clarification forms prevent a complete native verdict. Scout and Copilot app
 remain not run by explicit user scope. Historical findings/retests remain
 in [scenario evidence](docs/verification/README.md), not rewritten as new passes.
+The [additional native probes](archive/verification/host-accessibility/2026-11-08/native-observations.json)
+reproduced truncated tool arguments and paused clarification forms. Queued
+and separately steered synthetic follow-ups exposed no completed answers,
+including after the user reported answering the forms. The user approved
+archiving only those test chats, preserving history. R8 remains open; another
+identical rerun is not the next action without an observable completion path.
 
 Use the [versioned cases and run guide](docs/verification/README.md) to exercise
 reasoning, review, recovery, conversion, chart, and draft-only workflows.
@@ -123,9 +130,13 @@ verify a requested plan, native agent JSON, shell output, and direct MCP file
 output in Git-visible repository destinations. Ignored-copy and changed-source
 controls failed as expected; copying to a Git-visible destination resolved the
 synthetic stranded result. Native browser rendering is observed, while its
-inline screenshot did not establish file delivery. Scout/Copilot app,
-user-approved live external destinations, and strong host enforcement remain
-unverified. Synthetic checker metadata is not a natural host-stranding incident.
+inline screenshot did not establish file delivery. Scout/Copilot app and
+strong host enforcement remain unverified.
+[A user-approved external synthetic destination](archive/verification/host-accessibility/2026-11-08/external-artifact.json)
+now has exact-byte verification and approved cleanup. Native trusted
+download-button activation exposed neither a download event nor a saved file.
+That limitation is not replaced by headless download evidence. Synthetic
+checker metadata is not a natural host-stranding incident.
 
 **Next actions**
 
@@ -171,7 +182,12 @@ Do not use the active user runtime as a failure-test fixture.
 
 ### Extend accessibility and browser coverage
 
-**Status:** the scoped local browser gate exists; broader coverage is pending.
+**Status:** the [expanded local gate](archive/verification/host-accessibility/2026-11-08/browser.json)
+passes baseline SVG text/mark/outline contrast and additional keyboard/focus
+restoration on both demos. Approved contrast-tuned theme variants and numeric
+heatmap mapping preserve the data and bounded score domain. Screen-reader
+speech, remaining gestures/chart families, color-to-color distinguishability,
+and integrated-browser saving remain pending.
 
 Build on the [recorded browser scope and limitations](docs/verification/flint-browser.md)
 rather than rerunning the same happy path and calling it full accessibility.

@@ -5,6 +5,19 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+- Extended the bounded browser gate to measure live SVG text, painted data
+  marks and visible outlines, and additional chart keyboard/focus restoration.
+  Approved demo theme variants retain house palettes while tuning contrast,
+  using opaque points and readable same-hue heatmap ramps. Bounded heatmap
+  scores now use an explicit quantitative color mapping, preserving the
+  original values and domain instead of dropping intermediate ordinal values.
+  Both rebuilt demos passed the expanded
+  [Edge gate](archive/verification/host-accessibility/2026-11-08/browser.json).
+  [External artifact verification](archive/verification/host-accessibility/2026-11-08/external-artifact.json)
+  passed with an explicitly approved synthetic destination and cleanup.
+  [Native follow-ups](archive/verification/host-accessibility/2026-11-08/native-observations.json)
+  preserve unresolved transcript/form and native-download limits; R8 is not
+  closed. No release, installed update, or strong host enforcement is implied.
 - Repaired the post-release source CI gates: restored explicit candidate
   marketplace verification wording and rebuilt both Flint demos in the
   reviewed isolated lockfile runtime. Exact comparisons prove that only the

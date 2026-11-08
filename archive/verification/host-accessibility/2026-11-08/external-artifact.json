@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "classification": "synthetic",
+  "sourceBaseline": "f89028a856aba4b1b88bc0d3f1b666205e1f3109",
+  "destinationClass": "user-approved external temporary directory",
+  "producer": "native VS Code Copilot SDK apply_patch",
+  "expectedValue": 0,
+  "observedValue": 0,
+  "sha256": "075efcd6a175bd73845a12e8a16fd16f9fa10aecbe7212335b3b4901b6622dba",
+  "bytes": 119,
+  "destinationVerified": true,
+  "repositoryArtifactCheckerCertifiesExternalDelivery": false,
+  "cleanup": "completed after exact-hash verification; only the owned fixture and empty test directory were removed",
+  "limitations": [
+    "This is an explicitly authorized fixture, not arbitrary-write enforcement."
+  ]
+}

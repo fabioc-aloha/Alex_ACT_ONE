@@ -52,7 +52,10 @@ test('lab uses less-conventional actual chart types and meaningful gesture contr
             assert.ok(sample.inputs[theme.id]);
             for (const chart of sample.inputs[theme.id].chart ? [sample.inputs[theme.id].chart] : sample.inputs[theme.id].board.charts) {
                 if (['Bump Chart', 'Connected Scatter Plot', 'ECDF Plot'].includes(chart.chart_spec.chartType)) {
-                    assert.deepEqual(chart.theme_spec, { extends: theme.id, legend: { show: 'never' } });
+                    assert.deepEqual(chart.theme_spec, { extends: theme.id,
+                        ink: { series: { minContrast: { fill: 3, stroke: 3 } } },
+                        geometry: { point: { opacity: 1 } },
+                        dataLabels: { minContrast: 4.5 }, legend: { show: 'never' } });
                 }
             }
         }

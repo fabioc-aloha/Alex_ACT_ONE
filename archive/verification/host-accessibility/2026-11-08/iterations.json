@@ -1,0 +1,282 @@
+{
+  "schemaVersion": 1,
+  "classification": "synthetic task-local development probes",
+  "limitation": "The initial fill-only probe was superseded by visible-outline-aware sampling; initial numbers are not the final acceptance verdict.",
+  "iterations": [
+    {
+      "probe": "accessibility-initial.json",
+      "originalSha256": "63c103286d2dcd6ad88ee40220d250ebfc53f520ff0dca1141275272af468bba",
+      "pages": [
+        {
+          "page": "flint-showcase.html",
+          "passed": false,
+          "findings": [
+            {
+              "case": "composition, economist, mark",
+              "reportedFailures": 4,
+              "minimumReportedRatio": 1.8900999625889894,
+              "example": "quarter: Q1; orders: 30; product: Plus"
+            },
+            {
+              "case": "composition, nyt, text",
+              "reportedFailures": 2,
+              "minimumReportedRatio": 4.027806323690779,
+              "example": "quarter: Q1; orders: 20; product: Services"
+            },
+            {
+              "case": "heatmap, economist, mark",
+              "reportedFailures": 20,
+              "minimumReportedRatio": 1.0,
+              "example": "day: Mon; team: Support; workload: 4"
+            },
+            {
+              "case": "heatmap, economist, text",
+              "reportedFailures": 9,
+              "minimumReportedRatio": 1.0,
+              "example": "day: Mon; team: Support; workload: 4"
+            },
+            {
+              "case": "heatmap, nyt, mark",
+              "reportedFailures": 20,
+              "minimumReportedRatio": 1.0,
+              "example": "day: Mon; team: Support; workload: 4"
+            },
+            {
+              "case": "heatmap, nyt, text",
+              "reportedFailures": 9,
+              "minimumReportedRatio": 1.0,
+              "example": "day: Mon; team: Support; workload: 4"
+            },
+            {
+              "case": "heatmap, swiss, mark",
+              "reportedFailures": 20,
+              "minimumReportedRatio": 1.0,
+              "example": "day: Mon; team: Support; workload: 4"
+            },
+            {
+              "case": "heatmap, swiss, text",
+              "reportedFailures": 9,
+              "minimumReportedRatio": 1.1280109407091974,
+              "example": "day: Mon; team: Support; workload: 4"
+            },
+            {
+              "case": "linked, economist, mark",
+              "reportedFailures": 6,
+              "minimumReportedRatio": 1.5586298573398607,
+              "example": "hours: 18; orders: 58; region: North; store: N1"
+            },
+            {
+              "case": "linked, swiss, mark",
+              "reportedFailures": 4,
+              "minimumReportedRatio": 1.4110496864207436,
+              "example": "hours: 16; orders: 48; region: East; store: E1"
+            },
+            {
+              "case": "relationship, economist, mark",
+              "reportedFailures": 6,
+              "minimumReportedRatio": 1.5586298573398607,
+              "example": "hours: 18; orders: 58; region: North; store: N1"
+            },
+            {
+              "case": "relationship, swiss, mark",
+              "reportedFailures": 4,
+              "minimumReportedRatio": 1.4110496864207436,
+              "example": "hours: 16; orders: 48; region: East; store: E1"
+            },
+            {
+              "case": "trend, economist, mark",
+              "reportedFailures": 1,
+              "minimumReportedRatio": 2.2511071057922023,
+              "example": "month: Jan 01, 2025; revenue: 38000; region: South"
+            }
+          ]
+        },
+        {
+          "page": "flint-experimental.html",
+          "passed": false,
+          "findings": [
+            {
+              "case": "lens, de-stijl, mark",
+              "reportedFailures": 8,
+              "minimumReportedRatio": 1.4551023833057755,
+              "example": "cost: 110; score: 61; cohort: Forge; run: Forge-1"
+            },
+            {
+              "case": "lens, pop, mark",
+              "reportedFailures": 30,
+              "minimumReportedRatio": 1.2642866118632305,
+              "example": "cost: 80; score: 45; cohort: Atlas; run: Atlas-1"
+            },
+            {
+              "case": "lens, swiss, mark",
+              "reportedFailures": 16,
+              "minimumReportedRatio": 1.4110496864207436,
+              "example": "cost: 80; score: 45; cohort: Atlas; run: Atlas-1"
+            },
+            {
+              "case": "linked-lab, de-stijl, mark",
+              "reportedFailures": 16,
+              "minimumReportedRatio": 1.4551023833057755,
+              "example": "checkpoint: 1; rank: 4; cohort: Forge"
+            },
+            {
+              "case": "linked-lab, pop, mark",
+              "reportedFailures": 88,
+              "minimumReportedRatio": 1.0,
+              "example": "checkpoint: 1; rank: 2; cohort: Drift"
+            },
+            {
+              "case": "linked-lab, swiss, mark",
+              "reportedFailures": 30,
+              "minimumReportedRatio": 1.4110496864207436,
+              "example": "checkpoint: 1; rank: 3; cohort: Kite"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "probe": "accessibility-tuned.json",
+      "originalSha256": "c1c72e0546bf71163c3c6bf755cd876e59b8571b702d0f62d4fa08f6f3d0f979",
+      "pages": [
+        {
+          "page": "flint-showcase.html",
+          "passed": false,
+          "findings": [
+            {
+              "case": "heatmap, economist, mark",
+              "reportedFailures": 20,
+              "minimumReportedRatio": 1.0,
+              "example": "day: Mon; team: Support; workload: 4"
+            },
+            {
+              "case": "heatmap, economist, text",
+              "reportedFailures": 9,
+              "minimumReportedRatio": 1.0,
+              "example": "day: Mon; team: Support; workload: 4"
+            },
+            {
+              "case": "heatmap, nyt, mark",
+              "reportedFailures": 20,
+              "minimumReportedRatio": 1.0,
+              "example": "day: Mon; team: Support; workload: 4"
+            },
+            {
+              "case": "heatmap, nyt, text",
+              "reportedFailures": 9,
+              "minimumReportedRatio": 1.0,
+              "example": "day: Mon; team: Support; workload: 4"
+            },
+            {
+              "case": "heatmap, swiss, mark",
+              "reportedFailures": 20,
+              "minimumReportedRatio": 1.0,
+              "example": "day: Mon; team: Support; workload: 4"
+            },
+            {
+              "case": "heatmap, swiss, text",
+              "reportedFailures": 9,
+              "minimumReportedRatio": 1.1280109407091974,
+              "example": "day: Mon; team: Support; workload: 4"
+            },
+            {
+              "case": "linked, economist, mark",
+              "reportedFailures": 4,
+              "minimumReportedRatio": 2.277717111900876,
+              "example": "hours: 14; orders: 44; region: South; store: S1"
+            },
+            {
+              "case": "linked, swiss, mark",
+              "reportedFailures": 2,
+              "minimumReportedRatio": 2.5755821127267606,
+              "example": "hours: 28; orders: 72; region: West; store: W1"
+            },
+            {
+              "case": "relationship, economist, mark",
+              "reportedFailures": 4,
+              "minimumReportedRatio": 2.277717111900876,
+              "example": "hours: 14; orders: 44; region: South; store: S1"
+            },
+            {
+              "case": "relationship, swiss, mark",
+              "reportedFailures": 2,
+              "minimumReportedRatio": 2.5755821127267606,
+              "example": "hours: 28; orders: 72; region: West; store: W1"
+            }
+          ]
+        },
+        {
+          "page": "flint-experimental.html",
+          "passed": false,
+          "findings": [
+            {
+              "case": "lens, pop, mark",
+              "reportedFailures": 24,
+              "minimumReportedRatio": 2.6159192116022627,
+              "example": "cost: 80; score: 45; cohort: Atlas; run: Atlas-1"
+            },
+            {
+              "case": "lens, swiss, mark",
+              "reportedFailures": 16,
+              "minimumReportedRatio": 2.5755821127267606,
+              "example": "cost: 80; score: 45; cohort: Atlas; run: Atlas-1"
+            },
+            {
+              "case": "linked-lab, pop, mark",
+              "reportedFailures": 24,
+              "minimumReportedRatio": 2.6159192116022627,
+              "example": "cost: 80; score: 45; cohort: Atlas; run: Atlas-1"
+            },
+            {
+              "case": "linked-lab, swiss, mark",
+              "reportedFailures": 28,
+              "minimumReportedRatio": 2.1939443043932725,
+              "example": "checkpoint: 1; rank: 1; cohort: Atlas"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "probe": "accessibility-numeric.json",
+      "originalSha256": "489d66f6b358680e57af3b962f4b87035706d081e5c6ba76ef11d65ad3b99fcf",
+      "pages": [
+        {
+          "page": "flint-showcase.html",
+          "passed": false,
+          "findings": [
+            {
+              "case": "heatmap, economist, mark",
+              "reportedFailures": 5,
+              "minimumReportedRatio": 1.8880847593373662,
+              "example": "day: Fri; team: Support; workload: 2"
+            },
+            {
+              "case": "heatmap, nyt, mark",
+              "reportedFailures": 11,
+              "minimumReportedRatio": 1.6334237832121716,
+              "example": "day: Tue; team: Support; workload: 3"
+            },
+            {
+              "case": "heatmap, swiss, mark",
+              "reportedFailures": 5,
+              "minimumReportedRatio": 2.3200882838743357,
+              "example": "day: Fri; team: Support; workload: 2"
+            },
+            {
+              "case": "heatmap, swiss, text",
+              "reportedFailures": 6,
+              "minimumReportedRatio": 3.579563582256398,
+              "example": "day: Tue; team: Support; workload: 3"
+            }
+          ]
+        },
+        {
+          "page": "flint-experimental.html",
+          "passed": true,
+          "findings": []
+        }
+      ]
+    }
+  ]
+}

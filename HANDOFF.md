@@ -33,6 +33,13 @@
   the dependency-source hash. Standalone strict local gates and fresh Edge
   acceptance passed; [testing](docs/testing.md#post-release-source-ci-repair)
   records the working-source evidence separately from hosted qualification.
+- The approved next-candidate hardening adds measured SVG contrast and broader
+  keyboard/focus checks. Both demos pass with contrast-tuned house themes,
+  opaque points and a numeric bounded-score heatmap mapping. Exact external
+  synthetic artifact bytes verified at an approved destination and were
+  removed as authorized. [Fresh observations](archive/verification/host-accessibility/2026-11-08/native-observations.json)
+  retain native transcript/form and saved-download limits; only the two
+  paused test chats were archived with consent. No installed state changed.
 - Fresh installed `0.9.5` host evidence is in
   [the task record](archive/verification/host-scenarios/2026-11-08/README.md).
   Exact installed/cache payload parity passed. All six CLI `.2` responses have

@@ -52,6 +52,31 @@ No active runtime, registry policy, published payload, or release tag changed.
 These are working-source observations; clean-checkout and full hosted matrix
 results must identify the exact reviewed candidate commit separately.
 
+## Next-candidate host and accessibility hardening
+
+The approved 2026-11-08 work based on `f89028a` adds baseline live SVG contrast
+and chart keyboard/focus-restoration checks. Both demos passed the expanded
+[standalone Edge gate](../archive/verification/host-accessibility/2026-11-08/browser.json).
+[Development probes](../archive/verification/host-accessibility/2026-11-08/iterations.json)
+separate the superseded fill-only checker from the final visible-outline-aware
+measurement. Regressions cover actual text backdrops, opacity, text-size
+thresholds, visible outlines, unsupported paints, and numeric heatmap mapping.
+Demo variants use documented ThemeSpec overrides, opaque points and
+same-hue darker heatmap ramps; no upstream App bytes or data values changed.
+The existing locked runtime was provisioned only in an approved disposable
+directory; active runtime and registry policy were preserved.
+
+[External artifact evidence](../archive/verification/host-accessibility/2026-11-08/external-artifact.json)
+verifies synthetic output at the specifically approved destination and records
+hash-checked cleanup. The repository checker does not certify external delivery.
+[Native observations](../archive/verification/host-accessibility/2026-11-08/native-observations.json)
+retain truncated transcripts, unobserved form completion despite reported
+answers, and a trusted download click without a native event or saved file.
+Only the paused test chats were archived with approval. R8, integrated-host
+saving, broader accessibility and strong write enforcement remain open.
+These observations do not qualify a release or substitute for a fresh
+same-commit full matrix.
+
 ## What runs where
 
 The [2026-11-08 fresh-host record](../archive/verification/host-scenarios/2026-11-08/README.md)
@@ -59,8 +84,9 @@ separately verifies the installed `0.9.5` package, all six exact CLI `.2`
 scenarios, limited native VS Code transcripts, and actual repository-owned
 artifact outputs. Its 21 runner/scenario/storage regression tests passed.
 Those model/host observations are not a new release matrix or all-host
-certification. Other hosts, live external-destination approval, and strong
-write enforcement remain unverified.
+certification. Subsequent external-destination observations are scoped in the
+next-candidate record above; other hosts and strong write enforcement remain
+unverified.
 
 The [candidate package gate](package.md) separately checks the explicit
 distribution boundary, exact demo preservation, all declared assets/resources,
