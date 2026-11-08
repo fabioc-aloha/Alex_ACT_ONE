@@ -5,10 +5,16 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
-Preparing `0.9.5`; the published `v0.9.4` tag remains immutable.
+Post-publication evidence does not change the immutable `v0.9.5` payload.
 
 ## 0.9.5 - 2026-11-08
 
+- Published [v0.9.5](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.5)
+  at `26d0518ec998817ed2d5c27a66855a58747e820c` after the full six-job matrix,
+  fresh-checkout 608/57 strict test lanes, exact rebuilt demos and Edge acceptance
+  passed. Mall validation passed 69 tests and the public route was verified.
+  [Evidence](archive/verification/release-0.9.5/README.md) records manual
+  installation as deferred; no user runtime or credentials were replaced.
 - Added explicit `-Refresh` for native Mall/plugin updates without uninstalling
   first. Default mismatched-version preservation and activation conflict guards
   remain; an unsuccessful/no-op update cannot activate a stale release.
@@ -17,7 +23,7 @@ Preparing `0.9.5`; the published `v0.9.4` tag remains immutable.
 - Updated exact npm pins from fresh stable metadata through the configured
   Microsoft proxy: Playwright MCP `0.0.84`, JSZip `3.10.2`, Mermaid CLI `12.0.0`,
   canvas `1.1.0`, Chart.js `4.6.1`, and SDK `1.32.2`. Source compatibility and
-  same-commit release gates remain required before publication.
+  same-commit release gates passed; later changes need their own evidence.
 - Repaired the read-only version audit's scalar/array handling, semantic stable
   version comparison, and explicit rejection of ambiguous, prerelease, malformed,
   or regressed registry metadata.
@@ -115,7 +121,7 @@ Preparing `0.9.5`; the published `v0.9.4` tag remains immutable.
   Instructions do not claim universal filesystem enforcement.
 - Recorded the local `0.9.2` installation and dependency audit in
   [verification history](docs/testing.md#092-local-installation-verification),
-  added the [Replicate retirement proposal](ROADMAP.md#consider-retiring-bundled-replicate-support),
+  added the [Replicate retirement proposal](https://github.com/fabioc-aloha/Alex_ACT_ONE/blob/v0.9.4/ROADMAP.md#consider-retiring-bundled-replicate-support),
   and refreshed offline Flint demonstration provenance for `0.9.3`.
 
 ## 0.9.2 - 2026-11-06

@@ -14,6 +14,7 @@ decisions that the product owns.
 
 - [Recovered engineering evidence](verification/session-recovery/README.md).
 - [0.9.4 release verification and manual-install exception](verification/release-0.9.4/README.md).
+- [0.9.5 proxy pins, helper verification, and provider retirement](verification/release-0.9.5/README.md).
 - [Development-repository recovery](verification/development-recovery/2026-11-08/README.md).
 - [Retention review and implementation](verification/recovery-retention-review/2026-11-08/README.md).
 - [Native-first implementation history](plans/2026-11-04-native-first-copilot.md).

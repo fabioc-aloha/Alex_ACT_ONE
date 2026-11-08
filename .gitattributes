@@ -1,6 +1,7 @@
 docs/flint-*.html text eol=lf
 archive/verification/session-recovery/history/** -text -whitespace
 archive/verification/release-0.9.4/*.json -text -whitespace
+archive/verification/release-0.9.5/*.json -text -whitespace
 archive/retired-assets/** -text -whitespace
 archive/verification/session-recovery/manifest.json text eol=lf
 package/alex-act-one/** -text -whitespace

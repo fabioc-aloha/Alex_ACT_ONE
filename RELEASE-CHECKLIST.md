@@ -13,6 +13,11 @@ records the failed native installation observations and exact approval.
 Installation/activation are not claimed. Future releases retain the normal
 fail-closed gates; this exception is not standing permission to bypass them.
 
+For `0.9.5`, the user separately approved publication of the tested source and
+Mall entry with manual installation. [Its record](archive/verification/release-0.9.5/README.md)
+separates complete source/runtime/browser gates from unclaimed local activation.
+Neither dated decision relaxes the requirements for subsequent releases.
+
 ## Candidate packaging boundary
 
 When a release proposes lean distribution, use the

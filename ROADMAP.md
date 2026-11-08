@@ -2,9 +2,9 @@
 
 Updated 2026-11-08. This is the product backlog for maintaining and shipping
 Alex ACT ONE, not a history of incidents or an adopter-fleet work queue.
-The current priority is to prepare the local candidate for verified delivery.
-The dependency-audit repair remains a maintenance follow-up; R8 remains next
-for host evidence as access permits. Runtime upgrade recovery requires a
+The source and Mall `0.9.5` release is published. R8 remains next for host
+evidence as access permits; manual installation is deferred to the user.
+Runtime upgrade recovery requires a
 design decision before implementation.
 
 Release version: `v0.9.5`. This roadmap describes work beyond its scoped
@@ -56,36 +56,6 @@ failures and limitations. Discovery, instruction loading, MCP connectivity, and
 end-to-end behavior must remain separate claims. Do not mark an inaccessible
 host freshly verified or infer semantic compliance from structural tests.
 
-### Repair the dependency update audit
-
-**Status:** reproducible reporting defect found during the
-[local installation audit](docs/testing.md#092-local-installation-verification);
-the `0.9.5` source repair is awaiting release verification. The configured registry returns array-wrapped
-metadata, so equal version strings were reported as updates. A prerelease
-`latest` tag was also incorrectly described as a stable update.
-
-**Next actions**
-
-- Correct the existing
-  [update auditor](skills/setup-dependencies/scripts/provision-runtime.mjs)
-  to handle scalar and single-result array metadata consistently. Reject
-  malformed or ambiguous responses explicitly rather than reporting success.
-- Distinguish a newer stable version from a prerelease or otherwise anomalous
-  `latest` tag. Use fresh metadata for current-version claims without changing
-  the configured registry or npm policy.
-- Extend the existing
-  [runtime readiness tests](tests/runtime-readiness.test.mjs) with equal-version,
-  changed-version, scalar/array, prerelease, malformed, and multi-result cases,
-  retaining explicit subprocess error and timeout reporting.
-- Review surfaced npm and Pillow updates separately. Preserve reviewed source
-  pins, the isolated demo lock, and the active runtime until compatibility,
-  artifact, and separately approved delivery checks pass.
-
-**Done when:** regression tests prove equal versions remain current across
-supported response shapes, only newer stable versions are reported as stable
-updates, and invalid or prerelease metadata has an explicit non-success outcome.
-The audit remains read-only and no package upgrade is implied by its results.
-
 ### Verify future delivery changes
 
 **Status:** release verification follows the
@@ -95,7 +65,7 @@ The `0.9.4` source hardens reusable artifact/authentication safeguards and
 provides a [lean package](docs/package.md), with both Flint demonstrations and
 runtime owners retained. Its source-path delivery, publication and installed
 parity require separate exact-candidate observations.
-[Source and Mall publication are complete](archive/verification/release-0.9.4/README.md);
+[Source and Mall 0.9.5 publication are complete](archive/verification/release-0.9.5/README.md);
 local installation/activation remain deferred to the user's manual reinstall
 after an explicit publication exception. Enabled flags and a Git-cache copy
 did not establish an installed plugin in the attached environment.
