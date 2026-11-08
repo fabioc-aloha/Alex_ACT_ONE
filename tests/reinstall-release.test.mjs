@@ -121,7 +121,18 @@ if ($command -eq 'plugin uninstall alex-act-one@alex-mall') {
   ConvertTo-Json -InputObject @($state | Where-Object { $_.name -ne 'alex-act-one' }) -Compress | Set-Content -LiteralPath $statePath
   exit 0
 }
-if ($command -eq 'plugin install alex-act-one@alex-mall') {
+if ($command -eq 'plugin marketplace update alex-mall') {
+  if ($env:FAKE_REFRESH_FAILURE -eq '1') { Write-Output 'fixture catalog refresh failure'; exit 24 }
+  exit 0
+}
+if ($command -eq 'plugin install alex-act-one@alex-mall' -or $command -eq 'plugin update alex-act-one@alex-mall') {
+  if ($env:FAKE_UPDATE_WARNING -eq '1') {
+    & $env:FAKE_NODE -e "console.error('fixture non-fatal update warning')"
+  }
+  if ($command -eq 'plugin update alex-act-one@alex-mall' -and $env:FAKE_UPDATE_FAILURE -eq '1') {
+    Write-Output 'fixture update failure'; exit 25
+  }
+  if ($command -eq 'plugin update alex-act-one@alex-mall' -and $env:FAKE_UPDATE_NOOP -eq '1') { exit 0 }
   if ($env:FAKE_INSTALL_FAILURE -eq '1') { Write-Output 'fixture install failure'; exit 23 }
   New-Item -ItemType Directory -Force -Path $installedRoot | Out-Null
     @{ name = 'alex-act-one'; version = '${VERSION}' } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $installedRoot 'plugin.json')
@@ -158,7 +169,7 @@ $Arguments | ConvertTo-Json -Compress | Set-Content -LiteralPath $env:FAKE_BOOTS
 exit 0
 `);
     writePowerShell(wrapper, `
-param([string]$CopilotHome, [string]$CopilotCommand, [string]$NodeCommand, [string]$ExpectedVersion)
+param([switch]$Refresh, [string]$CopilotHome, [string]$CopilotCommand, [string]$NodeCommand, [string]$ExpectedVersion)
 Set-Variable -Name HOME -Value $env:FAKE_PROFILE -Force
 try {
     & $env:FAKE_RELEASE_SCRIPT @PSBoundParameters
@@ -172,6 +183,7 @@ try {
     const invoke = () => runPowerShell(shell, wrapper, {
         ...(options.inheritHome ? {} : { CopilotHome: copilotHome }),
         CopilotCommand: copilot, NodeCommand: node, ExpectedVersion: VERSION,
+        ...(options.refresh ? { Refresh: true } : {}),
     }, {
         root,
         cwd: ROOT_PATH,
@@ -191,6 +203,10 @@ try {
             FAKE_ADD_NOOP: options.addNoop || '',
             FAKE_ADD_WRONG_SOURCE: options.addWrongSource || '',
             FAKE_INSTALL_FAILURE: options.installFailure ? '1' : '',
+            FAKE_REFRESH_FAILURE: options.refreshFailure ? '1' : '',
+            FAKE_UPDATE_FAILURE: options.updateFailure ? '1' : '',
+            FAKE_UPDATE_NOOP: options.updateNoop ? '1' : '',
+            FAKE_UPDATE_WARNING: options.updateWarning ? '1' : '',
         },
     });
     const result = invoke();
@@ -261,6 +277,10 @@ try {
         .every((command) => command === 'plugin install alex-act-one@alex-mall'));
     assert.equal(commands.filter((command) => command.startsWith('plugin install ')).length, options.firstInstall ? 1 : 0);
     assert.ok(commands.every(command => !command.startsWith('plugin uninstall ')));
+    assert.equal(commands.filter(command => command === 'plugin marketplace update alex-mall').length,
+        options.refresh ? (options.repeat ? 2 : 1) : 0);
+    assert.equal(commands.filter(command => command === 'plugin update alex-act-one@alex-mall').length,
+        options.refresh && !options.firstInstall ? (options.repeat ? 2 : 1) : 0);
     assert.ok(bootstrapArgs.includes('--apply'));
     assert.ok(bootstrapArgs.some((argument) => argument.endsWith('bootstrap-core.cjs')));
     assert.equal(existsSync(join(copilotHome, 'session-state')), false);
@@ -276,6 +296,30 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
 
     testRelease('preserves an older installed release and refuses automatic replacement before marketplace writes', (t) => {
         runRelease(t, { oldVersion: true, error: /existing.*preserv|automatic.*replacement|upgrade/i });
+    });
+
+    testRelease('explicit refresh updates an older release without uninstalling, then verifies and activates', t => {
+        runRelease(t, { oldVersion: true, refresh: true });
+    });
+
+    testRelease('explicit refresh repairs a matching release without uninstalling', t => {
+        runRelease(t, { refresh: true });
+    });
+
+    testRelease('a native zero-exit update warning does not abort verified refresh', t => {
+        runRelease(t, { oldVersion: true, refresh: true, updateWarning: true });
+    });
+
+    testRelease('catalog refresh failure prevents update and activation while preserving the old release', t => {
+        runRelease(t, { oldVersion: true, refresh: true, refreshFailure: true, error: /catalog refresh failure/ });
+    });
+
+    testRelease('update failure prevents activation without uninstalling the old release', t => {
+        runRelease(t, { oldVersion: true, refresh: true, updateFailure: true, error: /update failure/ });
+    });
+
+    testRelease('a success-shaped no-op update cannot activate an older release', t => {
+        runRelease(t, { oldVersion: true, refresh: true, updateNoop: true, error: /Installed inventory does not match/ });
     });
 
     testRelease('rejects same-name installations from another source before making changes', (t) => {

@@ -18,6 +18,9 @@ decisions that the product owns.
 - [Retention review and implementation](verification/recovery-retention-review/2026-11-08/README.md).
 - [Native-first implementation history](plans/2026-11-04-native-first-copilot.md).
 - [Relocation hashes and declared link edits](relocation.json).
+- [Retired asset snapshots](retired-assets/manifest.json) resolve historical
+  archive citations without restoring removed active skills. Snapshot hashes
+  are checked; archive content is never part of the runtime payload.
 
 The retained frozen engineering artifacts moved without content changes.
 Relocated historical plans and living indexes had only declared link rebasing.

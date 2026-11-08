@@ -1,7 +1,7 @@
 # Verification environments and release gates
 
-Release version: `0.9.4`. Use the
-[release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.4)
+Release version: `0.9.5`. Use the
+[release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.5)
 for the frozen commit's CI, clean-clone, artifact, and delivered-package results.
 The dated baseline runs below do not substitute for same-commit release evidence.
 Live-host and browser observations retain their separately documented limits.
@@ -27,8 +27,8 @@ lean runtime package is not a Git checkout or all-host certification.
 | Integration | Explicit reviewed MCP runtime, JSZip from the shared registry, Pandoc 3.13, reviewed Mermaid CLI | Actual MCP version/launch and three-backend render tests, real HTML/Word conversion, and installed Mermaid CLI startup |
 | Canonical demo rebuild | Windows integration environment | Byte-for-byte checks of both generated HTML pages; Git preserves their LF endings |
 
-Canonical demos additionally require `@napi-rs/canvas@1.0.10`,
-`chart.js@4.5.1`, and `@modelcontextprotocol/sdk@1.32.1`, defined in
+Canonical demos additionally require `@napi-rs/canvas@1.1.0`,
+`chart.js@4.6.1`, and `@modelcontextprotocol/sdk@1.32.2`, defined in
 `SHOWCASE_PACKAGES` in the shared dependency registry. CI installs them only in
 its disposable demo/runtime prefix. The builder checks server-resolved versions
 before generating output and never changes an existing runtime to match them.
@@ -45,9 +45,11 @@ user runtime. Tests require the profile's direct versions to match the shared
 registry. The lock's `registry.npmjs.org` URLs use npm's documented sentinel for
 the currently configured registry, not a workflow registry override.
 
-The hosted diagnosis found matching bundled-font hashes but canvas 1.1.0,
+The `0.9.4` hosted diagnosis found matching bundled-font hashes but canvas 1.1.0,
 Chart.js 4.6.1, and SDK 1.32.2 instead of the reviewed versions. Canvas measured
-different glyph widths, changing SVG paths and raster output. These explicit build pins fix renderer input drift rather than rounding paths.
+different glyph widths, changing SVG paths and raster output. The `0.9.5`
+upgrade separately reviews those newer renderer inputs and rebuilds the demos;
+it does not reinterpret the earlier mismatch as a passing exact check.
 A subsequent notice-only mismatch exposed `@hono/node-server` 2.1.6 versus
 2.1.4; the isolated lock also freezes that indirect build input. No paths or
 notice content are normalized away, and the exact artifact check remains.
@@ -284,8 +286,8 @@ the [release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v
 | Bootstrap preview and profile receipt | Schema-v2 receipt at `0.9.2`; 15 preserve actions, preserved receipt, no conflicts |
 | Structural lane in the Git checkout | 553 passed; no failures, skips, todos, or cancellations |
 | Integration lane against the installed VS Code package | 58 passed; no failures, skips, todos, or cancellations |
-| Optional dependency `-VerifyOnly -IncludeReplicate -BrowserExecutablePath` | All 7 selected pins and 3 MCP launchers verified; actual Mermaid SVG and SVG-to-PNG rendering passed with installed Edge |
-| Live MCP probes | Flint theme listing and Playwright tab listing succeeded; Replicate public-model lookup returned HTTP 401 |
+| Optional dependency verification with 0.9.2's then-supported options | All 7 selected pins and 3 MCP launchers verified; actual Mermaid SVG and SVG-to-PNG rendering passed with installed Edge |
+| Live MCP probes | Flint theme listing and Playwright tab listing succeeded; the retired image provider's public-model lookup returned HTTP 401 |
 
 The initial structural run against the installed cache failed three
 Git-dependent checks because that directory has no `.git` metadata.

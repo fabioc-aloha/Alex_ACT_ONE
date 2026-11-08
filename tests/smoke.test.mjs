@@ -22,8 +22,9 @@ import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 import { existsSync, readdirSync, readFileSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const require = createRequire(import.meta.url);
@@ -265,6 +266,14 @@ describe('markdown links', () => {
         // neither is a real link, and treating them as one produces noise that
         // trains people to ignore the check.
         const broken = [];
+        // Frozen archive citations may resolve to hash-checked snapshots, never to active fallback skills.
+        const retired = new Set();
+        for (const asset of readJson('archive', 'retired-assets', 'manifest.json').assets) {
+            assert.ok(asset.snapshot.startsWith('archive/retired-assets/') && !asset.snapshot.includes('..'));
+            const snapshot = readFileSync(join(ROOT, asset.snapshot));
+            assert.equal(createHash('sha256').update(snapshot).digest('hex'), asset.sha256);
+            retired.add(resolve(ROOT, asset.originalPath));
+        }
         for (const file of markdownFiles()) {
             const text = readFileSync(file, 'utf8')
                 .replace(/```[\s\S]*?```/g, '')
@@ -275,6 +284,7 @@ describe('markdown links', () => {
                 if (/^(https?:|mailto:|#|<)/.test(path)) continue;
                 if (/[{}<>?*]|\$\{/.test(path)) continue;
                 if (!existsSync(resolve(dirname(file), path))) {
+                    if (file.startsWith(join(ROOT, 'archive') + sep) && retired.has(resolve(dirname(file), path))) continue;
                     broken.push(`${file.replace(ROOT, '.')} -> ${path}`);
                 }
             }

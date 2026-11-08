@@ -1,5 +1,16 @@
+<#
+.SYNOPSIS
+Install or verify ONE and activate its owned instructions.
+.DESCRIPTION
+Use -Refresh to refresh the Mall catalog and update an existing enabled
+Mall installation before verification. No uninstall or forced activation occurs.
+Without -Refresh, mismatched existing installations are preserved.
+.EXAMPLE
+.\reinstall-and-check.ps1 -Refresh
+#>
 [CmdletBinding()]
 param(
+    [switch]$Refresh,
     [string]$Plugin = 'alex-act-one',
     [string]$Marketplace = 'alex-mall',
     [string]$MarketplaceSource = 'fabioc-aloha/Alex_Skill_Mall',
@@ -18,12 +29,18 @@ function Invoke-ExternalCommand {
         [Parameter(Mandatory)] [string[]]$Arguments
     )
 
-    $output = & $Command @Arguments 2>&1
-    $exitCode = $LASTEXITCODE
+    $previousPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        $output = & $Command @Arguments 2>&1
+        $exitCode = $LASTEXITCODE
+    } finally {
+        $ErrorActionPreference = $previousPreference
+    }
     if ($exitCode -ne 0) {
         throw "Command failed ($exitCode): $Command $($Arguments -join ' ')`n$($output -join "`n")"
     }
-    return $output
+    return $output | ForEach-Object { $_.ToString() }
 }
 
 function Get-InstalledPlugin {
@@ -77,7 +94,7 @@ $previousCopilotHome = $env:COPILOT_HOME
 try {
     $env:COPILOT_HOME = $CopilotHome
     $initial = Get-InstalledPlugin
-    if ($initial -and ($initial.version -ne $ExpectedVersion -or -not $initial.enabled -or $initial.source -ne 'installed')) {
+    if ($initial -and ((-not $Refresh -and $initial.version -ne $ExpectedVersion) -or -not $initial.enabled -or $initial.source -ne 'installed')) {
         throw "Existing $Plugin installation preserved. Automatic replacement/upgrades are disabled; expected enabled $ExpectedVersion from installed, found $($initial.version)."
     }
     $installedRoot = Join-Path (Join-Path (Join-Path $CopilotHome 'installed-plugins') $Marketplace) $Plugin
@@ -116,7 +133,12 @@ try {
         }
     }
 
-    if (-not $initial) {
+    if ($Refresh) {
+        Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'marketplace', 'update', $Marketplace) | Out-Null
+    }
+    if ($initial -and $Refresh) {
+        Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'update', "$Plugin@$Marketplace") | Out-Null
+    } elseif (-not $initial) {
         Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'install', "$Plugin@$Marketplace") | Out-Null
     }
 

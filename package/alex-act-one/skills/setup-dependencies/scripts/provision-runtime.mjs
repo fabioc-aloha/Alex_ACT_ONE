@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { spawnCommand } from '../../../scripts/process-launch.mjs';
 import deps from '../../../scripts/shared/dependencies.cjs';
 import runtimeStatus from '../../../scripts/shared/runtime-status.cjs';
+import versionAudit from '../../../scripts/shared/version-audit.cjs';
 
 // Read from the shared registry rather than restating the pins. Two copies of
 // the same three versions drift silently, and the copy a reader trusts is
@@ -114,13 +115,13 @@ try {
         pinned.name,
         'dist-tags.latest',
         '--json',
-        '--prefer-offline',
+        '--prefer-online',
       ], {
         capture: true,
         env: { NPM_CONFIG_REGISTRY: registry },
       });
-      const latest = JSON.parse(result.stdout.trim());
-      const current = latest === pinned.version;
+      const { latest, status } = versionAudit.auditVersion(pinned.version, JSON.parse(result.stdout.trim()));
+      const current = status === 'current';
       if (!current) updates += 1;
       console.log(`  ${current ? 'current' : 'UPDATE '} ${pinned.name}: ${pinned.version} -> ${latest}`);
     }

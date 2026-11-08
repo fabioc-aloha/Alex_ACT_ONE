@@ -10,9 +10,9 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const require = createRequire(import.meta.url);
 const deps = require('../scripts/shared/dependencies.cjs');
 const pins = [
-    { package: '@napi-rs/canvas', version: '1.0.10' },
-    { package: 'chart.js', version: '4.5.1' },
-    { package: '@modelcontextprotocol/sdk', version: '1.32.1' },
+    { package: '@napi-rs/canvas', version: '1.1.0' },
+    { package: 'chart.js', version: '4.6.1' },
+    { package: '@modelcontextprotocol/sdk', version: '1.32.2' },
 ];
 test('canonical demo builds have explicit reviewed renderer and protocol pins, separate from runtime upgrades', () => {
     assert.deepEqual(deps.SHOWCASE_PACKAGES, pins);

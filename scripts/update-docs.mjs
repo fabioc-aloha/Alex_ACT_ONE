@@ -15,7 +15,7 @@ const GROUPS = [
     ['Charts and figures', 'Deciding what to draw, drawing it, and checking it says what you meant.',
         ['render-chart', 'chart-big-idea', 'chart-vocabulary', 'chart-interpretation', 'flint-chart', 'flint-interactions',
             'flint-theme', 'ascii-chart', 'print-svg-style-guide', 'figure-generator', 'svg-banner',
-            'markdown-mermaid', 'annotate-screenshot', 'render-verify', 'replicate-imagery', 'docs-shell']],
+            'markdown-mermaid', 'annotate-screenshot', 'render-verify', 'docs-shell']],
     ['Document conversion', 'Moving a document between formats without losing its structure.',
         ['convert', 'docx-to-md', 'html-to-md', 'md-to-html', 'md-to-word', 'md-to-eml', 'md-to-txt', 'rich-email']],
     ['Working on the agent itself', 'Auditing, extending, and consolidating the agent.',
@@ -29,7 +29,7 @@ const NEEDS = new Map([
     ...['render-chart', 'flint-chart', 'flint-interactions', 'flint-theme'].map(name => [name, 'Flint MCP']),
     ...['convert', 'docx-to-md', 'html-to-md', 'md-to-html', 'md-to-word', 'md-to-eml', 'md-to-txt', 'rich-email']
         .map(name => [name, 'Pandoc']),
-    ['annotate-screenshot', 'Pillow'], ['replicate-imagery', 'Replicate MCP'],
+    ['annotate-screenshot', 'Pillow'],
 ]);
 
 const read = (root, path) => readFileSync(join(root, ...path.split('/')), 'utf8').replace(/\r\n/g, '\n');

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "originalPath": "skills/replicate-imagery/SKILL.md",
+      "snapshot": "archive/retired-assets/replicate-imagery.source.txt",
+      "sha256": "6ee2a125ffd2c160fec0ce48d9a899333278574eddc1215b3c7a7c5d2da208a3",
+      "sourceCommit": "ba657521416a51fbe84696b6676db3fb69a36778",
+      "retiredIn": "0.9.5"
+    }
+  ]
+}

@@ -12,7 +12,7 @@ tools, and historical verification notes in one reference.
 | Repository | Deprecated direct-install path: repository source selected at installation time; it can include unreleased work | Temporary candidate testing only; review root/revision and do not assume future CLI support |
 | Optional runtime | The separately provisioned chart, browser, image, and converter packages | Plugin installation does not activate instructions or provision these packages; installs and upgrades require their own approval |
 
-Release version: `0.9.4`. Mall selects the reviewed release tag and its
+Release version: `0.9.5`. Mall selects the reviewed release tag and its
 `package/alex-act-one` payload; a checkout on
 main can later include unreleased changes. A version is not evidence of live-host
 activation. Packages with the same version can also contain different bytes.
@@ -31,7 +31,7 @@ before publication. Do not treat a generated directory as an upgrade.
 ## Testing the repository candidate
 
 This section preserves the historical `0.9.0-rc.1` candidate-testing procedure.
-It is not the normal installation path for `0.9.4`.
+It is not the normal installation path for `0.9.5`.
 
 **Deprecated installation path.** During the user's candidate install on
 2026-11-05, installation succeeded and the CLI printed:
@@ -98,15 +98,14 @@ the dated observations below remain historical evidence.
 | Copilot CLI | All | All, after activation | All | All, from the manifest |
 | VS Code with GitHub Copilot Chat | All | All, after activation | All | All, from the manifest |
 | Microsoft Scout | All, after enabling **Load Copilot CLI skills** | All, after activation | **None** | All, after registration |
-| GitHub Copilot app | All, discovered and invoked | All, active after activation | All, exposed | Registered; Flint and Playwright verified in the `v0.2.0` baseline; Replicate requires an API token |
+| GitHub Copilot app | All, discovered and invoked | All, active after activation | All, exposed | Registered; Flint and Playwright verified in the `v0.2.0` baseline |
 
 The GitHub Copilot app test on 2026-09-13 found all 15 instructions active and
 at hash parity with the installed `v0.2.0` sources. The app discovered the skill
 catalog and prompt aliases; `bootstrap-core`, `platform-awareness`,
 `proactive-awareness`, and `humanizer` were invoked. Playwright listed the
 active browser tabs, and Flint validated a Vega-Lite chart with no warnings or
-errors. Replicate reached its MCP server but returned `401 Unauthenticated`
-because this app did not have a Replicate API token. Individual skills and
+errors. Individual skills and
 slash commands were not exhaustively invoked. This is historical host evidence,
 not a `v0.3.5` activation claim.
 
@@ -254,9 +253,9 @@ directly as `/skill-name`.
 What does not transfer: the plugin install, the 15 always-on instructions,
 and the 15 slash commands are Copilot-format. Claude Code's always-on
 equivalent is `CLAUDE.md`; the texts in `instructions/` can be adapted into
-one by hand. The three MCP servers are standard stdio servers and can be
+one by hand. The two MCP servers are standard stdio servers and can be
 registered with `claude mcp add`, using the commands in `plugin.json` pointed
-at your clone. Until they are, the chart, browser-check, and image skills
+at your clone. Until they are, the chart and browser-check skills
 still guide the work but have no rendering back end to call.
 
 One honesty note: this pack is tested on its Copilot hosts, not on Claude
@@ -306,10 +305,6 @@ After upgrading to the reviewed Flint 1.0.1 runtime, confirm its expected tools:
 - `list_interaction_presets`
 - `get_flint_skill`
 
-`replicate` is skipped unless `REPLICATE_API_TOKEN` is set in the environment.
-That is deliberate: a clear omission now beats an opaque authentication failure
-at call time.
-
 Without this step every skill still loads, but the tools those skills call are
 missing, which looks like a broken package rather than an unregistered one.
 
@@ -322,8 +317,8 @@ Flint is reviewed at `flint-chart-mcp@1.0.1` with independently exact-pinned
 `flint-chart@1.0.1`. Upgrade the plugin before the shared runtime: older launchers
 correctly refuse a mismatched version. From the updated installed package,
 preview `skills/setup-dependencies/scripts/provision-runtime.mjs --server flint`,
-then apply the same selection after consent. This changes neither Playwright nor
-Replicate. Reload the host to discover the new validated `show` interface.
+then apply the same selection after consent. This does not change Playwright.
+Reload the host to discover the new validated `show` interface.
 
 If Microsoft proxy metadata points tarballs at a backend feed that npm policy
 blocks directly, do not enable remote fetching or edit npm configuration. With
@@ -342,17 +337,16 @@ without shell argument concatenation.
 | If you want to... | You also need | Get it |
 | --- | --- | --- |
 | Convert documents (Word, HTML, email, plain text) | Pandoc | `winget install JohnMacFarlane.Pandoc`, `brew install pandoc`, or `apt install pandoc` |
-| Render Mermaid diagrams into Word or HTML output | Mermaid CLI | `npm install -g @mermaid-js/mermaid-cli@11.17.0` |
+| Render Mermaid diagrams into Word or HTML output | Mermaid CLI | `npm install -g @mermaid-js/mermaid-cli@12.0.0` |
 | Export SVG banners and figures as PNG | svgexport | `npm install -g svgexport@0.4.2` |
 | Annotate a screenshot | Pillow | `pip install Pillow` |
 | Render charts | Flint MCP server | Ask for the `setup-dependencies` skill |
 | Check rendered output in a browser | The `alex-playwright` MCP server, or your host's own browser tools | Ask for the `setup-dependencies` skill |
-| Generate images with AI | Replicate MCP server, plus a paid account and API token | Ask for the `setup-dependencies` skill |
 
-The three MCP servers are not equally important. Only Flint is required for the
+The two MCP servers are not equally important. Only Flint is required for the
 skill that uses it: without it, chart rendering cannot run and there is no
 substitute. Playwright has one — several hosts provide their own browser tools —
-and Replicate adds a capability rather than unblocking one.
+so browser verification has an alternate path.
 
 That fallback has a limit worth knowing before you rely on it. A host can have a
 browser and still refuse to open `file://`, which is the case that matters for
@@ -385,16 +379,18 @@ Close hosts that may lock the installed plugin before running
 [`reinstall-and-check.ps1`](../reinstall-and-check.ps1):
 
 ```powershell
-.\reinstall-and-check.ps1
+.\reinstall-and-check.ps1 -Refresh -ExpectedVersion 0.9.5
 ```
 
 The current checkout's helper is not a preview. It first rejects duplicate or
 cross-source ONE installations. An older, disabled, or otherwise mismatched
 existing release is preserved and blocks automatic replacement. A matching
-release is verified in place; only an absent package is installed. Explicit
-upgrades require a separately reviewed delivery operation until staged
-replacement and rollback are available. These safety changes ship in `0.9.1`;
-they are not a claim about older Mall packages.
+release is verified in place; only an absent package is installed by default.
+In `0.9.5`, explicit `-Refresh` refreshes the Mall catalog and invokes native
+plugin update for an existing enabled Mall installation, including the same
+version. It verifies inventory and installed files before activation and never
+uninstalls first. A failed/no-op update cannot activate a stale version.
+This is not a claim of transactional native-CLI rollback.
 
 The helper registers missing public marketplaces (`alex-mall`,
 `awesome-copilot`, `copilot-plugins`, `azure-skills`, and `fabric-collection`),
@@ -420,25 +416,16 @@ installation paths before applying:
 The installer reads the shared version pins. Flint, Playwright, and JSZip go
 into ONE's private runtime; Mermaid CLI and svgexport use npm's global prefix.
 It leaves the registry and npm policy unchanged and does not install
-companion plugins or system packages.
-
-Replicate is optional. Add `-IncludeReplicate` to preview or apply to include
-its pinned MCP package. Image generation separately requires a paid account
-and `REPLICATE_API_TOKEN`; the script does not read or store credentials or
-make paid API calls.
-
-```powershell
-.\install-optional-dependencies.ps1 -IncludeReplicate
-.\install-optional-dependencies.ps1 -Apply -IncludeReplicate
-```
+companion plugins or system packages. `-RuntimeRoot` overrides
+`ALEX_ACT_ONE_RUNTIME_ROOT`; otherwise the shared default private runtime is
+used. Install the matching `0.9.5` plugin before applying its new runtime pins:
+older launchers intentionally reject newer MCP package versions.
 
 Check existing package versions, MCP launchers, and actual Mermaid/SVG-to-PNG
 rendering without reinstalling:
 
 ```powershell
 .\install-optional-dependencies.ps1 -VerifyOnly
-# Include Replicate in verification only if you selected it for installation.
-.\install-optional-dependencies.ps1 -VerifyOnly -IncludeReplicate
 ```
 
 To use an existing compatible browser instead of downloading Puppeteer's browser,
@@ -459,7 +446,7 @@ compatibility: the render checks must still pass.
 With npm 12, the Microsoft proxy can advertise tarball URLs on a different
 Microsoft host and trigger `EALLOWREMOTE`. For the verified feed prefix below,
 route those URLs back through your configured proxy. Preview first, then
-repeat with `-Apply`; add `-IncludeReplicate` if wanted.
+repeat with `-Apply`.
 
 ```powershell
 $feed = 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/'
@@ -481,6 +468,23 @@ The readiness check reports that failure rather than claiming success.
 Browser setup is a separate decision: its downloads do not use the npm feed,
 and svgexport's pinned dependency requests an old, deprecated browser build.
 Do not enable lifecycle scripts globally to suppress the warning.
+
+The current release's exact npm pins were verified through
+`https://packagefeedproxy.microsoft.io/npm/`; an older backend-feed prefix is
+not automatically valid for a new registry response. Only supply explicit
+tarball routing after checking the current rejected URL.
+
+Pandoc and Pillow are separate manual installs:
+
+```powershell
+winget install --id JohnMacFarlane.Pandoc --exact
+python -m pip install --upgrade Pillow
+```
+
+Optional visual companions and Microsoft ecosystem plugins remain owned by
+[their opt-in workflows](../skills/setup-dependencies/SKILL.md#what-is-optional).
+ONE no longer bundles an image-generation provider. Upgrade does not delete
+old private packages, credentials, or manually registered external servers.
 
 See the [release checklist](../RELEASE-CHECKLIST.md) for the verification steps
 and installation boundaries.

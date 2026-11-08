@@ -37,7 +37,7 @@ const TOOLS = {
         kind: 'npm-global',
         tier: 'enhances',
         package: '@mermaid-js/mermaid-cli',
-        version: '11.17.0',
+        version: '12.0.0',
         unlocks: 'Mermaid diagrams rendered as images. Conversions still succeed without it',
         probe: ['mmdc', ['--version']],
     },
@@ -55,7 +55,7 @@ const TOOLS = {
         kind: 'npm-module',
         tier: 'enhances',
         package: 'jszip',
-        version: '3.10.1',
+        version: '3.10.2',
         unlocks: 'Word table formatting and image centering. The .docx is still produced without it',
         probe: null,
     },
@@ -73,7 +73,7 @@ const TOOLS = {
 };
 
 /**
- * The three pinned MCP servers, tiered individually. They are provisioned
+ * The pinned MCP servers, tiered individually. They are provisioned
  * together by one command but they are not equally important, and a single
  * "MCP servers" row hid that: without Flint the chart skills cannot render at
  * all, while Playwright has a documented fallback and Replicate needs a paid
@@ -92,25 +92,17 @@ const MCP_SERVERS = {
     playwright: {
         label: 'Playwright (browser)',
         package: '@playwright/mcp',
-        version: '0.0.80',
+        version: '0.0.84',
         entrypoint: 'cli.js',
         tier: 'enhances',
         unlocks: 'browser verification for render-verify, which also works with the host\'s own browser tools',
     },
-    replicate: {
-        label: 'Replicate (images)',
-        package: 'replicate-mcp',
-        version: '0.9.0',
-        entrypoint: 'index.js',
-        tier: 'addon',
-        unlocks: 'AI image generation. Also needs a REPLICATE_API_TOKEN and a paid account',
-    },
 };
 
 const SHOWCASE_PACKAGES = Object.freeze([
-    { package: '@napi-rs/canvas', version: '1.0.10' },
-    { package: 'chart.js', version: '4.5.1' },
-    { package: '@modelcontextprotocol/sdk', version: '1.32.1' },
+    { package: '@napi-rs/canvas', version: '1.1.0' },
+    { package: 'chart.js', version: '4.6.1' },
+    { package: '@modelcontextprotocol/sdk', version: '1.32.2' },
 ]);
 
 function platformKey() {

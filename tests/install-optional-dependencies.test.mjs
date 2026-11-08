@@ -20,9 +20,6 @@ const packages = [
     })),
 ];
 const feedPrefix = 'https://feed.example.invalid/npm/registry/';
-const replicate = {
-    name: deps.MCP_SERVERS.replicate.package, version: deps.MCP_SERVERS.replicate.version, scope: 'private',
-};
 
 function runInstaller(t, shell, options = {}) {
     const root = realpathSync.native(mkdtempSync(join(ROOT, '.test-optional-deps-')));
@@ -43,7 +40,7 @@ function runInstaller(t, shell, options = {}) {
 param([Parameter(ValueFromRemainingArguments = $true)][string[]]$Arguments)
 $ErrorActionPreference = 'Stop'
 ConvertTo-Json -InputObject $Arguments -Compress | Add-Content -LiteralPath $env:FAKE_NPM_LOG
-$packages = @(('${JSON.stringify([...packages, replicate])}' | ConvertFrom-Json))
+$packages = @(('${JSON.stringify(packages)}' | ConvertFrom-Json))
 if (($Arguments -join ' ') -eq '--version') {
     Write-Output $env:FAKE_NPM_VERSION
     exit 0
@@ -103,7 +100,6 @@ if ($Arguments[0] -eq 'install') {
     $target = switch ($package.name) {
         'flint-chart-mcp' { 'dist/cli.js' }
         '@playwright/mcp' { 'cli.js' }
-        'replicate-mcp' { 'index.js' }
     }
     if ($target) {
         $targetPath = Join-Path $directory $target
@@ -164,15 +160,17 @@ exit 1
 `, 'utf8');
     const invoke = (verifyOnly = false) => runPowerShell(shell, script, {
         ...(verifyOnly ? { VerifyOnly: true } : options.apply ? { Apply: true } : {}),
-        RuntimeRoot: runtime, NpmCommand: npm, NodeCommand: process.execPath,
+        ...(options.inheritRuntime ? {} : { RuntimeRoot: runtime }),
+        NpmCommand: npm, NodeCommand: process.execPath,
         ...(options.tarballPrefix ? { RegistryTarballPrefix: options.tarballPrefix } : {}),
         ...(browserPath !== undefined ? { BrowserExecutablePath: browserPath } : {}),
-        ...(options.includeReplicate ? { IncludeReplicate: true } : {}),
+        ...(options.removedReplicateFlag ? { IncludeReplicate: true } : {}),
     }, {
         root,
         encoding: 'utf8', timeout: 30000,
         env: {
             ...process.env,
+            ALEX_ACT_ONE_RUNTIME_ROOT: options.inheritRuntime ? runtime : join(root, 'unselected-runtime'),
             TEMP: root, TMP: root, TMPDIR: root,
             FAKE_POWERSHELL: shell,
             FAKE_RENDER_INPUT: join(root, 'verified-input.svg'),
@@ -225,7 +223,7 @@ exit 1
     }
     for (const command of commands) {
         assert.ok(!command.some(arg => /--registry|allow-remote|strict-ssl/.test(arg)));
-        if (!options.includeReplicate) assert.ok(!command.some(arg => /replicate/.test(arg)));
+        assert.ok(!command.some(arg => /replicate/.test(arg)));
         assert.ok(!command.includes('set'));
         const routing = command.filter(arg => arg.startsWith('--replace-registry-host='));
         assert.deepEqual(routing, command[0] === 'install' && options.tarballPrefix
@@ -263,6 +261,13 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
             if (pkg.scope === 'private') assert.equal(args[args.indexOf('--prefix') + 1], runtime);
         }
         assert.ok(output.includes(`Verified all selected pinned dependencies (${packages.length}), MCP launchers (2)`));
+    });
+
+    test(`${shell}: honors the inherited runtime selected by the host and verifies there`, t => {
+        const { commands, runtime } = runInstaller(t, shell, { apply: true, inheritRuntime: true });
+        for (const command of commands.filter(args => args[0] === 'install' && args.includes('--prefix'))) {
+            assert.equal(command[command.indexOf('--prefix') + 1], runtime);
+        }
     });
 
     test(`${shell}: unavailable proxy pin prevents all installations`, (t) => {
@@ -452,47 +457,11 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
         });
     }
 
-    test(`${shell}: Replicate opt-in preview uses the shared pin without installs`, (t) => {
-        const { commands, output, runtime } = runInstaller(t, shell, { includeReplicate: true });
-        assert.deepEqual(commands, [['config', 'get', 'registry'], ['prefix', '--global']]);
+    test(`${shell}: removed image-provider opt-in is rejected before npm or runtime writes`, t => {
+        const { commands, runtime } = runInstaller(t, shell, {
+            apply: true, removedReplicateFlag: true, error: /parameter.*IncludeReplicate|IncludeReplicate.*parameter/i,
+        });
+        assert.deepEqual(commands, []);
         assert.equal(existsSync(runtime), false);
-        assert.ok(output.includes(`private: ${replicate.name}@${replicate.version}`));
-        assert.match(output, /do not verify API access or make paid calls/);
-    });
-
-    test(`${shell}: Replicate opt-in installs privately and verifies all three MCP launchers`, (t) => {
-        const { commands, output, runtime } = runInstaller(t, shell, {
-            apply: true, includeReplicate: true, verifyAgain: true, tarballPrefix: feedPrefix,
-        });
-        assert.equal(commands.filter(command => command[0] === 'view').length, packages.length + 1);
-        const installs = commands.filter(command => command[0] === 'install');
-        assert.equal(installs.length, packages.length + 1);
-        const args = installs.find(command => command.at(-1) === `${replicate.name}@${replicate.version}`);
-        assert.ok(args);
-        assert.equal(args.includes('--global'), false);
-        assert.equal(args[args.indexOf('--prefix') + 1], runtime);
-        assert.ok(output.includes(`Verified all selected pinned dependencies (${packages.length + 1}), MCP launchers (3)`));
-    });
-
-    test(`${shell}: unavailable Replicate pin prevents all opt-in installations`, (t) => {
-        const { commands } = runInstaller(t, shell, {
-            apply: true, includeReplicate: true, missingPin: `${replicate.name}@${replicate.version}`,
-            error: /E404/,
-        });
-        assert.equal(commands.filter(command => command[0] === 'install').length, 0);
-    });
-
-    test(`${shell}: wrong Replicate installed version prevents success`, (t) => {
-        runInstaller(t, shell, {
-            apply: true, includeReplicate: true, metadataMismatch: `${replicate.name}@${replicate.version}`,
-            error: /Installed package verification failed/,
-        });
-    });
-
-    test(`${shell}: wrong Replicate launcher output prevents success`, (t) => {
-        runInstaller(t, shell, {
-            apply: true, includeReplicate: true, launcherMismatch: `${replicate.name}@${replicate.version}`,
-            error: /MCP launcher reported an unexpected version for replicate/,
-        });
     });
 }

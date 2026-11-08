@@ -6,6 +6,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { test } from 'node:test';
 import { Script } from 'node:vm';
+import deps from '../scripts/shared/dependencies.cjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const script = join(ROOT, 'scripts', 'verification-gate.mjs');
@@ -114,7 +115,7 @@ test('Word optional-module loading honors an explicitly provisioned CI runtime',
     const runtime = join(root, 'runtime');
     const jszip = join(runtime, 'node_modules', 'jszip');
     mkdirSync(jszip, { recursive: true });
-    writeFileSync(join(jszip, 'package.json'), '{"name":"jszip","version":"3.10.1","main":"index.cjs"}');
+    writeFileSync(join(jszip, 'package.json'), JSON.stringify({ name: 'jszip', version: deps.TOOLS.jszip.version, main: 'index.cjs' }));
     writeFileSync(join(jszip, 'index.cjs'), 'module.exports = class FixtureZip {};\n');
     const source = join(ROOT, 'skills', 'md-to-word', 'scripts', 'md-to-word.cjs');
     const result = spawnSync(process.execPath, ['-e', `require(${JSON.stringify(source)});console.log('loaded');`], {

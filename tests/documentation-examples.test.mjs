@@ -85,13 +85,6 @@ test('documented commands run against an installed copy from an unrelated adopte
     assert.equal(existsSync(join(adopter, 'skills')), false);
     assert.deepEqual(readdirSync(adopter), []);
 });
-test('Replicate documentation points to the real manifest and environment reference', () => {
-    const source = readFileSync(join(ROOT, 'skills', 'replicate-imagery', 'SKILL.md'), 'utf8');
-    const plugin = JSON.parse(readFileSync(join(ROOT, 'plugin.json'), 'utf8'));
-    assert.ok(source.includes('](../../plugin.json)'));
-    assert.doesNotMatch(source, /shipped `\.vscode\/mcp\.json`/);
-    assert.equal(plugin.mcpServers.replicate.env.REPLICATE_API_TOKEN, '${env:REPLICATE_API_TOKEN}');
-});
 
 test('the documented standalone Word layout loads without the original checkout', t => {
     const root = mkdtempSync(join(tmpdir(), 'one detached-word-'));

@@ -7,7 +7,7 @@ The dependency-audit repair remains a maintenance follow-up; R8 remains next
 for host evidence as access permits. Runtime upgrade recovery requires a
 design decision before implementation.
 
-Release version: `v0.9.4`. This roadmap describes work beyond its scoped
+Release version: `v0.9.5`. This roadmap describes work beyond its scoped
 verification, not an instruction to reopen completed repairs or automatically
 change existing installations. See
 [installation sources](docs/install.md#installation-sources) for the distinction.
@@ -60,7 +60,7 @@ host freshly verified or infer semantic compliance from structural tests.
 
 **Status:** reproducible reporting defect found during the
 [local installation audit](docs/testing.md#092-local-installation-verification);
-implementation is pending. The configured registry returns array-wrapped
+the `0.9.5` source repair is awaiting release verification. The configured registry returns array-wrapped
 metadata, so equal version strings were reported as updates. A prerelease
 `latest` tag was also incorrectly described as a stable update.
 
@@ -191,38 +191,6 @@ launches, and real rendering pass before an explicitly approved switch; rollback
 is demonstrated in disposable fixtures. Preserve configured registries, npm
 policy, explicit runtime-root selection, consent, and host reload boundaries.
 Do not use the active user runtime as a failure-test fixture.
-
-### Consider retiring bundled Replicate support
-
-**Status:** proposed product-scope simplification; removal is not yet approved.
-Reduce credential setup, paid-service coupling, and provider-specific maintenance
-if generative imagery is not a core requirement. An authentication failure alone
-is not evidence that the integration is defective.
-
-**Next actions**
-
-- Decide between retiring the bundled integration and keeping it explicitly
-  opt-in. Retention is justified if consistent cross-host image generation is
-  a core requirement.
-- If retirement is approved, remove the Replicate MCP declaration from
-  [plugin.json](plugin.json) and retire the
-  [provider-specific skill](skills/replicate-imagery/SKILL.md). Reconcile dependency
-  reporting, provisioning, installer options, host registration, CI runtime
-  manifests and locks, tests, and active documentation together.
-- Preserve charts, Mermaid diagrams, SVG authoring, and image annotation.
-  Leave generative imagery to user-configured providers or host tools without
-  promising an equivalent capability on every host.
-- Document the capability loss and migration choices. Preserve historical
-  release evidence; do not uninstall existing runtime packages, remove
-  credentials, or change user-owned server registrations without separate
-  approval.
-
-**Done when:** the scope decision is recorded and, if retirement is chosen,
-active routes and guidance contain no stale Replicate dependency, retained
-visual workflows pass their applicable tests, and the change follows the
-[delivery gates](#verify-future-delivery-changes). This does not close the
-[dependency-audit task](#repair-the-dependency-update-audit) or R9 runtime
-recovery work.
 
 ### Extend accessibility and browser coverage
 

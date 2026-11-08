@@ -88,7 +88,6 @@ only in disposable targets, never by mutating a real profile for a test.
 ```text
 node skills/setup-dependencies/scripts/runtime-launcher.mjs flint --version
 node skills/setup-dependencies/scripts/runtime-launcher.mjs playwright --version
-node skills/setup-dependencies/scripts/runtime-launcher.mjs replicate --version
 ```
 
 The reported version must match the pin. Exit 0 alone is not enough: a launcher
@@ -345,7 +344,7 @@ Optional npm dependencies have a separate, preview-first installer:
 
 It reads the shared version pins and uses the configured npm registry.
 Flint, Playwright, and JSZip go into ONE's private runtime; Mermaid CLI and
-svgexport use the npm global prefix. Replicate is excluded by default;
+svgexport use the npm global prefix;
 companion plugins, Pandoc, and Pillow are not installed. Browser downloads
 may occur during installation.
 All pins are checked before installation; registry or policy failures stop
@@ -383,19 +382,6 @@ decision because Puppeteer downloads browsers outside the npm feed. The pinned
 svgexport package also uses an old, deprecated Puppeteer browser build; review
 that before allowing a download.
 
-To include the shared pinned Replicate MCP package in the private runtime,
-add `-IncludeReplicate` to preview, apply, or verification:
-
-```powershell
-.\install-optional-dependencies.ps1 -IncludeReplicate
-.\install-optional-dependencies.ps1 -Apply -IncludeReplicate
-.\install-optional-dependencies.ps1 -VerifyOnly -IncludeReplicate
-```
-
-Combine this with `-RegistryTarballPrefix` when needed by the configured proxy.
-Installation verifies Replicate's package and launcher version only. Actual
-image generation requires `REPLICATE_API_TOKEN` and a paid account; the
-installer does not read or store credentials or make paid API calls.
 The existing renderer-readiness checks and browser-download restrictions
 are unchanged.
 

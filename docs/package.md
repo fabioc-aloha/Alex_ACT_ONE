@@ -7,7 +7,7 @@ documentation, not adopter-project recovery records or fleet operations.
 The [builder](../scripts/build-plugin-package.mjs) produces a reproducible
 candidate under `dist/alex-act-one/`. Release preparation uses the same
 allowlist to generate `package/alex-act-one/`, the source-subdirectory payload
-selected for `0.9.4`. Assembly is distinct from publication and installation.
+selected since `0.9.4` and retained for `0.9.5`. Assembly is distinct from publication and installation.
 
 ## Included
 

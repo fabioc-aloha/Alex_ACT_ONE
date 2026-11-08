@@ -54,11 +54,12 @@ covers temporary candidate testing, Scout setup, and optional tools.
 Already set up? Browse the
 [skill catalog](#the-skills).
 
-**Release version: `v0.9.4`**, prepared 2026-11-08. This update hardens artifact
-accounting and multi-account Git authentication, keeps incident history outside
-the runtime package, and restores the source repository's maintain-and-ship
-focus. The lean payload retains every declared runtime owner/resource and both
-Flint demonstrations. Runtime dependency pins are unchanged.
+**Release version: `v0.9.5`**, prepared 2026-11-08. This update adds explicit
+safe plugin refresh, pins the latest stable npm versions verified through the
+configured Microsoft proxy, and removes the bundled image-generation provider.
+Charts, Mermaid diagrams, SVG authoring, image annotation, and both Flint
+demonstrations remain. Reviewed pins are fixed at release time, not floating
+`latest` installs.
 
 Existing installations do not update automatically. Use the reviewed Mall
 release, verify the loaded version/root, and preview activation again before
@@ -90,10 +91,10 @@ the published release's historical inventory.
 
 | Source surface | Count | Delivery |
 | --- | --- | --- |
-| Skills | 64 | Loaded on demand from the plugin |
+| Skills | 63 | Loaded on demand from the plugin |
 | Prompts / command aliases | 15 | Thin user-invoked entrypoints; availability depends on host |
 | Resident instructions | 15 | Preview-first profile activation; execution detail stays in skills |
-| MCP servers | 3 | Registered from plugin metadata where supported |
+| MCP servers | 2 | Registered from plugin metadata where supported |
 
 <!-- END GENERATED INVENTORY -->
 
@@ -206,7 +207,6 @@ Deciding what to draw, drawing it, and checking it says what you meant.
 | [`markdown-mermaid`](skills/markdown-mermaid/SKILL.md) | Author Mermaid diagrams that render correctly in GitHub, VS Code, and Mermaid 10+ consumers. Applies a config-driven init directive + linkStyle + semantic classDef vocabulary... | Node only |
 | [`annotate-screenshot`](skills/annotate-screenshot/SKILL.md) | Add callouts to a raster you did not author, using Pillow, at a resolution that stays legible. Covers upscale-then-annotate ordering, supersampled shape rendering, measured... | Pillow |
 | [`render-verify`](skills/render-verify/SKILL.md) | Verify a rendered visual artifact actually says what it was supposed to say — open it, read console errors, walk a failure catalog, and check its claim. Works on charts,... | Node only |
-| [`replicate-imagery`](skills/replicate-imagery/SKILL.md) | Route AI image generation and editing requests to Replicate (FLUX, Ideogram, Recraft, SDXL, imagen) via the bundled `replicate` MCP server. Use when a document, book, or report... | Replicate MCP |
 | [`docs-shell`](skills/docs-shell/SKILL.md) | The single-page HTML shell (index.html + manifest.json at a repository root or stable subfolder) that renders concatenated markdown as browsable, GitHub-styled documentation... | Node only |
 
 ### Document conversion
@@ -496,7 +496,55 @@ See [optional tools, runtime readiness, and registry policy](docs/install.md#opt
 
 ### Scripts for reinstalling and optional setup
 
-See [repository setup scripts and their write boundaries](docs/install.md#scripts-for-reinstalling-and-optional-setup).
+Use a standalone terminal outside the attached agent session, from this checkout.
+Close apps that can lock or cache the old plugin. The
+[plugin helper](reinstall-and-check.ps1) refreshes Mall and updates an existing
+enabled Mall installation only with explicit `-Refresh`; it never uninstalls
+first or forces instruction conflicts:
+
+```powershell
+$ErrorActionPreference = 'Stop'
+.\reinstall-and-check.ps1 -Refresh -ExpectedVersion 0.9.5
+.\install-optional-dependencies.ps1
+# After reviewing the exact pins, registry, and private/global destinations:
+.\install-optional-dependencies.ps1 -Apply
+.\install-optional-dependencies.ps1 -VerifyOnly
+```
+
+Install the matching plugin **before** updating its private runtime. New
+runtime pins are incompatible with older plugin launchers. The
+[dependency helper](install-optional-dependencies.ps1) installs Flint,
+Playwright, and JSZip privately, and Mermaid CLI/svgexport in npm's global
+prefix. It honors `ALEX_ACT_ONE_RUNTIME_ROOT` unless `-RuntimeRoot` is supplied.
+It preserves npm registry/policy settings and checks real rendering; package
+presence alone is not success.
+
+If npm reports `EALLOWREMOTE`, stop. The current Microsoft proxy advertised
+the following backend prefix during release verification. Preview and apply
+explicit per-command routing only after confirming it matches the rejected URL:
+
+```powershell
+$feed = 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/'
+.\install-optional-dependencies.ps1 -RegistryTarballPrefix $feed
+.\install-optional-dependencies.ps1 -Apply -RegistryTarballPrefix $feed
+```
+
+Do not change registries, enable remote fetching, or continue after an error.
+
+Pandoc and Pillow are separate, explicitly invoked prerequisites for the
+converter and screenshot workflows:
+
+```powershell
+winget install --id JohnMacFarlane.Pandoc --exact
+python -m pip install --upgrade Pillow
+```
+
+Use an existing browser with `-BrowserExecutablePath` if browser setup is
+blocked. Optional companion/Microsoft plugins remain separate opt-in workflows.
+See [all setup options and their write boundaries](docs/install.md#scripts-for-reinstalling-and-optional-setup).
+No bundled image-generation server is installed. Existing credentials, private
+packages, and manually configured external servers are not deleted. Restart the
+host after verified setup and check its MCP connectivity separately.
 
 #### Reinstall and verify ONE
 

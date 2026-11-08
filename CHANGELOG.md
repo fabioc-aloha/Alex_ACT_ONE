@@ -5,7 +5,27 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
-Post-publication delivery records do not change the frozen `v0.9.4` payload.
+Preparing `0.9.5`; the published `v0.9.4` tag remains immutable.
+
+## 0.9.5 - 2026-11-08
+
+- Added explicit `-Refresh` for native Mall/plugin updates without uninstalling
+  first. Default mismatched-version preservation and activation conflict guards
+  remain; an unsuccessful/no-op update cannot activate a stale release.
+- Aligned optional dependency runtime selection with the host environment and
+  updated the root README's manual plugin/tool setup commands.
+- Updated exact npm pins from fresh stable metadata through the configured
+  Microsoft proxy: Playwright MCP `0.0.84`, JSZip `3.10.2`, Mermaid CLI `12.0.0`,
+  canvas `1.1.0`, Chart.js `4.6.1`, and SDK `1.32.2`. Source compatibility and
+  same-commit release gates remain required before publication.
+- Repaired the read-only version audit's scalar/array handling, semantic stable
+  version comparison, and explicit rejection of ambiguous, prerelease, malformed,
+  or regressed registry metadata.
+- Removed Replicate's skill, MCP declaration, package pin, installer opt-in, and
+  active documentation routes. Charts, SVG, Mermaid, and annotation remain;
+  generative imagery requires separately configured host/provider capability.
+  Historical release evidence, existing credentials/private packages, and
+  user-owned external server registrations are not deleted.
 
 ## 0.9.4 - 2026-11-08
 

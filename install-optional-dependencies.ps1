@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-Preview or install ONE's optional npm dependencies, with opt-in Replicate.
+Preview or install ONE's pinned optional npm dependencies.
 .DESCRIPTION
 Reads the canonical version pins and uses the configured npm registry.
 Flint, Playwright and JSZip use ONE's private runtime. Mermaid CLI and
@@ -17,18 +17,15 @@ It does not enable lifecycle scripts, download a browser or change the environme
 .EXAMPLE
 .\install-optional-dependencies.ps1 -VerifyOnly
 .EXAMPLE
-.\install-optional-dependencies.ps1 -Apply -IncludeReplicate
-.EXAMPLE
 .\install-optional-dependencies.ps1 -VerifyOnly -BrowserExecutablePath 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 #>
 [CmdletBinding()]
 param(
     [switch]$Apply,
     [switch]$VerifyOnly,
-    [switch]$IncludeReplicate,
     [string]$RegistryTarballPrefix,
     [string]$BrowserExecutablePath,
-    [string]$RuntimeRoot = (Join-Path $HOME '.copilot\plugin-data\alex-act-one\runtime'),
+    [string]$RuntimeRoot = $(if ($env:ALEX_ACT_ONE_RUNTIME_ROOT) { $env:ALEX_ACT_ONE_RUNTIME_ROOT } else { Join-Path $HOME '.copilot\plugin-data\alex-act-one\runtime' }),
     [string]$NpmCommand = 'npm',
     [string]$NodeCommand = 'node'
 )
@@ -120,9 +117,7 @@ $RuntimeRoot = [IO.Path]::GetFullPath($RuntimeRoot)
 $dependencyRegistry = Join-Path $PSScriptRoot 'scripts\shared\dependencies.cjs'
 $readPins = @'
 const deps = require(process.argv[1]);
-const routes = ['flint', 'playwright'];
-if (process.argv[2] === 'true') routes.push('replicate');
-const packages = deps.mcpPackages(routes).map(pkg => ({
+const packages = deps.mcpPackages().map(pkg => ({
     name: pkg.name,
     version: pkg.version,
     scope: 'private',
@@ -139,7 +134,7 @@ for (const key of ['jszip', 'mmdc', 'svgexport']) {
 }
 console.log(JSON.stringify(packages));
 '@
-$raw = (Invoke-CheckedCommand -Command $NodeCommand -Arguments @('-e', $readPins, $dependencyRegistry, $IncludeReplicate.IsPresent.ToString().ToLowerInvariant())) -join "`n"
+$raw = (Invoke-CheckedCommand -Command $NodeCommand -Arguments @('-e', $readPins, $dependencyRegistry)) -join "`n"
 $packages = @(($raw | ConvertFrom-Json))
 foreach ($package in $packages) {
     if (-not $package.name -or -not $package.version) {
@@ -167,11 +162,6 @@ foreach ($package in $packages) {
     Write-Output "$($package.scope): $($package.name)@$($package.version)"
 }
 Write-Output 'Excluded: optional plugins and system packages. Registry and npm policy are unchanged.'
-if ($IncludeReplicate) {
-    Write-Output 'Replicate selected. Image generation separately requires REPLICATE_API_TOKEN and a paid account; installation and version checks do not verify API access or make paid calls.'
-} else {
-    Write-Output 'Replicate excluded by default. Use -IncludeReplicate to select it.'
-}
 if (-not $Apply -and -not $VerifyOnly) {
     Write-Output 'Preview only; nothing installed or changed. Run again with -Apply to install.'
     return

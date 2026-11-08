@@ -26,7 +26,7 @@ test('shared runtime package selection includes the exact library without changi
         { name: 'flint-chart', version: '1.0.1', route: null },
     ]);
     assert.deepEqual(deps.mcpPackages(['playwright']), [
-        { name: '@playwright/mcp', version: '0.0.80', route: 'playwright' },
+        { name: '@playwright/mcp', version: '0.0.84', route: 'playwright' },
     ]);
     assert.throws(() => deps.mcpPackages(['unknown']), /unknown MCP/i);
 });

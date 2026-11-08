@@ -9,7 +9,7 @@ lastReviewed: 2026-11-05
 Most of this plugin needs nothing beyond Node. Roughly three quarters of its
 skills run with no external tools at all. This skill handles the rest: document
 converters that need Pandoc, a few visual skills that use optional
-render helpers, and three MCP servers that back charts, image generation, and
+render helpers, and two MCP servers that back charts and
 browser verification.
 
 Nothing here installs without consent. A dependency check is read-only.
@@ -48,14 +48,13 @@ relative to a capability, so the report sorts every item into three tiers:
 | --- | --- | --- |
 | **Required** | The skills that call it cannot run without it | Pandoc (document conversion), Pillow (annotate-screenshot), Flint MCP (chart rendering) |
 | **Recommended** | Those skills run and produce less | Mermaid CLI (diagrams stay unrendered), svgexport (no PNG export), jszip (Word loses table formatting), Playwright MCP (`render-verify` falls back to the host's browser tools) |
-| **Add-on** | Blocks nothing. Adds capability this package does not have | Replicate MCP (also needs a paid token), visual companions, Microsoft ecosystem plugins |
+| **Add-on** | Blocks nothing. Adds capability this package does not have | Visual companions, Microsoft ecosystem plugins |
 
-The three MCP servers are provisioned by one command but they are not equally
+The two MCP servers are provisioned by one command but they are not equally
 important, and the report tiers them separately. Flint is the only one whose
 absence stops a skill outright: `flint-chart` and `flint-theme` call its tools
 throughout and have no fallback. Playwright has one, documented in
-`render-verify`'s own description. Replicate needs a paid account before it does
-anything at all.
+`render-verify`'s own description.
 
 The distinction matters when reporting to a user. A missing Pandoc means the
 affected converters are unavailable and should be named. A missing jszip means one output is
@@ -76,15 +75,6 @@ Plugin counts depend on which store the host reads. `copilot plugin list`
 follows `COPILOT_HOME` when set and `~/.copilot` otherwise, and different apps
 set different stores, so a plugin installed for one app may not appear for
 another. The report prints the store it read for that reason.
-
-### One add-on is closer to a dependency
-
-`replicate-imagery` describes itself as a thin router and delegates its
-substantive prompting guidance to Replicate's upstream skills, installed with
-`npx skills add replicate/skills`. It still runs without them: model selection,
-cost awareness, brand alignment, and the routing decision are all here. But the
-prompt craft it points at is not. Treat it as an add-on that the skill leans on
-harder than the rest.
 
 ## Install With Consent
 
@@ -110,8 +100,7 @@ or npx.
 | Pinned package | Tier | Role |
 | --- | --- | --- |
 | `flint-chart-mcp@1.0.1` with `flint-chart@1.0.1` | Required | Chart rendering, validated interactive show, and version-matched chart/theme/interaction/board resources. No fallback |
-| `@playwright/mcp@0.0.80` | Recommended | Browser verification. `render-verify` also works with the host's own browser tools |
-| `replicate-mcp@0.9.0` | Add-on | AI image generation. Also needs `REPLICATE_API_TOKEN` and a paid account |
+| `@playwright/mcp@0.0.84` | Recommended | Browser verification. `render-verify` also works with the host's own browser tools |
 
 Provisioning selects all MCP servers by default. Use `--server flint` to select
 only Flint and its independently exact-pinned library. The launcher checks both
@@ -184,10 +173,6 @@ first launch.
 The registration points at whichever plugin copy the script was run from. Run it
 from the installed package, not a working checkout, unless the intent is to test
 uncommitted changes.
-
-`replicate` is skipped when `REPLICATE_API_TOKEN` is unset. Registering a server
-that cannot authenticate trades a clear "not configured" message for an opaque
-auth failure at call time.
 
 ### Why `alex-playwright` and not `playwright`
 

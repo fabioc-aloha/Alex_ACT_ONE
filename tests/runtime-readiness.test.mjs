@@ -13,7 +13,7 @@ const deps = require('../scripts/shared/dependencies.cjs');
 const modulePath = join(ROOT, 'scripts', 'shared', 'runtime-status.cjs');
 const launcher = join(ROOT, 'skills', 'setup-dependencies', 'scripts', 'runtime-launcher.mjs');
 const provisioner = join(ROOT, 'skills', 'setup-dependencies', 'scripts', 'provision-runtime.mjs');
-const targets = { flint: 'dist/cli.js', playwright: 'cli.js', replicate: 'index.js' };
+const targets = { flint: 'dist/cli.js', playwright: 'cli.js' };
 function api() {
     assert.ok(existsSync(modulePath), 'Missing the shared runtime inspection/readiness contract');
     return require(modulePath);
@@ -82,8 +82,8 @@ test('readiness launch probes have a real bounded timeout', t => {
 });
 test('a successful version probe does not pretend the host connected', t => {
     const root = fixture(t);
-    installFixture(root, 'replicate');
-    const state = api().checkRuntime('replicate', root);
+    installFixture(root, 'playwright');
+    const state = api().checkRuntime('playwright', root);
     assert.equal(state.present, true);
     assert.equal(state.versionMatched, true);
     assert.equal(state.launchable, true);
