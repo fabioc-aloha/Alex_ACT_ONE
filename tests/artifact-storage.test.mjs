@@ -83,7 +83,10 @@ test('session-artifact checker detects stranded deliverables and recognizes reco
     writeFileSync(join(otherSession, 'files', 'other-project.md'), '# Unrelated repo\n');
 
     const report = checkSessionArtifacts({ repositoryRoot: repo, sessionRoot: sessions });
-    assert.equal(report.status, 'stranded-artifacts-found');
+    assert.equal(report.status, 'stranded-artifacts-found', JSON.stringify({
+        repo, gitRoot: execFileSync('git', ['rev-parse', '--show-toplevel'], { cwd: repo, encoding: 'utf8' }).trim(),
+        metadata: readFileSync(join(matchingSession, 'workspace.yaml'), 'utf8'), report,
+    }));
     assert.equal(report.matchedSessions, 1);
     assert.equal(report.totalCandidates, 2);
     assert.equal(report.accountedCount, 1);
