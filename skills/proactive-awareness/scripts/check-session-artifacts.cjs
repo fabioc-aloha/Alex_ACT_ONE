@@ -51,8 +51,11 @@ function sessionMatchesRepository(metadataPath, root) {
     const text = fs.readFileSync(metadataPath, 'utf8');
     const cwd = text.match(/^cwd:\s*(.+?)\s*$/m)?.[1]?.replace(/^["']|["']$/g, '');
     const gitRoot = text.match(/^git_root:\s*(.+?)\s*$/m)?.[1]?.replace(/^["']|["']$/g, '');
+    if (!cwd && !gitRoot) return false;
+    const workspace = path.resolve(cwd || gitRoot);
+    const canonical = fs.existsSync(workspace) ? fs.realpathSync(workspace) : workspace;
     // An explicit different cwd belongs to another worktree, even if git_root names this checkout.
-    return Boolean(cwd || gitRoot) && pathKey(path.resolve(cwd || gitRoot)) === pathKey(root);
+    return pathKey(canonical) === pathKey(root);
 }
 
 function inside(root, target) {

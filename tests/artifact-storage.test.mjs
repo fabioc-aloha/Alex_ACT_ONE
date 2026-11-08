@@ -156,3 +156,11 @@ test('ignored and linked copies cannot satisfy delivery and unavailable scope is
     assert.ok(report.unsupported.length > 0);
     assert.equal(checkSessionArtifacts({ ...f.options, sessionRoot: join(f.repo, 'absent') }).status, 'session-root-absent');
 });
+
+test('session scope canonicalizes existing workspace aliases consistently with the Git root', t => {
+    const f = detectorFixture(t);
+    const alias = join(f.repo, '..', 'workspace-alias');
+    symlinkSync(f.repo, alias, process.platform === 'win32' ? 'junction' : 'dir');
+    writeFileSync(join(f.sessions, 'owned', 'workspace.yaml'), `cwd: ${alias}\n`);
+    assert.equal(checkSessionArtifacts(f.options).status, 'clean');
+});

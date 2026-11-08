@@ -9,6 +9,10 @@ No unreleased source changes beyond the selected `0.9.4` release candidate.
 
 ## 0.9.4 - 2026-11-08
 
+- Canonicalized existing session workspace aliases consistently with the Git
+  worktree root. A regression reproduces the prior false
+  `no-matching-sessions` result; linked artifact copies still cannot qualify
+  as delivery. The initial full-matrix candidate was blocked, not published.
 - Selected the lean `package/alex-act-one` source-path payload for release
   delivery, preserving every declared runtime owner/resource and both Flint
   demonstrations. Source and payload hashes distinguish checkout line endings
