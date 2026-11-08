@@ -51,7 +51,7 @@ in the evidence after a temporary copy is removed.
 node scripts\run-skill-scenarios.mjs `
   --cli '<absolute existing Copilot executable>' `
   --plugin-root '<absolute installed package or explicit disposable source copy>' `
-  --out '<new absolute evidence directory outside the source checkout>'
+  --out '<new absolute repository-owned evidence directory>'
 ```
 
 By default it runs every case; repeat `--case <scenario-id>` for a subset.
@@ -62,8 +62,11 @@ noninteractive path, so missing-input cases must stop with a written clarificati
 Flint MCP tools are not exposed in these CLI cases; chart guidance/renderer
 connectivity remains a separate check.
 
-The runner preserves JSONL, stderr, invocation metadata, and curated response/tool
-observations. Its deterministic gate requires the exact input, successful
+The runner initially captures JSONL, stderr, invocation metadata, and curated
+response/tool observations. Keep curated synthetic responses/tool hashes and
+exact prompts as repository evidence; inspect and exclude runtime logs, raw
+event streams, profile state, and credentials before committing.
+Its deterministic gate requires the exact input, successful
 skill/reference calls, only installed Markdown skill-guidance reads, a final
 response, and no reported/workspace mutations. It rejects missing or failed
 completion records and never labels model content a semantic pass automatically.
@@ -74,6 +77,16 @@ instructions, and installed skill files are never changed by the runner.
 
 ## Evidence status
 
+The latest scoped run is the
+[fresh 0.9.5 host/artifact verification](https://github.com/fabioc-aloha/Alex_ACT_ONE).
+It tested all six exact `.2` prompts in fresh CLI and native VS Code sessions.
+CLI responses/tool hashes are complete and separately reviewed; native
+transcripts remain truncated and two missing-input forms await clarification.
+The installed Mall package and loaded cache matched the exact release payload.
+Scout and Copilot app remain not run by explicit user scope.
+
+### Historical baseline execution
+
 | Host | Current suite execution | Limits |
 | --- | --- | --- |
 | Copilot CLI | Revised `.2` suite and corrected-source recovery retest executed on 2026-11-05 | Original installed recovery finding retained; the corrected disposable source passed its scoped retest, not an installed-package upgrade |
@@ -83,7 +96,7 @@ instructions, and installed skill files are never changed by the runner.
 
 ### Installed candidate observations
 
-Candidate: `0.9.0-rc.1`, source commit
+Historical candidate: `0.9.0-rc.1`, source commit
 [`276f5de`](https://github.com/fabioc-aloha/Alex_ACT_ONE/commit/276f5de9bea070f88fbc94d5a1e9872635505d9f).
 The enabled direct-repository installation was present without a Mall duplicate.
 Manifest, plugin metadata, the original `.1` scenario suite, declared skill entrypoints, and

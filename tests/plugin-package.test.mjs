@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 import { spawnSync } from 'node:child_process';
@@ -105,4 +105,19 @@ test('release payload is distinct from publication and survives source checkout 
         writeFileSync(join(source, record.path), data);
     }
     assert.ok(verifyPackage(output, source).hashesVerified);
+});
+
+test('relative package verification resolves roots before walking parent paths', t => {
+    const temporary = mkdtempSync(join(tmpdir(), 'one-relative-package-'));
+    t.after(() => rmSync(temporary, { recursive: true, force: true }));
+    const output = join(temporary, 'package');
+    buildPackage(ROOT, output);
+    const module = new URL('../scripts/build-plugin-package.mjs', import.meta.url).href;
+    const result = spawnSync(process.execPath, ['--input-type=module', '-e',
+        `import { verifyPackage } from ${JSON.stringify(module)}; ` +
+        `console.log(JSON.stringify(verifyPackage(${JSON.stringify(relative(ROOT, output))}, '.')));`], {
+        cwd: ROOT, encoding: 'utf8', timeout: 10000,
+    });
+    assert.equal(result.status, 0, result.error?.message || result.stderr);
+    assert.equal(JSON.parse(result.stdout).hashesVerified, true);
 });

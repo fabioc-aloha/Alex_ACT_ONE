@@ -57,20 +57,22 @@ covers temporary candidate testing, Scout setup, and optional tools.
 Already set up? Browse the
 [skill catalog](#the-skills).
 
-**Release version: `v0.9.5`**, prepared 2026-11-08. This update adds explicit
-safe plugin refresh, pins the latest stable npm versions verified through the
-configured Microsoft proxy, and removes the bundled image-generation provider.
-Charts, Mermaid diagrams, SVG authoring, image annotation, and both Flint
-demonstrations remain. Reviewed pins are fixed at release time, not floating
-`latest` installs.
+**Release version: `v0.9.6` (candidate)**, prepared 2026-11-08. The published
+Mall baseline remains `0.9.5`; `0.9.6` is not published. This candidate adds
+automatic routing for the recognized Microsoft npm proxy, repository-owned
+scenario evidence output, and broader SVG contrast and keyboard checks.
+Both Flint demonstrations retain their data and upstream App, with
+contrast-tuned themes and corrected bounded-score heatmap mapping.
+Reviewed dependency pins are unchanged from `0.9.5`, not floating `latest`
+installs.
 
 Existing installations do not update automatically. Use the reviewed Mall
 release, verify the loaded version/root, and preview activation again before
 approving profile changes. The [install reference](docs/install.md#installation-sources)
 separates package delivery, activation, and optional runtime provisioning.
-CLI/VS Code observations and local browser evidence have
+Installed `0.9.5` CLI/VS Code observations and local candidate browser evidence have
 [documented limits](docs/verification/README.md); Scout and Copilot app behavior
-is **not freshly verified** for this release.
+is **not freshly verified** for this candidate.
 
 The [storage contract](skills/proactive-awareness/references/project-artifact-storage.md)
 and its checker support reliable artifact delivery. They do not constitute
@@ -505,9 +507,12 @@ Close apps that can lock or cache the old plugin. The
 enabled Mall installation only with explicit `-Refresh`; it never uninstalls
 first or forces instruction conflicts:
 
+The following `0.9.6` sequence is for use only after that version is published
+in Mall. Do not run it while `0.9.6` is a source candidate.
+
 ```powershell
 $ErrorActionPreference = 'Stop'
-.\reinstall-and-check.ps1 -Refresh -ExpectedVersion 0.9.5
+.\reinstall-and-check.ps1 -Refresh -ExpectedVersion 0.9.6
 .\install-optional-dependencies.ps1
 # After reviewing the exact pins, registry, and private/global destinations:
 .\install-optional-dependencies.ps1 -Apply
@@ -522,9 +527,14 @@ prefix. It honors `ALEX_ACT_ONE_RUNTIME_ROOT` unless `-RuntimeRoot` is supplied.
 It preserves npm registry/policy settings and checks real rendering; package
 presence alone is not success.
 
-If npm reports `EALLOWREMOTE`, stop. The current Microsoft proxy advertised
-the following backend prefix during release verification. Preview and apply
-explicit per-command routing only after confirming it matches the rejected URL:
+The checkout's installer now recognizes the configured
+`https://packagefeedproxy.microsoft.io/npm/` registry and previews its confirmed
+backend-prefix routing automatically. `-Apply` uses that routing for every
+private/global npm install with npm 12+. No extra proxy flag is needed.
+This source improvement is not yet in the immutable `0.9.5` Mall payload.
+
+Other registries are unchanged. To override the detected prefix or configure
+another confirmed backend, preview an explicit per-command routing prefix:
 
 ```powershell
 $feed = 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/'
@@ -532,7 +542,10 @@ $feed = 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-publ
 .\install-optional-dependencies.ps1 -Apply -RegistryTarballPrefix $feed
 ```
 
-Do not change registries, enable remote fetching, or continue after an error.
+`-RegistryTarballPrefix` takes precedence over detection. If a routed install
+still reports `EALLOWREMOTE`, stop and inspect the actual rejected URL; the
+helper does not retry or broaden routing. Do not change registries, enable
+remote fetching, or continue after an error.
 
 Pandoc and Pillow are separate, explicitly invoked prerequisites for the
 converter and screenshot workflows:

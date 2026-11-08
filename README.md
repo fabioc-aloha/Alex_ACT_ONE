@@ -54,20 +54,22 @@ covers temporary candidate testing, Scout setup, and optional tools.
 Already set up? Browse the
 [skill catalog](#the-skills).
 
-**Release version: `v0.9.5`**, prepared 2026-11-08. This update adds explicit
-safe plugin refresh, pins the latest stable npm versions verified through the
-configured Microsoft proxy, and removes the bundled image-generation provider.
-Charts, Mermaid diagrams, SVG authoring, image annotation, and both Flint
-demonstrations remain. Reviewed pins are fixed at release time, not floating
-`latest` installs.
+**Release version: `v0.9.6` (candidate)**, prepared 2026-11-08. The published
+Mall baseline remains `0.9.5`; `0.9.6` is not published. This candidate adds
+automatic routing for the recognized Microsoft npm proxy, repository-owned
+scenario evidence output, and broader SVG contrast and keyboard checks.
+Both Flint demonstrations retain their data and upstream App, with
+contrast-tuned themes and corrected bounded-score heatmap mapping.
+Reviewed dependency pins are unchanged from `0.9.5`, not floating `latest`
+installs.
 
 Existing installations do not update automatically. Use the reviewed Mall
 release, verify the loaded version/root, and preview activation again before
 approving profile changes. The [install reference](docs/install.md#installation-sources)
 separates package delivery, activation, and optional runtime provisioning.
-CLI/VS Code observations and local browser evidence have
+Installed `0.9.5` CLI/VS Code observations and local candidate browser evidence have
 [documented limits](docs/verification/README.md); Scout and Copilot app behavior
-is **not freshly verified** for this release.
+is **not freshly verified** for this candidate.
 
 The [storage contract](skills/proactive-awareness/references/project-artifact-storage.md)
 and its checker support reliable artifact delivery. They do not constitute
@@ -502,9 +504,12 @@ Close apps that can lock or cache the old plugin. The
 enabled Mall installation only with explicit `-Refresh`; it never uninstalls
 first or forces instruction conflicts:
 
+The following `0.9.6` sequence is for use only after that version is published
+in Mall. Do not run it while `0.9.6` is a source candidate.
+
 ```powershell
 $ErrorActionPreference = 'Stop'
-.\reinstall-and-check.ps1 -Refresh -ExpectedVersion 0.9.5
+.\reinstall-and-check.ps1 -Refresh -ExpectedVersion 0.9.6
 .\install-optional-dependencies.ps1
 # After reviewing the exact pins, registry, and private/global destinations:
 .\install-optional-dependencies.ps1 -Apply

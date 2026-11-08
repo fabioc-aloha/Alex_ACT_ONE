@@ -12,9 +12,10 @@ tools, and historical verification notes in one reference.
 | Repository | Deprecated direct-install path: repository source selected at installation time; it can include unreleased work | Temporary candidate testing only; review root/revision and do not assume future CLI support |
 | Optional runtime | The separately provisioned chart, browser, image, and converter packages | Plugin installation does not activate instructions or provision these packages; installs and upgrades require their own approval |
 
-Release version: `0.9.5`. Mall selects the reviewed release tag and its
-`package/alex-act-one` payload; a checkout on
-main can later include unreleased changes. A version is not evidence of live-host
+Release version: `0.9.6` (candidate). The published Mall baseline remains
+`0.9.5`; `0.9.6` is not published. Mall selects the reviewed release tag and its
+`package/alex-act-one` payload; the checkout contains separately prepared
+candidate changes. A version is not evidence of live-host
 activation. Packages with the same version can also contain different bytes.
 Check the loaded plugin root, installation source, and revision when available;
 if the revision cannot be established, do not claim exact source parity.
@@ -31,7 +32,8 @@ before publication. Do not treat a generated directory as an upgrade.
 ## Testing the repository candidate
 
 This section preserves the historical `0.9.0-rc.1` candidate-testing procedure.
-It is not the normal installation path for `0.9.5`.
+It is not the normal installation path for the reviewed Mall release or the
+current candidate.
 
 **Deprecated installation path.** During the user's candidate install on
 2026-11-05, installation succeeded and the CLI printed:
@@ -322,9 +324,10 @@ Reload the host to discover the new validated `show` interface.
 
 If Microsoft proxy metadata points tarballs at a backend feed that npm policy
 blocks directly, do not enable remote fetching or edit npm configuration. With
-explicit approval, npm 12+ can route an exact HTTPS backend prefix through the
-configured proxy using the provisioner's `--registry-tarball-prefix` option.
-Its preview names the prefix, registry, runtime, and selected packages.
+installation consent, npm 12+ routes the confirmed backend prefix automatically
+when the configured registry is exactly the HTTPS Microsoft packagefeedproxy npm
+endpoint. The preview names the detected prefix, registry, runtime, and packages.
+`--registry-tarball-prefix` overrides detection for a separately confirmed prefix.
 
 In version `0.9.0`, dependency checks distinguish installed
 directories, exact version matches, and bounded launch probes. Host connection
@@ -375,11 +378,12 @@ expanded marketplace checks ship in `v0.5.0`.
 
 #### Reinstall and verify ONE
 
-Close hosts that may lock the installed plugin before running
+Only after `0.9.6` is published in Mall, close hosts that may lock the installed
+plugin before running
 [`reinstall-and-check.ps1`](../reinstall-and-check.ps1):
 
 ```powershell
-.\reinstall-and-check.ps1 -Refresh -ExpectedVersion 0.9.5
+.\reinstall-and-check.ps1 -Refresh -ExpectedVersion 0.9.6
 ```
 
 The current checkout's helper is not a preview. It first rejects duplicate or
@@ -418,8 +422,9 @@ into ONE's private runtime; Mermaid CLI and svgexport use npm's global prefix.
 It leaves the registry and npm policy unchanged and does not install
 companion plugins or system packages. `-RuntimeRoot` overrides
 `ALEX_ACT_ONE_RUNTIME_ROOT`; otherwise the shared default private runtime is
-used. Install the matching `0.9.5` plugin before applying its new runtime pins:
-older launchers intentionally reject newer MCP package versions.
+used. Install the matching reviewed plugin before applying its runtime pins:
+older launchers intentionally reject newer MCP package versions. The `0.9.6`
+candidate reuses the reviewed `0.9.5` pins.
 
 Check existing package versions, MCP launchers, and actual Mermaid/SVG-to-PNG
 rendering without reinstalling:
@@ -444,9 +449,16 @@ No browser is selected automatically, and a supplied path does not prove browser
 compatibility: the render checks must still pass.
 
 With npm 12, the Microsoft proxy can advertise tarball URLs on a different
-Microsoft host and trigger `EALLOWREMOTE`. For the verified feed prefix below,
-route those URLs back through your configured proxy. Preview first, then
-repeat with `-Apply`.
+Microsoft host and trigger `EALLOWREMOTE`. The updated checkout detects the
+configured `https://packagefeedproxy.microsoft.io/npm/` registry and selects
+its confirmed backend prefix before installation. Preview shows
+`detected Microsoft proxy`; ordinary `-Apply` uses per-command routing.
+It does not infer a corporate network, change the registry or npm policy,
+or route other endpoints automatically. The immutable `0.9.5` payload retains
+the older explicit-only behavior.
+
+To override detection or select a separately confirmed prefix for another
+registry, use the existing explicit option:
 
 ```powershell
 $feed = 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/'
@@ -470,9 +482,12 @@ and svgexport's pinned dependency requests an old, deprecated browser build.
 Do not enable lifecycle scripts globally to suppress the warning.
 
 The current release's exact npm pins were verified through
-`https://packagefeedproxy.microsoft.io/npm/`; an older backend-feed prefix is
-not automatically valid for a new registry response. Only supply explicit
-tarball routing after checking the current rejected URL.
+`https://packagefeedproxy.microsoft.io/npm/`. Detection is limited to that
+configured endpoint and the confirmed backend prefix, with an npm 12+ guard
+before preview/apply. `-VerifyOnly` fetches no packages and does not need
+automatic routing support. Explicit prefixes retain their validation.
+A new backend is not silently trusted: continued fetch-policy errors stop,
+without retries or policy changes.
 
 Pandoc and Pillow are separate manual installs:
 

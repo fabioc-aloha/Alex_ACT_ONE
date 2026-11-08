@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "candidateVersion": "0.9.6",
+  "classification": "source-and-package preparation; not publication",
+  "preparationBaseCommit": "9f00eb62afb8b8ec2f5fac612d2cf6d87a19b4c0",
+  "sourceHasUncommittedChangesAtAssembly": true,
+  "payload": {
+    "path": "package/alex-act-one",
+    "files": 254,
+    "bytes": 11331254,
+    "hashesVerified": true,
+    "pluginVersion": "0.9.6",
+    "status": "release-payload",
+    "receiptSha256": "7a235de9f66048a76ff74db6233fd9428243824d325cba1ba35df7ca05af9b44"
+  },
+  "bootstrap": {
+    "apply": false,
+    "expectedFiles": 15,
+    "targetCreated": false,
+    "scope": "Packaged script against an explicit nonexistent disposable instruction target"
+  },
+  "packageSafetyTests": {
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0,
+    "relativePathRegression": "Former code timed out in the bounded child process; normalized roots pass"
+  },
+  "faultControls": {
+    "log": "mutations.log",
+    "caught": 6,
+    "survived": 0,
+    "preconditionNotFound": 0,
+    "scope": "Six sampled production guards; separate disposable copy per control; actual source hashes preserved"
+  },
+  "browserEvidence": "browser.json",
+  "nativeCandidateInstallation": "not run",
+  "releasePublication": "not performed",
+  "mallUpdate": "not performed",
+  "activeRuntimeUpdate": "not performed",
+  "profileActivation": "not performed outside disposable test fixtures",
+  "remainingGates": [
+    "Fresh clean-checkout and exact-commit full matrix after committing this candidate",
+    "Separately approved native candidate installation evidence",
+    "Final release notices and separately approved immutable release/Mall publication"
+  ]
+}

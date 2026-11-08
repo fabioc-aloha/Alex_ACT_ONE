@@ -8,8 +8,9 @@ candidate installation requires separate approval.
 Runtime upgrade recovery requires a
 design decision before implementation.
 
-Release version: `v0.9.5`. This roadmap describes work beyond its scoped
-verification, not an instruction to reopen completed repairs or automatically
+Release version: `v0.9.6` (candidate), not published. Mall and the installed
+baseline remain `0.9.5`. This roadmap describes work beyond the published
+baseline's scoped verification, not an instruction to reopen completed repairs or automatically
 change existing installations. See
 [installation sources](docs/install.md#installation-sources) for the distinction.
 Current verification belongs in [testing](docs/testing.md),
@@ -22,6 +23,10 @@ Current verification belongs in [testing](docs/testing.md),
 [delivery gate](#verify-future-delivery-changes). Completed cross-repository
 recovery and synchronization are archived; they do not add ongoing operations
 to this backlog.
+The `0.9.6` metadata and canonical payload are assembled with
+[task-local preparation evidence](archive/verification/candidate-0.9.6/preparation.json);
+their exact commit requires fresh gates. Publication, Mall selection and native
+installation remain separately approved operations.
 
 ### R8. Run fresh live-host scenarios
 

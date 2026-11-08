@@ -1,10 +1,16 @@
 # Verification environments and release gates
 
-Release version: `0.9.5`. Use the
+Release version: `0.9.6` (candidate), not published or installed. Use the
 [release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.5)
-for the frozen commit's CI, clean-clone, artifact, and delivered-package results.
+for the published `0.9.5` baseline's CI, clean-clone, artifact, and delivered-package results.
 The dated baseline runs below do not substitute for same-commit release evidence.
 Live-host and browser observations retain their separately documented limits.
+
+The `0.9.6` metadata and generated payload need their own exact-commit matrix,
+clean-checkout checks, demo rebuilds and package verification. A prepared
+`release-payload` receipt is assembly evidence only, not publication or a
+native installation. Previous manual-install publication exceptions do not
+apply to this candidate.
 
 The source workflow targets Windows Server 2025 and Ubuntu 24.04 on x64.
 Ordinary pushes run structural jobs on Node 24 and provisioned integration jobs

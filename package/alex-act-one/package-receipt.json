@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "status": "release-payload",
-  "declaredPluginVersion": "0.9.5",
-  "sourceCommit": "9fff799e901cb3e6cb2528b53f0d27b7b6e40dae",
+  "declaredPluginVersion": "0.9.6",
+  "sourceCommit": "9f00eb62afb8b8ec2f5fac612d2cf6d87a19b4c0",
   "sourceHasUncommittedChanges": true,
   "files": [
     {
@@ -15,10 +15,10 @@
     },
     {
       "path": "README.md",
-      "sourceSha256": "a7e6f7ae8cc36cba5801454743ada8c4b5c3725279a4b05ff5a8852d70aba536",
-      "sourceContentSha256": "55f121db8febfbaa69cd463ca116d39f4cd10f992fe5d6e3da740caef874b869",
-      "sha256": "2eb0ec452f670776b139b7a67007c9bcb25dbab0a0cdbd34d83152bb17ba3aba",
-      "bytes": 49290,
+      "sourceSha256": "1856513629b24de5b1fbfcb7f0dbe94e06b7ccd9e206c91f3cd5c310b470df16",
+      "sourceContentSha256": "a3de7ed1b52b1075849ae9337c6e7998b6bfd79863072a2d5154849ddaaf4119",
+      "sha256": "ef19a5048c20e9c386d95a75697d9236cbae4a06d97c4583f02e25d6ba641859",
+      "bytes": 50063,
       "edits": [
         "unshipped-maintainer-links-routed-to-source-repository",
         "candidate-package-scope-notice"
@@ -60,36 +60,36 @@
     },
     {
       "path": "docs/flint-experimental.html",
-      "sourceSha256": "a623ae1b07988fb2fa445c232d5a9e04635857474b04bd95bb670d04e293cd04",
-      "sourceContentSha256": "a623ae1b07988fb2fa445c232d5a9e04635857474b04bd95bb670d04e293cd04",
-      "sha256": "a623ae1b07988fb2fa445c232d5a9e04635857474b04bd95bb670d04e293cd04",
-      "bytes": 4699420,
+      "sourceSha256": "05fd3dacc69908aba7b7e5122cb5d004893b4c25f7265bc774711165becdb064",
+      "sourceContentSha256": "05fd3dacc69908aba7b7e5122cb5d004893b4c25f7265bc774711165becdb064",
+      "sha256": "05fd3dacc69908aba7b7e5122cb5d004893b4c25f7265bc774711165becdb064",
+      "bytes": 4711189,
       "edits": []
     },
     {
       "path": "docs/flint-showcase.html",
-      "sourceSha256": "6da4a8aa6f92bc0e9b065990a00551d385b25b038402f318bfaa6f0cb4a296dd",
-      "sourceContentSha256": "6da4a8aa6f92bc0e9b065990a00551d385b25b038402f318bfaa6f0cb4a296dd",
-      "sha256": "6da4a8aa6f92bc0e9b065990a00551d385b25b038402f318bfaa6f0cb4a296dd",
-      "bytes": 4494501,
+      "sourceSha256": "aefd18f14701f47d007f4e468ece150073e3882c1c5bfe753fa4b505de072fbb",
+      "sourceContentSha256": "aefd18f14701f47d007f4e468ece150073e3882c1c5bfe753fa4b505de072fbb",
+      "sha256": "aefd18f14701f47d007f4e468ece150073e3882c1c5bfe753fa4b505de072fbb",
+      "bytes": 4507265,
       "edits": []
     },
     {
       "path": "docs/getting-started.md",
-      "sourceSha256": "c1ac2ff6bb914646e4c72fc96fa77cf238f9ad35a6d0239c33d5e5e4f223e830",
-      "sourceContentSha256": "d4cb34b51d142fec5748bbce8e4e9bad43dc79dac17a2df18fba375c384803db",
-      "sha256": "eb106c9f32576977514d5c0852cf12f1aa7a5db04ba56e458d06b19b5cff7c68",
-      "bytes": 4657,
+      "sourceSha256": "45a554e272ea2fbdc7a336c0eff6957dd9a81fc4198f8a593e03200ffdcba8bd",
+      "sourceContentSha256": "4fdc5d4e3d0d0cb5e5039b19f1dedc16c4d9ae331cd8176ce91e40a5d773baa1",
+      "sha256": "0baafc5d3ba96d51aa7cccfbae15541fe7e77ded7eb56793bccbeea714dc4b8b",
+      "bytes": 4741,
       "edits": [
         "unshipped-maintainer-links-routed-to-source-repository"
       ]
     },
     {
       "path": "docs/install.md",
-      "sourceSha256": "df6ee2f5834c9dc99106bcec80c7dbe378a293b770d3d3c647e531ec215d80d9",
-      "sourceContentSha256": "2ed27a0710f3422db352a43248fa792c8a9ccc1a7380c832bdb463db6e1531b2",
-      "sha256": "bb5c9c8ea53083e7c01a88f0313aefffa6212a796c9be92cbad307d83ec362f9",
-      "bytes": 24893,
+      "sourceSha256": "4fd915a06bac2bc1f16611c5d120c53b01f1f67f9b8fbe0f6e110869ce671102",
+      "sourceContentSha256": "a0bfb912217d09cf8f0504d1eee8869b669b3b4790d73bc027d8e2d45c23c413",
+      "sha256": "13208a6d2a1f06d5d1a3bafcd9da68d9e1055f2e8115e2924c8eb43042e60538",
+      "bytes": 25846,
       "edits": [
         "unshipped-maintainer-links-routed-to-source-repository"
       ]
@@ -106,20 +106,20 @@
     },
     {
       "path": "docs/package.md",
-      "sourceSha256": "dc7be29b7d141be3ee7db72a8e99af133f2affd06f8681a3504abbc6ca503b7e",
-      "sourceContentSha256": "d44bb1c981628dff852694452e3533d866734b8dcbf8318c30f83107cd8bb5b0",
-      "sha256": "e4822a56bb44e380862539a152aa451c67971150d12009bd6e094b72944e4d94",
-      "bytes": 4184,
+      "sourceSha256": "0aba65a1f584e388cf5e995f677c319cbf1968699196d58ff565614e4ce398ff",
+      "sourceContentSha256": "d5fa55cba1335b9c28b2640301028d7047f3eede63639652967c95130c50e70a",
+      "sha256": "61e30407dfdca19fdb109e4b237e563278531c2eec3ddf57e0e3c070182a6bda",
+      "bytes": 4482,
       "edits": [
         "unshipped-maintainer-links-routed-to-source-repository"
       ]
     },
     {
       "path": "docs/testing.md",
-      "sourceSha256": "3489d8e3c04663b07541900dc77fc40fd0be09b42c7c9eb659c51ccfac4e4bd0",
-      "sourceContentSha256": "1ee9a8a91c49004db5c1959590f4b1ce52397171cfb2b32f62824b4d6d298793",
-      "sha256": "ce8d06102bd6aab895897e079f7a9bab29704fb792b40db580f3024a0ba92711",
-      "bytes": 26714,
+      "sourceSha256": "b5a95bf0e922237c1f7b2f8d868929323041aa325f48707dbc96f25685fd5d1d",
+      "sourceContentSha256": "05b534cd2758e2d12d65d8eb0e663b7b3b36956d7b09a99ad73a5aa84b7ecf1a",
+      "sha256": "f1d9b915e16d533c43ffc26f5502b180708a33ec006d8172845603fa5b1bdd42",
+      "bytes": 31715,
       "edits": [
         "unshipped-maintainer-links-routed-to-source-repository",
         "candidate-package-scope-notice"
@@ -127,21 +127,23 @@
     },
     {
       "path": "docs/verification/README.md",
-      "sourceSha256": "b4cd1b82256e3ba8425bfeadbd8c7703861c7a87b0bb17f3f763691feec5df10",
-      "sourceContentSha256": "164e7f810516f8de50aa32fa3b34df368f4f9b9d44528976f04ddab75e3843fa",
-      "sha256": "21c9eaccff6b9f4a815df40cf8c0dc8b601ff04ad387eff5046ff14307060ff0",
-      "bytes": 18314,
+      "sourceSha256": "f0969c43b7f4032efd80a5def51d86ea967ad2a79d3f74b345364030595c0909",
+      "sourceContentSha256": "9a072032cc5cd7d604313f4aba6212fd7397c0c324dad4052fe096e28762e605",
+      "sha256": "8f6473097c0f345e047d1204b35d8a5a5f58b1e1cd1b5d53bada8ff707af4bf7",
+      "bytes": 19047,
       "edits": [
         "unshipped-maintainer-links-routed-to-source-repository"
       ]
     },
     {
       "path": "docs/verification/flint-browser.md",
-      "sourceSha256": "751036942a2c3a0ab3219f3d236f351c821d0cfbd926d6728fa8949207b3c9a5",
-      "sourceContentSha256": "c18027c3e609be11c8b4c4235ce857f08185ce938e3b02537c529bc409d14602",
-      "sha256": "751036942a2c3a0ab3219f3d236f351c821d0cfbd926d6728fa8949207b3c9a5",
-      "bytes": 8427,
-      "edits": []
+      "sourceSha256": "7618cc3436d7034aba0629ff39008a1fd98c19986051c6f12723370bf7b23775",
+      "sourceContentSha256": "65f510ef9cb7f092820427f8b9db6997b782d2b3ae1377a7d93c88a46248e8e8",
+      "sha256": "e16ad1422be00f0a34c46c46f27b81a2293a18d422c1c54baee5a30c7db52a5f",
+      "bytes": 10028,
+      "edits": [
+        "unshipped-maintainer-links-routed-to-source-repository"
+      ]
     },
     {
       "path": "docs/verification/skill-scenarios.json",
@@ -153,10 +155,10 @@
     },
     {
       "path": "install-optional-dependencies.ps1",
-      "sourceSha256": "aaa616327f73f4f980cc6b8ad4e8b016b376343f41618c8e6bf2580892470f9b",
-      "sourceContentSha256": "04bf26b1798160c26748c5cdd9771c7ae4f9b87f724a34bdc9c0012a33fe35aa",
-      "sha256": "aaa616327f73f4f980cc6b8ad4e8b016b376343f41618c8e6bf2580892470f9b",
-      "bytes": 13748,
+      "sourceSha256": "a174523514c7212b1a7771f698612e69e1611bbeb061d5fbde9c81540ff55b09",
+      "sourceContentSha256": "29bbf22f00f51db3134069fb6b7474339fb5beeca61f873c56828f635dc912dd",
+      "sha256": "a174523514c7212b1a7771f698612e69e1611bbeb061d5fbde9c81540ff55b09",
+      "bytes": 14644,
       "edits": []
     },
     {
@@ -401,17 +403,17 @@
     },
     {
       "path": "manifest.json",
-      "sourceSha256": "5c17e9153f22686d605c9e79ac7b17e9423f77157adba25200cf199792a45557",
-      "sourceContentSha256": "d02ecedcf5be18b9c008cb6d4bcfaffdb66712fd421f34a40c78b0ec90fc7c86",
-      "sha256": "5c17e9153f22686d605c9e79ac7b17e9423f77157adba25200cf199792a45557",
+      "sourceSha256": "20fea85f542e3bdc1aa7b6b36ef0b719e3b68ac0d281b6c9357144f7cb7d9309",
+      "sourceContentSha256": "b3dcdaeaa0cc890864640d03a9b8a87d624f44b12e5cdc43ef629d2e777f4b9b",
+      "sha256": "20fea85f542e3bdc1aa7b6b36ef0b719e3b68ac0d281b6c9357144f7cb7d9309",
       "bytes": 14910,
       "edits": []
     },
     {
       "path": "plugin.json",
-      "sourceSha256": "9393d580fc50e1b3504c623a6f850eefdca1642f060ad43659a7ecc0754f53bb",
-      "sourceContentSha256": "6104060b86390110cb68c7963786481152ecc69b80ddf8fd7e7c414b42b16a31",
-      "sha256": "9393d580fc50e1b3504c623a6f850eefdca1642f060ad43659a7ecc0754f53bb",
+      "sourceSha256": "67c0762547df9299d041c505e5e347de7302ea962c0177f90017bd212ff2c2ae",
+      "sourceContentSha256": "9d4da5db57b2d514ac74967ed3eb50c095ed68dbfe7660fdcd289bf0a4fa875f",
+      "sha256": "67c0762547df9299d041c505e5e347de7302ea962c0177f90017bd212ff2c2ae",
       "bytes": 1619,
       "edits": []
     },
@@ -553,18 +555,18 @@
     },
     {
       "path": "scripts/build-flint-showcase.mjs",
-      "sourceSha256": "d310ced7aa961513d4a4a032672e21a168488f6702cb8716c5a83f6258a5f085",
-      "sourceContentSha256": "7d998e53194ad3082f4defd93a88fb32f35b83506cdabe14d1ee50c721c48400",
-      "sha256": "d310ced7aa961513d4a4a032672e21a168488f6702cb8716c5a83f6258a5f085",
-      "bytes": 63323,
+      "sourceSha256": "4483c47b8512959edda129392e78b41a77440706fe30174ce838efdb58642b94",
+      "sourceContentSha256": "105b60cf1e2b0e5be6d71138b93d4d8dfb1e0b2526ed6caef4aed4a76c85c3cd",
+      "sha256": "4483c47b8512959edda129392e78b41a77440706fe30174ce838efdb58642b94",
+      "bytes": 64064,
       "edits": []
     },
     {
       "path": "scripts/flint-browser-acceptance.mjs",
-      "sourceSha256": "e8c8401d04e25825f2766932ac1d7ac46b6120759a8df8fff21560ef8a0e3d6f",
-      "sourceContentSha256": "dc79280e9ee744a44b634c43103ea2c62542e73cddca461e0158d1c76e45e373",
-      "sha256": "e8c8401d04e25825f2766932ac1d7ac46b6120759a8df8fff21560ef8a0e3d6f",
-      "bytes": 26338,
+      "sourceSha256": "eafc696c5d69f0cbfe3b5065765259cfd922560c3c65d3854ac1a7e92176cd17",
+      "sourceContentSha256": "2d76bdaf4c2e2f38e51a9a3d2d8e5b97adb3528957d8a8b66a713fd43f107a13",
+      "sha256": "eafc696c5d69f0cbfe3b5065765259cfd922560c3c65d3854ac1a7e92176cd17",
+      "bytes": 35513,
       "edits": []
     },
     {
@@ -577,10 +579,10 @@
     },
     {
       "path": "scripts/run-skill-scenarios.mjs",
-      "sourceSha256": "7e72e9c71d8b75853f7479ee1622dc8507d881330a6edc6ebb41585227ddd075",
-      "sourceContentSha256": "c253f37c56e83189274b59ef6e7850c003dd6487b5d3e5be10c3358618288fde",
-      "sha256": "7e72e9c71d8b75853f7479ee1622dc8507d881330a6edc6ebb41585227ddd075",
-      "bytes": 10028,
+      "sourceSha256": "f4f28fc7fcb9162c0857fa702fe4c17e6d8c809691013d364c95b7b02f63b774",
+      "sourceContentSha256": "27d27145a058ebf185843770b3ab9996694934c1b24efc93dcc97d3de9fe1485",
+      "sha256": "f4f28fc7fcb9162c0857fa702fe4c17e6d8c809691013d364c95b7b02f63b774",
+      "bytes": 9940,
       "edits": []
     },
     {
@@ -593,10 +595,10 @@
     },
     {
       "path": "scripts/shared/dependencies.cjs",
-      "sourceSha256": "bc0d0594a2d4c95ec9384863ac2d7351538874e6ccfa77a1f59cf14cc74d4e64",
-      "sourceContentSha256": "07b56207444da8233a76a9aab622205b52a517f7d3cd744f9ca0318fc194f349",
-      "sha256": "bc0d0594a2d4c95ec9384863ac2d7351538874e6ccfa77a1f59cf14cc74d4e64",
-      "bytes": 8907,
+      "sourceSha256": "9632ea4bcf9a87b7ebbb4b48ee0361c0e2ebcc841ef5748f1eb1c9e8754b9970",
+      "sourceContentSha256": "6399b6c190f4985321c583d65854d0dcce6a030360493e76c2176374017910c4",
+      "sha256": "9632ea4bcf9a87b7ebbb4b48ee0361c0e2ebcc841ef5748f1eb1c9e8754b9970",
+      "bytes": 9318,
       "edits": []
     },
     {
@@ -1845,10 +1847,10 @@
     },
     {
       "path": "skills/setup-dependencies/SKILL.md",
-      "sourceSha256": "91468125d615bc03558002af231e21bfbaf248e63bd805a9f3b6782f17d84016",
-      "sourceContentSha256": "7d22ea698b3fe7d13202f40b3f4ceae671f7b2babb08cba21c5e6378c0bf135f",
-      "sha256": "91468125d615bc03558002af231e21bfbaf248e63bd805a9f3b6782f17d84016",
-      "bytes": 13118,
+      "sourceSha256": "d1981e886f92b28b4babbdf5c0fd23115a0c59a1a72c3c3663be2a7afe6d8892",
+      "sourceContentSha256": "ed15171bb842a68c195d66f0ff076dd1a6eecd3676d638e39ff6a250d0e2b0fc",
+      "sha256": "d1981e886f92b28b4babbdf5c0fd23115a0c59a1a72c3c3663be2a7afe6d8892",
+      "bytes": 13665,
       "edits": []
     },
     {
@@ -1861,10 +1863,10 @@
     },
     {
       "path": "skills/setup-dependencies/scripts/provision-runtime.mjs",
-      "sourceSha256": "4018f45d58d06982fce808c5901fd13f48f44d0c06c67c2fc08f96c8108c1628",
-      "sourceContentSha256": "9b86adf5ba7b9d49d894497ac18ef055db3a2ab71999678c5e35521222c0aa2a",
-      "sha256": "4018f45d58d06982fce808c5901fd13f48f44d0c06c67c2fc08f96c8108c1628",
-      "bytes": 7360,
+      "sourceSha256": "cd73c0f61d5fdc159e7b2c1acdcf29ad4bf0d27c72d5aca2b25e63edd77f48fc",
+      "sourceContentSha256": "baae4e2d50ed91c8e4f5bb23a026d085c52e7147ff4c228b94dec167bc1c5143",
+      "sha256": "cd73c0f61d5fdc159e7b2c1acdcf29ad4bf0d27c72d5aca2b25e63edd77f48fc",
+      "bytes": 7857,
       "edits": []
     },
     {

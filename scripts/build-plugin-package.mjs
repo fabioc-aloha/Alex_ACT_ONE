@@ -61,6 +61,8 @@ function outputFile(root, name) {
 }
 
 export function verifyPackage(output, sourceRoot = null) {
+    output = resolve(output);
+    if (sourceRoot !== null) sourceRoot = resolve(sourceRoot);
     const receipt = JSON.parse(readFileSync(outputFile(output, 'package-receipt.json'), 'utf8'));
     assert.equal(receipt.schemaVersion, 1, 'Unsupported package receipt');
     assert.ok(['unreleased-source-candidate', 'release-payload'].includes(receipt.status), 'Unsupported package status');

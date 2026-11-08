@@ -3,11 +3,17 @@
 
 # Verification environments and release gates
 
-Release version: `0.9.5`. Use the
+Release version: `0.9.6` (candidate), not published or installed. Use the
 [release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.5)
-for the frozen commit's CI, clean-clone, artifact, and delivered-package results.
+for the published `0.9.5` baseline's CI, clean-clone, artifact, and delivered-package results.
 The dated baseline runs below do not substitute for same-commit release evidence.
 Live-host and browser observations retain their separately documented limits.
+
+The `0.9.6` metadata and generated payload need their own exact-commit matrix,
+clean-checkout checks, demo rebuilds and package verification. A prepared
+`release-payload` receipt is assembly evidence only, not publication or a
+native installation. Previous manual-install publication exceptions do not
+apply to this candidate.
 
 The source workflow targets Windows Server 2025 and Ubuntu 24.04 on x64.
 Ordinary pushes run structural jobs on Node 24 and provisioned integration jobs
@@ -16,7 +22,80 @@ Node 26 structural jobs for the full release matrix.
 These are verification targets, not certification of every Copilot host or OS.
 macOS and other Node versions are not covered by this workflow.
 
+## Post-release proxy-routing source verification
+
+The unreleased checkout recognizes only the configured HTTPS Microsoft
+packagefeedproxy npm endpoint and its confirmed backend prefix. Shared
+detection is exercised through both the optional PowerShell installer and
+Node MCP provisioner. The focused routing/runtime run passed 107 tests without
+failures, skips, or todos, including private/global routing, explicit precedence,
+read-only previews/verification, npm 12 guards, lookalike registries, and
+failure without retries or policy changes. This is not a new full release matrix.
+
+After the user's manual setup, native inventory reports enabled `0.9.5` from
+Mall, and installed-source bootstrap verification matched all 15 instructions
+and the current receipt. The root dependency helper's no-install `-VerifyOnly`
+check passed all six selected pins, both MCP launchers, real Mermaid SVG, and
+SVG-to-PNG output using installed Edge. User packages were not reinstalled
+by these checks. Full installed payload parity and live-host loading remain
+separate observations. Published `v0.9.5` bytes are unchanged; automatic proxy
+detection is still a source-only improvement pending release delivery.
+
+## Post-release source CI repair
+
+On 2026-11-08, source based on `b130779` repaired the onboarding roadmap
+assertion and stale demo provenance found in the
+[post-release push run](https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/runs/42525340099).
+Windows/Node `26.13.0` standalone strict gates passed 628 structural and
+57 integration tests, with no failures, skips, todos, or cancellations.
+Both exact demo checks passed. A deterministic comparison against the prior
+HTML proves that only the dependency-source SHA-256 changed.
+[Fresh Edge acceptance](https://github.com/fabioc-aloha/Alex_ACT_ONE)
+passed every required check for both pages, with the existing accessibility
+and integrated-host limitations preserved.
+
+The approved disposable runtime used the unchanged CI package versions and
+integrities. Only its copied lockfile's public registry URLs were rebased to
+the confirmed Microsoft backend prefix for per-command proxy routing.
+No active runtime, registry policy, published payload, or release tag changed.
+These are working-source observations; clean-checkout and full hosted matrix
+results must identify the exact reviewed candidate commit separately.
+
+## Next-candidate host and accessibility hardening
+
+The approved 2026-11-08 work based on `f89028a` adds baseline live SVG contrast
+and chart keyboard/focus-restoration checks. Both demos passed the expanded
+[standalone Edge gate](https://github.com/fabioc-aloha/Alex_ACT_ONE).
+[Development probes](https://github.com/fabioc-aloha/Alex_ACT_ONE)
+separate the superseded fill-only checker from the final visible-outline-aware
+measurement. Regressions cover actual text backdrops, opacity, text-size
+thresholds, visible outlines, unsupported paints, and numeric heatmap mapping.
+Demo variants use documented ThemeSpec overrides, opaque points and
+same-hue darker heatmap ramps; no upstream App bytes or data values changed.
+The existing locked runtime was provisioned only in an approved disposable
+directory; active runtime and registry policy were preserved.
+
+[External artifact evidence](https://github.com/fabioc-aloha/Alex_ACT_ONE)
+verifies synthetic output at the specifically approved destination and records
+hash-checked cleanup. The repository checker does not certify external delivery.
+[Native observations](https://github.com/fabioc-aloha/Alex_ACT_ONE)
+retain truncated transcripts, unobserved form completion despite reported
+answers, and a trusted download click without a native event or saved file.
+Only the paused test chats were archived with approval. R8, integrated-host
+saving, broader accessibility and strong write enforcement remain open.
+These observations do not qualify a release or substitute for a fresh
+same-commit full matrix.
+
 ## What runs where
+
+The [2026-11-08 fresh-host record](https://github.com/fabioc-aloha/Alex_ACT_ONE)
+separately verifies the installed `0.9.5` package, all six exact CLI `.2`
+scenarios, limited native VS Code transcripts, and actual repository-owned
+artifact outputs. Its 21 runner/scenario/storage regression tests passed.
+Those model/host observations are not a new release matrix or all-host
+certification. Subsequent external-destination observations are scoped in the
+next-candidate record above; other hosts and strong write enforcement remain
+unverified.
 
 The [candidate package gate](package.md) separately checks the explicit
 distribution boundary, exact demo preservation, all declared assets/resources,
@@ -302,9 +381,11 @@ The configured npm registry returned array-wrapped metadata and a prerelease
 value for Playwright's `latest` tag. The bundled update audit incorrectly
 reported equal versions as updates and called the prerelease stable. An
 independent normalized, fresh-metadata check identified newer stable npm pins;
-Pillow also had a newer upstream release. These remain review candidates, not
-approved upgrades. Track the correction and regression cases in the
-[dependency-audit task](https://github.com/fabioc-aloha/Alex_ACT_ONE).
+Pillow also had a newer upstream release. At the time, these were review
+candidates, not approved upgrades. The audit correction and reviewed npm pin
+upgrades subsequently shipped in
+[0.9.5](https://github.com/fabioc-aloha/Alex_ACT_ONE); Pillow remains a
+separate manual setup choice.
 
 No dependencies, credentials, profile instructions, or host configuration were
 changed, and no paid image generation was attempted. Replicate launchability

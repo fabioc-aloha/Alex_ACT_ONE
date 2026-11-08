@@ -5,6 +5,13 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+Candidate version: `0.9.6`. Preparation does not publish a release, change Mall,
+or update installed plugins or runtimes.
+
+- Normalize package verification roots before parent-path checks. Relative
+  package/source paths no longer cause a non-terminating traversal; a bounded
+  regression reproduces the former timeout. This is a source packaging-helper
+  repair, not an installed-runtime change.
 - Extended the bounded browser gate to measure live SVG text, painted data
   marks and visible outlines, and additional chart keyboard/focus restoration.
   Approved demo theme variants retain house palettes while tuning contrast,

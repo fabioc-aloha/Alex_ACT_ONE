@@ -6,8 +6,9 @@ Reads the canonical version pins and uses the configured npm registry.
 Flint, Playwright and JSZip use ONE's private runtime. Mermaid CLI and
 svgexport use npm's global prefix. Installation may download browsers.
 No optional plugins, system packages, registry or npm policy changes.
-An explicit RegistryTarballPrefix routes matching backend tarballs through
-the configured registry using npm 12's per-command URL-prefix replacement.
+The configured Microsoft packagefeedproxy registry selects its confirmed
+backend tarball prefix automatically; RegistryTarballPrefix overrides it.
+Routing uses npm 12's per-command replacement, never persistent npm settings.
 BrowserExecutablePath selects an existing browser for renderer checks only.
 It does not enable lifecycle scripts, download a browser or change the environment.
 .EXAMPLE
@@ -80,7 +81,7 @@ function Invoke-CheckedCommand {
         if ($Command -eq $NpmCommand -and $Arguments[0] -eq 'install') {
             if ($detail -match '\bEALLOWREMOTE\b') {
                 if ($RegistryTarballPrefix) {
-                    $guidance += 'Explicit tarball routing was already requested. Check whether the confirmed prefix covers the rejected URL, including transitive packages. No automatic retry or broader routing was attempted.'
+                    $guidance += 'Tarball routing was already selected. Check whether the confirmed prefix covers the rejected URL, including transitive packages. No automatic retry or broader routing was attempted.'
                 } else {
                     $guidance += 'npm refused a remote tarball. Inspect dist.tarball metadata through the configured registry. With npm 12 or later, preview -RegistryTarballPrefix <confirmed-HTTPS-prefix/> to route matching URLs through that registry; apply separately after approval. Do not enable remote fetching or switch registries.'
                 }
@@ -114,6 +115,11 @@ if ($RegistryTarballPrefix) {
 }
 
 $RuntimeRoot = [IO.Path]::GetFullPath($RuntimeRoot)
+$registry = ((Invoke-CheckedCommand -Command $NpmCommand -Arguments @('config', 'get', 'registry')) -join "`n").Trim()
+$globalPrefix = ((Invoke-CheckedCommand -Command $NpmCommand -Arguments @('prefix', '--global')) -join "`n").Trim()
+if (-not $registry -or -not [IO.Path]::IsPathRooted($globalPrefix)) {
+    throw 'npm must report a registry and an absolute global prefix.'
+}
 $dependencyRegistry = Join-Path $PSScriptRoot 'scripts\shared\dependencies.cjs'
 $readPins = @'
 const deps = require(process.argv[1]);
@@ -132,21 +138,27 @@ for (const key of ['jszip', 'mmdc', 'svgexport']) {
         route: null
     });
 }
-console.log(JSON.stringify(packages));
+console.log(JSON.stringify({ packages, detectedTarballPrefix: deps.registryTarballPrefix(process.argv[2]) }));
 '@
-$raw = (Invoke-CheckedCommand -Command $NodeCommand -Arguments @('-e', $readPins, $dependencyRegistry)) -join "`n"
-$packages = @(($raw | ConvertFrom-Json))
+$raw = (Invoke-CheckedCommand -Command $NodeCommand -Arguments @('-e', $readPins, $dependencyRegistry, $registry)) -join "`n"
+$configuration = $raw | ConvertFrom-Json
+$packages = @($configuration.packages)
+$routingSource = 'explicit prefix'
+if (-not $RegistryTarballPrefix -and $configuration.detectedTarballPrefix) {
+    $RegistryTarballPrefix = $configuration.detectedTarballPrefix
+    $routingSource = 'detected Microsoft proxy'
+    if (-not $VerifyOnly) {
+        $npmVersion = ((Invoke-CheckedCommand -Command $NpmCommand -Arguments @('--version')) -join "`n").Trim()
+        if ($npmVersion -notmatch '^(\d+)\.\d+\.\d+' -or [int]$Matches[1] -lt 12) {
+            throw 'Detected Microsoft proxy routing requires npm 12 or later for full URL-prefix replacement.'
+        }
+    }
+}
 foreach ($package in $packages) {
     if (-not $package.name -or -not $package.version) {
         throw 'The dependency registry must provide an exact package name and version.'
     }
 }
-$registry = ((Invoke-CheckedCommand -Command $NpmCommand -Arguments @('config', 'get', 'registry')) -join "`n").Trim()
-$globalPrefix = ((Invoke-CheckedCommand -Command $NpmCommand -Arguments @('prefix', '--global')) -join "`n").Trim()
-if (-not $registry -or -not [IO.Path]::IsPathRooted($globalPrefix)) {
-    throw 'npm must report a registry and an absolute global prefix.'
-}
-
 Write-Output "Registry: $registry"
 Write-Output "Private runtime: $RuntimeRoot"
 Write-Output "Global npm prefix: $globalPrefix"
@@ -156,7 +168,8 @@ if ($effectiveBrowser) {
     Write-Output 'Browser executable: Puppeteer default; no browser auto-detection.'
 }
 if ($RegistryTarballPrefix) {
-    Write-Output "Tarball routing: $RegistryTarballPrefix -> $registry (per-install URL-prefix replacement only)"
+    Write-Output "Tarball routing: $RegistryTarballPrefix -> $registry ($routingSource; per-install URL-prefix replacement only)"
+    if ($VerifyOnly) { Write-Output 'VerifyOnly does not fetch packages or apply tarball routing.' }
 }
 foreach ($package in $packages) {
     Write-Output "$($package.scope): $($package.name)@$($package.version)"

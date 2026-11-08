@@ -17,6 +17,16 @@ const html = value => String(value).replace(/[&<>"']/g, char =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
 const json = value => JSON.stringify(value).replace(/</g, '\\u003c');
 
+export function demoTheme(id, chartType) {
+    const series = { minContrast: { fill: 3, stroke: 3 } };
+    if (chartType === 'Heatmap') {
+        const ramps = { nyt: ['#2f6b9a', '#1c4363'], economist: ['#006ba2', '#003f5c'], swiss: ['#e2231a', '#9e120c'] };
+        if (!ramps[id]) throw new Error(`No reviewed heatmap contrast ramp for theme: ${id}`);
+        series.sequential = { stops: ramps[id], space: 'rgb', consumption: 'interpolate' };
+    }
+    return { extends: id, ink: { series }, geometry: { point: { opacity: 1 } }, dataLabels: { minContrast: 4.5 } };
+}
+
 export function createSamples() {
     const stores = [
         ['North', 'N1', 18, 58], ['North', 'N2', 26, 70],
@@ -75,7 +85,7 @@ export function createSamples() {
     const heatmap = chart('Heatmap', 'Workload peaks on different days across teams',
         'Synthetic workload score; 1 = low, 5 = high', Object.entries(workloads).flatMap(([team, values]) =>
             ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].map((day, i) => ({ team, day, workload: values[i] }))),
-        { x: { field: 'day' }, y: { field: 'team' }, color: { field: 'workload' } },
+        { x: { field: 'day' }, y: { field: 'team' }, color: { field: 'workload', type: 'quantitative' } },
         { day: { semanticType: 'Category', sortOrder: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'] },
             team: 'Category', workload: { semanticType: 'Score', intrinsicDomain: [1, 5] } }, [highlight, keyboard]);
     const updates = structuredClone(comparison);
@@ -424,15 +434,16 @@ export async function buildShowcase(runtime, { experimental = false } = {}) {
               for (const theme of themes) {
                 const input = structuredClone(variant.input);
                 const base = input.chart || input.board;
-                base.theme_spec = theme.id;
+                const themeSpec = demoTheme(theme.id, base.chart_spec?.chartType);
+                base.theme_spec = themeSpec;
                 for (const chart of input.chart ? [input.chart] : input.board.charts) {
                     // Explicit sizes disable the upstream App's responsive relayout.
                     delete chart.chart_spec.baseSize;
                     delete chart.chart_spec.canvasSize;
                     if (chart.interaction_spec?.interactions.some(item => item.type === 'legend-toggle')) {
-                        chart.theme_spec = { extends: theme.id, legend: { show: 'always', placement: ['top'] } };
+                        chart.theme_spec = { ...themeSpec, legend: { show: 'always', placement: ['top'] } };
                     } else if (experimental && ['Connected Scatter Plot', 'Bump Chart', 'ECDF Plot'].includes(chart.chart_spec.chartType)) {
-                        chart.theme_spec = { extends: theme.id, legend: { show: 'never' } };
+                        chart.theme_spec = { ...themeSpec, legend: { show: 'never' } };
                     }
                 }
                 variant.inputs[theme.id] = input;
@@ -461,7 +472,8 @@ export async function buildShowcase(runtime, { experimental = false } = {}) {
             const previewInput = structuredClone(sample.input.chart || sample.input.board.charts[0]);
             delete previewInput.updates;
             delete previewInput.interaction_spec;
-            const rendered = await call('render_chart', { ...previewInput, theme_spec: 'nyt', backend: 'vegalite', format: 'svg' });
+            const rendered = await call('render_chart', { ...previewInput,
+                theme_spec: demoTheme('nyt', previewInput.chart_spec.chartType), backend: 'vegalite', format: 'svg' });
             sample.preview = svgResult(rendered);
         }
         const backendInput = structuredClone(createSamples()[0].input.chart);

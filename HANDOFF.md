@@ -11,6 +11,14 @@
   source matrix passed. Mall publication selects `v0.9.5` and
   `package/alex-act-one`; [the release evidence](archive/verification/release-0.9.5/README.md)
   records exact source, payload, browser, and public catalog observations.
+- Source metadata and the canonical payload now declare the prepared `0.9.6`
+  candidate. [Preparation evidence](archive/verification/candidate-0.9.6/preparation.json)
+  records exact package/source hashes, both version-stamped demos, no-write
+  disposable bootstrap, caught fault controls and fresh browser acceptance.
+  The relative-path package-verification hang was reproduced and fixed.
+  Its exact candidate commit requires fresh qualification.
+  Published Mall and installed `0.9.5` remain separate;
+  no tag, marketplace entry, installation or profile activation is changed.
 - The release includes hardened artifact/account checks, native Windows path
   resolution, regression coverage, and the [lean package boundary](docs/package.md).
   Both Flint demonstrations are retained and rebuilt with reviewed newer pins.
@@ -58,9 +66,10 @@
 
 ## Blockers
 
-- Exact installed/cache bytes are verified; native transcript completeness,
-  unanswered clarification flows, additional hosts, approved external
-  artifact destinations, and stronger write enforcement remain separate gaps.
+- Exact installed/cache `0.9.5` bytes are verified; the `0.9.6` candidate's
+  native installation is not. Native transcript completeness, unanswered
+  clarification flows, additional hosts, coverage beyond the approved
+  synthetic external destination, and stronger write enforcement remain gaps.
   Do not treat file parity alone as complete host behavior.
 - Later delivery changes require their own reviewed commit and fresh
   same-commit release evidence. The dated manual-install exceptions do not
@@ -72,9 +81,10 @@
 
 ## Next Action
 
-Use the repaired candidate's exact-commit full matrix and clean-checkout results
-to qualify the unreleased proxy-routing and repository-evidence runner changes.
-If those gates pass, choose whether to prepare a new release; publication,
+Use the prepared `0.9.6` candidate's exact-commit full matrix, clean-checkout
+results, exact demo rebuilds and package receipt to qualify its metadata and
+payload. Do not inherit the green `9f00eb6` source run across a version or
+payload change. If those gates pass, choose the next delivery operation; publication,
 Mall updates, installation, and activation still require separate approval.
 If any gate fails, repair that candidate before proceeding.
 Continue R8/artifact-host observations only for the remaining authorized gaps

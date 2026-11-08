@@ -82,6 +82,11 @@ export function parseScenarioEvidence(jsonl, { prompt, skill, pluginRoot }) {
     };
 }
 
+export function validateEvidenceOutput(output) {
+    if (!isAbsolute(output)) throw new Error('Evidence output must be an explicit absolute path');
+    if (existsSync(output)) throw new Error('Evidence output already exists; preserve prior runs and select a new directory');
+}
+
 async function main(args) {
     const options = { cases: [] };
     for (let index = 0; index < args.length; index++) {
@@ -101,11 +106,7 @@ async function main(args) {
     }
     const plugin = JSON.parse(readFileSync(join(options.pluginRoot, 'plugin.json'), 'utf8'));
     if (plugin.name !== 'alex-act-one') throw new Error('Selected installed package is not alex-act-one');
-    const relativeOutput = relative(realpathSync(ROOT), resolve(options.output));
-    if (!relativeOutput.startsWith('..' + sep) && relativeOutput !== '..' && !isAbsolute(relativeOutput)) {
-        throw new Error('Evidence output must be outside the source checkout');
-    }
-    if (existsSync(options.output)) throw new Error('Evidence output already exists; preserve prior runs and select a new directory');
+    validateEvidenceOutput(options.output);
     const cli = inspectCli(options.cli);
     const suitePath = join(ROOT, 'docs', 'verification', 'skill-scenarios.json');
     const suite = JSON.parse(readFileSync(suitePath, 'utf8'));

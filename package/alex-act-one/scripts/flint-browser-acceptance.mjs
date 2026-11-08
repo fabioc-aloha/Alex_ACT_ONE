@@ -10,6 +10,7 @@ import runtimeStatus from './shared/runtime-status.cjs';
 export const requiredChecks = Object.freeze([
     'offline', 'images', 'matrix', 'keyboard', 'focus', 'live-regions', 'contrast',
     'linked-selection', 'reset', 'resize', 'saved-spec', 'provenance',
+    'chart-contrast', 'keyboard-matrix',
 ]);
 
 export function contrastRatio(foreground, background) {
@@ -25,6 +26,99 @@ export function contrastRatio(foreground, background) {
     }).reduce((sum, value, index) => sum + value * [0.2126, 0.7152, 0.0722][index], 0);
     const values = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
     return (values[0] + 0.05) / (values[1] + 0.05);
+}
+
+function paint(value) {
+    const match = typeof value === 'string' && value.match(/^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)(?:\s*,\s*([\d.]+))?\s*\)$/);
+    if (!match) throw new Error(`Unsupported computed paint color: ${value}`);
+    const channels = match.slice(1, 4).map(Number);
+    contrastRatio(channels, channels);
+    const alpha = match[4] === undefined ? 1 : Number(match[4]);
+    if (!Number.isFinite(alpha) || alpha < 0 || alpha > 1) throw new Error(`Invalid paint opacity: ${value}`);
+    return { channels, alpha };
+}
+
+export function measureChartContrast(sample) {
+    if (!['text', 'mark'].includes(sample.kind)) throw new Error(`Unsupported contrast kind: ${sample.kind}`);
+    for (const value of [sample.opacity, sample.backgroundOpacity]) {
+        if (!Number.isFinite(value) || value < 0 || value > 1) throw new Error(`Invalid measured opacity: ${value}`);
+    }
+    const foreground = paint(sample.foreground);
+    const background = paint(sample.background);
+    const canvas = paint(sample.canvas);
+    if (canvas.alpha !== 1) throw new Error('Chart canvas color must be opaque');
+    const composite = (color, base, opacity) => color.channels.map((channel, index) =>
+        channel * color.alpha * opacity + base[index] * (1 - color.alpha * opacity));
+    const backdrop = composite(background, canvas.channels, sample.backgroundOpacity);
+    let required = 3;
+    if (sample.kind === 'text') {
+        if (!Number.isFinite(sample.fontSize) || sample.fontSize <= 0 ||
+            !Number.isFinite(sample.fontWeight) || sample.fontWeight < 1) throw new Error('Invalid measured font size or weight');
+        required = sample.fontSize >= 24 || sample.fontSize >= 56 / 3 && sample.fontWeight >= 700 ? 3 : 4.5;
+    }
+    const fillRatio = contrastRatio(composite(foreground, backdrop, sample.opacity), backdrop);
+    let strokeRatio = null;
+    if (sample.kind === 'mark' && sample.stroke && sample.stroke !== 'none' && sample.strokeWidth >= 1) {
+        if (!Number.isFinite(sample.strokeOpacity) || sample.strokeOpacity < 0 || sample.strokeOpacity > 1) {
+            throw new Error('Invalid measured stroke opacity');
+        }
+        strokeRatio = contrastRatio(composite(paint(sample.stroke), canvas.channels, sample.strokeOpacity), canvas.channels);
+    }
+    const ratio = Math.max(fillRatio, strokeRatio ?? 0);
+    return { ratio, fillRatio, strokeRatio, required, passed: ratio >= required };
+}
+
+export function collectChartContrastSamples() {
+    const opacity = element => {
+        let result = 1;
+        for (let node = element; node; node = node.parentElement) result *= Number(getComputedStyle(node).opacity);
+        return result;
+    };
+    const samples = [];
+    for (const svg of document.querySelectorAll('svg.marks')) {
+        let canvas;
+        for (let node = svg; node; node = node.parentElement) {
+            const color = getComputedStyle(node).backgroundColor;
+            if (color !== 'transparent' && color !== 'rgba(0, 0, 0, 0)') { canvas = color; break; }
+        }
+        if (!canvas) throw new Error('No observed chart canvas background');
+        const elements = [...svg.querySelectorAll('text')].filter(element => element.textContent.trim());
+        elements.push(...svg.querySelectorAll('g.role-mark path[role="graphics-symbol"][aria-label]'));
+        for (const element of elements) {
+            const bounds = element.getBoundingClientRect();
+            if (bounds.width <= 0 || bounds.height <= 0) continue;
+            const style = getComputedStyle(element);
+            const kind = element.tagName.toLowerCase() === 'text' ? 'text' : 'mark';
+            const property = style.fill !== 'none' ? 'fill' : 'stroke';
+            if (style[property] === 'none') throw new Error('Chart target has no observed fill or stroke');
+            let point = { x: bounds.x + bounds.width / 2, y: bounds.y + bounds.height / 2 };
+            if (property === 'stroke' && typeof element.getPointAtLength === 'function') {
+                const position = element.getPointAtLength(element.getTotalLength() / 2);
+                point = new DOMPoint(position.x, position.y).matrixTransform(element.getScreenCTM());
+            }
+            if (point.x < 0 || point.x >= innerWidth || point.y < 0 || point.y >= innerHeight) {
+                throw new Error('Contrast target is outside the visible chart viewport');
+            }
+            const stack = document.elementsFromPoint(point.x, point.y);
+            const index = stack.indexOf(element);
+            const behind = (index >= 0 ? stack.slice(index + 1) : stack).find(candidate =>
+                candidate !== element && candidate.closest('svg.marks') === svg &&
+                candidate.matches('path,rect,circle,ellipse,polygon') &&
+                !['none', 'rgba(0, 0, 0, 0)'].includes(getComputedStyle(candidate).fill) &&
+                opacity(candidate) * Number(getComputedStyle(candidate).fillOpacity) > 0);
+            samples.push({
+                kind, chart: svg.closest('[data-flint-chart-id]')?.getAttribute('data-flint-chart-id'),
+                label: element.getAttribute('aria-label') || element.textContent,
+                foreground: style[property], opacity: opacity(element) * Number(style[property + 'Opacity']),
+                stroke: style.stroke, strokeWidth: parseFloat(style.strokeWidth),
+                strokeOpacity: opacity(element) * Number(style.strokeOpacity),
+                background: behind ? getComputedStyle(behind).fill : canvas,
+                backgroundOpacity: behind ? opacity(behind) * Number(getComputedStyle(behind).fillOpacity) : 1,
+                canvas, fontSize: parseFloat(style.fontSize), fontWeight: Number(style.fontWeight),
+            });
+        }
+    }
+    return samples;
 }
 
 export function validateDownloadedSpec(content, expected) {
@@ -90,11 +184,9 @@ export async function waitForChartLayout(frame) {
 }
 
 function rgb(value) {
-    const channels = value.match(/[\d.]+/g)?.map(Number);
-    if (!channels || (channels.length !== 3 && !(channels.length === 4 && channels[3] === 1))) {
-        throw new Error(`Unsupported nonopaque computed color: ${value}`);
-    }
-    return channels.slice(0, 3);
+    const color = paint(value);
+    if (color.alpha !== 1) throw new Error(`Unsupported nonopaque computed color: ${value}`);
+    return color.channels;
 }
 
 export async function verifyShowcasePage(page, { nativeFocus = false, downloads = true } = {}) {
@@ -237,6 +329,53 @@ export async function verifyShowcasePage(page, { nativeFocus = false, downloads 
                 }
             }
             return { cases, samples: gallery.samples.length, themes: gallery.themes.length };
+        });
+        const accessibleSamples = gallery.samples.filter(sample => !sample.input.chart?.updates &&
+            (sample.input.chart ? [sample.input.chart] : sample.input.board.charts).some(chart =>
+                chart.interaction_spec?.interactions.some(item => item.type === 'accessible-navigation')));
+        await check('chart-contrast', async () => {
+            const results = [];
+            for (const sample of accessibleSamples) {
+                for (const theme of gallery.themes) {
+                    const frame = await choose(sample, theme);
+                    await waitForFrameViewport(page, frame);
+                    await waitForChartLayout(frame);
+                    const samples = await frame.evaluate(collectChartContrastSamples);
+                    assert.ok(samples.some(item => item.kind === 'text') && samples.some(item => item.kind === 'mark'),
+                        `${sample.id}/${theme.id}: no measured chart text or data marks`);
+                    const measured = samples.map(item => ({ ...item, ...measureChartContrast(item) }));
+                    results.push({ sample: sample.id, theme: theme.id, measured });
+                }
+            }
+            const failures = results.flatMap(result => result.measured.filter(item => !item.passed)
+                .map(item => ({ sample: result.sample, theme: result.theme, ...item })));
+            assert.deepEqual(failures, [], `Measured SVG contrast failures: ${JSON.stringify(failures)}`);
+            return { scope: 'Baseline keyboard-enabled examples; no deliberate update-layer dimming', results };
+        });
+        await check('keyboard-matrix', async () => {
+            const results = [];
+            for (const sample of accessibleSamples) {
+                const frame = await choose(sample, gallery.themes[0]);
+                for (const target of await frame.locator('[data-flint-accessible-focus]').all()) {
+                    const before = await target.getAttribute('aria-label');
+                    await target.focus();
+                    await key(frame, 'Enter');
+                    await frame.waitForFunction(({ previous, chart }) =>
+                        document.querySelector(`[data-flint-chart-id="${chart}"] [data-flint-accessible-focus]`)
+                            ?.getAttribute('aria-label') !== previous,
+                    { previous: before, chart: await target.evaluate(element =>
+                        element.closest('[data-flint-chart-id]').getAttribute('data-flint-chart-id')) },
+                    { polling: 100, timeout: 5000 });
+                    const entered = await target.getAttribute('aria-label');
+                    await key(frame, 'Escape');
+                    assert.equal(await target.getAttribute('aria-label'), before, 'Escape did not restore the chart navigation root');
+                    assert.equal(await target.evaluate(element => document.activeElement === element), true,
+                        'Chart navigation lost actual keyboard focus');
+                    results.push({ sample: sample.id, before, entered, restored: true });
+                }
+            }
+            assert.ok(results.length > 1, 'Keyboard coverage did not expand beyond the original example');
+            return { theme: gallery.themes[0].id, results };
         });
         const first = gallery.samples.find(sample =>
             sample.input.chart?.interaction_spec?.interactions.some(item => item.type === 'accessible-navigation'));

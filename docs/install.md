@@ -12,9 +12,10 @@ tools, and historical verification notes in one reference.
 | Repository | Deprecated direct-install path: repository source selected at installation time; it can include unreleased work | Temporary candidate testing only; review root/revision and do not assume future CLI support |
 | Optional runtime | The separately provisioned chart, browser, image, and converter packages | Plugin installation does not activate instructions or provision these packages; installs and upgrades require their own approval |
 
-Release version: `0.9.5`. Mall selects the reviewed release tag and its
-`package/alex-act-one` payload; a checkout on
-main can later include unreleased changes. A version is not evidence of live-host
+Release version: `0.9.6` (candidate). The published Mall baseline remains
+`0.9.5`; `0.9.6` is not published. Mall selects the reviewed release tag and its
+`package/alex-act-one` payload; the checkout contains separately prepared
+candidate changes. A version is not evidence of live-host
 activation. Packages with the same version can also contain different bytes.
 Check the loaded plugin root, installation source, and revision when available;
 if the revision cannot be established, do not claim exact source parity.
@@ -31,7 +32,8 @@ before publication. Do not treat a generated directory as an upgrade.
 ## Testing the repository candidate
 
 This section preserves the historical `0.9.0-rc.1` candidate-testing procedure.
-It is not the normal installation path for `0.9.5`.
+It is not the normal installation path for the reviewed Mall release or the
+current candidate.
 
 **Deprecated installation path.** During the user's candidate install on
 2026-11-05, installation succeeded and the CLI printed:
@@ -376,11 +378,12 @@ expanded marketplace checks ship in `v0.5.0`.
 
 #### Reinstall and verify ONE
 
-Close hosts that may lock the installed plugin before running
+Only after `0.9.6` is published in Mall, close hosts that may lock the installed
+plugin before running
 [`reinstall-and-check.ps1`](../reinstall-and-check.ps1):
 
 ```powershell
-.\reinstall-and-check.ps1 -Refresh -ExpectedVersion 0.9.5
+.\reinstall-and-check.ps1 -Refresh -ExpectedVersion 0.9.6
 ```
 
 The current checkout's helper is not a preview. It first rejects duplicate or
@@ -419,8 +422,9 @@ into ONE's private runtime; Mermaid CLI and svgexport use npm's global prefix.
 It leaves the registry and npm policy unchanged and does not install
 companion plugins or system packages. `-RuntimeRoot` overrides
 `ALEX_ACT_ONE_RUNTIME_ROOT`; otherwise the shared default private runtime is
-used. Install the matching `0.9.5` plugin before applying its new runtime pins:
-older launchers intentionally reject newer MCP package versions.
+used. Install the matching reviewed plugin before applying its runtime pins:
+older launchers intentionally reject newer MCP package versions. The `0.9.6`
+candidate reuses the reviewed `0.9.5` pins.
 
 Check existing package versions, MCP launchers, and actual Mermaid/SVG-to-PNG
 rendering without reinstalling:
