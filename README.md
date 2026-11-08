@@ -43,13 +43,15 @@ covers temporary candidate testing, Scout setup, and optional tools.
 Already set up? Browse the
 [skill catalog](#the-skills).
 
-**Release version: `v0.9.2`**, prepared 2026-11-06. This patch adds explicit
-`-BrowserExecutablePath` renderer verification and non-destructive fetch-policy
-and cleanup diagnostics to the optional dependency installer, reconciles release
-continuity and checklist guidance, and retains the `0.9.1` conversion, fixture,
-and browser-verification repairs. The `flint-interactions`
-workflow, offline demonstrations, existing commands, preview-first bootstrap,
-and optional browser fallback remain available; runtime package pins are unchanged.
+**Release version: `v0.9.3`**, prepared 2026-11-07. This emergency patch recovers
+stranded session-state project artifacts into the repository index, adds a
+shared repository artifact-storage contract across instructions and workflows,
+and ships deterministic helpers for detecting stranded session files
+([`check-session-artifacts.cjs`](skills/proactive-awareness/scripts/check-session-artifacts.cjs))
+and diagnosing or repository-pinning multi-account `gh` / non-interactive Git
+credentials ([`check-git-auth.cjs`](skills/git-workflow/scripts/check-git-auth.cjs)).
+It retains the `0.9.2` optional-installer diagnostics and `0.9.1` conversion,
+fixture, and browser-verification repairs; runtime package pins are unchanged.
 
 Existing installations do not update automatically. Use the reviewed Mall
 release, verify the loaded version/root, and preview activation again before
@@ -59,13 +61,11 @@ CLI/VS Code observations and local browser evidence have
 [documented limits](docs/verification/README.md); Scout and Copilot app behavior
 is **not freshly verified** for this release.
 
-Unreleased source guidance requires project deliverables to live in the
-repository, not solely in agent session storage. The
-[recovered artifact index](docs/verification/session-recovery/README.md) preserves
+The [recovered artifact index](docs/verification/session-recovery/README.md) preserves
 historical reports and supporting evidence. The
 [storage contract](skills/proactive-awareness/references/project-artifact-storage.md)
-is an instruction-level safeguard; existing installations and host permissions
-are unchanged.
+is an instruction-level safeguard plus explicit checker, not host-enforced
+filesystem isolation.
 
 Try the [offline Flint chart gallery](docs/flint-showcase.html) for working examples of semantic data, themes, interactions, linked views, and static exports, or the [experimental interaction lab](docs/flint-experimental.html) for polar brushing, direct reordering, distribution shapes, and reader-driven stories. Open either downloaded HTML in a browser; no server or connection is needed.
 

@@ -60,6 +60,7 @@ export function sanitizeText(text) {
 }
 
 function rebaseMarkdown(text, sourceFile, destination, root, sourceRoot) {
+    const eol = text.includes('\r\n') ? '\r\n' : '\n';
     let inFence = false;
     const lines = text.split('\n').map(line => {
         if (/^\s*(```|~~~)/.test(line)) inFence = !inFence;
@@ -79,7 +80,7 @@ function rebaseMarkdown(text, sourceFile, destination, root, sourceRoot) {
             return `${label}(${portable(relative(dirname(destination), final))}${fragment ? `#${fragment}` : ''})`;
         });
     });
-    return `> Historical recovery; not current certification or an active issue list.\n> See [current change history](${portable(relative(dirname(destination), join(root, 'CHANGELOG.md')))}).\n\n${lines.join('\n')}`;
+    return `> Historical recovery; not current certification or an active issue list.${eol}> See [current change history](${portable(relative(dirname(destination), join(root, 'CHANGELOG.md')))}).${eol}${eol}${lines.join('\n')}`;
 }
 
 function exclusion(path) {

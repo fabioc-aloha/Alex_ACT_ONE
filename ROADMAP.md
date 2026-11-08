@@ -6,7 +6,7 @@ before delivery. R8 remaining-host evidence is next for host coverage; the
 dependency-audit repair is the immediate maintenance follow-up. Runtime upgrade
 recovery needs a design decision before implementation.
 
-Release version: `v0.9.2`. This roadmap describes work beyond its scoped
+Release version: `v0.9.3`. This roadmap describes work beyond its scoped
 verification, not an instruction to reopen completed repairs or automatically
 change existing installations. See
 [installation sources](docs/install.md#installation-sources) for the distinction.

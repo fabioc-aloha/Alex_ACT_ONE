@@ -1,7 +1,7 @@
 # Verification environments and release gates
 
-Release version: `0.9.2`. Use the
-[release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.2)
+Release version: `0.9.3`. Use the
+[release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.3)
 for the frozen commit's CI, clean-clone, artifact, and delivered-package results.
 The dated baseline runs below do not substitute for same-commit release evidence.
 Live-host and browser observations retain their separately documented limits.
@@ -84,7 +84,7 @@ node scripts\verification-gate.mjs --lane structural
 ### Repository artifact recovery
 
 On 2026-11-07, the authorized recovery retained 220 historical files
-(9,318,087 recovered bytes) from this repository's local sessions, verified
+(9,318,096 recovered bytes) from this repository's local sessions, verified
 their recovered SHA-256 values, and confirmed the originals were unchanged.
 The [index and manifest](verification/session-recovery/README.md) distinguish
 original hashes from privacy/link-edited copies, exclude disposable runtime
@@ -238,7 +238,12 @@ at `a7b4ba6`: 533 Windows and 474 Ubuntu structural tests per job, 58
 integration tests per OS, and both canonical Windows demo rebuilds). Version
 `v0.9.2` adds explicit `-BrowserExecutablePath` renderer-verification and
 non-destructive fetch-policy and cleanup recovery regressions (80 tests across
-PowerShell 7 and Windows PowerShell 5.1).
+PowerShell 7 and Windows PowerShell 5.1). Version `v0.9.3` recovers stranded
+session-state project artifacts into the repository index, adds the shared
+artifact-storage contract across instructions and workflows, and ships
+deterministic helpers and regressions for session-artifact detection and
+multi-account non-interactive GitHub credential pinning (576 Windows structural
+tests).
 
 ### 0.9.2 local installation verification
 

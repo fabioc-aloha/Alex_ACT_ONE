@@ -5,8 +5,12 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
-- 2026-11-07: Added deterministic safeguards for both non-interactive multi-account
-  GitHub authentication and session-state artifact stranding:
+No unreleased changes.
+
+## 0.9.3 - 2026-11-07
+
+- Added deterministic safeguards for both non-interactive multi-account
+  GitHub authentication and session-state artifact stranding (`a8aff02`):
   - [`skills/git-workflow/scripts/check-git-auth.cjs`](skills/git-workflow/scripts/check-git-auth.cjs)
     detects missing `gh` credential helpers (`credential.interactive=never`
     failures in Copilot shells) and multi-account `gh` drift (including
@@ -17,28 +21,22 @@ An Unreleased entry does not imply publication, installation, or activation.
     deliverables not accounted for in the repository working tree or recovery
     manifest, wired into `proactive-awareness`, `project-status`,
     `git-workflow`, and `bootstrap-project`.
-- 2026-11-07: Recovered stranded project reports, a useful release-verification
+- Recovered stranded project reports, a useful release-verification
   helper, and related historical evidence into the
-  [repository recovery index](docs/verification/session-recovery/README.md).
-  Original and recovered hashes, declared privacy/link edits, duplicate
-  verification, and runtime exclusions are retained in its manifest. Originals
-  remain untouched; frozen recovered bytes have an independent tested checker.
+  [repository recovery index](docs/verification/session-recovery/README.md)
+  (`bf74451`). Original and recovered hashes, declared privacy/link edits,
+  duplicate verification, and runtime exclusions are retained in its manifest.
+  Originals remain untouched; frozen recovered bytes have an independent tested
+  checker.
 - Added a [shared artifact-storage contract](skills/proactive-awareness/references/project-artifact-storage.md)
   to repository guidance, the resident session-health floor, new project
   scaffolds, and planning/bootstrap/recovery/meditation/rendering/Git owners.
   Requested plans are no longer classified as private planning scratch.
-  Instructions do not claim universal filesystem enforcement. Installed
-  packages, user-profile activation, global settings, and releases are unchanged.
-- 2026-11-06: Recorded the local `0.9.2` installation and dependency audit in
+  Instructions do not claim universal filesystem enforcement.
+- Recorded the local `0.9.2` installation and dependency audit in
   [verification history](docs/testing.md#092-local-installation-verification),
-  including installed-package integration checks, source structural checks,
-  activation parity, renderer output, and separate host/API limits. No packages,
-  credentials, profile instructions, or host configuration were changed.
-- Added the [Replicate retirement proposal](ROADMAP.md#consider-retiring-bundled-replicate-support)
-  and retained the dependency-audit defect as pending work. Neither provider
-  removal nor dependency upgrades are implemented or approved by these records.
-- Refreshed the installation handoff while preserving the earlier `0.9.1`
-  activation and line-ending recovery baseline in the verification history.
+  added the [Replicate retirement proposal](ROADMAP.md#consider-retiring-bundled-replicate-support),
+  and refreshed offline Flint demonstration provenance for `0.9.3`.
 
 ## 0.9.2 - 2026-11-06
 
@@ -132,8 +130,9 @@ package recovery checks passed, completing that roadmap verification item.
 The original recovery finding and isolated-source retest remain in
 [scenario evidence](docs/verification/README.md).
 
-The repairs above ship in `0.9.1` and `0.9.2`, not `0.9.0`. See the
-[0.9.1 release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.1)
-and [0.9.2 release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.2)
+The repairs above ship in `0.9.1`, `0.9.2`, and `0.9.3`, not `0.9.0`. See the
+[0.9.1 release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.1),
+[0.9.2 release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.2),
+and [0.9.3 release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.3)
 for final publication and delivery evidence. Preparing a release does not
 automatically upgrade the active plugin, profile instructions, or runtime.

@@ -2,20 +2,18 @@
 
 ## Current State
 
-- The selected release is `0.9.2` at `32e9400`. The local Copilot CLI user-store
-  package and loaded VS Code cache were verified against that source; the
-  profile activation receipt is current. The
-  [0.9.2 release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.2)
-  owns final source, publication, CI, and Mall-delivery evidence.
-- Current source changes recover stranded reports and supporting evidence in
+- The selected release is `0.9.3`. The
+  [0.9.3 release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.3)
+  owns final source, publication, CI, and Mall-delivery evidence; earlier
+  `0.9.2` local audit evidence remains in
+  [verification history](docs/testing.md#092-local-installation-verification).
+- Release `0.9.3` recovers stranded reports and supporting evidence in
   [the repository recovery index](docs/verification/session-recovery/README.md),
-  add shared instruction-level artifact-storage safeguards, and provide
+  adds shared instruction-level artifact-storage safeguards, and ships
   deterministic helpers for
   [session-artifact detection](skills/proactive-awareness/scripts/check-session-artifacts.cjs)
   and [multi-account GitHub credential pinning](skills/git-workflow/scripts/check-git-auth.cjs).
-  The local user instruction profile (`~/.copilot/instructions`) was refreshed
-  from this checkout with explicit approval. Dependency pins, installed plugin
-  caches, and Replicate retirement status were not changed.
+  Dependency pins and Replicate retirement proposal status are unchanged.
 
 ## Blockers
 

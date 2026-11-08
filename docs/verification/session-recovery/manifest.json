@@ -2120,8 +2120,8 @@
       "sourcePath": "copilot-native-replacement-audit-2026-11-04.md",
       "sourceBytes": 40851,
       "sourceSha256": "9f5147c0eabbf4dd66ed46fa478f1f78a6145f08aea7d8052b2d664b0ca8927e",
-      "bytes": 39817,
-      "sha256": "8797494c5bb21d153d208910e921b5d25b8c88259f31ebaf05e5ed4f74aae8dc",
+      "bytes": 39820,
+      "sha256": "65dd75be5fb4c60b92c9babfc9fe13e4ff9bbe55a010a068fe873b4010aad926",
       "edits": [
         "historical-status-and-local-link-rebasing"
       ],
@@ -3335,8 +3335,8 @@
       "sourcePath": "release-0.9.0.md",
       "sourceBytes": 5199,
       "sourceSha256": "b54e3bc19cfdd3668897615fb2cd015056705e23da23e74a16ffbcf736daa278",
-      "bytes": 5335,
-      "sha256": "0bd6114b92e7621badae4af52d40e20ece47bf02557cf8938a717077d0bb36e8",
+      "bytes": 5338,
+      "sha256": "3ffa48346767667d24fc82e51e9a1de6558744f4a29d7fcf562ee7c92502387f",
       "edits": [
         "historical-status-and-local-link-rebasing"
       ],
@@ -4302,8 +4302,8 @@
       "sourcePath": "production-readiness-review.md",
       "sourceBytes": 13607,
       "sourceSha256": "db72dbb72707eccc3a0994af031a5ed2feb9ca52185048deca73bc4f187ece41",
-      "bytes": 13507,
-      "sha256": "48a74d6e3a4584e67f66975909e2bc3cd4b8c14f1e818cca3c2f3e64fcfc5d21",
+      "bytes": 13510,
+      "sha256": "bfe95d0f84688e9347d1445939cafd18c01cda00e80b7a5554e77f8285f783e9",
       "edits": [
         "historical-status-and-local-link-rebasing"
       ],
