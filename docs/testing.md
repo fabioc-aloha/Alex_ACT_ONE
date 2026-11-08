@@ -32,6 +32,26 @@ by these checks. Full installed payload parity and live-host loading remain
 separate observations. Published `v0.9.5` bytes are unchanged; automatic proxy
 detection is still a source-only improvement pending release delivery.
 
+## Post-release source CI repair
+
+On 2026-11-08, source based on `b130779` repaired the onboarding roadmap
+assertion and stale demo provenance found in the
+[post-release push run](https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/runs/42525340099).
+Windows/Node `26.13.0` standalone strict gates passed 628 structural and
+57 integration tests, with no failures, skips, todos, or cancellations.
+Both exact demo checks passed. A deterministic comparison against the prior
+HTML proves that only the dependency-source SHA-256 changed.
+[Fresh Edge acceptance](../archive/verification/source-ci/2026-11-08/browser.json)
+passed every required check for both pages, with the existing accessibility
+and integrated-host limitations preserved.
+
+The approved disposable runtime used the unchanged CI package versions and
+integrities. Only its copied lockfile's public registry URLs were rebased to
+the confirmed Microsoft backend prefix for per-command proxy routing.
+No active runtime, registry policy, published payload, or release tag changed.
+These are working-source observations; clean-checkout and full hosted matrix
+results must identify the exact reviewed candidate commit separately.
+
 ## What runs where
 
 The [2026-11-08 fresh-host record](../archive/verification/host-scenarios/2026-11-08/README.md)

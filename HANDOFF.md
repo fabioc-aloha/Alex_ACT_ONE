@@ -28,6 +28,11 @@
   selects its confirmed tarball prefix automatically. Explicit routing wins;
   npm settings/security policy are unchanged. The installed/released `0.9.5`
   payload remains immutable and does not contain this source improvement.
+- Post-release CI exposed missing candidate marketplace wording and stale
+  demo provenance. Both are repaired in source; exact rebuilds changed only
+  the dependency-source hash. Standalone strict local gates and fresh Edge
+  acceptance passed; [testing](docs/testing.md#post-release-source-ci-repair)
+  records the working-source evidence separately from hosted qualification.
 - Fresh installed `0.9.5` host evidence is in
   [the task record](archive/verification/host-scenarios/2026-11-08/README.md).
   Exact installed/cache payload parity passed. All six CLI `.2` responses have
@@ -60,8 +65,11 @@
 
 ## Next Action
 
-Qualify the unreleased proxy-routing and repository-evidence runner source changes
-through the existing release gates before separately approved publication.
+Use the repaired candidate's exact-commit full matrix and clean-checkout results
+to qualify the unreleased proxy-routing and repository-evidence runner changes.
+If those gates pass, choose whether to prepare a new release; publication,
+Mall updates, installation, and activation still require separate approval.
+If any gate fails, repair that candidate before proceeding.
 Continue R8/artifact-host observations only for the remaining authorized gaps
 in [ROADMAP.md](ROADMAP.md), using the frozen task evidence rather than rerunning
 known cases and calling them broader coverage. The 107 focused

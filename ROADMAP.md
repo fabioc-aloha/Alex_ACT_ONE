@@ -87,8 +87,9 @@ local Windows results are not a replacement for a green same-commit matrix.
   [install reference](docs/install.md#testing-the-repository-candidate).
   Later candidate-route changes need separately approved native installation
   evidence; source mounting or a version string alone is not enough.
-- Revalidate the exact marketplace source-subdirectory schema/adapter when
-  changing the currently published lean route or another delivery mechanism.
+- For each candidate, revalidate the exact marketplace source-subdirectory
+  schema/adapter when changing the currently published lean route or another
+  delivery mechanism.
   Preserve all required runtime owners/resources and both exact Flint demos,
   while keeping maintainer archive and source-only CI tooling out of that package.
   Disposable plugin-directory discovery is not marketplace-install verification.

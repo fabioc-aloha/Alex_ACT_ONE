@@ -5,6 +5,14 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+- Repaired the post-release source CI gates: restored explicit candidate
+  marketplace verification wording and rebuilt both Flint demos in the
+  reviewed isolated lockfile runtime. Exact comparisons prove that only the
+  dependency-source provenance hash changed; chart inputs and rendered bytes
+  are otherwise unchanged. Strict local structural/integration gates and
+  [fresh Edge acceptance](archive/verification/source-ci/2026-11-08/browser.json)
+  passed. The published `v0.9.5` tag, payload, Mall route, and active runtimes
+  remain unchanged; hosted qualification requires the exact candidate commit.
 - Ran fresh installed `0.9.5` CLI/native VS Code scenarios and actual
   plan/agent/shell/MCP artifact-delivery checks.
   [Task evidence](archive/verification/host-scenarios/2026-11-08/README.md)
