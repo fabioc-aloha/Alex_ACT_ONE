@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { createRequire } from 'node:module';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -13,7 +13,7 @@ const script = join(ROOT, 'skills', 'git-workflow', 'scripts', 'check-git-auth.c
 const gitAuth = require(script);
 
 function createGitFixture(t, remoteUrl = 'https://github.com/fabioc-aloha/Alex_ACT_ONE.git') {
-    const root = mkdtempSync(join(tmpdir(), 'one-git-auth-'));
+    const root = realpathSync.native(mkdtempSync(join(tmpdir(), 'one-git-auth-')));
     t.after(() => rmSync(root, { recursive: true, force: true }));
     const repo = join(root, 'repo');
     mkdirSync(repo, { recursive: true });
