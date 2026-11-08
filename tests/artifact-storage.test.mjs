@@ -166,4 +166,11 @@ test('session scope canonicalizes existing workspace aliases consistently with t
     symlinkSync(f.repo, alias, process.platform === 'win32' ? 'junction' : 'dir');
     writeFileSync(join(f.sessions, 'owned', 'workspace.yaml'), `cwd: ${alias}\n`);
     assert.equal(checkSessionArtifacts(f.options).status, 'clean');
+    if (process.platform === 'win32') {
+        const shortPath = execFileSync('powershell', ['-NoProfile', '-Command',
+            `(New-Object -ComObject Scripting.FileSystemObject).GetFolder('${f.repo.replace(/'/g, "''")}').ShortPath`,
+        ], { encoding: 'utf8' }).trim();
+        writeFileSync(join(f.sessions, 'owned', 'workspace.yaml'), `cwd: ${shortPath}\n`);
+        assert.equal(checkSessionArtifacts(f.options).status, 'clean');
+    }
 });

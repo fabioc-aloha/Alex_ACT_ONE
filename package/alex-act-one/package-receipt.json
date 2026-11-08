@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "status": "release-payload",
   "declaredPluginVersion": "0.9.4",
-  "sourceCommit": "9f9d248f47956bab3d017b473734e7ac9f66a418",
+  "sourceCommit": "3d710fe53b11390f50509021cb2c82285d926bd0",
   "sourceHasUncommittedChanges": true,
   "files": [
     {
@@ -1731,10 +1731,10 @@
     },
     {
       "path": "skills/proactive-awareness/scripts/check-session-artifacts.cjs",
-      "sourceSha256": "601de77a6ab44c215b08aeec478940a77ad3377f0eb0c78fc53178f86ace7f58",
-      "sourceContentSha256": "b79e3c866b516234f3f4576cbdeb2ab3c69595beb48ddcb3677428bc172076bf",
-      "sha256": "601de77a6ab44c215b08aeec478940a77ad3377f0eb0c78fc53178f86ace7f58",
-      "bytes": 11977,
+      "sourceSha256": "6cb74a659ca37e2067902f0eea37483ce9d26e2de88580011f34c9e17beb21a6",
+      "sourceContentSha256": "17c640fdf97fe8547efd09238065e64a2956e1d5989efee26cef6c8cc60f9afd",
+      "sha256": "6cb74a659ca37e2067902f0eea37483ce9d26e2de88580011f34c9e17beb21a6",
+      "bytes": 11998,
       "edits": []
     },
     {

@@ -53,7 +53,7 @@ function sessionMatchesRepository(metadataPath, root) {
     const gitRoot = text.match(/^git_root:\s*(.+?)\s*$/m)?.[1]?.replace(/^["']|["']$/g, '');
     if (!cwd && !gitRoot) return false;
     const workspace = path.resolve(cwd || gitRoot);
-    const canonical = fs.existsSync(workspace) ? fs.realpathSync(workspace) : workspace;
+    const canonical = fs.existsSync(workspace) ? fs.realpathSync.native(workspace) : workspace;
     // An explicit different cwd belongs to another worktree, even if git_root names this checkout.
     return pathKey(canonical) === pathKey(root);
 }
@@ -70,7 +70,7 @@ function regularFile(root, name) {
     for (let current = target; current !== root; current = path.dirname(current)) {
         assert.ok(!fs.lstatSync(current).isSymbolicLink(), `Linked recovery path is unsupported: ${name}`);
     }
-    assert.ok(fs.statSync(target).isFile() && inside(root, fs.realpathSync(target)), `Invalid recovery file: ${name}`);
+    assert.ok(fs.statSync(target).isFile() && inside(root, fs.realpathSync.native(target)), `Invalid recovery file: ${name}`);
     return target;
 }
 
@@ -143,7 +143,7 @@ function buildRepositoryIndex(root, unsupported) {
 }
 
 function checkSessionArtifacts(options) {
-    const root = fs.realpathSync(git(options.repositoryRoot, ['rev-parse', '--show-toplevel']).trim());
+    const root = fs.realpathSync.native(git(options.repositoryRoot, ['rev-parse', '--show-toplevel']).trim());
     const report = { schemaVersion: 2, status: 'clean', scope: 'matching local session files and Git-visible repository artifacts',
         matchedSessions: 0, totalCandidates: 0, accountedCount: 0, strandedCount: 0, stranded: [], unsupported: [] };
     if (!fs.existsSync(options.sessionRoot)) return { ...report, status: 'session-root-absent' };

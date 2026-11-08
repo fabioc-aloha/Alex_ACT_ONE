@@ -5,6 +5,7 @@ import { existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, realpathSy
 import { dirname, extname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { sanitizeText } from './session-recovery.mjs';
+import artifactChecker from '../skills/proactive-awareness/scripts/check-session-artifacts.cjs';
 
 const TEXT = new Set(['.md', '.cjs', '.mjs', '.js', '.ps1', '.py', '.json', '.jsonl', '.log', '.txt', '.svg']);
 const SKIP = new Set(['.git', 'node_modules', '.venv', 'venv', '__pycache__', 'logs',
@@ -25,7 +26,7 @@ function checkedPath(root, name, existing = true) {
     for (let current = target; current !== root; current = dirname(current)) {
         if (existsSync(current)) assert.ok(!lstatSync(current).isSymbolicLink(), 'Linked path is unsupported');
     }
-    if (existing) assert.ok(inside(realpathSync(root), realpathSync(target)), 'Real path escapes approved root');
+    if (existing) assert.ok(inside(realpathSync.native(root), realpathSync.native(target)), 'Real path escapes approved root');
     return target;
 }
 
@@ -42,14 +43,6 @@ function walk(root, current = root, files = [], excluded = []) {
         else excluded.push({ path: name, reason: 'non-regular-file' });
     }
     return { files: files.sort(), excluded };
-}
-
-function sessionForRoot(metadata, root) {
-    for (const key of ['git_root', 'cwd']) {
-        const value = metadata.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'))?.[1]?.trim().replace(/^["']|["']$/g, '');
-        if (value && resolve(value).toLowerCase() === root.toLowerCase()) return true;
-    }
-    return false;
 }
 
 function formatReason(name, data, reviewedPngHashes) {
@@ -142,9 +135,9 @@ function rebaseMarkdown(text, source, destination, root, sourceDestinations) {
 }
 
 export function previewRecovery({ repositoryRoot, sessionRoot, destination, reviewedPngHashes = [] }) {
-    const root = realpathSync(repositoryRoot);
-    const sessions = realpathSync(sessionRoot);
-    assert.equal(realpathSync(execFileSync('git', ['rev-parse', '--show-toplevel'], {
+    const root = realpathSync.native(repositoryRoot);
+    const sessions = realpathSync.native(sessionRoot);
+    assert.equal(realpathSync.native(execFileSync('git', ['rev-parse', '--show-toplevel'], {
         cwd: root, encoding: 'utf8', timeout: 10000,
     }).trim()), root, 'Select the exact Git worktree root');
     checkedPath(root, destination, false);
@@ -156,7 +149,7 @@ export function previewRecovery({ repositoryRoot, sessionRoot, destination, revi
         const metadata = join(sessions, entry.name, 'workspace.yaml');
         if (!existsSync(metadata)) continue;
         checkedPath(sessions, `${entry.name}/workspace.yaml`);
-        if (!sessionForRoot(readFileSync(metadata, 'utf8'), root)) continue;
+        if (!artifactChecker.sessionMatchesRepository(metadata, root)) continue;
         matchedSessions.push(entry.name);
         const area = join(sessions, entry.name, 'files');
         if (!existsSync(area)) continue;
@@ -276,7 +269,7 @@ export function applyRecovery(plan) {
 }
 
 export function verifyRecovery(repositoryRoot, destination) {
-    const root = realpathSync(repositoryRoot);
+    const root = realpathSync.native(repositoryRoot);
     const manifest = JSON.parse(readFileSync(checkedPath(root, `${destination}/manifest.json`), 'utf8'));
     assert.equal(manifest.schemaVersion, 1, 'Unsupported recovery manifest');
     assert.equal(manifest.destination, destination, 'Wrong recovery destination');

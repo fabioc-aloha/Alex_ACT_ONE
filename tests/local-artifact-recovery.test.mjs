@@ -45,12 +45,20 @@ test('local recovery deduplicates exact and line-ending-only copies and isolates
     writeFileSync(join(f.session, 'files', 'old-name.md'), '# Existing\n');
     const other = join(f.sessions, 'other');
     mkdirSync(join(other, 'files'), { recursive: true });
-    writeFileSync(join(other, 'workspace.yaml'), `cwd: ${f.repo}-sibling\n`);
+    writeFileSync(join(other, 'workspace.yaml'), `cwd: ${f.repo}-sibling\ngit_root: ${f.repo}\n`);
     writeFileSync(join(other, 'files', 'foreign.md'), '# Not this project\n');
     const plan = previewRecovery(f.options);
     assert.equal(plan.copies.length, 0);
     assert.equal(plan.accounted.length, 1);
     assert.deepEqual(plan.matchedSessions, ['abcdef01-owned']);
+});
+
+test('local recovery accepts existing workspace aliases without widening session scope', t => {
+    const f = fixture(t);
+    const alias = join(f.root, 'workspace-alias');
+    symlinkSync(f.repo, alias, process.platform === 'win32' ? 'junction' : 'dir');
+    writeFileSync(join(f.session, 'workspace.yaml'), `cwd: ${alias}\n`);
+    assert.deepEqual(previewRecovery(f.options).matchedSessions, ['abcdef01-owned']);
 });
 
 test('local recovery excludes credentials, raw identities, packages, and unreviewed binary sources', t => {
