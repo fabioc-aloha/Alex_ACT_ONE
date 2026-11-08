@@ -94,7 +94,12 @@ needs its own evidence; an earlier candidate's green CI is not transferable.
 The `0.9.4` source hardens reusable artifact/authentication safeguards and
 provides a [lean package](docs/package.md), with both Flint demonstrations and
 runtime owners retained. Its source-path delivery, publication and installed
-parity require separate exact-candidate observations. Later changes cannot
+parity require separate exact-candidate observations.
+[Source and Mall publication are complete](archive/verification/release-0.9.4/README.md);
+local installation/activation remain deferred to the user's manual reinstall
+after an explicit publication exception. Enabled flags and a Git-cache copy
+did not establish an installed plugin in the attached environment.
+Later changes cannot
 inherit those results or move an existing release tag.
 The [verification record](docs/testing.md) owns source and package observations;
 local Windows results are not a replacement for a green same-commit matrix.

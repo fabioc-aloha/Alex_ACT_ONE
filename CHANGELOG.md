@@ -5,10 +5,17 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
-No unreleased source changes beyond the selected `0.9.4` release candidate.
+Post-publication delivery records do not change the frozen `v0.9.4` payload.
 
 ## 0.9.4 - 2026-11-08
 
+- Published [v0.9.4](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.4)
+  from `ba657521416a51fbe84696b6676db3fb69a36778` after the full six-job
+  same-commit matrix, fresh-checkout gates, exact demos and Edge acceptance
+  passed. Mall selects the release's lean runtime path; its curated validation
+  passed. [Publication evidence](archive/verification/release-0.9.4/README.md)
+  records the explicitly approved manual-install exception. The local
+  installation remains `0.9.3`; no upgraded activation or host cache is claimed.
 - Canonicalized existing session workspace aliases, including Windows DOS
   short names, with native filesystem resolution. Detection and the
   source-only recovery helper share the same worktree matcher; a different

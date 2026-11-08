@@ -1,0 +1,16 @@
+{
+  "profileRemoved": true,
+  "installedVersion": "0.9.4",
+  "historyIncluded": false,
+  "sourceCommit": "9f9d248f47956bab3d017b473734e7ac9f66a418",
+  "marketplaceSource": {
+    "path": "package/alex-act-one",
+    "repo": "fabioc-aloha/Alex_ACT_ONE",
+    "source": "github",
+    "ref": "9f9d248f47956bab3d017b473734e7ac9f66a418"
+  },
+  "realUserStoreChanged": false,
+  "sourcePath": "package/alex-act-one",
+  "status": "passed",
+  "payloadFilesVerified": 254
+}

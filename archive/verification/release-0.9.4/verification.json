@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "ba657521416a51fbe84696b6676db3fb69a36778",
+  "version": "0.9.4",
+  "hostedMatrix": {
+    "runId": 42498345981,
+    "event": "workflow_dispatch",
+    "conclusion": "success",
+    "jobsPassed": 6,
+    "url": "https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/runs/42498345981"
+  },
+  "freshCheckout": {
+    "platform": "win32",
+    "node": "26.13.0",
+    "structuralPassed": 600,
+    "integrationPassed": 58,
+    "failures": 0,
+    "skipped": 0,
+    "todos": 0,
+    "cancelled": 0,
+    "exactDemoRebuilds": 2,
+    "payloadHashesVerified": true,
+    "activationPreviewOnly": true,
+    "disposableCheckoutRemoved": true
+  },
+  "browser": {
+    "channel": "msedge",
+    "version": "157.0.4341.42",
+    "pagesPassed": 2,
+    "evidence": "browser.json"
+  },
+  "payload": {
+    "path": "package/alex-act-one",
+    "files": 254,
+    "bytes": 11297938,
+    "receiptAdditional": true,
+    "maintainerArchiveIncluded": false
+  },
+  "publication": {
+    "sourceRelease": "https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.4",
+    "tag": "v0.9.4",
+    "annotatedTagObject": "64dd9c301028ec1ca7127be94d900250ef2ad08f",
+    "mallCommit": "1bed5812808609b4387bf54b89d59f845c696516",
+    "mallMetadataCommit": "5813e026bf02fd60717b2adea3a40c827b2ad619",
+    "mallTestsPassed": 69,
+    "mallValidation": "passed",
+    "publicVersionRefPathVerified": true,
+    "mallPushReportedRuleBypass": true
+  },
+  "localInstallation": {
+    "status": "manual-reinstall-deferred-by-maintainer",
+    "observedInstalledVersion": "0.9.3",
+    "evidence": "native-installation.json",
+    "upgradeClaimed": false,
+    "activationClaimed": false
+  },
+  "postPublicationDocumentation": {
+    "testsPassed": 20,
+    "relativeLinksChecked": 88,
+    "brokenLinks": 0,
+    "catalogDrift": false
+  },
+  "artifactDeliveryCheck": {
+    "scope": "active session only",
+    "matchedSessions": 1,
+    "sessionFileCandidates": 0,
+    "strandedArtifacts": 0,
+    "unsupportedInputs": 0,
+    "status": "clean"
+  }
+}

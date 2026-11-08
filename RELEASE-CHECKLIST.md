@@ -6,6 +6,13 @@ when, so a step nobody can justify can be removed rather than cargo-culted.
 Work top to bottom. A failure stops the release; it does not become a note in
 the release announcement.
 
+The maintainer explicitly approved one scoped exception for `0.9.4`: publish
+the fully verified source and Mall entry while deferring local installation to
+a manual reinstall. [The evidence](archive/verification/release-0.9.4/README.md)
+records the failed native installation observations and exact approval.
+Installation/activation are not claimed. Future releases retain the normal
+fail-closed gates; this exception is not standing permission to bypass them.
+
 ## Candidate packaging boundary
 
 When a release proposes lean distribution, use the

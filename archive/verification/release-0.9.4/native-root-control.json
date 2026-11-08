@@ -1,0 +1,9 @@
+{
+  "status": "blocked",
+  "cliReportedSuccess": true,
+  "profileRemoved": true,
+  "realUserStoreChanged": false,
+  "matchingInventoryEntries": 0,
+  "inventoryVersions": [],
+  "probe": "published-0.9.3-root-route-control"
+}

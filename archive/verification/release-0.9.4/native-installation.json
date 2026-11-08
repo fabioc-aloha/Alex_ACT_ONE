@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "ba657521416a51fbe84696b6676db3fb69a36778",
+  "status": "deferred-by-maintainer",
+  "cliVersion": "1.0.107",
+  "probeScope": "Disposable native CLI profiles, not the real user store",
+  "observations": {
+    "installCommandReportedSuccess": true,
+    "installedPluginInventoryEntries": 0,
+    "pluginSkillsDiscovered": 0,
+    "enabledSettingsEntry": true,
+    "legacyInstalledPlugins": [],
+    "selectedPayloadFetchedToGitCache": true,
+    "published093RootControlAlsoFailed": true
+  },
+  "conclusion": "Installation was not verified. A source-path-specific defect is not established; enabled flags and cached bytes do not prove an installed or loaded plugin.",
+  "approval": "If you cannot install it locally, publish to the mall so I can run the scripts and reinstall it",
+  "localUpgradeClaimed": false,
+  "activationClaimed": false,
+  "temporaryProfilesRemoved": true,
+  "realUserStoreChanged": false
+}

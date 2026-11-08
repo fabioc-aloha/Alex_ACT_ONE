@@ -13,6 +13,7 @@ Their value here is traceability for the reusable safeguards and release
 decisions that the product owns.
 
 - [Recovered engineering evidence](verification/session-recovery/README.md).
+- [0.9.4 release verification and manual-install exception](verification/release-0.9.4/README.md).
 - [Development-repository recovery](verification/development-recovery/2026-11-08/README.md).
 - [Retention review and implementation](verification/recovery-retention-review/2026-11-08/README.md).
 - [Native-first implementation history](plans/2026-11-04-native-first-copilot.md).
@@ -24,5 +25,6 @@ Earlier bytes and approved pruned files remain recoverable from Git history;
 original external session files were not changed.
 
 The candidate package builder excludes this entire tree. That tested package
-boundary does not change the existing Mall source route or installed caches:
-publishing and switching distribution remain separate operations.
+boundary alone does not change delivery. The separately published `0.9.4`
+Mall route selects the runtime payload; installation and activation remain
+separate operations with their own observations.
