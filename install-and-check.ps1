@@ -2,7 +2,7 @@
 .SYNOPSIS
 Report ONE and its tools, or install the latest Mall release and dependencies.
 .DESCRIPTION
-Registers Alex Mall if missing and refreshes all registered marketplace catalogs.
+Registers Alex Mall if missing and refreshes only its marketplace catalog.
 Without -Apply, reports the installed and latest Mall versions without changing
 plugins, instructions or dependencies. -Apply installs or updates the latest Mall
 release, bootstraps its owned instructions, then sets up its reviewed npm tools
@@ -182,7 +182,7 @@ try {
         }
     }
 
-    Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'marketplace', 'update') | Out-Null
+    Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'marketplace', 'update', $Marketplace) | Out-Null
     $latestVersion = Get-LatestReleaseVersion
     if ($initial) {
         Write-Host "Installed ${Plugin}: $($initial.version) (enabled=$($initial.enabled), source=$($initial.source))."
@@ -191,7 +191,7 @@ try {
     }
     Write-Host "Latest ${Plugin}@${Marketplace}: $latestVersion."
     if (-not $Apply) {
-        Write-Host 'Report only: marketplace catalogs were refreshed. Use -Apply to install/update, bootstrap owned instructions and set up dependencies. No plugins or instructions were changed.'
+        Write-Host 'Report only: the selected marketplace catalog was refreshed. Use -Apply to install/update, bootstrap owned instructions and set up dependencies. No plugins or instructions were changed.'
         if ($initial) {
             $manifestPath = Join-Path $installedRoot 'plugin.json'
             if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) {

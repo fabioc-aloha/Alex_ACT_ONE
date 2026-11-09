@@ -56,7 +56,8 @@ pins and launcher. Missing Windows Pandoc and selected-Python Pillow are
 installed only with consent; existing system tools are not upgraded and
 Python is not installed. Native CLI help confirmed
 that marketplace update without a name refreshes all registered catalogs;
-its browse JSON does not expose release versions.
+source now always supplies the selected marketplace name to avoid unrelated
+private Agency refreshes. Its browse JSON does not expose release versions.
 
 Disposable PowerShell 7 and Windows PowerShell 5.1 fixtures cover the plugin
 stage, dependency stage and their ordered orchestration. Cases include
@@ -65,6 +66,10 @@ than the checkout, downgraded or invalid catalogs, failed/no-op updates,
 registration guards, selected-home isolation, real bootstrap conflicts,
 missing/matched/mismatched dependency reports, selected Python/pip, missing
 winget, system installer failures/no-ops and invalid-option preflight.
+Report and apply fixtures register synthetic private Agency catalogs and an
+unrelated plugin, reject blanket refresh with an authentication error, and
+require only the Alex Mall update. Unrelated plugin/marketplace state and
+MCP configuration bytes remain unchanged; Mall-specific failures still stop.
 Older installed registries without automatic tarball-routing support still
 report their own pins with an explicit capability limitation; the helper does
 not borrow newer checkout routing behavior.

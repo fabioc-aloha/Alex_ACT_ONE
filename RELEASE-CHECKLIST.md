@@ -340,12 +340,15 @@ After separate installation approval, close hosts that may lock the package:
 ```
 
 The simplified source helper registers only missing Alex Mall, verifies its
-GitHub source, and refreshes all registered catalogs in either mode.
+GitHub source, and refreshes only its catalog in either mode.
 It follows the latest stable version in that marketplace's catalog rather
 than the checkout version. Only `-Apply` installs or updates and activates
 owned instructions. Existing unrelated/default registrations are preserved.
 Registration and refresh access the network and change marketplace state even
 without `-Apply`; plugin and profile changes remain gated.
+Unrelated marketplaces, private Agency authentication and MCP registrations
+must remain outside this refresh. Tests reject a blanket marketplace update;
+an Alex Mall refresh failure still stops explicitly.
 Conflicting or disabled packages and downgrades stop explicitly; no uninstall
 or forced instruction overwrite occurs. The frozen `0.9.6` helper retains its
 earlier interface; `0.9.7` packages the unified setup flow.

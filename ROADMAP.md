@@ -116,7 +116,7 @@ local Windows results are not a replacement for a green same-commit matrix.
   Do not move existing published tags.
 - Before enabling automatic plugin replacement, design and test staged delivery
   and rollback without overwriting unrelated profile state. The source helper
-  now refreshes marketplace catalogs and reports versions by default; explicit
+  now refreshes only Alex Mall and reports versions by default; explicit
   `-Apply` in `install-and-check.ps1` installs/updates the latest Mall release,
   bootstraps guarded owned instructions and sets up dependencies from that
   installed owner's pins. It never uninstalls first. That is not staged/transactional rollback

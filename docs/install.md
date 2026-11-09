@@ -380,7 +380,7 @@ expanded marketplace checks ship in `v0.5.0`.
 
 Run the current checkout's
 [`install-and-check.ps1`](../install-and-check.ps1) without switches to
-connect Alex Mall if missing, refresh all registered marketplace catalogs,
+connect Alex Mall if missing, refresh only its marketplace catalog,
 and report the installed version, if any, plus the latest version in Mall and
 the installed/missing dependency versions:
 
@@ -392,6 +392,9 @@ Default mode changes only marketplace registration/catalog caches, not plugins
 or instructions or tools. It adds only `alex-mall` and preserves existing/default
 and unrelated registrations. Full reporting requires the Copilot CLI, Node
 and npm; a missing Python or system tool is reported without installing it.
+Unrelated marketplaces, including private Agency sources, are not refreshed
+or reconfigured. Their authentication failures cannot block Alex setup.
+The helper does not change Agency plugins, credentials or MCP registrations.
 
 To install or update the latest Mall version, close hosts that may lock the
 plugin, then opt in:
@@ -471,7 +474,7 @@ $browser = 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 The option works with preview, `-Apply`, and `-VerifyOnly`. Invalid paths stop
 before any installation. `-VerifyOnly` requires an installed plugin and adds
 strict dependency readiness checks without package downloads or activation;
-it still refreshes the normal marketplace catalogs. The selected path is passed only to renderer processes;
+it still refreshes only the selected Alex Mall catalog. The selected path is passed only to renderer processes;
 it does not configure the host or change the parent environment. An existing
 `PUPPETEER_EXECUTABLE_PATH` is used when the option is omitted and is also validated.
 No browser is selected automatically, and a supplied path does not prove browser

@@ -17,7 +17,7 @@ Nothing here installs without consent. A dependency check is read-only.
 ## Unified Source Setup
 
 The source checkout provides one [root helper](../../install-and-check.ps1).
-Without switches it connects Alex Mall if missing, refreshes catalogs and
+Without switches it connects Alex Mall if missing, refreshes only its catalog and
 reports plugin/dependency versions without installation or activation.
 Marketplace registration and caches can change; this is not a wholly read-only
 host operation. The standalone checker below remains read-only.
@@ -29,7 +29,9 @@ missing Windows Pandoc (winget) and selected-Python Pillow (configured pip).
 Existing system tools are checked, not silently upgraded. Python installation,
 forced elevation, agreement acceptance and policy bypasses are excluded.
 Missing prerequisites stop dependency installation with setup guidance.
-`-VerifyOnly` adds strict no-install readiness checks but still refreshes catalogs.
+`-VerifyOnly` adds strict no-install readiness checks but still refreshes that
+selected catalog. Unrelated Agency marketplaces, plugins, credentials and MCP
+registrations are not refreshed or changed by the helper.
 This source flow is separate from the narrower standalone `--apply` routes below
 and from the helpers preserved inside older immutable release payloads.
 

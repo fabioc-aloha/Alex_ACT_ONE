@@ -502,8 +502,9 @@ See [optional tools, runtime readiness, and registry policy](docs/install.md#opt
 Use a standalone terminal outside the attached agent session, from this checkout.
 Close apps that can lock or cache the old plugin. The
 [unified setup helper](install-and-check.ps1) now has two source-checkout modes:
-the default registers Alex Mall if missing, refreshes all registered marketplace
-catalogs, and reports the installed/latest plugin and dependency versions.
+the default registers Alex Mall if missing, refreshes only its catalog, and
+reports the installed/latest plugin and dependency versions. Other marketplaces,
+including Agency, and their plugins/MCP configuration are not updated.
 It does not install plugins or tools or activate instructions. Add `-Apply`
 to install/update the latest Mall release, bootstrap its owned instructions
 with conflict checks, then set up its reviewed npm pins and missing Pandoc/Pillow.

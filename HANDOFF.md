@@ -25,6 +25,12 @@
   the configured proxy using an isolated prefix/cache. The original npm log
   was unavailable, so original feed/cache state is not proven.
   No live runtime repair or new release was performed by the agent.
+- Unreleased source also scopes setup refresh to Alex Mall only. The previous
+  blanket CLI update unnecessarily fetched unrelated private Agency catalogs
+  and stopped setup on their Git authentication errors even when Mall succeeded.
+  Report/apply regressions now reject that blanket operation and preserve
+  unrelated plugins, marketplace registrations and MCP configuration.
+  No Agency authentication/configuration repair or removal is authorized.
 - The user approved a fresh `0.9.7` manual-install exception. Final metadata,
   version-stamped demos, source/payload hashes, fresh-checkout 694/57 strict
   lanes and all six same-commit jobs passed. The public Mall API and actual

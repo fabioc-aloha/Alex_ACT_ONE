@@ -5,6 +5,12 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+- Restrict the unified setup helper's marketplace refresh to Alex Mall instead
+  of every registered marketplace. Unrelated private Agency catalog Git
+  authentication failures no longer block Alex setup. Preserve their plugins,
+  registrations, credentials and MCP configuration; do not suppress a failure
+  from Alex Mall itself. Report/apply regressions exercise that boundary.
+
 - Request fresh npm metadata for exact-pin checks and installs in the unified
   setup helper and standalone provisioner, instead of preferring a potentially
   stale cache. A disposable real-npm control reproduced `ETARGET` with cached

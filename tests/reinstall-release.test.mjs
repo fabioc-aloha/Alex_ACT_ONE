@@ -32,6 +32,7 @@ function runReleaseForShell(t, shell, options = {}) {
     const installedRoot = join(copilotHome, 'installed-plugins', 'alex-mall', 'alex-act-one');
     const statePath = join(copilotHome, 'plugins.json');
     const marketplaceStatePath = join(copilotHome, 'marketplaces.json');
+    const mcpConfigPath = join(copilotHome, 'mcp-config.json');
     const bootstrapLog = join(root, 'bootstrap.log');
     const commandLog = join(root, 'commands.log');
     const homeLog = join(root, 'homes.log');
@@ -80,6 +81,8 @@ function runReleaseForShell(t, shell, options = {}) {
     }
     const otherPlugins = options.otherPlugins || [];
     mkdirSync(copilotHome, { recursive: true });
+    const mcpConfig = '{"mcpServers":{"agency-fixture":{"command":"fixture-only","args":["keep"]}}}\n';
+    writeFileSync(mcpConfigPath, mcpConfig);
     writeFileSync(statePath, JSON.stringify([...otherPlugins, ...(options.firstInstall ? [] : [{
         name: 'alex-act-one', marketplace: options.installedMarketplace || 'alex-mall',
         version: initialVersion, enabled: !options.disabled, source: 'installed',
@@ -124,6 +127,10 @@ if ($command -eq 'plugin uninstall alex-act-one@alex-mall') {
   exit 0
 }
 if ($command -eq 'plugin marketplace update') {
+  Write-Output 'fixture private Agency catalog authentication failure; all-marketplace refresh is forbidden'
+  exit 26
+}
+if ($command -eq 'plugin marketplace update alex-mall') {
   if ($env:FAKE_REFRESH_FAILURE -eq '1') { Write-Output 'fixture catalog refresh failure'; exit 24 }
   exit 0
 }
@@ -229,6 +236,7 @@ try {
     assert.equal(restored.present, inheritedHome !== '');
     assert.equal(restored.value || '', inheritedHome);
     assert.deepEqual(snapshotUnselected(), unselectedBefore, 'The unselected profile must remain byte-identical');
+    assert.equal(readFileSync(mcpConfigPath, 'utf8'), mcpConfig, 'MCP registrations must remain byte-identical');
     const homes = readFileSync(homeLog, 'utf8').trim().split(/\r?\n/);
     assert.ok(homes.every(home => home === copilotHome), `Unexpected operation homes: ${homes.join(', ')}`);
     if (options.error) {
@@ -306,16 +314,31 @@ try {
     assert.equal(commands.filter((command) => command.startsWith('plugin install ')).length,
         options.firstInstall && options.apply !== false ? 1 : 0);
     assert.ok(commands.every(command => !command.startsWith('plugin uninstall ')));
-    assert.equal(commands.filter(command => command === 'plugin marketplace update').length, options.repeat ? 2 : 1);
+    assert.deepEqual(commands.filter(command => command.startsWith('plugin marketplace update')),
+        Array(options.repeat ? 2 : 1).fill('plugin marketplace update alex-mall'));
     assert.equal(commands.filter(command => command === 'plugin update alex-act-one@alex-mall').length,
         options.apply !== false ? (options.repeat ? (options.firstInstall ? 1 : 2) : (options.firstInstall ? 0 : 1)) : 0);
-    assert.ok(commands.indexOf('plugin marketplace update') < commands.indexOf('catalog read'));
+    assert.ok(commands.indexOf('plugin marketplace update alex-mall') < commands.indexOf('catalog read'));
     assert.equal(existsSync(join(copilotHome, 'session-state')), false);
 }
 
 for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pwsh']) {
     const runRelease = (t, options) => runReleaseForShell(t, shell, options);
     const testRelease = (name, fn) => test(`${shell}: ${name}`, fn);
+
+    for (const apply of [false, true]) {
+        testRelease(`${apply ? 'apply' : 'report'} refreshes only Alex Mall and leaves private Agency marketplaces/plugins/MCPs untouched`, t => {
+            runRelease(t, {
+                apply, oldVersion: true,
+                marketplaces: [...MARKETPLACES,
+                    { name: 'agency', source: 'GitHub: fixture/private-agency', isDefault: false },
+                    { name: 'agency-playground', source: 'GitHub: fixture/private-playground', isDefault: false },
+                    { name: 'agency-workflows-local', source: 'Local: fixture-workflows', isDefault: false }],
+                otherPlugins: [{ name: 'fixture-agency-plugin', marketplace: 'agency',
+                    version: '1.0.0', enabled: true, source: 'installed' }],
+            });
+        });
+    }
 
     for (const [parameter, value] of [['Refresh', true], ['ExpectedVersion', '99.0.0'], ['IncludeReplicate', true]]) {
         testRelease(`removed option ${parameter} is rejected before any CLI operation`, t => {
@@ -398,7 +421,7 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
         });
     }
 
-    testRelease('default still stops when a registered marketplace cannot refresh', t => {
+    testRelease('default still stops when Alex Mall cannot refresh', t => {
         runRelease(t, { apply: false, oldVersion: true, refreshFailure: true, error: /catalog refresh failure/ });
     });
 
