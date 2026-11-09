@@ -2,15 +2,14 @@
 
 Updated 2026-11-09. This is the product backlog for maintaining and shipping
 Alex ACT ONE, not a history of incidents or an adopter-fleet work queue.
-The source and Mall `0.9.6` release is published. The user will install it
+The source and Mall `0.9.7` release is published. The user will install it
 manually using the script; only earlier `0.9.5` installed-package parity is
 recorded. R8 remains next for observable host evidence as access permits.
 Runtime upgrade recovery requires a
 design decision before implementation.
 
-Release version: `v0.9.7`. Final release qualification/publication is in
-progress; Mall remains on `0.9.6` until the release record confirms the update.
-Publication is not native installation or activation. This roadmap describes work beyond the published
+Release version: `v0.9.7`. Publication is verified, not native installation
+or activation. This roadmap describes work beyond the published
 baseline's scoped verification, not an instruction to reopen completed repairs or automatically
 change existing installations. See
 [installation sources](docs/install.md#installation-sources) for the distinction.
@@ -24,7 +23,7 @@ Current verification belongs in [testing](docs/testing.md),
 [delivery gate](#verify-future-delivery-changes). Completed cross-repository
 recovery and synchronization are archived; they do not add ongoing operations
 to this backlog.
-The [0.9.6 release record](archive/verification/release-0.9.6/README.md) owns
+The [0.9.7 release record](archive/verification/release-0.9.7/README.md) owns
 the exact source, same-commit gates, payload, browser and public Mall evidence.
 Await the user's manual installation result; do not infer it from publication.
 

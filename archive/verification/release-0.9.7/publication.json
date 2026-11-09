@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "release": {
+    "isDraft": false,
+    "isPrerelease": false,
+    "publishedAt": "2026-11-09T22:57:34Z",
+    "tagName": "v0.9.7",
+    "targetCommitish": "32db8b9752e501a5ef4287327fa9f30fe9d53224",
+    "url": "https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.7"
+  },
+  "sourceCommit": "32db8b9752e501a5ef4287327fa9f30fe9d53224",
+  "ci": {
+    "url": "https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/runs/42715595855",
+    "headSha": "32db8b9752e501a5ef4287327fa9f30fe9d53224",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "Structural / ubuntu-24.04 / Node 24",
+        "conclusion": "success"
+      },
+      {
+        "name": "Structural / windows-2025 / Node 26",
+        "conclusion": "success"
+      },
+      {
+        "name": "Structural / ubuntu-24.04 / Node 26",
+        "conclusion": "success"
+      },
+      {
+        "name": "Provisioned runtime / ubuntu-24.04 / Node 26",
+        "conclusion": "success"
+      },
+      {
+        "name": "Structural / windows-2025 / Node 24",
+        "conclusion": "success"
+      },
+      {
+        "name": "Provisioned runtime / windows-2025 / Node 26",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "freshWindowsCheckout": {
+    "structuralPassed": 694,
+    "integrationPassed": 57,
+    "failed": 0,
+    "skipped": 0,
+    "sourceUnchanged": true,
+    "bothExactDemoRebuildsPassed": true,
+    "packageAndSourceHashesVerified": true
+  },
+  "payload": {
+    "path": "package/alex-act-one",
+    "files": 253,
+    "bytes": 11346217.0,
+    "receiptSha256": "d0eb187dead27386e7dd64cdafdd7f5bb10385976b8e73af474497d6f5dd7e66",
+    "publicRootScript": "install-and-check.ps1",
+    "oldPublicRootNamesBundled": false
+  },
+  "bootstrap": {
+    "apply": false,
+    "expectedFiles": 15,
+    "disposableTargetCreated": false,
+    "packageActivationOrchestrationTestsPassed": 47
+  },
+  "faultControls": {
+    "results": "mutations.txt",
+    "caught": 4,
+    "survived": 0,
+    "actualSourcePreserved": true,
+    "scope": "Four sampled safety guards; not exhaustive mutation coverage"
+  },
+  "browserEvidence": "browser.json",
+  "mall": {
+    "repository": "fabioc-aloha/Alex_Skill_Mall",
+    "preservedPriorUpstream": "34d63c83711826ca4c3468297581cf97d84b3423",
+    "metadataCommit": "b8ef5123c9a9d3ac58c4f71bc640351a41b5245c",
+    "publicationCommit": "54668ef57960b86d787cc80262f41e08e178efc9",
+    "version": "0.9.7",
+    "ref": "v0.9.7",
+    "path": "package/alex-act-one",
+    "canonicalSourceModeFileCount": 2,
+    "testsPassed": 69,
+    "failed": 0,
+    "skipped": 0,
+    "catalogValidation": "PASS",
+    "publicMainEntryVerified": true,
+    "actualSetupCatalogUrlVerified": true,
+    "unrelatedDeclaredVersionsPreserved": true,
+    "pushNotice": "GitHub accepted the fast-forward with existing rule-bypass notices; no rule configuration changed."
+  },
+  "manualInstallation": {
+    "approval": "User explicitly accepted the 0.9.7 publication-before-manual-install and disposable-preparation form options.",
+    "scope": "0.9.7 only",
+    "publisherInstalledPlugin": false,
+    "publisherActivatedRealProfile": false,
+    "publisherUpdatedActiveRuntime": false,
+    "publisherInstalledSystemPackages": false,
+    "status": "deferred to the user; native setup unverified",
+    "reportCommand": ".\\install-and-check.ps1",
+    "applyCommand": ".\\install-and-check.ps1 -Apply"
+  },
+  "macOS": "Roadmap-only; no installation or dependency support certified",
+  "priorRelease": {
+    "tag": "v0.9.6",
+    "sourceCommit": "0e71824e3a931a3beeb3bd8e97c76d3c7273b93b",
+    "unchanged": true
+  }
+}

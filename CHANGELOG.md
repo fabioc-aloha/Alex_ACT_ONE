@@ -7,9 +7,12 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## 0.9.7 - 2026-11-09
 
-The user approved source and Mall publication with manual installation
-deferred. [The release record](archive/verification/release-0.9.7/README.md)
-binds final source/package evidence separately from native activation.
+Published [v0.9.7](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.7)
+from `32db8b9752e501a5ef4287327fa9f30fe9d53224` after the six-job matrix,
+fresh-checkout 694 structural/57 integration tests, exact demos, package hashes
+and browser acceptance passed. Mall passed 69 tests and public-route checks.
+[The release record](archive/verification/release-0.9.7/README.md) retains the
+user-approved manual-install exception; native setup/activation is unverified.
 macOS setup remains a documented roadmap item, not an implemented feature.
 
 - Replaced the two source root helpers with `install-and-check.ps1`.

@@ -6,28 +6,27 @@
   verification, and release preparation from [ROADMAP.md](ROADMAP.md), not
   cross-repository recovery or fleet operations.
 - The published baseline is
-  [0.9.6](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.6),
-  frozen at `0e71824e3a931a3beeb3bd8e97c76d3c7273b93b`. The full same-commit
-  source matrix passed. Mall publication selects `v0.9.6` and
-  `package/alex-act-one`; [the release evidence](archive/verification/release-0.9.6/README.md)
+  [0.9.7](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.7),
+  frozen at `32db8b9752e501a5ef4287327fa9f30fe9d53224`. The full same-commit
+  source matrix passed. Mall publication selects `v0.9.7` and
+  `package/alex-act-one`; [the release evidence](archive/verification/release-0.9.7/README.md)
   records exact source, payload, browser, and public catalog observations.
 - The user explicitly approved publication before their manual script
-  installation. GitHub and Mall delivery are verified; native `0.9.6`
+  installation. GitHub and Mall delivery are verified; native `0.9.7`
   installation, cache parity, activation and host restart remain unverified.
   The earlier [preparation evidence](archive/verification/candidate-0.9.6/preparation.json)
   remains historical. The relative-path package-verification hang was fixed.
-- The user approved `0.9.7` publication and a fresh manual-install exception.
-  Final metadata, version-stamped demos, source/payload hashes and same-commit
-  gates are being qualified. Do not treat earlier source CI as this release
-  cut. The [release record](archive/verification/release-0.9.7/README.md)
-  separates public delivery from unverified native setup; macOS stays pending.
-- Unreleased source now simplifies the root helper: default mode registers
+- The user approved a fresh `0.9.7` manual-install exception. Final metadata,
+  version-stamped demos, source/payload hashes, fresh-checkout 694/57 strict
+  lanes and all six same-commit jobs passed. The public Mall API and actual
+  setup-script catalog URL both select `0.9.7`; macOS stays roadmap-only.
+- Release `0.9.7` simplifies the root helper: default mode registers
   missing Alex Mall, refreshes registered catalogs and reports installed/latest
   versions. Only `-Apply` installs or updates the latest Mall version and
-  activates owned instructions with conflict checks. No checkout version pin,
-  optional dependency install, uninstall or forced overwrite is required.
+  activates owned instructions with conflict checks, then sets up capability
+  tools. No checkout version pin, uninstall or forced overwrite is required.
   Stale retired-provider script comments were removed. The frozen `0.9.6`
-  payload and installed state are not modified by these source changes.
+  tag/payload and active user state remain unchanged.
 - The single public source entry point is now `install-and-check.ps1`.
   Default mode reports dependencies too. `-Apply` installs the latest Mall
   plugin, bootstraps owned instructions, then uses that installed owner's pins
@@ -82,7 +81,7 @@
 
 ## Blockers
 
-- Exact installed/cache `0.9.5` bytes were verified; the `0.9.6` release's
+- Exact installed/cache `0.9.5` bytes were verified; the `0.9.7` release's
   native installation is not. Native transcript completeness, unanswered
   clarification flows, additional hosts, coverage beyond the approved
   synthetic external destination, and stronger write enforcement remain gaps.
@@ -106,7 +105,7 @@ after closing hosts that may lock the package.
 Leave installation to the user unless separately authorized. Record actual
 installed root/version, package/cache parity, bootstrap receipt and restart
 observations separately; publication does not prove any of them.
-Preserve the immutable `v0.9.6` tag and its exact verified payload. Later
+Preserve the immutable `v0.9.7` tag and its exact verified payload. Later
 delivery changes require their own reviewed commit and fresh gates.
 Continue R8/artifact-host observations only for the remaining authorized gaps
 in [ROADMAP.md](ROADMAP.md), using the frozen task evidence rather than rerunning
@@ -122,6 +121,9 @@ Do not resume adopter-recovery operations from this handoff.
 
 ## Verification
 
+- [0.9.7 verification](archive/verification/release-0.9.7/README.md) records
+  the unified setup package, full same-commit gates, public Mall bindings and
+  explicitly deferred native/system-package setup.
 - [0.9.6 verification](archive/verification/release-0.9.6/README.md) records
   the frozen source, six-job matrix, exact payload, fresh browser observations,
   public Mall route and explicitly deferred manual installation.

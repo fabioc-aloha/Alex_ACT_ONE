@@ -26,9 +26,10 @@ bootstrap and capability tools, with explicit consent for changes.
 
 ## Verification boundaries
 
-The final release requires its own full Windows/Ubuntu matrix, fresh-checkout
-strict gates, exact demo rebuilds, package/source hashes and browser acceptance.
-See [the release record](README.md) for actual results. Passing fixtures do not
+The final release passed the full Windows/Ubuntu matrix, fresh-checkout strict
+gates, exact demo rebuilds, package/source hashes and browser acceptance.
+See [the release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/blob/main/archive/verification/release-0.9.7/README.md)
+for actual results. Passing fixtures do not
 prove native installation, real system-package changes, all-host behavior or
 accessibility certification. macOS remains unverified.
 
