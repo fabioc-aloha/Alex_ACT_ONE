@@ -116,6 +116,10 @@ if (($Arguments -join ' ') -eq 'prefix --global') {
     exit 0
 }
 if ($Arguments[0] -eq 'view') {
+    if ($env:FAKE_STALE_METADATA -eq '1' -and $Arguments -notcontains '--prefer-online') {
+        Write-Output 'ETARGET: cached registry metadata does not contain the reviewed dependency'
+        exit 1
+    }
     if ($env:FAKE_MISSING_PIN -eq $Arguments[1]) {
         Write-Output 'E404: pinned version not found in proxy'
         exit 1
@@ -129,6 +133,11 @@ if ($Arguments[0] -eq 'view') {
     exit 0
 }
 if ($Arguments[0] -eq 'install') {
+    if ($env:FAKE_STALE_METADATA -eq '1' -and
+        ($Arguments -notcontains '--prefer-online' -or $Arguments -contains '--prefer-offline')) {
+        Write-Output 'ETARGET: cached abbreviated metadata does not contain playwright@1.65.0-alpha-2026-10-30'
+        exit 1
+    }
     if ($env:PUPPETEER_EXECUTABLE_PATH -cne $env:FAKE_INHERITED_BROWSER) {
         throw 'Renderer browser override leaked into npm'
     }
@@ -259,6 +268,7 @@ exit 1
             FAKE_REGISTRY: options.registry || 'https://proxy.example.invalid/npm/',
             FAKE_NODE: process.execPath,
             FAKE_STDERR_WARNING: options.stderrWarning ? '1' : '',
+            FAKE_STALE_METADATA: options.staleMetadata ? '1' : '',
             FAKE_RENDER_FAILURE: options.renderFailure || '',
             FAKE_RENDER_NO_OUTPUT: options.renderNoOutput || '',
             FAKE_RENDER_INVALID: options.renderInvalid || '',
@@ -315,6 +325,29 @@ exit 1
 }
 
 for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pwsh']) {
+    test(`${shell}: apply refreshes registry metadata for every pin and install instead of preferring a stale transitive cache`, t => {
+        const { commands } = runInstaller(t, shell, { apply: true, staleMetadata: true });
+        const requests = commands.filter(args => args[0] === 'view' || args[0] === 'install');
+        assert.equal(requests.length, packages.length * 2);
+        for (const args of requests) {
+            assert.ok(args.includes('--prefer-online'));
+            assert.ok(!args.includes('--prefer-offline'));
+        }
+    });
+
+    test(`${shell}: a continued ETARGET after fresh metadata stops without retries or version substitution`, t => {
+        const spec = '@playwright/mcp@' + deps.MCP_SERVERS.playwright.version;
+        const { commands, output } = runInstaller(t, shell, {
+            apply: true, installFailure: spec,
+            installError: 'ETARGET: No matching version found for playwright@1.65.0-alpha-2026-10-30',
+            error: /ETARGET/,
+        });
+        assert.equal(commands.filter(args => args[0] === 'install' && args.at(-1) === spec).length, 1);
+        assert.match(output, /No automatic retry|No .*retry/);
+        assert.match(output, /configured registry|configured feed/);
+        assert.doesNotMatch(output, /Verified all selected pinned dependencies/);
+    });
+
     test(`${shell}: previews shared pins and scopes without writes or package network requests`, (t) => {
         const { commands, output, runtime, globalPrefix } = runInstaller(t, shell);
         assert.deepEqual(commands, [['config', 'get', 'registry'], ['prefix', '--global']]);

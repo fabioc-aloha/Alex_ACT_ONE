@@ -147,16 +147,16 @@ try {
 
   mkdirSync(RUNTIME_ROOT, { recursive: true });
   for (const pinned of PINNED_PACKAGES) {
-    const result = await run('npm', ['view', `${pinned.name}@${pinned.version}`, 'version', '--json'], { capture: true });
+    const result = await run('npm', ['view', `${pinned.name}@${pinned.version}`, 'version', '--json', '--prefer-online'], { capture: true });
     const value = JSON.parse(result.stdout);
     const versions = Array.isArray(value) ? value : [value];
     if (versions.length !== 1 || versions[0] !== pinned.version) throw new Error(`Registry did not confirm exact pin ${pinned.name}@${pinned.version}`);
   }
   console.log(`installing: ${PACKAGES.join(', ')}`);
-  await run('npm', [
+  const installation = await run('npm', [
       'install',
       '--save-exact',
-      '--prefer-offline',
+      '--prefer-online',
       '--no-audit',
       '--no-fund',
       '--loglevel=error',
@@ -165,8 +165,10 @@ try {
       ...(tarballPrefix ? [`--replace-registry-host=${tarballPrefix}`] : []),
       ...PACKAGES,
     ], {
-      env: { NPM_CONFIG_REGISTRY: registry }, timeout: 180000,
+      capture: true, env: { NPM_CONFIG_REGISTRY: registry }, timeout: 180000,
     });
+  if (installation.stdout) process.stdout.write(installation.stdout);
+  if (installation.stderr) process.stderr.write(installation.stderr);
 
   for (const pinned of PINNED_PACKAGES.filter(packageInfo => packageInfo.route)) {
     const state = runtimeStatus.checkRuntime(pinned.route, RUNTIME_ROOT);
@@ -176,5 +178,8 @@ try {
   console.log('\nProvisioned direct runtime. Reload the host, then verify its MCP connection in a new session.');
 } catch (error) {
   console.error(`FAIL  ${error.message}`);
+  if (/\bETARGET\b/.test(error.message)) {
+    console.error('A required version could not be resolved after requesting fresh metadata from the configured registry. Check the named dependency, including transitive dependencies, through that registry. No automatic retry, cache deletion, version substitution or registry switch was attempted.');
+  }
   process.exit(1);
 }

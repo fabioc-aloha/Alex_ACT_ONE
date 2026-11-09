@@ -502,6 +502,16 @@ broadening the prefix or retrying automatically. Access-denied cleanup errors
 suggest closing applications using the affected package and checking permissions.
 The helper does not delete package directories to recover from these errors.
 
+The unreleased source helper and standalone provisioner request fresh npm
+metadata for exact-pin checks and installs (`--prefer-online`). A cached
+package index can otherwise omit a required transitive version even when
+top-level pin checks succeed. This does not bypass the configured registry or
+change its policy; a continued `ETARGET` still stops without retries, cache
+deletion or version substitution. After updating the source checkout, rerun
+the normal `-Apply` command to resume setup; previously installed Pandoc/Pillow
+are checked rather than silently upgraded. The frozen `0.9.7` payload retains
+its earlier cache preference until a separately approved release.
+
 This routing does not switch registries or relax `allow-remote`. A failed
 install may leave partial package state. If npm blocks Puppeteer's browser
 setup scripts, package installation can succeed while rendering still fails.

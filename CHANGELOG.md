@@ -5,6 +5,15 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+- Request fresh npm metadata for exact-pin checks and installs in the unified
+  setup helper and standalone provisioner, instead of preferring a potentially
+  stale cache. A disposable real-npm control reproduced `ETARGET` with cached
+  metadata and succeeded after revalidation. The exact reviewed Playwright
+  package and transitive pins installed and launched through the configured
+  proxy in a disposable prefix/cache. Continued `ETARGET` stops with explicit
+  feed guidance, without retries, cache deletion, version substitution or
+  registry/policy changes. The published `0.9.7` payload is unchanged.
+
 ## 0.9.7 - 2026-11-09
 
 Published [v0.9.7](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.7)

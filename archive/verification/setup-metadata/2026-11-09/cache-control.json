@@ -1,0 +1,20 @@
+{
+  "classification": "synthetic local-loopback cache control",
+  "npmCli": "existing npm CLI",
+  "package": "alex-synthetic-cache-probe",
+  "metadataWarmVersion": "1.0.0",
+  "requestedNewVersion": "1.0.1",
+  "offline": {
+    "exit": 1,
+    "error": "ETARGET",
+    "additionalMetadataRequests": 0
+  },
+  "online": {
+    "exit": 0,
+    "additionalMetadataRequests": 1
+  },
+  "limits": [
+    "No public registry, user cache or active runtime used.",
+    "This reproduces the failure mechanism, not the missing original user log."
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-09",
+  "sourceBaseline": "0b395e1",
+  "npmVersion": "12.0.2",
+  "diagnosis": {
+    "observedSourceDefect": "Both installer paths preferred potentially stale npm metadata during exact-pin installs.",
+    "originalIncidentCertainty": "Leading explanation; unavailable original log leaves transient feed availability unverified.",
+    "userReportedPartialSuccess": [
+      "Plugin/bootstrap 0.9.7",
+      "Pandoc 3.13",
+      "Pillow 13.0.0"
+    ],
+    "fullUserSetupVerified": false
+  },
+  "cacheControl": {
+    "classification": "synthetic local-loopback cache control",
+    "npmCli": "existing npm CLI",
+    "package": "alex-synthetic-cache-probe",
+    "metadataWarmVersion": "1.0.0",
+    "requestedNewVersion": "1.0.1",
+    "offline": {
+      "exit": 1,
+      "error": "ETARGET",
+      "additionalMetadataRequests": 0
+    },
+    "online": {
+      "exit": 0,
+      "additionalMetadataRequests": 1
+    },
+    "limits": [
+      "No public registry, user cache or active runtime used.",
+      "This reproduces the failure mechanism, not the missing original user log."
+    ]
+  },
+  "exactProxyInstall": {
+    "registry": "https://packagefeedproxy.microsoft.io/npm/",
+    "prefixClass": "approved disposable temporary directory",
+    "cacheClass": "isolated temporary npm cache",
+    "versions": {
+      "@playwright/mcp": "0.0.84",
+      "playwright": "1.65.0-alpha-2026-10-30",
+      "playwright-core": "1.65.0-alpha-2026-10-30"
+    },
+    "reportedVersion": "Version 0.0.84",
+    "lifecycleScripts": "disabled for this isolated package/launch probe",
+    "browserDownload": "not performed",
+    "readinessScope": "Exact metadata and MCP --version only; no host connection or full renderer readiness claim"
+  },
+  "safety": {
+    "activeRuntimeChanged": false,
+    "userCacheDeleted": false,
+    "registryPolicyChanged": false,
+    "packagePinsChanged": false,
+    "liveSetupApplyRun": false
+  },
+  "limits": [
+    "No replay of original unavailable npm log.",
+    "Synthetic cache mechanism and later real-feed success are separate evidence.",
+    "Published 0.9.7 remains immutable; this is source-only repair."
+  ]
+}

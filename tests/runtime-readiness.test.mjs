@@ -175,6 +175,9 @@ for (const route of Object.keys(deps.MCP_SERVERS)) {
 }
 for (const [mode, registry, prefix, explicitPrefix, npmVersion = '12.0.2'] of [
     ['ready', 'https://fixture.invalid/npm/', null],
+    ['stale-metadata', 'https://fixture.invalid/npm/', null],
+    ['warning', 'https://fixture.invalid/npm/', null],
+    ['missing-transitive', 'https://fixture.invalid/npm/', null],
     ['empty', 'https://fixture.invalid/npm/', null],
     ['wrong-report', 'https://fixture.invalid/npm/', null],
     ['ready', 'https://packagefeedproxy.microsoft.io/npm/',
@@ -195,8 +198,14 @@ const pins=${JSON.stringify(deps.mcpPackages(['flint']))};
 fs.appendFileSync(process.env.FIXTURE_COMMAND_LOG,JSON.stringify(args)+'\\n');
 if(args[0]==='config'){console.log(${JSON.stringify(registry)});}
 else if(args[0]==='--version'){console.log(${JSON.stringify(npmVersion)});}
-else if(args[0]==='view'){console.log(JSON.stringify(args[1].slice(args[1].lastIndexOf('@')+1)));}
+else if(args[0]==='view'){
+ if(process.env.FIXTURE_MODE==='stale-metadata'&&!args.includes('--prefer-online')){console.error('ETARGET: stale metadata');process.exit(1);}
+ console.log(JSON.stringify(args[1].slice(args[1].lastIndexOf('@')+1)));
+}
 else if(args[0]==='install'){
+ if(process.env.FIXTURE_MODE==='stale-metadata'&&(!args.includes('--prefer-online')||args.includes('--prefer-offline'))){console.error('ETARGET: stale transitive metadata');process.exit(1);}
+ if(process.env.FIXTURE_MODE==='missing-transitive'){console.error('ETARGET: missing transitive package');process.exit(1);}
+ if(process.env.FIXTURE_MODE==='warning'){console.log('fixture installation output');console.error('fixture npm warning');}
  const root=args[args.indexOf('--prefix')+1];
  if(path.resolve(root)!==path.resolve(process.env.FIXTURE_RUNTIME))throw Error('Refusing writes outside the test fixture runtime');
  for(const p of pins){const dir=path.join(root,'node_modules',p.name);fs.mkdirSync(dir,{recursive:true});
@@ -219,6 +228,10 @@ else if(args[0]==='install'){
             assert.deepEqual(args.filter(arg => arg.startsWith('--replace-registry-host=')),
                 args[0] === 'install' && prefix ? [`--replace-registry-host=${prefix}`] : []);
             assert.ok(!args.some(arg => /^--registry(?:=|$)|allow-remote|strict-ssl/.test(arg)));
+            if (args[0] === 'view' || args[0] === 'install') {
+                assert.ok(args.includes('--prefer-online'));
+                assert.ok(!args.includes('--prefer-offline'));
+            }
         }
         if (mode === 'old-npm') {
             assert.notEqual(result.status, 0);
@@ -228,14 +241,24 @@ else if(args[0]==='install'){
             return;
         }
         assert.equal(existsSync(runtime), true, 'Provisioner did not honor the selected environment runtime');
-        if (mode === 'ready') {
+        if (['ready', 'stale-metadata', 'warning'].includes(mode)) {
             assert.equal(result.status, 0, result.stderr);
             assert.match(result.stdout, /verified.*flint/i);
             assert.match(result.stdout, /host.*not.*observed/i);
+            if (mode === 'warning') {
+                assert.match(result.stdout, /fixture installation output/);
+                assert.match(result.stderr, /fixture npm warning/);
+            }
         } else {
             assert.notEqual(result.status, 0);
             assert.doesNotMatch(result.stdout, /Provisioned direct runtime/);
             assert.match(result.stderr, /FAIL/);
+            if (mode === 'missing-transitive') {
+                assert.equal(commands.filter(args => args[0] === 'install').length, 1);
+                assert.match(result.stderr, /ETARGET/);
+                assert.match(result.stderr, /configured registry/);
+                assert.match(result.stderr, /No automatic retry, cache deletion, version substitution or registry switch/);
+            }
         }
     });
 }

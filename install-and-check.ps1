@@ -305,6 +305,9 @@ function Invoke-DependencySetup {
             $detail = $output -join "`n"
             $guidance = @()
             if ($Command -eq $NpmCommand -and $Arguments[0] -eq 'install') {
+                if ($detail -match '\bETARGET\b') {
+                    $guidance += 'npm could not resolve a required version after requesting fresh metadata from the configured registry. Check availability of the named dependency through that registry, including transitive dependencies. No automatic retry, cache deletion, version substitution or registry switch was attempted.'
+                }
                 if ($detail -match '\bEALLOWREMOTE\b') {
                     if ($RegistryTarballPrefix) {
                         $guidance += 'Tarball routing was already selected. Check whether the confirmed prefix covers the rejected URL, including transitive packages. No automatic retry or broader routing was attempted.'
@@ -453,7 +456,7 @@ console.log(JSON.stringify(packages.map(pkg => {
         }
         foreach ($package in $packages) {
             $spec = "$($package.name)@$($package.version)"
-            $available = @(((Invoke-CheckedCommand -Command $NpmCommand -Arguments @('view', $spec, 'version', '--json')) -join "`n") | ConvertFrom-Json)
+            $available = @(((Invoke-CheckedCommand -Command $NpmCommand -Arguments @('view', $spec, 'version', '--json', '--prefer-online')) -join "`n") | ConvertFrom-Json)
             if ($available.Count -ne 1 -or $available[0] -cne $package.version) { throw "The configured registry did not confirm the exact pinned version: $spec. No installs started." }
         }
         Write-Output 'All exact pins are listed by the configured registry; downloads may still fail.'
@@ -468,7 +471,7 @@ console.log(JSON.stringify(packages.map(pkg => {
             if (-not $pillow.present) { throw 'Pillow installation verification failed in the selected Python.' }
         }
         foreach ($package in $packages) {
-            $arguments = @('install', '--save-exact', '--prefer-offline', '--no-audit', '--no-fund')
+            $arguments = @('install', '--save-exact', '--prefer-online', '--no-audit', '--no-fund')
             if ($RegistryTarballPrefix) { $arguments += "--replace-registry-host=$RegistryTarballPrefix" }
             if ($package.scope -eq 'global') { $arguments += '--global' } else { $arguments += @('--prefix', $RuntimeRoot) }
             $arguments += "$($package.name)@$($package.version)"

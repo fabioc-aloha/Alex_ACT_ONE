@@ -20,6 +20,32 @@ Node 26 structural jobs for the full release matrix.
 These are verification targets, not certification of every Copilot host or OS.
 macOS and other Node versions are not covered by this workflow.
 
+## Post-0.9.7 npm metadata freshness
+
+The user's setup transcript reported successful `0.9.7` plugin/bootstrap and
+Pandoc/Pillow installation, then `ETARGET` for the pinned Playwright transitive
+version. Those are reported observations, not independently verified
+installed/cache or renderer results. The referenced npm log was unavailable
+during diagnosis; temporary feed availability at the original failure remains
+unknown.
+
+A [real-npm loopback control](../archive/verification/setup-metadata/2026-11-09/cache-control.mjs)
+with a disposable cache reproduced stale-index `ETARGET` with
+`--prefer-offline` and succeeded with `--prefer-online`. The configured proxy
+subsequently served the exact reviewed Playwright package and both transitive
+pins; a separate approved disposable prefix/cache installed them and its MCP
+CLI reported `0.0.84`. [Evidence](../archive/verification/setup-metadata/2026-11-09/results.json)
+keeps that narrower result separate from the user's interrupted full setup.
+No live helper apply, cache deletion, runtime change or registry-policy edit
+was performed by the agent.
+
+Root-helper tests in both PowerShell hosts and provisioner tests exercise
+metadata refresh and continued fail-closed `ETARGET`, including no retries,
+fallback versions or registry changes. Source changes are not a new release.
+The focused Windows run passed 163 tests, without failures, skips, todos or
+cancellations, including PowerShell 7/5.1 installer cases and standalone
+provisioner output/error handling.
+
 ## Simplified root-helper source checks
 
 The 2026-11-09 source has one root `install-and-check.ps1` entry point.

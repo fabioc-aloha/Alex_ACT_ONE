@@ -16,6 +16,15 @@
   installation, cache parity, activation and host restart remain unverified.
   The earlier [preparation evidence](archive/verification/candidate-0.9.6/preparation.json)
   remains historical. The relative-path package-verification hang was fixed.
+- The user's subsequent setup transcript reports `0.9.7` plugin/bootstrap and
+  Pandoc/Pillow success, followed by Playwright transitive `ETARGET`.
+  Full dependency/render readiness and cache parity are not claimed.
+  Unreleased source now requests fresh metadata in root and standalone npm
+  install paths. A real-npm disposable control reproduced stale-cache
+  `ETARGET`; the exact reviewed Playwright pins then installed/launched through
+  the configured proxy using an isolated prefix/cache. The original npm log
+  was unavailable, so original feed/cache state is not proven.
+  No live runtime repair or new release was performed by the agent.
 - The user approved a fresh `0.9.7` manual-install exception. Final metadata,
   version-stamped demos, source/payload hashes, fresh-checkout 694/57 strict
   lanes and all six same-commit jobs passed. The public Mall API and actual
