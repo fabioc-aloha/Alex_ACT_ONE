@@ -7,9 +7,9 @@ documentation, not adopter-project recovery records or fleet operations.
 The [builder](https://github.com/fabioc-aloha/Alex_ACT_ONE) produces a reproducible
 candidate under `dist/alex-act-one/`. Release preparation uses the same
 allowlist to generate `package/alex-act-one/`, the source-subdirectory payload
-selected since `0.9.4` and retained for the `0.9.6` candidate. The published
-Mall route still selects `v0.9.5`; assembly is distinct from publication and
-installation.
+selected since `0.9.4` and retained for `0.9.6`. The approved Mall route is
+`v0.9.6:package/alex-act-one`; [the release record](https://github.com/fabioc-aloha/Alex_ACT_ONE)
+verifies its publication separately from assembly and installation.
 
 ## Included
 

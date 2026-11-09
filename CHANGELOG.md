@@ -5,8 +5,12 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
-Candidate version: `0.9.6`. Preparation does not publish a release, change Mall,
-or update installed plugins or runtimes.
+## 0.9.6 - 2026-11-08
+
+The user approved source and Mall publication with manual script-based
+installation. [The release record](archive/verification/release-0.9.6/README.md)
+binds the immutable source and delivery results; no local installation,
+activation or runtime replacement is claimed.
 
 - Normalize package verification roots before parent-path checks. Relative
   package/source paths no longer cause a non-terminating traversal; a bounded
@@ -24,30 +28,31 @@ or update installed plugins or runtimes.
   passed with an explicitly approved synthetic destination and cleanup.
   [Native follow-ups](archive/verification/host-accessibility/2026-11-08/native-observations.json)
   preserve unresolved transcript/form and native-download limits; R8 is not
-  closed. No release, installed update, or strong host enforcement is implied.
+  closed. These observations do not prove installed activation or strong host
+  enforcement.
 - Repaired the post-release source CI gates: restored explicit candidate
   marketplace verification wording and rebuilt both Flint demos in the
   reviewed isolated lockfile runtime. Exact comparisons prove that only the
   dependency-source provenance hash changed; chart inputs and rendered bytes
   are otherwise unchanged. Strict local structural/integration gates and
   [fresh Edge acceptance](archive/verification/source-ci/2026-11-08/browser.json)
-  passed. The published `v0.9.5` tag, payload, Mall route, and active runtimes
-  remain unchanged; hosted qualification requires the exact candidate commit.
+  passed. The immutable `v0.9.5` tag and payload remain unchanged; `0.9.6`
+  requires its own exact-commit hosted qualification.
 - Ran fresh installed `0.9.5` CLI/native VS Code scenarios and actual
   plan/agent/shell/MCP artifact-delivery checks.
   [Task evidence](archive/verification/host-scenarios/2026-11-08/README.md)
   separates complete CLI response review from native transcript/missing-input
   limits, and repository file parity from host enforcement. Scout and Copilot
   app remain not run. Repaired the source CLI runner's forced outside-repository
-  output restriction while preserving existing-evidence rejection; no new
-  release or installed-package modification is implied.
+  output restriction while preserving existing-evidence rejection. Earlier
+  installed `0.9.5` observations are not native `0.9.6` verification.
 - Detect the configured Microsoft packagefeedproxy npm endpoint in the root
   optional installer and MCP provisioner, using one shared exact-endpoint
   matcher. Preview reports the confirmed backend prefix; npm 12+ apply uses
   per-command routing without changing registry/security policy. Other
   registries remain unchanged, explicit prefixes take precedence, and continued
   fetch-policy failures stop without retries. The immutable `v0.9.5` payload
-  is unchanged; this source improvement requires separate release delivery.
+  is unchanged; `0.9.6` includes this routing improvement.
 
 ## 0.9.5 - 2026-11-08
 

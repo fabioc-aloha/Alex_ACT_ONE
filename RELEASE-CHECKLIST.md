@@ -18,6 +18,13 @@ Mall entry with manual installation. [Its record](archive/verification/release-0
 separates complete source/runtime/browser gates from unclaimed local activation.
 Neither dated decision relaxes the requirements for subsequent releases.
 
+For `0.9.6`, the user explicitly requested: "Publish and then I will install
+it using the script". This separately authorizes source and Mall publication
+with native installation/activation deferred to the user. The
+[release record](archive/verification/release-0.9.6/README.md) retains that
+scoped decision and the exact source/runtime/browser gates. No earlier
+exception is inherited, and no future release receives standing approval.
+
 ## Candidate packaging boundary
 
 When a release proposes lean distribution, use the
@@ -26,8 +33,9 @@ Require every manifest owner/resource, exact Flint demonstration, documented
 runtime dependency, and local adoption link to survive the package allowlist.
 Keep maintainer history outside the generated package. Validate a real
 disposable marketplace installation through the precise approved source route
-before changing Mall or a normal user store. The current published root route
-does not become lean merely because history moved to an archive.
+before changing Mall or a normal user store, unless the release's explicitly
+recorded manual-install exception applies. Archive relocation alone is not
+proof that the selected source-subdirectory payload was delivered.
 
 ## 1. The suite passes on a fresh clone
 

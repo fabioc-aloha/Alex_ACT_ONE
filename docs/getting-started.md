@@ -6,9 +6,10 @@ workflow. You need a working GitHub Copilot setup and Node 24 or newer, but
 Copilot CLI is the reference path below; VS Code also exposes the activation
 command. Other hosts have [their own setup steps](install.md#where-alex-act-one-works).
 
-Release version: `0.9.6` (candidate). The published Mall baseline remains
-`0.9.5`; `0.9.6` is not published. Verify the installed version and delivery
-source; this guide does not establish that a host loaded the instructions.
+Release version: `0.9.6`. Verify the installed version and delivery source;
+this guide does not establish that a host loaded the instructions.
+Publication and the separately approved manual installation are recorded in
+[the release evidence](../archive/verification/release-0.9.6/README.md).
 
 ## 1. Install
 

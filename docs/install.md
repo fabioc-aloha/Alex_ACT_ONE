@@ -12,10 +12,10 @@ tools, and historical verification notes in one reference.
 | Repository | Deprecated direct-install path: repository source selected at installation time; it can include unreleased work | Temporary candidate testing only; review root/revision and do not assume future CLI support |
 | Optional runtime | The separately provisioned chart, browser, image, and converter packages | Plugin installation does not activate instructions or provision these packages; installs and upgrades require their own approval |
 
-Release version: `0.9.6` (candidate). The published Mall baseline remains
-`0.9.5`; `0.9.6` is not published. Mall selects the reviewed release tag and its
-`package/alex-act-one` payload; the checkout contains separately prepared
-candidate changes. A version is not evidence of live-host
+Release version: `0.9.6`. Mall delivery uses the reviewed release tag and its
+`package/alex-act-one` payload. Confirm publication in
+[the release record](../archive/verification/release-0.9.6/README.md) before
+upgrading; the user performs installation separately. A version is not evidence of live-host
 activation. Packages with the same version can also contain different bytes.
 Check the loaded plugin root, installation source, and revision when available;
 if the revision cannot be established, do not claim exact source parity.
@@ -378,8 +378,8 @@ expanded marketplace checks ship in `v0.5.0`.
 
 #### Reinstall and verify ONE
 
-Only after `0.9.6` is published in Mall, close hosts that may lock the installed
-plugin before running
+After confirming `0.9.6` is available in Mall, close hosts that may lock the
+installed plugin before running
 [`reinstall-and-check.ps1`](../reinstall-and-check.ps1):
 
 ```powershell
@@ -424,7 +424,7 @@ companion plugins or system packages. `-RuntimeRoot` overrides
 `ALEX_ACT_ONE_RUNTIME_ROOT`; otherwise the shared default private runtime is
 used. Install the matching reviewed plugin before applying its runtime pins:
 older launchers intentionally reject newer MCP package versions. The `0.9.6`
-candidate reuses the reviewed `0.9.5` pins.
+release reuses the reviewed `0.9.5` pins.
 
 Check existing package versions, MCP launchers, and actual Mermaid/SVG-to-PNG
 rendering without reinstalling:
@@ -454,8 +454,8 @@ configured `https://packagefeedproxy.microsoft.io/npm/` registry and selects
 its confirmed backend prefix before installation. Preview shows
 `detected Microsoft proxy`; ordinary `-Apply` uses per-command routing.
 It does not infer a corporate network, change the registry or npm policy,
-or route other endpoints automatically. The immutable `0.9.5` payload retains
-the older explicit-only behavior.
+or route other endpoints automatically. This behavior ships in `0.9.6`;
+the immutable `0.9.5` payload retains the older explicit-only behavior.
 
 To override detection or select a separately confirmed prefix for another
 registry, use the existing explicit option:

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "status": "release-payload",
   "declaredPluginVersion": "0.9.6",
-  "sourceCommit": "9f00eb62afb8b8ec2f5fac612d2cf6d87a19b4c0",
+  "sourceCommit": "1652910a15500820ea88c9dcdb9e1cefcf507f85",
   "sourceHasUncommittedChanges": true,
   "files": [
     {
@@ -15,10 +15,10 @@
     },
     {
       "path": "README.md",
-      "sourceSha256": "1856513629b24de5b1fbfcb7f0dbe94e06b7ccd9e206c91f3cd5c310b470df16",
-      "sourceContentSha256": "a3de7ed1b52b1075849ae9337c6e7998b6bfd79863072a2d5154849ddaaf4119",
-      "sha256": "ef19a5048c20e9c386d95a75697d9236cbae4a06d97c4583f02e25d6ba641859",
-      "bytes": 50063,
+      "sourceSha256": "9c5baa638b304be58909d8d36ba23ab4d63afa9d727886559a7c715a279aa267",
+      "sourceContentSha256": "8ab86b8328e18e3da37985b7fe3093c40ed61fcc9f944d49a91a8c3afa912b6e",
+      "sha256": "0f2a76844830fe0e71f1e146547cd9b693d23f11b9f798c292e617fbbbe9a651",
+      "bytes": 50097,
       "edits": [
         "unshipped-maintainer-links-routed-to-source-repository",
         "candidate-package-scope-notice"
@@ -76,20 +76,20 @@
     },
     {
       "path": "docs/getting-started.md",
-      "sourceSha256": "45a554e272ea2fbdc7a336c0eff6957dd9a81fc4198f8a593e03200ffdcba8bd",
-      "sourceContentSha256": "4fdc5d4e3d0d0cb5e5039b19f1dedc16c4d9ae331cd8176ce91e40a5d773baa1",
-      "sha256": "0baafc5d3ba96d51aa7cccfbae15541fe7e77ded7eb56793bccbeea714dc4b8b",
-      "bytes": 4741,
+      "sourceSha256": "45c25de70be40454d133cee1cf8034ddcbcb861cffaa960dec8478ea96fbff23",
+      "sourceContentSha256": "bbc411a665bb8ab8bba4bbe46b8d1d7a2494d0ec9724b3ad60e985530bb82d6c",
+      "sha256": "1b22e864c227dead0dcd2b54af718a293a255be93f4a4dfabd1353fbcd658e80",
+      "bytes": 4805,
       "edits": [
         "unshipped-maintainer-links-routed-to-source-repository"
       ]
     },
     {
       "path": "docs/install.md",
-      "sourceSha256": "4fd915a06bac2bc1f16611c5d120c53b01f1f67f9b8fbe0f6e110869ce671102",
-      "sourceContentSha256": "a0bfb912217d09cf8f0504d1eee8869b669b3b4790d73bc027d8e2d45c23c413",
-      "sha256": "13208a6d2a1f06d5d1a3bafcd9da68d9e1055f2e8115e2924c8eb43042e60538",
-      "bytes": 25846,
+      "sourceSha256": "fb647d120932a4f72b9f457613a730f8d3585ae83e78532830ad3a47968f72a3",
+      "sourceContentSha256": "22b3391c5c3788dd974c2c035aa66469f79465a6c1216bd5edc7967cb0e1217d",
+      "sha256": "43e3e983fed8f185d9edad137dc214ddec9c477c4375f52954a5c30f51c152c6",
+      "bytes": 25895,
       "edits": [
         "unshipped-maintainer-links-routed-to-source-repository"
       ]
@@ -106,20 +106,20 @@
     },
     {
       "path": "docs/package.md",
-      "sourceSha256": "0aba65a1f584e388cf5e995f677c319cbf1968699196d58ff565614e4ce398ff",
-      "sourceContentSha256": "d5fa55cba1335b9c28b2640301028d7047f3eede63639652967c95130c50e70a",
-      "sha256": "61e30407dfdca19fdb109e4b237e563278531c2eec3ddf57e0e3c070182a6bda",
-      "bytes": 4482,
+      "sourceSha256": "436bb2d75ecc78d8ecd028904e9666560266163d08844eed7e64b5835bb210b5",
+      "sourceContentSha256": "078598c894d5f867d127a2b54ea73519b6b739f60335592dc26feaa5c090d176",
+      "sha256": "307f113bde361d6860730263a3ec762e3f32a7ff3444fca8b9ff46dfcb2e700e",
+      "bytes": 4556,
       "edits": [
         "unshipped-maintainer-links-routed-to-source-repository"
       ]
     },
     {
       "path": "docs/testing.md",
-      "sourceSha256": "b5a95bf0e922237c1f7b2f8d868929323041aa325f48707dbc96f25685fd5d1d",
-      "sourceContentSha256": "05b534cd2758e2d12d65d8eb0e663b7b3b36956d7b09a99ad73a5aa84b7ecf1a",
-      "sha256": "f1d9b915e16d533c43ffc26f5502b180708a33ec006d8172845603fa5b1bdd42",
-      "bytes": 31715,
+      "sourceSha256": "9282f7039bce2b183794c2ebeb798ce83ff2dcbd482fd64d2384d52c800b6c57",
+      "sourceContentSha256": "a82650c01770cf05b80c2f4dc48ab557c1fbe12cc8a8e7db73476084c9eb5aa7",
+      "sha256": "aed3f535d4a205a948c737909d4ddf680d276e20897450c5aa3c630bb8100737",
+      "bytes": 31752,
       "edits": [
         "unshipped-maintainer-links-routed-to-source-repository",
         "candidate-package-scope-notice"
