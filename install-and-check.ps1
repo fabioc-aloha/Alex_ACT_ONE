@@ -376,7 +376,9 @@ for (const key of ['jszip', 'mmdc', 'svgexport']) {
     packages.push({ name: tool.package, version: tool.version,
         scope: tool.kind === 'npm-global' ? 'global' : 'private', route: null });
 }
-console.log(JSON.stringify({ packages, detectedTarballPrefix: deps.registryTarballPrefix(process.argv[2]),
+const routingAvailable = typeof deps.registryTarballPrefix === 'function';
+console.log(JSON.stringify({ packages, routingAvailable,
+    detectedTarballPrefix: routingAvailable ? deps.registryTarballPrefix(process.argv[2]) : null,
     pandocInstall: deps.TOOLS.pandoc.install, pillowPackage: deps.TOOLS.Pillow.package }));
 '@
     $configuration = ((Invoke-CheckedCommand -Command $NodeCommand -Arguments @('-e', $readPins, $dependencyRegistry, $registry)) -join "`n") | ConvertFrom-Json
@@ -399,6 +401,9 @@ console.log(JSON.stringify({ packages, detectedTarballPrefix: deps.registryTarba
     Write-Output "Registry: $registry"
     Write-Output "Private runtime: $RuntimeRoot"
     Write-Output "Global npm prefix: $globalPrefix"
+    if (-not $configuration.routingAvailable) {
+        Write-Output 'Automatic tarball routing is unavailable in this older plugin registry; use a confirmed explicit prefix if needed. No registry policy was changed.'
+    }
     if ($effectiveBrowser) { Write-Output "Browser executable: $effectiveBrowser ($browserSource; renderer processes only)" }
     else { Write-Output 'Browser executable: Puppeteer default; no browser auto-detection.' }
     if ($RegistryTarballPrefix) {

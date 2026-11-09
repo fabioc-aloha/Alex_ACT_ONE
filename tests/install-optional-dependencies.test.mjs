@@ -40,6 +40,13 @@ function runInstaller(t, shell, options = {}) {
     const log = join(root, 'commands.log');
     const npm = join(root, 'npm.ps1');
     const wrapper = join(root, 'dependencies-wrapper.ps1');
+    let pluginRoot = ROOT;
+    if (options.legacyRegistry) {
+        pluginRoot = join(root, 'legacy-plugin');
+        const registry = join(pluginRoot, 'scripts', 'shared', 'dependencies.cjs');
+        mkdirSync(dirname(registry), { recursive: true });
+        writeFileSync(registry, `module.exports = { ...require(${JSON.stringify(join(ROOT, 'scripts', 'shared', 'dependencies.cjs'))}) };\ndelete module.exports.registryTarballPrefix;\n`);
+    }
     const systemLog = join(root, 'system.log');
     const pandoc = join(root, 'pandoc.ps1');
     const pandocTemplate = join(root, 'pandoc-template.ps1');
@@ -230,7 +237,7 @@ exit 1
             TEMP: root, TMP: root, TMPDIR: root,
             FAKE_POWERSHELL: shell,
             FAKE_SETUP_SCRIPT: script,
-            FAKE_PLUGIN_ROOT: ROOT,
+            FAKE_PLUGIN_ROOT: pluginRoot,
             FAKE_SYSTEM_LOG: systemLog,
             FAKE_PANDOC_TEMPLATE: pandocTemplate,
             FAKE_PANDOC_COMMAND: pandoc,
@@ -340,6 +347,14 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
         assert.ok(output.includes(`${mismatch.name}@${mismatch.version}; installed=0.0.1; status=mismatched`));
         assert.ok(commands.every(args => args[0] !== 'view' && args[0] !== 'install'));
         assert.deepEqual(renderers, []);
+    });
+
+    test(`${shell}: default can report an older installed registry without borrowing checkout routing`, t => {
+        const { commands, output } = runInstaller(t, shell, { legacyRegistry: true, registry: microsoftProxy });
+        assert.match(output, /older plugin registry/);
+        assert.match(output, /Automatic tarball routing is unavailable/);
+        assert.doesNotMatch(output, /detected Microsoft proxy/);
+        assert.ok(commands.every(args => args[0] !== 'view' && args[0] !== 'install'));
     });
 
     test(`${shell}: apply refuses missing Python before any package installation`, t => {

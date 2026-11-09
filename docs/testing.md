@@ -39,6 +39,9 @@ than the checkout, downgraded or invalid catalogs, failed/no-op updates,
 registration guards, selected-home isolation, real bootstrap conflicts,
 missing/matched/mismatched dependency reports, selected Python/pip, missing
 winget, system installer failures/no-ops and invalid-option preflight.
+Older installed registries without automatic tarball-routing support still
+report their own pins with an explicit capability limitation; the helper does
+not borrow newer checkout routing behavior.
 No live helper installation or activation was run to validate these changes.
 The source scripts and help have no retired image-provider setup options;
 negative regressions retain the removed-option rejection.
