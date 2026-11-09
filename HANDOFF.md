@@ -6,42 +6,39 @@
   verification, and release preparation from [ROADMAP.md](ROADMAP.md), not
   cross-repository recovery or fleet operations.
 - The published baseline is
-  [0.9.5](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.5),
-  frozen at `26d0518ec998817ed2d5c27a66855a58747e820c`. The full same-commit
-  source matrix passed. Mall publication selects `v0.9.5` and
-  `package/alex-act-one`; [the release evidence](archive/verification/release-0.9.5/README.md)
+  [0.9.6](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.6),
+  frozen at `0e71824e3a931a3beeb3bd8e97c76d3c7273b93b`. The full same-commit
+  source matrix passed. Mall publication selects `v0.9.6` and
+  `package/alex-act-one`; [the release evidence](archive/verification/release-0.9.6/README.md)
   records exact source, payload, browser, and public catalog observations.
-- Source metadata and the canonical payload now declare the prepared `0.9.6`
-  candidate. [Preparation evidence](archive/verification/candidate-0.9.6/preparation.json)
-  records exact package/source hashes, both version-stamped demos, no-write
-  disposable bootstrap, caught fault controls and fresh browser acceptance.
-  The relative-path package-verification hang was reproduced and fixed.
-  Its exact candidate commit requires fresh qualification.
-  Published Mall and installed `0.9.5` remain separate;
-  no tag, marketplace entry, installation or profile activation is changed.
+- The user explicitly approved publication before their manual script
+  installation. GitHub and Mall delivery are verified; native `0.9.6`
+  installation, cache parity, activation and host restart remain unverified.
+  The earlier [preparation evidence](archive/verification/candidate-0.9.6/preparation.json)
+  remains historical. The relative-path package-verification hang was fixed.
 - The release includes hardened artifact/account checks, native Windows path
   resolution, regression coverage, and the [lean package boundary](docs/package.md).
-  Both Flint demonstrations are retained and rebuilt with reviewed newer pins.
+  Both Flint demonstrations are retained with the reviewed locked pins.
   Replicate support is removed; old user state is not deleted. The root helpers
   now support explicit safe refresh and selected-runtime verification.
-- After the user's manual reinstall, native inventory reports enabled `0.9.5`
-  from `alex-mall`. The loaded installed cache reports `0.9.5`; consented
+- After the earlier manual reinstall, the last recorded native inventory was enabled `0.9.5`
+  from `alex-mall`. The then-loaded installed cache reported `0.9.5`; consented
   bootstrap verification matched all 15 instruction hashes and the unchanged
   current receipt. This does not prove every host loaded the instructions.
 - The user's dependency installation succeeded with explicit proxy routing.
   A later no-install check verified all six selected pins, both MCP launchers,
   Mermaid SVG, and SVG-to-PNG rendering with existing Edge. Host MCP
   connectivity remains separate.
-- Unreleased source now detects the exact configured Microsoft npm proxy and
+- Release `0.9.6` detects the exact configured Microsoft npm proxy and
   selects its confirmed tarball prefix automatically. Explicit routing wins;
   npm settings/security policy are unchanged. The installed/released `0.9.5`
-  payload remains immutable and does not contain this source improvement.
+  payload remains immutable and does not contain this `0.9.6` improvement.
 - Post-release CI exposed missing candidate marketplace wording and stale
   demo provenance. Both are repaired in source; exact rebuilds changed only
   the dependency-source hash. Standalone strict local gates and fresh Edge
   acceptance passed; [testing](docs/testing.md#post-release-source-ci-repair)
   records the working-source evidence separately from hosted qualification.
-- The approved next-candidate hardening adds measured SVG contrast and broader
+- The `0.9.6` hardening adds measured SVG contrast and broader
   keyboard/focus checks. Both demos pass with contrast-tuned house themes,
   opaque points and a numeric bounded-score heatmap mapping. Exact external
   synthetic artifact bytes verified at an approved destination and were
@@ -56,8 +53,8 @@
   missing-input forms stop at clarification. Scout/Copilot app were not run.
 - Actual plan/agent/shell/MCP artifact files are repository-owned and Git-visible.
   Ignored and changed-source synthetic controls exposed stranded artifacts.
-  No host write-blocking hooks, stronger enforcement, installation changes,
-  or external publication occurred. The source CLI runner now accepts a new
+  Those host observations added no write-blocking hooks, stronger enforcement
+  or installation changes. The CLI runner now accepts a new
   explicit repository evidence directory instead of forcing output outside it.
 - Completed recovery, retention, and synchronization records are preserved
   in [the archive](archive/README.md). That work is closed historical context,
@@ -66,7 +63,7 @@
 
 ## Blockers
 
-- Exact installed/cache `0.9.5` bytes are verified; the `0.9.6` candidate's
+- Exact installed/cache `0.9.5` bytes were verified; the `0.9.6` release's
   native installation is not. Native transcript completeness, unanswered
   clarification flows, additional hosts, coverage beyond the approved
   synthetic external destination, and stronger write enforcement remain gaps.
@@ -81,12 +78,13 @@
 
 ## Next Action
 
-Use the prepared `0.9.6` candidate's exact-commit full matrix, clean-checkout
-results, exact demo rebuilds and package receipt to qualify its metadata and
-payload. Do not inherit the green `9f00eb6` source run across a version or
-payload change. If those gates pass, choose the next delivery operation; publication,
-Mall updates, installation, and activation still require separate approval.
-If any gate fails, repair that candidate before proceeding.
+The user will run `.\reinstall-and-check.ps1 -Refresh -ExpectedVersion 0.9.6`
+from a standalone terminal after closing hosts that may lock the package.
+Leave installation to the user unless separately authorized. Record actual
+installed root/version, package/cache parity, bootstrap receipt and restart
+observations separately; publication does not prove any of them.
+Preserve the immutable `v0.9.6` tag and its exact verified payload. Later
+delivery changes require their own reviewed commit and fresh gates.
 Continue R8/artifact-host observations only for the remaining authorized gaps
 in [ROADMAP.md](ROADMAP.md), using the frozen task evidence rather than rerunning
 known cases and calling them broader coverage. The 107 focused
@@ -101,6 +99,9 @@ Do not resume adopter-recovery operations from this handoff.
 
 ## Verification
 
+- [0.9.6 verification](archive/verification/release-0.9.6/README.md) records
+  the frozen source, six-job matrix, exact payload, fresh browser observations,
+  public Mall route and explicitly deferred manual installation.
 - [Testing](docs/testing.md) owns verification environments and dated limits;
   structural release checks require a Git checkout, not an installed cache.
 - [0.9.5 verification](archive/verification/release-0.9.5/README.md) records

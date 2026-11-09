@@ -7,9 +7,12 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## 0.9.6 - 2026-11-08
 
-The user approved source and Mall publication with manual script-based
-installation. [The release record](archive/verification/release-0.9.6/README.md)
-binds the immutable source and delivery results; no local installation,
+Published [v0.9.6](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.6)
+from `0e71824e3a931a3beeb3bd8e97c76d3c7273b93b` after the full six-job matrix,
+fresh-checkout structural gate, provisioned integration, exact demos and
+browser acceptance passed. Mall publication passed 69 tests and public-route
+verification. [The release record](archive/verification/release-0.9.6/README.md)
+retains the user's explicit manual-install exception; no local installation,
 activation or runtime replacement is claimed.
 
 - Normalize package verification roots before parent-path checks. Relative

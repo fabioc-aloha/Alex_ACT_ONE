@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "release": {
+    "isDraft": false,
+    "isPrerelease": false,
+    "publishedAt": "2026-11-09T02:20:11Z",
+    "tagName": "v0.9.6",
+    "targetCommitish": "0e71824e3a931a3beeb3bd8e97c76d3c7273b93b",
+    "url": "https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.6"
+  },
+  "sourceCommit": "0e71824e3a931a3beeb3bd8e97c76d3c7273b93b",
+  "ci": {
+    "url": "https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/runs/42549910373",
+    "headSha": "0e71824e3a931a3beeb3bd8e97c76d3c7273b93b",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "Provisioned runtime / windows-2025 / Node 26",
+        "conclusion": "success"
+      },
+      {
+        "name": "Provisioned runtime / ubuntu-24.04 / Node 26",
+        "conclusion": "success"
+      },
+      {
+        "name": "Structural / ubuntu-24.04 / Node 24",
+        "conclusion": "success"
+      },
+      {
+        "name": "Structural / windows-2025 / Node 24",
+        "conclusion": "success"
+      },
+      {
+        "name": "Structural / windows-2025 / Node 26",
+        "conclusion": "success"
+      },
+      {
+        "name": "Structural / ubuntu-24.04 / Node 26",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "freshWindowsCheckout": {
+    "structuralPassed": 633,
+    "failed": 0,
+    "skipped": 0,
+    "sourceUnchanged": true,
+    "packageAndSourceHashesVerified": true
+  },
+  "provisionedWindowsCI": {
+    "integrationPassed": 57,
+    "failed": 0,
+    "skipped": 0,
+    "bothExactDemoRebuildsPassed": true
+  },
+  "payload": {
+    "path": "package/alex-act-one",
+    "files": 254,
+    "bytes": 11331512.0,
+    "receiptSha256": "f05573aeebcd611ce4da0d167ecfd97f29143f9ab11e931ef3b4a9d6ea26af28"
+  },
+  "bootstrap": {
+    "apply": false,
+    "expectedFiles": 15,
+    "disposableTargetCreated": false
+  },
+  "browserEvidence": "browser.json",
+  "mall": {
+    "repository": "fabioc-aloha/Alex_Skill_Mall",
+    "metadataCommit": "7a8a80a6eeb36df3ced6ca71c9bde1c983891c9c",
+    "publicationCommit": "03cb946214923b6ec9464cf42f09b5710d75dd69",
+    "version": "0.9.6",
+    "ref": "v0.9.6",
+    "path": "package/alex-act-one",
+    "canonicalSourceModeFileCount": 2,
+    "testsPassed": 69,
+    "failed": 0,
+    "skipped": 0,
+    "catalogValidation": "PASS",
+    "publicMainEntryVerified": true,
+    "pushNotice": "GitHub accepted the fast-forward with existing rule-bypass notices; no rule configuration changed."
+  },
+  "manualInstallation": {
+    "approvalQuote": "Publish and then I will install it using the script",
+    "scope": "0.9.6-only publication before native installation",
+    "publisherInstalledPlugin": false,
+    "publisherActivatedRealProfile": false,
+    "publisherUpdatedActiveRuntime": false,
+    "nativeInstallationStatus": "deferred to the user; not verified",
+    "command": ".\\reinstall-and-check.ps1 -Refresh -ExpectedVersion 0.9.6"
+  },
+  "priorRelease": {
+    "tag": "v0.9.5",
+    "sourceCommit": "26d0518ec998817ed2d5c27a66855a58747e820c",
+    "preserved": true
+  }
+}

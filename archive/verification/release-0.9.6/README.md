@@ -10,12 +10,34 @@ requirements, and it grants no standing approval for another release.
 
 ## Release binding
 
-The immutable release must select the final source commit whose full six-job
-Windows/Ubuntu matrix passes after release notices and payload regeneration.
-Earlier candidate commit `1652910` is preparation evidence, not the final cut.
-Publication and Mall results are added after they are actually observed.
-For the completed record after publication, use
+Published source: `0e71824e3a931a3beeb3bd8e97c76d3c7273b93b`.
+The [release](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.6)
+and public Mall select `v0.9.6:package/alex-act-one`.
+Earlier candidate commit `1652910` remains preparation evidence, not the cut.
+For the completed record when viewing the frozen tag's earlier snapshot, use
 [this record on main](https://github.com/fabioc-aloha/Alex_ACT_ONE/blob/main/archive/verification/release-0.9.6/README.md).
+
+## Observed publication results
+
+- [All six same-commit Windows/Ubuntu jobs passed](https://github.com/fabioc-aloha/Alex_ACT_ONE/actions/runs/42549910373).
+- Fresh Windows checkout: 633 structural tests passed without failures, skips,
+  todos or cancellations. The provisioned Windows CI lane passed 57 integration
+  tests; both exact canonical demo rebuilds passed there.
+- All 254 payload files and 11,331,512 payload bytes verified against their
+  receipt and source hashes; the receipt is additional.
+- Fresh release-task Edge acceptance passed both demos. Packaged bootstrap
+  preview planned all 15 instructions, reported `apply: false`, and created no
+  target directory in the explicit disposable fixture.
+- Canonical source-mode Mall packaging validated the two-file metadata entry.
+  Metadata commit `7a8a80a6eeb36df3ced6ca71c9bde1c983891c9c` preceded catalog
+  generation. Publication commit
+  `03cb946214923b6ec9464cf42f09b5710d75dd69` passed all 69 tests and catalog
+  validation; the public version/ref/path was verified through GitHub's API.
+  GitHub accepted the push with existing rule-bypass notices; no rule changed.
+- The prior `v0.9.5` tag still resolves to
+  `26d0518ec998817ed2d5c27a66855a58747e820c`. No tag was moved.
+- [Structured publication evidence](publication.json) retains exact bindings
+  and separately names native installation as deferred.
 
 ## Evidence and retained limits
 

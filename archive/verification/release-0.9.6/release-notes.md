@@ -23,9 +23,11 @@ chart readability without changing the reviewed dependency pins.
 
 ## Verification boundaries
 
-The exact final release commit requires the full Windows/Ubuntu matrix,
-fresh-checkout strict gates, exact demo rebuilds, package/source hashes and
-browser acceptance. See [the release record](README.md) for actual results.
+The exact final release commit passed the full Windows/Ubuntu matrix,
+fresh-checkout structural gate, provisioned integration lanes, exact demo
+rebuilds, package/source hashes and browser acceptance. See
+[the release record](https://github.com/fabioc-aloha/Alex_ACT_ONE/blob/main/archive/verification/release-0.9.6/README.md)
+for actual results.
 Passing structural tests is not all-host behavior or accessibility certification.
 Native transcript/form completion, integrated-browser download completion,
 broader accessibility, strong write enforcement and runtime rollback remain
