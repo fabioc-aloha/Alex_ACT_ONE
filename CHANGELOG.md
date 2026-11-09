@@ -5,6 +5,17 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+- Replaced the two source root helpers with `install-and-check.ps1`.
+  Default mode refreshes marketplace catalogs and reports plugin/dependency
+  status without installing or activating. `-Apply` installs/updates the latest
+  Mall plugin, bootstraps its owned instructions, then uses its own reviewed
+  pins and launchers for dependency setup. Missing Windows Pandoc uses winget;
+  missing Pillow uses an existing selected Python and configured pip. Existing
+  system tools are checked, not silently upgraded; Python installation,
+  auto-elevation and policy bypasses are excluded. Strict `-VerifyOnly` remains
+  available. Old root names are removed from active source and package inputs,
+  not from immutable release snapshots.
+
 - Simplified the source root helper: default mode connects Alex Mall if missing,
   refreshes all registered marketplace catalogs and reports installed/latest
   versions. Only `-Apply` installs or updates the latest stable Mall release

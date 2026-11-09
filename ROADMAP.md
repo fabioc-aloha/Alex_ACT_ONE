@@ -117,8 +117,9 @@ local Windows results are not a replacement for a green same-commit matrix.
 - Before enabling automatic plugin replacement, design and test staged delivery
   and rollback without overwriting unrelated profile state. The source helper
   now refreshes marketplace catalogs and reports versions by default; explicit
-  `-Apply` installs/updates the latest Mall release and activates guarded owned
-  instructions without uninstalling first. That is not staged/transactional rollback
+  `-Apply` in `install-and-check.ps1` installs/updates the latest Mall release,
+  bootstraps guarded owned instructions and sets up dependencies from that
+  installed owner's pins. It never uninstalls first. That is not staged/transactional rollback
   or standing authority for automatic replacement.
 
 **Done when:** the selected delivery operation is verified end to end.

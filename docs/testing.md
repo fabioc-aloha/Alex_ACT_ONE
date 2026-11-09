@@ -22,26 +22,31 @@ macOS and other Node versions are not covered by this workflow.
 
 ## Simplified root-helper source checks
 
-The 2026-11-09 source helper separates marketplace refresh/version reporting
-from plugin changes. Default mode adds only missing Alex Mall and refreshes
-registered catalogs; only `-Apply` installs/updates and activates owned
-instructions. The selected GitHub marketplace catalog supplies the latest
-stable version, independently of checkout metadata. Native CLI help confirmed
+The 2026-11-09 source has one root `install-and-check.ps1` entry point.
+Default mode connects Alex Mall, refreshes catalogs and reports plugin and
+dependency versions. Only `-Apply` installs/updates the plugin, bootstraps
+owned instructions, then sets up dependencies from that installed owner's
+pins and launcher. Missing Windows Pandoc and selected-Python Pillow are
+installed only with consent; existing system tools are not upgraded and
+Python is not installed. Native CLI help confirmed
 that marketplace update without a name refreshes all registered catalogs;
 its browse JSON does not expose release versions.
 
-Disposable PowerShell 7 and Windows PowerShell 5.1 fixtures cover report-only
-behavior without Node, absent/older/disabled packages, a Mall version newer
+Disposable PowerShell 7 and Windows PowerShell 5.1 fixtures cover the plugin
+stage, dependency stage and their ordered orchestration. Cases include
+absent/older/disabled packages, a Mall version newer
 than the checkout, downgraded or invalid catalogs, failed/no-op updates,
-registration guards, selected-home isolation, and real bootstrap conflicts.
+registration guards, selected-home isolation, real bootstrap conflicts,
+missing/matched/mismatched dependency reports, selected Python/pip, missing
+winget, system installer failures/no-ops and invalid-option preflight.
 No live helper installation or activation was run to validate these changes.
 The source scripts and help have no retired image-provider setup options;
 negative regressions retain the removed-option rejection.
 The published `0.9.6` payload remains frozen with its earlier helper interface.
-The focused Windows run passed 186 helper/onboarding/documentation tests; the
-strict structural source lane passed 655 tests, without failures, skips, todos
-or cancellations. Both demo rebuilds passed in the approved disposable locked
-runtime; exact comparisons show only the shared dependency-source hash changed.
+Before unification, the focused split-helper Windows run passed 186 tests and
+the structural lane passed 655 without failures, skips, todos or cancellations.
+That earlier demo rebuild changed only the shared dependency-source hash.
+These are historical source observations, not the unified helper's verdict.
 
 ## Post-release proxy-routing source verification
 

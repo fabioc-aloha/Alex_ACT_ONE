@@ -9,7 +9,7 @@ const require = createRequire(import.meta.url);
 const { runPowerShell } = require('./helpers/powershell.cjs');
 
 const ROOT = new URL('..', import.meta.url);
-const SCRIPT = new URL('../reinstall-and-check.ps1', import.meta.url);
+const SCRIPT = new URL('../install-and-check.ps1', import.meta.url);
 const ROOT_PATH = fileURLToPath(ROOT);
 const SCRIPT_PATH = fileURLToPath(SCRIPT);
 const VERSION = JSON.parse(readFileSync(new URL('../plugin.json', import.meta.url), 'utf8')).version;
@@ -183,7 +183,8 @@ function Invoke-RestMethod {
     return ('${JSON.stringify(options.catalog || { plugins: [{ name: 'alex-act-one', version: latestVersion }] })}' | ConvertFrom-Json)
 }
 try {
-    & $env:FAKE_RELEASE_SCRIPT @PSBoundParameters
+    . $env:FAKE_RELEASE_SCRIPT @PSBoundParameters
+    Invoke-PluginSetup | Out-Null
 } finally {
     @{ present = (Test-Path Env:COPILOT_HOME); value = $env:COPILOT_HOME } |
         ConvertTo-Json -Compress | Set-Content -LiteralPath $env:FAKE_RESTORED_LOG

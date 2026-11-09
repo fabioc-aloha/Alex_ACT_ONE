@@ -24,7 +24,7 @@ test('retired image provider is absent from declared assets, provisioning, and C
 
 test('active runtime guidance contains no retired provider installation or routing instructions', () => {
     for (const name of [
-        'reinstall-and-check.ps1', 'install-optional-dependencies.ps1',
+        'install-and-check.ps1',
         'scripts/shared/dependencies.cjs',
         'skills/setup-dependencies/scripts/check-dependencies.cjs',
         'skills/setup-dependencies/scripts/provision-runtime.mjs',

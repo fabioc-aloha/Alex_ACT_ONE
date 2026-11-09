@@ -29,7 +29,7 @@ test('one short guide covers install, consented activation, verification, and a 
     assert.doesNotMatch(text, /copilot plugin install fabioc-aloha\/Alex_ACT_ONE/);
     assert.ok(text.includes('](install.md#mall-option)'));
     const reference = read(referencePath);
-    const marketplace = read('reinstall-and-check.ps1').match(/MarketplaceSource = '([^']+)'/)?.[1];
+    const marketplace = read('install-and-check.ps1').match(/MarketplaceSource = '([^']+)'/)?.[1];
     assert.ok(marketplace, 'Use the same reviewed marketplace as the repository installer');
     const register = `copilot plugin marketplace add ${marketplace}`;
     assert.ok(text.includes(register), 'A fresh profile must register Mall before using its install command');

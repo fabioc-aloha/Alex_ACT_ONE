@@ -323,13 +323,13 @@ From the current source checkout, first refresh catalogs and inspect versions
 without changing plugins or instructions:
 
 ```powershell
-.\reinstall-and-check.ps1
+.\install-and-check.ps1
 ```
 
 After separate installation approval, close hosts that may lock the package:
 
 ```powershell
-.\reinstall-and-check.ps1 -Apply
+.\install-and-check.ps1 -Apply
 ```
 
 The simplified source helper registers only missing Alex Mall, verifies its
@@ -354,18 +354,23 @@ receipt state, not whole-package source parity or host activation after restart.
 This is not staged/transactional rollback; keep that separate runtime design
 gate open.
 
-Optional npm dependencies have a separate, preview-first installer:
+The same entry point reports dependency versions by default and sets up the
+installed plugin's reviewed pins only with explicit apply:
 
 ```powershell
-.\install-optional-dependencies.ps1
-.\install-optional-dependencies.ps1 -Apply
+.\install-and-check.ps1
+.\install-and-check.ps1 -Apply
 ```
 
-It reads the shared version pins and uses the configured npm registry.
+It reads the installed plugin's shared version pins and uses the configured npm registry.
 Flint, Playwright, and JSZip go into ONE's private runtime; Mermaid CLI and
 svgexport use the npm global prefix;
-companion plugins, Pandoc, and Pillow are not installed. Browser downloads
-may occur during installation.
+companion plugins and Python itself are not installed. Only missing Pandoc
+(Windows winget) and Pillow (selected existing Python/pip) are installed with
+`-Apply`; existing system tools are checked, not silently upgraded. Missing
+Python/winget or unsupported system installation stops dependency changes with
+guidance. No forced elevation, agreement acceptance or policy bypass is added.
+Browser downloads may occur during npm installation.
 All pins are checked before installation; registry or policy failures stop
 the script without registry changes or policy overrides. A failed install
 may leave partial package state. Success verifies installed versions and
@@ -382,7 +387,7 @@ To check an existing installation without reinstalling or querying package
 availability, use:
 
 ```powershell
-.\install-optional-dependencies.ps1 -VerifyOnly
+.\install-and-check.ps1 -VerifyOnly
 ```
 
 To verify rendering with an existing compatible browser when npm lifecycle
@@ -391,10 +396,10 @@ explicitly (or validate an inherited `PUPPETEER_EXECUTABLE_PATH`):
 
 ```powershell
 $browser = 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
-.\install-optional-dependencies.ps1 -VerifyOnly -BrowserExecutablePath $browser
+.\install-and-check.ps1 -VerifyOnly -BrowserExecutablePath $browser
 ```
 
-The selected path is validated before any `npm` command runs and is passed only
+The selected path is validated before plugin or dependency changes and is passed only
 to renderer child processes (`mmdc` and `svgexport`); it does not auto-detect a
 browser or alter the parent environment. Browser acquisition remains a separate
 decision because Puppeteer downloads browsers outside the npm feed. The pinned
@@ -414,7 +419,7 @@ The published `0.9.5` payload retains explicit-only routing. To override the
 detected mapping or select another confirmed backend prefix:
 
 ```powershell
-.\install-optional-dependencies.ps1 -RegistryTarballPrefix 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/'
+.\install-and-check.ps1 -RegistryTarballPrefix 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/'
 # Review the preview, then repeat with -Apply.
 ```
 

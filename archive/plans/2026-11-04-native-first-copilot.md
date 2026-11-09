@@ -615,7 +615,7 @@ the discovery/inclusion/behavior checks and preserves existing integrations.
 
 **Depends on:** T5 passing on the intended client. Do not remove bootstrap first.
 
-**Files:** [bootstrap-core.cjs](../../skills/bootstrap-core/scripts/bootstrap-core.cjs), [host-readiness.cjs](../../skills/bootstrap-core/scripts/host-readiness.cjs), [reinstall-and-check.ps1](../../reinstall-and-check.ps1), [activation-readiness.test.mjs](../../tests/activation-readiness.test.mjs), [reinstall-release.test.mjs](../../tests/reinstall-release.test.mjs).
+**Files:** [bootstrap-core.cjs](../../skills/bootstrap-core/scripts/bootstrap-core.cjs), [host-readiness.cjs](../../skills/bootstrap-core/scripts/host-readiness.cjs), [reinstall-and-check.ps1](https://github.com/fabioc-aloha/Alex_ACT_ONE/blob/v0.9.6/reinstall-and-check.ps1), [activation-readiness.test.mjs](../../tests/activation-readiness.test.mjs), [reinstall-release.test.mjs](../../tests/reinstall-release.test.mjs).
 
 1. Write failing tests for unchanged receipt-owned copies, modified copies,
    foreign ownership, malformed receipts, duplicate native/copied activation,

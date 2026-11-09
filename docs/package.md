@@ -20,8 +20,9 @@ verifies its publication separately from assembly and installation.
   Flint HTML demonstrations.
 - The locked demonstration runtime inputs and the explicitly documented
   standalone Rich Email regression test.
-- Plugin metadata, license, optional installer and installation-verification
-  scripts, and a package-specific scope notice in the README/testing guide.
+- Plugin metadata, license, the unified root setup helper, and a package-specific
+  scope notice in the README/testing guide. Source candidates use
+  `install-and-check.ps1`; older frozen payloads retain their original helpers.
 
 ## Excluded
 

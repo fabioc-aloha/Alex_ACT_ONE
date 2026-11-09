@@ -205,6 +205,6 @@ test('release notices match package metadata and keep historical candidate switc
     ]) assert.ok(install.includes(command), command);
     assert.match(install, /uninstall.*does not.*(?:instruction|profile)/is);
     assert.match(install, /preview.*approval/is);
-    assert.match(install, /not.*reinstall-and-check\.ps1/is);
+    assert.match(install, /not.*install-and-check\.ps1/is);
     assert.match(install, /historical.*candidate|candidate.*historical/i);
 });

@@ -46,10 +46,14 @@
       "source": "docs/plans/2026-11-04-native-first-copilot.md",
       "destination": "archive/plans/2026-11-04-native-first-copilot.md",
       "originalSha256": "ef6323bab5b9dad6368821351d6c2e60ff7a7cca06092bd13f81b282ff0fc7cc",
-      "sha256": "ef6323bab5b9dad6368821351d6c2e60ff7a7cca06092bd13f81b282ff0fc7cc",
+      "sha256": "4c6e5e57215409fef937c9dab9095685d9b23099049bf69b308e308c3aa25c7d",
       "originalBytes": 76416,
-      "bytes": 76416,
-      "edits": []
+      "bytes": 76467,
+      "edits": [
+        "2026-11-09: retired-helper relative link routed to immutable v0.9.6; prose and code examples unchanged"
+      ],
+      "preservedOriginal": "https://github.com/fabioc-aloha/Alex_ACT_ONE/blob/v0.9.6/archive/plans/2026-11-04-native-first-copilot.md",
+      "preservationNote": "Original content matches v0.9.6 after LF/CRLF normalization; original checkout byte hash and size remain recorded."
     },
     {
       "source": "docs/testing.md",

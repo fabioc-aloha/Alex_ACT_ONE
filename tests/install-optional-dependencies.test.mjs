@@ -1,14 +1,14 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, realpathSync, readFileSync, rmSync, writeFileSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { mkdtempSync, mkdirSync, realpathSync, readFileSync, rmSync, writeFileSync, existsSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
 const { runPowerShell } = require('./helpers/powershell.cjs');
 const deps = require('../scripts/shared/dependencies.cjs');
-const script = fileURLToPath(new URL('../install-optional-dependencies.ps1', import.meta.url));
+const script = fileURLToPath(new URL('../install-and-check.ps1', import.meta.url));
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const packages = [
     ...deps.mcpPackages(['flint', 'playwright']).map(pkg => ({
@@ -28,8 +28,61 @@ function runInstaller(t, shell, options = {}) {
     t.after(() => rmSync(root, { recursive: true, force: true }));
     const runtime = join(root, 'runtime');
     const globalPrefix = join(root, 'global');
+    for (const [name, version] of Object.entries(options.seededPackages || {})) {
+        const pkg = packages.find(pkg => pkg.name === name);
+        assert.ok(pkg, 'Fixture must seed a declared dependency');
+        const modules = pkg.scope === 'private' ? join(runtime, 'node_modules')
+            : process.platform === 'win32' ? join(globalPrefix, 'node_modules') : join(globalPrefix, 'lib', 'node_modules');
+        const file = join(modules, name, 'package.json');
+        mkdirSync(dirname(file), { recursive: true });
+        writeFileSync(file, JSON.stringify({ name, version }));
+    }
     const log = join(root, 'commands.log');
     const npm = join(root, 'npm.ps1');
+    const wrapper = join(root, 'dependencies-wrapper.ps1');
+    const systemLog = join(root, 'system.log');
+    const pandoc = join(root, 'pandoc.ps1');
+    const pandocTemplate = join(root, 'pandoc-template.ps1');
+    const python = join(root, 'python.ps1');
+    const winget = join(root, 'winget.ps1');
+    const pillowState = join(root, 'pillow-installed');
+    writeFileSync(pandocTemplate, "param([Parameter(ValueFromRemainingArguments=$true)][string[]]$Arguments)\nWrite-Output 'pandoc 3.13'\nexit 0\n");
+    if (!options.missingPandoc) writeFileSync(pandoc, readFileSync(pandocTemplate));
+    if (!options.missingPython) writeFileSync(python, `
+param([Parameter(ValueFromRemainingArguments=$true)][string[]]$Arguments)
+ConvertTo-Json -InputObject $Arguments -Compress | Add-Content -LiteralPath $env:FAKE_SYSTEM_LOG
+if (($Arguments[0..1] -join ' ') -eq '-B -c') {
+    $present = $env:FAKE_MISSING_PILLOW -ne '1' -or (Test-Path -LiteralPath $env:FAKE_PILLOW_STATE)
+    @{ present=$present; version=$(if($present){'12.2.0'}else{$null}); executable='selected-fixture-python' } | ConvertTo-Json -Compress
+    exit 0
+}
+if (($Arguments -join ' ') -eq '-m pip --version') { Write-Output 'pip 25.3'; exit 0 }
+if (($Arguments -join ' ') -eq '-m pip install Pillow') {
+    if ($env:FAKE_SYSTEM_FAILURE -eq 'pillow') { Write-Output 'fixture pip policy failure'; exit 1 }
+    if ($env:FAKE_SYSTEM_NOOP -ne 'pillow') { Set-Content -LiteralPath $env:FAKE_PILLOW_STATE -Value 'installed' }
+    exit 0
+}
+throw 'Unexpected selected-Python invocation'
+`, 'utf8');
+    if (!options.missingWinget) writeFileSync(winget, `
+param([Parameter(ValueFromRemainingArguments=$true)][string[]]$Arguments)
+ConvertTo-Json -InputObject $Arguments -Compress | Add-Content -LiteralPath $env:FAKE_SYSTEM_LOG
+if (($Arguments -join ' ') -ne 'install --id JohnMacFarlane.Pandoc --exact') { throw 'Unexpected winget arguments' }
+if ($env:FAKE_SYSTEM_FAILURE -eq 'pandoc') { Write-Output 'fixture winget failure'; exit 1 }
+if ($env:FAKE_SYSTEM_NOOP -ne 'pandoc') { Copy-Item -LiteralPath $env:FAKE_PANDOC_TEMPLATE -Destination $env:FAKE_PANDOC_COMMAND }
+exit 0
+`, 'utf8');
+    writeFileSync(wrapper, `
+param([switch]$Apply,[switch]$VerifyOnly,[string]$RegistryTarballPrefix,[string]$BrowserExecutablePath,
+    [string]$RuntimeRoot,[string]$NpmCommand,[string]$NodeCommand,[string]$PythonCommand,
+    [string]$PandocCommand,[string]$WingetCommand,[switch]$IncludeReplicate)
+if ($PSBoundParameters.ContainsKey('IncludeReplicate')) {
+    & $env:FAKE_SETUP_SCRIPT @PSBoundParameters
+} else {
+    . $env:FAKE_SETUP_SCRIPT @PSBoundParameters
+    Invoke-DependencySetup -PluginRoot $env:FAKE_PLUGIN_ROOT
+}
+`, 'utf8');
     const browserPath = options.browserPath === 'fixture'
         ? join(root, 'browser with spaces.exe')
         : options.browserPath === 'directory' ? root : options.browserPath;
@@ -160,10 +213,11 @@ fs.writeFileSync(output, content);
 Write-Output "Unexpected npm arguments: $($Arguments -join ' ')"
 exit 1
 `, 'utf8');
-    const invoke = (verifyOnly = false) => runPowerShell(shell, script, {
+    const invoke = (verifyOnly = false) => runPowerShell(shell, wrapper, {
         ...(verifyOnly ? { VerifyOnly: true } : options.apply ? { Apply: true } : {}),
         ...(options.inheritRuntime ? {} : { RuntimeRoot: runtime }),
         NpmCommand: npm, NodeCommand: process.execPath,
+        PythonCommand: python, PandocCommand: pandoc, WingetCommand: winget,
         ...(options.tarballPrefix ? { RegistryTarballPrefix: options.tarballPrefix } : {}),
         ...(browserPath !== undefined ? { BrowserExecutablePath: browserPath } : {}),
         ...(options.removedReplicateFlag ? { IncludeReplicate: true } : {}),
@@ -175,6 +229,15 @@ exit 1
             ALEX_ACT_ONE_RUNTIME_ROOT: options.inheritRuntime ? runtime : join(root, 'unselected-runtime'),
             TEMP: root, TMP: root, TMPDIR: root,
             FAKE_POWERSHELL: shell,
+            FAKE_SETUP_SCRIPT: script,
+            FAKE_PLUGIN_ROOT: ROOT,
+            FAKE_SYSTEM_LOG: systemLog,
+            FAKE_PANDOC_TEMPLATE: pandocTemplate,
+            FAKE_PANDOC_COMMAND: pandoc,
+            FAKE_PILLOW_STATE: pillowState,
+            FAKE_MISSING_PILLOW: options.missingPillow ? '1' : '',
+            FAKE_SYSTEM_FAILURE: options.systemFailure || '',
+            FAKE_SYSTEM_NOOP: options.systemNoop || '',
             FAKE_RENDER_INPUT: join(root, 'verified-input.svg'),
             FAKE_NPM_LOG: log,
             FAKE_GLOBAL_PREFIX: globalPrefix,
@@ -236,7 +299,12 @@ exit 1
     const renderers = existsSync(renderLog)
         ? readFileSync(renderLog, 'utf8').trim().split(/\r?\n/).map(line => JSON.parse(line))
         : [];
-    return { commands, output, runtime, globalPrefix, browserPath, inheritedBrowser, renderers };
+    const systemCommands = existsSync(systemLog)
+        ? readFileSync(systemLog, 'utf8').trim().split(/\r?\n/).map(line => JSON.parse(line))
+        : [];
+    assert.ok(systemCommands.every(args => !args.some(arg =>
+        /--upgrade|--break-system-packages|--index-url|--trusted-host|accept-.*agreements/.test(arg))));
+    return { commands, output, runtime, globalPrefix, browserPath, inheritedBrowser, renderers, systemCommands };
 }
 
 for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pwsh']) {
@@ -246,9 +314,86 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
         assert.equal(existsSync(runtime), false);
         assert.equal(existsSync(globalPrefix), false);
         for (const pkg of packages) assert.ok(output.includes(`${pkg.scope}: ${pkg.name}@${pkg.version}`));
-        assert.match(output, /Preview only/);
+        assert.match(output, /Report only/);
+        assert.match(output, /missing/);
+        assert.match(output, /Pandoc.*3\.13/);
+        assert.match(output, /Pillow.*12\.2\.0/);
     });
 
+    test(`${shell}: default reports missing Python, Pillow and Pandoc without any system installation`, t => {
+        const { commands, output, systemCommands } = runInstaller(t, shell, {
+            missingPython: true, missingPandoc: true, missingWinget: true,
+        });
+        assert.match(output, /Python.*missing/i);
+        assert.match(output, /Pandoc.*missing/i);
+        assert.match(output, /Pillow.*missing/i);
+        assert.deepEqual(systemCommands, []);
+        assert.ok(commands.every(args => args[0] !== 'install' && args[0] !== 'view'));
+    });
+
+    test(`${shell}: default reports matched and mismatched installed npm versions without installing or launching them`, t => {
+        const matched = packages[0], mismatch = packages.at(-1);
+        const { commands, output, renderers } = runInstaller(t, shell, {
+            seededPackages: { [matched.name]: matched.version, [mismatch.name]: '0.0.1' },
+        });
+        assert.ok(output.includes(`${matched.name}@${matched.version}; installed=${matched.version}; status=matched`));
+        assert.ok(output.includes(`${mismatch.name}@${mismatch.version}; installed=0.0.1; status=mismatched`));
+        assert.ok(commands.every(args => args[0] !== 'view' && args[0] !== 'install'));
+        assert.deepEqual(renderers, []);
+    });
+
+    test(`${shell}: apply refuses missing Python before any package installation`, t => {
+        const { commands, systemCommands } = runInstaller(t, shell, {
+            apply: true, missingPython: true, error: /Python.*install|Python.*required/i,
+        });
+        assert.equal(commands.filter(args => args[0] === 'install').length, 0);
+        assert.ok(systemCommands.every(args => !args.includes('install')));
+    });
+
+    test(`${shell}: apply installs missing Pillow only in the selected Python and verifies the result`, t => {
+        const { systemCommands, output } = runInstaller(t, shell, { apply: true, missingPillow: true });
+        assert.equal(systemCommands.filter(args => args.join(' ') === '-m pip install Pillow').length, 1);
+        assert.match(output, /Pillow.*12\.2\.0/);
+    });
+
+    test(`${shell}: existing Pandoc and Pillow are never silently upgraded`, t => {
+        const { systemCommands } = runInstaller(t, shell, { apply: true });
+        assert.ok(systemCommands.every(args => !args.includes('install')));
+    });
+
+    if (process.platform === 'win32') {
+        test(`${shell}: apply installs missing Pandoc through winget and verifies its command`, t => {
+            const { systemCommands, output } = runInstaller(t, shell, { apply: true, missingPandoc: true });
+            assert.ok(systemCommands.some(args => args.join(' ') === 'install --id JohnMacFarlane.Pandoc --exact'));
+            assert.match(output, /Pandoc.*3\.13/);
+        });
+        test(`${shell}: missing winget blocks all package installation`, t => {
+            const { commands } = runInstaller(t, shell, {
+                apply: true, missingPandoc: true, missingWinget: true, error: /winget.*required|winget.*unavailable/i,
+            });
+            assert.equal(commands.filter(args => args[0] === 'install').length, 0);
+        });
+        for (const [failure, expected] of [['failure', /winget failure/], ['no-op', /Pandoc installation verification failed/]]) {
+            test(`${shell}: Pandoc ${failure} cannot claim readiness`, t => {
+                runInstaller(t, shell, { apply: true, missingPandoc: true,
+                    ...(failure === 'failure' ? { systemFailure: 'pandoc' } : { systemNoop: 'pandoc' }), error: expected });
+            });
+        }
+    } else {
+        test(`${shell}: missing Pandoc on an unsupported installation platform stops before npm writes`, t => {
+            const { commands } = runInstaller(t, shell, {
+                apply: true, missingPandoc: true, error: /Pandoc.*manually|Windows.*winget/i,
+            });
+            assert.equal(commands.filter(args => args[0] === 'install').length, 0);
+        });
+    }
+
+    for (const [failure, expected] of [['failure', /pip policy failure/], ['no-op', /Pillow.*verification|Pillow.*missing/i]]) {
+        test(`${shell}: Pillow ${failure} cannot claim readiness`, t => {
+            runInstaller(t, shell, { apply: true, missingPillow: true,
+                ...(failure === 'failure' ? { systemFailure: 'pillow' } : { systemNoop: 'pillow' }), error: expected });
+        });
+    }
     test(`${shell}: checks every pin first, installs in correct scopes, and verifies versions`, (t) => {
         const { commands, output, runtime } = runInstaller(t, shell, { apply: true });
         const views = commands.filter(command => command[0] === 'view');
@@ -281,7 +426,7 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
         assert.equal(commands.filter(args => args[0] === 'view' || args[0] === 'install').length, 0);
         assert.equal(existsSync(runtime), false);
         assert.equal(existsSync(globalPrefix), false);
-        assert.deepEqual(commands, [['config', 'get', 'registry'], ['prefix', '--global'], ['--version']]);
+        assert.deepEqual(commands, [['config', 'get', 'registry'], ['prefix', '--global']]);
     });
 
     test(`${shell}: routes every private and global install for the configured Microsoft proxy`, t => {
@@ -394,7 +539,7 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
 
     test(`${shell}: explicit routing preview still performs no installs`, (t) => {
         const { commands } = runInstaller(t, shell, { tarballPrefix: feedPrefix });
-        assert.deepEqual(commands, [['--version'], ['config', 'get', 'registry'], ['prefix', '--global']]);
+        assert.deepEqual(commands, [['config', 'get', 'registry'], ['prefix', '--global']]);
     });
 
     for (const prefix of ['http://feed.example.invalid/', 'https://user:pass@feed.example.invalid/',
@@ -413,7 +558,7 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
             apply: true, tarballPrefix: feedPrefix, npmVersion: '11.17.0',
             error: /requires npm 12 or later/,
         });
-        assert.deepEqual(commands, [['--version']]);
+        assert.deepEqual(commands, [['config', 'get', 'registry'], ['prefix', '--global'], ['--version']]);
     });
 
     test(`${shell}: routing does not mask a continued fetch-policy failure`, (t) => {

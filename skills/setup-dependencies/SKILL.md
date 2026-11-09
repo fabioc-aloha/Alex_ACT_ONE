@@ -1,6 +1,6 @@
 ---
 name: setup-dependencies
-description: "Check which optional dependencies this plugin can use, report what each missing one costs, and install them with consent. Covers Pandoc, Mermaid CLI, svgexport, jszip, and the pinned MCP servers for charts, image generation, and browser verification. Use after installing the plugin, when a skill reports a missing tool, or when checking for MCP updates."
+description: "Check capability-specific dependencies, explain missing tools, and install with consent. Covers Pandoc, Pillow, Mermaid CLI, svgexport, jszip, and pinned chart/browser MCP servers. Use after plugin installation, when a skill reports a missing tool, or when checking MCP updates."
 lastReviewed: 2026-11-05
 ---
 
@@ -13,6 +13,25 @@ render helpers, and two MCP servers that back charts and
 browser verification.
 
 Nothing here installs without consent. A dependency check is read-only.
+
+## Unified Source Setup
+
+The source checkout provides one [root helper](../../install-and-check.ps1).
+Without switches it connects Alex Mall if missing, refreshes catalogs and
+reports plugin/dependency versions without installation or activation.
+Marketplace registration and caches can change; this is not a wholly read-only
+host operation. The standalone checker below remains read-only.
+
+With `-Apply`, the helper installs/updates the latest Mall plugin, bootstraps
+its owned instructions with conflict checks, then uses that installed package's
+dependency registry and launcher. It installs exact reviewed npm pins and only
+missing Windows Pandoc (winget) and selected-Python Pillow (configured pip).
+Existing system tools are checked, not silently upgraded. Python installation,
+forced elevation, agreement acceptance and policy bypasses are excluded.
+Missing prerequisites stop dependency installation with setup guidance.
+`-VerifyOnly` adds strict no-install readiness checks but still refreshes catalogs.
+This source flow is separate from the narrower standalone `--apply` routes below
+and from the helpers preserved inside older immutable release payloads.
 
 ## Check First
 

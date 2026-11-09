@@ -23,6 +23,13 @@
   optional dependency install, uninstall or forced overwrite is required.
   Stale retired-provider script comments were removed. The frozen `0.9.6`
   payload and installed state are not modified by these source changes.
+- The single public source entry point is now `install-and-check.ps1`.
+  Default mode reports dependencies too. `-Apply` installs the latest Mall
+  plugin, bootstraps owned instructions, then uses that installed owner's pins
+  and launcher for dependency setup. It adds only missing Windows Pandoc
+  (winget) and selected-Python Pillow, without upgrading existing system tools
+  or installing Python. The two old root helper names are removed from source;
+  frozen release snapshots are unchanged.
 - The release includes hardened artifact/account checks, native Windows path
   resolution, regression coverage, and the [lean package boundary](docs/package.md).
   Both Flint demonstrations are retained with the reviewed locked pins.
@@ -85,9 +92,11 @@
 
 ## Next Action
 
-From the current source checkout, use `.\reinstall-and-check.ps1` to refresh
+From the current source checkout, use `.\install-and-check.ps1` to refresh
 catalogs and inspect installed/latest versions; add `-Apply` only for a
-user-approved update and instruction activation. Use a standalone terminal
+user-approved update, instruction bootstrap and full dependency setup.
+Review the selected Python, system managers, private/global destinations and
+browser readiness before applying. Use a standalone terminal
 after closing hosts that may lock the package.
 Leave installation to the user unless separately authorized. Record actual
 installed root/version, package/cache parity, bootstrap receipt and restart
@@ -99,7 +108,7 @@ in [ROADMAP.md](ROADMAP.md), using the frozen task evidence rather than rerunnin
 known cases and calling them broader coverage. The 107 focused
 routing/runtime tests passed in disposable fixtures; real configured-proxy
 previews and no-install dependency/render checks also passed. The
-[optional installer](install-optional-dependencies.ps1) needs no explicit
+[unified setup helper](install-and-check.ps1) needs no explicit
 prefix for the recognized proxy in this checkout. Preserve profile conflicts,
 reviewed pins, and the frozen release payload. Continue product maintenance from
 [ROADMAP.md](ROADMAP.md); R8 remains open. The scalar/array stable-version audit

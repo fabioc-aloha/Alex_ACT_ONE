@@ -10,7 +10,7 @@ import publication from './shared/output-publication.cjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const ROOT_FILES = ['plugin.json', 'manifest.json', 'LICENSE', 'README.md',
-    'install-optional-dependencies.ps1', 'reinstall-and-check.ps1'];
+    'install-and-check.ps1'];
 const DOCS = ['docs/README.md', 'docs/package.md', 'docs/getting-started.md', 'docs/install.md', 'docs/testing.md',
     'docs/flint-showcase.html', 'docs/flint-experimental.html', 'docs/launch/evaluation-guide.md',
     'docs/verification/README.md', 'docs/verification/flint-browser.md', 'docs/verification/skill-scenarios.json'];

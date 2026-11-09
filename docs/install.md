@@ -77,7 +77,7 @@ conflict guard must stop on modified or unowned instructions rather than
 silently replace them. Follow the [first-session verification](getting-started.md#3-verify)
 and then the [scenario run guide](verification/README.md).
 
-Do not run `reinstall-and-check.ps1` for this repository-candidate switch: that
+Do not run `install-and-check.ps1` for this repository-candidate switch: that
 helper uses Mall and applies instructions; it does not switch installation sources. No new release, Mall
 publication, profile activation, or runtime installation is implied here.
 
@@ -379,26 +379,28 @@ expanded marketplace checks ship in `v0.5.0`.
 #### Reinstall and verify ONE
 
 Run the current checkout's
-[`reinstall-and-check.ps1`](../reinstall-and-check.ps1) without switches to
+[`install-and-check.ps1`](../install-and-check.ps1) without switches to
 connect Alex Mall if missing, refresh all registered marketplace catalogs,
-and report the installed version, if any, plus the latest version in Mall:
+and report the installed version, if any, plus the latest version in Mall and
+the installed/missing dependency versions:
 
 ```powershell
-.\reinstall-and-check.ps1
+.\install-and-check.ps1
 ```
 
 Default mode changes only marketplace registration/catalog caches, not plugins
-or instructions. It adds only `alex-mall`, preserves existing/default and
-unrelated registrations, and requires only the Copilot CLI.
+or instructions or tools. It adds only `alex-mall` and preserves existing/default
+and unrelated registrations. Full reporting requires the Copilot CLI, Node
+and npm; a missing Python or system tool is reported without installing it.
 
 To install or update the latest Mall version, close hosts that may lock the
 plugin, then opt in:
 
 ```powershell
-.\reinstall-and-check.ps1 -Apply
+.\install-and-check.ps1 -Apply
 ```
 
-`-Apply` also requires Node. It installs when absent or invokes native update
+`-Apply` installs when absent or invokes native update
 for an enabled Mall installation, including a matching version. The latest
 stable version comes from the registered GitHub marketplace's catalog, not
 the checkout's metadata. A missing, ambiguous or invalid catalog version,
@@ -417,24 +419,35 @@ and the inherited environment value is restored afterward.
 
 The simplified interface is an unreleased source change: use the current
 checkout, not the frozen `0.9.6` helper. It needs neither a refresh switch
-nor a version pin. This is not transactional native-CLI rollback or an optional
-dependency installation.
+nor a version pin. Once plugin/bootstrap succeeds, it sets up dependencies
+from that installed package's registry and launcher. A later dependency failure
+does not undo a successful plugin stage; it stops full setup explicitly.
+This is not transactional native-CLI rollback.
 
 #### Install or check optional dependencies
 
-[`install-optional-dependencies.ps1`](../install-optional-dependencies.ps1)
-previews by default. Review its package list, configured registry, and
-installation paths before applying:
+The same [`install-and-check.ps1`](../install-and-check.ps1) reports installed,
+missing or mismatched dependency versions by default. Review its configured
+registry and installation paths before applying:
 
 ```powershell
-.\install-optional-dependencies.ps1
-.\install-optional-dependencies.ps1 -Apply
+.\install-and-check.ps1
+.\install-and-check.ps1 -Apply
 ```
 
-The installer reads the shared version pins. Flint, Playwright, and JSZip go
+The helper reads pins from the installed plugin, not the checkout. If no plugin
+is installed, default mode labels checkout pins as planning only; `-Apply`
+installs the plugin before selecting its dependency owner. Flint, Playwright, and JSZip go
 into ONE's private runtime; Mermaid CLI and svgexport use npm's global prefix.
 It leaves the registry and npm policy unchanged and does not install
-companion plugins or system packages. `-RuntimeRoot` overrides
+companion plugins. Missing Pandoc and Pillow are included only with `-Apply`:
+Pandoc uses Windows winget, and Pillow uses the selected existing Python's pip.
+No Python installation, silent upgrade of existing Pandoc/Pillow, forced
+elevation, agreement acceptance or package-manager policy bypass is added.
+Select Python with `-PythonCommand`; its environment and configured pip source
+remain authoritative. Missing Python/winget or unsupported automatic system
+installation stops before any dependency installation, with guidance.
+`-RuntimeRoot` overrides
 `ALEX_ACT_ONE_RUNTIME_ROOT`; otherwise the shared default private runtime is
 used. Install the matching reviewed plugin before applying its runtime pins:
 older launchers intentionally reject newer MCP package versions. The `0.9.6`
@@ -444,7 +457,7 @@ Check existing package versions, MCP launchers, and actual Mermaid/SVG-to-PNG
 rendering without reinstalling:
 
 ```powershell
-.\install-optional-dependencies.ps1 -VerifyOnly
+.\install-and-check.ps1 -VerifyOnly
 ```
 
 To use an existing compatible browser instead of downloading Puppeteer's browser,
@@ -452,11 +465,13 @@ pass its absolute executable path explicitly:
 
 ```powershell
 $browser = 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
-.\install-optional-dependencies.ps1 -VerifyOnly -BrowserExecutablePath $browser
+.\install-and-check.ps1 -VerifyOnly -BrowserExecutablePath $browser
 ```
 
 The option works with preview, `-Apply`, and `-VerifyOnly`. Invalid paths stop
-before any installation. The selected path is passed only to renderer processes;
+before any installation. `-VerifyOnly` requires an installed plugin and adds
+strict dependency readiness checks without package downloads or activation;
+it still refreshes the normal marketplace catalogs. The selected path is passed only to renderer processes;
 it does not configure the host or change the parent environment. An existing
 `PUPPETEER_EXECUTABLE_PATH` is used when the option is omitted and is also validated.
 No browser is selected automatically, and a supplied path does not prove browser
@@ -476,8 +491,8 @@ registry, use the existing explicit option:
 
 ```powershell
 $feed = 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/'
-.\install-optional-dependencies.ps1 -RegistryTarballPrefix $feed
-.\install-optional-dependencies.ps1 -Apply -RegistryTarballPrefix $feed
+.\install-and-check.ps1 -RegistryTarballPrefix $feed
+.\install-and-check.ps1 -Apply -RegistryTarballPrefix $feed
 ```
 
 Combine `-BrowserExecutablePath $browser` with `-RegistryTarballPrefix $feed`
@@ -498,16 +513,17 @@ Do not enable lifecycle scripts globally to suppress the warning.
 The current release's exact npm pins were verified through
 `https://packagefeedproxy.microsoft.io/npm/`. Detection is limited to that
 configured endpoint and the confirmed backend prefix, with an npm 12+ guard
-before preview/apply. `-VerifyOnly` fetches no packages and does not need
+before dependency apply. Default reports and `-VerifyOnly` fetch no packages and do not need
 automatic routing support. Explicit prefixes retain their validation.
 A new backend is not silently trusted: continued fetch-policy errors stop,
 without retries or policy changes.
 
-Pandoc and Pillow are separate manual installs:
+Pandoc and Pillow support particular capabilities, not core reasoning.
+To set them up separately instead of using the unified `-Apply` path:
 
 ```powershell
 winget install --id JohnMacFarlane.Pandoc --exact
-python -m pip install --upgrade Pillow
+python -m pip install Pillow
 ```
 
 Optional visual companions and Microsoft ecosystem plugins remain owned by
