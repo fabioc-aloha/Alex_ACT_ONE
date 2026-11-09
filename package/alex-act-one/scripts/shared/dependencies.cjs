@@ -76,8 +76,7 @@ const TOOLS = {
  * The pinned MCP servers, tiered individually. They are provisioned
  * together by one command but they are not equally important, and a single
  * "MCP servers" row hid that: without Flint the chart skills cannot render at
- * all, while Playwright has a documented fallback and Replicate needs a paid
- * account before it does anything.
+ * all, while Playwright has a documented native-browser fallback.
  */
 const MCP_SERVERS = {
     flint: {

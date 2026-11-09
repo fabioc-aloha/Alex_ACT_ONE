@@ -8,8 +8,9 @@ recorded. R8 remains next for observable host evidence as access permits.
 Runtime upgrade recovery requires a
 design decision before implementation.
 
-Release version: `v0.9.6`. Publication is verified, not native installation
-or activation. This roadmap describes work beyond the published
+Release version: `v0.9.7`. Final release qualification/publication is in
+progress; Mall remains on `0.9.6` until the release record confirms the update.
+Publication is not native installation or activation. This roadmap describes work beyond the published
 baseline's scoped verification, not an instruction to reopen completed repairs or automatically
 change existing installations. See
 [installation sources](docs/install.md#installation-sources) for the distinction.

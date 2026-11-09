@@ -54,22 +54,22 @@ covers temporary candidate testing, Scout setup, and optional tools.
 Already set up? Browse the
 [skill catalog](#the-skills).
 
-**Release version: `v0.9.6`**, prepared 2026-11-08. This release adds
-automatic routing for the recognized Microsoft npm proxy, repository-owned
-scenario evidence output, and broader SVG contrast and keyboard checks.
-Both Flint demonstrations retain their data and upstream App, with
-contrast-tuned themes and corrected bounded-score heatmap mapping.
-Reviewed dependency pins are unchanged from `0.9.5`, not floating `latest`
-installs.
+**Release version: `v0.9.7`**, prepared 2026-11-09. This release combines plugin
+installation, owned-instruction bootstrap and capability tools in one root
+helper. Default mode reports status; only `-Apply` installs or activates.
+Dependency pins and launchers come from the installed plugin, with guarded
+setup for missing Windows Pandoc and selected-Python Pillow. Core reasoning
+does not require the full tool set. Reviewed npm pins remain unchanged from
+`0.9.6`; macOS installation support is planned, not certified.
 
 Existing installations do not update automatically. Use the reviewed Mall
 release, verify the loaded version/root, and preview activation again before
 approving profile changes. The [install reference](docs/install.md#installation-sources)
 separates package delivery, activation, and optional runtime provisioning.
-Installed `0.9.5` CLI/VS Code observations and local `0.9.6` browser evidence have
+Earlier installed CLI/VS Code observations and current browser evidence have
 [documented limits](docs/verification/README.md); Scout and Copilot app behavior
 is **not freshly verified** for this release. The
-[release record](archive/verification/release-0.9.6/README.md) separates
+[release record](archive/verification/release-0.9.7/README.md) separates
 publication from the user's manual installation; no local activation is claimed.
 
 The [storage contract](skills/proactive-awareness/references/project-artifact-storage.md)
@@ -515,8 +515,8 @@ $ErrorActionPreference = 'Stop'
 .\install-and-check.ps1 -Apply
 ```
 
-This simplified helper is an unreleased source change; the immutable `0.9.6`
-package retains its earlier helper interface. The source helper follows the
+This unified helper ships in `0.9.7`; the immutable `0.9.6` package retains
+its earlier helper interface. The helper follows the
 latest version advertised by Alex Mall, not the checkout's version. Default
 mode can change marketplace registrations/catalog caches. Dependency pins and
 launchers come from the installed plugin, never an unrelated checkout; when

@@ -12,7 +12,7 @@ tools, and historical verification notes in one reference.
 | Repository | Deprecated direct-install path: repository source selected at installation time; it can include unreleased work | Temporary candidate testing only; review root/revision and do not assume future CLI support |
 | Optional runtime | The separately provisioned chart, browser, image, and converter packages | Plugin installation does not activate instructions or provision these packages; installs and upgrades require their own approval |
 
-Release version: `0.9.6`. Mall delivery uses the reviewed release tag and its
+Release version: `0.9.7`. Mall delivery uses the reviewed release tag and its
 `package/alex-act-one` payload. Confirm publication in
 [the release record](https://github.com/fabioc-aloha/Alex_ACT_ONE) before
 upgrading; the user performs installation separately. A version is not evidence of live-host
@@ -77,7 +77,7 @@ conflict guard must stop on modified or unowned instructions rather than
 silently replace them. Follow the [first-session verification](getting-started.md#3-verify)
 and then the [scenario run guide](verification/README.md).
 
-Do not run `reinstall-and-check.ps1` for this repository-candidate switch: that
+Do not run `install-and-check.ps1` for this repository-candidate switch: that
 helper uses Mall and applies instructions; it does not switch installation sources. No new release, Mall
 publication, profile activation, or runtime installation is implied here.
 
@@ -378,59 +378,86 @@ expanded marketplace checks ship in `v0.5.0`.
 
 #### Reinstall and verify ONE
 
-After confirming `0.9.6` is available in Mall, close hosts that may lock the
-installed plugin before running
-[`reinstall-and-check.ps1`](../reinstall-and-check.ps1):
+Run the current checkout's
+[`install-and-check.ps1`](../install-and-check.ps1) without switches to
+connect Alex Mall if missing, refresh all registered marketplace catalogs,
+and report the installed version, if any, plus the latest version in Mall and
+the installed/missing dependency versions:
 
 ```powershell
-.\reinstall-and-check.ps1 -Refresh -ExpectedVersion 0.9.6
+.\install-and-check.ps1
 ```
 
-The current checkout's helper is not a preview. It first rejects duplicate or
-cross-source ONE installations. An older, disabled, or otherwise mismatched
-existing release is preserved and blocks automatic replacement. A matching
-release is verified in place; only an absent package is installed by default.
-In `0.9.5`, explicit `-Refresh` refreshes the Mall catalog and invokes native
-plugin update for an existing enabled Mall installation, including the same
-version. It verifies inventory and installed files before activation and never
-uninstalls first. A failed/no-op update cannot activate a stale version.
-This is not a claim of transactional native-CLI rollback.
+Default mode changes only marketplace registration/catalog caches, not plugins
+or instructions or tools. It adds only `alex-mall` and preserves existing/default
+and unrelated registrations. Full reporting requires the Copilot CLI, Node
+and npm; a missing Python or system tool is reported without installing it.
 
-The helper registers missing public marketplaces (`alex-mall`,
-`awesome-copilot`, `copilot-plugins`, `azure-skills`, and `fabric-collection`),
-rejects conflicting sources, and uses the Mall's release tag for a first install,
-not the working checkout. It verifies the installed version and applies the
-canonical instructions to the selected Copilot profile, checking their
-bootstrap receipt afterward. It does not install optional plugins or prove
-that a host has observed activation after restart. `-CopilotHome` selects that
-profile explicitly; otherwise `COPILOT_HOME` is used when set, then
-`~/.copilot`. It never uninstalls an existing package.
+To install or update the latest Mall version, close hosts that may lock the
+plugin, then opt in:
+
+```powershell
+.\install-and-check.ps1 -Apply
+```
+
+`-Apply` installs when absent or invokes native update
+for an enabled Mall installation, including a matching version. The latest
+stable version comes from the registered GitHub marketplace's catalog, not
+the checkout's metadata. A missing, ambiguous or invalid catalog version,
+failed refresh/update, or mismatched installed inventory stops before activation.
+An installed version ahead of Mall is preserved rather than downgraded.
+Duplicate, cross-source, disabled or unregistered package state requires
+explicit resolution; the helper never uninstalls first.
+
+After verifying inventory and the installed manifest, `-Apply` activates only
+the installed package's canonical instructions and checks their bootstrap
+receipt. Conflicts are not overwritten. Restart the host after success;
+the script does not prove that the restarted host loaded instructions.
+`-CopilotHome` selects the profile explicitly; otherwise `COPILOT_HOME` is
+used when set, then `~/.copilot`. Every operation is scoped to that home,
+and the inherited environment value is restored afterward.
+
+The unified interface ships in `0.9.7`: use that release or the current
+checkout, not the frozen `0.9.6` helper. It needs neither a refresh switch
+nor a version pin. Once plugin/bootstrap succeeds, it sets up dependencies
+from that installed package's registry and launcher. A later dependency failure
+does not undo a successful plugin stage; it stops full setup explicitly.
+This is not transactional native-CLI rollback.
 
 #### Install or check optional dependencies
 
-[`install-optional-dependencies.ps1`](../install-optional-dependencies.ps1)
-previews by default. Review its package list, configured registry, and
-installation paths before applying:
+The same [`install-and-check.ps1`](../install-and-check.ps1) reports installed,
+missing or mismatched dependency versions by default. Review its configured
+registry and installation paths before applying:
 
 ```powershell
-.\install-optional-dependencies.ps1
-.\install-optional-dependencies.ps1 -Apply
+.\install-and-check.ps1
+.\install-and-check.ps1 -Apply
 ```
 
-The installer reads the shared version pins. Flint, Playwright, and JSZip go
+The helper reads pins from the installed plugin, not the checkout. If no plugin
+is installed, default mode labels checkout pins as planning only; `-Apply`
+installs the plugin before selecting its dependency owner. Flint, Playwright, and JSZip go
 into ONE's private runtime; Mermaid CLI and svgexport use npm's global prefix.
 It leaves the registry and npm policy unchanged and does not install
-companion plugins or system packages. `-RuntimeRoot` overrides
+companion plugins. Missing Pandoc and Pillow are included only with `-Apply`:
+Pandoc uses Windows winget, and Pillow uses the selected existing Python's pip.
+No Python installation, silent upgrade of existing Pandoc/Pillow, forced
+elevation, agreement acceptance or package-manager policy bypass is added.
+Select Python with `-PythonCommand`; its environment and configured pip source
+remain authoritative. Missing Python/winget or unsupported automatic system
+installation stops before any dependency installation, with guidance.
+`-RuntimeRoot` overrides
 `ALEX_ACT_ONE_RUNTIME_ROOT`; otherwise the shared default private runtime is
 used. Install the matching reviewed plugin before applying its runtime pins:
-older launchers intentionally reject newer MCP package versions. The `0.9.6`
-release reuses the reviewed `0.9.5` pins.
+older launchers intentionally reject newer MCP package versions. The `0.9.7`
+release reuses the reviewed `0.9.6` pins.
 
 Check existing package versions, MCP launchers, and actual Mermaid/SVG-to-PNG
 rendering without reinstalling:
 
 ```powershell
-.\install-optional-dependencies.ps1 -VerifyOnly
+.\install-and-check.ps1 -VerifyOnly
 ```
 
 To use an existing compatible browser instead of downloading Puppeteer's browser,
@@ -438,11 +465,13 @@ pass its absolute executable path explicitly:
 
 ```powershell
 $browser = 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
-.\install-optional-dependencies.ps1 -VerifyOnly -BrowserExecutablePath $browser
+.\install-and-check.ps1 -VerifyOnly -BrowserExecutablePath $browser
 ```
 
 The option works with preview, `-Apply`, and `-VerifyOnly`. Invalid paths stop
-before any installation. The selected path is passed only to renderer processes;
+before any installation. `-VerifyOnly` requires an installed plugin and adds
+strict dependency readiness checks without package downloads or activation;
+it still refreshes the normal marketplace catalogs. The selected path is passed only to renderer processes;
 it does not configure the host or change the parent environment. An existing
 `PUPPETEER_EXECUTABLE_PATH` is used when the option is omitted and is also validated.
 No browser is selected automatically, and a supplied path does not prove browser
@@ -462,8 +491,8 @@ registry, use the existing explicit option:
 
 ```powershell
 $feed = 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/'
-.\install-optional-dependencies.ps1 -RegistryTarballPrefix $feed
-.\install-optional-dependencies.ps1 -Apply -RegistryTarballPrefix $feed
+.\install-and-check.ps1 -RegistryTarballPrefix $feed
+.\install-and-check.ps1 -Apply -RegistryTarballPrefix $feed
 ```
 
 Combine `-BrowserExecutablePath $browser` with `-RegistryTarballPrefix $feed`
@@ -484,16 +513,17 @@ Do not enable lifecycle scripts globally to suppress the warning.
 The current release's exact npm pins were verified through
 `https://packagefeedproxy.microsoft.io/npm/`. Detection is limited to that
 configured endpoint and the confirmed backend prefix, with an npm 12+ guard
-before preview/apply. `-VerifyOnly` fetches no packages and does not need
+before dependency apply. Default reports and `-VerifyOnly` fetch no packages and do not need
 automatic routing support. Explicit prefixes retain their validation.
 A new backend is not silently trusted: continued fetch-policy errors stop,
 without retries or policy changes.
 
-Pandoc and Pillow are separate manual installs:
+Pandoc and Pillow support particular capabilities, not core reasoning.
+To set them up separately instead of using the unified `-Apply` path:
 
 ```powershell
 winget install --id JohnMacFarlane.Pandoc --exact
-python -m pip install --upgrade Pillow
+python -m pip install Pillow
 ```
 
 Optional visual companions and Microsoft ecosystem plugins remain owned by

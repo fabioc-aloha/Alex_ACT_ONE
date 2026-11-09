@@ -25,6 +25,13 @@ with native installation/activation deferred to the user. The
 scoped decision and the exact source/runtime/browser gates. No earlier
 exception is inherited, and no future release receives standing approval.
 
+For `0.9.7`, the user separately approved publication before their manual
+installation and approved disposable locked-runtime preparation. The
+[release record](archive/verification/release-0.9.7/README.md) retains that
+decision. Native installation, profile activation and actual system-package
+installation remain unclaimed; source/runtime/browser gates are not waived.
+This exception applies to `0.9.7` only.
+
 ## Candidate packaging boundary
 
 When a release proposes lean distribution, use the
@@ -341,7 +348,7 @@ Registration and refresh access the network and change marketplace state even
 without `-Apply`; plugin and profile changes remain gated.
 Conflicting or disabled packages and downgrades stop explicitly; no uninstall
 or forced instruction overwrite occurs. The frozen `0.9.6` helper retains its
-earlier interface until a separately approved release delivers this source.
+earlier interface; `0.9.7` packages the unified setup flow.
 The release-script regression tests exercise both PowerShell 7 and Windows
 PowerShell 5.1 on Windows, including inventories with unrelated entries.
 

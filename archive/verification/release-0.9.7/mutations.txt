@@ -1,0 +1,4 @@
+[default-plugin-no-apply] CAUGHT
+[default-dependencies-no-apply] CAUGHT
+[installed-owner-pins] CAUGHT
+[preserve-existing-system-tools] CAUGHT

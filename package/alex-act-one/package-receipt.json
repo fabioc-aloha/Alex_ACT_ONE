@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "status": "release-payload",
-  "declaredPluginVersion": "0.9.6",
-  "sourceCommit": "1652910a15500820ea88c9dcdb9e1cefcf507f85",
+  "declaredPluginVersion": "0.9.7",
+  "sourceCommit": "144a2964e2b3ea780483342b6ffaa74df5fd611a",
   "sourceHasUncommittedChanges": true,
   "files": [
     {
@@ -15,10 +15,10 @@
     },
     {
       "path": "README.md",
-      "sourceSha256": "9c5baa638b304be58909d8d36ba23ab4d63afa9d727886559a7c715a279aa267",
-      "sourceContentSha256": "8ab86b8328e18e3da37985b7fe3093c40ed61fcc9f944d49a91a8c3afa912b6e",
-      "sha256": "0f2a76844830fe0e71f1e146547cd9b693d23f11b9f798c292e617fbbbe9a651",
-      "bytes": 50097,
+      "sourceSha256": "5f753e7e8700ba281cd2dcff6aafc529deea2b95ed20b9cbc8abacd25584efc6",
+      "sourceContentSha256": "0516a749d59086c57aaf39df4a45e8c05c199bd46ed44a68bc7eb1f36083da9c",
+      "sha256": "76398157d35660f0520df55e87888266c59588a48d0ed1a4c61b95630c240ca1",
+      "bytes": 50878,
       "edits": [
         "unshipped-maintainer-links-routed-to-source-repository",
         "candidate-package-scope-notice"
@@ -60,25 +60,25 @@
     },
     {
       "path": "docs/flint-experimental.html",
-      "sourceSha256": "05fd3dacc69908aba7b7e5122cb5d004893b4c25f7265bc774711165becdb064",
-      "sourceContentSha256": "05fd3dacc69908aba7b7e5122cb5d004893b4c25f7265bc774711165becdb064",
-      "sha256": "05fd3dacc69908aba7b7e5122cb5d004893b4c25f7265bc774711165becdb064",
+      "sourceSha256": "50606dda77b801beb728d2d1c3a50c9d6866c992c8c570b4ec4db21c712dc738",
+      "sourceContentSha256": "50606dda77b801beb728d2d1c3a50c9d6866c992c8c570b4ec4db21c712dc738",
+      "sha256": "50606dda77b801beb728d2d1c3a50c9d6866c992c8c570b4ec4db21c712dc738",
       "bytes": 4711189,
       "edits": []
     },
     {
       "path": "docs/flint-showcase.html",
-      "sourceSha256": "aefd18f14701f47d007f4e468ece150073e3882c1c5bfe753fa4b505de072fbb",
-      "sourceContentSha256": "aefd18f14701f47d007f4e468ece150073e3882c1c5bfe753fa4b505de072fbb",
-      "sha256": "aefd18f14701f47d007f4e468ece150073e3882c1c5bfe753fa4b505de072fbb",
+      "sourceSha256": "2e03c60beb6c4a67c9c062b58116d980ef3ccd94eea95782d016d693c2dd49c5",
+      "sourceContentSha256": "2e03c60beb6c4a67c9c062b58116d980ef3ccd94eea95782d016d693c2dd49c5",
+      "sha256": "2e03c60beb6c4a67c9c062b58116d980ef3ccd94eea95782d016d693c2dd49c5",
       "bytes": 4507265,
       "edits": []
     },
     {
       "path": "docs/getting-started.md",
-      "sourceSha256": "45c25de70be40454d133cee1cf8034ddcbcb861cffaa960dec8478ea96fbff23",
-      "sourceContentSha256": "bbc411a665bb8ab8bba4bbe46b8d1d7a2494d0ec9724b3ad60e985530bb82d6c",
-      "sha256": "1b22e864c227dead0dcd2b54af718a293a255be93f4a4dfabd1353fbcd658e80",
+      "sourceSha256": "42989ba51cb3c61f32d99ccb7c3144d2585b4c8a75fdcd8f9c1f30c67912cdc7",
+      "sourceContentSha256": "9d8412788dabc41292fb73481f060bf79553902b08d64aea0c648e24e2933634",
+      "sha256": "bd103713a5be2fa787c5412af42a1ece523f6131f23761392f9ced358fcbba31",
       "bytes": 4805,
       "edits": [
         "unshipped-maintainer-links-routed-to-source-repository"
@@ -86,10 +86,10 @@
     },
     {
       "path": "docs/install.md",
-      "sourceSha256": "fb647d120932a4f72b9f457613a730f8d3585ae83e78532830ad3a47968f72a3",
-      "sourceContentSha256": "22b3391c5c3788dd974c2c035aa66469f79465a6c1216bd5edc7967cb0e1217d",
-      "sha256": "43e3e983fed8f185d9edad137dc214ddec9c477c4375f52954a5c30f51c152c6",
-      "bytes": 25895,
+      "sourceSha256": "d260fbbdb429941cb19f83138437d48b29e6250c3d5650f09394b96bfcda0483",
+      "sourceContentSha256": "6986ce6710e27729808ff6154133bece887b76d26d6deca31436d0b4aaad05c0",
+      "sha256": "2d2e5df2b3373f8c4fe5897d13a69615007c27ce195cca9177488b177c3815d2",
+      "bytes": 27541,
       "edits": [
         "unshipped-maintainer-links-routed-to-source-repository"
       ]
@@ -106,20 +106,20 @@
     },
     {
       "path": "docs/package.md",
-      "sourceSha256": "436bb2d75ecc78d8ecd028904e9666560266163d08844eed7e64b5835bb210b5",
-      "sourceContentSha256": "078598c894d5f867d127a2b54ea73519b6b739f60335592dc26feaa5c090d176",
-      "sha256": "307f113bde361d6860730263a3ec762e3f32a7ff3444fca8b9ff46dfcb2e700e",
-      "bytes": 4556,
+      "sourceSha256": "251944f03ab9bf8e34d8d0f4f937d8768953eedb91efc6b70a546183f736ad55",
+      "sourceContentSha256": "0d1eaf572a5c7d036a2b6f825a42643b997f298ae476892444ac441dbac3300c",
+      "sha256": "597ae8ab0e85163254be2e0ca8868c224106bb3a08e3f4fe46d7d5c34abdbf0a",
+      "bytes": 4632,
       "edits": [
         "unshipped-maintainer-links-routed-to-source-repository"
       ]
     },
     {
       "path": "docs/testing.md",
-      "sourceSha256": "9282f7039bce2b183794c2ebeb798ce83ff2dcbd482fd64d2384d52c800b6c57",
-      "sourceContentSha256": "a82650c01770cf05b80c2f4dc48ab557c1fbe12cc8a8e7db73476084c9eb5aa7",
-      "sha256": "aed3f535d4a205a948c737909d4ddf680d276e20897450c5aa3c630bb8100737",
-      "bytes": 31752,
+      "sourceSha256": "eed401579cf890f6c37271fd082ee3b6c0b7726cad88ea81bcccbdaf1537b509",
+      "sourceContentSha256": "552a33ca7d6317afbf26b7028fbb02ce1334cbf3a6265d8adb1e5c909083abbb",
+      "sha256": "d25ce240b1187fb602a19c90489b9b69288c1268739a18982ce61e556c97b6ee",
+      "bytes": 33986,
       "edits": [
         "unshipped-maintainer-links-routed-to-source-repository",
         "candidate-package-scope-notice"
@@ -154,11 +154,11 @@
       "edits": []
     },
     {
-      "path": "install-optional-dependencies.ps1",
-      "sourceSha256": "a174523514c7212b1a7771f698612e69e1611bbeb061d5fbde9c81540ff55b09",
-      "sourceContentSha256": "29bbf22f00f51db3134069fb6b7474339fb5beeca61f873c56828f635dc912dd",
-      "sha256": "a174523514c7212b1a7771f698612e69e1611bbeb061d5fbde9c81540ff55b09",
-      "bytes": 14644,
+      "path": "install-and-check.ps1",
+      "sourceSha256": "7a32899e23cbd71670c56e4682db3f75394b980716786c13da2663863ab75d93",
+      "sourceContentSha256": "86351abbe17e2b7484857c25b5029af0e4cd6bc5f9155f6e2f1a2bb8f1a24b51",
+      "sha256": "7a32899e23cbd71670c56e4682db3f75394b980716786c13da2663863ab75d93",
+      "bytes": 33120,
       "edits": []
     },
     {
@@ -403,17 +403,17 @@
     },
     {
       "path": "manifest.json",
-      "sourceSha256": "20fea85f542e3bdc1aa7b6b36ef0b719e3b68ac0d281b6c9357144f7cb7d9309",
-      "sourceContentSha256": "b3dcdaeaa0cc890864640d03a9b8a87d624f44b12e5cdc43ef629d2e777f4b9b",
-      "sha256": "20fea85f542e3bdc1aa7b6b36ef0b719e3b68ac0d281b6c9357144f7cb7d9309",
+      "sourceSha256": "0f72196cfb7a273f8889313f50856676b2900c7e210955a1983258d68a3da7e9",
+      "sourceContentSha256": "8bf6681ddaa107252ffafb9932be37478a6ba565dda063f9817f59ed473350c3",
+      "sha256": "0f72196cfb7a273f8889313f50856676b2900c7e210955a1983258d68a3da7e9",
       "bytes": 14910,
       "edits": []
     },
     {
       "path": "plugin.json",
-      "sourceSha256": "67c0762547df9299d041c505e5e347de7302ea962c0177f90017bd212ff2c2ae",
-      "sourceContentSha256": "9d4da5db57b2d514ac74967ed3eb50c095ed68dbfe7660fdcd289bf0a4fa875f",
-      "sha256": "67c0762547df9299d041c505e5e347de7302ea962c0177f90017bd212ff2c2ae",
+      "sourceSha256": "0545f2a34964f26b2c0efa29560d2e3e731aa63a7ed948c946c378ffee89e0f8",
+      "sourceContentSha256": "f23711cb80ccde4be94aba4e7cca7d0379c58a6961b1d8705129fb65e0d6e9f1",
+      "sha256": "0545f2a34964f26b2c0efa29560d2e3e731aa63a7ed948c946c378ffee89e0f8",
       "bytes": 1619,
       "edits": []
     },
@@ -538,14 +538,6 @@
       "edits": []
     },
     {
-      "path": "reinstall-and-check.ps1",
-      "sourceSha256": "2e4178b403f339db428d6efd1d004b2c7b2301c35ef8b58c2a3eb2a4cd94d4a5",
-      "sourceContentSha256": "e4cfb9e170cf58cd0f20e718b7619b8b680eb04c0d61d23d9a62e7e204a8d8b5",
-      "sha256": "2e4178b403f339db428d6efd1d004b2c7b2301c35ef8b58c2a3eb2a4cd94d4a5",
-      "bytes": 9550,
-      "edits": []
-    },
-    {
       "path": "scripts/assess-brain.cjs",
       "sourceSha256": "75a52eb2f2f82a2c04a2b126c8a96fda51d118bdb2fc049aa018ffcf1388a60c",
       "sourceContentSha256": "d71a55829993a9f7401c6c74a1bc1d2b1101c8b94fe344668ef187a022abcbdd",
@@ -595,10 +587,10 @@
     },
     {
       "path": "scripts/shared/dependencies.cjs",
-      "sourceSha256": "9632ea4bcf9a87b7ebbb4b48ee0361c0e2ebcc841ef5748f1eb1c9e8754b9970",
-      "sourceContentSha256": "6399b6c190f4985321c583d65854d0dcce6a030360493e76c2176374017910c4",
-      "sha256": "9632ea4bcf9a87b7ebbb4b48ee0361c0e2ebcc841ef5748f1eb1c9e8754b9970",
-      "bytes": 9318,
+      "sourceSha256": "8f12cd14c89ed8d24f72837c0425e955244ef1fc60b36b1172d45789399f6a3d",
+      "sourceContentSha256": "510fb8569c89f92cbc98890235e3dba92b81bea5edad3d9338f547abb1b73a48",
+      "sha256": "8f12cd14c89ed8d24f72837c0425e955244ef1fc60b36b1172d45789399f6a3d",
+      "bytes": 9270,
       "edits": []
     },
     {
@@ -1847,18 +1839,18 @@
     },
     {
       "path": "skills/setup-dependencies/SKILL.md",
-      "sourceSha256": "d1981e886f92b28b4babbdf5c0fd23115a0c59a1a72c3c3663be2a7afe6d8892",
-      "sourceContentSha256": "ed15171bb842a68c195d66f0ff076dd1a6eecd3676d638e39ff6a250d0e2b0fc",
-      "sha256": "d1981e886f92b28b4babbdf5c0fd23115a0c59a1a72c3c3663be2a7afe6d8892",
-      "bytes": 13665,
+      "sourceSha256": "4186797e57db6bbf3d75c06339fbf299720a85d4099cb00eb72a124fc3b80023",
+      "sourceContentSha256": "a52c3790476fb9ebd27593f00baffcc960f7e80ecf42c4c199a440b7b1fdf255",
+      "sha256": "4186797e57db6bbf3d75c06339fbf299720a85d4099cb00eb72a124fc3b80023",
+      "bytes": 14775,
       "edits": []
     },
     {
       "path": "skills/setup-dependencies/scripts/check-dependencies.cjs",
-      "sourceSha256": "fb83dd7d7a506987c1b6968d1f58c6976e298d529a2f160b27f131e7f8423e36",
-      "sourceContentSha256": "d9cb83c9224b5145c95f612b0a0a65b38b2c45d6ed3fe464f49c9ffb4cb85894",
-      "sha256": "fb83dd7d7a506987c1b6968d1f58c6976e298d529a2f160b27f131e7f8423e36",
-      "bytes": 14504,
+      "sourceSha256": "54b28d89d9331e5c862b3ead4bd07d89eeef7a43cb7d4672b1f36aa2a3a66256",
+      "sourceContentSha256": "684de321bf91ec2badf78f03bb25a06134eef86a5f1d051f9791f47a60495778",
+      "sha256": "54b28d89d9331e5c862b3ead4bd07d89eeef7a43cb7d4672b1f36aa2a3a66256",
+      "bytes": 14484,
       "edits": []
     },
     {

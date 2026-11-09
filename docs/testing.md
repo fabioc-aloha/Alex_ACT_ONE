@@ -1,16 +1,16 @@
 # Verification environments and release gates
 
-Release version: `0.9.6`. Use the
-[release record](../archive/verification/release-0.9.6/README.md)
+Release version: `0.9.7`. Use the
+[release record](../archive/verification/release-0.9.7/README.md)
 for the frozen commit's CI, clean-clone, artifact, and publication results.
 The dated baseline runs below do not substitute for same-commit release evidence.
 Live-host and browser observations retain their separately documented limits.
 
-The `0.9.6` release requires its own exact-commit matrix, clean-checkout
+The `0.9.7` release requires its own exact-commit matrix, clean-checkout
 checks, demo rebuilds and package verification. A `release-payload` receipt
 is assembly evidence only, not publication or a native installation.
 The user explicitly approved publication before their manual script-based
-installation. This `0.9.6`-only exception defers native installation and
+installation. This `0.9.7`-only exception defers native installation and
 activation evidence; it does not waive the source, runtime or browser gates.
 
 The source workflow targets Windows Server 2025 and Ubuntu 24.04 on x64.
@@ -45,7 +45,10 @@ not borrow newer checkout routing behavior.
 No live helper installation or activation was run to validate these changes.
 The source scripts and help have no retired image-provider setup options;
 negative regressions retain the removed-option rejection.
-The published `0.9.6` payload remains frozen with its earlier helper interface.
+The published `0.9.6` payload remains frozen with its earlier helper interface;
+`0.9.7` packages the unified helper and updated dependency skill. The source
+unification passed a clean-checkout gate and ordinary Windows/Ubuntu push CI;
+the version-stamped release still requires its own full same-commit gates.
 Before unification, the focused split-helper Windows run passed 186 tests and
 the structural lane passed 655 without failures, skips, todos or cancellations.
 That earlier demo rebuild changed only the shared dependency-source hash.

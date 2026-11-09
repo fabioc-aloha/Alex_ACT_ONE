@@ -213,7 +213,7 @@ const pad = Math.max(...rows.map((r) => r.label.length), ...mcp.servers.map((s) 
 // in the data. A flat list makes a missing Pandoc look like a missing jszip,
 // and those cost very different things. MCP servers are merged into the same
 // tiers rather than listed as one block, because Flint is required for charts
-// while Playwright has a fallback and Replicate needs a paid account.
+// while Playwright has a native-browser fallback.
 const byTier = (t) => [
     ...rows.filter((r) => r.tier === t),
     ...mcp.servers.filter((s) => s.tier === t),

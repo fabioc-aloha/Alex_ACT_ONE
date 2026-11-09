@@ -16,6 +16,11 @@
   installation, cache parity, activation and host restart remain unverified.
   The earlier [preparation evidence](archive/verification/candidate-0.9.6/preparation.json)
   remains historical. The relative-path package-verification hang was fixed.
+- The user approved `0.9.7` publication and a fresh manual-install exception.
+  Final metadata, version-stamped demos, source/payload hashes and same-commit
+  gates are being qualified. Do not treat earlier source CI as this release
+  cut. The [release record](archive/verification/release-0.9.7/README.md)
+  separates public delivery from unverified native setup; macOS stays pending.
 - Unreleased source now simplifies the root helper: default mode registers
   missing Alex Mall, refreshes registered catalogs and reports installed/latest
   versions. Only `-Apply` installs or updates the latest Mall version and

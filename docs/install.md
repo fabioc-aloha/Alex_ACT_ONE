@@ -12,9 +12,9 @@ tools, and historical verification notes in one reference.
 | Repository | Deprecated direct-install path: repository source selected at installation time; it can include unreleased work | Temporary candidate testing only; review root/revision and do not assume future CLI support |
 | Optional runtime | The separately provisioned chart, browser, image, and converter packages | Plugin installation does not activate instructions or provision these packages; installs and upgrades require their own approval |
 
-Release version: `0.9.6`. Mall delivery uses the reviewed release tag and its
+Release version: `0.9.7`. Mall delivery uses the reviewed release tag and its
 `package/alex-act-one` payload. Confirm publication in
-[the release record](../archive/verification/release-0.9.6/README.md) before
+[the release record](../archive/verification/release-0.9.7/README.md) before
 upgrading; the user performs installation separately. A version is not evidence of live-host
 activation. Packages with the same version can also contain different bytes.
 Check the loaded plugin root, installation source, and revision when available;
@@ -417,7 +417,7 @@ the script does not prove that the restarted host loaded instructions.
 used when set, then `~/.copilot`. Every operation is scoped to that home,
 and the inherited environment value is restored afterward.
 
-The simplified interface is an unreleased source change: use the current
+The unified interface ships in `0.9.7`: use that release or the current
 checkout, not the frozen `0.9.6` helper. It needs neither a refresh switch
 nor a version pin. Once plugin/bootstrap succeeds, it sets up dependencies
 from that installed package's registry and launcher. A later dependency failure
@@ -450,8 +450,8 @@ installation stops before any dependency installation, with guidance.
 `-RuntimeRoot` overrides
 `ALEX_ACT_ONE_RUNTIME_ROOT`; otherwise the shared default private runtime is
 used. Install the matching reviewed plugin before applying its runtime pins:
-older launchers intentionally reject newer MCP package versions. The `0.9.6`
-release reuses the reviewed `0.9.5` pins.
+older launchers intentionally reject newer MCP package versions. The `0.9.7`
+release reuses the reviewed `0.9.6` pins.
 
 Check existing package versions, MCP launchers, and actual Mermaid/SVG-to-PNG
 rendering without reinstalling:

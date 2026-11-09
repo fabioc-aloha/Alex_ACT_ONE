@@ -7,8 +7,8 @@ documentation, not adopter-project recovery records or fleet operations.
 The [builder](https://github.com/fabioc-aloha/Alex_ACT_ONE) produces a reproducible
 candidate under `dist/alex-act-one/`. Release preparation uses the same
 allowlist to generate `package/alex-act-one/`, the source-subdirectory payload
-selected since `0.9.4` and retained for `0.9.6`. The approved Mall route is
-`v0.9.6:package/alex-act-one`; [the release record](https://github.com/fabioc-aloha/Alex_ACT_ONE)
+selected since `0.9.4` and retained for `0.9.7`. The approved Mall route is
+`v0.9.7:package/alex-act-one`; [the release record](https://github.com/fabioc-aloha/Alex_ACT_ONE)
 verifies its publication separately from assembly and installation.
 
 ## Included
@@ -20,8 +20,9 @@ verifies its publication separately from assembly and installation.
   Flint HTML demonstrations.
 - The locked demonstration runtime inputs and the explicitly documented
   standalone Rich Email regression test.
-- Plugin metadata, license, optional installer and installation-verification
-  scripts, and a package-specific scope notice in the README/testing guide.
+- Plugin metadata, license, the unified root setup helper, and a package-specific
+  scope notice in the README/testing guide. Source candidates use
+  `install-and-check.ps1`; older frozen payloads retain their original helpers.
 
 ## Excluded
 

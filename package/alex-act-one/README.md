@@ -57,19 +57,19 @@ covers temporary candidate testing, Scout setup, and optional tools.
 Already set up? Browse the
 [skill catalog](#the-skills).
 
-**Release version: `v0.9.6`**, prepared 2026-11-08. This release adds
-automatic routing for the recognized Microsoft npm proxy, repository-owned
-scenario evidence output, and broader SVG contrast and keyboard checks.
-Both Flint demonstrations retain their data and upstream App, with
-contrast-tuned themes and corrected bounded-score heatmap mapping.
-Reviewed dependency pins are unchanged from `0.9.5`, not floating `latest`
-installs.
+**Release version: `v0.9.7`**, prepared 2026-11-09. This release combines plugin
+installation, owned-instruction bootstrap and capability tools in one root
+helper. Default mode reports status; only `-Apply` installs or activates.
+Dependency pins and launchers come from the installed plugin, with guarded
+setup for missing Windows Pandoc and selected-Python Pillow. Core reasoning
+does not require the full tool set. Reviewed npm pins remain unchanged from
+`0.9.6`; macOS installation support is planned, not certified.
 
 Existing installations do not update automatically. Use the reviewed Mall
 release, verify the loaded version/root, and preview activation again before
 approving profile changes. The [install reference](docs/install.md#installation-sources)
 separates package delivery, activation, and optional runtime provisioning.
-Installed `0.9.5` CLI/VS Code observations and local `0.9.6` browser evidence have
+Earlier installed CLI/VS Code observations and current browser evidence have
 [documented limits](docs/verification/README.md); Scout and Copilot app behavior
 is **not freshly verified** for this release. The
 [release record](https://github.com/fabioc-aloha/Alex_ACT_ONE) separates
@@ -253,7 +253,7 @@ Getting the plugin and its dependencies working.
 | --- | --- | --- |
 | [`bootstrap-core`](skills/bootstrap-core/SKILL.md) | Activates, verifies, repairs, or removes this plugin's user-scope runtime instructions from canonical installed sources. Use after installing or updating Alex ACT ONE, when ACT... | Node only |
 | [`bootstrap-project`](skills/bootstrap-project/SKILL.md) | Previews and applies this plugin's repository scaffold, portable workspace QoL settings, and project Copilot settings while preserving project-owned files. Use for new... | Node only |
-| [`setup-dependencies`](skills/setup-dependencies/SKILL.md) | Check which optional dependencies this plugin can use, report what each missing one costs, and install them with consent. Covers Pandoc, Mermaid CLI, svgexport, jszip, and the... | Node only |
+| [`setup-dependencies`](skills/setup-dependencies/SKILL.md) | Check capability-specific dependencies, explain missing tools, and install with consent. Covers Pandoc, Pillow, Mermaid CLI, svgexport, jszip, and pinned chart/browser MCP... | Node only |
 | [`platform-awareness`](skills/platform-awareness/SKILL.md) | Discover current host capabilities and verify Copilot CLI/VS Code platform claims against native help and official documentation. Use for deferred tools, harness differences,... | Node only |
 | [`browser-tools`](skills/browser-tools/SKILL.md) | Use native browser capabilities first for interactive pages, screenshots, console errors, measured visual checks, local artifacts, and embedded-frame or hidden-tab input... | Node only |
 | [`terminal-command-safety`](skills/terminal-command-safety/SKILL.md) | Provides terminal output-capture, hung-command, and platform-behavior procedures while the resident instruction retains the Backtick Hazard floor. Use when a command may lose... | Node only |
@@ -504,29 +504,40 @@ See [optional tools, runtime readiness, and registry policy](docs/install.md#opt
 
 Use a standalone terminal outside the attached agent session, from this checkout.
 Close apps that can lock or cache the old plugin. The
-[plugin helper](reinstall-and-check.ps1) refreshes Mall and updates an existing
-enabled Mall installation only with explicit `-Refresh`; it never uninstalls
-first or forces instruction conflicts:
-
-Run the following sequence only after the release record confirms `0.9.6`
-is available in Mall.
+[unified setup helper](install-and-check.ps1) now has two source-checkout modes:
+the default registers Alex Mall if missing, refreshes all registered marketplace
+catalogs, and reports the installed/latest plugin and dependency versions.
+It does not install plugins or tools or activate instructions. Add `-Apply`
+to install/update the latest Mall release, bootstrap its owned instructions
+with conflict checks, then set up its reviewed npm pins and missing Pandoc/Pillow.
 
 ```powershell
 $ErrorActionPreference = 'Stop'
-.\reinstall-and-check.ps1 -Refresh -ExpectedVersion 0.9.6
-.\install-optional-dependencies.ps1
-# After reviewing the exact pins, registry, and private/global destinations:
-.\install-optional-dependencies.ps1 -Apply
-.\install-optional-dependencies.ps1 -VerifyOnly
+.\install-and-check.ps1
+# After reviewing versions and installation scopes, close hosts that lock files:
+.\install-and-check.ps1 -Apply
 ```
 
-Install the matching plugin **before** updating its private runtime. New
-runtime pins are incompatible with older plugin launchers. The
-[dependency helper](install-optional-dependencies.ps1) installs Flint,
-Playwright, and JSZip privately, and Mermaid CLI/svgexport in npm's global
-prefix. It honors `ALEX_ACT_ONE_RUNTIME_ROOT` unless `-RuntimeRoot` is supplied.
-It preserves npm registry/policy settings and checks real rendering; package
-presence alone is not success.
+This unified helper ships in `0.9.7`; the immutable `0.9.6` package retains
+its earlier helper interface. The helper follows the
+latest version advertised by Alex Mall, not the checkout's version. Default
+mode can change marketplace registrations/catalog caches. Dependency pins and
+launchers come from the installed plugin, never an unrelated checkout; when
+no plugin is installed, the default report labels checkout pins as planning only.
+
+The helper installs Flint, Playwright and JSZip privately, and Mermaid CLI/
+svgexport in npm's global prefix. Missing Pandoc uses Windows winget; missing
+Pillow uses the selected existing Python and its pip settings. Existing Pandoc
+and Pillow are checked, not silently upgraded. Python is not installed;
+missing prerequisites stop with guidance. Use `-PythonCommand` to select an
+existing interpreter. No registry changes, auto-elevation or policy bypasses occur.
+Core reasoning does not require the full tool set; it enables more capabilities.
+
+`-VerifyOnly` runs strict no-install package, launcher and renderer checks.
+It still performs the normal marketplace refresh. `-RuntimeRoot` overrides
+`ALEX_ACT_ONE_RUNTIME_ROOT`. Package presence alone is not renderer readiness.
+The plugin/bootstrap stage can succeed before a later dependency failure;
+that failure is not full setup success or transactional rollback.
 
 The checkout's installer now recognizes the configured
 `https://packagefeedproxy.microsoft.io/npm/` registry and previews its confirmed
@@ -539,22 +550,14 @@ another confirmed backend, preview an explicit per-command routing prefix:
 
 ```powershell
 $feed = 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/'
-.\install-optional-dependencies.ps1 -RegistryTarballPrefix $feed
-.\install-optional-dependencies.ps1 -Apply -RegistryTarballPrefix $feed
+.\install-and-check.ps1 -RegistryTarballPrefix $feed
+.\install-and-check.ps1 -Apply -RegistryTarballPrefix $feed
 ```
 
 `-RegistryTarballPrefix` takes precedence over detection. If a routed install
 still reports `EALLOWREMOTE`, stop and inspect the actual rejected URL; the
 helper does not retry or broaden routing. Do not change registries, enable
 remote fetching, or continue after an error.
-
-Pandoc and Pillow are separate, explicitly invoked prerequisites for the
-converter and screenshot workflows:
-
-```powershell
-winget install --id JohnMacFarlane.Pandoc --exact
-python -m pip install --upgrade Pillow
-```
 
 Use an existing browser with `-BrowserExecutablePath` if browser setup is
 blocked. Optional companion/Microsoft plugins remain separate opt-in workflows.
@@ -565,11 +568,11 @@ host after verified setup and check its MCP connectivity separately.
 
 #### Reinstall and verify ONE
 
-See [reinstall and verification](docs/install.md#reinstall-and-verify-one).
+See [installation and verification](docs/install.md#reinstall-and-verify-one).
 
 #### Install or check optional dependencies
 
-See [optional installer preview, apply, and verification](docs/install.md#install-or-check-optional-dependencies).
+See [unified dependency reporting, apply, and verification](docs/install.md#install-or-check-optional-dependencies).
 
 ## Tests
 

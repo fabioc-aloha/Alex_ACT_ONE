@@ -5,6 +5,13 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+## 0.9.7 - 2026-11-09
+
+The user approved source and Mall publication with manual installation
+deferred. [The release record](archive/verification/release-0.9.7/README.md)
+binds final source/package evidence separately from native activation.
+macOS setup remains a documented roadmap item, not an implemented feature.
+
 - Replaced the two source root helpers with `install-and-check.ps1`.
   Default mode refreshes marketplace catalogs and reports plugin/dependency
   status without installing or activating. `-Apply` installs/updates the latest
@@ -23,8 +30,8 @@ An Unreleased entry does not imply publication, installation, or activation.
   duplicate/source and downgrade guards. It no longer needs a refresh switch
   or checkout-pinned expected version and does not add unrelated marketplaces.
   Removed stale retired-provider script comments and strengthened active-script
-  absence tests. These source changes do not replace the published `0.9.6`
-  package or run a real installation.
+  absence tests. The immutable `0.9.6` payload remains unchanged; no real
+  installation was run while validating these changes.
 
 ## 0.9.6 - 2026-11-08
 

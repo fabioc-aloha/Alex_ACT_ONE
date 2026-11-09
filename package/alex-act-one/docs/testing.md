@@ -3,17 +3,17 @@
 
 # Verification environments and release gates
 
-Release version: `0.9.6`. Use the
+Release version: `0.9.7`. Use the
 [release record](https://github.com/fabioc-aloha/Alex_ACT_ONE)
 for the frozen commit's CI, clean-clone, artifact, and publication results.
 The dated baseline runs below do not substitute for same-commit release evidence.
 Live-host and browser observations retain their separately documented limits.
 
-The `0.9.6` release requires its own exact-commit matrix, clean-checkout
+The `0.9.7` release requires its own exact-commit matrix, clean-checkout
 checks, demo rebuilds and package verification. A `release-payload` receipt
 is assembly evidence only, not publication or a native installation.
 The user explicitly approved publication before their manual script-based
-installation. This `0.9.6`-only exception defers native installation and
+installation. This `0.9.7`-only exception defers native installation and
 activation evidence; it does not waive the source, runtime or browser gates.
 
 The source workflow targets Windows Server 2025 and Ubuntu 24.04 on x64.
@@ -22,6 +22,40 @@ on Node 26, on both OSes. Manual dispatch and the weekly scheduled run add
 Node 26 structural jobs for the full release matrix.
 These are verification targets, not certification of every Copilot host or OS.
 macOS and other Node versions are not covered by this workflow.
+
+## Simplified root-helper source checks
+
+The 2026-11-09 source has one root `install-and-check.ps1` entry point.
+Default mode connects Alex Mall, refreshes catalogs and reports plugin and
+dependency versions. Only `-Apply` installs/updates the plugin, bootstraps
+owned instructions, then sets up dependencies from that installed owner's
+pins and launcher. Missing Windows Pandoc and selected-Python Pillow are
+installed only with consent; existing system tools are not upgraded and
+Python is not installed. Native CLI help confirmed
+that marketplace update without a name refreshes all registered catalogs;
+its browse JSON does not expose release versions.
+
+Disposable PowerShell 7 and Windows PowerShell 5.1 fixtures cover the plugin
+stage, dependency stage and their ordered orchestration. Cases include
+absent/older/disabled packages, a Mall version newer
+than the checkout, downgraded or invalid catalogs, failed/no-op updates,
+registration guards, selected-home isolation, real bootstrap conflicts,
+missing/matched/mismatched dependency reports, selected Python/pip, missing
+winget, system installer failures/no-ops and invalid-option preflight.
+Older installed registries without automatic tarball-routing support still
+report their own pins with an explicit capability limitation; the helper does
+not borrow newer checkout routing behavior.
+No live helper installation or activation was run to validate these changes.
+The source scripts and help have no retired image-provider setup options;
+negative regressions retain the removed-option rejection.
+The published `0.9.6` payload remains frozen with its earlier helper interface;
+`0.9.7` packages the unified helper and updated dependency skill. The source
+unification passed a clean-checkout gate and ordinary Windows/Ubuntu push CI;
+the version-stamped release still requires its own full same-commit gates.
+Before unification, the focused split-helper Windows run passed 186 tests and
+the structural lane passed 655 without failures, skips, todos or cancellations.
+That earlier demo rebuild changed only the shared dependency-source hash.
+These are historical source observations, not the unified helper's verdict.
 
 ## Post-release proxy-routing source verification
 
@@ -389,9 +423,10 @@ upgrades subsequently shipped in
 separate manual setup choice.
 
 No dependencies, credentials, profile instructions, or host configuration were
-changed, and no paid image generation was attempted. Replicate launchability
-does not establish API authorization. These observations do not certify every
-host, semantic skill scenario, browser interaction, or runtime rollback path.
+changed, and no paid image generation was attempted. The retired provider's
+then-observed launchability did not establish API authorization. These
+observations do not certify every host, semantic skill scenario, browser
+interaction, or runtime rollback path.
 The scoped runtime description check confirmed the reviewed demo renderer
 versions; the audit did not rebuild the demonstration pages or repeat browser
 acceptance.
@@ -517,6 +552,6 @@ behavior and refusal to replace existing or cross-source packages in both
 Windows PowerShell versions; no real profile or CLI installation is modified.
 
 CI is not live Copilot skill invocation, browser gesture/accessibility UAT, a
-security audit, New Outlook opening/sending, or a paid Replicate request.
+security audit, New Outlook opening/sending, or paid image generation.
 Those require their own scoped evidence and consent. See the
 [release checklist](https://github.com/fabioc-aloha/Alex_ACT_ONE) and [roadmap](https://github.com/fabioc-aloha/Alex_ACT_ONE).
