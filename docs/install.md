@@ -378,33 +378,47 @@ expanded marketplace checks ship in `v0.5.0`.
 
 #### Reinstall and verify ONE
 
-After confirming `0.9.6` is available in Mall, close hosts that may lock the
-installed plugin before running
-[`reinstall-and-check.ps1`](../reinstall-and-check.ps1):
+Run the current checkout's
+[`reinstall-and-check.ps1`](../reinstall-and-check.ps1) without switches to
+connect Alex Mall if missing, refresh all registered marketplace catalogs,
+and report the installed version, if any, plus the latest version in Mall:
 
 ```powershell
-.\reinstall-and-check.ps1 -Refresh -ExpectedVersion 0.9.6
+.\reinstall-and-check.ps1
 ```
 
-The current checkout's helper is not a preview. It first rejects duplicate or
-cross-source ONE installations. An older, disabled, or otherwise mismatched
-existing release is preserved and blocks automatic replacement. A matching
-release is verified in place; only an absent package is installed by default.
-In `0.9.5`, explicit `-Refresh` refreshes the Mall catalog and invokes native
-plugin update for an existing enabled Mall installation, including the same
-version. It verifies inventory and installed files before activation and never
-uninstalls first. A failed/no-op update cannot activate a stale version.
-This is not a claim of transactional native-CLI rollback.
+Default mode changes only marketplace registration/catalog caches, not plugins
+or instructions. It adds only `alex-mall`, preserves existing/default and
+unrelated registrations, and requires only the Copilot CLI.
 
-The helper registers missing public marketplaces (`alex-mall`,
-`awesome-copilot`, `copilot-plugins`, `azure-skills`, and `fabric-collection`),
-rejects conflicting sources, and uses the Mall's release tag for a first install,
-not the working checkout. It verifies the installed version and applies the
-canonical instructions to the selected Copilot profile, checking their
-bootstrap receipt afterward. It does not install optional plugins or prove
-that a host has observed activation after restart. `-CopilotHome` selects that
-profile explicitly; otherwise `COPILOT_HOME` is used when set, then
-`~/.copilot`. It never uninstalls an existing package.
+To install or update the latest Mall version, close hosts that may lock the
+plugin, then opt in:
+
+```powershell
+.\reinstall-and-check.ps1 -Apply
+```
+
+`-Apply` also requires Node. It installs when absent or invokes native update
+for an enabled Mall installation, including a matching version. The latest
+stable version comes from the registered GitHub marketplace's catalog, not
+the checkout's metadata. A missing, ambiguous or invalid catalog version,
+failed refresh/update, or mismatched installed inventory stops before activation.
+An installed version ahead of Mall is preserved rather than downgraded.
+Duplicate, cross-source, disabled or unregistered package state requires
+explicit resolution; the helper never uninstalls first.
+
+After verifying inventory and the installed manifest, `-Apply` activates only
+the installed package's canonical instructions and checks their bootstrap
+receipt. Conflicts are not overwritten. Restart the host after success;
+the script does not prove that the restarted host loaded instructions.
+`-CopilotHome` selects the profile explicitly; otherwise `COPILOT_HOME` is
+used when set, then `~/.copilot`. Every operation is scoped to that home,
+and the inherited environment value is restored afterward.
+
+The simplified interface is an unreleased source change: use the current
+checkout, not the frozen `0.9.6` helper. It needs neither a refresh switch
+nor a version pin. This is not transactional native-CLI rollback or an optional
+dependency installation.
 
 #### Install or check optional dependencies
 

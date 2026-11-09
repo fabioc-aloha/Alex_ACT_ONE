@@ -5,6 +5,16 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+- Simplified the source root helper: default mode connects Alex Mall if missing,
+  refreshes all registered marketplace catalogs and reports installed/latest
+  versions. Only `-Apply` installs or updates the latest stable Mall release
+  and activates its owned instructions, retaining profile isolation, conflict,
+  duplicate/source and downgrade guards. It no longer needs a refresh switch
+  or checkout-pinned expected version and does not add unrelated marketplaces.
+  Removed stale retired-provider script comments and strengthened active-script
+  absence tests. These source changes do not replace the published `0.9.6`
+  package or run a real installation.
+
 ## 0.9.6 - 2026-11-08
 
 Published [v0.9.6](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.6)

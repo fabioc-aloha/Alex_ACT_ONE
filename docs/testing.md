@@ -20,6 +20,29 @@ Node 26 structural jobs for the full release matrix.
 These are verification targets, not certification of every Copilot host or OS.
 macOS and other Node versions are not covered by this workflow.
 
+## Simplified root-helper source checks
+
+The 2026-11-09 source helper separates marketplace refresh/version reporting
+from plugin changes. Default mode adds only missing Alex Mall and refreshes
+registered catalogs; only `-Apply` installs/updates and activates owned
+instructions. The selected GitHub marketplace catalog supplies the latest
+stable version, independently of checkout metadata. Native CLI help confirmed
+that marketplace update without a name refreshes all registered catalogs;
+its browse JSON does not expose release versions.
+
+Disposable PowerShell 7 and Windows PowerShell 5.1 fixtures cover report-only
+behavior without Node, absent/older/disabled packages, a Mall version newer
+than the checkout, downgraded or invalid catalogs, failed/no-op updates,
+registration guards, selected-home isolation, and real bootstrap conflicts.
+No live helper installation or activation was run to validate these changes.
+The source scripts and help have no retired image-provider setup options;
+negative regressions retain the removed-option rejection.
+The published `0.9.6` payload remains frozen with its earlier helper interface.
+The focused Windows run passed 186 helper/onboarding/documentation tests; the
+strict structural source lane passed 655 tests, without failures, skips, todos
+or cancellations. Both demo rebuilds passed in the approved disposable locked
+runtime; exact comparisons show only the shared dependency-source hash changed.
+
 ## Post-release proxy-routing source verification
 
 The unreleased checkout recognizes only the configured HTTPS Microsoft
@@ -386,9 +409,10 @@ upgrades subsequently shipped in
 separate manual setup choice.
 
 No dependencies, credentials, profile instructions, or host configuration were
-changed, and no paid image generation was attempted. Replicate launchability
-does not establish API authorization. These observations do not certify every
-host, semantic skill scenario, browser interaction, or runtime rollback path.
+changed, and no paid image generation was attempted. The retired provider's
+then-observed launchability did not establish API authorization. These
+observations do not certify every host, semantic skill scenario, browser
+interaction, or runtime rollback path.
 The scoped runtime description check confirmed the reviewed demo renderer
 versions; the audit did not rebuild the demonstration pages or repeat browser
 acceptance.
@@ -514,6 +538,6 @@ behavior and refusal to replace existing or cross-source packages in both
 Windows PowerShell versions; no real profile or CLI installation is modified.
 
 CI is not live Copilot skill invocation, browser gesture/accessibility UAT, a
-security audit, New Outlook opening/sending, or a paid Replicate request.
+security audit, New Outlook opening/sending, or paid image generation.
 Those require their own scoped evidence and consent. See the
 [release checklist](../RELEASE-CHECKLIST.md) and [roadmap](../ROADMAP.md).

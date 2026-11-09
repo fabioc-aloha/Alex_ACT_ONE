@@ -501,16 +501,29 @@ See [optional tools, runtime readiness, and registry policy](docs/install.md#opt
 
 Use a standalone terminal outside the attached agent session, from this checkout.
 Close apps that can lock or cache the old plugin. The
-[plugin helper](reinstall-and-check.ps1) refreshes Mall and updates an existing
-enabled Mall installation only with explicit `-Refresh`; it never uninstalls
-first or forces instruction conflicts:
-
-Run the following sequence only after the release record confirms `0.9.6`
-is available in Mall.
+[plugin helper](reinstall-and-check.ps1) now has two source-checkout modes:
+the default registers Alex Mall if missing, refreshes all registered marketplace
+catalogs, and reports the installed and latest Mall versions. It does not change
+plugins or instructions. Add `-Apply` to install or update the latest Mall
+release and activate its owned instructions, preserving conflict checks.
+It never uninstalls first or installs optional dependencies.
 
 ```powershell
 $ErrorActionPreference = 'Stop'
-.\reinstall-and-check.ps1 -Refresh -ExpectedVersion 0.9.6
+.\reinstall-and-check.ps1
+# After reviewing the reported version, close hosts that may lock the plugin:
+.\reinstall-and-check.ps1 -Apply
+```
+
+This simplified helper is an unreleased source change; the immutable `0.9.6`
+package retains its earlier helper interface. The source helper follows the
+latest version advertised by Alex Mall, not the checkout's version. Default
+mode can change marketplace registrations/catalog caches, but needs no Node
+command and never installs a plugin or activates instructions.
+
+Optional dependency setup remains separate:
+
+```powershell
 .\install-optional-dependencies.ps1
 # After reviewing the exact pins, registry, and private/global destinations:
 .\install-optional-dependencies.ps1 -Apply

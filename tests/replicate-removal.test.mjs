@@ -24,9 +24,16 @@ test('retired image provider is absent from declared assets, provisioning, and C
 
 test('active runtime guidance contains no retired provider installation or routing instructions', () => {
     for (const name of [
-        'install-optional-dependencies.ps1', 'docs/install.md', 'skills/setup-dependencies/SKILL.md',
+        'reinstall-and-check.ps1', 'install-optional-dependencies.ps1',
+        'scripts/shared/dependencies.cjs',
+        'skills/setup-dependencies/scripts/check-dependencies.cjs',
+        'skills/setup-dependencies/scripts/provision-runtime.mjs',
+        'skills/setup-dependencies/scripts/runtime-launcher.mjs',
+        'docs/install.md', 'skills/setup-dependencies/SKILL.md',
         'skills/chart-vocabulary/SKILL.md',
     ]) {
-        assert.doesNotMatch(readFileSync(join(root, name), 'utf8'), /replicate-imagery|replicate-mcp|REPLICATE_API_TOKEN|IncludeReplicate/);
+        const source = readFileSync(join(root, name), 'utf8');
+        assert.doesNotMatch(source, /replicate-imagery|replicate-mcp|REPLICATE_API_TOKEN|IncludeReplicate/, name);
+        if (/\.(?:ps1|cjs|mjs)$/.test(name)) assert.doesNotMatch(source, /\breplicate\b/i, name);
     }
 });

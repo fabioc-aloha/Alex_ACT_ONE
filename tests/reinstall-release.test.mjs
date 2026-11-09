@@ -51,7 +51,8 @@ function runReleaseForShell(t, shell, options = {}) {
             return [file.slice(unselectedHome.length), readFileSync(file, 'base64')];
         }).sort(([a], [b]) => a.localeCompare(b));
     const unselectedBefore = snapshotUnselected();
-    const initialVersion = options.oldVersion ? '0.3.0' : VERSION;
+    const latestVersion = options.latestVersion || VERSION;
+    const initialVersion = options.installedVersion || (options.oldVersion ? '0.3.0' : VERSION);
     if (!options.firstInstall) {
         mkdirSync(join(installedRoot, 'skills', 'bootstrap-core', 'scripts'), { recursive: true });
         writeFileSync(join(installedRoot, 'plugin.json'), JSON.stringify({ name: 'alex-act-one', version: initialVersion }));
@@ -80,7 +81,8 @@ function runReleaseForShell(t, shell, options = {}) {
     const otherPlugins = options.otherPlugins || [];
     mkdirSync(copilotHome, { recursive: true });
     writeFileSync(statePath, JSON.stringify([...otherPlugins, ...(options.firstInstall ? [] : [{
-        name: 'alex-act-one', marketplace: 'alex-mall', version: initialVersion, enabled: true, source: 'installed',
+        name: 'alex-act-one', marketplace: options.installedMarketplace || 'alex-mall',
+        version: initialVersion, enabled: !options.disabled, source: 'installed',
     }])]));
     writeFileSync(marketplaceStatePath, JSON.stringify(options.marketplaces || []));
     writePowerShell(copilot, `
@@ -121,7 +123,7 @@ if ($command -eq 'plugin uninstall alex-act-one@alex-mall') {
   ConvertTo-Json -InputObject @($state | Where-Object { $_.name -ne 'alex-act-one' }) -Compress | Set-Content -LiteralPath $statePath
   exit 0
 }
-if ($command -eq 'plugin marketplace update alex-mall') {
+if ($command -eq 'plugin marketplace update') {
   if ($env:FAKE_REFRESH_FAILURE -eq '1') { Write-Output 'fixture catalog refresh failure'; exit 24 }
   exit 0
 }
@@ -135,13 +137,13 @@ if ($command -eq 'plugin install alex-act-one@alex-mall' -or $command -eq 'plugi
   if ($command -eq 'plugin update alex-act-one@alex-mall' -and $env:FAKE_UPDATE_NOOP -eq '1') { exit 0 }
   if ($env:FAKE_INSTALL_FAILURE -eq '1') { Write-Output 'fixture install failure'; exit 23 }
   New-Item -ItemType Directory -Force -Path $installedRoot | Out-Null
-    @{ name = 'alex-act-one'; version = '${VERSION}' } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $installedRoot 'plugin.json')
+    @{ name = 'alex-act-one'; version = '${latestVersion}' } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $installedRoot 'plugin.json')
   New-Item -ItemType Directory -Force -Path (Join-Path $installedRoot 'skills/bootstrap-core/scripts') | Out-Null
     if ($env:FAKE_REAL_BOOTSTRAP -ne '1') {
       Set-Content -LiteralPath (Join-Path $installedRoot 'skills/bootstrap-core/scripts/bootstrap-core.cjs') -Value '// mocked bootstrap'
     }
     $others = @($state | Where-Object { $_.name -ne 'alex-act-one' })
-    $installed = @{ name = 'alex-act-one'; marketplace = 'alex-mall'; version = '${VERSION}'; enabled = $true; source = 'installed' }
+    $installed = @{ name = 'alex-act-one'; marketplace = 'alex-mall'; version = '${latestVersion}'; enabled = $true; source = 'installed' }
     ConvertTo-Json -InputObject @($others + $installed) -Compress | Set-Content -LiteralPath $statePath
   exit 0
 }
@@ -161,7 +163,7 @@ New-Item -ItemType Directory -Force -Path (Split-Path -Parent $receiptPath) | Ou
 @{
     schemaVersion = 2
     bootstrappedBy = 'alex-act-one'
-    coreVersion = '${VERSION}'
+    coreVersion = '${latestVersion}'
     files = @(@{ name = 'alex-act-act-pass.instructions.md'; owner = 'alex-act-one'; sourceRelativePath = 'instructions/act-pass.instructions.md'; sha256 = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' })
 } | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath $receiptPath
 $Arguments | ConvertTo-Json -Compress | Set-Content -LiteralPath $env:FAKE_BOOTSTRAP_LOG
@@ -169,8 +171,17 @@ $Arguments | ConvertTo-Json -Compress | Set-Content -LiteralPath $env:FAKE_BOOTS
 exit 0
 `);
     writePowerShell(wrapper, `
-param([switch]$Refresh, [string]$CopilotHome, [string]$CopilotCommand, [string]$NodeCommand, [string]$ExpectedVersion)
+param([switch]$Apply, [string]$CopilotHome, [string]$CopilotCommand, [string]$NodeCommand)
 Set-Variable -Name HOME -Value $env:FAKE_PROFILE -Force
+function Invoke-RestMethod {
+    param([string]$Uri, [int]$TimeoutSec, [string]$ErrorAction)
+    if ($Uri -ne 'https://raw.githubusercontent.com/fabioc-aloha/Alex_Skill_Mall/HEAD/.github/plugin/marketplace.json') {
+        throw "Unexpected catalog URL: $Uri"
+    }
+    Add-Content -LiteralPath $env:FAKE_COMMAND_LOG -Value 'catalog read'
+    if ($env:FAKE_CATALOG_FAILURE -eq '1') { throw 'fixture catalog fetch failure' }
+    return ('${JSON.stringify(options.catalog || { plugins: [{ name: 'alex-act-one', version: latestVersion }] })}' | ConvertFrom-Json)
+}
 try {
     & $env:FAKE_RELEASE_SCRIPT @PSBoundParameters
 } finally {
@@ -182,8 +193,8 @@ try {
     const inheritedHome = options.unsetHome ? '' : options.unselectedHome ? unselectedHome : copilotHome;
     const invoke = () => runPowerShell(shell, wrapper, {
         ...(options.inheritHome ? {} : { CopilotHome: copilotHome }),
-        CopilotCommand: copilot, NodeCommand: node, ExpectedVersion: VERSION,
-        ...(options.refresh ? { Refresh: true } : {}),
+        CopilotCommand: copilot, NodeCommand: options.noNode ? join(root, 'missing-node') : node,
+        ...(options.apply === false ? {} : { Apply: true }),
     }, {
         root,
         cwd: ROOT_PATH,
@@ -207,10 +218,12 @@ try {
             FAKE_UPDATE_FAILURE: options.updateFailure ? '1' : '',
             FAKE_UPDATE_NOOP: options.updateNoop ? '1' : '',
             FAKE_UPDATE_WARNING: options.updateWarning ? '1' : '',
+            FAKE_CATALOG_FAILURE: options.catalogFailure ? '1' : '',
         },
     });
     const result = invoke();
     assert.ifError(result.error);
+    if (!options.error) assert.equal(result.status, 0, result.stdout + result.stderr);
     const restored = JSON.parse(readFileSync(restoredLog, 'utf8'));
     assert.equal(restored.present, inheritedHome !== '');
     assert.equal(restored.value || '', inheritedHome);
@@ -245,17 +258,32 @@ try {
         const repeated = invoke();
         assert.equal(repeated.status, 0, repeated.stdout + repeated.stderr);
     }
-    const installed = JSON.parse(readFileSync(join(installedRoot, 'plugin.json'), 'utf8'));
+    const commands = readFileSync(commandLog, 'utf8').trim().split(/\r?\n/);
+    if (options.apply === false) {
+        assert.doesNotMatch(commands.join('\n'), /plugin (install|update|uninstall) /);
+        assert.equal(existsSync(bootstrapLog), false);
+        assert.equal(existsSync(join(copilotHome, 'instructions')), false);
+        if (options.firstInstall) assert.equal(existsSync(installedRoot), false);
+        else assert.equal(JSON.parse(readFileSync(join(installedRoot, 'plugin.json'), 'utf8')).version, initialVersion);
+        assert.match(result.stdout, options.firstInstall ? /not installed/i : new RegExp(initialVersion.replaceAll('.', '\\.')));
+        assert.match(result.stdout, /-Apply/);
+    }
+    const installed = options.firstInstall && options.apply === false ? null :
+        JSON.parse(readFileSync(join(installedRoot, 'plugin.json'), 'utf8'));
     const parsedPlugins = JSON.parse(readFileSync(statePath, 'utf8'));
     const plugins = Array.isArray(parsedPlugins) ? parsedPlugins : [parsedPlugins];
     const parsedMarketplaces = JSON.parse(readFileSync(marketplaceStatePath, 'utf8'));
     const marketplaces = Array.isArray(parsedMarketplaces) ? parsedMarketplaces : [parsedMarketplaces];
-    const bootstrapArgs = JSON.parse(readFileSync(bootstrapLog, 'utf8'));
-    assert.equal(installed.version, VERSION);
-    assert.deepEqual(plugins, [...otherPlugins, {
-        name: 'alex-act-one', marketplace: 'alex-mall', version: VERSION, enabled: true, source: 'installed',
-    }]);
-    for (const expected of MARKETPLACES) {
+    if (options.apply !== false) {
+        assert.equal(installed.version, latestVersion);
+        assert.deepEqual(plugins, [...otherPlugins, {
+            name: 'alex-act-one', marketplace: 'alex-mall', version: latestVersion, enabled: true, source: 'installed',
+        }]);
+        const bootstrapArgs = JSON.parse(readFileSync(bootstrapLog, 'utf8'));
+        assert.ok(bootstrapArgs.includes('--apply'));
+        assert.ok(bootstrapArgs.some((argument) => argument.endsWith('bootstrap-core.cjs')));
+    }
+    for (const expected of MARKETPLACES.slice(0, 1)) {
         const matching = marketplaces.filter((entry) => entry.name === expected.name);
         assert.equal(matching.length, 1);
         assert.equal(matching[0].source, expected.source);
@@ -265,9 +293,8 @@ try {
     for (const existing of options.marketplaces || []) {
         assert.deepEqual(marketplaces.find((entry) => entry.name === existing.name), existing);
     }
-    const commands = readFileSync(commandLog, 'utf8').trim().split(/\r?\n/);
     const adds = commands.filter((command) => command.startsWith('plugin marketplace add '));
-    const missing = MARKETPLACES.filter((expected) =>
+    const missing = MARKETPLACES.slice(0, 1).filter((expected) =>
         !options.marketplaces?.some((entry) => entry.name === expected.name));
     assert.equal(adds.length, missing.length);
     for (const expected of missing) {
@@ -275,14 +302,13 @@ try {
     }
     assert.ok(commands.filter((command) => command.startsWith('plugin install '))
         .every((command) => command === 'plugin install alex-act-one@alex-mall'));
-    assert.equal(commands.filter((command) => command.startsWith('plugin install ')).length, options.firstInstall ? 1 : 0);
+    assert.equal(commands.filter((command) => command.startsWith('plugin install ')).length,
+        options.firstInstall && options.apply !== false ? 1 : 0);
     assert.ok(commands.every(command => !command.startsWith('plugin uninstall ')));
-    assert.equal(commands.filter(command => command === 'plugin marketplace update alex-mall').length,
-        options.refresh ? (options.repeat ? 2 : 1) : 0);
+    assert.equal(commands.filter(command => command === 'plugin marketplace update').length, options.repeat ? 2 : 1);
     assert.equal(commands.filter(command => command === 'plugin update alex-act-one@alex-mall').length,
-        options.refresh && !options.firstInstall ? (options.repeat ? 2 : 1) : 0);
-    assert.ok(bootstrapArgs.includes('--apply'));
-    assert.ok(bootstrapArgs.some((argument) => argument.endsWith('bootstrap-core.cjs')));
+        options.apply !== false ? (options.repeat ? (options.firstInstall ? 1 : 2) : (options.firstInstall ? 0 : 1)) : 0);
+    assert.ok(commands.indexOf('plugin marketplace update') < commands.indexOf('catalog read'));
     assert.equal(existsSync(join(copilotHome, 'session-state')), false);
 }
 
@@ -290,36 +316,89 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
     const runRelease = (t, options) => runReleaseForShell(t, shell, options);
     const testRelease = (name, fn) => test(`${shell}: ${name}`, fn);
 
-    testRelease('registers missing marketplaces, installs ONE only when absent, then verifies without reinstalling', (t) => {
+    for (const [parameter, value] of [['Refresh', true], ['ExpectedVersion', '99.0.0'], ['IncludeReplicate', true]]) {
+        testRelease(`removed option ${parameter} is rejected before any CLI operation`, t => {
+            const root = mkdtempSync(join(ROOT_PATH, '.test-release-options-'));
+            t.after(() => rmSync(root, { recursive: true, force: true }));
+            const result = runPowerShell(shell, SCRIPT_PATH, {
+                [parameter]: value, CopilotCommand: join(root, 'must-not-run'),
+            }, { root });
+            assert.notEqual(result.status, 0);
+            assert.match(result.stderr, new RegExp(`parameter.*${parameter}|${parameter}.*parameter`, 'i'));
+            assert.doesNotMatch(result.stderr, /Required command is unavailable/);
+        });
+    }
+
+    testRelease('default refresh connects only Alex Mall and reports an absent plugin without installing or requiring Node', t => {
+        runRelease(t, { firstInstall: true, apply: false, noNode: true, repeat: true });
+    });
+
+    testRelease('default reports an older installed version without replacing it or activating instructions', t => {
+        runRelease(t, { oldVersion: true, apply: false });
+    });
+
+    testRelease('default reports a disabled installed version without enabling or activating it', t => {
+        runRelease(t, { disabled: true, apply: false });
+    });
+
+    testRelease('apply installs only when absent and subsequent applies update without uninstalling', (t) => {
         runRelease(t, { firstInstall: true, repeat: true });
     });
 
-    testRelease('preserves an older installed release and refuses automatic replacement before marketplace writes', (t) => {
-        runRelease(t, { oldVersion: true, error: /existing.*preserv|automatic.*replacement|upgrade/i });
+    testRelease('apply follows a newer Mall version instead of the checkout version', t => {
+        runRelease(t, { oldVersion: true, latestVersion: '19.10.2' });
     });
 
-    testRelease('explicit refresh updates an older release without uninstalling, then verifies and activates', t => {
-        runRelease(t, { oldVersion: true, refresh: true });
+    testRelease('apply preserves an installed version ahead of Mall rather than downgrading it', t => {
+        runRelease(t, { oldVersion: true, latestVersion: '0.2.0', error: /newer|downgrade/i });
     });
 
-    testRelease('explicit refresh repairs a matching release without uninstalling', t => {
-        runRelease(t, { refresh: true });
+    testRelease('apply refuses a disabled installation rather than implicitly enabling it', t => {
+        runRelease(t, { disabled: true, error: /disabled|preserved/i });
+    });
+
+    testRelease('apply updates an older release without uninstalling, then verifies and activates', t => {
+        runRelease(t, { oldVersion: true });
+    });
+
+    testRelease('apply verifies a matching release without uninstalling', t => {
+        runRelease(t, {});
     });
 
     testRelease('a native zero-exit update warning does not abort verified refresh', t => {
-        runRelease(t, { oldVersion: true, refresh: true, updateWarning: true });
+        runRelease(t, { oldVersion: true, updateWarning: true });
     });
 
     testRelease('catalog refresh failure prevents update and activation while preserving the old release', t => {
-        runRelease(t, { oldVersion: true, refresh: true, refreshFailure: true, error: /catalog refresh failure/ });
+        runRelease(t, { oldVersion: true, refreshFailure: true, error: /catalog refresh failure/ });
     });
 
     testRelease('update failure prevents activation without uninstalling the old release', t => {
-        runRelease(t, { oldVersion: true, refresh: true, updateFailure: true, error: /update failure/ });
+        runRelease(t, { oldVersion: true, updateFailure: true, error: /update failure/ });
     });
 
     testRelease('a success-shaped no-op update cannot activate an older release', t => {
-        runRelease(t, { oldVersion: true, refresh: true, updateNoop: true, error: /Installed inventory does not match/ });
+        runRelease(t, { oldVersion: true, updateNoop: true, error: /Installed inventory does not match/ });
+    });
+
+    testRelease('catalog fetch failure stops before plugin installation or activation', t => {
+        runRelease(t, { catalogFailure: true, error: /catalog fetch failure/ });
+    });
+
+    for (const [label, catalog] of [
+        ['missing plugin', { plugins: [] }],
+        ['duplicate plugin', { plugins: [{ name: 'alex-act-one', version: VERSION }, { name: 'alex-act-one', version: VERSION }] }],
+        ['missing version', { plugins: [{ name: 'alex-act-one' }] }],
+        ['invalid version', { plugins: [{ name: 'alex-act-one', version: 'latest' }] }],
+        ['prerelease version', { plugins: [{ name: 'alex-act-one', version: '0.9.9-beta.1' }] }],
+    ]) {
+        testRelease(`unusable Mall catalog fails explicitly before plugin changes: ${label}`, t => {
+            runRelease(t, { catalog, error: /catalog|version|release/i });
+        });
+    }
+
+    testRelease('default still stops when a registered marketplace cannot refresh', t => {
+        runRelease(t, { apply: false, oldVersion: true, refreshFailure: true, error: /catalog refresh failure/ });
     });
 
     testRelease('rejects same-name installations from another source before making changes', (t) => {
@@ -351,7 +430,7 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
     });
 
     testRelease('scopes marketplace refusal and restores the unselected home without plugin writes', (t) => {
-        runRelease(t, { unselectedHome: true, addFailure: 'microsoft/skills-for-fabric',
+        runRelease(t, { unselectedHome: true, addFailure: 'fabioc-aloha/Alex_Skill_Mall',
             error: /Command failed|mock marketplace add failed/ });
     });
 
@@ -367,11 +446,11 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
         });
     });
 
-    testRelease('adds only missing marketplaces when some are already registered', (t) => {
-        runRelease(t, { marketplaces: MARKETPLACES.slice(0, 3) });
+    testRelease('registers only Alex Mall while preserving unrelated marketplace registrations', (t) => {
+        runRelease(t, { marketplaces: MARKETPLACES.slice(1, 3) });
     });
 
-    for (const marketplace of MARKETPLACES) {
+    for (const marketplace of MARKETPLACES.slice(0, 1)) {
         testRelease(`rejects a mismatched ${marketplace.name} source before uninstalling`, (t) => {
             runRelease(t, {
                 marketplaces: [{ ...marketplace, source: 'GitHub: unexpected/source' }],
@@ -382,29 +461,29 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
 
     testRelease('rejects duplicate marketplace names before uninstalling', (t) => {
         runRelease(t, {
-            marketplaces: [MARKETPLACES[3], MARKETPLACES[3]],
-            error: /Multiple registered marketplaces match azure-skills/,
+            marketplaces: [MARKETPLACES[0], MARKETPLACES[0]],
+            error: /Multiple registered marketplaces match alex-mall/,
         });
     });
 
     testRelease('stops on a failed marketplace add before uninstalling', (t) => {
         runRelease(t, {
-            addFailure: 'microsoft/skills-for-fabric',
+            addFailure: 'fabioc-aloha/Alex_Skill_Mall',
             error: /Command failed|mock marketplace add failed/,
         });
     });
 
     testRelease('verifies a successful add actually registered the expected marketplace', (t) => {
         runRelease(t, {
-            addNoop: 'microsoft/skills-for-fabric',
-            error: /fabric-collection is absent from the Copilot marketplace inventory/,
+            addNoop: 'fabioc-aloha/Alex_Skill_Mall',
+            error: /alex-mall is absent from the Copilot marketplace inventory/,
         });
     });
 
     testRelease('rejects a wrong source returned after marketplace add', (t) => {
         runRelease(t, {
-            addWrongSource: 'microsoft/skills-for-fabric',
-            error: /Marketplace source does not match the expected source for fabric-collection/,
+            addWrongSource: 'fabioc-aloha/Alex_Skill_Mall',
+            error: /Marketplace source does not match the expected source for alex-mall/,
         });
     });
 }

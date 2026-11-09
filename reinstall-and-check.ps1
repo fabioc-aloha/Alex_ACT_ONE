@@ -1,20 +1,23 @@
 <#
 .SYNOPSIS
-Install or verify ONE and activate its owned instructions.
+Refresh marketplaces and report ONE, or apply the latest Mall release.
 .DESCRIPTION
-Use -Refresh to refresh the Mall catalog and update an existing enabled
-Mall installation before verification. No uninstall or forced activation occurs.
-Without -Refresh, mismatched existing installations are preserved.
+Registers Alex Mall if missing and refreshes all registered marketplace catalogs.
+Without -Apply, reports the installed and latest Mall versions without changing
+plugins or instructions. -Apply installs or updates the latest Mall release,
+verifies it, and activates only its owned instructions with conflict checks.
+No uninstall, dependency installation or forced activation occurs.
 .EXAMPLE
-.\reinstall-and-check.ps1 -Refresh
+.\reinstall-and-check.ps1
+.EXAMPLE
+.\reinstall-and-check.ps1 -Apply
 #>
 [CmdletBinding()]
 param(
-    [switch]$Refresh,
+    [switch]$Apply,
     [string]$Plugin = 'alex-act-one',
     [string]$Marketplace = 'alex-mall',
     [string]$MarketplaceSource = 'fabioc-aloha/Alex_Skill_Mall',
-    [string]$ExpectedVersion = (Get-Content -LiteralPath (Join-Path $PSScriptRoot 'plugin.json') -Raw | ConvertFrom-Json).version,
     [string]$CopilotHome = $(if (-not [string]::IsNullOrWhiteSpace($env:COPILOT_HOME)) { $env:COPILOT_HOME } else { Join-Path $HOME '.copilot' }),
     [string]$CopilotCommand = 'copilot',
     [string]$NodeCommand = 'node'
@@ -57,7 +60,7 @@ function Get-InstalledPlugin {
     }
     if ($matches.Count -eq 1) {
         $marketplaceProperty = $matches[0].PSObject.Properties['marketplace']
-        if (-not $marketplaceProperty -or $marketplaceProperty.Value -ne $Marketplace) {
+        if ($Apply -and (-not $marketplaceProperty -or $marketplaceProperty.Value -ne $Marketplace)) {
             throw "$Plugin is installed from a different source. Resolve the cross-source installation explicitly; existing state was preserved."
         }
         return $matches[0]
@@ -69,6 +72,9 @@ function Get-RegisteredMarketplace {
     param([Parameter(Mandatory)] [string]$Name)
 
     $raw = (Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'marketplace', 'list', '--json')) -join "`n"
+    if ([string]::IsNullOrWhiteSpace($raw) -or $raw.Trim() -eq 'null') {
+        throw 'Copilot returned no usable marketplace inventory; refusing registration changes.'
+    }
     $marketplaces = @(($raw | ConvertFrom-Json))
     $matches = @($marketplaces | Where-Object { $_.name -eq $Name })
     if ($matches.Count -gt 1) {
@@ -80,7 +86,27 @@ function Get-RegisteredMarketplace {
     return $null
 }
 
-foreach ($command in @($CopilotCommand, $NodeCommand)) {
+function Get-LatestReleaseVersion {
+    $uri = "https://raw.githubusercontent.com/$MarketplaceSource/HEAD/.github/plugin/marketplace.json"
+    $catalog = Invoke-RestMethod -Uri $uri -TimeoutSec 30 -ErrorAction Stop
+    if (-not $catalog -or -not $catalog.PSObject.Properties['plugins']) {
+        throw "Marketplace catalog has no plugin inventory: $uri"
+    }
+    $matches = @($catalog.plugins | Where-Object { $null -ne $_ -and $_.name -eq $Plugin })
+    if ($matches.Count -ne 1) {
+        throw "Marketplace catalog must contain exactly one $Plugin release; found $($matches.Count)."
+    }
+    $versionProperty = $matches[0].PSObject.Properties['version']
+    if (-not $versionProperty -or $versionProperty.Value -isnot [string] -or
+        $versionProperty.Value -cnotmatch '^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$') {
+        throw "Marketplace catalog has no valid stable release version for $Plugin."
+    }
+    return $versionProperty.Value
+}
+
+$requiredCommands = @($CopilotCommand)
+if ($Apply) { $requiredCommands += $NodeCommand }
+foreach ($command in $requiredCommands) {
     if (-not (Get-Command $command -ErrorAction SilentlyContinue)) {
         throw "Required command is unavailable: $command"
     }
@@ -89,56 +115,57 @@ foreach ($command in @($CopilotCommand, $NodeCommand)) {
 if ([string]::IsNullOrWhiteSpace($CopilotHome)) {
     throw 'CopilotHome must not be empty.'
 }
+if ($MarketplaceSource -cnotmatch '^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$') {
+    throw 'MarketplaceSource must name a GitHub owner/repository.'
+}
 $CopilotHome = [IO.Path]::GetFullPath($CopilotHome)
 $previousCopilotHome = $env:COPILOT_HOME
 try {
     $env:COPILOT_HOME = $CopilotHome
     $initial = Get-InstalledPlugin
-    if ($initial -and ((-not $Refresh -and $initial.version -ne $ExpectedVersion) -or -not $initial.enabled -or $initial.source -ne 'installed')) {
-        throw "Existing $Plugin installation preserved. Automatic replacement/upgrades are disabled; expected enabled $ExpectedVersion from installed, found $($initial.version)."
+    if ($Apply -and $initial -and (-not $initial.enabled -or $initial.source -ne 'installed')) {
+        throw "Existing $Plugin installation preserved; -Apply requires an enabled installed package. Resolve disabled or unsupported entries explicitly."
     }
     $installedRoot = Join-Path (Join-Path (Join-Path $CopilotHome 'installed-plugins') $Marketplace) $Plugin
-    if (-not $initial -and (Test-Path -LiteralPath $installedRoot)) {
+    if ($Apply -and -not $initial -and (Test-Path -LiteralPath $installedRoot)) {
         throw "Unregistered package files exist at $installedRoot; resolve them explicitly before installation."
     }
-    $requiredMarketplaces = @(
-        @{ Name = $Marketplace; Source = $MarketplaceSource }
-        @{ Name = 'awesome-copilot'; Source = 'github/awesome-copilot' }
-        @{ Name = 'copilot-plugins'; Source = 'github/copilot-plugins' }
-        @{ Name = 'azure-skills'; Source = 'microsoft/azure-skills' }
-        @{ Name = 'fabric-collection'; Source = 'microsoft/skills-for-fabric' }
-    )
-    $seenMarketplaces = @{}
-    foreach ($required in $requiredMarketplaces) {
-        if ($seenMarketplaces.ContainsKey($required.Name) -and $seenMarketplaces[$required.Name] -cne $required.Source) {
-            throw "Conflicting required sources for marketplace $($required.Name)."
-        }
-        $seenMarketplaces[$required.Name] = $required.Source
-        $registeredMarketplace = Get-RegisteredMarketplace -Name $required.Name
-        if ($registeredMarketplace -and $registeredMarketplace.source -cne "GitHub: $($required.Source)") {
-            throw "Marketplace source does not match the expected source for $($required.Name): $($registeredMarketplace.source)."
-        }
+    $registeredMarketplace = Get-RegisteredMarketplace -Name $Marketplace
+    if ($registeredMarketplace -and $registeredMarketplace.source -cne "GitHub: $MarketplaceSource") {
+        throw "Marketplace source does not match the expected source for ${Marketplace}: $($registeredMarketplace.source)."
     }
-    foreach ($name in $seenMarketplaces.Keys) {
-        $registeredMarketplace = Get-RegisteredMarketplace -Name $name
+    if (-not $registeredMarketplace) {
+        Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'marketplace', 'add', $MarketplaceSource) | Out-Null
+        $registeredMarketplace = Get-RegisteredMarketplace -Name $Marketplace
         if (-not $registeredMarketplace) {
-            Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'marketplace', 'add', $seenMarketplaces[$name]) | Out-Null
-            $registeredMarketplace = Get-RegisteredMarketplace -Name $name
+            throw "Marketplace registration completed but $Marketplace is absent from the Copilot marketplace inventory."
         }
-        if (-not $registeredMarketplace) {
-            throw "Marketplace registration completed but $name is absent from the Copilot marketplace inventory."
-        }
-        if ($registeredMarketplace.source -cne "GitHub: $($seenMarketplaces[$name])") {
-            throw "Marketplace source does not match the expected source for ${name}: $($registeredMarketplace.source)."
+        if ($registeredMarketplace.source -cne "GitHub: $MarketplaceSource") {
+            throw "Marketplace source does not match the expected source for ${Marketplace}: $($registeredMarketplace.source)."
         }
     }
 
-    if ($Refresh) {
-        Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'marketplace', 'update', $Marketplace) | Out-Null
+    Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'marketplace', 'update') | Out-Null
+    $latestVersion = Get-LatestReleaseVersion
+    if ($initial) {
+        Write-Output "Installed ${Plugin}: $($initial.version) (enabled=$($initial.enabled), source=$($initial.source))."
+    } else {
+        Write-Output "$Plugin is not installed."
     }
-    if ($initial -and $Refresh) {
+    Write-Output "Latest ${Plugin}@${Marketplace}: $latestVersion."
+    if (-not $Apply) {
+        Write-Output 'Report only: marketplace catalogs were refreshed. Use -Apply to install/update and activate owned instructions. No plugins or instructions were changed.'
+        return
+    }
+    if ($initial) {
+        if ($initial.version -cnotmatch '^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$') {
+            throw "Installed version is not a valid stable release: $($initial.version). Existing package was preserved."
+        }
+        if ([version]$initial.version -gt [version]$latestVersion) {
+            throw "Installed $($initial.version) is newer than Mall $latestVersion; refusing to downgrade."
+        }
         Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'update', "$Plugin@$Marketplace") | Out-Null
-    } elseif (-not $initial) {
+    } else {
         Invoke-ExternalCommand -Command $CopilotCommand -Arguments @('plugin', 'install', "$Plugin@$Marketplace") | Out-Null
     }
 
@@ -146,8 +173,8 @@ try {
     if (-not $installed) {
         throw "Install completed but $Plugin@$Marketplace is absent from the Copilot plugin inventory."
     }
-    if ($installed.version -ne $ExpectedVersion -or -not $installed.enabled -or $installed.source -ne 'installed') {
-        throw "Installed inventory does not match the expected release: expected $Plugin@$Marketplace $ExpectedVersion enabled from installed; got version=$($installed.version), enabled=$($installed.enabled), source=$($installed.source)."
+    if ($installed.version -ne $latestVersion -or -not $installed.enabled -or $installed.source -ne 'installed') {
+        throw "Installed inventory does not match the latest Mall release: expected $Plugin@$Marketplace $latestVersion enabled from installed; got version=$($installed.version), enabled=$($installed.enabled), source=$($installed.source)."
     }
 
     $installedManifest = Join-Path $installedRoot 'plugin.json'
@@ -155,8 +182,8 @@ try {
         throw "Installed plugin manifest is missing: $installedManifest"
     }
     $manifest = Get-Content -LiteralPath $installedManifest -Raw | ConvertFrom-Json
-    if ($manifest.name -ne $Plugin -or $manifest.version -ne $ExpectedVersion) {
-        throw "Installed plugin manifest does not match $Plugin $ExpectedVersion."
+    if ($manifest.name -ne $Plugin -or $manifest.version -ne $latestVersion) {
+        throw "Installed plugin manifest does not match $Plugin $latestVersion."
     }
 
     $bootstrap = Join-Path $installedRoot 'skills/bootstrap-core/scripts/bootstrap-core.cjs'
@@ -176,7 +203,7 @@ try {
         throw "Bootstrap receipt is missing: $receiptPath"
     }
     $receipt = Get-Content -LiteralPath $receiptPath -Raw | ConvertFrom-Json
-    if ($receipt.schemaVersion -ne 2 -or $receipt.bootstrappedBy -ne $Plugin -or $receipt.coreVersion -ne $ExpectedVersion) {
+    if ($receipt.schemaVersion -ne 2 -or $receipt.bootstrappedBy -ne $Plugin -or $receipt.coreVersion -ne $latestVersion) {
         throw 'Bootstrap receipt identity or version is invalid after apply.'
     }
     $receiptFiles = @($receipt.files)
@@ -187,7 +214,7 @@ try {
         throw 'Bootstrap receipt entries are not fully migrated to the ONE ownership contract.'
     }
 
-    Write-Output "Verified $Plugin@$Marketplace $ExpectedVersion in $CopilotHome. Existing packages were not replaced."
+    Write-Output "Verified $Plugin@$Marketplace $latestVersion and its instruction receipt in $CopilotHome. Restart the host to load it."
 } finally {
     if ($null -eq $previousCopilotHome) {
         Remove-Item Env:COPILOT_HOME -ErrorAction SilentlyContinue

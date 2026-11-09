@@ -319,34 +319,40 @@ marketplace-first [getting-started guide](docs/getting-started.md).
 This section applies only after separately approved Mall publication and
 installation; a source push does not authorize running the helper below.
 
-Close any host that may lock the installed package, then run this from the
-release checkout:
+From the current source checkout, first refresh catalogs and inspect versions
+without changing plugins or instructions:
 
 ```powershell
 .\reinstall-and-check.ps1
 ```
 
-The current source helper verifies a matching existing release in place and
-installs only when absent. It refuses older, disabled, duplicate, or cross-source
-installations before changing package state; it never uninstalls a package.
-Use a separately reviewed upgrade operation instead of automatic replacement
-until staged plugin delivery and rollback are implemented.
+After separate installation approval, close hosts that may lock the package:
 
-The script checks ONE's public marketplace routes:
-`alex-mall`, `awesome-copilot`, `copilot-plugins`, `azure-skills`, and
-`fabric-collection`. It registers missing entries at user scope using the
-expected GitHub sources, preserves existing matching/default registrations,
-and stops on duplicates, source mismatches, or failed registration.
-Registration may access the network and change user configuration; it does
-not install optional plugins or alter private/local marketplaces.
+```powershell
+.\reinstall-and-check.ps1 -Apply
+```
+
+The simplified source helper registers only missing Alex Mall, verifies its
+GitHub source, and refreshes all registered catalogs in either mode.
+It follows the latest stable version in that marketplace's catalog rather
+than the checkout version. Only `-Apply` installs or updates and activates
+owned instructions. Existing unrelated/default registrations are preserved.
+Registration and refresh access the network and change marketplace state even
+without `-Apply`; plugin and profile changes remain gated.
+Conflicting or disabled packages and downgrades stop explicitly; no uninstall
+or forced instruction overwrite occurs. The frozen `0.9.6` helper retains its
+earlier interface until a separately approved release delivers this source.
 The release-script regression tests exercise both PowerShell 7 and Windows
 PowerShell 5.1 on Windows, including inventories with unrelated entries.
 
-The script installs `alex-act-one@alex-mall` only if absent, verifies the plugin inventory
+With `-Apply`, the script installs `alex-act-one@alex-mall` if absent or invokes
+native update, verifies the plugin inventory
 and installed manifest, applies the canonical instructions, and checks the
 receipt's ownership, version, and instruction entries in the selected
 `-CopilotHome` / `COPILOT_HOME` / default home. It verifies manifest and instruction
 receipt state, not whole-package source parity or host activation after restart.
+This is not staged/transactional rollback; keep that separate runtime design
+gate open.
 
 Optional npm dependencies have a separate, preview-first installer:
 

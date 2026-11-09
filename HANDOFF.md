@@ -16,11 +16,18 @@
   installation, cache parity, activation and host restart remain unverified.
   The earlier [preparation evidence](archive/verification/candidate-0.9.6/preparation.json)
   remains historical. The relative-path package-verification hang was fixed.
+- Unreleased source now simplifies the root helper: default mode registers
+  missing Alex Mall, refreshes registered catalogs and reports installed/latest
+  versions. Only `-Apply` installs or updates the latest Mall version and
+  activates owned instructions with conflict checks. No checkout version pin,
+  optional dependency install, uninstall or forced overwrite is required.
+  Stale retired-provider script comments were removed. The frozen `0.9.6`
+  payload and installed state are not modified by these source changes.
 - The release includes hardened artifact/account checks, native Windows path
   resolution, regression coverage, and the [lean package boundary](docs/package.md).
   Both Flint demonstrations are retained with the reviewed locked pins.
   Replicate support is removed; old user state is not deleted. The root helpers
-  now support explicit safe refresh and selected-runtime verification.
+  support guarded explicit updates and selected-runtime verification.
 - After the earlier manual reinstall, the last recorded native inventory was enabled `0.9.5`
   from `alex-mall`. The then-loaded installed cache reported `0.9.5`; consented
   bootstrap verification matched all 15 instruction hashes and the unchanged
@@ -78,8 +85,10 @@
 
 ## Next Action
 
-The user will run `.\reinstall-and-check.ps1 -Refresh -ExpectedVersion 0.9.6`
-from a standalone terminal after closing hosts that may lock the package.
+From the current source checkout, use `.\reinstall-and-check.ps1` to refresh
+catalogs and inspect installed/latest versions; add `-Apply` only for a
+user-approved update and instruction activation. Use a standalone terminal
+after closing hosts that may lock the package.
 Leave installation to the user unless separately authorized. Record actual
 installed root/version, package/cache parity, bootstrap receipt and restart
 observations separately; publication does not prove any of them.
