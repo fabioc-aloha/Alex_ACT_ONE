@@ -1,6 +1,6 @@
 # Roadmap
 
-Updated 2026-11-08. This is the product backlog for maintaining and shipping
+Updated 2026-11-09. This is the product backlog for maintaining and shipping
 Alex ACT ONE, not a history of incidents or an adopter-fleet work queue.
 The source and Mall `0.9.6` release is published. The user will install it
 manually using the script; only earlier `0.9.5` installed-package parity is
@@ -162,6 +162,44 @@ checker metadata is not a natural host-stranding incident.
 **Done when:** available-host observations prove the claimed instruction
 behavior and any approved runtime enforcement; unsupported operations remain
 explicitly unverified. The recovery checker does not certify future writes.
+
+### Support unified installation and dependencies on macOS
+
+**Status:** planned documentation only; implementation and native macOS
+verification are not authorized by this entry. The current unified
+[setup helper](install-and-check.ps1) has Windows-only automatic Pandoc
+installation. Existing cross-platform commands are not macOS certification.
+
+**Next actions**
+
+- Define supported macOS versions and Apple Silicon/Intel coverage. Choose
+  the supported entry point, including whether PowerShell 7 is a prerequisite,
+  before implementation. Preserve the unified contract: default mode reports
+  status without installing or activating; only explicit `-Apply` changes
+  plugins, instructions or dependencies.
+- Verify Alex Mall registration/refresh, latest-release installation/update,
+  installed-owner dependency pins, per-profile instruction bootstrap, conflict
+  preservation and environment restoration on the selected native hosts.
+- Design missing-Pandoc installation through an existing Homebrew and Pillow
+  installation in an explicitly selected existing Python environment. Respect
+  externally managed Python environments and configured package sources.
+  Do not silently install Homebrew/Python, force upgrades, escalate privileges
+  or bypass package-manager policy.
+- Handle architecture-specific package prefixes, private/global npm locations,
+  executable discovery and paths containing spaces. Select compatible browser
+  executables and Playwright launch settings without inheriting Windows paths
+  or assuming Edge is installed. Keep browser acquisition separately approved.
+- Add macOS test/CI coverage for the declared platform baseline, including
+  missing prerequisites, failed/no-op installers, denied changes, profile
+  conflicts, version drift and no-install modes. Preserve Windows/Ubuntu
+  behavior; do not infer native macOS success from their passing fixtures.
+
+**Done when:** a fresh checkout on each claimed macOS architecture has
+inspectable default-report and consented apply results, installed-package and
+bootstrap verification, selected-Python/Pandoc probes, MCP launches and real
+conversion/render output. Record browser/host limitations and preserved
+unrelated user state. Unsupported architectures or hosts remain unverified;
+no existing release gains a macOS support claim retroactively.
 
 ### R9. Make runtime upgrades reproducible and recoverable
 
