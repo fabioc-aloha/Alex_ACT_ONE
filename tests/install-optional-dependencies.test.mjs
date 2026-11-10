@@ -83,6 +83,9 @@ exit 0
 param([switch]$Apply,[switch]$VerifyOnly,[string]$RegistryTarballPrefix,[string]$BrowserExecutablePath,
     [string]$RuntimeRoot,[string]$NpmCommand,[string]$NodeCommand,[string]$PythonCommand,
     [string]$PandocCommand,[string]$WingetCommand,[switch]$IncludeReplicate)
+\${env:ProgramFiles(x86)} = $env:FAKE_PROGRAM_FILES_X86
+$env:ProgramFiles = $env:FAKE_PROGRAM_FILES
+$env:LOCALAPPDATA = $env:FAKE_LOCAL_APPDATA
 if ($PSBoundParameters.ContainsKey('IncludeReplicate')) {
     & $env:FAKE_SETUP_SCRIPT @PSBoundParameters
 } else {
@@ -95,6 +98,16 @@ if ($PSBoundParameters.ContainsKey('IncludeReplicate')) {
         : options.browserPath === 'directory' ? root : options.browserPath;
     const inheritedBrowser = options.inheritedBrowserPath === 'fixture'
         ? join(root, 'inherited browser.exe') : options.inheritedBrowserPath || '';
+    const programFilesX86 = join(root, 'Program Files (x86)');
+    const programFiles = join(root, 'Program Files');
+    const localAppData = join(root, 'Local AppData');
+    const autoBrowser = join(options.installedEdge === 'user' ? localAppData
+        : options.installedEdge === 'system64' ? programFiles : programFilesX86,
+    'Microsoft', 'Edge', 'Application', 'msedge.exe');
+    if (options.installedEdge) {
+        mkdirSync(dirname(autoBrowser), { recursive: true });
+        writeFileSync(autoBrowser, '');
+    }
     if (options.browserPath === 'fixture') writeFileSync(browserPath, '');
     if (options.inheritedBrowserPath === 'fixture') writeFileSync(inheritedBrowser, '');
     const renderLog = join(root, 'renderers.log');
@@ -273,9 +286,16 @@ exit 1
             FAKE_RENDER_NO_OUTPUT: options.renderNoOutput || '',
             FAKE_RENDER_INVALID: options.renderInvalid || '',
             PUPPETEER_EXECUTABLE_PATH: inheritedBrowser,
+            'ProgramFiles(x86)': programFilesX86,
+            ProgramFiles: programFiles,
+            LOCALAPPDATA: localAppData,
+            FAKE_PROGRAM_FILES_X86: programFilesX86,
+            FAKE_PROGRAM_FILES: programFiles,
+            FAKE_LOCAL_APPDATA: localAppData,
             FAKE_INHERITED_BROWSER: inheritedBrowser,
             FAKE_EXPECT_BROWSER: options.expectBrowser === 'explicit' ? browserPath
-                : options.expectBrowser === 'inherited' ? inheritedBrowser : '',
+                : options.expectBrowser === 'inherited' ? inheritedBrowser
+                    : options.expectBrowser === 'installed' ? autoBrowser : '',
             FAKE_RENDER_LOG: renderLog,
         },
     });
@@ -321,7 +341,7 @@ exit 1
         : [];
     assert.ok(systemCommands.every(args => !args.some(arg =>
         /--upgrade|--break-system-packages|--index-url|--trusted-host|accept-.*agreements/.test(arg))));
-    return { commands, output, runtime, globalPrefix, browserPath, inheritedBrowser, renderers, systemCommands };
+    return { commands, output, runtime, globalPrefix, browserPath, inheritedBrowser, autoBrowser, renderers, systemCommands };
 }
 
 for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pwsh']) {
@@ -627,10 +647,41 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
         assert.equal(existsSync(runtime), false);
     });
 
+    if (process.platform === 'win32') {
+        test(`${shell}: default reuses installed Edge for both renderers without changing npm environment`, t => {
+            const { autoBrowser, output, renderers, commands } = runInstaller(t, shell, {
+                apply: true, verifyAgain: true, installedEdge: true, expectBrowser: 'installed',
+            });
+            assert.ok(output.includes(`Browser executable: ${autoBrowser}`));
+            assert.match(output, /installed Edge; renderer processes only/);
+            assert.deepEqual(renderers, ['mmdc', 'svgexport', 'mmdc', 'svgexport']
+                .map(bin => ({ bin, browser: autoBrowser })));
+            assert.equal(commands.filter(args => args[0] === 'install').length, packages.length);
+        });
+
+        test(`${shell}: report names installed Edge without launching renderers or installing packages`, t => {
+            const { autoBrowser, output, renderers, commands } = runInstaller(t, shell, {
+                installedEdge: true, expectBrowser: 'installed',
+            });
+            assert.ok(output.includes(`Browser executable: ${autoBrowser}`));
+            assert.deepEqual(renderers, []);
+            assert.ok(commands.every(args => args[0] !== 'view' && args[0] !== 'install'));
+        });
+
+        for (const location of ['system64', 'user']) {
+            test(`${shell}: report finds existing Edge in the ${location} installation location`, t => {
+                const { autoBrowser, output, commands } = runInstaller(t, shell, { installedEdge: location });
+                assert.ok(output.includes(`Browser executable: ${autoBrowser}`));
+                assert.match(output, /installed Edge; renderer processes only/);
+                assert.ok(commands.every(args => args[0] !== 'install'));
+            });
+        }
+    }
+
     test(`${shell}: explicit browser path reaches both renderers without overriding npm environment`, (t) => {
         const { browserPath, renderers, commands } = runInstaller(t, shell, {
             apply: true, verifyAgain: true, browserPath: 'fixture',
-            inheritedBrowserPath: 'fixture', expectBrowser: 'explicit',
+            inheritedBrowserPath: 'fixture', installedEdge: true, expectBrowser: 'explicit',
         });
         assert.deepEqual(renderers, ['mmdc', 'svgexport', 'mmdc', 'svgexport']
             .map(bin => ({ bin, browser: browserPath })));
@@ -639,7 +690,7 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
 
     test(`${shell}: inherited browser path is validated and preserved`, (t) => {
         const { inheritedBrowser, output, renderers } = runInstaller(t, shell, {
-            apply: true, inheritedBrowserPath: 'fixture', expectBrowser: 'inherited',
+            apply: true, inheritedBrowserPath: 'fixture', installedEdge: true, expectBrowser: 'inherited',
         });
         assert.ok(output.includes(`Browser executable: ${inheritedBrowser}`));
         assert.match(output, /PUPPETEER_EXECUTABLE_PATH/);
@@ -655,7 +706,7 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
     ]) {
         test(`${shell}: rejects ${label} browser path before any npm commands`, (t) => {
             const { commands } = runInstaller(t, shell, {
-                apply: true, browserPath, error: /BrowserExecutablePath must name an existing absolute file path/,
+                apply: true, browserPath, installedEdge: true, error: /BrowserExecutablePath must name an existing absolute file path/,
             });
             assert.deepEqual(commands, []);
         });
@@ -663,7 +714,7 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
 
     test(`${shell}: rejects missing inherited browser path before any npm commands`, (t) => {
         const { commands } = runInstaller(t, shell, {
-            apply: true, inheritedBrowserPath: join(ROOT, 'absent-browser.exe'),
+            apply: true, inheritedBrowserPath: join(ROOT, 'absent-browser.exe'), installedEdge: true,
             error: /PUPPETEER_EXECUTABLE_PATH must name an existing absolute file path/,
         });
         assert.deepEqual(commands, []);

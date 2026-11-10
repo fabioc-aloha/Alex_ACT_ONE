@@ -8,6 +8,9 @@ plugins, instructions or dependencies. -Apply installs or updates the latest Mal
 release, bootstraps its owned instructions, then sets up its reviewed npm tools
 and missing Pandoc/Pillow. Existing system tools are checked, not upgraded.
 Python must already exist; missing Pandoc installation requires Windows winget.
+Renderer checks use BrowserExecutablePath, then PUPPETEER_EXECUTABLE_PATH,
+then existing Windows Edge when available. Selection is reported and scoped
+to renderer children; no browser is downloaded or global environment changed.
 No uninstall, policy bypass, Python installation or forced activation occurs.
 .EXAMPLE
 .\install-and-check.ps1
@@ -281,12 +284,21 @@ function Invoke-DependencySetup {
     $PluginRoot = [IO.Path]::GetFullPath($PluginRoot)
     $browserSource = if ($setupParameters.ContainsKey('BrowserExecutablePath')) {
         'BrowserExecutablePath'
-    } elseif ($null -ne $BrowserExecutablePath -and $BrowserExecutablePath -ne '') {
-        'BrowserExecutablePath'
     } else {
         'PUPPETEER_EXECUTABLE_PATH'
     }
     $effectiveBrowser = if ($browserSource -eq 'BrowserExecutablePath') { $BrowserExecutablePath } else { $env:PUPPETEER_EXECUTABLE_PATH }
+    if (-not $effectiveBrowser -and $env:OS -eq 'Windows_NT') {
+        foreach ($directory in @(${env:ProgramFiles(x86)}, $env:ProgramFiles, $env:LOCALAPPDATA)) {
+            if ([string]::IsNullOrWhiteSpace($directory) -or -not [IO.Path]::IsPathRooted($directory)) { continue }
+            $candidate = Join-Path $directory 'Microsoft\Edge\Application\msedge.exe'
+            if (Test-Path -LiteralPath $candidate -PathType Leaf) {
+                $effectiveBrowser = $candidate
+                $browserSource = 'installed Edge'
+                break
+            }
+        }
+    }
     if ($effectiveBrowser) { $effectiveBrowser = [IO.Path]::GetFullPath($effectiveBrowser) }
 
     function Invoke-CheckedCommand {
@@ -408,7 +420,7 @@ console.log(JSON.stringify({ packages, routingAvailable,
         Write-Output 'Automatic tarball routing is unavailable in this older plugin registry; use a confirmed explicit prefix if needed. No registry policy was changed.'
     }
     if ($effectiveBrowser) { Write-Output "Browser executable: $effectiveBrowser ($browserSource; renderer processes only)" }
-    else { Write-Output 'Browser executable: Puppeteer default; no browser auto-detection.' }
+    else { Write-Output 'Browser executable: Puppeteer default; no installed Windows Edge found. Cached browser readiness is checked in -Apply/-VerifyOnly; select -BrowserExecutablePath if needed.' }
     if ($RegistryTarballPrefix) {
         Write-Output "Tarball routing: $RegistryTarballPrefix -> $registry ($routingSource; per-install URL-prefix replacement only)"
         if ($VerifyOnly) { Write-Output 'VerifyOnly does not fetch packages or apply tarball routing.' }

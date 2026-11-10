@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-09",
+  "sourceBaseline": "c0239606efe4f90847fa3ebf326a6ba279e6f908",
+  "diagnosis": "Puppeteer browser binaries absent after package lifecycle scripts were blocked; installed package/version checks alone did not establish renderer readiness.",
+  "fix": "Validated explicit BrowserExecutablePath, then PUPPETEER_EXECUTABLE_PATH, then existing Windows Edge; child-renderer scope only.",
+  "edgeVersion": "157.0.4341.42",
+  "realRootRuns": [
+    {
+      "case": "original-default-VerifyOnly",
+      "observedExitCode": 1,
+      "realMermaidSvgVerified": false,
+      "realSvgexportPngVerified": false,
+      "fullReadinessReported": false,
+      "installedEdgeSelected": false,
+      "logSha256": "426bd1a1402b39e977224fbf81b0a3af11e5bf291a8f3ef418960385543e96c7",
+      "rawRuntimeLogArchived": false
+    },
+    {
+      "case": "original-explicit-Edge-VerifyOnly",
+      "observedExitCode": 0,
+      "realMermaidSvgVerified": true,
+      "realSvgexportPngVerified": true,
+      "fullReadinessReported": true,
+      "installedEdgeSelected": false,
+      "logSha256": "d80a6fc0233c00aace3e4f893eb52c617500c5c4b441cebbe4a5589c69c1b108",
+      "rawRuntimeLogArchived": false
+    },
+    {
+      "case": "fixed-PowerShell7-report",
+      "observedExitCode": 0,
+      "realMermaidSvgVerified": false,
+      "realSvgexportPngVerified": false,
+      "fullReadinessReported": false,
+      "installedEdgeSelected": true,
+      "logSha256": "3dbb83b162513b3984fbc1e5d78964f62d8641e8406309241fa0133243d9fe44",
+      "rawRuntimeLogArchived": false
+    },
+    {
+      "case": "fixed-WindowsPowerShell51-report",
+      "observedExitCode": 0,
+      "realMermaidSvgVerified": false,
+      "realSvgexportPngVerified": false,
+      "fullReadinessReported": false,
+      "installedEdgeSelected": true,
+      "logSha256": "3dbb83b162513b3984fbc1e5d78964f62d8641e8406309241fa0133243d9fe44",
+      "rawRuntimeLogArchived": false
+    },
+    {
+      "case": "fixed-PowerShell7-VerifyOnly",
+      "observedExitCode": 0,
+      "realMermaidSvgVerified": true,
+      "realSvgexportPngVerified": true,
+      "fullReadinessReported": true,
+      "installedEdgeSelected": true,
+      "logSha256": "1ccdd53c32e1a8d3fe7f476a32448e0e436a7417a2ac271ff5ddaec1f8851d8d",
+      "rawRuntimeLogArchived": false
+    },
+    {
+      "case": "fixed-WindowsPowerShell51-VerifyOnly",
+      "observedExitCode": 0,
+      "realMermaidSvgVerified": true,
+      "realSvgexportPngVerified": true,
+      "fullReadinessReported": true,
+      "installedEdgeSelected": true,
+      "logSha256": "1ccdd53c32e1a8d3fe7f476a32448e0e436a7417a2ac271ff5ddaec1f8851d8d",
+      "rawRuntimeLogArchived": false
+    }
+  ],
+  "fullApplyEvidence": "real-apply-tested.json",
+  "fullApplyPassed": true,
+  "firstFullFixtureAttempt": {
+    "evidence": "real-apply.json",
+    "passed": false,
+    "cause": "Disposable npm prefix caused the Windows npm shim to choose older bundled npm; version guard stopped before dependency writes.",
+    "activeUserStatePreserved": true
+  },
+  "testHarness": "test-real-setup.ps1",
+  "focusedTestsPassed": 225,
+  "structuralTestsPassed": 719,
+  "focusedTestsFailed": 0,
+  "focusedTestsSkipped": 0,
+  "safety": {
+    "liveUserApplyRun": false,
+    "realReportAndVerifyOnlyRun": true,
+    "realApplyOnlyInDisposableLocations": true,
+    "protectedUserFileHashesUnchanged": true,
+    "browserDownloads": false,
+    "registryPolicyRelaxed": false,
+    "agencyConfigurationChanged": false,
+    "publishedReleaseChanged": false
+  },
+  "limits": [
+    "Real full Apply was run in PowerShell 7; actual report/VerifyOnly also passed Windows PowerShell 5.1.",
+    "The selected existing system tools were checked, not newly installed.",
+    "Real output validation covers the observed pinned renderers with this Edge version, not all browser/host platforms.",
+    "Raw logs, copied plugin/profile/runtime state, credentials and personal paths are not archived."
+  ]
+}

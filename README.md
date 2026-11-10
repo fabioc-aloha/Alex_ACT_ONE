@@ -557,8 +557,11 @@ still reports `EALLOWREMOTE`, stop and inspect the actual rejected URL; the
 helper does not retry or broaden routing. Do not change registries, enable
 remote fetching, or continue after an error.
 
-Use an existing browser with `-BrowserExecutablePath` if browser setup is
-blocked. Optional companion/Microsoft plugins remain separate opt-in workflows.
+For renderer checks, the source helper reuses existing Windows Edge unless
+`-BrowserExecutablePath` or `PUPPETEER_EXECUTABLE_PATH` selects another browser.
+It prints the selection and verifies actual output without downloading a
+browser or enabling lifecycle scripts. Optional companion/Microsoft plugins
+remain separate opt-in workflows.
 See [all setup options and their write boundaries](docs/install.md#scripts-for-reinstalling-and-optional-setup).
 No bundled image-generation server is installed. Existing credentials, private
 packages, and manually configured external servers are not deleted. Restart the

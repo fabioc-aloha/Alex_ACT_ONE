@@ -464,6 +464,9 @@ rendering without reinstalling:
 ```
 
 To use an existing compatible browser instead of downloading Puppeteer's browser,
+the source helper now reuses existing Windows Edge automatically when no
+explicit browser or environment setting is supplied. The chosen executable
+is printed and used only by renderer child processes. To override that choice,
 pass its absolute executable path explicitly:
 
 ```powershell
@@ -477,8 +480,13 @@ strict dependency readiness checks without package downloads or activation;
 it still refreshes only the selected Alex Mall catalog. The selected path is passed only to renderer processes;
 it does not configure the host or change the parent environment. An existing
 `PUPPETEER_EXECUTABLE_PATH` is used when the option is omitted and is also validated.
-No browser is selected automatically, and a supplied path does not prove browser
-compatibility: the render checks must still pass.
+Precedence is explicit option, existing environment setting, then installed
+Windows Edge in its standard system/user locations. If none is available, the
+renderer uses its normal Puppeteer cache and a missing browser still fails
+explicitly. No browser is downloaded or script policy enabled by selection;
+compatibility is established by actual render output, not file presence.
+This default-browser repair is unreleased source; the frozen `0.9.7` helper
+retains its earlier explicit-only selection.
 
 With npm 12, the Microsoft proxy can advertise tarball URLs on a different
 Microsoft host and trigger `EALLOWREMOTE`. The updated checkout detects the

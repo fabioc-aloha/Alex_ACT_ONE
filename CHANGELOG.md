@@ -5,6 +5,16 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+- Reuse installed Windows Edge for renderer checks when neither an explicit
+  browser option nor `PUPPETEER_EXECUTABLE_PATH` is supplied. Report the selected
+  executable and pass it only to renderers; no browser downloads, global
+  environment changes or npm lifecycle-policy overrides are added. Actual
+  root report and `-VerifyOnly` passed in PowerShell 7/5.1, including real
+  Mermaid SVG and SVG-to-PNG output. A full real root `-Apply` also passed in
+  approved disposable plugin/profile/runtime/npm locations, with protected
+  user file hashes unchanged. [Evidence](docs/verification/setup-renderer/2026-11-09/results.json)
+  separates those observations from mocked tests and unchanged frozen releases.
+
 - Audited active dependency consumers and removed the legacy checker install
   path. `check-dependencies.cjs` is now read-only; retired `--apply` is rejected
   before probes and directs to the unified helper or explicit MCP provisioner.

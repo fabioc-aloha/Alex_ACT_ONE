@@ -38,6 +38,16 @@
   guidance were corrected. Integration CI no longer installs global Mermaid
   only to check its version. Real Mermaid rendering remains a separate root
   readiness check, not an implied CI render pass. Frozen payloads are unchanged.
+- The user's newer setup failure was reproduced in the actual no-install root
+  path: package versions were ready, but lifecycle policy had blocked the
+  bundled Puppeteer browser. Unreleased source now selects installed Windows
+  Edge after explicit/env overrides, printing its renderer-only scope.
+  Actual report and `-VerifyOnly` passed in PowerShell 7/5.1. A real full
+  `-Apply` in disposable Copilot/profile/runtime/global-prefix/cache locations
+  passed both real renderers; protected active-user files matched before/after
+  hashes. [Evidence](docs/verification/setup-renderer/2026-11-09/results.json)
+  preserves the first fixture npm-selection failure and corrected full pass.
+  No live user Apply, browser download, policy relaxation or new release ran.
 - The user approved a fresh `0.9.7` manual-install exception. Final metadata,
   version-stamped demos, source/payload hashes, fresh-checkout 694/57 strict
   lanes and all six same-commit jobs passed. The public Mall API and actual

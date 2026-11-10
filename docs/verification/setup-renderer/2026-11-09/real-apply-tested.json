@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "classification": "approved task-local real end-to-end installation in disposable locations",
+  "command": "actual root install-and-check.ps1 -Apply with disposable CopilotHome/RuntimeRoot/npm prefix/cache",
+  "shell": "PowerShell 7",
+  "childShellVersion": "7.6.9",
+  "exitCode": 0,
+  "passed": true,
+  "pluginVersion": "0.9.7",
+  "dependencyOwnerIsDisposableInstalledPlugin": true,
+  "realBootstrapReceiptVersion": "0.9.7",
+  "selectedExistingEdge": true,
+  "realMermaidSvgVerified": true,
+  "realSvgexportPngVerified": true,
+  "fullDependencySuccessReported": true,
+  "lifecycleScripts": "disabled only for the test process",
+  "npmInvocation": "Actual installed npm CLI selected before overriding its disposable global prefix; adapter forwards unmodified arguments.",
+  "browserDownload": "disabled; installed Edge reused",
+  "protectedStateUnchanged": true,
+  "protectedBefore": {
+    "installedOne": {
+      "present": true,
+      "files": 254,
+      "sha256": "ae995f5065f0d32d5f56fb5c6238a69e179948eb9345d22e9594d2a41dc5392b"
+    },
+    "instructions": {
+      "present": true,
+      "files": 16,
+      "sha256": "257c466d059703e2c99cde0cedf4abced8990437c69d88f658e13bcfe03e125a"
+    },
+    "copilotMcp": {
+      "present": true,
+      "files": 1,
+      "sha256": "a4a0e456dad3cdb83cfdffd61624d6192cc0c11cf71c4ed31ec2bb857cae5b96"
+    },
+    "copilotSettings": {
+      "present": true,
+      "files": 1,
+      "sha256": "809774bb9ec731cc9e896e2e6c414993299f7efd035bd8de7c7914d860f428f8"
+    },
+    "privatePackage": {
+      "present": true,
+      "files": 1,
+      "sha256": "35bb0cf377b35a715dcf50197e5723582121c720b6869f7d852bd40b23120b8c"
+    },
+    "privateLock": {
+      "present": true,
+      "files": 1,
+      "sha256": "b8322487962d3467f1c6da2daded3aa53e485492b5deb006e425b651c9bf78bd"
+    },
+    "privateModules": {
+      "present": true,
+      "files": 10037,
+      "sha256": "577333ede62dd0e0095c48e9e13f4e2c9ec41bdf19764d57f20b5bb936479f6a"
+    },
+    "globalMermaid": {
+      "present": true,
+      "files": 31274,
+      "sha256": "412cf1e6100e57c9581a8d892e4d5194c44f3709a1f665624f44b67ce43cc720"
+    },
+    "globalSvgexport": {
+      "present": true,
+      "files": 671,
+      "sha256": "991eaff08e9cc3535c30267a3510dc4d24aad88115fb3e0b26a6fc20a1e25a35"
+    },
+    "npmPolicy": {
+      "present": true,
+      "files": 1,
+      "sha256": "1b9faa9f8a06cfd4bd17c4cfa8d8685992eb642d712af5ebb8cbc001169ae6de"
+    },
+    "agencySettings": {
+      "present": true,
+      "files": 1,
+      "sha256": "1072baf184b566750034ccfbe08b53e40e50772039615d62d384e8812d144851"
+    },
+    "vscodeMcp": {
+      "present": true,
+      "files": 1,
+      "sha256": "7afd9377a653c0322d81f1270d37dc94de7cb483faa547fb2e7845eb78b48192"
+    }
+  },
+  "protectedAfter": {
+    "installedOne": {
+      "present": true,
+      "files": 254,
+      "sha256": "ae995f5065f0d32d5f56fb5c6238a69e179948eb9345d22e9594d2a41dc5392b"
+    },
+    "instructions": {
+      "present": true,
+      "files": 16,
+      "sha256": "257c466d059703e2c99cde0cedf4abced8990437c69d88f658e13bcfe03e125a"
+    },
+    "copilotMcp": {
+      "present": true,
+      "files": 1,
+      "sha256": "a4a0e456dad3cdb83cfdffd61624d6192cc0c11cf71c4ed31ec2bb857cae5b96"
+    },
+    "copilotSettings": {
+      "present": true,
+      "files": 1,
+      "sha256": "809774bb9ec731cc9e896e2e6c414993299f7efd035bd8de7c7914d860f428f8"
+    },
+    "privatePackage": {
+      "present": true,
+      "files": 1,
+      "sha256": "35bb0cf377b35a715dcf50197e5723582121c720b6869f7d852bd40b23120b8c"
+    },
+    "privateLock": {
+      "present": true,
+      "files": 1,
+      "sha256": "b8322487962d3467f1c6da2daded3aa53e485492b5deb006e425b651c9bf78bd"
+    },
+    "privateModules": {
+      "present": true,
+      "files": 10037,
+      "sha256": "577333ede62dd0e0095c48e9e13f4e2c9ec41bdf19764d57f20b5bb936479f6a"
+    },
+    "globalMermaid": {
+      "present": true,
+      "files": 31274,
+      "sha256": "412cf1e6100e57c9581a8d892e4d5194c44f3709a1f665624f44b67ce43cc720"
+    },
+    "globalSvgexport": {
+      "present": true,
+      "files": 671,
+      "sha256": "991eaff08e9cc3535c30267a3510dc4d24aad88115fb3e0b26a6fc20a1e25a35"
+    },
+    "npmPolicy": {
+      "present": true,
+      "files": 1,
+      "sha256": "1b9faa9f8a06cfd4bd17c4cfa8d8685992eb642d712af5ebb8cbc001169ae6de"
+    },
+    "agencySettings": {
+      "present": true,
+      "files": 1,
+      "sha256": "1072baf184b566750034ccfbe08b53e40e50772039615d62d384e8812d144851"
+    },
+    "vscodeMcp": {
+      "present": true,
+      "files": 1,
+      "sha256": "7afd9377a653c0322d81f1270d37dc94de7cb483faa547fb2e7845eb78b48192"
+    }
+  },
+  "limits": [
+    "No live user Apply was run.",
+    "Real system tools already existed and were checked, not installed.",
+    "Protected file roles are hashed, not archived.",
+    "This proves the observed existing Edge/runtime combination, not arbitrary future browser versions."
+  ]
+}

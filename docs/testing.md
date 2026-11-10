@@ -20,6 +20,36 @@ Node 26 structural jobs for the full release matrix.
 These are verification targets, not certification of every Copilot host or OS.
 macOS and other Node versions are not covered by this workflow.
 
+## Real renderer setup verification
+
+The [2026-11-09 renderer evidence](verification/setup-renderer/2026-11-09/results.json)
+records the actual root failure with its default Puppeteer cache, then real
+success with existing Edge. The source helper now selects installed Windows
+Edge only after validated explicit and environment overrides, reports the
+choice, and passes it only to renderer children. A missing cached/default
+browser or a failed render is still an explicit failure, not success.
+
+Actual root report and `-VerifyOnly` passed in PowerShell 7 and Windows
+PowerShell 5.1, with both installed renderer binaries creating validated
+outputs. The [bounded real-setup harness](verification/setup-renderer/2026-11-09/test-real-setup.ps1)
+then ran the complete root `-Apply` with real Copilot installation/bootstrap
+and npm packages in approved disposable locations. Its successful result
+includes real Mermaid SVG, SVG-to-PNG, installed-owner selection and unchanged
+protected user-file digests. It used existing Pandoc/Python/Pillow, not actual
+system-tool installation.
+
+The first full-run fixture redirected npm's prefix before resolving its CLI;
+the Windows shim selected an older bundled npm and the version guard stopped
+before dependency installation. That failed observation is retained, not
+counted as success. The corrected harness forwards unchanged arguments to the
+actual installed npm CLI selected before prefix isolation. Lifecycle scripts
+and browser downloads were disabled only for that test process; configured
+registry/policy and active runtime/profile files were preserved.
+The source browser regression suite also passed 225 tests without failures,
+skips, todos or cancellations; the standalone full structural gate passed
+719 tests under the same strict conditions. These observations do not certify every future
+Edge version, native host connection, macOS or accessibility path.
+
 ## Post-0.9.7 npm metadata freshness
 
 The user's setup transcript reported successful `0.9.7` plugin/bootstrap and

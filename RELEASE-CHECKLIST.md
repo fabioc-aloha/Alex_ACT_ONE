@@ -410,14 +410,21 @@ $browser = 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 ```
 
 The selected path is validated before plugin or dependency changes and is passed only
-to renderer child processes (`mmdc` and `svgexport`); it does not auto-detect a
-browser or alter the parent environment. Browser acquisition remains a separate
+to renderer child processes (`mmdc` and `svgexport`). Without an explicit option
+or environment selection, the source helper reuses existing Windows Edge and
+reports it; it does not alter the parent environment or download a browser.
+Explicit/env selection retains precedence and validation. Browser acquisition remains a separate
 decision because Puppeteer downloads browsers outside the npm feed. The pinned
 svgexport package also uses an old, deprecated Puppeteer browser build; review
 that before allowing a download.
 
 The existing renderer-readiness checks and browser-download restrictions
 are unchanged.
+
+The [2026-11-09 real setup test](docs/verification/setup-renderer/2026-11-09/results.json)
+records both actual report/verification shell variants and a full real
+`-Apply` in disposable profile/npm locations. Mocked installer fixtures alone
+are not evidence that the actual renderer/browser combination works.
 
 With npm 12, a proxy that advertises a different tarball host can trigger
 `EALLOWREMOTE` even when the exact package version is available.
