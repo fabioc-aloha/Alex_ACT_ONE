@@ -92,9 +92,7 @@ function integrationPrerequisites() {
     }
     const pandoc = command('pandoc', ['--version']).split(/\r?\n/)[0];
     if (pandoc !== `pandoc ${PANDOC_VERSION}`) throw new Error(`Required pandoc ${PANDOC_VERSION}; found ${pandoc}`);
-    const mermaid = command('mmdc', ['--version']);
-    if (mermaid !== deps.TOOLS.mmdc.version) throw new Error(`Required Mermaid ${deps.TOOLS.mmdc.version}; found ${mermaid}`);
-    console.log(`Converter prerequisites: ${pandoc}; mmdc ${mermaid}; jszip ${deps.TOOLS.jszip.version}.`);
+    console.log(`Converter prerequisites: ${pandoc}; jszip ${deps.TOOLS.jszip.version}.`);
 }
 
 async function main() {

@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-09",
+  "sourceBaseline": "a945b95f5f41999e6f8f95723320592c77f65139",
+  "scope": {
+    "included": [
+      "Root setup script and shared dependency registry",
+      "Active script imports, converter consumers, runtime checker/provisioner/launchers",
+      "Declared plugin MCP servers and optional companion installation boundaries",
+      "Package allowlist and current skill/setup guidance",
+      "Structural/integration test selection, runtime profile and GitHub workflow"
+    ],
+    "method": "Direct dependency tracing and targeted active-source searches; separate read-only test/CI audit followed by executable regressions.",
+    "notClaimed": [
+      "Line-by-line correctness or security certification of every skill",
+      "Fresh live-host, macOS or accessibility certification",
+      "Removal or repair of user-installed packages, credentials or Agency configuration"
+    ],
+    "preserved": [
+      "Immutable published tags and package/alex-act-one payload",
+      "Frozen archive and historical verification records",
+      "Active user runtime, Python, global packages and registry policy"
+    ]
+  },
+  "dependencyDecisions": [
+    {
+      "dependency": "flint-chart-mcp and matching flint-chart",
+      "decision": "keep",
+      "purpose": "Chart/theme tools, backend rendering and offline demos",
+      "consumers": ["plugin.json", "scripts/shared/runtime-status.cjs", "scripts/build-flint-showcase.mjs"]
+    },
+    {
+      "dependency": "@playwright/mcp and its declared Playwright transitive packages",
+      "decision": "keep",
+      "purpose": "Declared native-browser fallback and local browser acceptance",
+      "consumers": ["plugin.json", "scripts/flint-browser-acceptance.mjs", "skills/render-verify/SKILL.md"],
+      "limit": "Not universally required for core reasoning; installed versions remain pinned for the supported fallback."
+    },
+    {
+      "dependency": "jszip",
+      "decision": "keep",
+      "purpose": "Word OOXML table/image post-processing",
+      "consumers": ["skills/md-to-word/scripts/md-to-word.cjs"],
+      "limit": "Optional enhancement for affected conversions, not a core plugin requirement."
+    },
+    {
+      "dependency": "@mermaid-js/mermaid-cli",
+      "decision": "keep in capability setup; remove from CI-only global provisioning",
+      "purpose": "Actual Mermaid-to-image conversion when requested",
+      "consumers": ["scripts/shared/mermaid-pipeline.cjs", "skills/md-to-word/scripts/md-to-word.cjs", "install-and-check.ps1"],
+      "ciFinding": "Integration provisioned this global package only for duplicate --version probes, not a real Mermaid render."
+    },
+    {
+      "dependency": "svgexport",
+      "decision": "keep",
+      "purpose": "SVG-to-PNG conversion and actual setup readiness check",
+      "consumers": ["skills/md-to-word/scripts/md-to-word.cjs", "install-and-check.ps1"],
+      "limit": "Old Puppeteer/browser delivery remains an explicit compatibility concern; active consumers make this a modernization decision, not an unused-dependency deletion."
+    },
+    {
+      "dependency": "Pandoc",
+      "decision": "keep",
+      "purpose": "Document conversion",
+      "consumers": ["skills/md-to-word/scripts/md-to-word.cjs", "skills/md-to-html/scripts/md-to-html.cjs", "skills/docx-to-md/scripts/docx-to-md.cjs", "skills/html-to-md/scripts/html-to-md.cjs", "skills/md-to-eml/scripts/md-to-eml.cjs", "skills/md-to-txt/scripts/md-to-txt.cjs"]
+    },
+    {
+      "dependency": "Pillow in the selected existing Python",
+      "decision": "keep",
+      "purpose": "Screenshot annotation",
+      "consumers": ["skills/annotate-screenshot/SKILL.md", "install-and-check.ps1"]
+    },
+    {
+      "dependency": "@napi-rs/canvas, chart.js and @modelcontextprotocol/sdk",
+      "decision": "keep the isolated CI/demo profile pins",
+      "purpose": "Exact renderer/protocol build inputs",
+      "consumers": ["scripts/build-flint-showcase.mjs", "ci/runtime/package.json"],
+      "limit": "Not added as independent required system tools by the root installer."
+    },
+    {
+      "dependency": "Agency, optional visual companions and Microsoft ecosystem plugins",
+      "decision": "not installed or refreshed by core setup",
+      "purpose": "Separate host or explicitly opted-in workflows",
+      "consumers": ["skills/install-visual-companions/SKILL.md", "skills/setup-enterprise-stack/SKILL.md"],
+      "limit": "Root setup targets Alex Mall only. Report-only add-on inventory is not an installation prerequisite."
+    },
+    {
+      "dependency": "Retired bundled image provider",
+      "decision": "remain absent from active assets, install options and provisioning",
+      "limit": "Historical evidence and removal-negative tests are intentionally retained."
+    }
+  ],
+  "repairs": [
+    {
+      "id": "legacy-checker-installer",
+      "finding": "A second --apply path used bare pip and separate npm installation logic outside the unified helper's selected-interpreter and routing safeguards.",
+      "action": "Remove that writer; reject --apply before probes and direct approved installation to the root helper or MCP-only provisioner.",
+      "files": ["skills/setup-dependencies/scripts/check-dependencies.cjs", "skills/setup-dependencies/SKILL.md"]
+    },
+    {
+      "id": "stale-server-count",
+      "finding": "Checker guidance still claimed three servers after provider retirement.",
+      "action": "Derive the configured server count from the inspected registry."
+    },
+    {
+      "id": "stale-setup-guidance",
+      "finding": "Active Word CI example copied an old Mermaid pin; Word troubleshooting named extension node_modules; Scout guidance still mentioned bundled image generation.",
+      "action": "Resolve example pins from the shared registry, route Word setup to the private runtime, and remove the retired Scout capability implication."
+    },
+    {
+      "id": "interpreter-bound-install-guidance",
+      "finding": "Screenshot setup illustrated bare pip installation.",
+      "action": "Require consent and use the selected existing Python's pip."
+    },
+    {
+      "id": "startup-only-ci-renderer",
+      "finding": "Both integration OS jobs globally installed Mermaid solely for duplicate version/startup checks.",
+      "action": "Remove global provisioning, the prerequisite version probe and the startup-only test. Keep actual root renderer checks and controlled conversion coverage.",
+      "files": [".github/workflows/verify.yml", "scripts/verification-gate.mjs", "tests/conversion-runtime.test.cjs"]
+    }
+  ],
+  "testsAndCi": {
+    "kept": [
+      "Windows and Ubuntu parity",
+      "Node minimum and scheduled/manual newer-Node lanes",
+      "Independent structural and integration jobs",
+      "Lockfile versions, integrity, URL and graph validation",
+      "Strict failure/skip/todo/cancellation/empty-TAP checks",
+      "Activation ownership, conflicts, no-op failure, policy and selected-home regressions",
+      "Real MCP/backends/converter tests and exact offline demos",
+      "Synthetic removed-provider, private-marketplace and shell-shim negative controls"
+    ],
+    "notRemoved": "No broad test deletion or matrix reduction was justified by duplicate labels or historical regression names alone.",
+    "newCoverage": "Checker read-only/default/JSON behavior, retired --apply rejection before probes, executable registry-derived guidance and CI provisioning boundary."
+  },
+  "validation": {
+    "targetedPassed": 59,
+    "structuralPassed": 711,
+    "integrationPassedWithoutGlobalMermaid": 56,
+    "skipped": 0,
+    "failedInAcceptedRuns": 0,
+    "bothExactDemoChecksPassed": true,
+    "structuralRunLimit": "An overlapping integration fixture triggered the immutability guard; it was not counted as success. The standalone structural run passed.",
+    "integrationEnvironment": "Approved disposable runtime from the unchanged CI lockfile; global Mermaid command removed from test-process PATH.",
+    "liveSetupPerformed": false,
+    "newReleasePublished": false
+  }
+}

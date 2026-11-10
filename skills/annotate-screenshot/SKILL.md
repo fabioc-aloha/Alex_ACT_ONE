@@ -9,8 +9,12 @@ lastReviewed: 2026-08-18
 Mark up a raster this plugin did not render: a dashboard capture, a chart someone
 sent you, a screenshot under review. Pillow does the drawing. Nothing else is needed.
 
+Check Pillow in the selected existing Python environment first. After explicit
+installation approval, use that same interpreter's pip, not an unrelated
+bare `pip` command:
+
 ```bash
-pip install Pillow -q
+python -m pip install Pillow
 ```
 
 Not for artifacts you can regenerate. If you own the generator, put the callout in

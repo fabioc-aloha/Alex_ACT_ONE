@@ -76,9 +76,6 @@ jobs:
           Copy-Item (Join-Path $PWD 'ci' 'runtime' 'package-lock.json') $env:ALEX_ACT_ONE_RUNTIME_ROOT
           npm ci --prefix $env:ALEX_ACT_ONE_RUNTIME_ROOT --ignore-scripts --no-audit --no-fund
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          $mermaid = node -p "const d=require('./scripts/shared/dependencies.cjs').TOOLS.mmdc; d.package+'@'+d.version"
-          npm install --global --ignore-scripts --no-audit --no-fund $mermaid
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Verify runtime and real converter output without skips
         shell: pwsh
         run: node (Join-Path $PWD 'scripts' 'verification-gate.mjs') --lane integration

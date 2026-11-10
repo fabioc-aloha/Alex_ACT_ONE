@@ -31,6 +31,13 @@
   Report/apply regressions now reject that blanket operation and preserve
   unrelated plugins, marketplace registrations and MCP configuration.
   No Agency authentication/configuration repair or removal is authorized.
+- The source dependency audit retired `check-dependencies.cjs --apply`; the
+  checker only inspects and prints approved setup routes. Unified root setup
+  and the explicit MCP-only provisioner remain the installation paths.
+  Active tools all have current consumers; copied old pins and removed-provider
+  guidance were corrected. Integration CI no longer installs global Mermaid
+  only to check its version. Real Mermaid rendering remains a separate root
+  readiness check, not an implied CI render pass. Frozen payloads are unchanged.
 - The user approved a fresh `0.9.7` manual-install exception. Final metadata,
   version-stamped demos, source/payload hashes, fresh-checkout 694/57 strict
   lanes and all six same-commit jobs passed. The public Mall API and actual

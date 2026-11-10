@@ -267,8 +267,8 @@ they load; treat your first runs as an evaluation anyway. The
 
 ### On Microsoft Scout, register the MCP servers
 
-Only on Scout, and only if you want charts, browser verification, or image
-generation. Copilot CLI and VS Code read the servers from `plugin.json` and need
+Only on Scout, and only if you want charts or browser verification.
+Copilot CLI and VS Code read the servers from `plugin.json` and need
 nothing extra; Scout keeps its own registry and ignores that manifest.
 
 Ask Scout for the `setup-dependencies` skill by name. Slash commands do not

@@ -4,17 +4,15 @@
 
 /**
  * Reports which of this plugin's optional dependencies are present, what each
- * missing one costs, and how to install it. With --apply, installs the ones
- * that can be installed non-interactively (npm packages) and prints the exact
- * command for the ones that need a system package manager.
+ * missing one costs, and how to install it. This checker is read-only;
+ * the unified root helper and MCP provisioner own consented installation.
  *
  * Reads the same registry `tool-runner.cjs` uses for its error messages, so the
  * remedy a user is shown when a conversion fails is the remedy this script
  * offers. Two lists would drift, and a wrong remedy is worse than none.
  *
  * Usage:
- *   node check-dependencies.cjs            preview
- *   node check-dependencies.cjs --apply    install what can be automated
+ *   node check-dependencies.cjs            inspect
  *   node check-dependencies.cjs --json     machine-readable
  */
 
@@ -27,7 +25,6 @@ const { TOOLS, MCP_SERVERS, PLUGINS, platformKey, specOf, installMap } = require
 const { runtimeRoot, checkRuntime } = require('../../../scripts/shared/runtime-status.cjs');
 const { resolveInvocation } = require('../../../scripts/shared/process-command.cjs');
 
-const APPLY = process.argv.includes('--apply');
 const JSON_OUT = process.argv.includes('--json');
 const PLATFORM_LABEL = { win32: 'Windows', darwin: 'macOS', linux: 'Linux' }[platformKey()];
 let selectedRuntime;
@@ -36,9 +33,10 @@ for (let index = 2; index < process.argv.length; index++) {
     if (arg === '--runtime-root') {
         selectedRuntime = process.argv[++index];
         if (!selectedRuntime || selectedRuntime.startsWith('--')) throw new Error('--runtime-root requires a path');
-    } else if (!['--apply', '--json'].includes(arg)) throw new Error(`Unknown argument: ${arg}`);
+    } else if (arg === '--apply') {
+        throw new Error('check-dependencies.cjs is read-only. Use install-and-check.ps1 -Apply for consented setup, or provision-runtime.mjs --apply for MCP-only provisioning.');
+    } else if (arg !== '--json') throw new Error(`Unknown argument: ${arg}`);
 }
-if (APPLY && JSON_OUT) throw new Error('--apply and --json are separate operations');
 const MCP_RUNTIME = runtimeRoot(selectedRuntime);
 
 function onPath(bin) {
@@ -50,14 +48,14 @@ function onPath(bin) {
 
 function moduleResolvable(name) {
     try { require.resolve(name); return true; } catch { /* fall through */ }
-    // Also check the plugin-data runtime, which is where --apply installs local
+    // Also check the plugin-data runtime, where the setup helper installs local
     // modules and where the consuming skills look for them.
     try { require.resolve(path.join(MCP_RUNTIME, 'node_modules', name)); return true; } catch { return false; }
 }
 
 function pythonModulePresent(name) {
     for (const py of ['python', 'python3']) {
-        const probe = spawnSync(py, ['-c', `import ${name}`], { stdio: 'ignore', timeout: 5000 });
+        const probe = spawnSync(py, ['-B', '-c', `import ${name}`], { stdio: 'ignore', timeout: 5000 });
         if (probe.status === 0) return true;
     }
     return false;
@@ -278,41 +276,9 @@ console.log('\nTo install what is missing:\n');
 for (const r of missingTools) console.log(`  ${r.install}`);
 if (missingMcp.length) {
     console.log(`  node <this-skill>/scripts/provision-runtime.mjs --apply`);
-    console.log(`      provisions all three servers together: ${missingMcp.map((s) => s.label).join(', ')} missing`);
+    console.log(`      provisions ${mcp.servers.length} configured MCP servers: ${missingMcp.map((s) => s.label).join(', ')} missing`);
 }
 
-if (!APPLY) {
-    console.log('\nPreview only. Nothing was installed or changed.');
-    console.log('Re-run with --apply to install the package-manager items automatically.');
-    console.log('System packages still need their own command above, which cannot run without your consent.');
-    process.exit(0);
-}
-
-// --apply installs only what npm can do without a system package manager.
-// Installing a system package silently is a surprise change to the machine,
-// so those stay a printed command the user chooses to run.
-//
-// Local modules go into the plugin-data runtime, the same place the MCP
-// servers live. A bare `npm install` would land in whatever directory the user
-// happened to invoke from, which the consuming skill then cannot find — an
-// install that does not fix the problem is worse than no install.
-let installed = 0;
-let failed = 0;
-for (const r of missingTools.filter((x) => x.kind !== 'system')) {
-    console.log(`\ninstalling: ${r.label}`);
-    let cmd = 'npm';
-    let args;
-    if (r.kind === 'npm-global') args = ['install', '-g', r.spec];
-    else if (r.kind === 'python-module') { cmd = 'pip'; args = ['install', r.spec]; }
-    else args = ['install', '--prefix', MCP_RUNTIME, '--no-audit', '--no-fund', r.spec];
-    const invocation = resolveInvocation(cmd, args);
-    const res = spawnSync(invocation.command, invocation.args, { stdio: 'inherit', shell: false, timeout: 180000 });
-    if (res.status === 0) installed += 1;
-    else { failed += 1; console.error(`FAILED: ${r.label}${res.error ? `: ${res.error.message}` : ''}`); }
-}
-
-const systemLeft = missingTools.filter((x) => x.kind === 'system');
-console.log(`\ninstalled: ${installed}   failed: ${failed}   needs your package manager: ${systemLeft.length}`);
-for (const r of systemLeft) console.log(`  ${r.install}`);
-if (missingMcp.length) console.log(`  node <this-skill>/scripts/provision-runtime.mjs --apply`);
-process.exit(failed > 0 ? 1 : 0);
+console.log('\nRead-only inspection. Nothing was installed or changed.');
+console.log('Use install-and-check.ps1 to report setup status; add -Apply only after reviewing its installation scopes.');
+console.log('For MCP-only installation, preview provision-runtime.mjs and explicitly approve --apply.');

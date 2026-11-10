@@ -5,6 +5,16 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+- Audited active dependency consumers and removed the legacy checker install
+  path. `check-dependencies.cjs` is now read-only; retired `--apply` is rejected
+  before probes and directs to the unified helper or explicit MCP provisioner.
+  Corrected the stale three-server message, copied Mermaid pin, Word extension
+  setup advice and removed-provider Scout wording. All current capability
+  dependencies retain actual consumers; unrelated marketplace/plugins are not
+  added to the installer. Removed global Mermaid provisioning from CI and its
+  duplicate startup-only version checks; real conversion/MCP coverage, locked
+  runtimes, platform lanes and root renderer readiness checks remain.
+
 - Restrict the unified setup helper's marketplace refresh to Alex Mall instead
   of every registered marketplace. Unrelated private Agency catalog Git
   authentication failures no longer block Alex setup. Preserve their plugins,

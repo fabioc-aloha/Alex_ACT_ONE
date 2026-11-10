@@ -42,12 +42,6 @@ for (const [skill, extension] of [['md-to-html', 'html'], ['md-to-word', 'docx']
         }
     });
 }
-test('the installed Mermaid npm CLI starts through the shared tool runner', {
-    skip: available('mmdc') ? false : 'Mermaid CLI not installed',
-}, () => {
-    assert.match(runTool('mmdc', ['--version'], { encoding: 'utf8', timeout: 15000 }).trim(), /^\d+\.\d+\.\d+/);
-});
-
 const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=', 'base64');
 function conversionFixture(t) {
     const directory = fs.mkdtempSync(path.join(ROOT, '.conversion-test-'));

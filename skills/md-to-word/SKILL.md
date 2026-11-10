@@ -344,7 +344,7 @@ Paragraphs starting with "Table N" or "Figure N":
 | "mmdc not found" | mermaid-cli not installed | Run `/alex-act-one setup-dependencies` |
 | "pandoc not found" | pandoc not in PATH | Run `/alex-act-one setup-dependencies`, then restart the terminal |
 | "svgexport not found" | svgexport not installed | Run `/alex-act-one setup-dependencies` |
-| Tables not styled | jszip not available | Set `NODE_PATH` to extension node_modules |
+| Tables not styled | jszip not available | Use the unified setup helper or select the matching private runtime with `ALEX_ACT_ONE_RUNTIME_ROOT` |
 | Diagrams too small | Outdated script | Update to v5.3.0+ |
 | Images overflow | Complex diagram | Use `--debug` and check PNG dimensions |
 | SVG not converting | Missing svgexport | Install or use PNG source |
@@ -422,11 +422,25 @@ node skills/md-to-word/scripts/md-to-word.cjs spec.md --watch
 
 ### GitHub Actions CI/CD
 
+Pandoc must already be provisioned on the runner. Resolve optional npm tool
+versions from this checkout's shared registry rather than copying old pins:
+
+<!-- dependency-pin-example:start -->
+```javascript
+const d = require('./scripts/shared/dependencies.cjs');
+console.log(JSON.stringify(['mmdc', 'svgexport'].map(key => d.specOf(d.TOOLS[key]))));
+```
+<!-- dependency-pin-example:end -->
+
 ```yaml
 # Generate Word docs as build artifacts
 - name: Generate Word Documents
+  shell: pwsh
   run: |
-    npm install -g @mermaid-js/mermaid-cli@11.17.0 svgexport@0.4.2
+    $specs = node -e "const d = require('./scripts/shared/dependencies.cjs'); console.log(JSON.stringify(['mmdc', 'svgexport'].map(key => d.specOf(d.TOOLS[key]))));" | ConvertFrom-Json
+    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+    npm install --global @specs
+    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
     node skills/md-to-word/scripts/md-to-word.cjs docs/spec.md --toc --cover
 
 - name: Upload artifacts

@@ -46,6 +46,22 @@ The focused Windows run passed 163 tests, without failures, skips, todos or
 cancellations, including PowerShell 7/5.1 installer cases and standalone
 provisioner output/error handling.
 
+## Active dependency and verification audit
+
+The [source audit inventory](verification/dependency-audit/2026-11-09.json)
+traces current tools to their consumers and distinguishes frozen history from
+active setup. It removes the legacy checker's `--apply` writer and stale
+copied setup guidance without deleting active capability dependencies.
+Optional companion/Microsoft plugins and Agency remain outside root setup.
+
+The audit's accepted runs passed 59 focused checks, 711 structural tests and
+56 integration tests without skips or cancellations. Integration ran with the
+global Mermaid command hidden from the test processes, proving that the
+removed startup-only CI provisioning is unnecessary. Both exact demos matched.
+An initial overlapping fixture run tripped the source immutability guard and
+was not counted as success; the standalone source gate passed. No live setup
+or installed-runtime mutation was performed.
+
 ## Simplified root-helper source checks
 
 The 2026-11-09 source has one root `install-and-check.ps1` entry point.
@@ -169,7 +185,7 @@ lean runtime package is not a Git checkout or all-host certification.
 | Lane | Prerequisites | Required evidence |
 | --- | --- | --- |
 | Structural | Git checkout, Node 24+, PowerShell 7; Windows also requires Windows PowerShell 5.1 | Catalog/role drift check, read-only structural assessment, dependency-free tests, and fake-install/activation safety cases |
-| Integration | Explicit reviewed MCP runtime, JSZip from the shared registry, Pandoc 3.13, reviewed Mermaid CLI | Actual MCP version/launch and three-backend render tests, real HTML/Word conversion, and installed Mermaid CLI startup |
+| Integration | Explicit reviewed MCP runtime, JSZip from the shared registry, Pandoc 3.13 | Actual MCP version/launch and three-backend render tests, real HTML/Word conversion, and controlled Mermaid conversion/fallback cases |
 | Canonical demo rebuild | Windows integration environment | Byte-for-byte checks of both generated HTML pages; Git preserves their LF endings |
 
 Canonical demos additionally require `@napi-rs/canvas@1.1.0`,
@@ -327,7 +343,7 @@ push runs are automatically cancelled by a newer run in the same group.
 Actions are pinned to reviewed immutable commits, checkout
 does not persist credentials, and token permissions are read-only.
 
-Only disposable integration runners install packages. MCP, JSZip, and Mermaid
+Only disposable integration runners install packages. MCP, JSZip and demo
 direct versions agree with the [shared dependency registry](../scripts/shared/dependencies.cjs).
 The pinned Node setup action caches npm's download cache using the isolated
 runtime lockfile. Installed `node_modules` directories are not cached:
@@ -336,6 +352,13 @@ The workflow uses the runner's configured npm registry without a registry URL
 override, suppresses lifecycle scripts for these installs, and does not request
 API credentials or browser downloads. Pandoc 3.13 is installed by the pinned
 Pandoc setup action.
+
+The source dependency audit removed global Mermaid provisioning used only by
+duplicate `--version` checks. That lane does not certify real Mermaid rendering;
+the root helper's explicit readiness path still checks actual Mermaid SVG and
+SVG-to-PNG output, with missing/failed/invalid-output regressions.
+Controlled conversion/fallback tests and all real MCP/backend/converter tests
+remain. No platform, Node, lock-integrity or strict no-skip gate was removed.
 
 Windows shell-free tool resolution uses a bounded 30-second discovery budget,
 with the command and error in failures, instead of the earlier five-second

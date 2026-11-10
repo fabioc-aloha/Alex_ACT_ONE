@@ -32,8 +32,9 @@ Missing prerequisites stop dependency installation with setup guidance.
 `-VerifyOnly` adds strict no-install readiness checks but still refreshes that
 selected catalog. Unrelated Agency marketplaces, plugins, credentials and MCP
 registrations are not refreshed or changed by the helper.
-This source flow is separate from the narrower standalone `--apply` routes below
-and from the helpers preserved inside older immutable release payloads.
+This source flow is separate from the MCP-only provisioner below and from the
+helpers preserved inside older immutable release payloads. The checker itself
+has no install mode.
 
 ## Check First
 
@@ -99,18 +100,11 @@ another. The report prints the store it read for that reason.
 
 ## Install With Consent
 
-| Kind | What `--apply` does |
-| --- | --- |
-| npm packages (`jszip`, Mermaid CLI, svgexport) | Installs them |
-| System packages (Pandoc) | Prints the command for the current platform; does not run it |
-| MCP servers | Directs to the provisioner below; does not run it |
-
-Installing a system package silently is a surprise change to someone's machine.
-The command is printed so the user chooses to run it.
-
-```text
-node <this-skill>/scripts/check-dependencies.cjs --apply
-```
+Use the unified [root helper](../../install-and-check.ps1) after reviewing its
+status report and installation scopes. Only its explicit `-Apply` path changes
+plugin, instruction or dependency state. The checker rejects the retired
+`--apply` option before running probes; it cannot start a second unmanaged
+npm/pip installation path. For MCP-only setup, use the provisioner below.
 
 ## MCP Servers
 
