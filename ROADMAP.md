@@ -1,10 +1,11 @@
 # Roadmap
 
-Updated 2026-11-09. This is the product backlog for maintaining and shipping
+Updated 2026-11-13. This is the product backlog for maintaining and shipping
 Alex ACT ONE, not a history of incidents or an adopter-fleet work queue.
 The source and Mall `0.9.7` release is published. The user will install it
 manually using the script; only earlier `0.9.5` installed-package parity is
-recorded. R8 remains next for observable host evidence as access permits.
+recorded. Optimization scope approval is pending; R8 remains open for
+observable host evidence as access permits.
 Runtime upgrade recovery requires a
 design decision before implementation.
 
@@ -19,13 +20,36 @@ Current verification belongs in [testing](docs/testing.md),
 
 ## Now
 
-**Product focus:** review and qualify the next candidate through the
+**Product focus:** review the proposed cross-domain optimization scope, then
+qualify approved changes through the
 [delivery gate](#verify-future-delivery-changes). Completed cross-repository
 recovery and synchronization are archived; they do not add ongoing operations
 to this backlog.
 The [0.9.7 release record](archive/verification/release-0.9.7/README.md) owns
 the exact source, same-commit gates, payload, browser and public Mall evidence.
 Await the user's manual installation result; do not infer it from publication.
+
+### Review cross-domain optimization scope
+
+**Status:** the requested [optimization plan](OPTIMIZATION-PLAN.md) was saved
+on 2026-11-13. It is a design and acceptance reference, not a second backlog.
+The user requested a detailed proposal before changes and selected dedicated
+creative-writing support as the preferred direction. Plan creation does not
+approve implementation.
+
+**Next action:** obtain a decision on the proposed coding-only retirement set,
+retained cross-domain safeguards, completion ownership and creative-writing
+contract. If approved, use the plan's dependency sequence and representative
+noncoding acceptance cases, and record execution here.
+
+Native instruction delivery and browser-fallback changes retain separate
+approval and host-parity gates. Do not remove bootstrap or Playwright merely
+because native facilities are documented. Existing R8, artifact-delivery,
+accessibility, macOS and runtime-recovery work remains open.
+
+**Done when:** the scope decision is explicit. Approved implementation requires
+its own observed acceptance evidence and the existing delivery gates; document
+lint and a smaller inventory alone cannot establish success.
 
 ### R8. Run fresh live-host scenarios
 

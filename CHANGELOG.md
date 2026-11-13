@@ -5,6 +5,15 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+- 2026-11-13: Added the root [optimization plan](OPTIMIZATION-PLAN.md) after
+  reviewing recent Copilot harness releases against coding and noncoding
+  workflows. It proposes retiring coding-only skills while preserving shared
+  completion safeguards and improving documentation, creative writing, charts,
+  graphics and exports. Local links and editor diagnostics passed; these
+  document checks do not establish native replacement parity or quality gains.
+  Implementation remains pending scope approval. No skills, installed state,
+  frozen release payloads or publication changed.
+
 - Reuse installed Windows Edge for renderer checks when neither an explicit
   browser option nor `PUPPETEER_EXECUTABLE_PATH` is supplied. Report the selected
   executable and pass it only to renderers; no browser downloads, global

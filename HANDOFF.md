@@ -5,6 +5,11 @@
 - The mission is to maintain and ship Alex ACT ONE. Resume product maintenance,
   verification, and release preparation from [ROADMAP.md](ROADMAP.md), not
   cross-repository recovery or fleet operations.
+- The requested [optimization plan](OPTIMIZATION-PLAN.md) is saved in the
+  repository. It proposes coding-only retirement and cross-domain authoring
+  improvements; implementation is not approved. The next decision is
+  [optimization scope](ROADMAP.md#review-cross-domain-optimization-scope).
+  No skills, installed state or frozen release payloads changed in this review.
 - The published baseline is
   [0.9.7](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.7),
   frozen at `32db8b9752e501a5ef4287327fa9f30fe9d53224`. The full same-commit
@@ -113,6 +118,9 @@
 
 ## Blockers
 
+- Optimization implementation requires explicit scope approval. Native-rule
+  migration and browser-fallback retirement need their separate approval and
+  host-parity gates; the plan is not authorization to start them.
 - Exact installed/cache `0.9.5` bytes were verified; the `0.9.7` release's
   native installation is not. Native transcript completeness, unanswered
   clarification flows, additional hosts, coverage beyond the approved
@@ -127,6 +135,14 @@
   boundary; stronger enforcement retains its separate product acceptance gate.
 
 ## Next Action
+
+Review [OPTIMIZATION-PLAN.md](OPTIMIZATION-PLAN.md) and resolve the
+[scope decision](ROADMAP.md#review-cross-domain-optimization-scope) before
+implementation. Preserve cross-domain completion and artifact safeguards.
+R8 and the other verification gaps remain open; do not treat the planning
+exercise as fresh host qualification.
+
+The existing manual-install follow-up remains separate:
 
 From the current source checkout, use `.\install-and-check.ps1` to refresh
 catalogs and inspect installed/latest versions; add `-Apply` only for a
@@ -153,6 +169,9 @@ Do not resume adopter-recovery operations from this handoff.
 
 ## Verification
 
+- The optimization plan's local links resolved and editor diagnostics reported
+  no errors. These are document checks, not evidence that the proposed
+  retirements, creative-writing workflow or native migrations have run.
 - [0.9.7 verification](archive/verification/release-0.9.7/README.md) records
   the unified setup package, full same-commit gates, public Mall bindings and
   explicitly deferred native/system-package setup.
