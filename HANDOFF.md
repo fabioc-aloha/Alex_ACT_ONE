@@ -10,10 +10,14 @@
   improvements; implementation is not approved. The next decision is
   [optimization scope](ROADMAP.md#review-cross-domain-optimization-scope).
   No skills, installed state or frozen release payloads changed in this review.
-- The published baseline is
+- The release target is `0.10.0`. The user requested the full release and will
+  test installation and activation afterward. The
+  [verification record](docs/verification/0.10.0-candidate.md) separates
+  automated checks from native install evidence. macOS support is pending.
+- The previous release is
   [0.9.7](https://github.com/fabioc-aloha/Alex_ACT_ONE/releases/tag/v0.9.7),
   frozen at `32db8b9752e501a5ef4287327fa9f30fe9d53224`. The full same-commit
-  source matrix passed. Mall publication selects `v0.9.7` and
+  source matrix passed. Its Mall publication selected `v0.9.7` and
   `package/alex-act-one`; [the release evidence](archive/verification/release-0.9.7/README.md)
   records exact source, payload, browser, and public catalog observations.
 - The user explicitly approved publication before their manual script
@@ -24,13 +28,13 @@
 - The user's subsequent setup transcript reports `0.9.7` plugin/bootstrap and
   Pandoc/Pillow success, followed by Playwright transitive `ETARGET`.
   Full dependency/render readiness and cache parity are not claimed.
-  Unreleased source now requests fresh metadata in root and standalone npm
+  Release `0.10.0` requests fresh metadata in root and standalone npm
   install paths. A real-npm disposable control reproduced stale-cache
   `ETARGET`; the exact reviewed Playwright pins then installed/launched through
   the configured proxy using an isolated prefix/cache. The original npm log
   was unavailable, so original feed/cache state is not proven.
   No live runtime repair or new release was performed by the agent.
-- Unreleased source also scopes setup refresh to Alex Mall only. The previous
+- Release `0.10.0` also scopes setup refresh to Alex Mall only. The previous
   blanket CLI update unnecessarily fetched unrelated private Agency catalogs
   and stopped setup on their Git authentication errors even when Mall succeeded.
   Report/apply regressions now reject that blanket operation and preserve
@@ -45,7 +49,7 @@
   readiness check, not an implied CI render pass. Frozen payloads are unchanged.
 - The user's newer setup failure was reproduced in the actual no-install root
   path: package versions were ready, but lifecycle policy had blocked the
-  bundled Puppeteer browser. Unreleased source now selects installed Windows
+  bundled Puppeteer browser. Release `0.10.0` selects installed Windows
   Edge after explicit/env overrides, printing its renderer-only scope.
   Actual report and `-VerifyOnly` passed in PowerShell 7/5.1. A real full
   `-Apply` in disposable Copilot/profile/runtime/global-prefix/cache locations
@@ -137,10 +141,10 @@
 
 ## Next Action
 
-For release preparation, review the [0.10.0 candidate record](docs/verification/0.10.0-candidate.md).
-Local integration and the packaged demo checks passed before the candidate
-commit. Use the reviewed commit for fresh-clone and same-commit matrix
-verification. Published `0.9.7` is unchanged.
+For the `0.10.0` release, use the
+[verification record](docs/verification/0.10.0-candidate.md) and
+[release checklist](RELEASE-CHECKLIST.md). Verify the exact tagged payload
+and Mall route separately from the user's manual Windows setup.
 
 For Copilot harness compatibility, run the [R8 text-only clarification probes](docs/verification/README.md#text-only-clarification-and-resume).
 Source now supports a normal chat reply for recovery and missing chart data;
@@ -172,7 +176,7 @@ after closing hosts that may lock the package.
 Leave installation to the user unless separately authorized. Record actual
 installed root/version, package/cache parity, bootstrap receipt and restart
 observations separately; publication does not prove any of them.
-Preserve the immutable `v0.9.7` tag and its exact verified payload. Later
+Preserve immutable release tags and their exact verified payloads. Later
 delivery changes require their own reviewed commit and fresh gates.
 Continue R8/artifact-host observations only for the remaining authorized gaps
 in [ROADMAP.md](ROADMAP.md), using the frozen task evidence rather than rerunning

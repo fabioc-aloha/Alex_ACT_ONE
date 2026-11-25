@@ -1,5 +1,7 @@
 # Documentation
 
+Release version: `0.10.0`. See the [release highlights](verification/0.10.0-candidate.md#release-highlights).
+
 ## Use Alex ACT ONE
 
 - [Getting started](getting-started.md): install, activation, and first workflow.

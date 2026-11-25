@@ -7,9 +7,10 @@ documentation, not adopter-project recovery records or fleet operations.
 The [builder](../scripts/build-plugin-package.mjs) produces a reproducible
 candidate under `dist/alex-act-one/`. Release preparation uses the same
 allowlist to generate `package/alex-act-one/`, the source-subdirectory payload
-selected since `0.9.4` and retained for `0.9.7`. The approved Mall route is
-`v0.9.7:package/alex-act-one`; [the release record](../archive/verification/release-0.9.7/README.md)
-verifies its publication separately from assembly and installation.
+selected since `0.9.4`. Release version: `0.10.0`. The Mall route for this
+release is `v0.10.0:package/alex-act-one`. The
+[verification record](verification/0.10.0-candidate.md) keeps package
+assembly, publication, and installation evidence separate.
 
 ## Included
 

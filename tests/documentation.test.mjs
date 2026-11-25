@@ -145,7 +145,7 @@ test('release docs include the interaction workflow without claiming exhaustive 
     for (const owner of ['critical-thinking', 'code-review', 'big-idea', 'convert', 'proactive-awareness', 'compile-brain']) {
         assert.ok(readme.includes(`](skills/${owner}/SKILL.md)`), owner);
     }
-    assert.ok(readme.includes(`Release candidate: \`v${manifest.version}\``));
+    assert.ok(readme.includes(`Release version: \`v${manifest.version}\``));
     assert.doesNotMatch(readme, /source-only \[flint-interactions\]|not yet released `flint-interactions`/);
     assert.match(readme, /unverified|not freshly verified/i);
     for (const demo of ['flint-showcase.html', 'flint-experimental.html']) {
@@ -211,10 +211,10 @@ test('release notices match package metadata and keep historical candidate switc
     const plugin = JSON.parse(read('plugin.json'));
     assert.equal(plugin.version, manifest.version);
     const escaped = manifest.version.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    for (const file of ['README.md', 'ROADMAP.md', 'docs/install.md', 'docs/getting-started.md']) {
+    for (const file of ['README.md', 'ROADMAP.md', 'docs/install.md', 'docs/getting-started.md', 'docs/package.md', 'docs/testing.md']) {
         const text = read(file);
-        assert.match(text, new RegExp(`Release candidate: \`v?${escaped}\` \\(not published\\)`, 'i'), file);
-        assert.match(text, /Published release: `v?0\.9\.7`/, file);
+        assert.match(text, new RegExp(`Release version: \`v?${escaped}\``, 'i'), file);
+        assert.doesNotMatch(text, /Release candidate: `|Published release: `v?0\.9\.7`/i, file);
     }
     const install = read('docs/testing.md').split('## Testing the repository candidate')[1]?.split('\n## ')[0];
     assert.ok(install, 'Preserve the historical instructions in maintainer documentation');

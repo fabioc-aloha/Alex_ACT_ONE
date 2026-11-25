@@ -6,7 +6,7 @@ workflow. You need a working GitHub Copilot setup and Node 24 or newer, but
 Copilot CLI is the reference path below; VS Code also exposes the activation
 command. Other hosts have [their own setup steps](install.md#where-alex-act-one-works).
 
-Published release: `0.9.7`. Release candidate: `0.10.0` (not published).
+Release version: `0.10.0`.
 Verify the installed version and delivery source;
 this guide does not establish that a host loaded the instructions.
 

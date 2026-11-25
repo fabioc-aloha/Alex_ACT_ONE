@@ -32,6 +32,12 @@ decision. Native installation, profile activation and actual system-package
 installation remain unclaimed; source/runtime/browser gates are not waived.
 This exception applies to `0.9.7` only.
 
+For `0.10.0`, the user requested the full release and will test after
+publication. The [verification record](docs/verification/0.10.0-candidate.md)
+records this release-specific manual-install exception. Native installation
+and activation are not claimed. The source, runtime, package, and browser
+gates still apply.
+
 ## Candidate packaging boundary
 
 When a release proposes lean distribution, use the

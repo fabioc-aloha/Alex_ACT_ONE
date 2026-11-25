@@ -5,6 +5,17 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+## 0.10.0 - 2026-11-25
+
+Release route: `v0.10.0:package/alex-act-one`. This release focuses on
+Windows setup; macOS setup is pending. See the
+[verification record](docs/verification/0.10.0-candidate.md) for test scope
+and the manual-install boundary.
+
+- Check for supported fallbacks before optional dependency setup. The
+  installed package's `-DependenciesOnly` mode leaves the plugin, catalog,
+  and profile instructions alone.
+
 - Add a standalone [creative-writing skill](skills/creative-writing/SKILL.md)
   for original fiction and scoped revision. It preserves protected passages,
   continuity, and narrative voice without replacing Humanizer or adding a

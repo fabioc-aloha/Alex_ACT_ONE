@@ -5,7 +5,8 @@ what your app supports and what an optional tool unlocks.
 
 ## Installation sources
 
-Published release: `0.9.7`. Release candidate: `0.10.0` (not published).
+Release version: `0.10.0`. macOS setup is not yet verified; the PowerShell
+setup helper is for the Windows release path.
 
 | Source | What to use it for |
 | --- | --- |

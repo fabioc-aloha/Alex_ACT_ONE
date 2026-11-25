@@ -31,8 +31,7 @@ requested output, the skill checks for a supported fallback. If none fits, Setup
 Dependencies checks what's missing and asks before installing anything. See
 [optional tools](docs/install.md#optional-extra-tools-for-a-few-skills).
 
-**Published release: `v0.9.7`.** Release candidate: `v0.10.0` (not published).
-This README also describes candidate features where noted. See
+**Release version: `v0.10.0`.** See
 [installation sources](docs/install.md#installation-sources)
 and [host support](docs/install.md#where-alex-act-one-works) before switching apps.
 
@@ -287,8 +286,8 @@ canonical installed plugin; the bootstrap preview exposes
 
 ## Flint charts and interaction demos
 
-Current source and its demos pin `flint-chart-mcp@1.1.1` and `flint-chart@1.1.1`.
-The published `0.9.7` package retains its exact `1.0.1` pair. Keep those
+Release `0.10.0` and its demos pin `flint-chart-mcp@1.1.1` and `flint-chart@1.1.1`.
+The previous `0.9.7` package retains its exact `1.0.1` pair. Keep those
 runtimes separate. Flint supplies the version-matched chart, theme, interaction,
 board, and application guidance; ONE supplies framing, consent, and verification.
 Use `show` for a validated live chart or board on a client with App UI. Static
@@ -316,7 +315,7 @@ prevalidated board when the population changes; it does not run live queries.
 Both pages open offline and include synthetic data, inspectable starting specs,
 and static exports from Vega-Lite, ECharts, and Chart.js. The live viewer uses
 Vega-Lite. Native App UI support depends on the host and remains unverified for
-the source Flint 1.1.1 runtime.
+the Flint 1.1.1 runtime.
 
 ## Check a draft or rewrite it
 
@@ -464,8 +463,8 @@ the plugin or activating instructions, run from the installed package root:
 ```
 
 Add `-VerifyOnly` to check existing tools, or `-Apply` only after approving the
-plan. This mode is available in current source, not published `0.9.7`. For older
-packages or a single missing tool, follow the installed skill's guidance.
+plan. This mode ships in `0.10.0`. For older packages or a single missing tool,
+follow the installed skill's guidance.
 For registry or MCP setup issues, see the
 [Setup Dependencies reference](skills/setup-dependencies/SKILL.md#mcp-servers).
 For a renderer that needs a compatible existing browser, rerun verification

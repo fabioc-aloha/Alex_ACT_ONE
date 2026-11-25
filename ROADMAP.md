@@ -2,18 +2,14 @@
 
 Updated 2026-11-25. This is the product backlog for maintaining and shipping
 Alex ACT ONE, not a history of incidents or an adopter-fleet work queue.
-The source and Mall `0.9.7` release is published. The user will install it
-manually using the script; only earlier `0.9.5` installed-package parity is
-recorded. Optimization scope approval is pending; R8 remains open for
+Optimization scope approval is pending; R8 remains open for
 observable host evidence as access permits.
 Runtime upgrade recovery requires a
 design decision before implementation.
 
-Published release: `v0.9.7`. Release candidate: `v0.10.0` (not published).
-Publication of `v0.9.7` is verified, not native installation
-or activation. This roadmap describes work beyond the published
-baseline's scoped verification, not an instruction to reopen completed repairs or automatically
-change existing installations. See
+Release version: `v0.10.0`. Native installation and activation are separate
+from release verification. This roadmap tracks pending work, not an instruction
+to reopen completed repairs or change existing installations automatically. See
 [installation sources](docs/install.md#installation-sources) for the distinction.
 Current verification belongs in [testing](docs/testing.md),
 [scenario evidence](docs/verification/README.md), and
@@ -29,8 +25,8 @@ Qualify approved changes through the
 [delivery gate](#verify-future-delivery-changes). Completed cross-repository
 recovery and synchronization are archived; they do not add ongoing operations
 to this backlog.
-The [0.9.7 release record](archive/verification/release-0.9.7/README.md) owns
-the exact source, same-commit gates, payload, browser and public Mall evidence.
+The [0.10.0 verification record](docs/verification/0.10.0-candidate.md) tracks
+the release evidence and its limits.
 Await the user's manual installation result; do not infer it from publication.
 
 ### Review cross-domain optimization scope
@@ -215,7 +211,7 @@ retains the original failures and controls. The bundled Interaction Lab now
 demonstrates separate highlight, viewport, and population state, with
 [offline acceptance evidence](docs/testing.md#flint-111-source-migration).
 That example reloads a prevalidated board on filter changes; it does not
-verify in-place updates via Flint's application API. Published ONE `0.9.7`
+verify in-place updates via Flint's application API. The earlier ONE `0.9.7`
 and the active runtime were not changed. Native App UI and supported-host
 parity remain unverified.
 
