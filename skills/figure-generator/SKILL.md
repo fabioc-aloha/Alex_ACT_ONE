@@ -55,7 +55,7 @@ console.log(`Wrote ${OUT_PATH} (data-sha256: ${dataHash.slice(0, 12)}...)`);
 
 ### Why hand-authored and not a rendering library
 
-- **Layout math is exact.** Statistical-chart libraries (Vega-Lite, ECharts, Chart.js via the `flint-chart` MCP server) own final geometry — they stretch within a `baseSize` ceiling and return their own `computedSize`. Print-legibility gates and bounds gates need the generator to own layout, not the renderer.
+- **Layout math is exact.** Flint renderers own final geometry: `baseSize` is a target and `canvasSize` is a ceiling. Check the returned `computedSize` and actual render rather than treating either input as exact print geometry. For figures that must meet exact print bounds and legibility gates, the generator owns the layout.
 - **Regen is byte-stable.** Given the same dataset, a hand-authored generator produces byte-identical output. That is what makes `data-sha256` a useful audit hash.
 - **Debugging is easier.** When a figure looks wrong, `console.log()` inside the generator shows exactly the numbers it saw. A renderer failure hides behind opaque layout errors.
 

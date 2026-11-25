@@ -8,7 +8,7 @@ lastReviewed: 2026-08-15
 
 Frame the chart before you pick it. A chart is a rhetorical act — it makes an argument about the data. If you can't state the argument in one sentence, the chart type will be wrong no matter how it's rendered.
 
-This skill produces a **Chart Brief** — a short structured record of Big Idea + intent + story arc + audience + style stance + theme / tone stance — which then feeds the `flint-chart` skill's §0.2 selection table.
+This skill produces a **Chart Brief** — a short structured record of Big Idea + intent + story arc + audience + style stance + theme / tone stance — for Flint's [chart selection reference](../flint-chart/references/chart-selection.md).
 
 **Scope.** Steps 0, 1, and 3 — read the context, state the claim in one sentence, read the audience — apply to **any** communication artifact: a slide, a memo, a diagram, a report section. Steps 2, 4, and 5 are chart machinery, which is why this skill is chart-named. If you are framing something that is not a chart, run Steps 0–1 and 3 and stop there.
 
@@ -124,7 +124,7 @@ curriculum, absorbed into this plugin.
 
 ## Step 2: Story arc
 
-Once the Big Idea is written, classify the story arc. This narrows chart families before `flint-chart` §0.2 fires:
+Once the Big Idea is written, classify the story arc. This narrows the chart families in the [chart selection reference](../flint-chart/references/chart-selection.md):
 
 | Story arc                | What it argues                                 | Chart-family shortlist                                  |
 | ------------------------ | ---------------------------------------------- | ------------------------------------------------------- |
@@ -230,10 +230,10 @@ Output a compact brief (fits in one message, ~10 lines) that the `flint-chart` s
 - **Theme / tone stance**: <e.g. restrained editorial, playful explainer, technical instrument, executive deck>
 - **Suggested chartType(s)**: <1-2 from the Step 4 crosstab>
 - **Alternates considered**: <1-2 the crosstab surfaced but you didn't pick, with why>
-- **Anti-patterns to avoid**: <call out any per flint-chart §0.3 that this brief risks>
+- **Anti-patterns to avoid**: name any risks from the [chart selection reference](../flint-chart/references/chart-selection.md).
 ```
 
-Then invoke `flint-chart` §0.2 with the brief as context. The brief locks the framing; §0.2 handles the mechanical chartType lookup + Flint coverage check.
+Then hand the brief to [Flint chart authoring](../flint-chart/SKILL.md) for selection. The brief preserves the framing; the installed Flint catalog confirms the exact chart type and backend support.
 
 For a standalone Vega-Lite chart, the Big Idea becomes `chart_spec.title` and
 the measurement context becomes `chart_spec.subtitle`. This preserves the claim
@@ -273,7 +273,7 @@ when the chart travels without the surrounding prose.
 
 - `big-idea` (Alex ACT Core) — the generalized Big Idea distillation for any summary-shaped output. `chart-big-idea` is the chart-specific specialization.
 - [`chart-vocabulary`](../chart-vocabulary/SKILL.md) — 7-goal catalog + CSAR override table. Consumed by Step 5 (Chart Brief) to pick a chart type once the Big Idea is locked; also consumed by the selection tree in `chart-vocabulary` Module 5 which delegates back here for Step 1.
-- [`flint-chart`](../flint-chart/SKILL.md) — §0.2 chart-family-before-type + `ChartAssemblyInput` authoring. Consumes the Chart Brief.
+- [`flint-chart`](../flint-chart/SKILL.md) — uses the Chart Brief for selection and `ChartAssemblyInput` authoring.
 - [`render-verify`](../render-verify/SKILL.md) — post-render check + Prose-coupling check for the shipped figure.
 - [`print-svg-style-guide`](../print-svg-style-guide/SKILL.md) — how figures LOOK once framing (this skill) is locked. Canvas + typography + palette + composition idioms.
 - [`figure-generator`](../figure-generator/SKILL.md) — deterministic engineering discipline for shipping figures backed by real datasets.

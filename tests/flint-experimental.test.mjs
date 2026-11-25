@@ -5,7 +5,8 @@ import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const output = join(ROOT, 'docs', 'flint-experimental.html');
+const resources = join(ROOT, 'skills', 'flint-chart', 'resources');
+const output = join(resources, 'flint-experimental.html');
 
 function document() {
     assert.ok(existsSync(output), 'Keep the editorial gallery and create a separate interaction lab');
@@ -20,7 +21,7 @@ function gallery() {
 
 test('experimental page is a distinct offline lab, not a replacement for the editorial gallery', () => {
     const html = document();
-    assert.ok(existsSync(join(ROOT, 'docs', 'flint-showcase.html')));
+    assert.ok(existsSync(join(resources, 'flint-showcase.html')));
     assert.match(html, /data-mode="experimental"/);
     assert.match(html, /Interaction lab/);
     assert.match(html, /flint-showcase\.html/);
@@ -32,8 +33,8 @@ test('experimental page is a distinct offline lab, not a replacement for the edi
 test('lab uses less-conventional actual chart types and meaningful gesture contracts', () => {
     const data = gallery();
     assert.equal(data.mode, 'experimental');
-    assert.equal(data.version, '1.0.1');
-    assert.equal(data.samples.length, 7);
+    assert.equal(data.version, '1.1.1');
+    assert.ok(data.samples.some(sample => sample.id === 'application-state'));
     assert.deepEqual(data.themes.map(theme => theme.id), ['swiss', 'pop', 'de-stijl']);
     const types = data.samples.flatMap(sample =>
         sample.input.chart ? [sample.input.chart.chart_spec.chartType] : sample.input.board.charts.map(chart => chart.chart_spec.chartType));
@@ -52,10 +53,12 @@ test('lab uses less-conventional actual chart types and meaningful gesture contr
             assert.ok(sample.inputs[theme.id]);
             for (const chart of sample.inputs[theme.id].chart ? [sample.inputs[theme.id].chart] : sample.inputs[theme.id].board.charts) {
                 if (['Bump Chart', 'Connected Scatter Plot', 'ECDF Plot'].includes(chart.chart_spec.chartType)) {
-                    assert.deepEqual(chart.theme_spec, { extends: theme.id,
+                    assert.deepEqual(chart.theme_spec, {
+                        extends: theme.id,
                         ink: { series: { minContrast: { fill: 3, stroke: 3 } } },
                         geometry: { point: { opacity: 1 } },
-                        dataLabels: { minContrast: 4.5 }, legend: { show: 'never' } });
+                        dataLabels: { minContrast: 4.5 }, legend: { show: 'never' }
+                    });
                 }
             }
         }
@@ -71,8 +74,11 @@ test('reader-driven story beats are real prevalidated ChartUpdate layers, not a 
         assert.ok(step.input.chart.updates.some(layer => layer.ops.length));
         for (const theme of data.themes) {
             const result = step.results[theme.id];
-            assert.ok(result._meta.flint.board);
-            assert.ok(result.content.some(item => item.type === 'text' && /✓/.test(item.text)));
+            const board = result.structuredContent?.flint?.board || result._meta?.flint?.board;
+            assert.ok(board, 'Expected the live story step to have drawable state');
+            for (const layer of step.input.chart.updates) {
+                assert.ok(JSON.stringify(board).includes(layer.id), `Missing update layer ${layer.id}`);
+            }
         }
     }
     assert.match(document(), /id="step-select"/);
@@ -97,4 +103,20 @@ test('cohort instructions describe the rendered toggle buttons rather than nonex
     assert.doesNotMatch(lens.description + ' ' + lens.tryIt, /checkbox|uncheck/i);
     assert.match(lens.tryIt, /select.*team|click.*team/i);
     assert.match(lens.tryIt, /All/);
+});
+
+test('application state sample separates linked focus, period zoom and metric filtering', async () => {
+    const { createExperimentalSamples } = await import('../scripts/build-flint-showcase.mjs');
+    const sample = createExperimentalSamples().find(item => item.id === 'application-state');
+    assert.ok(sample, 'Missing application-state experiment');
+    const { board } = sample.input;
+    assert.deepEqual(board.link_spec.fields, ['cohort']);
+    assert.equal(board.charts.length, 2);
+    assert.ok(board.charts[0].interaction_spec.interactions.some(item => item.type === 'brush-zoom' && item.options.axes === 'x'));
+    const baseline = board.charts[0].data.values;
+    const filtered = sample.steps[0].input.board.charts;
+    assert.deepEqual(board.charts[1].data.values, baseline);
+    assert.deepEqual(filtered[0].data.values, baseline.filter(row => row.cohort !== 'Kite'));
+    assert.deepEqual(filtered[1].data.values, filtered[0].data.values);
+    assert.equal(sample.metric.field, 'cost');
 });

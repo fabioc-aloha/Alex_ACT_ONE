@@ -51,8 +51,10 @@ function conversionFixture(t) {
 function convert(skill, directory, source, output, args = [], overrides = {}) {
     return spawnSync(process.execPath, [
         path.join(ROOT, 'skills', skill, 'scripts', skill + '.cjs'), source, output, ...args,
-    ], { cwd: directory, encoding: 'utf8', timeout: 30000,
-        env: { ...process.env, TMP: directory, TEMP: directory, TMPDIR: directory, ...overrides } });
+    ], {
+        cwd: directory, encoding: 'utf8', timeout: 30000,
+        env: { ...process.env, TMP: directory, TEMP: directory, TMPDIR: directory, ...overrides }
+    });
 }
 
 test('real Pandoc DOCX media survive extraction cleanup with original PNG bytes', {
@@ -344,8 +346,10 @@ test('real detached Word converter loads the documented shared closure and creat
     fs.writeFileSync(source, '# Detached fixture\n\nLiteral `const one = 1`.\n');
     const result = spawnSync(process.execPath, [path.join(converterDir, 'md-to-word.cjs'), source, output], {
         cwd: unrelated, encoding: 'utf8', timeout: 30000,
-        env: { ...process.env, TMP: directory, TEMP: directory, TMPDIR: directory,
-            ALEX_ACT_ONE_RUNTIME_ROOT: path.join(directory, 'isolated-runtime') },
+        env: {
+            ...process.env, TMP: directory, TEMP: directory, TMPDIR: directory,
+            ALEX_ACT_ONE_RUNTIME_ROOT: path.join(directory, 'isolated-runtime')
+        },
     });
     assert.equal(result.status, 0, result.stderr + result.stdout);
     assert.ok(fs.statSync(output).size > 0);
@@ -366,6 +370,10 @@ test('Word accepts only a fresh successful Mermaid render and embeds its current
     const renderer = path.join(directory, 'renderer.cjs');
     fs.writeFileSync(renderer, [
         "const fs = require('node:fs'); const assert = require('node:assert/strict');",
+        "const args = process.argv.slice(2);",
+        "assert.ok(!args.includes('-w') && !args.includes('-H'), 'Mermaid CLI 12 removed viewport flags');",
+        "const targetPixels = Number(args[args.indexOf('--size') + 1]) * Number(args[args.indexOf('-s') + 1]);",
+        "assert.equal(targetPixels, 4800, 'keep print resolution within the PNG validation budget');",
         "const input = process.argv[process.argv.indexOf('-i') + 1];",
         "const output = process.argv[process.argv.indexOf('-o') + 1];",
         "assert.match(fs.readFileSync(input, 'utf8'), /A\\[Current\\] --> B\\[New\\]/);",
@@ -380,6 +388,51 @@ test('Word accepts only a fresh successful Mermaid render and embeds its current
     const embedded = fs.readdirSync(path.join(media, 'media')).filter(name => name.endsWith('.png'));
     assert.equal(embedded.length, 1);
     assert.deepEqual(fs.readFileSync(path.join(media, 'media', embedded[0])), PNG);
+});
+
+test('HTML embeds the requested Mermaid PNG using the Mermaid CLI 12 sizing option', {
+    skip: pandoc ? false : 'Pandoc unavailable: HTML image embedding not exercised',
+}, t => {
+    const directory = conversionFixture(t);
+    const source = path.join(directory, 'source.md');
+    const output = path.join(directory, 'output.html');
+    const renderer = path.join(directory, 'renderer.cjs');
+    fs.writeFileSync(source, '# Diagram\n\n```mermaid\nflowchart TD\nA --> B\n```\n');
+    fs.writeFileSync(renderer, [
+        "const fs = require('node:fs'); const assert = require('node:assert/strict');",
+        "const args = process.argv.slice(2);",
+        "assert.ok(!args.includes('-w') && !args.includes('-H'), 'Mermaid CLI 12 removed viewport flags');",
+        "assert.equal(args[args.indexOf('--size') + 1], '1200');",
+        `fs.writeFileSync(args[args.indexOf('-o') + 1], Buffer.from('${PNG.toString('base64')}', 'base64'));`,
+    ].join('\n'));
+    const result = convert('md-to-html', directory, source, output, ['--mermaid-png'], { ACT_TOOL_MMDC: renderer });
+    assert.equal(result.status, 0, result.stderr + result.stdout);
+    assert.ok(fs.readFileSync(output, 'utf8').includes(`data:image/png;base64,${PNG.toString('base64')}`));
+
+    fs.writeFileSync(renderer, "console.error('fixture browser unavailable'); process.exit(1);\n");
+    const previousOutput = fs.readFileSync(output);
+    const failed = convert('md-to-html', directory, source, output, ['--mermaid-png'], { ACT_TOOL_MMDC: renderer });
+    assert.notEqual(failed.status, 0);
+    assert.match(failed.stderr, /fixture browser unavailable/);
+    assert.deepEqual(fs.readFileSync(output), previousOutput);
+    const fallback = convert('md-to-html', directory, source, output, ['--mermaid-fallback'], { ACT_TOOL_MMDC: renderer });
+    assert.equal(fallback.status, 0, fallback.stderr + fallback.stdout);
+    assert.match(fs.readFileSync(output, 'utf8'), /<table\b/);
+});
+
+test('Word reports an SVG renderer failure without replacing the previous document', t => {
+    const directory = conversionFixture(t);
+    const source = path.join(directory, 'source.md');
+    const output = path.join(directory, 'output.docx');
+    const renderer = path.join(directory, 'renderer.cjs');
+    fs.writeFileSync(source, '# Diagram\n\n![Example](example.svg)\n');
+    fs.writeFileSync(path.join(directory, 'example.svg'), '<svg xmlns="http://www.w3.org/2000/svg"/>');
+    fs.writeFileSync(output, 'previous document');
+    fs.writeFileSync(renderer, "console.error('fixture SVG browser unavailable'); process.exit(1);\n");
+    const result = convert('md-to-word', directory, source, output, [], { ACT_TOOL_SVGEXPORT: renderer });
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /fixture SVG browser unavailable/);
+    assert.equal(fs.readFileSync(output, 'utf8'), 'previous document');
 });
 
 test('shared image paths decode once, honor HTML entities, and ignore URL query/fragment suffixes', t => {
@@ -406,9 +459,9 @@ for (const mode of ['missing-media', 'pandoc-failure']) {
         fs.writeFileSync(hook, mode === 'pandoc-failure'
             ? "process.stderr.write('fixture Pandoc failed'); process.exit(23);"
             : "const fs = require('node:fs'); const path = require('node:path'); " +
-              "const root = process.argv[process.argv.indexOf('--extract-media') + 1]; " +
-              "fs.writeFileSync(process.argv[process.argv.indexOf('-o') + 1], " +
-              "'![Missing](<' + path.join(root, 'media', 'missing.png').replace(/\\\\/g, '/') + '>)');");
+            "const root = process.argv[process.argv.indexOf('--extract-media') + 1]; " +
+            "fs.writeFileSync(process.argv[process.argv.indexOf('-o') + 1], " +
+            "'![Missing](<' + path.join(root, 'media', 'missing.png').replace(/\\\\/g, '/') + '>)');");
         const result = convert('docx-to-md', directory, source, output, [], { ACT_TOOL_PANDOC: hook });
         assert.notEqual(result.status, 0);
         assert.match(result.stderr, mode === 'pandoc-failure' ? /fixture Pandoc failed/ : /missing.png|ENOENT/);

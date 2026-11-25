@@ -7,7 +7,7 @@ import { Script } from 'node:vm';
 import { test } from 'node:test';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const output = join(ROOT, 'docs', 'flint-showcase.html');
+const output = join(ROOT, 'skills', 'flint-chart', 'resources', 'flint-showcase.html');
 
 function document() {
     assert.ok(existsSync(output), 'Missing the requested offline Flint showcase');
@@ -39,7 +39,7 @@ test('showcase embeds the actual pinned App UI and preserves third-party notices
     const html = document();
     const runtime = dataBlock(html, 'flint-runtime');
     const gallery = dataBlock(html, 'showcase-data');
-    assert.equal(gallery.version, '1.0.1');
+    assert.equal(gallery.version, '1.1.1');
     assert.match(runtime, /ui\/initialize/);
     assert.match(runtime, /ontoolresult/);
     assert.match(runtime, /<div id="root">/);
@@ -70,9 +70,27 @@ test('samples cover chart families, semantic types, gestures, themes, state upda
         }
     }
     assert.ok(samples.some(sample => sample.input.chart?.updates?.length));
+    assert.ok(samples.find(sample => sample.id === 'updates').input.chart.updates
+        .some(layer => layer.ops.some(operation => operation.op === 'annotate-text')));
     assert.ok(samples.some(sample => sample.input.board?.link_spec?.fields.length));
     assert.ok(samples.some(sample => sample.input.chart?.interaction_spec?.interactions.some(item => item.type === 'brush-zoom')));
     assert.ok(samples.some(sample => sample.input.chart?.semantic_types?.month === 'YearMonth'));
+});
+
+test('the offline gallery includes attributed country and city maps', () => {
+    const { samples, themes } = dataBlock(document(), 'showcase-data');
+    for (const [id, chartType, label] of [
+        ['country-map', 'Choropleth', 'Canada'], ['city-map', 'Map', 'Toronto'],
+    ]) {
+        const sample = samples.find(item => item.id === id);
+        assert.ok(sample, `Missing ${id} example`);
+        assert.equal(sample.input.chart.chart_spec.chartType, chartType);
+        assert.match(sample.preview, /World Bank Official Boundaries/i);
+        assert.match(sample.preview, new RegExp(label));
+        for (const theme of themes) {
+            assert.equal(sample.results[theme.id].isError, undefined);
+        }
+    }
 });
 
 test('one semantic input is actually rendered by the three supported MCP backends', () => {
@@ -97,9 +115,11 @@ test('legend-toggle examples keep a persistent visible key across editorial them
         sample.input.chart?.interaction_spec?.interactions.some(item => item.type === 'legend-toggle'))) {
         for (const theme of data.themes) {
             assert.deepEqual(sample.inputs[theme.id].chart.theme_spec,
-                { extends: theme.id, ink: { series: { minContrast: { fill: 3, stroke: 3 } } },
+                {
+                    extends: theme.id, ink: { series: { minContrast: { fill: 3, stroke: 3 } } },
                     geometry: { point: { opacity: 1 } },
-                    dataLabels: { minContrast: 4.5 }, legend: { show: 'always', placement: ['top'] } },
+                    dataLabels: { minContrast: 4.5 }, legend: { show: 'always', placement: ['top'] }
+                },
                 `${sample.id}/${theme.id} must retain a key after a series is hidden`);
         }
     }
@@ -148,7 +168,7 @@ test('gallery generation is reproducible and pinned rather than fetching a movin
     assert.match(source, /render_chart/);
     assert.match(source, /--check/);
     assert.doesNotMatch(source, /\bnpx\b|\bnpm install\b|\bfetch\s*\(/);
-    assert.match(readFileSync(join(ROOT, 'README.md'), 'utf8'), /docs\/flint-showcase\.html/);
+    assert.match(readFileSync(join(ROOT, 'README.md'), 'utf8'), /skills\/flint-chart\/resources\/flint-showcase\.html/);
 });
 
 test('stale artifact diagnostics identify a bounded first difference instead of hiding the cause', async t => {

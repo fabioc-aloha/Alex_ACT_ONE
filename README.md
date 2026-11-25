@@ -6,21 +6,10 @@
 
 Alex ACT ONE is a pack of skills for GitHub Copilot that changes how the agent works: frame the problem before solving it, look for evidence against its first answer, check a plan against its risks, and verify what it produced before calling it done.
 
-## Repository mission
-
-This source repository **maintains and ships Alex ACT ONE**. It owns the
-plugin's capabilities, runtime helpers, documentation, compatibility tests,
-packaging, and verified releases. The [roadmap](ROADMAP.md) is the product
-backlog; the [release checklist](RELEASE-CHECKLIST.md) governs delivery.
-
-Lessons from incidents become reusable safeguards and regression tests.
-Adopter projects retain their own files and operations; completed recovery work
-is historical evidence, not an ongoing service or this repository's backlog.
-
 **Try the discipline:** "Our dashboard takes 8 seconds to load. Rust rewrite, or Redis caching?" The comparison below is illustrative: these are hypotheses to test, not recorded outcomes. Try it yourself with [the evaluation guide](docs/launch/evaluation-guide.md).
 
-|  | Possible unexamined response | Response to look for |
-|---|---|---|
+| Step | Possible unexamined response | Response to look for |
+| --- | --- | --- |
 | First move | Jumps straight to an answer | Stops and checks the question first |
 | The answer | Picks Rust or Redis, and sounds sure | Asks where the 8 seconds are actually spent |
 | Evidence | Does not ask for any | Says what to measure, and what result would change the answer |
@@ -31,59 +20,25 @@ is historical evidence, not an ongoing service or this repository's backlog.
 
 ### Quick install
 
-If Alex Mall is not already registered, add it first:
+Install **Alex ACT ONE** from Alex Mall, then follow
+[your first session](docs/getting-started.md) to preview activation and try a
+reasoning skill. Installing the plugin does not activate the always-on
+instructions. For terminal commands, see [Manual installation](#appendix-manual-installation).
 
-```powershell
-copilot plugin marketplace add fabioc-aloha/Alex_Skill_Mall
-```
+**Skip optional setup until you need it.** Core skills, including the first-session
+exercise, need no extra tools or API tokens. When a missing dependency blocks the
+requested output, the skill checks for a supported fallback. If none fits, Setup
+Dependencies checks what's missing and asks before installing anything. See
+[optional tools](docs/install.md#optional-extra-tools-for-a-few-skills).
 
-Install the reviewed release:
+**Release version: `v0.9.7`.** This README also describes current source features
+where noted. See [installation sources](docs/install.md#installation-sources)
+and [host support](docs/install.md#where-alex-act-one-works) before switching apps.
 
-```powershell
-copilot plugin install alex-act-one@alex-mall
-```
+Try the [offline Flint chart gallery](skills/flint-chart/resources/flint-showcase.html) for semantic data, maps, themes, interactions, linked views, and static exports, or the [experimental interaction lab](skills/flint-chart/resources/flint-experimental.html) for polar brushing, direct reordering, distribution shapes, and reader-driven stories. Both ship with the Flint chart skill and open in a browser without a server or connection.
 
-Then follow [your first session](docs/getting-started.md) for preview-first
-activation, verification, and a read-only critical-thinking exercise. Installation
-alone does not turn on the always-on instructions. No optional runtime tools or
-API tokens are needed for that workflow.
-
-Direct repository installs still work but are deprecated; they are not the
-recommended onboarding path. The [install and host reference](docs/install.md)
-covers temporary candidate testing, Scout setup, and optional tools.
-Already set up? Browse the
-[skill catalog](#the-skills).
-
-**Release version: `v0.9.7`**, prepared 2026-11-09. This release combines plugin
-installation, owned-instruction bootstrap and capability tools in one root
-helper. Default mode reports status; only `-Apply` installs or activates.
-Dependency pins and launchers come from the installed plugin, with guarded
-setup for missing Windows Pandoc and selected-Python Pillow. Core reasoning
-does not require the full tool set. Reviewed npm pins remain unchanged from
-`0.9.6`; macOS installation support is planned, not certified.
-
-Existing installations do not update automatically. Use the reviewed Mall
-release, verify the loaded version/root, and preview activation again before
-approving profile changes. The [install reference](docs/install.md#installation-sources)
-separates package delivery, activation, and optional runtime provisioning.
-Earlier installed CLI/VS Code observations and current browser evidence have
-[documented limits](docs/verification/README.md); Scout and Copilot app behavior
-is **not freshly verified** for this release. The
-[release record](archive/verification/release-0.9.7/README.md) separates
-publication from the user's manual installation; no local activation is claimed.
-
-The [storage contract](skills/proactive-awareness/references/project-artifact-storage.md)
-and its checker support reliable artifact delivery. They do not constitute
-host-enforced filesystem isolation. Incident and recovery history is maintained
-separately from the product's user documentation and runtime package.
-
-Try the [offline Flint chart gallery](docs/flint-showcase.html) for working examples of semantic data, themes, interactions, linked views, and static exports, or the [experimental interaction lab](docs/flint-experimental.html) for polar brushing, direct reordering, distribution shapes, and reader-driven stories. Open either downloaded HTML in a browser; no server or connection is needed.
-
-The [documentation index](docs/README.md) separates user guides and reusable
-verification from maintainer history. The [lean package contract](docs/package.md)
-defines the `package/alex-act-one` release payload and its exact-file checks.
-Release publication, Mall selection and local installation are verified
-separately; a generated directory or version string is not delivery evidence.
+Browse the [skill catalog](#the-skills), [install and host reference](docs/install.md),
+or [documentation index](docs/README.md).
 
 ### Source package inventory
 
@@ -205,7 +160,7 @@ Deciding what to draw, drawing it, and checking it says what you meant.
 | [`flint-theme`](skills/flint-theme/SKILL.md) | Creates and refines reusable Flint ThemeSpec visual systems from brand guidance, websites, decks, design tokens, or publication references. Use when a user asks for a custom... | Flint MCP |
 | [`ascii-chart`](skills/ascii-chart/SKILL.md) | Render charts and compact dashboards as pure ASCII in a monospace grid: bar, dot, sparkline, histogram, box plot, scatter, bubble, heatmap, funnel, waterfall, treemap, gauge,... | Node only |
 | [`print-svg-style-guide`](skills/print-svg-style-guide/SKILL.md) | Author print-quality SVG figures for books, reports, and exec-facing documents: canvas and typography grammar with a legibility floor, a semantic color palette where color... | Node only |
-| [`figure-generator`](skills/figure-generator/SKILL.md) | Ship deterministic hand-authored SVG generators for print-quality figures backed by real published datasets. Ships the .mjs generator pattern reading from data/<slug>.json, the... | Node only |
+| [`figure-generator`](skills/figure-generator/SKILL.md) | Ship deterministic hand-authored SVG generators for print-quality figures backed by real published datasets. Ships the .mjs generator pattern reading from data/&lt;slug&gt;.json, the... | Node only |
 | [`svg-banner`](skills/svg-banner/SKILL.md) | Generate 1200x320 SVG banners for READMEs, plans, notes, and release artifacts, using a pluggable brand config that any project can override. Use when a document needs a hero... | Node only |
 | [`markdown-mermaid`](skills/markdown-mermaid/SKILL.md) | Author Mermaid diagrams that render correctly in GitHub, VS Code, and Mermaid 10+ consumers. Applies a config-driven init directive + linkStyle + semantic classDef vocabulary... | Node only |
 | [`annotate-screenshot`](skills/annotate-screenshot/SKILL.md) | Add callouts to a raster you did not author, using Pillow, at a resolution that stays legible. Covers upscale-then-annotate ordering, supersampled shape rendering, measured... | Pillow |
@@ -319,43 +274,15 @@ canonical installed plugin; the bootstrap preview exposes
 
 <!-- END GENERATED INSTRUCTION TABLE -->
 
-## Native-first skill optimization
-
-Instructions carry the trigger and essential guardrails. Prompts are thin
-entrypoints. Skills own the procedure, output contract, and verification;
-selectively loaded references hold the detailed checklists and examples.
-Native planning, session history, review execution, and browser tools provide
-mechanics where available without replacing approval or evidence requirements.
-
-For material quantitative claims, the
-[deterministic-check contract](skills/anti-hallucination/SKILL.md#deterministic-checks)
-uses tested scripts, formulas, or queries. The semantic layer still chooses the
-question, units, and interpretation. Task-local checks are not cross-session
-skill telemetry or behavioral scoring.
-
-| Workflow family | Canonical execution owner | Boundary kept separate |
-| --- | --- | --- |
-| ACT, framing, adversarial reasoning, curation risk | [critical-thinking](skills/critical-thinking/SKILL.md), with explicit modes | The [tenet canon](skills/act-tenets/SKILL.md) and compatibility skill names remain |
-| Ordinary, deep, and specialist review | [code-review](skills/code-review/SKILL.md), with selected references | [Debugging](skills/systematic-debugging/SKILL.md) investigates and fixes a reproduced failure; review is read-only |
-| Central claim and audience | [big-idea](skills/big-idea/SKILL.md) | [chart-big-idea](skills/chart-big-idea/SKILL.md) still owns the Chart Brief, population, units, and treatment |
-| Format selection | [convert](skills/convert/SKILL.md) | Format-specific converters keep their scripts; producing an email never authorizes sending |
-| Project recovery | [proactive-awareness](skills/proactive-awareness/SKILL.md) | [project-status](skills/project-status/SKILL.md) is read-only; [meditation](skills/meditation/SKILL.md) has its own bounded write authority |
-| Brain-artifact authoring | [compile-brain](skills/compile-brain/SKILL.md) | [assess-brain](skills/assess-brain/SKILL.md) remains read-only; semantic preservation and user-selected source are required |
-
-Compatibility aliases and the legacy preview/receipt-based bootstrap remain.
-Native skill discovery is not evidence that native rules activated, and a
-workflow loaded by name is not proof that its checks ran. The
-[native-first plan and receipts](archive/plans/2026-11-04-native-first-copilot.md)
-record the dated comparison and rollout decisions. Smaller source files do
-not, by themselves, establish token, latency, or quality improvements.
-
 ## Flint charts and interaction demos
 
-The published runtime integration pins `flint-chart-mcp@1.0.1` and
-`flint-chart@1.0.1` independently. Flint supplies the version-matched chart,
-theme, interaction, and board grammar; ONE supplies framing, consent, and
-verification. Author the semantic input, validate it, and then use `show` for a
-live chart or board. Static rendering and backend compilation remain separate.
+Current source and its demos pin `flint-chart-mcp@1.1.1` and `flint-chart@1.1.1`.
+The published `0.9.7` package retains its exact `1.0.1` pair. Keep those
+runtimes separate. Flint supplies the version-matched chart, theme, interaction,
+board, and application guidance; ONE supplies framing, consent, and verification.
+Use `show` for a validated live chart or board on a client with App UI. Static
+exports, backend JSON, and integration into application code are separate paths.
+See the [Flint delivery and integration guidance](skills/flint-chart/SKILL.md).
 
 The [flint-interactions](skills/flint-interactions/SKILL.md) workflow
 distinguishes reader gestures (`interaction_spec`), initial or agent-authored
@@ -366,36 +293,19 @@ prove that an interaction works.
 
 | Offline page | What it demonstrates |
 | --- | --- |
-| [Editorial gallery](docs/flint-showcase.html) | Comparison, time series, composition, relationships, distributions, heatmaps, initial state, and a linked board |
-| [Experimental interaction lab](docs/flint-experimental.html) | Connected trajectories, ridgelines, polar brushing, draggable ordering, cohort/range filters, story beats, and three coordinated views |
+| [Editorial gallery](skills/flint-chart/resources/flint-showcase.html) | Comparison, time series, composition, relationships, distributions, heatmaps, maps, initial state, and a linked board |
+| [Experimental interaction lab](skills/flint-chart/resources/flint-experimental.html) | Connected trajectories, polar brushing, draggable ordering, story beats, linked views, and separate highlight, zoom, and population filters |
 
-Both pages embed the pinned App UI, synthetic data, theme choices, inspectable
-starting specs, and static exports from Vega-Lite, ECharts, and Chart.js.
-Opening the HTML needs no server, installation, or network connection.
-Rebuilding requires the reviewed isolated demo build environment, including
-the renderer/protocol pins in [the verification guide](docs/testing.md); the
-[builder](scripts/build-flint-showcase.mjs) never installs or fetches packages.
-The live viewer is Vega-Lite: the static backend comparison does not imply
-theme or interaction parity across backends.
+In **Separate highlight, zoom, and filter**, highlighting a team preserves the
+data, zooming changes the period axis, and filtering recomputes total cost.
+The [application-state guide](skills/flint-interactions/references/application-state.md)
+explains how to apply the same pattern in an app. The offline lab reloads a
+prevalidated board when the population changes; it does not run live queries.
 
-```powershell
-node scripts\build-flint-showcase.mjs
-node scripts\build-flint-showcase.mjs --experimental
-node scripts\build-flint-showcase.mjs --check
-node scripts\build-flint-showcase.mjs --experimental --check
-```
-
-Internal-browser checks on 2026-11-05 covered the sample/theme/story combinations,
-targeted pointer and keyboard interactions, linked selections, and responsive
-board layout. They do not certify every preset, browser, or accessibility path.
-Saving a downloaded spec through the integrated browser remains unverified:
-the host did not expose a download event during that check.
-
-The [repeatable offline browser gate](docs/verification/flint-browser.md)
-subsequently verified actual saved JSON, semantic linked recipients, reset,
-responsive relayout, keyboard feedback, and sampled shell/focus contrast in
-headless Edge. The pages now carry deterministic build provenance. This is
-local browser evidence, not proof of a live Copilot skill invocation.
+Both pages open offline and include synthetic data, inspectable starting specs,
+and static exports from Vega-Lite, ECharts, and Chart.js. The live viewer uses
+Vega-Lite. Native App UI support depends on the host and remains unverified for
+the source Flint 1.1.1 runtime.
 
 ## Check a draft or rewrite it
 
@@ -441,14 +351,7 @@ putting it.
 Safe to run, correct, and worth relying on are three separate questions. A trust
 score answers none of them.
 
-The usual path installs first and asks later:
-
-```bash
-copilot plugin install copilot-sdk@alex-mall
-```
-
-That gives a package access to your agent environment on the strength of a
-description. This reads it first:
+Ask the skill to read the plugin before you install it:
 
 ```text
 Evaluate copilot-sdk@alex-mall before I install it.
@@ -464,18 +367,16 @@ wrong.
 
 ## Where Alex ACT ONE Works
 
-The [host delivery table and dated observations](docs/install.md#where-alex-act-one-works)
-now live in the install reference. Supported delivery is not fresh activation
-evidence for every host.
+See the [host support table](docs/install.md#where-alex-act-one-works) for
+Copilot CLI, VS Code, the GitHub Copilot app, and Scout.
 
 ## Install
 
-Start with [your first session](docs/getting-started.md). The links below retain
-the previous section destinations for existing bookmarks.
+Start with [your first session](docs/getting-started.md).
 
 ### 1. Install the plugin
 
-See [Mall installation and deprecated source testing](docs/install.md#1-install-the-plugin).
+See [Mall installation](docs/install.md#1-install-the-plugin).
 
 ### 2. Turn on the always-on instructions, once in each app
 
@@ -495,149 +396,86 @@ See [Scout registration, shared-root checks, and restart requirements](docs/inst
 
 ### Optional: extra tools for a few skills
 
-See [optional tools, runtime readiness, and registry policy](docs/install.md#optional-extra-tools-for-a-few-skills).
+Skip this step unless a task needs an extra tool. See
+[optional tools and fallbacks](docs/install.md#optional-extra-tools-for-a-few-skills).
+
+## Maintainer documentation
+
+See the [roadmap](ROADMAP.md), [testing guide](docs/testing.md), and
+[release checklist](RELEASE-CHECKLIST.md).
+
+## Appendix: Manual installation
+
+### Install from Alex Mall in a terminal
+
+Run the first command only if Alex Mall is not already registered:
+
+```powershell
+copilot plugin marketplace add fabioc-aloha/Alex_Skill_Mall
+copilot plugin install alex-act-one@alex-mall
+```
+
+Then [preview activation in the app you use](docs/getting-started.md#2-activate).
+No optional dependencies are needed to try a core skill. Direct repository
+installation is deprecated and can select unreleased source.
 
 ### Scripts for reinstalling and optional setup
 
-Use a standalone terminal outside the attached agent session, from this checkout.
-Close apps that can lock or cache the old plugin. The
-[unified setup helper](install-and-check.ps1) now has two source-checkout modes:
-the default registers Alex Mall if missing, refreshes only its catalog, and
-reports the installed/latest plugin and dependency versions. Other marketplaces,
-including Agency, and their plugins/MCP configuration are not updated.
-It does not install plugins or tools or activate instructions. Add `-Apply`
-to install/update the latest Mall release, bootstrap its owned instructions
-with conflict checks, then set up its reviewed npm pins and missing Pandoc/Pillow.
-
-```powershell
-$ErrorActionPreference = 'Stop'
-.\install-and-check.ps1
-# After reviewing versions and installation scopes, close hosts that lock files:
-.\install-and-check.ps1 -Apply
-```
-
-This unified helper ships in `0.9.7`; the immutable `0.9.6` package retains
-its earlier helper interface. The helper follows the
-latest version advertised by Alex Mall, not the checkout's version. Default
-mode can change marketplace registrations/catalog caches. Dependency pins and
-launchers come from the installed plugin, never an unrelated checkout; when
-no plugin is installed, the default report labels checkout pins as planning only.
-
-The helper installs Flint, Playwright and JSZip privately, and Mermaid CLI/
-svgexport in npm's global prefix. Missing Pandoc uses Windows winget; missing
-Pillow uses the selected existing Python and its pip settings. Existing Pandoc
-and Pillow are checked, not silently upgraded. Python is not installed;
-missing prerequisites stop with guidance. Use `-PythonCommand` to select an
-existing interpreter. No registry changes, auto-elevation or policy bypasses occur.
-Core reasoning does not require the full tool set; it enables more capabilities.
-
-`-VerifyOnly` runs strict no-install package, launcher and renderer checks.
-It still performs the normal marketplace refresh. `-RuntimeRoot` overrides
-`ALEX_ACT_ONE_RUNTIME_ROOT`. Package presence alone is not renderer readiness.
-The plugin/bootstrap stage can succeed before a later dependency failure;
-that failure is not full setup success or transactional rollback.
-
-The checkout's installer now recognizes the configured
-`https://packagefeedproxy.microsoft.io/npm/` registry and previews its confirmed
-backend-prefix routing automatically. `-Apply` uses that routing for every
-private/global npm install with npm 12+. No extra proxy flag is needed.
-This behavior ships in `0.9.6`; the immutable `0.9.5` payload remains unchanged.
-
-Other registries are unchanged. To override the detected prefix or configure
-another confirmed backend, preview an explicit per-command routing prefix:
-
-```powershell
-$feed = 'https://ms-feed-25.pkgs.visualstudio.com/1es-public/_packaging/npm-public/npm/registry/'
-.\install-and-check.ps1 -RegistryTarballPrefix $feed
-.\install-and-check.ps1 -Apply -RegistryTarballPrefix $feed
-```
-
-`-RegistryTarballPrefix` takes precedence over detection. If a routed install
-still reports `EALLOWREMOTE`, stop and inspect the actual rejected URL; the
-helper does not retry or broaden routing. Do not change registries, enable
-remote fetching, or continue after an error.
-
-For renderer checks, the source helper reuses existing Windows Edge unless
-`-BrowserExecutablePath` or `PUPPETEER_EXECUTABLE_PATH` selects another browser.
-It prints the selection and verifies actual output without downloading a
-browser or enabling lifecycle scripts. Optional companion/Microsoft plugins
-remain separate opt-in workflows.
-See [all setup options and their write boundaries](docs/install.md#scripts-for-reinstalling-and-optional-setup).
-No bundled image-generation server is installed. Existing credentials, private
-packages, and manually configured external servers are not deleted. Restart the
-host after verified setup and check its MCP connectivity separately.
+Use the [PowerShell helper](install-and-check.ps1) when you deliberately want
+the combined installation, activation, and dependency setup. It is not the
+normal first-session path.
 
 #### Reinstall and verify ONE
 
-See [installation and verification](docs/install.md#reinstall-and-verify-one).
+From the checkout, start with the status report. It can register or refresh
+the marketplace, but it does not install the plugin or tools. Close hosts
+that may lock the files before applying an update.
+
+```powershell
+.\install-and-check.ps1
+# Only after reviewing the report and approving the changes:
+.\install-and-check.ps1 -Apply
+```
+
+`-Apply` installs or updates the Mall release, activates its instructions, and
+sets up that release's dependencies. It does not use the checkout's pins for
+an installed release. Setup can stop partway through; a successful plugin update
+does not mean every dependency is ready. Restart the host after an update.
 
 #### Install or check optional dependencies
 
-See [unified dependency reporting, apply, and verification](docs/install.md#install-or-check-optional-dependencies).
-
-## Tests
-
-### Generated documentation
-
-The README inventory and skill, prompt, and instruction tables are generated
-from current source metadata. The
-[documentation generator](scripts/update-docs.mjs) also checks manifest/disk
-parity and resolves every command/instruction owner before writing. It derives
-manifest instruction roles from canonical descriptions and checks those for drift.
-Descriptions are discovery summaries, not a second execution contract.
+Prefer the [Setup Dependencies skill](skills/setup-dependencies/SKILL.md#when-another-skill-is-blocked)
+when only one task is blocked. To preview full dependency setup without changing
+the plugin or activating instructions, run from the installed package root:
 
 ```powershell
-node scripts\update-docs.mjs --write
-node scripts\update-docs.mjs --check
-node --test tests\documentation.test.mjs tests\documentation-examples.test.mjs tests\onboarding.test.mjs tests\smoke.test.mjs tests\native-compatibility.test.mjs
-node skills\compile-brain\scripts\check-links.cjs README.md ROADMAP.md RELEASE-CHECKLIST.md docs\getting-started.md docs\install.md docs\testing.md
+.\install-and-check.ps1 -DependenciesOnly
 ```
 
-`--check` is read-only and fails on drift. When adding a skill, choose its
-reader-facing group in the generator rather than duplicating a workflow.
-Historical inventories and host observations remain dated snapshots.
+Add `-VerifyOnly` to check existing tools, or `-Apply` only after approving the
+plan. This mode is available in current source, not published `0.9.7`. For older
+packages or a single missing tool, follow the installed skill's guidance.
+For registry or MCP setup issues, see the
+[Setup Dependencies reference](skills/setup-dependencies/SKILL.md#mcp-servers).
+For a renderer that needs a compatible existing browser, rerun verification
+with `-BrowserExecutablePath` and the browser's absolute path.
 
-The focused checks cover the first-session guide, source/Mall delivery
-distinctions, preserved setup anchors, and disposable-profile activation signals.
-They do not run the documented installation commands or establish that a live
-host loaded instructions. See [the testing guide](docs/testing.md#onboarding-verification)
-for the boundary between file-state verification and a live first session.
+### Use skills in Claude Code
 
-### Full suite
+For skill-only use, copy the skills and their shared scripts into your Claude
+Code profile. Use `.claude/` in a project instead of `~/.claude/` to scope the
+copy to that project.
 
-```text
-node --test
+```bash
+git clone https://github.com/fabioc-aloha/Alex_ACT_ONE.git
+mkdir -p ~/.claude/skills ~/.claude/scripts
+cp -r Alex_ACT_ONE/skills/* ~/.claude/skills/
+cp -r Alex_ACT_ONE/scripts/* ~/.claude/scripts/
 ```
 
-The runner uses Node's built-in tests: no npm test framework or root
-`package.json` is required. Release verification also requires PowerShell, and
-the integration lane requires its reviewed runtime/converter tools. See
-[verification environments and gates](docs/testing.md) for the Windows/Linux
-Node 24/26 targets, strict no-skip policy, and safe executable-example checks.
-
-They assert the things this README states: that every MCP server starts and
-reports its pinned version, that activation runs and plans exactly what the
-manifest declares, that the manifest and the files on disk agree in both
-directions, that each skill and instruction carries the frontmatter its host
-reads, that the counts quoted above are real, and that no relative link is dead.
-
-The checks that need a provisioned runtime skip rather than fail when
-`setup-dependencies` has not been run, so a clean checkout does not report red
-for a step it was never asked to perform.
-
-They exist because of specific defects, each of which passed unnoticed until
-something ran the code rather than reading about it. Release steps and the
-failures that motivated them are in the
-[release checklist](RELEASE-CHECKLIST.md).
-
-## What Is Next
-
-R7 onboarding, the scoped local browser gate, and evaluation calibration are
-complete. R8's [versioned scenarios](docs/verification/README.md) have scoped
-CLI/VS Code observations; remaining host coverage is explicitly unverified.
-R9 runtime upgrade recovery and broader accessibility/browser coverage remain
-future work. See the [roadmap](ROADMAP.md) for acceptance gates and approval
-boundaries; publication does not update an existing installation or profile.
+This does not install the Copilot plugin, activate instructions, or register
+MCP servers. Some setup workflows require the full plugin. Claude Code
+execution is not verified by the Copilot tests.
 
 ## License
 

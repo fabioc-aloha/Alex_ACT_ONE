@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
 import { homedir } from 'node:os';
@@ -38,8 +38,10 @@ export function createSamples() {
         region, orders: stores.filter(row => row.region === region).reduce((sum, row) => sum + row.orders, 0),
     }));
     const chart = (chartType, title, subtitle, values, encodings, semantic_types, interactions = []) => ({
-        chart_spec: { chartType, title, subtitle, source: 'Synthetic demonstration data',
-            baseSize: { width: 540, height: 320 }, canvasSize: { width: 740, height: 460 }, encodings },
+        chart_spec: {
+            chartType, title, subtitle, source: 'Synthetic demonstration data',
+            baseSize: { width: 540, height: 320 }, canvasSize: { width: 740, height: 460 }, encodings
+        },
         data: { values }, semantic_types,
         ...(interactions.length ? { interaction_spec: { interactions } } : {}),
     });
@@ -60,17 +62,21 @@ export function createSamples() {
         [{ type: 'legend-toggle' }, { type: 'inspect-index' }, keyboard]);
     const composition = chart('Stacked Bar Chart', 'Core remains the largest product line',
         'Orders by quarter and product; synthetic 2025', [
-            { quarter: 'Q1', product: 'Core', orders: 50 }, { quarter: 'Q1', product: 'Plus', orders: 30 },
-            { quarter: 'Q1', product: 'Services', orders: 20 }, { quarter: 'Q2', product: 'Core', orders: 58 },
-            { quarter: 'Q2', product: 'Plus', orders: 42 }, { quarter: 'Q2', product: 'Services', orders: 24 },
-        ], { x: { field: 'quarter' }, y: { field: 'orders' }, color: { field: 'product' } },
+        { quarter: 'Q1', product: 'Core', orders: 50 }, { quarter: 'Q1', product: 'Plus', orders: 30 },
+        { quarter: 'Q1', product: 'Services', orders: 20 }, { quarter: 'Q2', product: 'Core', orders: 58 },
+        { quarter: 'Q2', product: 'Plus', orders: 42 }, { quarter: 'Q2', product: 'Services', orders: 24 },
+    ], { x: { field: 'quarter' }, y: { field: 'orders' }, color: { field: 'product' } },
         { quarter: 'Category', product: 'Category', orders: 'Count' }, [{ type: 'legend-toggle' }, keyboard]);
     const scatter = chart('Scatter Plot', 'Busier stores fulfil more orders in this sample',
         'Eight synthetic stores; staff hours and orders in one week', stores,
         { x: { field: 'hours' }, y: { field: 'orders' }, color: { field: 'region' }, detail: { field: 'store' } },
         { hours: { semanticType: 'Quantity', unit: 'hr' }, orders: 'Count', region: 'Region', store: 'ID' },
-        [{ type: 'brush-zoom', options: { axes: 'xy', reset: ['escape', 'double-click'],
-            transition: { duration: 0 }, resetTransition: { duration: 0 } } }, keyboard]);
+        [{
+            type: 'brush-zoom', options: {
+                axes: 'xy', reset: ['escape', 'double-click'],
+                transition: { duration: 0 }, resetTransition: { duration: 0 }
+            }
+        }, keyboard]);
     const distribution = chart('Histogram', 'Shorter waits are more common in this sample',
         'Wait time in minutes; 30 synthetic visits', [
             3, 5, 4, 7, 9, 6, 6, 11, 8, 4, 5, 7, 12, 14, 6,
@@ -86,15 +92,44 @@ export function createSamples() {
         'Synthetic workload score; 1 = low, 5 = high', Object.entries(workloads).flatMap(([team, values]) =>
             ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].map((day, i) => ({ team, day, workload: values[i] }))),
         { x: { field: 'day' }, y: { field: 'team' }, color: { field: 'workload', type: 'quantitative' } },
-        { day: { semanticType: 'Category', sortOrder: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'] },
-            team: 'Category', workload: { semanticType: 'Score', intrinsicDomain: [1, 5] } }, [highlight, keyboard]);
+        {
+            day: { semanticType: 'Category', sortOrder: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'] },
+            team: 'Category', workload: { semanticType: 'Score', intrinsicDomain: [1, 5] }
+        }, [highlight, keyboard]);
+    const countryMap = chart('Choropleth', 'Canada has the highest on-time delivery rate in this sample',
+        'Share of orders delivered on time; four synthetic country values', [
+        { iso3: 'CAN', country: 'Canada', onTime: 0.94 },
+        { iso3: 'USA', country: 'United States', onTime: 0.85 },
+        { iso3: 'BRA', country: 'Brazil', onTime: 0.68 },
+        { iso3: 'AUS', country: 'Australia', onTime: 0.76 },
+    ], {
+        id: { field: 'iso3' }, color: { field: 'onTime', title: 'On-time deliveries' }, text: { field: 'country' },
+    }, { iso3: 'ID', country: 'Category', onTime: 'Percentage' });
+    countryMap.chart_spec.chartProperties = { keyType: 'iso3', boundaries: 'world-bank' };
+    const cityMap = chart('Map', 'Toronto has the most orders among the sampled cities',
+        'Weekly orders at four city locations; synthetic counts', [
+        { city: 'Toronto', longitude: -79.38, latitude: 43.65, orders: 120 },
+        { city: 'Melbourne', longitude: 144.96, latitude: -37.81, orders: 55 },
+        { city: 'Tokyo', longitude: 139.69, latitude: 35.68, orders: 85 },
+        { city: 'Sao Paulo', longitude: -46.63, latitude: -23.55, orders: 70 },
+    ], {
+        longitude: { field: 'longitude' }, latitude: { field: 'latitude' },
+        size: { field: 'orders' }, text: { field: 'city' },
+    }, { longitude: 'Longitude', latitude: 'Latitude', orders: 'Count', city: 'Category' });
+    cityMap.chart_spec.chartProperties = { boundaries: 'world-bank' };
     const updates = structuredClone(comparison);
-    updates.updates = [{ id: 'editorial-emphasis', ops: [
-        { op: 'set-style', targets: [{ select: { where: { region: { in: ['North', 'South', 'East'] } } } }],
-            value: { opacity: 0.25 } },
-        { op: 'set-annotation', target: { select: { key: { region: 'West' } } },
-            value: { text: 'Leading region', anchor: 'segment' } },
-    ] }];
+    updates.updates = [{
+        id: 'editorial-emphasis', ops: [
+            {
+                op: 'set-style', targets: [{ select: { where: { region: { in: ['North', 'South', 'East'] } } } }],
+                value: { opacity: 0.25 }
+            },
+            {
+                op: 'annotate-text', target: { select: { key: { region: 'West' } } },
+                value: { text: 'Leading region', anchor: 'segment' }
+            },
+        ]
+    }];
     const linkedScatter = structuredClone(scatter);
     linkedScatter.interaction_spec = { interactions: [highlight, keyboard] };
     const board = {
@@ -105,38 +140,66 @@ export function createSamples() {
         link_spec: { fields: ['region'] },
     };
     return [
-        { id: 'comparison', title: 'Comparison & keyboard access', category: 'Compare',
+        {
+            id: 'comparison', title: 'Comparison & keyboard access', category: 'Compare',
             description: 'Categorical regions and count semantics become a bar chart with a zero baseline.',
             tryIt: 'Click a bar to highlight it; press Escape to clear. Tab to the chart, press Enter to explore its data, then use Enter and arrow keys to reach and move between marks.',
-            input: { chart: comparison } },
-        { id: 'trend', title: 'Time, units & series', category: 'Follow change',
+            input: { chart: comparison }
+        },
+        {
+            id: 'trend', title: 'Time, units & series', category: 'Follow change',
             description: 'YearMonth and Amount semantics turn the same kind of input into dated axes and currency labels.',
             tryIt: 'Hover over a month to inspect both series. Click a region in the legend to hide it; click it again to restore it.',
-            input: { chart: trend } },
-        { id: 'composition', title: 'Parts within a whole', category: 'See composition',
+            input: { chart: trend }
+        },
+        {
+            id: 'composition', title: 'Parts within a whole', category: 'See composition',
             description: 'Stacked bars expose product contributions without turning counts into percentages.',
             tryIt: 'Toggle a product in the legend to inspect the remaining mix. Toggle it again to restore all products.',
-            input: { chart: composition } },
-        { id: 'relationship', title: 'Relationships & brush zoom', category: 'Explore',
+            input: { chart: composition }
+        },
+        {
+            id: 'relationship', title: 'Relationships & brush zoom', category: 'Explore',
             description: 'Position, color, and stable store identities support exploration of a small multivariate sample.',
             tryIt: 'Drag a rectangle across the point cloud to zoom. Double-click or press Escape inside the chart to reset.',
-            input: { chart: scatter } },
-        { id: 'distribution', title: 'Row-level distributions', category: 'Inspect spread',
+            input: { chart: scatter }
+        },
+        {
+            id: 'distribution', title: 'Row-level distributions', category: 'Inspect spread',
             description: 'A histogram bins the 30 original visit records instead of requiring a prepared frequency table.',
             tryIt: 'Hover a bin for its values. Click a bin to emphasize it; press Escape to clear.',
-            input: { chart: distribution } },
-        { id: 'heatmap', title: 'Bounded scores & matrix color', category: 'Find patterns',
+            input: { chart: distribution }
+        },
+        {
+            id: 'heatmap', title: 'Bounded scores & matrix color', category: 'Find patterns',
             description: 'A declared 1-5 score range and ordered weekdays make the color and category encodings explicit.',
             tryIt: 'Inspect a cell, then click to emphasize it. Press Escape to return to the full matrix.',
-            input: { chart: heatmap } },
-        { id: 'updates', title: 'Declarative initial state', category: 'Direct attention',
+            input: { chart: heatmap }
+        },
+        {
+            id: 'country-map', title: 'Country choropleth', category: 'Map areas',
+            description: 'Three-letter country codes join synthetic on-time delivery rates to bundled World Bank boundaries. Unshaded countries have no data.',
+            tryIt: 'Compare the country fills against the on-time delivery scale, then switch themes to see how the palette changes.',
+            input: { chart: countryMap }
+        },
+        {
+            id: 'city-map', title: 'City point map', category: 'Map locations',
+            description: 'Longitude and latitude position the cities. Symbol size shows synthetic order counts.',
+            tryIt: 'Compare the city symbols against the order-count key, then switch themes to see the same locations in a different style.',
+            input: { chart: cityMap }
+        },
+        {
+            id: 'updates', title: 'Declarative initial state', category: 'Direct attention',
             description: 'ChartUpdate layers dim three regions and annotate West without rewriting the source records.',
             tryIt: 'The live chart opens with emphasis and an annotation. Inspect the updates array in the spec. The preview below is the base chart.',
-            input: { chart: updates } },
-        { id: 'linked', title: 'A linked two-chart board', category: 'Connect views',
+            input: { chart: updates }
+        },
+        {
+            id: 'linked', title: 'A linked two-chart board', category: 'Connect views',
             description: 'The charts join on region. The regional totals are computed from the same eight store records.',
             tryIt: 'Click a regional bar and watch its store points stay emphasized. Press Escape in that chart to reset both views.',
-            input: { board } },
+            input: { board }
+        },
     ];
 }
 
@@ -149,15 +212,21 @@ export function createExperimentalSamples() {
         score: 45 + c * 8 + i * 4, latency: [7, 10, 5, 12][c] + ((i * 3 + c) % 7) - 3,
     })));
     const chart = (chartType, title, subtitle, values, encodings, semantic_types, interactions) => ({
-        chart_spec: { chartType, title, subtitle, source: 'Synthetic interaction-lab fixture',
-            baseSize: { width: 650, height: 360 }, canvasSize: { width: 1000, height: 520 }, encodings },
+        chart_spec: {
+            chartType, title, subtitle, source: 'Synthetic interaction-lab fixture',
+            baseSize: { width: 650, height: 360 }, canvasSize: { width: 1000, height: 520 }, encodings
+        },
         data: { values }, semantic_types, interaction_spec: { interactions },
     });
     const focus = { type: 'hover-group-focus', options: { groupBy: 'cohort', emphasis: 'spotlight' } };
     const keyboard = { type: 'accessible-navigation', options: { sections: ['data'], caption: true } };
     const clickGroup = { type: 'click-group-focus', options: { groupBy: 'cohort', reset: ['escape', 'click-none'] } };
-    const zoom = { type: 'brush-zoom', options: { reset: ['escape', 'double-click'],
-        transition: { duration: 0 }, resetTransition: { duration: 0 } } };
+    const zoom = {
+        type: 'brush-zoom', options: {
+            reset: ['escape', 'double-click'],
+            transition: { duration: 0 }, resetTransition: { duration: 0 }
+        }
+    };
     const paths = cohorts.flatMap((cohort, c) => Array.from({ length: 6 }, (_, i) => ({
         cohort, checkpoint: i + 1, energy: 16 + c * 3 + i * 4 + [0, 3, -2, 2, -1, 0][i],
         output: 28 + c * 6 + i * 7 + [0, -4, 3, -2, 4, 0][i],
@@ -187,25 +256,37 @@ export function createExperimentalSamples() {
     const lens = chart('Scatter Plot', 'Narrow the population before comparing the runs',
         '32 synthetic runs; cost in USD, score 0-100; filters change the visible rows', runs,
         { x: { field: 'cost' }, y: { field: 'score' }, color: { field: 'cohort' }, detail: { field: 'run' } },
-        { cost: { semanticType: 'Price', unit: 'USD' }, score: { semanticType: 'Score', intrinsicDomain: [0, 100] },
-            cohort: 'Category', run: 'ID', latency: { semanticType: 'Duration', unit: 'min' } },
-        [{ type: 'filter-controls', options: { fields: [
-            { field: 'cohort', widget: 'checkboxes', label: 'Team' },
-            { field: 'latency', widget: 'range', label: 'Latency (min)' },
-        ], mode: 'filter', placement: 'top' } }, focus, keyboard]);
+        {
+            cost: { semanticType: 'Price', unit: 'USD' }, score: { semanticType: 'Score', intrinsicDomain: [0, 100] },
+            cohort: 'Category', run: 'ID', latency: { semanticType: 'Duration', unit: 'min' }
+        },
+        [{
+            type: 'filter-controls', options: {
+                fields: [
+                    { field: 'cohort', widget: 'checkboxes', label: 'Team' },
+                    { field: 'latency', widget: 'range', label: 'Latency (min)' },
+                ], mode: 'filter', placement: 'top'
+            }
+        }, focus, keyboard]);
     const bump = chart('Bump Chart', 'Forge moves from fourth to first',
         'Four synthetic teams over six checkpoints; rank 1 is best', rankRows,
         { x: { field: 'checkpoint' }, y: { field: 'rank' }, color: { field: 'cohort' } },
         { checkpoint: 'Week', rank: 'Rank', cohort: 'Category' }, [focus, clickGroup]);
     const forge = structuredClone(bump);
-    forge.updates = [{ id: 'forge-spotlight', ops: [
-        { op: 'set-style', targets: [{ select: { where: { cohort: { in: ['Atlas', 'Drift', 'Kite'] } } } }],
-            value: { opacity: 0.18 } },
-    ] }];
+    forge.updates = [{
+        id: 'forge-spotlight', ops: [
+            {
+                op: 'set-style', targets: [{ select: { where: { cohort: { in: ['Atlas', 'Drift', 'Kite'] } } } }],
+                value: { opacity: 0.18 }
+            },
+        ]
+    }];
     const finish = structuredClone(forge);
-    finish.updates[0].ops.push({ op: 'set-annotation',
+    finish.updates[0].ops.push({
+        op: 'annotate-text',
         target: { select: { key: { cohort: 'Forge', checkpoint: 6 } } },
-        value: { text: 'Forge finishes first', anchor: 'point' } });
+        value: { text: 'Forge finishes first', anchor: 'point' }
+    });
     const linkedScatter = structuredClone(lens);
     linkedScatter.chart_spec.encodings = { x: { field: 'cost' }, y: { field: 'score' }, color: { field: 'cohort' }, detail: { field: 'run' } };
     linkedScatter.interaction_spec = { interactions: [clickGroup, keyboard] };
@@ -215,44 +296,93 @@ export function createExperimentalSamples() {
         { latency: { semanticType: 'Duration', unit: 'min' }, cohort: 'Category' }, [clickGroup]);
     const linkedCharts = [bump, linkedScatter, ecdf].map((input, i) => ({
         ...structuredClone(input), id: ['rank', 'runs', 'latency'][i],
-        chart_spec: { ...input.chart_spec, baseSize: { width: 340, height: 300 },
-            canvasSize: { width: 460, height: 430 } },
+        chart_spec: {
+            ...input.chart_spec, baseSize: { width: 340, height: 300 },
+            canvasSize: { width: 460, height: 430 }
+        },
         layout: { span: 1 },
     }));
+    const periodRuns = runs.map(row => ({ ...row, period: Number(row.run.split('-')[1]) }));
+    const costType = { semanticType: 'Price', unit: 'USD' };
+    const appBoard = values => ({
+        board: {
+            title: 'Cost over time and against score', source: 'Synthetic interaction-lab fixture', columns: 2,
+            link_spec: { fields: ['cohort'] }, charts: [
+                {
+                    id: 'period-cost', ...chart('Line Chart', 'Run cost by period', 'USD per run', values,
+                        { x: { field: 'period' }, y: { field: 'cost' }, color: { field: 'cohort' } },
+                        { period: 'Quantity', cost: costType, cohort: 'Category' },
+                        [clickGroup, { ...zoom, options: { ...zoom.options, axes: 'x' } }])
+                },
+                {
+                    id: 'cost-score', ...chart('Scatter Plot', 'Run cost and score', 'USD per run and score out of 100', values,
+                        { x: { field: 'cost' }, y: { field: 'score' }, color: { field: 'cohort' }, detail: { field: 'run' } },
+                        { cost: costType, score: 'Score', cohort: 'Category', run: 'ID' }, [clickGroup])
+                },
+            ],
+        }
+    });
     return [
-        { id: 'trajectory', title: 'Follow a trajectory', category: 'Hover + brush zoom',
+        {
+            id: 'trajectory', title: 'Follow a trajectory', category: 'Hover + brush zoom',
             description: 'A connected scatter separates the route from the destination. Ordered checkpoints connect energy use to output.',
             tryIt: 'Hover a team to spotlight its path. Drag a rectangle to zoom; move the pointer away and press Escape inside the chart to reset.',
-            input: { chart: trajectory } },
-        { id: 'density', title: 'Read the shape, not just the average', category: 'Ridgelines + transient focus',
+            input: { chart: trajectory }
+        },
+        {
+            id: 'density', title: 'Read the shape, not just the average', category: 'Ridgelines + transient focus',
             description: 'Four density ridges retain the shape of the latency samples. These small synthetic samples are demonstrations, not estimates of real team performance.',
             tryIt: 'Hover a ridge to spotlight its team. Leave the marks to restore the full view; there is no persistent selection to clear.',
-            input: { chart: density } },
-        { id: 'orbit', title: 'Brush an angular interval', category: 'Polar selection',
+            input: { chart: density }
+        },
+        {
+            id: 'orbit', title: 'Brush an angular interval', category: 'Polar selection',
             description: 'A rose chart puts the day on a circle. A stateful angular brush selects a sector rather than a rectangular screen region.',
             tryIt: 'Drag around part of the wheel to select a time sector. Press Escape inside the chart or click empty plot space to clear it.',
-            input: { chart: orbit } },
-        { id: 'reorder', title: 'Make your own comparison order', category: 'Direct manipulation',
+            input: { chart: orbit }
+        },
+        {
+            id: 'reorder', title: 'Make your own comparison order', category: 'Direct manipulation',
             description: 'A lollipop chart makes categorical ordering tangible. Reordering is a view setting; the four scores stay fixed.',
             tryIt: 'Drag a lollipop or category label horizontally to reorder teams. Press Escape inside the chart to restore the original order.',
-            input: { chart: reorder } },
-        { id: 'lens', title: 'Build a cohort lens', category: 'Widgets + real row filtering',
+            input: { chart: reorder }
+        },
+        {
+            id: 'lens', title: 'Build a cohort lens', category: 'Widgets + real row filtering',
             description: 'Team toggle buttons and a latency range control the displayed population. Filtering removes marks from the view, not records from the embedded source.',
             tryIt: 'Click a team to select its runs; click additional teams to include them. All restores every team. Narrow the latency range, then inspect Live state. Reset example restores all 32 source rows.',
-            input: { chart: lens } },
-        { id: 'story', title: 'Direct the story in three beats', category: 'Bump chart + ChartUpdate layers',
+            input: { chart: lens }
+        },
+        {
+            id: 'story', title: 'Direct the story in three beats', category: 'Bump chart + ChartUpdate layers',
             description: 'The rank paths stay fixed while explicit update layers change emphasis and add an annotation. No score or rank is recomputed.',
             tryIt: 'Use Story beat above the chart: full field, Forge spotlight, then the finish annotation. Inspect the input to see the actual updates.',
             input: { chart: bump }, steps: [
                 { id: 'story-forge', label: '02 / Spotlight Forge', input: { chart: forge } },
                 { id: 'story-finish', label: '03 / Annotate the finish', input: { chart: finish } },
-            ] },
-        { id: 'linked-lab', title: 'Connect rank, cost, and latency', category: 'Three coordinated views',
+            ]
+        },
+        {
+            id: 'linked-lab', title: 'Connect rank, cost, and latency', category: 'Three coordinated views',
             description: 'A bump chart, run-level scatter, and cumulative latency distribution share team identity across different measures and grains.',
             tryIt: 'Click a team in any chart to emphasize it across all three views. Press Escape in that chart to clear the shared selection.',
-            input: { board: { title: 'One team selection, three different questions',
-                subtitle: 'Four synthetic teams; checkpoint ranks and 32 run-level cost, score, and latency observations',
-                source: 'Synthetic interaction-lab fixture', columns: 3, charts: linkedCharts, link_spec: { fields: ['cohort'] } } } },
+            input: {
+                board: {
+                    title: 'One team selection, three different questions',
+                    subtitle: 'Four synthetic teams; checkpoint ranks and 32 run-level cost, score, and latency observations',
+                    source: 'Synthetic interaction-lab fixture', columns: 3, charts: linkedCharts, link_spec: { fields: ['cohort'] }
+                }
+            }
+        },
+        {
+            id: 'application-state', title: 'Separate highlight, zoom, and filter', category: 'Application state',
+            description: 'Highlight compares a team with the others. Zoom reframes the period axis. A population filter changes both charts and the total run cost.',
+            tryIt: 'Click a run in the scatter to highlight its team in both charts. Drag across the line chart to zoom its period axis. Then exclude Kite using Population; the board reloads and the total falls. Reset example restores the full population and view.',
+            metric: { field: 'cost', label: 'Total run cost (USD)' },
+            input: appBoard(periodRuns), steps: [
+                { id: 'application-without-kite', label: 'Exclude Kite', input: appBoard(periodRuns.filter(row => row.cohort !== 'Kite')) },
+            ]
+        },
     ];
 }
 
@@ -282,8 +412,10 @@ export function rendererEnvironment(runtime) {
         context.font = '12px "Showcase metric fixture"';
         metrics[text] = context.measureText(text).width;
     }
-    return { platform: process.platform, architecture: process.arch, node: process.version,
-        packages, fonts, metrics };
+    return {
+        platform: process.platform, architecture: process.arch, node: process.version,
+        packages, fonts, metrics
+    };
 }
 
 export function validateRendererEnvironment(environment) {
@@ -429,51 +561,53 @@ export async function buildShowcase(runtime, { experimental = false } = {}) {
         ] : THEMES;
         for (const sample of samples) {
             for (const variant of [sample, ...(sample.steps || [])]) {
-              variant.results = {};
-              variant.inputs = {};
-              for (const theme of themes) {
-                const input = structuredClone(variant.input);
-                const base = input.chart || input.board;
-                const themeSpec = demoTheme(theme.id, base.chart_spec?.chartType);
-                base.theme_spec = themeSpec;
-                for (const chart of input.chart ? [input.chart] : input.board.charts) {
-                    // Explicit sizes disable the upstream App's responsive relayout.
-                    delete chart.chart_spec.baseSize;
-                    delete chart.chart_spec.canvasSize;
-                    if (chart.interaction_spec?.interactions.some(item => item.type === 'legend-toggle')) {
-                        chart.theme_spec = { ...themeSpec, legend: { show: 'always', placement: ['top'] } };
-                    } else if (experimental && ['Connected Scatter Plot', 'Bump Chart', 'ECDF Plot'].includes(chart.chart_spec.chartType)) {
-                        chart.theme_spec = { ...themeSpec, legend: { show: 'never' } };
+                variant.results = {};
+                variant.inputs = {};
+                for (const theme of themes) {
+                    const input = structuredClone(variant.input);
+                    const base = input.chart || input.board;
+                    const themeSpec = demoTheme(theme.id, base.chart_spec?.chartType);
+                    base.theme_spec = themeSpec;
+                    for (const chart of input.chart ? [input.chart] : input.board.charts) {
+                        // Explicit sizes disable the upstream App's responsive relayout.
+                        delete chart.chart_spec.baseSize;
+                        delete chart.chart_spec.canvasSize;
+                        if (chart.interaction_spec?.interactions.some(item => item.type === 'legend-toggle')) {
+                            chart.theme_spec = { ...themeSpec, legend: { show: 'always', placement: ['top'] } };
+                        } else if (experimental && ['Connected Scatter Plot', 'Bump Chart', 'ECDF Plot'].includes(chart.chart_spec.chartType)) {
+                            chart.theme_spec = { ...themeSpec, legend: { show: 'never' } };
+                        }
                     }
-                }
-                variant.inputs[theme.id] = input;
-                if (input.chart) {
-                    const validation = primaryJSON(await call('validate_chart', { ...base, backend: 'vegalite' }));
-                    if (!validation.valid || validation.warnings.length || validation.updates?.some(layer => layer.ops.some(op => !op.ok))) {
-                        throw new Error(`${variant.id}/${theme.id}: ${JSON.stringify(validation)}`);
+                    variant.inputs[theme.id] = input;
+                    if (input.chart) {
+                        const validation = primaryJSON(await call('validate_chart', { ...base, backend: 'vegalite' }));
+                        if (!validation.valid || validation.warnings.length || validation.updates?.some(layer => layer.ops.some(op => !op.ok))) {
+                            throw new Error(`${variant.id}/${theme.id}: ${JSON.stringify(validation)}`);
+                        }
+                    } else {
+                        const report = textResult(await call('validate_board', base));
+                        if (/✗|dropped|^Warnings:/m.test(report)) throw new Error(`${sample.id}/${theme.id}: ${report}`);
                     }
-                } else {
-                    const report = textResult(await call('validate_board', base));
+                    const shown = await call('show', input);
+                    const report = textResult(shown);
                     if (/✗|dropped|^Warnings:/m.test(report)) throw new Error(`${sample.id}/${theme.id}: ${report}`);
+                    if (!shown._meta?.flint?.board && !shown.structuredContent?.flint?.board) {
+                        throw new Error(`${sample.id}/${theme.id}: show returned no drawable snapshot`);
+                    }
+                    // The MCP card id is random; this offline host gives each fixture a stable identity.
+                    for (const board of [shown._meta?.flint?.board, shown.structuredContent?.flint?.board]) {
+                        if (board) board.id = `showcase-${variant.id}-${theme.id}`;
+                    }
+                    variant.results[theme.id] = shown;
                 }
-                const shown = await call('show', input);
-                const report = textResult(shown);
-                if (/✗|dropped|^Warnings:/m.test(report)) throw new Error(`${sample.id}/${theme.id}: ${report}`);
-                if (!shown._meta?.flint?.board && !shown.structuredContent?.flint?.board) {
-                    throw new Error(`${sample.id}/${theme.id}: show returned no drawable snapshot`);
-                }
-                // The MCP card id is random; this offline host gives each fixture a stable identity.
-                for (const board of [shown._meta?.flint?.board, shown.structuredContent?.flint?.board]) {
-                    if (board) board.id = `showcase-${variant.id}-${theme.id}`;
-                }
-                variant.results[theme.id] = shown;
-              }
             }
             const previewInput = structuredClone(sample.input.chart || sample.input.board.charts[0]);
             delete previewInput.updates;
             delete previewInput.interaction_spec;
-            const rendered = await call('render_chart', { ...previewInput,
-                theme_spec: demoTheme('nyt', previewInput.chart_spec.chartType), backend: 'vegalite', format: 'svg' });
+            const rendered = await call('render_chart', {
+                ...previewInput,
+                theme_spec: demoTheme('nyt', previewInput.chart_spec.chartType), backend: 'vegalite', format: 'svg'
+            });
             sample.preview = svgResult(rendered);
         }
         const backendInput = structuredClone(createSamples()[0].input.chart);
@@ -487,14 +621,24 @@ export async function buildShowcase(runtime, { experimental = false } = {}) {
             if (result.isError) throw new Error(JSON.stringify(result.content));
             const image = result.content.find(item => item.type === 'image');
             const svg = image ? null : svgResult(result);
-            backends.push({ id, compiled: compiled.spec, width: validation.computedSize.width,
+            backends.push({
+                id, compiled: compiled.spec, width: validation.computedSize.width,
                 height: validation.computedSize.height,
                 artifact: image ? `data:${image.mimeType};base64,${image.data}` :
-                    `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}` });
+                    `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`
+            });
         }
         const ui = readFileSync(join(serverRoot, 'assets', 'flint-app.html'), 'utf8');
-        const data = { mode: experimental ? 'experimental' : 'editorial',
-            version: serverVersion, themes, samples, backendInput, backends };
+        const data = {
+            mode: experimental ? 'experimental' : 'editorial',
+            version: serverVersion, themes, samples, backendInput, backends
+        };
+        if (!experimental) {
+            const { worldBankTopology } = await import(pathToFileURL(runtimeRequire.resolve('flint-chart/geo')));
+            data.boundaryAssets = {
+                'https://microsoft.github.io/flint-chart/geo/v1/world-bank-coarse.json': worldBankTopology.coarse,
+            };
+        }
         return renderDocument(data, ui, collectNotices(nodeModules),
             buildProvenance(data, ui, rendererEnvironment(runtime)));
     } finally {
@@ -523,6 +667,7 @@ export function buildProvenance(data, ui, environment) {
 
 export function renderDocument(data, ui, notices, provenance) {
     const lab = data.mode === 'experimental';
+    const mapCredit = data.boundaryAssets ? 'Map geometry: <a href="https://datacatalog.worldbank.org/search/dataset/0038272/world-bank-official-boundaries" rel="noreferrer">World Bank Official Boundaries</a>, simplified and packaged by Flint, under <a href="https://creativecommons.org/licenses/by/4.0/" rel="noreferrer">CC BY 4.0</a>.' : '';
     return `<!doctype html>
 <html lang="en">
 <head>
@@ -567,7 +712,7 @@ body[data-mode=experimental] .hero-grid{grid-template-columns:1.6fr 1fr}
 body[data-mode=experimental] h1{font-family:var(--sans);font-weight:780;letter-spacing:-.065em;font-size:clamp(54px,7vw,88px)}
 body[data-mode=experimental] h2{font-family:var(--sans);font-weight:720;letter-spacing:-.04em}
 body[data-mode=experimental] .hero-note{border-left:0;border-top:2px solid var(--accent);padding:22px 0 0}
-body[data-mode=experimental] .hero-note::before{content:'07';font:700 72px/1 var(--sans);color:var(--accent);display:block;margin-bottom:20px;letter-spacing:-.06em}
+body[data-mode=experimental] .hero-note::before{content:'${String(data.samples.length).padStart(2, '0')}';font:700 72px/1 var(--sans);color:var(--accent);display:block;margin-bottom:20px;letter-spacing:-.06em}
 body[data-mode=experimental] .card{border-radius:0;border-top:3px solid var(--accent)}
 body[data-mode=experimental] .preview{background:#fff;margin:16px 18px 20px;min-height:280px}
 body[data-mode=experimental] .card-copy .eyebrow{color:var(--accent)}
@@ -587,11 +732,11 @@ body[data-mode=experimental] pre{background:#0b141c}
 <body data-mode="${lab ? 'experimental' : 'editorial'}">
 <a class="skip" href="#live">Skip to the live examples</a>
 <div class="wrap">
-<nav class="masthead" aria-label="Site"><a class="brand" href="../README.md">Alex ACT ONE / ${lab ? 'Interaction lab' : 'Field notes'}</a><span class="edition">Flint ${html(data.version)}<br>Self-contained offline edition</span></nav>
+<div class="masthead"><span class="brand">Alex ACT ONE / ${lab ? 'Interaction lab' : 'Field notes'}</span><span class="edition">Flint ${html(data.version)}<br>Self-contained offline edition</span></div>
 <header>
 <div class="hero-grid">
 <div><p class="eyebrow">${lab ? 'Flint / experimental edition' : 'A working chart gallery'}</p><h1>${lab ? 'A chart is a place<br>to explore.' : 'Flint, in practice.'}</h1><p class="lede">${lab ? 'Brush a sector. Reorder a comparison. Follow a team across three views. The gestures change what you can ask, not just how the chart looks.' : 'Start with data and meaning. Choose a visual language. Give the reader something useful to explore.'}</p></div>
-<aside class="hero-note"><strong>${lab ? 'Seven experiments. Real semantic interactions.' : 'Real Flint charts. No server required.'}</strong><p>${lab ? 'Less familiar forms, direct manipulation, and reader-driven story beats. The actual Flint renderer is embedded. Every record is synthetic, and no data leaves this file.' : 'Eight examples connect semantic fields, chart families, themes, reader gestures, and linked views. Everything is embedded in this file. All figures use synthetic data, not business results.'}</p></aside>
+<aside class="hero-note"><strong>${lab ? 'Experiments with real semantic interactions.' : 'Real Flint charts. No server required.'}</strong><p>${lab ? 'Less familiar forms, direct manipulation, and reader-driven story beats. The actual Flint renderer is embedded. Every record is synthetic, and no data leaves this file.' : 'Examples connect semantic fields, chart families, maps, reader gestures, and linked views. Everything is embedded in this file. All figures use synthetic data, not business results.'}</p></aside>
 </div>
 <nav class="jump-links" aria-label="Page"><a href="#live">${lab ? 'Enter the lab' : 'Try the charts'}</a><a href="#gallery">${lab ? 'Explore the experiments' : 'Browse the gallery'}</a><a href="#backends">Compare exports</a><a href="${lab ? 'flint-showcase.html' : 'flint-experimental.html'}">${lab ? 'Editorial gallery' : 'Experimental interaction lab'}</a></nav>
 </header>
@@ -602,19 +747,20 @@ body[data-mode=experimental] pre{background:#0b141c}
 <div class="controls">
 <div class="control"><label for="sample-select">Example</label><select id="sample-select">${data.samples.map(sample => `<option value="${html(sample.id)}">${html(sample.title)}</option>`).join('')}</select></div>
 <div class="control small"><label for="theme-select">Theme</label><select id="theme-select">${data.themes.map(theme => `<option value="${html(theme.id)}">${html(theme.label)} (${html(theme.id)})</option>`).join('')}</select></div>
-<div class="control small" id="step-control" hidden><label for="step-select">Story beat</label><select id="step-select"><option value="">01 / Full field</option></select></div>
+<div class="control small" id="step-control" hidden><label id="step-label" for="step-select">Story beat</label><select id="step-select"><option value="">01 / Full field</option></select></div>
 <button type="button" id="reset-example">Reset example</button>
 </div>
-<div class="instructions"><p id="sample-description"></p><p><strong>Try this:</strong> <span id="try-it"></span></p></div>
+<div class="instructions"><p id="sample-description"></p><p><strong>Try this:</strong> <span id="try-it"></span></p><output id="population-metric" for="step-select" hidden></output></div>
 <div class="viewer"><p class="status" id="live-status" role="status" aria-live="polite">Starting the embedded Flint viewer...</p><iframe id="flint-viewer" title="Interactive Flint chart example" sandbox="allow-scripts"></iframe></div>
+${mapCredit ? `<p id="map-credit" class="helper" hidden>${mapCredit}</p>` : ''}
 <p class="helper">Escape resets supported chart gestures; Reset example also restores theme edits and initial state. The embedded editor can change the chart locally. It cannot call tools, send a chat message, or access files.${lab ? ' Layered line/point views use labels and tooltips instead of a separate legend.' : ''}</p>
 <details><summary>Inspect the Flint input</summary><div class="detail-body"><p class="helper">This is ChartAssemblyInput (or a board), not handwritten Vega-Lite. Edits made inside the viewer are reported in Live state; this source remains the reproducible starting input.</p><div class="source-actions"><button type="button" id="download-spec">Download starting spec</button><span class="helper">JSON, including the synthetic rows</span></div><pre id="spec-output"></pre></div></details>
 <details${lab ? ' open' : ''}><summary>Live state and interaction read-back</summary><div class="detail-body"><p class="helper">Flint reports committed gestures, visible state, and panel edits here. Hover-only feedback may not produce a committed state update.</p><pre class="state" id="state-output" aria-live="polite">Waiting for the viewer.</pre></div></details>
 <noscript><p class="status error">JavaScript is required for the live viewer. The SVG gallery and static backend exports below are still available.</p></noscript>
 </section>
 <section class="section" id="gallery" aria-labelledby="gallery-heading">
-<div class="section-title"><h2 id="gallery-heading">${lab ? 'Seven ways to ask more of a chart.' : 'One grammar. Different questions.'}</h2><span class="badge">${data.samples.length} worked examples</span></div>
-<p class="section-intro">These are real SVG exports generated by Flint, not illustrations of what it might draw. Open an example above to exercise its behavior. Theme and interaction support are checked against the installed 1.0.1 runtime.</p>
+<div class="section-title"><h2 id="gallery-heading">${lab ? 'Ways to ask more of a chart.' : 'One grammar. Different questions.'}</h2><span class="badge">${data.samples.length} worked examples</span></div>
+<p class="section-intro">These are real SVG exports generated by Flint, not illustrations of what it might draw. Open an example above to exercise its behavior. Theme and interaction support are checked against Flint ${html(data.version)}.</p>
 <div class="grid">${data.samples.map((sample, index) => `
 <article class="card"><div class="card-copy"><p class="eyebrow">${String(index + 1).padStart(2, '0')} / ${html(sample.category)}</p><h3>${html(sample.title)}</h3><p>${html(sample.description)}</p></div>
 <div class="preview" role="img" aria-label="${html(sample.input.chart?.chart_spec.title || sample.input.board.title)}">${sample.preview}</div>
@@ -643,6 +789,7 @@ body[data-mode=experimental] pre{background:#0b141c}
 <p>Static exports are generated in UTC for reproducible date annotations. The live viewer remains a separate host-rendered surface.</p>
 <p><strong>Rebuild:</strong> from a source checkout with the reviewed isolated demo build environment, run <code>node scripts\\build-flint-showcase.mjs${lab ? ' --experimental' : ''}</code>. Use <code>--check</code> to check that this file matches the build, or <code>--describe-runtime</code> for renderer versions, font hashes, and text metrics. The renderer/protocol pins are listed in the verification guide. No package is installed or fetched by the builder; it rejects mismatched build dependencies.</p>
 <p><a href="https://microsoft.github.io/flint-chart/" rel="noreferrer">Flint documentation</a> &middot; <a href="https://microsoft.github.io/flint-chart/#/interactions" rel="noreferrer">Interaction reference</a> &middot; Opening external links requires a connection.</p>
+${mapCredit ? `<p>${mapCredit}</p>` : ''}
 <details><summary>Third-party notices</summary><div class="detail-body"><p>Flint and its embedded UI are distributed under their upstream open-source licenses. The original bundle is embedded unchanged; notices for its runtime dependencies and React are included below. Static exports are generated from the same pinned runtime.</p><pre class="notices">${html(notices)}</pre></div></details>
 </footer>
 </div>
@@ -653,10 +800,23 @@ body[data-mode=experimental] pre{background:#0b141c}
 'use strict';
 const gallery = JSON.parse(document.getElementById('showcase-data').textContent);
 const runtime = JSON.parse(document.getElementById('flint-runtime').textContent);
+function serveBundledBoundaries(assets) {
+    const load = globalThis.fetch.bind(globalThis);
+    globalThis.fetch = (input, options) => {
+        const url = typeof input === 'string' ? input : input.url || String(input);
+        return Object.hasOwn(assets, url)
+            ? Promise.resolve(new Response(JSON.stringify(assets[url]), { headers: { 'Content-Type': 'application/json' } }))
+            : load(input, options);
+    };
+}
+const mapRuntime = gallery.boundaryAssets ? runtime.replace('<head>', head => head +
+    '<script>(' + serveBundledBoundaries.toString() + ')(' +
+    JSON.stringify(gallery.boundaryAssets).replace(/</g, '\\\\u003c') + ');</scr' + 'ipt>') : runtime;
 const frame = document.getElementById('flint-viewer');
 const sampleSelect = document.getElementById('sample-select');
 const themeSelect = document.getElementById('theme-select');
 const stepSelect = document.getElementById('step-select');
+const mapCredit = document.getElementById('map-credit');
 const status = document.getElementById('live-status');
 let ready = false;
 let startupTimer;
@@ -681,11 +841,20 @@ function mount() {
     document.getElementById('sample-description').textContent = sample.description;
     document.getElementById('try-it').textContent = sample.tryIt;
     const input = structuredClone(variant().inputs[themeSelect.value]);
+    const metric = document.getElementById('population-metric');
+    metric.hidden = !sample.metric;
+    if (sample.metric) {
+        const { field, label } = sample.metric;
+        const total = input.board.charts[0].data.values.reduce((sum, row) => sum + row[field], 0);
+        metric.textContent = label + ': ' + total.toLocaleString('en-US');
+    }
+    const isMap = ['Map', 'Choropleth'].includes(input.chart?.chart_spec.chartType);
+    if (mapCredit) mapCredit.hidden = !isMap;
     document.getElementById('spec-output').textContent = JSON.stringify(input, null, 2);
     document.getElementById('state-output').textContent = 'Waiting for ' + sample.title + '.';
     frame.style.height = (sample.input.board ? 850 : 650) + 'px';
     setStatus('Loading ' + sample.title + '...');
-    frame.srcdoc = runtime;
+    frame.srcdoc = isMap ? mapRuntime : runtime;
     startupTimer = setTimeout(() => {
         if (!ready) setStatus('The embedded viewer did not initialize. Static previews remain below; check browser script/CSP restrictions.', true);
     }, 15000);
@@ -720,9 +889,11 @@ window.addEventListener('message', event => {
     }
 });
 function selectSample() {
-    const steps = current().steps || [];
+    const sample = current();
+    const steps = sample.steps || [];
     document.getElementById('step-control').hidden = !steps.length;
-    stepSelect.replaceChildren(new Option('01 / Full field', ''), ...steps.map(step => new Option(step.label, step.id)));
+    document.getElementById('step-label').textContent = sample.metric ? 'Population' : 'Story beat';
+    stepSelect.replaceChildren(new Option(sample.metric ? 'All teams' : '01 / Full field', ''), ...steps.map(step => new Option(step.label, step.id)));
     mount();
 }
 sampleSelect.addEventListener('change', selectSample);
@@ -785,14 +956,15 @@ async function main() {
         console.log(JSON.stringify(rendererEnvironment(runtime), null, 2));
         return;
     }
-    output ||= join(ROOT, 'docs', experimental ? 'flint-experimental.html' : 'flint-showcase.html');
+    output ||= join(ROOT, 'skills', 'flint-chart', 'resources', experimental ? 'flint-experimental.html' : 'flint-showcase.html');
     const content = await buildShowcase(runtime, { experimental });
     if (check) {
         assertCurrentArtifact(output, content);
         console.log('Offline showcase matches the pinned runtime and all validated examples.');
     } else {
+        mkdirSync(dirname(output), { recursive: true });
         writeFileSync(output, content);
-        console.log(`Built offline Flint ${experimental ? 'interaction lab' : 'showcase'}: ${Buffer.byteLength(content).toLocaleString('en-US')} bytes; ${experimental ? 7 : 8} samples, 3 themes, 3 backend exports.`);
+        console.log(`Built offline Flint ${experimental ? 'interaction lab' : 'showcase'}: ${Buffer.byteLength(content).toLocaleString('en-US')} bytes.`);
     }
 }
 

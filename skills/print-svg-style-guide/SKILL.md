@@ -8,7 +8,7 @@ lastReviewed: 2026-07-29
 
 Rules for print-quality SVG figures in books, reports, and exec-facing HTML. Distilled from a shipped book: 53 figures across 14 chapters at print size 7×10in, figure width 4.39in. Portable to any figure that will land on paper or a PDF.
 
-Complements the big-idea family: `big-idea` and `chart-big-idea` decide what the figure ARGUES; this skill decides how it LOOKS. `flint-chart`'s publication config preset pins the Vega-Lite config that emits charts obeying these rules. `figure-generator` provides the engineering discipline that emits SVGs conforming to this guide.
+Complements the big-idea family: `big-idea` and `chart-big-idea` decide what the figure ARGUES; this skill decides how it LOOKS. The [Flint publication preset](../flint-chart/references/publication-preset.md) supplies starting settings for Vega-Lite, not a print pass. Check the rendered SVG at its intended print size. `figure-generator` provides the engineering discipline for SVGs that must meet this guide.
 
 ## When to invoke
 
@@ -266,7 +266,7 @@ Used for dashboard-shaped figures. From dashboard-design literature (Wexler / Sh
 ## Related skills
 
 - [`chart-big-idea`](../chart-big-idea/SKILL.md) — Step 0.5 earn-a-figure gate + Step 4.5 focus discipline. The framing side of the same discipline.
-- [`flint-chart`](../flint-chart/SKILL.md) § Publication config preset — pins the Vega-Lite `config` block that emits statistical charts obeying this style guide.
+- [Flint publication preset](../flint-chart/references/publication-preset.md) — a Vega-Lite starting point; the rendered SVG still needs print verification.
 - [`render-verify`](../render-verify/SKILL.md) § Prose-coupling check — verifies the surrounding prose after the figure ships.
 - [`figure-generator`](../figure-generator/SKILL.md) — the engineering discipline that emits SVGs conforming to this guide (`.mjs` generators, `data-sha256` audit hash, contract tests).
 - `markdown-mermaid` (Alex ACT Core) — sibling for Mermaid-authored diagrams (different rendering model, shares palette discipline where colors carry meaning).

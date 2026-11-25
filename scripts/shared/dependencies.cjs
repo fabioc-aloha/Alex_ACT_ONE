@@ -82,9 +82,9 @@ const MCP_SERVERS = {
     flint: {
         label: 'Flint (charts)',
         package: 'flint-chart-mcp',
-        version: '1.0.1',
+        version: '1.1.1',
         entrypoint: 'dist/cli.js',
-        library: { package: 'flint-chart', version: '1.0.1' },
+        library: { package: 'flint-chart', version: '1.1.1' },
         tier: 'required',
         unlocks: 'flint-chart and flint-theme. Without it they cannot render anything, and there is no fallback',
     },

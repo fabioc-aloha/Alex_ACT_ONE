@@ -25,37 +25,31 @@ test('one short guide covers install, consented activation, verification, and a 
     for (const heading of ['Install', 'Activate', 'Verify', 'Try one workflow']) {
         assert.match(text, new RegExp(`^## \\d\\. ${heading}`, 'm'));
     }
-    assert.match(text, /copilot plugin install alex-act-one@alex-mall/);
-    assert.doesNotMatch(text, /copilot plugin install fabioc-aloha\/Alex_ACT_ONE/);
+    assert.doesNotMatch(text, /copilot plugin (?:install|marketplace add)/);
     assert.ok(text.includes('](install.md#mall-option)'));
     const reference = read(referencePath);
     const marketplace = read('install-and-check.ps1').match(/MarketplaceSource = '([^']+)'/)?.[1];
     assert.ok(marketplace, 'Use the same reviewed marketplace as the repository installer');
     const register = `copilot plugin marketplace add ${marketplace}`;
-    assert.ok(text.includes(register), 'A fresh profile must register Mall before using its install command');
-    assert.ok(text.indexOf(register) < text.indexOf('copilot plugin install alex-act-one@alex-mall'));
-    const installSection = reference.split('### 1. Install the plugin')[1]?.split('### 2.')[0];
-    assert.ok(installSection, 'Missing the detailed install section');
-    const mall = installSection.indexOf('#### Mall option');
-    const direct = installSection.indexOf('copilot plugin install fabioc-aloha/Alex_ACT_ONE');
-    assert.ok(mall >= 0 && direct > mall, 'Lead the reference install section with Mall, not deprecated direct installation');
-    assert.ok(installSection.indexOf(register) > mall);
-    assert.ok(installSection.indexOf(register) < installSection.indexOf('copilot plugin install alex-act-one@alex-mall'));
+    const appendix = read('README.md').split('## Appendix: Manual installation')[1];
+    assert.ok(appendix.includes(register), 'Put both commands for a fresh profile in the appendix');
+    const install = appendix.indexOf('copilot plugin install alex-act-one@alex-mall');
+    assert.ok(install > appendix.indexOf(register));
     for (const source of [text, reference]) {
-        assert.match(source, /repository\s+source/);
-        assert.match(source, /unreleased/);
+        assert.ok(source.includes('](../README.md#appendix-manual-installation)'));
         assert.match(source, /reviewed release/);
+        assert.match(source, /skip full dependency setup/i);
     }
     assert.match(text, /\/alex-act-one bootstrap-core/);
     assert.match(text, /preview/i);
     assert.match(text, /approval/i);
-    for (const signal of ['expectedFiles', 'preserve', 'receipt', 'version', 'target']) {
-        assert.ok(text.includes(signal), `Missing activation success signal: ${signal}`);
-    }
+    assert.match(text, /same installed version and target/);
+    assert.match(text, /preserved without changes/);
+    assert.match(read('docs/testing.md'), /receiptCurrent: true/);
     assert.match(text, /host.*(?:observ|load)|(?:observ|load).*host/i);
     assert.match(text, /no optional.*tools/i);
     assert.ok(text.includes(`Release version: \`${JSON.parse(read('plugin.json')).version}\``));
-    assert.match(text, /demo.only/i);
+    assert.match(text, /Flint demos.*without\s+installing an MCP server/is);
 });
 
 test('the first-workflow prompt is synthetic and read-only with a semantic success rubric', () => {
@@ -78,25 +72,29 @@ test('README routes to onboarding before its catalogs and keeps setup reference 
     const entry = readme.indexOf(`](${guidePath})`);
     assert.ok(entry >= 0 && entry < readme.indexOf('## The Skills'));
     assert.ok(readme.includes(`](${referencePath})`));
-    const install = readme.indexOf('copilot plugin install alex-act-one@alex-mall');
-    assert.ok(install >= 0 && install < entry, 'Lead with marketplace installation before the guide');
+    const [main, appendix] = readme.split('## Appendix: Manual installation');
+    assert.match(appendix, /copilot plugin install alex-act-one@alex-mall/);
+    assert.match(appendix, /install-and-check\.ps1 -DependenciesOnly/);
+    assert.doesNotMatch(main, /copilot plugin (?:install|marketplace add)|install-and-check\.ps1 -Apply/);
     const start = readme.slice(readme.indexOf('## Start here'), readme.indexOf('## What You Can Do'));
-    assert.match(start, /copilot plugin marketplace add fabioc-aloha\/Alex_Skill_Mall/);
-    assert.doesNotMatch(start, /copilot plugin install fabioc-aloha\/Alex_ACT_ONE/);
-    assert.match(start, /deprecat/i);
-    assert.match(start, /Existing installations do not update automatically/);
+    assert.match(start, /from Alex Mall/);
+    assert.match(start, /Skip optional setup until you need it/);
+    assert.match(start, /supported fallback/);
+    assert.match(start, /asks before installing/);
     assert.doesNotMatch(readme, /under Install\.\./);
     const reference = read(referencePath);
     for (const section of ['Where Alex ACT ONE Works', 'Install', 'On Microsoft Scout, register the MCP servers',
         'Optional: extra tools for a few skills', 'Scripts for reinstalling and optional setup']) {
         assert.ok(reference.includes(section), section);
     }
-    assert.match(reference, /historical host evidence/);
-    assert.match(reference, /^> all 60 skills surfaced/m);
+    assert.doesNotMatch(reference, /Testing the repository candidate|copilot plugin uninstall/);
+    assert.match(reference, /read-only\s+check/);
 });
 
 test('install guidance preserves observed deprecation instead of treating command availability as a support promise', () => {
-    const reference = read(referencePath);
+    assert.match(read(referencePath), /direct installation is deprecated/i);
+    const reference = read('docs/testing.md').split('## Testing the repository candidate')[1]?.split('\n## ')[0];
+    assert.ok(reference, 'Keep the observed warning in maintainer testing notes');
     assert.ok(reference.includes('Warning: Direct plugin installs (repos, URLs, local paths) are deprecated. Only plugin@marketplace installs will be supported in a future release.'));
     assert.match(reference, /installation succeeded/i);
     assert.match(reference, /(?:removal|retirement).*(?:date|version)|(?:date|version).*removal/i);
@@ -120,7 +118,7 @@ test('onboarding links and legacy README setup anchors still resolve', () => {
         'what-you-get-after-each-step', 'using-claude-code-instead',
         'on-microsoft-scout-register-the-mcp-servers', 'optional-extra-tools-for-a-few-skills',
         'scripts-for-reinstalling-and-optional-setup', 'reinstall-and-verify-one',
-        'install-or-check-optional-dependencies']) {
+        'install-or-check-optional-dependencies', 'appendix-manual-installation']) {
         assert.ok(anchors.has(anchor), `Preserve existing inbound link #${anchor}`);
     }
 });

@@ -8,6 +8,8 @@ lastReviewed: 2026-11-06
 
 # Docx To Md
 
+If Pandoc is unavailable, load [Setup Dependencies](../setup-dependencies/SKILL.md#when-another-skill-is-blocked).
+
 > Ingest Word documents into your Markdown workflow — clean, linted, version-control ready
 
 Convert .docx files into clean, linted Markdown with extracted images, normalized headings, and cleaned table formatting. The reverse converter for ingesting external documents into a Markdown-based workflow.

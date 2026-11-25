@@ -167,8 +167,10 @@ export async function waitForChartLayout(frame) {
                     clips.push([clip.left, clip.right]);
                 }
             }
-            return { x: bounds.x, y: bounds.y, left: bounds.left, right: bounds.right,
-                width: bounds.width, height: bounds.height, clips };
+            return {
+                x: bounds.x, y: bounds.y, left: bounds.left, right: bounds.right,
+                width: bounds.width, height: bounds.height, clips
+            };
         });
         const signature = JSON.stringify({ viewport: innerWidth, charts });
         const now = performance.now();
@@ -224,7 +226,7 @@ export async function verifyShowcasePage(page, { nativeFocus = false, downloads 
         await frame.waitForFunction(count =>
             document.querySelectorAll('[data-flint-chart-id] svg.marks').length === count &&
             document.querySelectorAll('svg.marks [role="graphics-symbol"][aria-label]').length > 0,
-        expectedCharts, { polling: 100, timeout: 15000 });
+            expectedCharts, { polling: 100, timeout: 15000 });
         return frame;
     }
     async function choose(sample, theme, step) {
@@ -324,11 +326,71 @@ export async function verifyShowcasePage(page, { nativeFocus = false, downloads 
                         const frame = await choose(sample, theme, step);
                         const text = await frame.locator('body').innerText();
                         assert.doesNotMatch(text, /Failed to render|Error rendering|Invalid specification/i);
+                        if (['Map', 'Choropleth'].includes(sample.input.chart?.chart_spec.chartType)) {
+                            const geographicMarks = frame.locator('svg.marks .mark-shape.role-mark path[d]');
+                            await geographicMarks.first().waitFor({ state: 'visible', timeout: 10000 });
+                            const credit = page.locator('#map-credit');
+                            assert.ok(await credit.isVisible(), `${sample.id}/${theme.id} is missing visible map attribution`);
+                            assert.match(await credit.textContent(), /World Bank Official Boundaries/i);
+                        }
                         cases++;
                     }
                 }
             }
-            return { cases, samples: gallery.samples.length, themes: gallery.themes.length };
+            const result = { cases, samples: gallery.samples.length, themes: gallery.themes.length };
+            const experiment = gallery.samples.find(sample => sample.id === 'application-state');
+            if (experiment) {
+                const frame = await choose(experiment, gallery.themes[0]);
+                const trendSelector = '[data-flint-chart-id="flint-board-period-cost"]';
+                const axisSelector = `${trendSelector} svg.marks .role-axis-label`;
+                const trend = frame.locator(trendSelector);
+                const scatter = frame.locator('[data-flint-chart-id="flint-board-cost-score"]');
+                const points = 'svg.marks path[role="graphics-symbol"][aria-label*="run:"]';
+                const metric = page.locator('#population-metric');
+                assert.match(await metric.textContent(), /4,288$/);
+                const population = await scatter.locator(points).count();
+                assert.equal(population, 32);
+                const beforeFocus = await semantics(frame, 'cohort', 'Atlas');
+                await scatter.locator(`${points}[aria-label*="cohort: Atlas"]`).first().click();
+                await page.waitForFunction(() => document.getElementById('state-output').textContent.includes('cohort Atlas'));
+                const focused = await semantics(frame, 'cohort', 'Atlas');
+                assert.equal(focused.length, 2);
+                for (const [index, chart] of focused.entries()) {
+                    assert.deepEqual(chart.population, beforeFocus[index].population);
+                    assert.ok(chart.selected > chart.other, `${chart.id}: linked highlight did not reach the chart`);
+                }
+                assert.match(await metric.textContent(), /4,288$/);
+
+                const ticks = await frame.locator(axisSelector).first().textContent();
+                const plot = trend.locator('svg.marks .role-frame path.background').first();
+                await plot.scrollIntoViewIfNeeded();
+                const bounds = await plot.boundingBox();
+                assert.ok(bounds?.width > 0 && bounds?.height > 0);
+                const y = bounds.y + bounds.height * 0.45;
+                await page.mouse.move(bounds.x + bounds.width * 0.25, y);
+                await page.mouse.down();
+                await page.mouse.move(bounds.x + bounds.width * 0.65, y, { steps: 10 });
+                await page.mouse.up();
+                await frame.waitForFunction(({ axisSelector, ticks }) => {
+                    const current = document.querySelector(axisSelector)?.textContent;
+                    return current && current !== ticks;
+                }, { axisSelector, ticks }, { timeout: 5000 });
+                assert.equal(await scatter.locator(points).count(), population);
+                assert.match(await metric.textContent(), /4,288$/);
+
+                const filtered = await choose(experiment, gallery.themes[0], experiment.steps[0]);
+                assert.equal(await filtered.locator(points).count(), 24);
+                assert.equal(await filtered.locator('svg.marks [aria-label*="cohort: Kite"]').count(), 0);
+                assert.match(await metric.textContent(), /3,036$/);
+                await remount(() => page.locator('#reset-example').press('Enter'));
+                const reset = await ready(2);
+                assert.equal(await reset.locator(points).count(), population);
+                assert.equal(await reset.locator(axisSelector).first().textContent(), ticks);
+                assert.deepEqual(await semantics(reset, 'cohort', 'Atlas'), beforeFocus);
+                assert.match(await metric.textContent(), /4,288$/);
+                result.appState = { linkedCharts: 2, zoomed: true, filteredRows: 24, reset: true };
+            }
+            return result;
         });
         const accessibleSamples = gallery.samples.filter(sample => !sample.input.chart?.updates &&
             (sample.input.chart ? [sample.input.chart] : sample.input.board.charts).some(chart =>
@@ -363,9 +425,11 @@ export async function verifyShowcasePage(page, { nativeFocus = false, downloads 
                     await frame.waitForFunction(({ previous, chart }) =>
                         document.querySelector(`[data-flint-chart-id="${chart}"] [data-flint-accessible-focus]`)
                             ?.getAttribute('aria-label') !== previous,
-                    { previous: before, chart: await target.evaluate(element =>
-                        element.closest('[data-flint-chart-id]').getAttribute('data-flint-chart-id')) },
-                    { polling: 100, timeout: 5000 });
+                        {
+                            previous: before, chart: await target.evaluate(element =>
+                                element.closest('[data-flint-chart-id]').getAttribute('data-flint-chart-id'))
+                        },
+                        { polling: 100, timeout: 5000 });
                     const entered = await target.getAttribute('aria-label');
                     await key(frame, 'Escape');
                     assert.equal(await target.getAttribute('aria-label'), before, 'Escape did not restore the chart navigation root');
@@ -391,7 +455,7 @@ export async function verifyShowcasePage(page, { nativeFocus = false, downloads 
             await key(frame, 'Enter');
             await frame.waitForFunction(previous =>
                 document.querySelector('[data-flint-accessible-focus]')?.getAttribute('aria-label') !== previous,
-            before, { polling: 100, timeout: 5000 });
+                before, { polling: 100, timeout: 5000 });
             return { input: nativeFocus ? 'child-scoped CDP key' : 'Playwright key', before, after: await target.getAttribute('aria-label') };
         });
         await check('focus', async () => {
@@ -403,8 +467,10 @@ export async function verifyShowcasePage(page, { nativeFocus = false, downloads 
                     const value = getComputedStyle(node).backgroundColor;
                     if (value !== 'rgba(0, 0, 0, 0)' && value !== 'transparent') { background = value; break; }
                 }
-                return { active: document.activeElement === element, outline: style.outlineStyle,
-                    width: parseFloat(style.outlineWidth), color: style.outlineColor, background };
+                return {
+                    active: document.activeElement === element, outline: style.outlineStyle,
+                    width: parseFloat(style.outlineWidth), color: style.outlineColor, background
+                };
             });
             assert.ok(style.active && style.outline !== 'none' && style.width >= 2, JSON.stringify(style));
             const ratio = contrastRatio(rgb(style.color), rgb(style.background));
@@ -469,7 +535,7 @@ export async function verifyShowcasePage(page, { nativeFocus = false, downloads 
             } else await mark.click();
             await page.waitForFunction(() =>
                 !/Waiting for/.test(document.getElementById('state-output').textContent),
-            null, { polling: 100, timeout: 5000 });
+                null, { polling: 100, timeout: 5000 });
             const after = await semantics(frame, field, selected);
             assert.equal(after.length, linked.input.board.charts.length);
             after.forEach((chart, index) => {
@@ -539,10 +605,12 @@ export async function verifyShowcasePage(page, { nativeFocus = false, downloads 
             assert.deepEqual(errors, [], 'Browser errors were observed');
             return { networkRequests: requests.length, browserErrors: errors.length };
         });
-        return { url, browser, input: nativeFocus ? 'native child-scoped CDP' : 'Playwright',
+        return {
+            url, browser, input: nativeFocus ? 'native child-scoped CDP' : 'Playwright',
             limitations: ['Sampled shell contrast, not all SVG text or chart colors', 'Live-region DOM checked; screen-reader speech not observed',
                 'Representative keyboard and linked-selection checks, not every gesture preset'],
-            ...summarizeAcceptance(checks) };
+            ...summarizeAcceptance(checks)
+        };
     } finally {
         try {
             if (focus) await focus.send('Emulation.setFocusEmulationEnabled', { enabled: false });
@@ -576,7 +644,7 @@ async function main(args) {
         for (const file of ['flint-showcase.html', 'flint-experimental.html']) {
             const page = await browser.newPage({ acceptDownloads: true });
             try {
-                await page.goto(new URL(`../docs/${file}`, import.meta.url).href);
+                await page.goto(new URL(`../skills/flint-chart/resources/${file}`, import.meta.url).href);
                 reports.push(await verifyShowcasePage(page));
             } finally { await page.close(); }
         }

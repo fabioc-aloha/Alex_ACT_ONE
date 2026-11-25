@@ -92,5 +92,20 @@ test('installed interaction routes resolve without an adopter skills directory',
         assert.ok(link, name);
         assert.ok(existsSync(resolve(dirname(file), link[1])));
     }
+    assert.equal(existsSync(join(plugin, 'docs')), false);
+    const chart = readFileSync(join(plugin, 'skills', 'flint-chart', 'SKILL.md'), 'utf8');
+    const reference = join(plugin, 'skills', 'flint-chart', 'references', 'flint-language-reference.md');
+    const examples = readFileSync(reference, 'utf8');
+    assert.match(chart, /\]\(https:\/\/microsoft\.github\.io\/flint-chart\/#\/gallery\)/);
+    for (const route of ['gallery', 'documentation']) {
+        assert.ok(examples.includes(`](https://microsoft.github.io/flint-chart/#/${route})`), route);
+    }
+    for (const demo of ['flint-showcase.html', 'flint-experimental.html']) {
+        const link = `../resources/${demo}`;
+        assert.ok(examples.includes(`](${link})`), `Missing skill-relative link to ${demo}`);
+        const artifact = readFileSync(resolve(dirname(reference), link), 'utf8');
+        assert.match(artifact, /^<!doctype html>/i);
+        assert.match(artifact, /id="showcase-data"/);
+    }
     assert.equal(existsSync(join(temp, 'skills')), false);
 });

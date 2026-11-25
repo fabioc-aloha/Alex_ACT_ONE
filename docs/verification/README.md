@@ -35,6 +35,28 @@ must still explain its consequence. The chart and conversion cases intentionally
 stop before output; do not generate paid images or install packages to make
 them appear successful. Draft-only means no file, Outlook opening, or sending.
 
+### Text-only clarification and resume
+
+Run these follow-up probes separately from the exact suite. Use the same
+candidate in VS Code Copilot, GitHub Copilot CLI, GitHub Copilot app, and
+Microsoft Scout where available. A VS Code Local run can be a control, not a
+substitute for results from those clients.
+
+1. Start a fresh session with `recovery-denied-handoff` or
+  `chart-missing-measure` and append: `Ask any clarification in normal chat.
+  Do not use an interactive form.` Record it as an adapted prompt, not an
+  exact-suite run. The first response must ask a usable question and stop.
+2. Send a normal chat reply in the same session. For recovery, reply `My next
+  task is to review the release checklist. Give only a read-only plan; do not
+  open files or run tools.` For the chart, reply `A: 120 USD; B: 80 USD;
+  October 2026. Summarize the chart inputs only; do not validate, render,
+  display, or write anything.`
+3. Record both turns and tool activity. Recovery should plan from the supplied
+  goal without reopening the denied source. The chart response should retain
+  both values, currency, and period without rendering or inventing data. A
+  question alone is not a pass. Mark an unavailable client **not run** and
+  an unobservable second turn **unverified**.
+
 ## Running the CLI scenarios
 
 The [CLI runner](../../scripts/run-skill-scenarios.mjs) uses a single explicitly

@@ -45,6 +45,9 @@ store, linked source, or unsupported format is not proof of clean delivery.
   ask for the task goal or next action without requesting restricted source
   contents or a summary of them. Do not make the user explain the denial to
   continue.
+- If an interactive form is unavailable, disallowed, or cannot reliably
+   deliver its answer, ask one plain-text question in chat and wait for a reply.
+   Continue from the confirmed goal only; the denied source stays out of scope.
 - Preserve the boundary between supplied fixture facts and live observations.
   Do not infer staged/unstaged state, change age, filenames, counts, or task
   completion from the word "modified." State any unobserved details as unknown;

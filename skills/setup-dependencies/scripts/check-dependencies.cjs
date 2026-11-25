@@ -34,7 +34,7 @@ for (let index = 2; index < process.argv.length; index++) {
         selectedRuntime = process.argv[++index];
         if (!selectedRuntime || selectedRuntime.startsWith('--')) throw new Error('--runtime-root requires a path');
     } else if (arg === '--apply') {
-        throw new Error('check-dependencies.cjs is read-only. Use install-and-check.ps1 -Apply for consented setup, or provision-runtime.mjs --apply for MCP-only provisioning.');
+        throw new Error('check-dependencies.cjs is read-only. Preview install-and-check.ps1 -DependenciesOnly, or provision-runtime.mjs for MCP-only setup. Apply only after approval.');
     } else if (arg !== '--json') throw new Error(`Unknown argument: ${arg}`);
 }
 const MCP_RUNTIME = runtimeRoot(selectedRuntime);
@@ -272,13 +272,13 @@ if (missingRequired === 0) {
     console.log('\nNothing required is missing. The items below are enhancements or add-ons.');
 }
 
-console.log('\nTo install what is missing:\n');
+console.log('\nInstallation options to review and approve:\n');
 for (const r of missingTools) console.log(`  ${r.install}`);
 if (missingMcp.length) {
-    console.log(`  node <this-skill>/scripts/provision-runtime.mjs --apply`);
+    console.log('  node <this-skill>/scripts/provision-runtime.mjs');
     console.log(`      provisions ${mcp.servers.length} configured MCP servers: ${missingMcp.map((s) => s.label).join(', ')} missing`);
 }
 
 console.log('\nRead-only inspection. Nothing was installed or changed.');
-console.log('Use install-and-check.ps1 to report setup status; add -Apply only after reviewing its installation scopes.');
+console.log('Preview install-and-check.ps1 -DependenciesOnly from the installed package; add -Apply only after explicit approval.');
 console.log('For MCP-only installation, preview provision-runtime.mjs and explicitly approve --apply.');

@@ -1,6 +1,6 @@
 # Roadmap
 
-Updated 2026-11-13. This is the product backlog for maintaining and shipping
+Updated 2026-11-25. This is the product backlog for maintaining and shipping
 Alex ACT ONE, not a history of incidents or an adopter-fleet work queue.
 The source and Mall `0.9.7` release is published. The user will install it
 manually using the script; only earlier `0.9.5` installed-package parity is
@@ -20,8 +20,11 @@ Current verification belongs in [testing](docs/testing.md),
 
 ## Now
 
-**Product focus:** review the proposed cross-domain optimization scope, then
-qualify approved changes through the
+**Product focus:** use VS Code Local as the development control, qualify
+priority workflows in the Copilot harness, and verify native delivery of
+the Flint 1.1.1 source migration. Use that evidence to decide what ONE can
+retire or simplify.
+Qualify approved changes through the
 [delivery gate](#verify-future-delivery-changes). Completed cross-repository
 recovery and synchronization are archived; they do not add ongoing operations
 to this backlog.
@@ -51,6 +54,38 @@ accessibility, macOS and runtime-recovery work remains open.
 its own observed acceptance evidence and the existing delivery gates; document
 lint and a smaller inventory alone cannot establish success.
 
+### Pilot native Copilot capabilities
+
+**Status:** VS Code Local stays the development control while available;
+[Microsoft schedules its removal for February 2027](https://code.visualstudio.com/docs/agents/run/move-to-copilot).
+Copilot is the compatibility target, not a claim that its behavior is already
+equivalent across VS Code, GitHub Copilot CLI, the Copilot app, and Scout.
+
+**Next actions:**
+
+- Start with [R8](#r8-run-fresh-live-host-scenarios). Hold the prompt, model,
+  effort, and permissions constant where possible; compare first response,
+  completion, tool friction, and whether the workflow resumes after a reply.
+- Pilot native Plan and review using an existing read-only review case and a
+  document-planning case. `deep-review` is the first retirement candidate:
+  it forwards to `code-review` deep mode. Keep the direct owner route until
+  independent perspectives, evidence-backed synthesis, and the read-only
+  boundary are verified. Do not infer TDD, mutation, or security-audit parity.
+- Where available, use [model comparison](https://code.visualstudio.com/updates/v1_147#_model-comparison-improvements-preview)
+  to improve `adversarial-review`: compare a real decision or editorial task
+  against one explicit rubric. Keep the portable single-session critique;
+  preview availability and agreement between models are not proof of quality.
+- Prefer native tools when they can complete a task. Use
+  [Skills over MCP](https://code.visualstudio.com/updates/v1_147#_skills-over-mcp)
+  only after observing a server advertise and a client load the skill with
+  consent. Retain bundled guidance and current bootstrap/browser fallbacks
+  until their [transition gates](OPTIMIZATION-PLAN.md#separate-migration-opportunities)
+  pass. Migrate only user-facing prompt aliases with a verified invocation gap.
+
+**Done when:** decisions name the replacement, required behavior, supported
+clients, fallback, and evidence. Do not retire a skill solely because a native
+feature has a similar label. Preserve the separate optimization scope decision.
+
 ### R8. Run fresh live-host scenarios
 
 **Status:** fresh installed `0.9.5` CLI and VS Code `.2` cases ran on 2026-11-08.
@@ -68,13 +103,23 @@ including after the user reported answering the forms. The user approved
 archiving only those test chats, preserving history. R8 remains open; another
 identical rerun is not the next action without an observable completion path.
 
+The [2026-11-25 pilot](docs/verification/2026-11-25-copilot-flint-pilot.md)
+passed both adapted two-turn probes in standalone CLI and observed a read-only
+native Plan result. This does not qualify a native review replacement or
+establish parity with VS Code Copilot, the Copilot app, or Scout.
+
 Use the [versioned cases and run guide](docs/verification/README.md) to exercise
 reasoning, review, recovery, conversion, chart, and draft-only workflows.
 Preserve missing-input, denied-tool fixture, unsupported-output, read-only,
 and approval-boundary cases rather than testing only successful requests.
 
-**Next actions**
+**Next actions:**
 
+- Run the [two-turn text-only probes](docs/verification/README.md#text-only-clarification-and-resume)
+  against the updated source. Start with VS Code Local as a control and a
+  fresh VS Code Copilot session, then run the same probes in the CLI, Copilot
+  app, and Scout where available. Record the follow-up reply and actions;
+  a visible question alone does not establish that the workflow resumed.
 - Repeat in Scout and the Copilot app as access permits. Expand VS Code coverage
   only with separately observed cases, not by inheriting the boundary-test result.
 - Record the loaded plugin root, source revision when available, host/version,
@@ -111,7 +156,7 @@ inherit those results or move an existing release tag.
 The [verification record](docs/testing.md) owns source and package observations;
 local Windows results are not a replacement for a green same-commit matrix.
 
-**Next actions**
+**Next actions:**
 
 - Require the activation fixture boundary, conversion source/media/code
   preservation regressions, and corrected browser settling checks to pass
@@ -119,7 +164,7 @@ local Windows results are not a replacement for a green same-commit matrix.
   structural tests, as described in the [browser evidence](docs/verification/flint-browser.md).
 - Keep Mall-first onboarding and preserve the historical direct-install
   deprecation warning in the
-  [install reference](docs/install.md#testing-the-repository-candidate).
+  [candidate-testing record](docs/testing.md#testing-the-repository-candidate).
   Later candidate-route changes need separately approved native installation
   evidence; source mounting or a version string alone is not enough.
 - For each candidate, revalidate the exact marketplace source-subdirectory
@@ -153,6 +198,39 @@ approval. No publication or installation is authorized by this roadmap.
 
 ## Next
 
+### Verify native Flint 1.1.1 delivery
+
+**Status:** source pins both Flint packages at `1.1.1`, migrates both demo
+annotations to `annotate-text`, and rebuilds both demos against the updated
+CI lock. The lock was generated and installed through the Microsoft npm
+proxy. [The earlier pilot](docs/verification/2026-11-25-copilot-flint-pilot.md)
+retains the original failures and controls. The bundled Interaction Lab now
+demonstrates separate highlight, viewport, and population state, with
+[offline acceptance evidence](docs/testing.md#flint-111-source-migration).
+That example reloads a prevalidated board on filter changes; it does not
+verify in-place updates via Flint's application API. Published ONE `0.9.7`
+and the active runtime were not changed. Native App UI and supported-host
+parity remain unverified.
+
+**Next actions:**
+
+- Pilot [fullscreen MCP Apps in VS Code](https://code.visualstudio.com/updates/v1_148#_support-for-fullscreen-mcp-apps).
+  Test interaction there and a static artifact wherever App UI is absent.
+  Evaluate the upstream Canvas integration separately; it is not a portable
+  replacement for Flint execution, output verification, or saved artifacts.
+- Use the installed runtime's advertised schemas for map and annotation
+  probes. Verify actual state and saved output separately from tool responses.
+  A `flint://` resource or `get_flint_skill` does not prove SEP-2640 support.
+- Keep Playwright separate. The same proxy listed stable `0.0.85` alongside
+  a prerelease `latest` tag, while ONE pins `0.0.84`. Do not adopt the tag or
+  silently substitute another version. Investigate the tag separately and
+  keep the fallback until native-browser parity is observed.
+
+**Done when:** claimed hosts have separate evidence for live UI and saved
+static output, and the exact source passes the delivery gates. Any active
+runtime switch requires separate approval and the
+[runtime recovery design](#r9-make-runtime-upgrades-reproducible-and-recoverable).
+
 ### Verify artifact delivery in supported hosts
 
 **Status:** [fresh VS Code artifact observations](archive/verification/host-scenarios/2026-11-08/README.md)
@@ -168,7 +246,7 @@ download-button activation exposed neither a download event nor a saved file.
 That limitation is not replaced by headless download evidence. Synthetic
 checker metadata is not a natural host-stranding incident.
 
-**Next actions**
+**Next actions:**
 
 - Later canonical instruction updates still require separately approved
   source/package delivery and exact-target bootstrap operations.
@@ -194,7 +272,7 @@ verification are not authorized by this entry. The current unified
 [setup helper](install-and-check.ps1) has Windows-only automatic Pandoc
 installation. Existing cross-platform commands are not macOS certification.
 
-**Next actions**
+**Next actions:**
 
 - Define supported macOS versions and Apple Silicon/Intel coverage. Choose
   the supported entry point, including whether PowerShell 7 is a prerequisite,
@@ -233,7 +311,7 @@ The [provisioner](skills/setup-dependencies/scripts/provision-runtime.mjs)
 installs into shared active state. The [CI/demo lock](ci/runtime/package-lock.json)
 protects build reproducibility, not user-runtime upgrade recovery.
 
-**Decide first**
+**Decide first:**
 
 - Which runtime packages and transitive dependencies are locked, how integrity
   is reviewed, and how selected-server upgrades preserve unselected packages.
@@ -260,7 +338,7 @@ and integrated-browser saving remain pending.
 Build on the [recorded browser scope and limitations](docs/verification/flint-browser.md)
 rather than rerunning the same happy path and calling it full accessibility.
 
-**Next actions**
+**Next actions:**
 
 - Verify actual screen-reader announcements and keyboard traversal across the
   remaining chart types, controls, gestures, and focus-restoration paths.

@@ -20,6 +20,46 @@ Node 26 structural jobs for the full release matrix.
 These are verification targets, not certification of every Copilot host or OS.
 macOS and other Node versions are not covered by this workflow.
 
+## Flint 1.1.1 source migration
+
+On 2026-11-25, the exact source Flint MCP and library pair moved to `1.1.1`.
+The updated CI lock was resolved and installed with npm 12 through the
+Microsoft npm proxy, without lifecycle scripts or registry-policy changes.
+Its tarball URLs retain the portable npm registry origin; use
+`--replace-registry-host=npmjs` when verifying this lock through the proxy.
+Playwright and the other direct dependencies are unchanged. The previous
+[qualification pilot](verification/2026-11-25-copilot-flint-pilot.md) is a
+separate experiment, not the source lock used to build the final demos.
+
+The migrated lock passed the Flint runtime contract and timezone checks.
+Both regenerated demos matched exact rebuilds and passed the existing
+offline browser acceptance checks in cached Chromium `151.0.7922.34`.
+This verifies the offline App simulation, not native Copilot fullscreen,
+GitHub Copilot app, or Scout behavior. The active runtime and frozen `0.9.7`
+release were not changed.
+
+The application-state adaptation kept the same pins. Both bundled demos
+matched exact rebuilds and passed the [browser gate](verification/flint-browser.md)
+from a copy of the skill resources outside the checkout. In the
+[Interaction Lab](../skills/flint-chart/resources/flint-experimental.html),
+linked highlight and period zoom preserved the baseline total. Filtering
+removed one team and recomputed the total from the remaining rows; keyboard
+reset restored the baseline. This verifies prevalidated board variants in
+the offline host, not in-place app API updates, live queries, or native delivery.
+Both demos were refreshed after the builder changed, and exact rebuild checks
+passed with the current source and locked runtime. This is not a release gate
+result for other hosts.
+
+Use the reviewed isolated runtime to rebuild the demos. The builder never
+installs or fetches packages:
+
+```powershell
+node scripts\build-flint-showcase.mjs
+node scripts\build-flint-showcase.mjs --experimental
+node scripts\build-flint-showcase.mjs --check
+node scripts\build-flint-showcase.mjs --experimental --check
+```
+
 ## Real renderer setup verification
 
 The [2026-11-09 renderer evidence](verification/setup-renderer/2026-11-09/results.json)
@@ -95,8 +135,8 @@ or installed-runtime mutation was performed.
 ## Simplified root-helper source checks
 
 The 2026-11-09 source has one root `install-and-check.ps1` entry point.
-Default mode connects Alex Mall, refreshes catalogs and reports plugin and
-dependency versions. Only `-Apply` installs/updates the plugin, bootstraps
+Default mode connects Alex Mall, refreshes only its catalog, and reports plugin
+and dependency versions. Only `-Apply` installs/updates the plugin, bootstraps
 owned instructions, then sets up dependencies from that installed owner's
 pins and launcher. Missing Windows Pandoc and selected-Python Pillow are
 installed only with consent; existing system tools are not upgraded and
@@ -540,8 +580,9 @@ Markdown shell blocks as a documentation checker.
 ## Onboarding verification
 
 The [first-session guide](getting-started.md) uses Mall-first installation.
-The [install reference](install.md#mall-option) keeps the reviewed-release
-route canonical and records the observed deprecation of direct source installs.
+The [README appendix](../README.md#appendix-manual-installation) owns the
+terminal commands. The [candidate-testing record](#testing-the-repository-candidate)
+preserves the observed deprecation of direct source installs.
 Source and Mall can share a plugin version while having different contents,
 so record the loaded root and revision when available.
 
@@ -560,11 +601,54 @@ instructions, fixture apply verifies hashes and receipt, and the next preview
 preserves every instruction and receipt without changes. The adopter workspace
 remains empty. Navigation checks include the preserved README anchors and the
 relocated host reference; generated catalogs remain canonical in the README.
+The success signals are the expected file count, `preserve` for the instruction
+and receipt actions on the second preview, and `receiptCurrent: true` after apply.
 
 The documented plugin installation commands are not executed by these tests.
 The synthetic reasoning prompt has a reader-facing success rubric, not a
 machine-verified model outcome. Skill invocation, loaded instructions, and
 observed behavior in a real host remain separate R8 evidence.
+
+## Testing the repository candidate
+
+Historical record for the `0.9.0-rc.1` candidate. This is not the installation
+path for a reviewed release. Installation succeeded on 2026-11-05 and the CLI
+printed the following warning:
+
+> Warning: Direct plugin installs (repos, URLs, local paths) are deprecated. Only plugin@marketplace installs will be supported in a future release.
+
+The warning did not name a removal date or version. A command appearing in
+help does not override the deprecation warning. The historical switch ran:
+
+```powershell
+copilot plugin uninstall alex-act-one@alex-mall
+copilot plugin install fabioc-aloha/Alex_ACT_ONE
+copilot plugin list --json
+```
+
+Uninstall does not remove activated instructions or the optional runtime.
+Never run these commands as part of routine setup or from a verification test.
+An approved candidate switch needs same-commit evidence, a separately approved
+profile, and a confirmed loaded root and revision after restarting the host.
+Review activation preview and obtain approval before applying. Do not use
+`install-and-check.ps1` to switch sources; it follows Mall.
+
+## Scout verification
+
+The 2026-09-13 session against `v0.2.0` reported:
+
+> all 60 skills surfaced, all 15 instructions were active in context, none of the 15 slash commands were reachable, and both registered MCP servers answered a protocol handshake: 6 tools from Flint and 24 from Playwright.
+
+That is historical evidence, not a current inventory. The GitHub Copilot app
+also discovered plugin skills and prompts and validated a Flint chart on that
+date. Those observations do not qualify a later version.
+
+When verifying Scout after registration and a full restart, compare the loaded
+plugin root with the preview. For the source Flint runtime, check the expected
+tool list against the exact server version: `compile_chart`, `show`,
+`list_chart_types`, `list_themes`, `render_chart`, `validate_chart`,
+`validate_board`, `list_interaction_presets`, and `get_flint_skill`. Tool
+discovery is not evidence of native App UI or saved-file delivery.
 
 ## Scenario and browser evidence
 

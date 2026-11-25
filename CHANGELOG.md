@@ -5,6 +5,20 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+- Migrate source Flint MCP and library pins together to `1.1.1`. Update the
+  CI lock through the Microsoft npm proxy, migrate both demo annotations to
+  `annotate-text`, and rebuild the editorial and experimental demos. Runtime
+  coverage checks structured validation, drawable interaction state, compact
+  SVG, region annotations, and map attribution. Playwright, the active
+  runtime, and published ONE `0.9.7` are unchanged.
+
+- Bundle the canonical offline Showcase and Interaction Lab with the Flint
+  chart skill so they work without a checkout. Adapt Data Formulator's chart
+  coordination patterns for Flint `1.1.1`: linked highlight preserves the
+  population, period zoom reframes it, and filtering recomputes the total.
+  Add application-state and map validation guidance without bringing in Data
+  Formulator's runtime or APIs.
+
 - 2026-11-13: Added the root [optimization plan](OPTIMIZATION-PLAN.md) after
   reviewing recent Copilot harness releases against coding and noncoding
   workflows. It proposes retiring coding-only skills while preserving shared

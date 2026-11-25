@@ -14,16 +14,16 @@ const read = (...parts) => readFileSync(join(ROOT, ...parts), 'utf8');
 const launcher = join(ROOT, 'skills', 'setup-dependencies', 'scripts', 'runtime-launcher.mjs');
 const provisioner = join(ROOT, 'skills', 'setup-dependencies', 'scripts', 'provision-runtime.mjs');
 
-test('Flint MCP and library are independently exact-pinned at 1.0.1', () => {
-    assert.equal(deps.MCP_SERVERS.flint.version, '1.0.1');
-    assert.deepEqual(deps.MCP_SERVERS.flint.library, { package: 'flint-chart', version: '1.0.1' });
+test('Flint MCP and library are independently exact-pinned at 1.1.1', () => {
+    assert.equal(deps.MCP_SERVERS.flint.version, '1.1.1');
+    assert.deepEqual(deps.MCP_SERVERS.flint.library, { package: 'flint-chart', version: '1.1.1' });
 });
 
 test('shared runtime package selection includes the exact library without changing other routes', () => {
     assert.equal(typeof deps.mcpPackages, 'function');
     assert.deepEqual(deps.mcpPackages(['flint']), [
-        { name: 'flint-chart-mcp', version: '1.0.1', route: 'flint' },
-        { name: 'flint-chart', version: '1.0.1', route: null },
+        { name: 'flint-chart-mcp', version: '1.1.1', route: 'flint' },
+        { name: 'flint-chart', version: '1.1.1', route: null },
     ]);
     assert.deepEqual(deps.mcpPackages(['playwright']), [
         { name: '@playwright/mcp', version: '0.0.84', route: 'playwright' },
@@ -31,13 +31,13 @@ test('shared runtime package selection includes the exact library without changi
     assert.throws(() => deps.mcpPackages(['unknown']), /unknown MCP/i);
 });
 
-for (const version of [null, '0.5.1', '1.0.1']) {
+for (const version of [null, '1.0.1', '1.1.1']) {
     test(`launcher verifies the Flint library before invoking the server: ${version}`, (t) => {
         const runtime = mkdtempSync(join(tmpdir(), 'one-flint-version-'));
         t.after(() => rmSync(runtime, { recursive: true, force: true }));
         const server = join(runtime, 'node_modules', 'flint-chart-mcp');
         mkdirSync(join(server, 'dist'), { recursive: true });
-        writeFileSync(join(server, 'package.json'), JSON.stringify({ name: 'flint-chart-mcp', version: '1.0.1' }));
+        writeFileSync(join(server, 'package.json'), JSON.stringify({ name: 'flint-chart-mcp', version: '1.1.1' }));
         writeFileSync(join(server, 'dist', 'cli.js'), 'console.log("server invoked");\n');
         if (version) {
             const library = join(runtime, 'node_modules', 'flint-chart');
@@ -47,8 +47,8 @@ for (const version of [null, '0.5.1', '1.0.1']) {
         const result = spawnSync(process.execPath, [launcher, 'flint', '--version'], {
             encoding: 'utf8', env: { ...process.env, ALEX_ACT_ONE_RUNTIME_ROOT: runtime },
         });
-        assert.equal(result.status, version === '1.0.1' ? 0 : version === null ? 3 : 4, result.stderr);
-        if (version === '1.0.1') assert.match(result.stdout, /server invoked/);
+        assert.equal(result.status, version === '1.1.1' ? 0 : version === null ? 3 : 4, result.stderr);
+        if (version === '1.1.1') assert.match(result.stdout, /server invoked/);
         else {
             assert.match(result.stderr, /flint-chart/);
             assert.doesNotMatch(result.stdout, /server invoked/);
@@ -63,8 +63,8 @@ test('provisioner can preview only Flint and library without mutating a runtime'
     const result = spawnSync(process.execPath, [provisioner, '--server', 'flint', '--runtime-root', runtime],
         { encoding: 'utf8', timeout: 30000 });
     assert.equal(result.status, 0, result.stderr);
-    assert.match(result.stdout, /flint-chart-mcp@1\.0\.1/);
-    assert.match(result.stdout, /flint-chart@1\.0\.1/);
+    assert.match(result.stdout, /flint-chart-mcp@1\.1\.1/);
+    assert.match(result.stdout, /flint-chart@1\.1\.1/);
     assert.doesNotMatch(result.stdout, /@playwright\/mcp@|replicate-mcp@/);
     assert.match(result.stdout, /Preview only/);
     assert.equal(existsSync(runtime), false);
@@ -75,10 +75,10 @@ test('launcher rejects a stale nested Flint dependency even when the root librar
     t.after(() => rmSync(runtime, { recursive: true, force: true }));
     const server = join(runtime, 'node_modules', 'flint-chart-mcp');
     mkdirSync(join(server, 'dist'), { recursive: true });
-    writeFileSync(join(server, 'package.json'), JSON.stringify({ name: 'flint-chart-mcp', version: '1.0.1' }));
+    writeFileSync(join(server, 'package.json'), JSON.stringify({ name: 'flint-chart-mcp', version: '1.1.1' }));
     writeFileSync(join(server, 'dist', 'cli.js'), 'console.log("server invoked");\n');
-    for (const [location, version] of [[join(runtime, 'node_modules', 'flint-chart'), '1.0.1'],
-        [join(server, 'node_modules', 'flint-chart'), '0.5.1']]) {
+    for (const [location, version] of [[join(runtime, 'node_modules', 'flint-chart'), '1.1.1'],
+    [join(server, 'node_modules', 'flint-chart'), '1.0.1']]) {
         mkdirSync(location, { recursive: true });
         writeFileSync(join(location, 'package.json'), JSON.stringify({ name: 'flint-chart', version }));
     }
@@ -108,7 +108,7 @@ test('current Flint routes load version-matched skills and use validate then sho
     const chart = read('skills', 'flint-chart', 'SKILL.md');
     const theme = read('skills', 'flint-theme', 'SKILL.md');
     const orchestrator = read('skills', 'render-chart', 'SKILL.md');
-    assert.match(chart, /1\.0\.1/);
+    assert.match(chart, /flint-chart-mcp@1\.1\.1.*flint-chart@1\.1\.1/);
     assert.match(chart, /get_flint_skill/);
     assert.match(chart, /validate_chart/);
     assert.match(chart, /show/);

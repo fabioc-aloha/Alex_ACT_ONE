@@ -36,7 +36,7 @@ file before reporting a missing capability or recommending installation.
    chart input; do not restart framing. Define behavior/reset acceptance before
    validation, then test it after display. Static-only output needs no interaction pass.
 
-7. **Validate, render, and compare.** For interactive Vega-Lite with App UI support, call `validate_chart`, resolve errors/warnings, then `show({ "chart": input })` with the full spec. Flint 1.0.1 keeps no chart state between calls. Use `render_chart` for requested static output or a host without App UI; Vega-Lite/ECharts support PNG/SVG and Chart.js PNG. Use `compile_chart` for backend JSON. ThemeSpec applies to Vega-Lite in this MCP workflow. Compare the rendered candidates' focal point, reading order, hierarchy, accessibility, and study cost against the Brief.
+7. **Validate, render, and compare.** Follow the [Flint delivery route](../flint-chart/SKILL.md#step-4-validate-then-display) for live charts, boards, static output, and hosts without App UI. Compare the rendered candidates' focal point, reading order, hierarchy, accessibility, and study cost against the Brief.
 
 8. **Verify and iterate — look at what you rendered.** Load [render-verify](../render-verify/SKILL.md) using the same resolution rule. Use the host's built-in browser tools if it has them and they can open the artifact; otherwise the optional `alex-playwright` MCP server. Read console errors _before_ judging the picture, then walk the skill's chart and storytelling checks. Repair visible defects and re-render the smallest responsible layer. Check that the selected picture carries the Brief's Big Idea without relying on surrounding prose to explain what the visual failed to show.
 

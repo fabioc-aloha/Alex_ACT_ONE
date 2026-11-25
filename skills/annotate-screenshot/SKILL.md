@@ -9,13 +9,9 @@ lastReviewed: 2026-08-18
 Mark up a raster this plugin did not render: a dashboard capture, a chart someone
 sent you, a screenshot under review. Pillow does the drawing. Nothing else is needed.
 
-Check Pillow in the selected existing Python environment first. After explicit
-installation approval, use that same interpreter's pip, not an unrelated
-bare `pip` command:
-
-```bash
-python -m pip install Pillow
-```
+Check Pillow in the selected existing Python environment first. If it is missing
+or cannot import, load [Setup Dependencies](../setup-dependencies/SKILL.md#when-another-skill-is-blocked)
+with the selected interpreter and diagnostic before attempting annotation.
 
 Not for artifacts you can regenerate. If you own the generator, put the callout in
 the source and re-render, because a vector figure beats any raster markup. See

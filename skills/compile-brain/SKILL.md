@@ -105,6 +105,21 @@ fresh-context semantic review before it is presented as execution-ready. Above
 citations, or resource links carried operational meaning. A reviewer finding is
 a blocking issue until corrected or the source element is restored.
 
+## Skill resource portability
+
+Treat required material outside the skill directory as unavailable at runtime
+unless the skill links directly to an external website that supplies it. Bundle
+required local examples, templates, scripts, data, and references inside the
+owning skill and link to them with skill-relative paths. Use an external link
+only when the workflow can depend on internet access. Bundle required resources
+for offline workflows.
+
+An installed skill must not depend on files in the authoring repository. When
+changing a required resource, exercise its use from a copy of the skill (or an
+installed package) with no checkout available. A link that resolves in the
+source tree is not evidence of runtime availability. Separately declared skills
+and tools remain dependencies: discover them explicitly and handle their absence.
+
 ## Human-Facing Artifact Gate
 
 Compilation optimizes for an agent runtime: token economy, imperative steps,

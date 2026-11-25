@@ -6,11 +6,13 @@ import { dirname, join, resolve } from 'node:path';
 import { spawn, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
+import deps from '../scripts/shared/dependencies.cjs';
 
 const runtime = process.env.FLINT_COMPATIBILITY_RUNTIME_ROOT || process.env.ALEX_ACT_ONE_RUNTIME_ROOT ||
     join(homedir(), '.copilot', 'plugin-data', 'alex-act-one', 'runtime');
 const metadata = join(runtime, 'node_modules', 'flint-chart-mcp', 'package.json');
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const { version: expectedVersion, library } = deps.MCP_SERVERS.flint;
 
 function client(t) {
     const server = spawn(process.execPath, [join(runtime, 'node_modules', 'flint-chart-mcp', 'dist', 'cli.js')],
@@ -60,15 +62,17 @@ function jsonResult(result) {
     return Array.isArray(parsed) ? parsed[0] : parsed;
 }
 
-test('provisioned Flint 1.0.1 preserves the MCP and three-backend output contracts', {
+test(`provisioned Flint ${expectedVersion} preserves the MCP and three-backend output contracts`, {
     skip: existsSync(metadata) ? false : 'Flint runtime not provisioned',
 }, async (t) => {
-    assert.equal(JSON.parse(readFileSync(metadata, 'utf8')).version, '1.0.1');
-    assert.equal(JSON.parse(readFileSync(join(runtime, 'node_modules', 'flint-chart', 'package.json'), 'utf8')).version, '1.0.1');
+    assert.equal(JSON.parse(readFileSync(metadata, 'utf8')).version, expectedVersion);
+    assert.equal(JSON.parse(readFileSync(join(runtime, 'node_modules', library.package, 'package.json'), 'utf8')).version, library.version);
     const mcp = client(t);
-    const initialized = await mcp.request('initialize', { protocolVersion: '2024-11-05', capabilities: {},
-        clientInfo: { name: 'alex-flint-tests', version: '1' } });
-    assert.equal(initialized.serverInfo.version, '1.0.1');
+    const initialized = await mcp.request('initialize', {
+        protocolVersion: '2024-11-05', capabilities: {},
+        clientInfo: { name: 'alex-flint-tests', version: '1' }
+    });
+    assert.equal(initialized.serverInfo.version, expectedVersion);
     mcp.notify('notifications/initialized');
     const tools = (await mcp.request('tools/list')).tools;
     for (const name of ['compile_chart', 'render_chart', 'validate_chart', 'show', 'get_flint_skill',
@@ -87,15 +91,19 @@ test('provisioned Flint 1.0.1 preserves the MCP and three-backend output contrac
     const input = {
         data: { values: [{ category: 'Alpha', value: 12 }, { category: 'Beta', value: 7 }] },
         semantic_types: { category: 'Category', value: 'Quantity' },
-        chart_spec: { chartType: 'Bar Chart', title: 'Compatibility fixture',
-            encodings: { x: { field: 'category' }, y: { field: 'value' } } },
+        chart_spec: {
+            chartType: 'Bar Chart', title: 'Compatibility fixture',
+            encodings: { x: { field: 'category' }, y: { field: 'value' } }
+        },
     };
     for (const backend of ['vegalite', 'echarts', 'chartjs']) {
         await t.test(`${backend}: catalog, validation, compilation, and real render`, async () => {
             const catalog = jsonResult(await mcp.call('list_chart_types', { backend }));
             assert.ok(catalog.chartTypes.some(chart => chart.chartType === 'Bar Chart'));
-            const validation = jsonResult(await mcp.call('validate_chart', { ...input, backend }));
+            const result = await mcp.call('validate_chart', { ...input, backend });
+            const validation = jsonResult(result);
             assert.equal(validation.valid, true, JSON.stringify(validation));
+            assert.equal(result.structuredContent?.valid, true, JSON.stringify(result.structuredContent));
             const compiled = jsonResult(await mcp.call('compile_chart', { ...input, backend }));
             assert.equal(compiled.backend, backend);
             assert.ok(compiled.spec && typeof compiled.spec === 'object', JSON.stringify(compiled));
@@ -128,27 +136,35 @@ test('provisioned Flint 1.0.1 preserves the MCP and three-backend output contrac
         assert.ok(shown.content.length > 0);
     });
     await t.test('interaction grammar and chart-compatible discovery admit highlight plus keyboard navigation', async () => {
-        const grammar = await mcp.call('get_flint_skill', { skill: 'interaction', section: 'Add interactions to the chart' });
+        const grammar = await mcp.call('get_flint_skill', { skill: 'interaction' });
         assert.ok(!grammar.isError, JSON.stringify(grammar));
         assert.match(grammar.content.map(item => item.text || '').join('\n'), /interaction_spec/);
         const presets = jsonResult(await mcp.call('list_interaction_presets', { chartType: 'Bar Chart' }));
         for (const type of ['click-highlight', 'accessible-navigation']) {
             assert.ok(presets.presets.some(preset => preset.type === type), type);
         }
-        const chart = { ...input, interaction_spec: { interactions: [
-            { type: 'click-highlight', options: { targets: ['mark'], reset: ['escape'] } },
-            { type: 'accessible-navigation' },
-        ] } };
+        const chart = {
+            ...input, interaction_spec: {
+                interactions: [
+                    { type: 'click-highlight', options: { targets: ['mark'], reset: ['escape'] } },
+                    { type: 'accessible-navigation' },
+                ]
+            }
+        };
         const validation = jsonResult(await mcp.call('validate_chart', { ...chart, backend: 'vegalite' }));
         assert.equal(validation.valid, true);
         assert.deepEqual(validation.errors, []);
         assert.deepEqual(validation.warnings, []);
         const shown = await mcp.call('show', { chart });
         assert.ok(!shown.isError, JSON.stringify(shown));
-        assert.match(shown.content.map(item => item.text || '').join('\n'), /click-highlight/);
+        const snapshot = shown.structuredContent?.flint?.board || shown._meta?.flint?.board;
+        assert.ok(snapshot, 'Expected a drawable chart snapshot');
+        assert.match(JSON.stringify(snapshot), /click-highlight/);
+        assert.match(JSON.stringify(snapshot), /accessible-navigation/);
     });
     await t.test('a dropped interaction remains a warning even when the chart is valid', async () => {
-        const validation = jsonResult(await mcp.call('validate_chart', { ...input, backend: 'vegalite',
+        const validation = jsonResult(await mcp.call('validate_chart', {
+            ...input, backend: 'vegalite',
             interaction_spec: { interactions: [{ type: 'legend-toggle' }] },
         }));
         assert.equal(validation.valid, true);
@@ -157,7 +173,8 @@ test('provisioned Flint 1.0.1 preserves the MCP and three-backend output contrac
             /discrete legend.*dropped/s.test(warning.message)), JSON.stringify(validation));
     });
     await t.test('unknown reset gestures are explicit errors rather than neutral-state fallbacks', async () => {
-        const validation = jsonResult(await mcp.call('validate_chart', { ...input, backend: 'vegalite',
+        const validation = jsonResult(await mcp.call('validate_chart', {
+            ...input, backend: 'vegalite',
             interaction_spec: { interactions: [{ type: 'click-highlight', options: { reset: ['nonsense'] } }] },
         }));
         assert.equal(validation.valid, false);
@@ -165,9 +182,11 @@ test('provisioned Flint 1.0.1 preserves the MCP and three-backend output contrac
             /reset gesture.*unknown/.test(error.message)), JSON.stringify(validation));
     });
     await t.test('initial state and linked boards use their separate supported input surfaces', async () => {
-        const updates = [{ id: 'initial-emphasis', ops: [
-            { op: 'set-style', targets: [{ select: { key: { category: 'Alpha' } } }], value: { opacity: 0.35 } },
-        ] }];
+        const updates = [{
+            id: 'initial-emphasis', ops: [
+                { op: 'set-style', targets: [{ select: { key: { category: 'Alpha' } } }], value: { opacity: 0.35 } },
+            ]
+        }];
         const validation = jsonResult(await mcp.call('validate_chart', { ...input, updates, backend: 'vegalite' }));
         assert.equal(validation.valid, true, JSON.stringify(validation));
         assert.deepEqual(validation.errors, []);
@@ -190,9 +209,15 @@ test('provisioned Flint 1.0.1 preserves the MCP and three-backend output contrac
         const checked = await mcp.call('validate_board', board);
         assert.ok(!checked.isError, JSON.stringify(checked));
         const report = checked.content.map(item => item.text || '').join('\n');
-        assert.match(report, /✓ source: sends category by click-highlight; receives category/);
-        assert.match(report, /✓ recipient: receives category; sends nothing/);
-        assert.doesNotMatch(report, /✗/);
+        assert.match(report, /Nothing to fix: call show/);
+        assert.match(report, /Link notes \(category\)/);
+        assert.match(report, /recipient: sends nothing/);
+        assert.doesNotMatch(report, /✗|dropped/);
+        const shown = await mcp.call('show', { board });
+        assert.ok(!shown.isError, JSON.stringify(shown.content));
+        const snapshot = shown.structuredContent?.flint?.board || shown._meta?.flint?.board;
+        assert.ok(snapshot, 'Expected a drawable board snapshot');
+        assert.match(JSON.stringify(snapshot), /click-highlight/);
     });
     await t.test('offline export CLI is independent of the caller timezone and uses UTC date annotations', () => {
         const fixture = mkdtempSync(join(tmpdir(), 'one-flint-timezone-'));
@@ -211,6 +236,45 @@ test('provisioned Flint 1.0.1 preserves the MCP and three-backend output contrac
             assert.equal(bytes.toString('utf8').includes('aria-label="month: May 31, 2025; revenue: 76000'), false);
         }
         assert.equal(outputs[0], outputs[1], 'The same reviewed build must not depend on the caller timezone');
+    });
+    await t.test('compact SVG exports retain data and maps credit their boundaries', async () => {
+        const compact = { ...input, chart_spec: { ...input.chart_spec, canvasSize: { width: 280, height: 220 } } };
+        const rendered = await mcp.call('render_chart', { ...compact, backend: 'vegalite', format: 'svg' });
+        assert.ok(!rendered.isError, JSON.stringify(rendered.content));
+        const svg = rendered.content.find(item => item.type === 'text' && /<svg[\s>]/.test(item.text))?.text;
+        assert.match(svg, /category: Alpha; value: 12/);
+        assert.match(svg, /category: Beta; value: 7/);
+        const dimensions = /<svg\b[^>]*\bwidth="(\d+(?:\.\d+)?)"[^>]*\bheight="(\d+(?:\.\d+)?)"/.exec(svg);
+        assert.ok(dimensions && Number(dimensions[1]) <= 280 && Number(dimensions[2]) <= 220);
+
+        const annotated = {
+            ...input, backend: 'vegalite',
+            updates: [{
+                id: 'range-note', ops: [
+                    { op: 'annotate-region', name: 'range', value: { y: [6, 9], text: 'Review range' } },
+                ]
+            }],
+        };
+        const annotation = jsonResult(await mcp.call('validate_chart', annotated));
+        assert.equal(annotation.valid, true, JSON.stringify(annotation));
+        assert.equal(annotation.updates?.[0]?.ops?.[0]?.ok, true, JSON.stringify(annotation.updates));
+
+        const map = {
+            data: { values: [{ country: 'USA', value: 12 }, { country: 'CAN', value: 7 }] },
+            semantic_types: { country: 'Category', value: 'Quantity' },
+            chart_spec: {
+                chartType: 'Choropleth', title: 'Boundary attribution fixture',
+                encodings: { id: { field: 'country' }, color: { field: 'value' } },
+                chartProperties: { keyType: 'iso3', boundaries: 'world-bank' }
+            },
+            backend: 'vegalite',
+        };
+        const checked = jsonResult(await mcp.call('validate_chart', map));
+        assert.equal(checked.valid, true, JSON.stringify(checked));
+        const plotted = await mcp.call('render_chart', { ...map, format: 'svg' });
+        assert.ok(!plotted.isError, JSON.stringify(plotted.content));
+        const mapSvg = plotted.content.find(item => item.type === 'text' && /<svg[\s>]/.test(item.text))?.text;
+        assert.match(mapSvg, /World Bank Official Boundaries/i);
     });
     await t.test('invalid snake_case names and missing fields remain explicit failures', async () => {
         const invalid = jsonResult(await mcp.call('validate_chart', {

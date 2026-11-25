@@ -353,7 +353,7 @@ describe('Microsoft Scout setup guidance', () => {
             'Scout has no plugin slash-command surface',
         );
         assert.match(scoutSetup, /setup-dependencies/);
-        assert.match(scoutSetup, /register-scout-mcp\.mjs/);
+        assert.match(scoutSetup, /#registering-the-servers-with-microsoft-scout/);
     });
 
     test('package metadata and roadmap do not overstate automatic setup', () => {
@@ -365,16 +365,15 @@ describe('Microsoft Scout setup guidance', () => {
     });
 
     test('documents host readiness without promising observed activation', () => {
-        assert.match(install, /host-readiness\.cjs/);
+        assert.match(bootstrapSkill, /host-readiness\.cjs/);
         assert.match(bootstrapSkill, /Host Readiness/);
         assert.match(bootstrapSkill, /writes no instructions or MCP registry entries/i);
         assert.match(bootstrapSkill, /cannot prove a host has restarted or observed/i);
     });
 
     test('documents the Copilot CLI plugin as Scout shared source', () => {
-        assert.match(install, /Scout should use the Copilot CLI installation/i);
+        assert.match(install, /same ONE installation as Copilot\s+CLI/i);
         assert.match(install, /Load Copilot CLI skills/);
-        assert.match(install, /~[\\/]?\.copilot/);
         assert.doesNotMatch(install, /Scout can retain another version/i);
         assert.match(pluginJson.description, /Copilot CLI user store/i);
         assert.match(roadmap, /shared Copilot CLI store/i);
@@ -386,11 +385,14 @@ describe('Microsoft Scout setup guidance', () => {
     });
 
     test('preserves the historical Scout inventory instead of rewriting it as the current count', () => {
-        assert.match(install, /^> all 60 skills surfaced/m);
+        assert.match(read('docs/testing.md'), /^> all 60 skills surfaced/m);
+        assert.doesNotMatch(install, /^> all \d+ skills surfaced/m);
         assert.doesNotMatch(install, /all 63 skills surfaced/);
     });
 
     test('names every Flint tool expected after Scout restarts', () => {
+        const scoutVerification = read('docs/testing.md').split('## Scout verification')[1]?.split('\n## ')[0];
+        assert.ok(scoutVerification, 'Missing Scout verification guide');
         for (const tool of [
             'compile_chart',
             'show',
@@ -402,7 +404,7 @@ describe('Microsoft Scout setup guidance', () => {
             'list_interaction_presets',
             'get_flint_skill',
         ]) {
-            assert.match(scoutSetup, new RegExp(`\\b${tool}\\b`), `missing Flint tool ${tool}`);
+            assert.match(scoutVerification, new RegExp(`\\b${tool}\\b`), `missing Flint tool ${tool}`);
         }
     });
 });

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
@@ -23,6 +23,35 @@ test('one public root setup script replaces the two obsolete names and is packag
 });
 
 for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pwsh']) {
+    for (const mode of ['Report', 'Apply', 'VerifyOnly']) {
+        test(`${shell}: dependency-only ${mode} uses the packaged owner without plugin setup`, t => {
+            const fixture = mkdtempSync(join(root, '.test-dependency-only-'));
+            t.after(() => rmSync(fixture, { recursive: true, force: true }));
+            const installedRoot = join(fixture, 'installed plugin');
+            mkdirSync(installedRoot);
+            const owner = join(installedRoot, 'install-and-check.ps1');
+            writeFileSync(owner, readFileSync(script));
+            const wrapper = join(fixture, 'wrapper.ps1');
+            writeFileSync(wrapper, `
+param([string]$Script,[switch]$Apply,[switch]$VerifyOnly)
+. $Script -DependenciesOnly -Apply:$Apply -VerifyOnly:$VerifyOnly
+function Invoke-PluginSetup { throw 'dependency-only mode must not invoke plugin setup' }
+function Invoke-DependencySetup {
+    param([string]$PluginRoot)
+    @{owner=$PluginRoot;apply=[bool]$Apply;verifyOnly=[bool]$VerifyOnly} | ConvertTo-Json -Compress
+}
+Invoke-InstallAndCheck
+`, 'utf8');
+            const result = runPowerShell(shell, wrapper, {
+                Script: owner,
+                ...(mode !== 'Report' ? { [mode]: true } : {})
+            }, { root: fixture });
+            assert.equal(result.status, 0, result.stdout + result.stderr);
+            assert.deepEqual(JSON.parse(result.stdout), {
+                owner: installedRoot, apply: mode === 'Apply', verifyOnly: mode === 'VerifyOnly',
+            });
+        });
+    }
     for (const [label, parameters, expected] of [
         ['conflicting modes', { Apply: true, VerifyOnly: true }, /separate operations/],
         ['empty browser', { Apply: true, BrowserExecutablePath: '' }, /BrowserExecutablePath.*absolute/],

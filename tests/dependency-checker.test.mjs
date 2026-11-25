@@ -8,6 +8,19 @@ import { test } from 'node:test';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 
+test('blocked skills hand off to dependency setup without granting install consent', () => {
+    const skill = name => readFileSync(join(root, 'skills', name, 'SKILL.md'), 'utf8');
+    const setup = skill('setup-dependencies');
+    assert.match(setup, /## When another skill is blocked/i);
+    assert.match(setup, /read-only check first/i);
+    assert.match(setup, /explicit approval.*install/is);
+    assert.match(setup, /supported fallback.*requested output/is);
+    for (const name of ['convert', 'docx-to-md', 'html-to-md', 'md-to-eml', 'md-to-html', 'md-to-txt', 'md-to-word',
+        'annotate-screenshot', 'rich-email', 'flint-chart', 'flint-theme', 'flint-interactions', 'render-verify']) {
+        assert.match(skill(name), /load \[Setup Dependencies\]\(\.\.\/setup-dependencies\/SKILL\.md(?:#[^)]*)?\)/i, name);
+    }
+});
+
 function fixture(t) {
     const directory = mkdtempSync(join(tmpdir(), 'one-dependency-checker-'));
     t.after(() => rmSync(directory, { recursive: true, force: true }));
@@ -41,8 +54,10 @@ module.exports = { resolveInvocation: (command, args) => {
     const runtime = join(directory, 'runtime');
     const preload = join(directory, 'isolated-home.cjs');
     writeFileSync(preload, `require('node:os').homedir = () => ${JSON.stringify(join(directory, 'home'))};`);
-    const env = { ...process.env, PATH: '', COPILOT_HOME: join(directory, 'copilot-home'),
-        FIXTURE_RUNTIME: runtime, FIXTURE_COMMAND_LOG: log };
+    const env = {
+        ...process.env, PATH: '', COPILOT_HOME: join(directory, 'copilot-home'),
+        FIXTURE_RUNTIME: runtime, FIXTURE_COMMAND_LOG: log
+    };
     const run = args => spawnSync(process.execPath, ['--require', preload, script, ...args], {
         cwd: directory, env, encoding: 'utf8', timeout: 15000,
     });
@@ -64,7 +79,7 @@ for (const args of [[], ['--json']]) {
         } else {
             assert.match(result.stdout, /2 configured MCP servers/);
             assert.doesNotMatch(result.stdout, /all three servers|Re-run with --apply/);
-            assert.match(result.stdout, /install-and-check\.ps1/);
+            assert.match(result.stdout, /Preview install-and-check\.ps1 -DependenciesOnly/);
         }
     });
 }
@@ -75,7 +90,7 @@ for (const args of [['--apply'], ['--json', '--apply']]) {
         const result = run(args);
         assert.notEqual(result.status, 0);
         assert.match(result.stderr, /read.only/i);
-        assert.match(result.stderr, /install-and-check\.ps1 -Apply/);
+        assert.match(result.stderr, /Preview install-and-check\.ps1 -DependenciesOnly/);
         assert.equal(existsSync(log), false);
         assert.equal(existsSync(runtime), false);
     });
@@ -89,7 +104,7 @@ test('active Word CI example derives optional npm tool pins from the shared regi
     const observed = execFileSync(process.execPath, ['-e', example[1]], { cwd: root, encoding: 'utf8' }).trim();
     const deps = JSON.parse(execFileSync(process.execPath, ['-e',
         'const d=require("./scripts/shared/dependencies.cjs"); console.log(JSON.stringify(["mmdc","svgexport"].map(k=>d.specOf(d.TOOLS[k]))))'],
-    { cwd: root, encoding: 'utf8' }));
+        { cwd: root, encoding: 'utf8' }));
     assert.deepEqual(JSON.parse(observed), deps);
 });
 

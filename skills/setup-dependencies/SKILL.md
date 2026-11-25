@@ -1,6 +1,6 @@
 ---
 name: setup-dependencies
-description: "Check capability-specific dependencies, explain missing tools, and install with consent. Covers Pandoc, Pillow, Mermaid CLI, svgexport, jszip, and pinned chart/browser MCP servers. Use after plugin installation, when a skill reports a missing tool, or when checking MCP updates."
+description: "Check capability-specific dependencies, explain missing tools, and install with consent. Covers Pandoc, Pillow, Mermaid CLI, svgexport, jszip, and pinned chart/browser MCP servers. Use when another skill needs an unavailable dependency, after plugin installation, or when checking MCP updates."
 lastReviewed: 2026-11-05
 ---
 
@@ -13,6 +13,47 @@ render helpers, and two MCP servers that back charts and
 browser verification.
 
 Nothing here installs without consent. A dependency check is read-only.
+
+## When another skill is blocked
+
+Load this skill as soon as confirmed missing or unusable dependencies block the
+requested capability; do not wait for a separate setup request. Carry over the
+blocked skill, requested output, exact diagnostic, and selected runtime or
+interpreter. Run a read-only check first. Use a supported fallback without
+setup if it still meets the requested output; do not silently downgrade it.
+
+Distinguish a missing dependency from a host that has not registered or loaded
+it, a missing user input, or an unsupported feature. Report only what blocks
+the task and propose the narrowest applicable remedy. Get explicit approval
+before installing, updating, or registering anything. After an approved fix,
+verify the dependency in the same runtime and resume the original skill; if
+the dependency remains unavailable, report the blocker instead of retrying
+blindly.
+
+## Installed Package Setup
+
+Use the installed ONE package, not the current workspace or a source checkout.
+Resolve its root through host plugin discovery or from this skill's actual
+location in the full package. Confirm the root contains the bundled
+[`install-and-check.ps1`](../../install-and-check.ps1) and that it supports
+`-DependenciesOnly`. A copied skill directory by itself is not the full plugin.
+
+On PowerShell hosts, report the pins, registry, and install destinations first:
+
+```powershell
+& "<installed-plugin-root>\install-and-check.ps1" -DependenciesOnly
+```
+
+After explicit approval, add `-Apply` to install that package's reviewed pins
+and missing Pandoc/Pillow. Add `-VerifyOnly` instead to check existing tools,
+MCP launchers, and renderer output without downloading or reinstalling tools.
+These commands do not refresh Mall, update the plugin, activate instructions,
+or register a host. They still need the relevant system tools and configured
+package sources; this is checkout-independent setup, not an offline installer.
+
+If the installed release lacks `-DependenciesOnly`, say so. Use its documented
+checker or MCP-only provisioner when that narrower scope meets the request;
+do not substitute an unapproved checkout or update the plugin implicitly.
 
 ## Unified Source Setup
 
@@ -69,7 +110,7 @@ relative to a capability, so the report sorts every item into three tiers:
 | Tier | Meaning | Members |
 | --- | --- | --- |
 | **Required** | The skills that call it cannot run without it | Pandoc (document conversion), Pillow (annotate-screenshot), Flint MCP (chart rendering) |
-| **Recommended** | Those skills run and produce less | Mermaid CLI (diagrams stay unrendered), svgexport (no PNG export), jszip (Word loses table formatting), Playwright MCP (`render-verify` falls back to the host's browser tools) |
+| **Recommended** | Optional for the base workflow; required when the selected output depends on them | Mermaid CLI (Word diagrams or HTML PNG mode), svgexport (SVG-to-PNG conversion), jszip (Word formatting), Playwright MCP (browser verification when native tools are insufficient) |
 | **Add-on** | Blocks nothing. Adds capability this package does not have | Visual companions, Microsoft ecosystem plugins |
 
 The two MCP servers are provisioned by one command but they are not equally
@@ -83,8 +124,9 @@ affected converters are unavailable and should be named. A missing jszip means o
 plainer. A missing add-on means nothing at all, and telling someone to install
 one to "fix" a problem is wrong.
 
-Plugin installation is not handled here. `install-visual-companions` and
-`setup-enterprise` own those flows because they carry the marketplace
+Companion plugin installation is not part of the root helper's ONE setup.
+`install-visual-companions` and `setup-enterprise` own those flows, including
+marketplace
 registration, the consent gates, and the post-install caveats — several
 companions pull roughly 100 MB of Chromium each. This skill reports the state so
 one command shows the whole picture; it does not duplicate their install logic.
@@ -100,11 +142,11 @@ another. The report prints the store it read for that reason.
 
 ## Install With Consent
 
-Use the unified [root helper](../../install-and-check.ps1) after reviewing its
-status report and installation scopes. Only its explicit `-Apply` path changes
-plugin, instruction or dependency state. The checker rejects the retired
-`--apply` option before running probes; it cannot start a second unmanaged
-npm/pip installation path. For MCP-only setup, use the provisioner below.
+For an existing installation, use [installed package setup](#installed-package-setup)
+after reviewing the status report and installation scopes. Use unified source
+setup only when plugin installation or update is itself requested. The checker
+rejects the retired `--apply` option before running probes. For MCP-only setup,
+use the provisioner below.
 
 ## MCP Servers
 
@@ -114,7 +156,7 @@ or npx.
 
 | Pinned package | Tier | Role |
 | --- | --- | --- |
-| `flint-chart-mcp@1.0.1` with `flint-chart@1.0.1` | Required | Chart rendering, validated interactive show, and version-matched chart/theme/interaction/board resources. No fallback |
+| `flint-chart-mcp@1.1.1` with `flint-chart@1.1.1` | Required | Chart rendering, validated interactive show, and version-matched chart/theme/interaction/board resources. No fallback |
 | `@playwright/mcp@0.0.84` | Recommended | Browser verification. `render-verify` also works with the host's own browser tools |
 
 Provisioning selects all MCP servers by default. Use `--server flint` to select

@@ -36,6 +36,10 @@ Cross-project work stays explicit until separately authorized.
 
 ## Project artifact storage
 
+For skill resources, follow the
+[skill resource portability rule](skills/compile-brain/SKILL.md#skill-resource-portability).
+Do not rely on a repository checkout to supply information a skill needs at runtime.
+
 Keep requested documents, plans, reports, code, useful helpers, generated outputs,
 and supporting evidence inside this repository, never solely in session storage.
 Use existing project locations and respect explicitly approved destinations.

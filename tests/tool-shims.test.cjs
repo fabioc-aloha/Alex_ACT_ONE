@@ -22,7 +22,7 @@ function fixture(t, { tool = 'mmdc', local = false, badBin = false } = {}) {
         name: packageName, bin: { [tool]: badBin ? '../outside.cjs' : 'cli.cjs' },
     }));
     fs.writeFileSync(path.join(directory, 'cli.cjs'), 'console.log(JSON.stringify(process.argv.slice(2)));\n');
-    return { shim, directory };
+    return { shim, directory, root };
 }
 const windows = { skip: process.platform === 'win32' ? false : 'Real npm .cmd layout is Windows-specific' };
 const args = ['path with spaces.svg', '& whoami', 'literal%PATH%', 'a!b', '`literal`', 'quote"value'];
@@ -49,6 +49,21 @@ test('Windows async tool launch uses the same shell-free package resolution', wi
 test('a package bin escaping its package is rejected instead of running a shell', windows, t => {
     const { shim } = fixture(t, { badBin: true });
     assert.throws(() => runTool(shim, []), /bin.*(?:outside|escap)|(?:outside|escap).*bin/i);
+});
+test('Windows renderers reuse installed Edge without changing the caller environment', windows, t => {
+    for (const tool of ['mmdc', 'svgexport', 'copilot']) {
+        const { shim, directory, root } = fixture(t, { tool });
+        const programFiles = path.join(root, 'Program Files (x86)');
+        const edge = path.join(programFiles, 'Microsoft', 'Edge', 'Application', 'msedge.exe');
+        fs.mkdirSync(path.dirname(edge), { recursive: true });
+        fs.writeFileSync(edge, 'fixture');
+        fs.writeFileSync(path.join(directory, 'cli.cjs'), 'console.log(process.env.PUPPETEER_EXECUTABLE_PATH || "");\n');
+        const env = { 'ProgramFiles(x86)': programFiles };
+        const launch = childEnv => runTool(shim, [], { env: childEnv, encoding: 'utf8', timeout: 5000 }).trim();
+        assert.equal(launch(env), tool === 'copilot' ? '' : edge);
+        assert.equal(launch({ ...env, PUPPETEER_EXECUTABLE_PATH: 'explicit-browser.exe' }), 'explicit-browser.exe');
+        assert.equal(env.PUPPETEER_EXECUTABLE_PATH, undefined);
+    }
 });
 test('native executables still receive literal arguments', () => {
     assert.deepEqual(JSON.parse(runTool(process.execPath, ['-e',

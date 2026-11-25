@@ -37,9 +37,8 @@ const link = (name, path) => `[\`${name}\`](${path})`;
 const cell = value => String(value).replace(/\s+/g, ' ').trim().replace(/\|/g, '&#124;');
 function summary(value) {
     const text = cell(value);
-    if (text.length <= 180) return text;
-    const end = text.lastIndexOf(' ', 177);
-    return text.slice(0, end) + '...';
+    const excerpt = text.length <= 180 ? text : text.slice(0, text.lastIndexOf(' ', 177)) + '...';
+    return excerpt.replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
 function metadata(text, path) {

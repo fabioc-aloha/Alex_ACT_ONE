@@ -326,7 +326,7 @@ marketplace-first [getting-started guide](docs/getting-started.md).
 This section applies only after separately approved Mall publication and
 installation; a source push does not authorize running the helper below.
 
-From the current source checkout, first refresh catalogs and inspect versions
+From the current source checkout, first refresh Alex Mall and inspect versions
 without changing plugins or instructions:
 
 ```powershell
@@ -418,8 +418,11 @@ decision because Puppeteer downloads browsers outside the npm feed. The pinned
 svgexport package also uses an old, deprecated Puppeteer browser build; review
 that before allowing a download.
 
-The existing renderer-readiness checks and browser-download restrictions
-are unchanged.
+The setup probes verify renderer output, not end-to-end converter output. For
+converter changes, also exercise Mermaid PNG embedding in Word and HTML with
+the pinned Mermaid CLI and a compatible browser. A mocked renderer does not
+qualify the real CLI or the browser. For SVG conversion changes, verify that
+Word embeds the PNG produced by svgexport.
 
 The [2026-11-09 real setup test](docs/verification/setup-renderer/2026-11-09/results.json)
 records both actual report/verification shell variants and a full real

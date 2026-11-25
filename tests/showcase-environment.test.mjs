@@ -17,8 +17,8 @@ const pins = [
 test('canonical demo builds have explicit reviewed renderer and protocol pins, separate from runtime upgrades', () => {
     assert.deepEqual(deps.SHOWCASE_PACKAGES, pins);
     assert.deepEqual(deps.mcpPackages(['flint']), [
-        { name: 'flint-chart-mcp', version: '1.0.1', route: 'flint' },
-        { name: 'flint-chart', version: '1.0.1', route: null },
+        { name: 'flint-chart-mcp', version: '1.1.1', route: 'flint' },
+        { name: 'flint-chart', version: '1.1.1', route: null },
     ]);
 });
 test('demo environment validation rejects floating renderer drift before generating any artifacts', () => {

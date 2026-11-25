@@ -4,8 +4,8 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
-    "flint-chart-mcp": "1.0.1",
-    "flint-chart": "1.0.1",
+    "flint-chart-mcp": "1.1.1",
+    "flint-chart": "1.1.1",
     "@playwright/mcp": "0.0.84",
     "jszip": "3.10.2",
     "@napi-rs/canvas": "1.1.0",

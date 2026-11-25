@@ -1,38 +1,26 @@
 # Documentation
 
-This source repository maintains and ships Alex ACT ONE. Documentation supports
-using the plugin, maintaining its capabilities, validating compatibility, and
-delivering reviewed releases; it is not an adopter-recovery operations manual.
-
-## Start and operate
+## Use Alex ACT ONE
 
 - [Getting started](getting-started.md): install, activation, and first workflow.
-- [Install and host reference](install.md): delivery, host differences, and upgrades.
-- [Testing](testing.md): source verification environments and release boundaries.
-- [Evaluation guide](launch/evaluation-guide.md): bounded comparison methodology.
+- [Install and host reference](install.md): supported apps and optional tools.
+- [Manual installation](../README.md#appendix-manual-installation): terminal and advanced setup commands.
+- [Evaluation guide](launch/evaluation-guide.md): try the workflows on your own tasks.
 
 ## Flint demonstrations
 
-- [Editorial gallery](flint-showcase.html).
-- [Experimental interaction lab](flint-experimental.html).
+- [Editorial gallery](../skills/flint-chart/resources/flint-showcase.html).
+- [Experimental interaction lab](../skills/flint-chart/resources/flint-experimental.html).
 
-Both demonstrations remain part of the candidate package, with their exact
-HTML bytes and existing generation/verification contracts preserved.
+The bundled demos open offline in a browser. They do not require the Flint
+server or verify that it is connected to your app.
 
-## Reusable verification
+## Maintainer references
 
+- [Testing and host evidence](testing.md).
 - [Scenario guide](verification/README.md) and
   [versioned scenario definitions](verification/skill-scenarios.json).
 - [Browser acceptance contract](verification/flint-browser.md).
-- [Candidate package boundary](package.md).
-
-Historical plans and recovery/synchronization evidence are maintained separately
-in the repository archive. They are not required for ordinary plugin use and
-are not included in the lean candidate package.
-
-## Maintainer entry points
-
-Use the source repository's [roadmap](../ROADMAP.md) for pending product work,
-[handoff](../HANDOFF.md) for restart state, and
-[release checklist](../RELEASE-CHECKLIST.md) for shipping gates. Completed
-incident work stays in history rather than becoming a second active backlog.
+- [Package boundary](package.md).
+- [Roadmap](../ROADMAP.md), [handoff](../HANDOFF.md), and
+  [release checklist](../RELEASE-CHECKLIST.md).

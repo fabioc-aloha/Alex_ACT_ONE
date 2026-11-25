@@ -57,11 +57,12 @@
   version-stamped demos, source/payload hashes, fresh-checkout 694/57 strict
   lanes and all six same-commit jobs passed. The public Mall API and actual
   setup-script catalog URL both select `0.9.7`; macOS stays roadmap-only.
-- Release `0.9.7` simplifies the root helper: default mode registers
-  missing Alex Mall, refreshes registered catalogs and reports installed/latest
-  versions. Only `-Apply` installs or updates the latest Mall version and
-  activates owned instructions with conflict checks, then sets up capability
-  tools. No checkout version pin, uninstall or forced overwrite is required.
+- The frozen `0.9.7` root helper registers missing Alex Mall, refreshes all
+  registered catalogs, and reports installed/latest versions. Current source
+  narrows that refresh to Alex Mall. Only `-Apply` installs or updates the
+  latest Mall version and activates owned instructions with conflict checks,
+  then sets up capability tools. No checkout version pin, uninstall or forced
+  overwrite is required.
   Stale retired-provider script comments were removed. The frozen `0.9.6`
   tag/payload and active user state remain unchanged.
 - The single public source entry point is now `install-and-check.ps1`.
@@ -136,6 +137,18 @@
 
 ## Next Action
 
+For Copilot harness compatibility, run the [R8 text-only clarification probes](docs/verification/README.md#text-only-clarification-and-resume).
+Source now supports a normal chat reply for recovery and missing chart data;
+the two-turn behavior still needs live evidence for each target client.
+Use Local as the control, then run the [native Copilot pilots](ROADMAP.md#pilot-native-copilot-capabilities).
+The [2026-11-25 pilot](docs/verification/2026-11-25-copilot-flint-pilot.md)
+passed both CLI follow-up probes and isolated Flint 1.1.1 contract tests.
+The later [offline browser run](docs/testing.md#flint-111-source-migration)
+verified the bundled application-state example. Both bundled demos now match
+exact rebuilds with the current builder. The
+[Flint delivery gate](ROADMAP.md#verify-native-flint-111-delivery) still needs
+native App UI evidence. No active runtime or retirement decisions changed.
+
 Review [OPTIMIZATION-PLAN.md](OPTIMIZATION-PLAN.md) and resolve the
 [scope decision](ROADMAP.md#review-cross-domain-optimization-scope) before
 implementation. Preserve cross-domain completion and artifact safeguards.
@@ -145,7 +158,7 @@ exercise as fresh host qualification.
 The existing manual-install follow-up remains separate:
 
 From the current source checkout, use `.\install-and-check.ps1` to refresh
-catalogs and inspect installed/latest versions; add `-Apply` only for a
+Alex Mall and inspect installed/latest versions; add `-Apply` only for a
 user-approved update, instruction bootstrap and full dependency setup.
 Review the selected Python, system managers, private/global destinations and
 browser readiness before applying. Use a standalone terminal

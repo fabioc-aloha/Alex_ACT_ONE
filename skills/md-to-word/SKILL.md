@@ -8,6 +8,8 @@ lastReviewed: 2026-11-06
 
 # Md To Word
 
+If a missing tool blocks the requested output, load [Setup Dependencies](../setup-dependencies/SKILL.md#when-another-skill-is-blocked).
+
 > One command to professional Word documents — diagrams, tables, and formatting done right on first attempt.
 
 Convert any Markdown document into polished Word (.docx) files ready for stakeholders, executives, and external audiences. Supports all standard Markdown formatting, Mermaid diagrams (auto-converted to PNG), and SVG illustrations (auto-embedded).
@@ -78,7 +80,8 @@ All Mermaid diagram types are supported:
 | **Mindmap** | `mindmap` | Width priority |
 | **Timeline** | `timeline` | Width priority |
 
-Diagrams are rendered at 4x scale (4800px width) for crisp printing, then sized to fit within page bounds.
+Mermaid CLI renders diagrams at a 1600px target size and 3x scale, then Word
+sizes the resulting image to fit within page bounds.
 
 Rendered PNGs are checked for chunk structure/checksums, valid dimensions,
 complete compressed raster data, and row filters before replacing an existing
@@ -135,7 +138,7 @@ node skills/md-to-word/scripts/md-to-word.cjs docs/plan.md --keep-temp
 | **pandoc** | Markdown to Word | Yes |
 | **mermaid-cli** | Mermaid diagrams to PNG | Only for diagrams |
 | **jszip** | OOXML post-processing (table formatting, image centering) | No — degrades |
-| **svgexport** | SVG to PNG | No |
+| **svgexport** | SVG to PNG | Only when converting referenced SVGs without existing PNGs |
 
 To check what is present and install what is missing:
 
@@ -345,9 +348,9 @@ Paragraphs starting with "Table N" or "Figure N":
 | "pandoc not found" | pandoc not in PATH | Run `/alex-act-one setup-dependencies`, then restart the terminal |
 | "svgexport not found" | svgexport not installed | Run `/alex-act-one setup-dependencies` |
 | Tables not styled | jszip not available | Use the unified setup helper or select the matching private runtime with `ALEX_ACT_ONE_RUNTIME_ROOT` |
-| Diagrams too small | Outdated script | Update to v5.3.0+ |
+| Diagrams too small | Dense diagram or constrained page width | Split the diagram or use a wider page layout |
 | Images overflow | Complex diagram | Use `--debug` and check PNG dimensions |
-| SVG not converting | Missing svgexport | Install or use PNG source |
+| Mermaid or SVG renderer fails | Missing renderer or incompatible browser | Read the renderer error; set `PUPPETEER_EXECUTABLE_PATH` to an installed compatible browser, or use a pre-rendered PNG |
 | Document corrupt | Incomplete write | Check disk space, re-run |
 
 ### Debug Mode
@@ -468,7 +471,9 @@ console.log(JSON.stringify(['mmdc', 'svgexport'].map(key => d.specOf(d.TOOLS[key
 
 1. Copy `skills/md-to-word/scripts/md-to-word.cjs` to the same relative path in the target project.
 2. Copy the complete `scripts/shared/` directory to the same relative path in the target project. Keep its helpers together, including `process-command.cjs` and `runtime-status.cjs`, so unconditional and transitive imports resolve.
-3. Install prerequisites: Pandoc is required; jszip, Mermaid CLI, and svgexport are optional format helpers. The copied `tool-runner` still prints the install command for any missing tool.
+3. Install prerequisites: Pandoc is required. Mermaid CLI is needed for Mermaid
+  blocks, and svgexport is needed when converting SVGs without existing PNGs.
+  Both renderers need a compatible browser. JSZip is optional for Word formatting.
 4. Run: `node skills/md-to-word/scripts/md-to-word.cjs your-doc.md`.
 
 ---

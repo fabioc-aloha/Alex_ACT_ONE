@@ -26,7 +26,7 @@ test('provenance uses source/content digests rather than a wall clock, home path
 
 test('both generated pages carry portable source status and machine-readable build provenance', () => {
     for (const file of ['flint-showcase.html', 'flint-experimental.html']) {
-        const html = readFileSync(new URL(`../docs/${file}`, import.meta.url), 'utf8');
+        const html = readFileSync(new URL(`../skills/flint-chart/resources/${file}`, import.meta.url), 'utf8');
         const block = html.match(/<script type="application\/json" id="build-provenance">([\s\S]*?)<\/script>/);
         assert.ok(block, file);
         const provenance = JSON.parse(block[1]);
@@ -39,7 +39,7 @@ test('both generated pages carry portable source status and machine-readable bui
 
 test('live themed inputs leave dimensions to upstream responsive layout and expose a keyboard example', () => {
     for (const file of ['flint-showcase.html', 'flint-experimental.html']) {
-        const html = readFileSync(new URL(`../docs/${file}`, import.meta.url), 'utf8');
+        const html = readFileSync(new URL(`../skills/flint-chart/resources/${file}`, import.meta.url), 'utf8');
         const gallery = JSON.parse(html.match(/<script type="application\/json" id="showcase-data">([\s\S]*?)<\/script>/)[1]);
         let keyboard = false;
         for (const sample of gallery.samples) {

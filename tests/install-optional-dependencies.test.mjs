@@ -86,7 +86,9 @@ param([switch]$Apply,[switch]$VerifyOnly,[string]$RegistryTarballPrefix,[string]
 \${env:ProgramFiles(x86)} = $env:FAKE_PROGRAM_FILES_X86
 $env:ProgramFiles = $env:FAKE_PROGRAM_FILES
 $env:LOCALAPPDATA = $env:FAKE_LOCAL_APPDATA
-if ($PSBoundParameters.ContainsKey('IncludeReplicate')) {
+if ($env:FAKE_DEPENDENCIES_ONLY) {
+    & $env:FAKE_SETUP_SCRIPT -DependenciesOnly -CopilotCommand $env:FAKE_NO_COPILOT @PSBoundParameters
+} elseif ($PSBoundParameters.ContainsKey('IncludeReplicate')) {
     & $env:FAKE_SETUP_SCRIPT @PSBoundParameters
 } else {
     . $env:FAKE_SETUP_SCRIPT @PSBoundParameters
@@ -103,7 +105,7 @@ if ($PSBoundParameters.ContainsKey('IncludeReplicate')) {
     const localAppData = join(root, 'Local AppData');
     const autoBrowser = join(options.installedEdge === 'user' ? localAppData
         : options.installedEdge === 'system64' ? programFiles : programFilesX86,
-    'Microsoft', 'Edge', 'Application', 'msedge.exe');
+        'Microsoft', 'Edge', 'Application', 'msedge.exe');
     if (options.installedEdge) {
         mkdirSync(dirname(autoBrowser), { recursive: true });
         writeFileSync(autoBrowser, '');
@@ -251,14 +253,16 @@ exit 1
         ...(browserPath !== undefined ? { BrowserExecutablePath: browserPath } : {}),
         ...(options.removedReplicateFlag ? { IncludeReplicate: true } : {}),
     }, {
-        root,
+        root, cwd: root,
         encoding: 'utf8', timeout: 30000,
         env: {
             ...process.env,
             ALEX_ACT_ONE_RUNTIME_ROOT: options.inheritRuntime ? runtime : join(root, 'unselected-runtime'),
             TEMP: root, TMP: root, TMPDIR: root,
             FAKE_POWERSHELL: shell,
-            FAKE_SETUP_SCRIPT: script,
+            FAKE_SETUP_SCRIPT: options.installedRoot ? join(options.installedRoot, 'install-and-check.ps1') : script,
+            FAKE_DEPENDENCIES_ONLY: options.installedRoot ? '1' : '',
+            FAKE_NO_COPILOT: join(root, 'copilot-must-not-run'),
             FAKE_PLUGIN_ROOT: pluginRoot,
             FAKE_SYSTEM_LOG: systemLog,
             FAKE_PANDOC_TEMPLATE: pandocTemplate,
@@ -343,6 +347,20 @@ exit 1
         /--upgrade|--break-system-packages|--index-url|--trusted-host|accept-.*agreements/.test(arg))));
     return { commands, output, runtime, globalPrefix, browserPath, inheritedBrowser, autoBrowser, renderers, systemCommands };
 }
+
+test('dependency-only setup applies and verifies pins from a packaged copy without Copilot', async t => {
+    const { buildPackage } = await import('../scripts/build-plugin-package.mjs');
+    const temporary = mkdtempSync(join(ROOT, '.test-packaged-setup-'));
+    t.after(() => rmSync(temporary, { recursive: true, force: true }));
+    const installedRoot = join(temporary, 'installed plugin');
+    buildPackage(ROOT, installedRoot);
+    const { commands, output } = runInstaller(t, 'pwsh', {
+        installedRoot, apply: true, verifyAgain: true, registry: microsoftProxy,
+    });
+    assert.ok(output.includes(`Dependency owner: ${installedRoot}`));
+    assert.equal(commands.filter(args => args[0] === 'install').length, packages.length);
+    assert.match(output, /Verified all selected pinned dependencies/);
+});
 
 for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pwsh']) {
     test(`${shell}: apply refreshes registry metadata for every pin and install instead of preferring a stale transitive cache`, t => {
@@ -443,8 +461,10 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
         });
         for (const [failure, expected] of [['failure', /winget failure/], ['no-op', /Pandoc installation verification failed/]]) {
             test(`${shell}: Pandoc ${failure} cannot claim readiness`, t => {
-                runInstaller(t, shell, { apply: true, missingPandoc: true,
-                    ...(failure === 'failure' ? { systemFailure: 'pandoc' } : { systemNoop: 'pandoc' }), error: expected });
+                runInstaller(t, shell, {
+                    apply: true, missingPandoc: true,
+                    ...(failure === 'failure' ? { systemFailure: 'pandoc' } : { systemNoop: 'pandoc' }), error: expected
+                });
             });
         }
     } else {
@@ -458,8 +478,10 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
 
     for (const [failure, expected] of [['failure', /pip policy failure/], ['no-op', /Pillow.*verification|Pillow.*missing/i]]) {
         test(`${shell}: Pillow ${failure} cannot claim readiness`, t => {
-            runInstaller(t, shell, { apply: true, missingPillow: true,
-                ...(failure === 'failure' ? { systemFailure: 'pillow' } : { systemNoop: 'pillow' }), error: expected });
+            runInstaller(t, shell, {
+                apply: true, missingPillow: true,
+                ...(failure === 'failure' ? { systemFailure: 'pillow' } : { systemNoop: 'pillow' }), error: expected
+            });
         });
     }
     test(`${shell}: checks every pin first, installs in correct scopes, and verifies versions`, (t) => {

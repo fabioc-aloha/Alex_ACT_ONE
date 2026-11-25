@@ -318,8 +318,8 @@ Rows H001-H220 retain the archive manifest order; N rows are newly created files
 | M005 | [HANDOFF.md](../../../../HANDOFF.md) | KEEP | Restart-critical state remains necessary. Remove stale work-in-progress claims only by reconciling current evidence, not by deleting the handoff. |
 | M006 | [README.md](../../../../README.md) | KEEP | Keep product inventory and the concise storage boundary; move bulky recovery details into their index rather than remove the README. |
 | M007 | [ROADMAP.md](../../../../ROADMAP.md) | KEEP | Owns pending host/enforcement work; instructions and a historical recovery test do not close the runtime enforcement gate. |
-| M008 | [docs/flint-experimental.html](../../../../docs/flint-experimental.html) | KEEP | Pre-existing product demonstration, not newly recovered clutter. Only release provenance changed during this work. |
-| M009 | [docs/flint-showcase.html](../../../../docs/flint-showcase.html) | KEEP | Pre-existing product demonstration, not newly recovered clutter. Its large size is unrelated to recovery retention. |
+| M008 | [docs/flint-experimental.html](https://github.com/fabioc-aloha/Alex_ACT_ONE/blob/dd242ccefecbc8739937c9ddf4dfc56b40ff9627/docs/flint-experimental.html) | KEEP | Pre-existing product demonstration, not newly recovered clutter. Only release provenance changed during this work. |
+| M009 | [docs/flint-showcase.html](https://github.com/fabioc-aloha/Alex_ACT_ONE/blob/dd242ccefecbc8739937c9ddf4dfc56b40ff9627/docs/flint-showcase.html) | KEEP | Pre-existing product demonstration, not newly recovered clutter. Its large size is unrelated to recovery retention. |
 | M010 | [docs/getting-started.md](../../../../docs/getting-started.md) | KEEP | Existing onboarding guide; only release notices were updated. |
 | M011 | [docs/install.md](../../../../docs/install.md) | KEEP | Existing host/install reference; preserve source/Mall/activation boundaries. |
 | M012 | [docs/testing.md](../../../../docs/testing.md) | KEEP | Owns dated verification claims and release limits. Retain concise recovery receipts, not every raw intermediate log inline. |

@@ -12,7 +12,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const ROOT_FILES = ['plugin.json', 'manifest.json', 'LICENSE', 'README.md',
     'install-and-check.ps1'];
 const DOCS = ['docs/README.md', 'docs/package.md', 'docs/getting-started.md', 'docs/install.md', 'docs/testing.md',
-    'docs/flint-showcase.html', 'docs/flint-experimental.html', 'docs/launch/evaluation-guide.md',
+    'docs/launch/evaluation-guide.md',
     'docs/verification/README.md', 'docs/verification/flint-browser.md', 'docs/verification/skill-scenarios.json'];
 const MAINTAINER_SCRIPTS = new Set(['scripts/session-recovery.mjs', 'scripts/recover-local-artifacts.mjs',
     'scripts/archive-maintainer-docs.mjs', 'scripts/build-plugin-package.mjs',
@@ -40,7 +40,7 @@ export function packageSources(root) {
     const selected = [...ROOT_FILES, ...DOCS, ...['skills', 'instructions', 'prompts', 'assets']
         .flatMap(name => tree(root, name)),
     ...tree(root, 'scripts').filter(name => !MAINTAINER_SCRIPTS.has(name)),
-    'ci/runtime/package.json', 'ci/runtime/package-lock.json', 'tests/rich-email.test.cjs'];
+        'ci/runtime/package.json', 'ci/runtime/package-lock.json', 'tests/rich-email.test.cjs'];
     const manifest = JSON.parse(readFileSync(join(root, 'manifest.json'), 'utf8'));
     for (const group of ['skills', 'instructions', 'prompts']) {
         for (const entry of manifest.assets[group]) assert.ok(selected.includes(entry.path), `Missing declared ${group} asset: ${entry.path}`);
@@ -89,8 +89,10 @@ export function verifyPackage(output, sourceRoot = null) {
     for (const group of ['skills', 'instructions', 'prompts']) {
         for (const asset of manifest.assets[group]) assert.ok(expected.has(asset.path), 'Declared package asset missing');
     }
-    return { files: expected.size, bytes: receipt.files.reduce((sum, record) => sum + record.bytes, 0),
-        hashesVerified: true, pluginVersion: plugin.version, status: receipt.status };
+    return {
+        files: expected.size, bytes: receipt.files.reduce((sum, record) => sum + record.bytes, 0),
+        hashesVerified: true, pluginVersion: plugin.version, status: receipt.status
+    };
 }
 
 export function buildPackage(root, output, { release = false } = {}) {
@@ -125,8 +127,10 @@ export function buildPackage(root, output, { release = false } = {}) {
                 edits.push('candidate-package-scope-notice');
             }
         }
-        return { path: name, sourceSha256: sha256(original), sourceContentSha256: contentHash(original),
-            sha256: sha256(data), bytes: data.length, edits, data };
+        return {
+            path: name, sourceSha256: sha256(original), sourceContentSha256: contentHash(original),
+            sha256: sha256(data), bytes: data.length, edits, data
+        };
     });
     mkdirSync(dirname(output), { recursive: true });
     const staging = mkdtempSync(join(dirname(output), '.alex-package-'));
@@ -136,11 +140,13 @@ export function buildPackage(root, output, { release = false } = {}) {
             mkdirSync(dirname(file), { recursive: true });
             writeFileSync(file, entry.data, { flag: 'wx' });
         }
-        const receipt = { schemaVersion: 1, status: release ? 'release-payload' : 'unreleased-source-candidate',
+        const receipt = {
+            schemaVersion: 1, status: release ? 'release-payload' : 'unreleased-source-candidate',
             declaredPluginVersion: JSON.parse(readFileSync(join(root, 'plugin.json'), 'utf8')).version,
             sourceCommit: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(),
             sourceHasUncommittedChanges: Boolean(execFileSync('git', ['status', '--porcelain'], { cwd: root, encoding: 'utf8' }).trim()),
-            files: prepared.map(({ data, ...record }) => record) };
+            files: prepared.map(({ data, ...record }) => record)
+        };
         writeFileSync(join(staging, 'package-receipt.json'), `${JSON.stringify(receipt, null, 2)}\n`, { flag: 'wx' });
         verifyPackage(staging);
         for (const entry of prepared) {

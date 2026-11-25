@@ -52,3 +52,25 @@ test('every scenario explicitly permits the required skill references without gr
         assert.ok(item.prompt.includes('This does not permit commands, file writes, installation, or external actions.'), item.id);
     }
 });
+
+test('recovery and chart clarification can continue in chat without a host form', () => {
+    const recovery = readFileSync(join(ROOT, 'skills', 'proactive-awareness', 'references', 'project-recovery.md'), 'utf8');
+    const chart = readFileSync(join(ROOT, 'skills', 'flint-chart', 'SKILL.md'), 'utf8');
+    for (const guidance of [recovery, chart]) {
+        assert.match(guidance, /plain[- ]text question/i);
+        assert.match(guidance, /(?:unavailable|unconfirmed)[\s\S]{0,120}(?:form|reply)|form[\s\S]{0,120}(?:unavailable|unconfirmed)/i);
+        assert.match(guidance, /(?:wait|stop)[\s\S]{0,72}(?:reply|answer|input)/i);
+    }
+    const guide = readFileSync(join(ROOT, 'docs', 'verification', 'README.md'), 'utf8');
+    assert.match(guide, /### Text-only clarification and resume/);
+    assert.match(guide, /normal chat reply/);
+    assert.match(guide, /Record both turns/);
+});
+
+test('missing chart inputs can be clarified before tool discovery or chart framing', () => {
+    const chart = readFileSync(join(ROOT, 'skills', 'flint-chart', 'SKILL.md'), 'utf8');
+    const clarify = chart.indexOf('plain-text question');
+    assert.ok(clarify >= 0 && clarify < chart.indexOf('get_flint_skill'));
+    assert.ok(clarify < chart.indexOf('](../chart-big-idea/SKILL.md)'));
+    assert.match(chart, /No Flint\s+tool is needed to clarify/i);
+});

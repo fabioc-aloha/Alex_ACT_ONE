@@ -26,11 +26,15 @@ export function laneSelection(root, lane, platform = process.platform) {
     return { files, excluded };
 }
 
-export function verifyTap(tap, exitCode) {
+export function verifyTap(tap, exitCode, signal = null) {
+    if (signal) throw new Error(`Test process was terminated by ${signal} before completing the lane`);
     const result = {};
     for (const field of ['tests', 'pass', 'fail', 'cancelled', 'skipped', 'todo']) {
         const matches = [...tap.matchAll(new RegExp(`^# ${field} (\\d+)[ \\t]*\\r?$`, 'gm'))];
-        if (matches.length !== 1) throw new Error(`Missing or ambiguous TAP summary: ${field}`);
+        if (matches.length !== 1) {
+            const exit = exitCode !== 0 ? `Test process did not complete (exit=${exitCode}). ` : '';
+            throw new Error(`${exit}Missing or ambiguous TAP summary: ${field}`);
+        }
         const value = Number(matches[0][1]);
         if (!Number.isSafeInteger(value)) throw new Error(`Invalid TAP total: ${field}`);
         result[field] = value;
@@ -54,8 +58,9 @@ export function runTests(files, { cwd = ROOT, env = process.env, output = text =
         child.stdout.on('data', data => { tap += data.toString(); output(data.toString()); });
         child.stderr.on('data', data => output(data.toString()));
         child.on('error', reject);
-        child.on('close', code => {
-            try { resolve(verifyTap(tap, code)); } catch (error) { reject(error); }
+        child.on('close', (code, signal) => {
+            if (child.killed) return reject(new Error('Test process exceeded the 600000 ms lane timeout'));
+            try { resolve(verifyTap(tap, code, signal)); } catch (error) { reject(error); }
         });
     });
 }

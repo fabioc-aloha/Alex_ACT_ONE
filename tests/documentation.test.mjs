@@ -77,6 +77,8 @@ test('the documentation generator has no drift and --check performs no writes', 
     assert.ok(existsSync(script), 'Missing reproducible documentation generation');
     const { generateSections, replaceSections } = await import(pathToFileURL(script));
     const sections = generateSections(ROOT);
+    assert.match(sections['SKILL TABLE'], /data\/&lt;slug&gt;\.json/);
+    assert.doesNotMatch(sections['SKILL TABLE'], /data\/<slug>\.json/);
     assert.equal(replaceSections(read('README.md'), sections), read('README.md'));
     assert.throws(() => replaceSections('No markers here', sections), /marker/i);
     const before = readFileSync(join(ROOT, 'README.md'));
@@ -126,7 +128,7 @@ test('generation rejects a prompt routed to a missing owner before producing mis
 
 test('release docs include the interaction workflow without claiming exhaustive host verification', () => {
     const readme = read('README.md');
-    assert.match(readme, /## Native-first.*optimization/i);
+    assert.match(readme, /## Flint charts and interaction demos/);
     for (const owner of ['critical-thinking', 'code-review', 'big-idea', 'convert', 'proactive-awareness', 'compile-brain']) {
         assert.ok(readme.includes(`](skills/${owner}/SKILL.md)`), owner);
     }
@@ -134,9 +136,9 @@ test('release docs include the interaction workflow without claiming exhaustive 
     assert.doesNotMatch(readme, /source-only \[flint-interactions\]|not yet released `flint-interactions`/);
     assert.match(readme, /unverified|not freshly verified/i);
     for (const demo of ['flint-showcase.html', 'flint-experimental.html']) {
-        assert.ok(readme.includes(`](docs/${demo})`), demo);
+        assert.ok(readme.includes(`](skills/flint-chart/resources/${demo})`), demo);
     }
-    assert.match(readme, /build-flint-showcase\.mjs/);
+    assert.match(read('docs/testing.md'), /build-flint-showcase\.mjs/);
     assert.match(read('RELEASE-CHECKLIST.md'), /update-docs\.mjs --check/);
 });
 
@@ -147,7 +149,7 @@ test('install reference separates repository source, Mall release, and optional 
         assert.ok(install.includes(`| ${delivery} |`), delivery);
     }
     assert.match(install, /same.*version|version.*same/i);
-    assert.match(install, /revision/);
+    assert.match(read('docs/testing.md'), /loaded root and revision/);
     assert.match(install, /does not.*(?:activate|provision)/i);
     assert.match(read('README.md'), /\]\(docs\/install\.md#installation-sources\)/);
     assert.doesNotMatch(read('ROADMAP.md'), /source-only until a separately approved release and installation/);
@@ -158,15 +160,18 @@ test('release and testing docs cover the relocated host reference and current on
     const testing = read('docs/testing.md');
     assert.ok(checklist.includes('](docs/install.md#where-alex-act-one-works)'));
     assert.doesNotMatch(checklist, /compatibility table in the README/);
-    for (const source of [checklist, testing, read('README.md')]) {
+    for (const source of [checklist, testing]) {
         assert.ok(source.includes('tests\\onboarding.test.mjs'), 'Keep onboarding in the documented focused gate');
     }
     assert.match(testing, /disposable.*profile|profile.*disposable/i);
     assert.match(testing, /not.*(?:install|installation).*command|install.*commands.*not/is);
-    const readme = read('README.md').split('## What Is Next')[1];
-    assert.match(readme, /R7.*complete/is);
-    assert.match(readme, /R8/);
-    assert.match(read('ROADMAP.md'), /R8.*next|next.*R8/i);
+    const readme = read('README.md');
+    assert.ok(readme.includes('](docs/testing.md)'));
+    assert.doesNotMatch(readme, /tests\\onboarding\.test\.mjs|R7 onboarding/);
+    const r8 = read('ROADMAP.md').split(/^### R8\. /m)[1]?.split(/^#{2,3} /m)[0];
+    assert.ok(r8, 'Keep R8 in the roadmap');
+    assert.match(r8, /R8 remains open/);
+    assert.match(r8, /^\*\*Next actions:\*\*\r?\n\s*- \S/m);
 });
 
 test('roadmap is a pending-work plan with evidence links and explicit decision gates', () => {
@@ -196,8 +201,8 @@ test('release notices match package metadata and keep historical candidate switc
     for (const file of ['README.md', 'ROADMAP.md', 'docs/install.md', 'docs/getting-started.md']) {
         assert.match(read(file), new RegExp(`Release version: \`v?${escaped}\``, 'i'), file);
     }
-    const install = read('docs/install.md');
-    assert.match(install, /^## Testing the repository candidate$/m);
+    const install = read('docs/testing.md').split('## Testing the repository candidate')[1]?.split('\n## ')[0];
+    assert.ok(install, 'Preserve the historical instructions in maintainer documentation');
     for (const command of [
         'copilot plugin uninstall alex-act-one@alex-mall',
         'copilot plugin install fabioc-aloha/Alex_ACT_ONE',

@@ -45,8 +45,10 @@ test('archive custody preserves historical bytes and refuses conflicting destina
 
 test('package allowlist includes all runtime owners and both demos but excludes maintainer history', () => {
     const selected = packageSources(ROOT);
-    assert.ok(selected.includes('docs/flint-showcase.html'));
-    assert.ok(selected.includes('docs/flint-experimental.html'));
+    for (const demo of ['flint-showcase.html', 'flint-experimental.html']) {
+        assert.ok(selected.includes(`skills/flint-chart/resources/${demo}`));
+        assert.ok(!selected.includes(`docs/${demo}`), `Do not package a second demo copy: ${demo}`);
+    }
     assert.ok(selected.includes('docs/verification/skill-scenarios.json'));
     assert.ok(selected.includes('tests/rich-email.test.cjs'));
     assert.ok(selected.includes('scripts/assess-brain.cjs'));
@@ -70,7 +72,8 @@ test('lean package verifies, activates only a disposable profile, and detects ta
     assert.throws(() => buildPackage(ROOT, output), /already exists/);
     assert.throws(() => buildPackage(ROOT, ROOT), /replace the source/);
     for (const name of ['flint-showcase.html', 'flint-experimental.html']) {
-        assert.deepEqual(readFileSync(join(output, 'docs', name)), readFileSync(join(ROOT, 'docs', name)));
+        const resource = join('skills', 'flint-chart', 'resources', name);
+        assert.deepEqual(readFileSync(join(output, resource)), readFileSync(join(ROOT, resource)));
     }
     const script = join(output, 'skills', 'bootstrap-core', 'scripts', 'bootstrap-core.cjs');
     const profile = join(temporary, 'profile');
@@ -83,7 +86,7 @@ test('lean package verifies, activates only a disposable profile, and detects ta
     assert.equal(apply.status, 0, apply.stderr);
     assert.equal(JSON.parse(apply.stdout).verification.receiptCurrent, true);
     assert.equal(JSON.parse(invoke([]).stdout).receipt.action, 'preserve');
-    rmSync(join(output, 'docs', 'flint-showcase.html'));
+    rmSync(join(output, 'skills', 'flint-chart', 'resources', 'flint-showcase.html'));
     assert.throws(() => verifyPackage(output), /missing|ENOENT|Broken package links/);
 });
 

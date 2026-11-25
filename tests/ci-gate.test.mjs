@@ -33,6 +33,12 @@ test('gate rejects failures, skipped/todo/cancelled tests, empty runs, and absen
         [tap(), 2],
     ]) assert.throws(() => verifyTap(output, code), /fail|skip|todo|cancel|empty|total|exit|summary/i);
 });
+test('gate distinguishes interrupted tests from an invalid completed TAP summary', async () => {
+    const { verifyTap } = await api();
+    assert.throws(() => verifyTap('TAP version 13\n', null, 'SIGTERM'), /terminated.*SIGTERM/i);
+    assert.throws(() => verifyTap('TAP version 13\n', 9), /exit=9.*TAP summary/i);
+    assert.throws(() => verifyTap('TAP version 13\n', 0), /Missing or ambiguous TAP summary/i);
+});
 test('lane selection covers every test file and explicitly records platform exclusions', async () => {
     const { laneSelection } = await api();
     const windows = laneSelection(ROOT, 'structural', 'win32');
@@ -57,9 +63,9 @@ test('the actual gate runner cannot turn a real skipped test into success', asyn
     const skipped = join(root, 'skip.test.cjs');
     writeFileSync(passing, "require('node:test')('fixture passes',()=>{});\n");
     writeFileSync(skipped, "require('node:test')('fixture skipped',{skip:'missing required tool'},()=>{});\n");
-    const result = await runTests([passing], { cwd: root, output: () => {} });
+    const result = await runTests([passing], { cwd: root, output: () => { } });
     assert.equal(result.tests, 1);
-    await assert.rejects(runTests([skipped], { cwd: root, output: () => {} }), /skip/i);
+    await assert.rejects(runTests([skipped], { cwd: root, output: () => { } }), /skip/i);
 });
 test('integration gate fails before tests when the selected runtime is not provisioned', async t => {
     await api();
@@ -127,7 +133,8 @@ test('Word optional-module loading honors an explicitly provisioned CI runtime',
 });
 
 test('generated offline pages retain LF endings on Windows checkouts for reproducible builds', () => {
-    const result = spawnSync('git', ['check-attr', 'eol', '--', 'docs/flint-showcase.html', 'docs/flint-experimental.html'],
+    const resources = ['flint-showcase.html', 'flint-experimental.html'].map(name => `skills/flint-chart/resources/${name}`);
+    const result = spawnSync('git', ['check-attr', 'eol', '--', ...resources],
         { cwd: ROOT, encoding: 'utf8' });
     assert.equal(result.status, 0, result.stderr);
     assert.ok(result.stdout.trim().split(/\r?\n/).every(line => line.endsWith(': lf')));
