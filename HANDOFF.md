@@ -10,8 +10,8 @@
   improvements; implementation is not approved. The next decision is
   [optimization scope](ROADMAP.md#review-cross-domain-optimization-scope).
   No skills, installed state or frozen release payloads changed in this review.
-- The release target is `0.10.0`. The user requested the full release and will
-  test installation and activation afterward. The
+- GitHub and Alex Mall publish `0.10.0` at `v0.10.0:package/alex-act-one`.
+  The user will test installation and activation afterward. The
   [verification record](docs/verification/0.10.0-candidate.md) separates
   automated checks from native install evidence. macOS support is pending.
 - The previous release is
@@ -143,8 +143,8 @@
 
 For the `0.10.0` release, use the
 [verification record](docs/verification/0.10.0-candidate.md) and
-[release checklist](RELEASE-CHECKLIST.md). Verify the exact tagged payload
-and Mall route separately from the user's manual Windows setup.
+[release checklist](RELEASE-CHECKLIST.md). The tagged payload and Mall route
+are verified. Await the user's manual Windows setup and host observations.
 
 For Copilot harness compatibility, run the [R8 text-only clarification probes](docs/verification/README.md#text-only-clarification-and-resume).
 Source now supports a normal chat reply for recovery and missing chart data;
