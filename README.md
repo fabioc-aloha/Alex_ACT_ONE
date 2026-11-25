@@ -36,6 +36,10 @@ This README also describes candidate features where noted. See
 [installation sources](docs/install.md#installation-sources)
 and [host support](docs/install.md#where-alex-act-one-works) before switching apps.
 
+**macOS support is pending.** The PowerShell setup helper is for the Windows
+release path. Installation, activation, and optional tools have not been
+verified on macOS. See the [macOS roadmap item](ROADMAP.md#support-unified-installation-and-dependencies-on-macos).
+
 Try the [offline Flint chart gallery](skills/flint-chart/resources/flint-showcase.html) for semantic data, maps, themes, interactions, linked views, and static exports, or the [experimental interaction lab](skills/flint-chart/resources/flint-experimental.html) for polar brushing, direct reordering, distribution shapes, and reader-driven stories. Both ship with the Flint chart skill and open in a browser without a server or connection.
 
 Browse the [skill catalog](#the-skills), [install and host reference](docs/install.md),
@@ -428,9 +432,9 @@ installation is deprecated and can select unreleased source.
 
 ### Scripts for reinstalling and optional setup
 
-Use the [PowerShell helper](install-and-check.ps1) when you deliberately want
-the combined installation, activation, and dependency setup. It is not the
-normal first-session path.
+On Windows, use the [PowerShell helper](install-and-check.ps1) when you
+deliberately want the combined installation, activation, and dependency setup.
+It is not the normal first-session path.
 
 #### Reinstall and verify ONE
 

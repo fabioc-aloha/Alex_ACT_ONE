@@ -279,18 +279,20 @@ explicitly unverified. The recovery checker does not certify future writes.
 
 ### Support unified installation and dependencies on macOS
 
-**Status:** planned documentation only; implementation and native macOS
-verification are not authorized by this entry. The current unified
-[setup helper](install-and-check.ps1) has Windows-only automatic Pandoc
-installation. Existing cross-platform commands are not macOS certification.
+**Priority:** urgent follow-up after the Windows-focused `0.10.0` release.
+This does not block `0.10.0` or waive any of its existing release gates.
+
+**Status:** macOS installation, activation, and optional tool setup are not
+verified. The current [setup helper](install-and-check.ps1) requires PowerShell
+and can install missing Pandoc automatically only on Windows. This entry
+does not authorize implementation or a native install.
 
 **Next actions:**
 
-- Define supported macOS versions and Apple Silicon/Intel coverage. Choose
-  the supported entry point, including whether PowerShell 7 is a prerequisite,
-  before implementation. Preserve the unified contract: default mode reports
-  status without installing or activating; only explicit `-Apply` changes
-  plugins, instructions or dependencies.
+- Define supported macOS versions and start with Apple Silicon. Design a
+  native setup path that does not require PowerShell; claim Intel support only
+  after native Intel verification. Preserve the consent boundary: report
+  first, and require explicit approval before installing, updating, or activating.
 - Verify Alex Mall registration/refresh, latest-release installation/update,
   installed-owner dependency pins, per-profile instruction bootstrap, conflict
   preservation and environment restoration on the selected native hosts.
