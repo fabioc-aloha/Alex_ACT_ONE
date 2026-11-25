@@ -8,6 +8,8 @@ lastReviewed: 2026-11-06
 
 # Md To Eml
 
+If a missing tool blocks the requested output, load [Setup Dependencies](../setup-dependencies/SKILL.md#when-another-skill-is-blocked).
+
 > Write in Markdown, send as professional email — works in any email client
 
 Convert Markdown documents with YAML frontmatter into RFC 5322-compliant `.eml` files ready for governance, newsletter, and stakeholder communication workflows.

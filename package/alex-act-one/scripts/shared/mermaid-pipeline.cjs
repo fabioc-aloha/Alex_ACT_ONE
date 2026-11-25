@@ -247,7 +247,7 @@ function validateSyntax(mmdContent) {
  *
  * @param {string} mmdContent - Raw Mermaid diagram source
  * @param {string} outputPath - Destination PNG file path
- * @param {object} options - { scale, width, format, injectPalette, background }
+ * @param {object} options - { scale, width, format, injectPalette, background, throwOnError }
  * @returns {boolean} true if render succeeded
  */
 function renderMermaid(mmdContent, outputPath, options = {}) {
@@ -259,7 +259,7 @@ function renderMermaid(mmdContent, outputPath, options = {}) {
   const safeScale = Number(scale);
   const safeWidth = Number(width);
   if (!Number.isFinite(safeScale) || safeScale <= 0) return false;
-  if (!Number.isFinite(safeWidth) || safeWidth <= 0) return false;
+  if (!Number.isSafeInteger(safeWidth) || safeWidth <= 0) return false;
   if (!/^[a-zA-Z0-9#_-]+$/.test(String(bg))) return false;
 
   // Optional palette injection
@@ -277,12 +277,13 @@ function renderMermaid(mmdContent, outputPath, options = {}) {
       fs.mkdirSync(outDir, { recursive: true });
     }
 
-    runTool('mmdc', ['-i', tmpFile, '-o', outputPath, '-b', String(bg), '-s', String(safeScale), '-w', String(safeWidth)], {
+    runTool('mmdc', ['-i', tmpFile, '-o', outputPath, '-b', String(bg), '-s', String(safeScale), '--size', String(safeWidth)], {
       stdio: ['pipe', 'pipe', 'pipe'],
       timeout: 60000
     });
     return true;
-  } catch {
+  } catch (error) {
+    if (options.throwOnError) throw error;
     return false;
   } finally {
     try { fs.unlinkSync(tmpFile); } catch { /* ignore */ }

@@ -21,7 +21,7 @@ This skill is the **selection and evaluation reference**. It sits upstream of th
 | Verify after render | [`render-verify`](../render-verify/SKILL.md) |
 | Deliver / browse the gallery | [`docs-shell`](../docs-shell/SKILL.md) |
 
-`flint-chart` §0.2 (Question → family → chart) is a compact router pointing into this catalog; when a decision needs more than the router's ~7 rows, read this file. When picking a chart to hand-author rather than render via Flint, this catalog is still the reference — the delivery skill differs, the taxonomy does not.
+Flint's [chart selection reference](../flint-chart/references/chart-selection.md) gives a short route from question to chart family. Use this catalog when that route is too coarse or when hand-authoring a chart. The taxonomy is shared; confirm Flint availability separately in the installed catalog.
 
 ## When to Use
 

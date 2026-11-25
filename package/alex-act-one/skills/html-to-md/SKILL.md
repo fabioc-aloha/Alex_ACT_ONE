@@ -8,6 +8,8 @@ lastReviewed: 2026-05-26
 
 # Html To Md
 
+If Pandoc is unavailable, load [Setup Dependencies](../setup-dependencies/SKILL.md#when-another-skill-is-blocked).
+
 Convert HTML documents to clean Markdown. Strips inline styles, scripts, and tracking pixels while preserving semantic structure.
 
 ## Quick Start

@@ -8,6 +8,8 @@ lastReviewed: 2026-11-06
 
 # Md To Html
 
+If a missing tool blocks the requested output, load [Setup Dependencies](../setup-dependencies/SKILL.md#when-another-skill-is-blocked).
+
 > Write in Markdown, share as a polished web page — zero dependencies for viewers
 
 Convert Markdown documents into self-contained HTML files with embedded CSS, base64 images, and Mermaid diagram rendering. Ready for quick-share distribution, offline viewing, print, or email attachment.
@@ -145,7 +147,10 @@ node skills/md-to-html/scripts/md-to-html.cjs report.md --debug
 | Pie | ✅ Full render | Source retained |
 | Journey | ✅ Full render | Source retained |
 
-**PNG Mode** (`--mermaid-png`): Requires mermaid-cli (`mmdc`). Renders at scale 3 and 1200px width. Diagrams are embedded as base64 PNGs.
+**PNG Mode** (`--mermaid-png`): Requires Mermaid CLI (`mmdc`) and a compatible
+browser. Renders at scale 3 with a target size of 1200px and embeds base64 PNGs.
+If rendering fails, the conversion stops without replacing existing HTML. Use
+`--mermaid-fallback` to request tables instead.
 
 **Fallback Mode** (default): No renderer dependency. The supported simple
 `graph`/`flowchart` subset becomes node and relationship tables. Unsupported

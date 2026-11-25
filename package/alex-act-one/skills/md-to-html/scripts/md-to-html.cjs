@@ -236,8 +236,9 @@ function generateCss(style) {
 // ---------------------------------------------------------------------------
 // Mermaid handling
 // ---------------------------------------------------------------------------
-function processMermaidBlocks(markdown, sourceDir, usePng) {
+function processMermaidBlocks(markdown, usePng) {
   if (!sharedMermaid) {
+    if (usePng && /```mermaid\r?\n/.test(markdown)) throw new Error('Mermaid PNG rendering is unavailable; the shared renderer is missing.');
     return markdown.replace(/```mermaid\r?\n[\s\S]*?```/g, '*[Diagram -- view source markdown]*');
   }
 
@@ -246,21 +247,22 @@ function processMermaidBlocks(markdown, sourceDir, usePng) {
 
   for (const block of blocks) {
     if (usePng) {
-      // Render to PNG and embed as base64
-      const tmpPng = path.join(os.tmpdir(), `mmd-html-${Date.now()}-${block.index}.png`);
-      const rendered = sharedMermaid.renderMermaid(block.content, tmpPng, {
-        format: 'html', scale: 3, width: 1200, injectPalette: true
-      });
-      if (rendered && fs.existsSync(tmpPng)) {
-        try {
-          const base64 = fs.readFileSync(tmpPng).toString('base64');
-          markdown = markdown.replace(block.raw, `![Diagram](data:image/png;base64,${base64})`);
-        } finally {
-          try { fs.unlinkSync(tmpPng); } catch { /* ignore */ }
+      const staging = fs.mkdtempSync(path.join(os.tmpdir(), 'mmd-html-'));
+      const tmpPng = path.join(staging, 'diagram.png');
+      try {
+        const rendered = sharedMermaid.renderMermaid(block.content, tmpPng, {
+          format: 'html', scale: 3, width: 1200, injectPalette: true, throwOnError: true
+        });
+        if (!rendered) throw new Error('Invalid Mermaid renderer options.');
+        const png = fs.readFileSync(tmpPng);
+        if (png.length <= 8 || png.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a') {
+          throw new Error('The renderer did not produce a PNG.');
         }
-      } else {
-        const fallback = sharedMermaid.mermaidToTableFallback(block.content);
-        markdown = markdown.replace(block.raw, fallback);
+        markdown = markdown.replace(block.raw, `![Diagram](data:image/png;base64,${png.toString('base64')})`);
+      } catch (error) {
+        throw new Error(`Mermaid PNG rendering failed; use --mermaid-fallback to request a table instead: ${error.stderr?.toString().trim() || error.message}`, { cause: error });
+      } finally {
+        fs.rmSync(staging, { recursive: true, force: true });
       }
     } else {
       const fallback = sharedMermaid.mermaidToTableFallback(block.content);
@@ -348,7 +350,7 @@ function convertMarkdownToHtml(sourcePath, outputPath, options = {}) {
   }
 
   // Mermaid handling
-  markdown = processMermaidBlocks(markdown, sourceDir, usePngMermaid);
+  markdown = processMermaidBlocks(markdown, usePngMermaid);
 
   if (options.debug) {
     fs.writeFileSync(debugPath, markdown, 'utf8');

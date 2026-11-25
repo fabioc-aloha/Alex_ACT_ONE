@@ -58,6 +58,19 @@ These are instruction-level safeguards and an explicit verification procedure,
 not universal filesystem enforcement. Tests establish only their stated scope.
 Do not claim a host hook ran without observing invocation and failure handling.
 
+## Draft-to-delivery handoff
+
+When a task asks for a set of linked files, prepare the draft and name the
+required parts before reviewing it. For a report with a chart, check that the
+report opens, its chart link resolves, and the final chart's data, units, and
+main claim agree with the report and source. A rendered preview or an embedded
+image alone does not satisfy a separately requested chart file.
+
+If any required part is missing, stale, or unverified, keep the set in draft
+and name the blocker. Repeat affected checks when a reviewed file changes.
+When all required checks pass, present the set as ready for review. Verification
+does not authorize publication, sending, or any move to an external destination.
+
 ## Authority
 
 Storage requirements grant no implementation, installation, deletion, commit,

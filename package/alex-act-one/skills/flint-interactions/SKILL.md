@@ -30,8 +30,10 @@ reader task before choosing behavior; clarify only material missing decisions.
 
 Read `flint://interaction-skill` or call
 `get_flint_skill({ "skill": "interaction" })` before writing a spec.
-Use its relevant section for the selected workflow; do not copy its preset,
-option, update-op, or programming-API catalog here.
+Use the relevant section from that runtime's returned guide. If a section
+title is unknown or rejected, read the full guide without `section` rather
+than guessing. Do not copy its preset, option, update-op, or programming-API
+catalog here.
 
 Call `list_chart_types` for the backend and
 `list_interaction_presets` with the exact `chartType`. For a selected preset,
@@ -40,23 +42,31 @@ enough: actual fields, discrete legends, continuous axes, and faceting can
 change whether an interaction is admitted.
 
 If the resource or a required tool is unavailable, report the missing capability.
+If the Flint runtime or its host connection is the blocker, load [Setup Dependencies](../setup-dependencies/SKILL.md#when-another-skill-is-blocked).
 Do not invent names or silently substitute a static picture for requested
-interactivity. The reviewed 1.0.1 interaction workflow targets Vega-Lite;
+interactivity. The reviewed interaction workflow targets Vega-Lite;
 do not infer ECharts/Chart.js or static-output parity from successful rendering.
 
 ## 2. Select the workflow, not just a gesture
 
 | Request | Owner-produced result | Load from Flint |
 | --- | --- | --- |
-| Reader acts on a chart | `interaction_spec` beside the existing chart input | Interaction skill: Add interactions to the chart |
-| Agent supplies emphasis, annotations, ordering, or viewport state | `updates` layers with the full chart input | Interaction skill: Update the chart |
-| Several charts share a selection | Board `link_spec`, or application linking code only when requested | Board skill plus the interaction skill's Link charts section |
-| Application reacts to a chart, or a preset cannot express the behavior | Approved project code using `flint-chart/interactive` | Interaction skill: application/bespoke sections |
+| Reader acts on a chart | `interaction_spec` beside the existing chart input | Interaction guide: preset and validation guidance |
+| Agent supplies emphasis, annotations, ordering, or viewport state | `updates` layers with the full chart input | Interaction guide: chart updates and supported operations |
+| Several charts share a selection | Board `link_spec`, or application linking code only when requested | Board guide: link fields and send/receive behavior |
+| Application reacts to a chart, or a preset cannot express the behavior | Approved project code using `flint-chart/interactive` | [Application integration route](../flint-chart/SKILL.md#runtime-and-project-integration) |
+
+For controls that coordinate charts and metrics, use the bundled
+[application state patterns](references/application-state.md).
 
 Behavior and state are different. Read the current chart input, user edits,
 selection/filter/viewport state, and existing update layers when available.
 Preserve unrelated state and panel edits; do not guess an absent state snapshot.
 Use semantic field identities, not pixel coordinates or fabricated row IDs.
+On Flint 1.1.1, use `annotate-text` for a point or mark note and a supported
+region annotation for a range. Do not introduce the deprecated
+`set-annotation` operation. Validate the layer and verify the annotation in
+the output the user requested.
 
 Preserve source data, semantic types, units, and analytical meaning. An explicitly
 requested filter changes the view, not the underlying dataset. Do not silently
@@ -139,6 +149,7 @@ tests expose a gap, or linked/app authority becomes ambiguous.
 ## References
 
 - [Interaction demos and concepts](https://microsoft.github.io/flint-chart/#/interactions)
+- [Flint example and documentation index](../flint-chart/references/flint-language-reference.md#examples-and-documentation)
 
 Live documentation illustrates intent; the installed runtime remains the exact
 language authority. This skill changes neither runtime pins nor installation.

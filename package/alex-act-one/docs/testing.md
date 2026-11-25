@@ -3,9 +3,10 @@
 
 # Verification environments and release gates
 
-Release version: `0.9.7`. Use the
-[release record](https://github.com/fabioc-aloha/Alex_ACT_ONE)
-for the frozen commit's CI, clean-clone, artifact, and publication results.
+Release version: `0.10.0`. Use the
+[0.10.0 verification record](https://github.com/fabioc-aloha/Alex_ACT_ONE) for scoped
+release evidence, and the [0.9.7 archive](https://github.com/fabioc-aloha/Alex_ACT_ONE)
+for the previous release's results.
 The dated baseline runs below do not substitute for same-commit release evidence.
 Live-host and browser observations retain their separately documented limits.
 
@@ -23,17 +24,130 @@ Node 26 structural jobs for the full release matrix.
 These are verification targets, not certification of every Copilot host or OS.
 macOS and other Node versions are not covered by this workflow.
 
+## Flint 1.1.1 source migration
+
+On 2026-11-25, the exact source Flint MCP and library pair moved to `1.1.1`.
+The updated CI lock was resolved and installed with npm 12 through the
+Microsoft npm proxy, without lifecycle scripts or registry-policy changes.
+Its tarball URLs retain the portable npm registry origin; use
+`--replace-registry-host=npmjs` when verifying this lock through the proxy.
+Playwright and the other direct dependencies are unchanged. The previous
+[qualification pilot](https://github.com/fabioc-aloha/Alex_ACT_ONE) is a
+separate experiment, not the source lock used to build the final demos.
+
+The migrated lock passed the Flint runtime contract and timezone checks.
+Both regenerated demos matched exact rebuilds and passed the existing
+offline browser acceptance checks in cached Chromium `151.0.7922.34`.
+This verifies the offline App simulation, not native Copilot fullscreen,
+GitHub Copilot app, or Scout behavior. The active runtime and frozen `0.9.7`
+release were not changed.
+
+The application-state adaptation kept the same pins. Both bundled demos
+matched exact rebuilds and passed the [browser gate](verification/flint-browser.md)
+from a copy of the skill resources outside the checkout. In the
+[Interaction Lab](../skills/flint-chart/resources/flint-experimental.html),
+linked highlight and period zoom preserved the baseline total. Filtering
+removed one team and recomputed the total from the remaining rows; keyboard
+reset restored the baseline. This verifies prevalidated board variants in
+the offline host, not in-place app API updates, live queries, or native delivery.
+Both demos were refreshed after the builder changed, and exact rebuild checks
+passed with the current source and locked runtime. This is not a release gate
+result for other hosts.
+
+Use the reviewed isolated runtime to rebuild the demos. The builder never
+installs or fetches packages:
+
+```powershell
+node scripts\build-flint-showcase.mjs
+node scripts\build-flint-showcase.mjs --experimental
+node scripts\build-flint-showcase.mjs --check
+node scripts\build-flint-showcase.mjs --experimental --check
+```
+
+## Real renderer setup verification
+
+The [2026-11-09 renderer evidence](https://github.com/fabioc-aloha/Alex_ACT_ONE)
+records the actual root failure with its default Puppeteer cache, then real
+success with existing Edge. The source helper now selects installed Windows
+Edge only after validated explicit and environment overrides, reports the
+choice, and passes it only to renderer children. A missing cached/default
+browser or a failed render is still an explicit failure, not success.
+
+Actual root report and `-VerifyOnly` passed in PowerShell 7 and Windows
+PowerShell 5.1, with both installed renderer binaries creating validated
+outputs. The [bounded real-setup harness](https://github.com/fabioc-aloha/Alex_ACT_ONE)
+then ran the complete root `-Apply` with real Copilot installation/bootstrap
+and npm packages in approved disposable locations. Its successful result
+includes real Mermaid SVG, SVG-to-PNG, installed-owner selection and unchanged
+protected user-file digests. It used existing Pandoc/Python/Pillow, not actual
+system-tool installation.
+
+The first full-run fixture redirected npm's prefix before resolving its CLI;
+the Windows shim selected an older bundled npm and the version guard stopped
+before dependency installation. That failed observation is retained, not
+counted as success. The corrected harness forwards unchanged arguments to the
+actual installed npm CLI selected before prefix isolation. Lifecycle scripts
+and browser downloads were disabled only for that test process; configured
+registry/policy and active runtime/profile files were preserved.
+The source browser regression suite also passed 225 tests without failures,
+skips, todos or cancellations; the standalone full structural gate passed
+719 tests under the same strict conditions. These observations do not certify every future
+Edge version, native host connection, macOS or accessibility path.
+
+## Post-0.9.7 npm metadata freshness
+
+The user's setup transcript reported successful `0.9.7` plugin/bootstrap and
+Pandoc/Pillow installation, then `ETARGET` for the pinned Playwright transitive
+version. Those are reported observations, not independently verified
+installed/cache or renderer results. The referenced npm log was unavailable
+during diagnosis; temporary feed availability at the original failure remains
+unknown.
+
+A [real-npm loopback control](https://github.com/fabioc-aloha/Alex_ACT_ONE)
+with a disposable cache reproduced stale-index `ETARGET` with
+`--prefer-offline` and succeeded with `--prefer-online`. The configured proxy
+subsequently served the exact reviewed Playwright package and both transitive
+pins; a separate approved disposable prefix/cache installed them and its MCP
+CLI reported `0.0.84`. [Evidence](https://github.com/fabioc-aloha/Alex_ACT_ONE)
+keeps that narrower result separate from the user's interrupted full setup.
+No live helper apply, cache deletion, runtime change or registry-policy edit
+was performed by the agent.
+
+Root-helper tests in both PowerShell hosts and provisioner tests exercise
+metadata refresh and continued fail-closed `ETARGET`, including no retries,
+fallback versions or registry changes. Source changes are not a new release.
+The focused Windows run passed 163 tests, without failures, skips, todos or
+cancellations, including PowerShell 7/5.1 installer cases and standalone
+provisioner output/error handling.
+
+## Active dependency and verification audit
+
+The [source audit inventory](https://github.com/fabioc-aloha/Alex_ACT_ONE)
+traces current tools to their consumers and distinguishes frozen history from
+active setup. It removes the legacy checker's `--apply` writer and stale
+copied setup guidance without deleting active capability dependencies.
+Optional companion/Microsoft plugins and Agency remain outside root setup.
+
+The audit's accepted runs passed 59 focused checks, 711 structural tests and
+56 integration tests without skips or cancellations. Integration ran with the
+global Mermaid command hidden from the test processes, proving that the
+removed startup-only CI provisioning is unnecessary. Both exact demos matched.
+An initial overlapping fixture run tripped the source immutability guard and
+was not counted as success; the standalone source gate passed. No live setup
+or installed-runtime mutation was performed.
+
 ## Simplified root-helper source checks
 
 The 2026-11-09 source has one root `install-and-check.ps1` entry point.
-Default mode connects Alex Mall, refreshes catalogs and reports plugin and
-dependency versions. Only `-Apply` installs/updates the plugin, bootstraps
+Default mode connects Alex Mall, refreshes only its catalog, and reports plugin
+and dependency versions. Only `-Apply` installs/updates the plugin, bootstraps
 owned instructions, then sets up dependencies from that installed owner's
 pins and launcher. Missing Windows Pandoc and selected-Python Pillow are
 installed only with consent; existing system tools are not upgraded and
 Python is not installed. Native CLI help confirmed
 that marketplace update without a name refreshes all registered catalogs;
-its browse JSON does not expose release versions.
+source now always supplies the selected marketplace name to avoid unrelated
+private Agency refreshes. Its browse JSON does not expose release versions.
 
 Disposable PowerShell 7 and Windows PowerShell 5.1 fixtures cover the plugin
 stage, dependency stage and their ordered orchestration. Cases include
@@ -42,6 +156,10 @@ than the checkout, downgraded or invalid catalogs, failed/no-op updates,
 registration guards, selected-home isolation, real bootstrap conflicts,
 missing/matched/mismatched dependency reports, selected Python/pip, missing
 winget, system installer failures/no-ops and invalid-option preflight.
+Report and apply fixtures register synthetic private Agency catalogs and an
+unrelated plugin, reject blanket refresh with an authentication error, and
+require only the Alex Mall update. Unrelated plugin/marketplace state and
+MCP configuration bytes remain unchanged; Mall-specific failures still stop.
 Older installed registries without automatic tarball-routing support still
 report their own pins with an explicit capability limitation; the helper does
 not borrow newer checkout routing behavior.
@@ -141,7 +259,7 @@ lean runtime package is not a Git checkout or all-host certification.
 | Lane | Prerequisites | Required evidence |
 | --- | --- | --- |
 | Structural | Git checkout, Node 24+, PowerShell 7; Windows also requires Windows PowerShell 5.1 | Catalog/role drift check, read-only structural assessment, dependency-free tests, and fake-install/activation safety cases |
-| Integration | Explicit reviewed MCP runtime, JSZip from the shared registry, Pandoc 3.13, reviewed Mermaid CLI | Actual MCP version/launch and three-backend render tests, real HTML/Word conversion, and installed Mermaid CLI startup |
+| Integration | Explicit reviewed MCP runtime, JSZip from the shared registry, Pandoc 3.13 | Actual MCP version/launch and three-backend render tests, real HTML/Word conversion, and controlled Mermaid conversion/fallback cases |
 | Canonical demo rebuild | Windows integration environment | Byte-for-byte checks of both generated HTML pages; Git preserves their LF endings |
 
 Canonical demos additionally require `@napi-rs/canvas@1.1.0`,
@@ -299,7 +417,7 @@ push runs are automatically cancelled by a newer run in the same group.
 Actions are pinned to reviewed immutable commits, checkout
 does not persist credentials, and token permissions are read-only.
 
-Only disposable integration runners install packages. MCP, JSZip, and Mermaid
+Only disposable integration runners install packages. MCP, JSZip and demo
 direct versions agree with the [shared dependency registry](../scripts/shared/dependencies.cjs).
 The pinned Node setup action caches npm's download cache using the isolated
 runtime lockfile. Installed `node_modules` directories are not cached:
@@ -308,6 +426,13 @@ The workflow uses the runner's configured npm registry without a registry URL
 override, suppresses lifecycle scripts for these installs, and does not request
 API credentials or browser downloads. Pandoc 3.13 is installed by the pinned
 Pandoc setup action.
+
+The source dependency audit removed global Mermaid provisioning used only by
+duplicate `--version` checks. That lane does not certify real Mermaid rendering;
+the root helper's explicit readiness path still checks actual Mermaid SVG and
+SVG-to-PNG output, with missing/failed/invalid-output regressions.
+Controlled conversion/fallback tests and all real MCP/backend/converter tests
+remain. No platform, Node, lock-integrity or strict no-skip gate was removed.
 
 Windows shell-free tool resolution uses a bounded 30-second discovery budget,
 with the command and error in failures, instead of the earlier five-second
@@ -459,8 +584,9 @@ Markdown shell blocks as a documentation checker.
 ## Onboarding verification
 
 The [first-session guide](getting-started.md) uses Mall-first installation.
-The [install reference](install.md#mall-option) keeps the reviewed-release
-route canonical and records the observed deprecation of direct source installs.
+The [README appendix](../README.md#appendix-manual-installation) owns the
+terminal commands. The [candidate-testing record](#testing-the-repository-candidate)
+preserves the observed deprecation of direct source installs.
 Source and Mall can share a plugin version while having different contents,
 so record the loaded root and revision when available.
 
@@ -479,11 +605,54 @@ instructions, fixture apply verifies hashes and receipt, and the next preview
 preserves every instruction and receipt without changes. The adopter workspace
 remains empty. Navigation checks include the preserved README anchors and the
 relocated host reference; generated catalogs remain canonical in the README.
+The success signals are the expected file count, `preserve` for the instruction
+and receipt actions on the second preview, and `receiptCurrent: true` after apply.
 
 The documented plugin installation commands are not executed by these tests.
 The synthetic reasoning prompt has a reader-facing success rubric, not a
 machine-verified model outcome. Skill invocation, loaded instructions, and
 observed behavior in a real host remain separate R8 evidence.
+
+## Testing the repository candidate
+
+Historical record for the `0.9.0-rc.1` candidate. This is not the installation
+path for a reviewed release. Installation succeeded on 2026-11-05 and the CLI
+printed the following warning:
+
+> Warning: Direct plugin installs (repos, URLs, local paths) are deprecated. Only plugin@marketplace installs will be supported in a future release.
+
+The warning did not name a removal date or version. A command appearing in
+help does not override the deprecation warning. The historical switch ran:
+
+```powershell
+copilot plugin uninstall alex-act-one@alex-mall
+copilot plugin install fabioc-aloha/Alex_ACT_ONE
+copilot plugin list --json
+```
+
+Uninstall does not remove activated instructions or the optional runtime.
+Never run these commands as part of routine setup or from a verification test.
+An approved candidate switch needs same-commit evidence, a separately approved
+profile, and a confirmed loaded root and revision after restarting the host.
+Review activation preview and obtain approval before applying. Do not use
+`install-and-check.ps1` to switch sources; it follows Mall.
+
+## Scout verification
+
+The 2026-09-13 session against `v0.2.0` reported:
+
+> all 60 skills surfaced, all 15 instructions were active in context, none of the 15 slash commands were reachable, and both registered MCP servers answered a protocol handshake: 6 tools from Flint and 24 from Playwright.
+
+That is historical evidence, not a current inventory. The GitHub Copilot app
+also discovered plugin skills and prompts and validated a Flint chart on that
+date. Those observations do not qualify a later version.
+
+When verifying Scout after registration and a full restart, compare the loaded
+plugin root with the preview. For the source Flint runtime, check the expected
+tool list against the exact server version: `compile_chart`, `show`,
+`list_chart_types`, `list_themes`, `render_chart`, `validate_chart`,
+`validate_board`, `list_interaction_presets`, and `get_flint_skill`. Tool
+discovery is not evidence of native App UI or saved-file delivery.
 
 ## Scenario and browser evidence
 

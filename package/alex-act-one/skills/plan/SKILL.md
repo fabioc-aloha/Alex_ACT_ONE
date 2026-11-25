@@ -16,4 +16,8 @@ Do not create a repository plan file unless the user explicitly requests one or 
 
 If native planning is unavailable, perform a read-only planning discussion and state that the permission boundary is procedural rather than host-enforced. Obtain approval before implementation. The [project-specific plan template](references/project-plan-template.md) is optional craft material; its old mandatory sizing/storage prescriptions are historical examples, overridden by this authority contract. Load only relevant template sections.
 
+Use [scoped delegation](references/scoped-delegation.md) only when delegation is
+explicitly authorized and a worker has a distinct task. Planning alone never
+authorizes dispatch or expands the worker's permissions.
+
 Report the plan, unresolved decisions, and verification, not a success claim about code that has not run.

@@ -8,6 +8,8 @@ lastReviewed: 2026-05-26
 
 # Md To Txt
 
+If Pandoc is unavailable, load [Setup Dependencies](../setup-dependencies/SKILL.md#when-another-skill-is-blocked).
+
 Strip all Markdown formatting and produce clean plain text. Useful for clipboard export, email body fallback, accessibility, and as input to text analysis tools.
 
 ## Quick Start

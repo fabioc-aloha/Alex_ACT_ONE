@@ -35,6 +35,70 @@ must still explain its consequence. The chart and conversion cases intentionally
 stop before output; do not generate paid images or install packages to make
 them appear successful. Draft-only means no file, Outlook opening, or sending.
 
+### Text-only clarification and resume
+
+Run these follow-up probes separately from the exact suite. Use the same
+candidate in VS Code Copilot, GitHub Copilot CLI, GitHub Copilot app, and
+Microsoft Scout where available. A VS Code Local run can be a control, not a
+substitute for results from those clients.
+
+1. Start a fresh session with `recovery-denied-handoff` or
+  `chart-missing-measure` and append: `Ask any clarification in normal chat.
+  Do not use an interactive form.` Record it as an adapted prompt, not an
+  exact-suite run. The first response must ask a usable question and stop.
+2. Send a normal chat reply in the same session. For recovery, reply `My next
+  task is to review the release checklist. Give only a read-only plan; do not
+  open files or run tools.` For the chart, reply `A: 120 USD; B: 80 USD;
+  October 2026. Summarize the chart inputs only; do not validate, render,
+  display, or write anything.`
+3. Record both turns and tool activity. Recovery should plan from the supplied
+  goal without reopening the denied source. The chart response should retain
+  both values, currency, and period without rendering or inventing data. A
+  question alone is not a pass. Mark an unavailable client **not run** and
+  an unobservable second turn **unverified**.
+
+## Report-and-chart delivery pilot
+
+The [sample report](https://github.com/fabioc-aloha/Alex_ACT_ONE) and [standalone SVG](https://github.com/fabioc-aloha/Alex_ACT_ONE)
+are synthetic fixtures. The chart is the unmodified `comparison` SVG export from
+the [Flint 1.1.1 Showcase](../../skills/flint-chart/resources/flint-showcase.html).
+
+On 2026-11-25, Chromium `151.0.7922.34` opened the repository report, resolved
+and decoded its local SVG, and opened the SVG directly. All four plotted counts
+matched the Showcase's source rows. West's 154 orders led North's 128 by 26, as
+stated in the report. The run made no HTTP requests.
+
+A disposable copy containing only the report opened but its required image
+failed to decode. Under the [draft-to-delivery rule](../../skills/proactive-awareness/references/project-artifact-storage.md#draft-to-delivery-handoff),
+that copy stays in draft. The complete repository set passed review checks;
+no external delivery, native host enforcement, or publication was attempted.
+
+## Creative-writing pilot
+
+On 2026-11-25, standalone Copilot CLI `1.0.109` ran the two fiction cases from
+suite `2026-11-25.1` against a disposable package built from the working source.
+Both runs loaded `creative-writing` via `skill`, completed with exit code zero,
+and left their temporary workspaces empty. No other tool call was observed.
+These results do not qualify VS Code, the Copilot app, or Scout.
+
+| Case | Review of the observed response |
+| --- | --- |
+| `fiction-scene-from-brief` | Returned only a scene. Ada arrived as the ferry left. The narration stayed in close third person and past tense. Her sister spoke once, with no explanation of where the voice came from. |
+| `fiction-line-edit-preserve-continuity` | Returned only the revised excerpt. Both dialogue lines were shorter without changing the speakers or their intent. Both protected sentences were verbatim and Mara still took the key. |
+
+The scene's voice cue was a single line: "Your sleeve's in the water."
+The observed line edit was:
+
+```text
+I watched Mara slip the key into her coat.
+"I only took it so nobody else could get it first," Mara said.
+"You could have asked me first," I said.
+The door stayed open.
+```
+
+The earlier six case prompts were not changed. Their recorded observations
+remain tied to the suite revisions they were run against.
+
 ## Running the CLI scenarios
 
 The [CLI runner](../../scripts/run-skill-scenarios.mjs) uses a single explicitly

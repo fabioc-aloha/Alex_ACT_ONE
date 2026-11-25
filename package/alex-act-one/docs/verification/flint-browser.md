@@ -1,9 +1,11 @@
 # Offline Flint browser acceptance
 
 The [acceptance harness](../../scripts/flint-browser-acceptance.mjs) exercises
-the actual [editorial gallery](../flint-showcase.html) and
-[interaction lab](../flint-experimental.html). It does not substitute a renderer
-or modify the embedded upstream App.
+the canonical [editorial gallery](../../skills/flint-chart/resources/flint-showcase.html) and
+[interaction lab](../../skills/flint-chart/resources/flint-experimental.html) bundled with the Flint chart skill.
+It does not substitute a renderer
+or replace the embedded upstream App. The offline gallery serves its bundled
+World Bank map geometry locally without changing the network policy.
 
 ## Run it
 
@@ -38,7 +40,7 @@ run below therefore used the direct Node CLI, not an integrated-browser run.
 | --- | --- |
 | Offline | Fresh load with HTTP(S) blocked; no attempted requests or browser errors |
 | Images | Every backend image decodes to nonzero dimensions |
-| Matrix | Every sample/theme/story variant mounts its expected real charts |
+| Matrix | Every sample/theme/story variant mounts its expected charts; maps draw geographic shapes with visible boundary credit |
 | Keyboard | Shell Tab order and an actual chart Enter step change the announced focus target |
 | Keyboard matrix | Baseline keyboard-enabled examples enter chart navigation and restore its root label and actual focus with Escape |
 | Focus | Visible indicator and measured contrast of at least 3:1 against its adjacent shell background |
@@ -50,6 +52,12 @@ run below therefore used the direct Node CLI, not an integrated-browser run.
 | Resize | Settled plots fit their nearest clipping containers at desktop, tablet, and narrow widths |
 | Saved spec | Trusted keyboard activation produces a download event and actual saved file, equal to the selected starting input |
 | Provenance | Embedded data and upstream App digests match their actual payloads |
+
+The Interaction Lab matrix also exercises its application-state example:
+linked emphasis preserves the population, a period brush changes the axis
+without changing the total, a population filter recomputes the total, and
+keyboard reset restores the baseline. The offline host uses prevalidated board
+variants, not live data connectors or in-place application API updates.
 
 The chart audit resolves value labels against underlying painted marks rather
 than the canvas alone, ignores fully transparent hit-test overlays, and

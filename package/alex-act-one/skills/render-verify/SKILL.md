@@ -27,6 +27,13 @@ inspect the final repository copy and its resources, not only a temporary
 preview or MCP display. Preserve required supporting sources and report blocked
 delivery explicitly. This check grants no relocation or publication authority.
 
+For Flint MCP Apps, record separately whether `show` returned, the actual host
+displayed the card, the requested interaction worked, and an export was saved.
+Inspect state after the gesture and reset. Check fullscreen only if the host
+offers it and it is in scope. An offline demo is not evidence for a native host.
+For an exported SVG or PNG, open the saved file and check it against the chart
+claim; a displayed preview or tool reply is not file delivery.
+
 **Scope.** The method below — open, read the console first, walk a catalog, check
 the claim — is general. It applies to charts, generated HTML reports, SVG
 figures, dashboards, diagrams, and printable output. Charts are the
@@ -345,14 +352,13 @@ verified.
 **Fallback only — rung 2 of Step 1.** Try the host's own browser capability
 first; if it provides the capabilities the task needs, you do not need this
 server. Check the actual capability inventory in Step 1: a host with a browser
-may still block `file://` or lack child-frame input. Measured against
-`@playwright/mcp@0.0.80`:
+may still block `file://` or lack child-frame input. Use the reviewed browser
+fallback pin in [setup-dependencies](../setup-dependencies/SKILL.md#mcp-servers).
 
-Run `setup-dependencies` after installing or updating this plugin when the
-selected fallback runtime needs provisioning.
-Its `--check-updates` mode compares the reviewed Playwright pin with the stable
-dist-tag; a newer version still requires a browser-compatibility pass before the
-source pin changes.
+If the selected fallback runtime is missing or unusable, load [Setup Dependencies](../setup-dependencies/SKILL.md#when-another-skill-is-blocked).
+Its `--check-updates` mode audits the registry's `latest` tag; a prerelease tag
+is not a stable update. A newer stable version still requires a browser
+compatibility pass before the source pin changes.
 
 The server key is **`alex-playwright`**, not `playwright`. Some hosts — Microsoft
 Scout among them — already ship a built-in server under the bare name, and a
@@ -379,11 +385,11 @@ the host's for ordinary web pages, this one for `file://` artifacts.
 }
 ```
 
-Merge this **additively** into the existing server map — overwriting the file
-destroys the user's other servers, including `flint`. Same per-host path table
-as the `flint-chart` skill (`.vscode/mcp.json` for VS Code, `.mcp.json` for
-Claude Code, `.cursor/mcp.json` for Cursor, `~/.copilot/mcp-config.json` with
-key `mcpServers` for Copilot CLI).
+The example uses VS Code's `.vscode/mcp.json` `servers` format. Prefer the
+plugin's own registration where the client supports it. For Scout use the
+[registration guide](../setup-dependencies/SKILL.md#registering-the-servers-with-microsoft-scout).
+For any manual configuration, confirm the active client's file, server-map
+key, and launcher path. Merge additively without overwriting other servers.
 
 ### Why each flag
 
@@ -429,7 +435,7 @@ path inside that folder. Verified 2026-07-25: a bare filename leaked into
 | `Access to "file:" protocol is blocked`         | Flag missing — the default blocks `file://` navigation entirely                                  | Add `--allow-unrestricted-file-access`                                                                                                  |
 | `Browser distribution '<channel>' is not found` | No bundled browser — the selected channel is not installed on this machine                       | Switch `--browser` to a channel that is present (`msedge` / `chrome` / `firefox` / `webkit`), or run `npx playwright install <channel>` |
 | Server reports a version like `1.62.0-alpha-…`  | That is the underlying **Playwright library** version, not the `@playwright/mcp` package version | Do not pin against what the handshake reports                                                                                           |
-| Tools never appear at all                       | Config in the wrong path or under the wrong top-level key                                        | Same trap as `flint` — see the per-host table in the `flint-chart` skill                                                                |
+| Tools never appear at all                       | Config in the wrong path or under the wrong top-level key                                        | Check the active client's registration, config path, and server-map key |
 | Untracked `.playwright-mcp/` in `git status`    | Working-directory artifacts                                                                      | Gitignore it                                                                                                                            |
 
 ## Anti-patterns
@@ -463,7 +469,7 @@ path inside that folder. Verified 2026-07-25: a bare filename leaked into
 
 - [`chart-big-idea`](../chart-big-idea/SKILL.md) — Step 0.5 earn-a-figure gate + Step 4.5 focus discipline. Framing side of the same discipline.
 - [`chart-vocabulary`](../chart-vocabulary/SKILL.md) — Module 2 CSAR evaluation loop asks *did the AI pick the right chart family*. This skill's Prose-coupling check asks *did the render match the message*. Both fire on an AI-generated chart; different failure modes.
-- [`flint-chart`](../flint-chart/SKILL.md) — spec authoring + Publication config preset. Verification runs against what this skill produces.
+- [`flint-chart`](../flint-chart/SKILL.md) — spec authoring and delivery. For print output, see the [publication preset](../flint-chart/references/publication-preset.md) and verify the rendered artifact.
 - [`print-svg-style-guide`](../print-svg-style-guide/SKILL.md) — the visual grammar the shipped SVG obeys. The failure-catalog entries in this skill fire when that grammar is violated.
 - [`figure-generator`](../figure-generator/SKILL.md) — where the "fix in the generator, never in the SVG" rule for the SVG XML invalid catalog entry lives.
 - [`corpus-qa-sweep`](../corpus-qa-sweep/SKILL.md) — the corpus-scale companion. That skill sweeps every item against machine-checkable invariants and triages the flags; this one judges a single artifact against the failure catalog. Sweep to find candidates, then verify one.

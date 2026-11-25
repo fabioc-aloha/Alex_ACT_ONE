@@ -1,10 +1,11 @@
-## Publication config preset (books, reports, exec-facing)
+# Publication config preset (books, reports, exec-facing)
 
 When the render target is a book chapter, a print report, or an exec-facing
 document, three settings routinely need to be pinned across every chart in the
-artifact so the visuals read as one voice. This is a Vega-Lite `config` block
-you can drop into the compiled spec (via Step 3 semantic types →
-`compile_chart` → backend edit as described above).
+artifact so the visuals read as one voice. After `compile_chart`, apply this
+Vega-Lite `config` block to the compiled spec. Follow the [chart delivery
+guidance](../SKILL.md#step-4-validate-then-display) for backend edits, then
+verify the output at its intended print size.
 
 > **Print variant of the brand palette.** The categorical range
 > below (blue-800 / amber-700 / green-700 / gray-500 / red-700) is the
@@ -13,8 +14,8 @@ you can drop into the compiled spec (via Step 3 semantic types →
 > lives in your project's `.github/config/brand-palette.json`. Same 5-role
 > semantic categorical, deeper contrast for paper.
 
-Pin this once at the top of the artifact's chart set; regenerated charts
-inherit it without per-chart overrides.
+Apply it consistently in the artifact's build so regenerated charts use the
+same settings without one-off overrides.
 
 ```json
 {
@@ -58,7 +59,7 @@ itself):
 | Report title               | 18pt / 700 / `#1f2937`                                            |
 | Section header             | 14pt / 700 / `#1f2937`                                            |
 | Body copy                  | 15-16px / `#1f2937` (text) or `#6b7280` (asides)                  |
-| REJECTED / APPROVED badges | 12pt / 700 white on red-700 or green-700, `rx="3"` 80x20 pill    |
+| REJECTED / APPROVED badges | 12pt / 700 white on red-700 or green-700, `rx="3"` 80x20 pill     |
 
 Print-legibility floor for figures embedded in the artifact: 12px at a 640
 viewBox is 5.93pt — the instructional minimum. For the full print-legibility

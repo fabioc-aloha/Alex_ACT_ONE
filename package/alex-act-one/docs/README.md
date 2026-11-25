@@ -1,38 +1,36 @@
 # Documentation
 
-This source repository maintains and ships Alex ACT ONE. Documentation supports
-using the plugin, maintaining its capabilities, validating compatibility, and
-delivering reviewed releases; it is not an adopter-recovery operations manual.
+Release version: `0.10.0`. See the [release highlights](https://github.com/fabioc-aloha/Alex_ACT_ONE).
 
-## Start and operate
+## Use Alex ACT ONE
 
 - [Getting started](getting-started.md): install, activation, and first workflow.
-- [Install and host reference](install.md): delivery, host differences, and upgrades.
-- [Testing](testing.md): source verification environments and release boundaries.
-- [Evaluation guide](launch/evaluation-guide.md): bounded comparison methodology.
+- [Install and host reference](install.md): supported apps and optional tools.
+- [Manual installation](../README.md#appendix-manual-installation): terminal and advanced setup commands.
+- [Evaluation guide](launch/evaluation-guide.md): try the workflows on your own tasks.
+- [Creative Writing](../skills/creative-writing/SKILL.md) and
+  [Humanizer](../skills/humanizer/SKILL.md): draft fiction or review existing prose.
+- [Scoped delegation](../skills/plan/references/scoped-delegation.md): brief and
+  verify workers when delegation is authorized.
+- [Draft-to-delivery handoff](../skills/proactive-awareness/references/project-artifact-storage.md#draft-to-delivery-handoff):
+  review a report and its required files together without publishing them.
 
 ## Flint demonstrations
 
-- [Editorial gallery](flint-showcase.html).
-- [Experimental interaction lab](flint-experimental.html).
+- [Editorial gallery](../skills/flint-chart/resources/flint-showcase.html).
+- [Experimental interaction lab](../skills/flint-chart/resources/flint-experimental.html).
 
-Both demonstrations remain part of the candidate package, with their exact
-HTML bytes and existing generation/verification contracts preserved.
+The bundled demos open offline in a browser. They do not require the Flint
+server or verify that it is connected to your app.
 
-## Reusable verification
+## Maintainer references
 
+- [Testing and host evidence](testing.md).
 - [Scenario guide](verification/README.md) and
   [versioned scenario definitions](verification/skill-scenarios.json).
 - [Browser acceptance contract](verification/flint-browser.md).
-- [Candidate package boundary](package.md).
-
-Historical plans and recovery/synchronization evidence are maintained separately
-in the repository archive. They are not required for ordinary plugin use and
-are not included in the lean candidate package.
-
-## Maintainer entry points
-
-Use the source repository's [roadmap](https://github.com/fabioc-aloha/Alex_ACT_ONE) for pending product work,
-[handoff](https://github.com/fabioc-aloha/Alex_ACT_ONE) for restart state, and
-[release checklist](https://github.com/fabioc-aloha/Alex_ACT_ONE) for shipping gates. Completed
-incident work stays in history rather than becoming a second active backlog.
+- [Report-and-chart delivery pilot](verification/README.md#report-and-chart-delivery-pilot)
+  and [Creative Writing pilot](verification/README.md#creative-writing-pilot).
+- [Package boundary](package.md).
+- [Roadmap](https://github.com/fabioc-aloha/Alex_ACT_ONE), [handoff](https://github.com/fabioc-aloha/Alex_ACT_ONE), and
+  [release checklist](https://github.com/fabioc-aloha/Alex_ACT_ONE).

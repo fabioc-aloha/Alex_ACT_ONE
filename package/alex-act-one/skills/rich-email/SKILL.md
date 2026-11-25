@@ -74,7 +74,8 @@ The helper requires `olk.exe` or `outlook.exe`. Validation-only mode remains ava
 
 | Signal | Action |
 | --- | --- |
-| Pandoc or `md-to-eml` unavailable | Stop and report the prerequisite; do not install it without approval. |
+| Pandoc unavailable | Load [Setup Dependencies](../setup-dependencies/SKILL.md#when-another-skill-is-blocked); do not install it without approval. |
+| Bundled `md-to-eml` skill unavailable | Report the missing plugin component; installing Pandoc does not restore it. |
 | Multipart EML or inline-image output | Stop with the helper's clear unsupported-format message; do not open a partial draft. |
 | Missing or malformed headers | Fix Markdown frontmatter and reconvert. |
 | New Outlook launcher unavailable | Use `--validate-only` and report that opening the draft requires Windows New Outlook. |

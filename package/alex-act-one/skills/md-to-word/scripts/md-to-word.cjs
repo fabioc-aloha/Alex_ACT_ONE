@@ -224,11 +224,11 @@ function validateRenderedPng(png) {
       const color = data[9];
       const depths = { 0: [1, 2, 4, 8, 16], 2: [8, 16], 3: [1, 2, 4, 8], 4: [8, 16], 6: [8, 16] };
       if (!width || !height || width > 0x7fffffff || height > 0x7fffffff ||
-          !depths[color]?.includes(depth) || data[10] !== 0 || data[11] !== 0 || data[12] > 1) fail('IHDR values');
+        !depths[color]?.includes(depth) || data[10] !== 0 || data[11] !== 0 || data[12] > 1) fail('IHDR values');
       header = { width, height, depth, color, interlace: data[12] };
     } else if (type === 'PLTE') {
       if (paletteEntries || imageData.length || !length || length % 3 || length > 768 ||
-          [0, 4].includes(header.color)) fail('palette structure');
+        [0, 4].includes(header.color)) fail('palette structure');
       paletteEntries = length / 3;
       if (header.color === 3 && paletteEntries > 2 ** header.depth) fail('palette size');
     } else if (type === 'IDAT') {
@@ -244,10 +244,10 @@ function validateRenderedPng(png) {
   const passes = (header.interlace
     ? [[0, 0, 8, 8], [4, 0, 8, 8], [0, 4, 4, 8], [2, 0, 4, 4], [0, 2, 2, 4], [1, 0, 2, 2], [0, 1, 1, 2]]
     : [[0, 0, 1, 1]]).map(([x, y, dx, dy]) => {
-    const width = Math.max(0, Math.ceil((header.width - x) / dx));
-    const height = Math.max(0, Math.ceil((header.height - y) / dy));
-    return { width, height, bytes: Math.ceil(width * channels * header.depth / 8) };
-  }).filter(pass => pass.width && pass.height);
+      const width = Math.max(0, Math.ceil((header.width - x) / dx));
+      const height = Math.max(0, Math.ceil((header.height - y) / dy));
+      return { width, height, bytes: Math.ceil(width * channels * header.depth / 8) };
+    }).filter(pass => pass.width && pass.height);
   const expectedSize = passes.reduce((sum, pass) => sum + (pass.bytes + 1) * pass.height, 0);
   if (!Number.isSafeInteger(expectedSize) || expectedSize <= 0) fail('raster size');
   if (expectedSize > MAX_PNG_RASTER_BYTES) fail('decompressed raster exceeds the 256 MiB PNG budget');
@@ -269,10 +269,7 @@ function convertMermaidToPng(mmdContent, outputPath) {
   const freshPng = path.join(staging, 'diagram.png');
   try {
     fs.writeFileSync(tmpFile, mmdContent, 'utf8');
-    // High-res render: 4x scale, 4800px viewport (was 8x/2400px).
-    // Wider viewport prevents clipping on wide architecture diagrams;
-    // 4 × 4800 = 19200px effective output — same fidelity, more horizontal room.
-    runTool('mmdc', ['-i', tmpFile, '-o', freshPng, '-b', 'white', '-s', '4', '-w', '4800', '-H', '2400'], {
+    runTool('mmdc', ['-i', tmpFile, '-o', freshPng, '-b', 'white', '-s', '3', '--size', '1600'], {
       stdio: ['pipe', 'pipe', 'pipe'],
       timeout: 120000
     });
@@ -281,7 +278,7 @@ function convertMermaidToPng(mmdContent, outputPath) {
     fs.copyFileSync(freshPng, outputPath);
     return true;
   } catch (err) {
-    throw new Error(`Mermaid rendering failed; original source preserved: ${err.stderr?.toString() || err.message}`, { cause: err });
+    throw new Error(`Mermaid rendering failed; original source preserved: ${err.stderr?.toString().trim() || err.message}`, { cause: err });
   } finally {
     fs.rmSync(staging, { recursive: true, force: true });
   }
@@ -293,10 +290,8 @@ function convertSvgToPng(svgPath, pngPath) {
       stdio: ['pipe', 'pipe', 'pipe'],
       timeout: 30000
     });
-    return true;
-  } catch {
-    console.log(`WARNING: svgexport not available, skipping ${svgPath}`);
-    return false;
+  } catch (error) {
+    throw new Error(`SVG rendering failed; prior outputs preserved: ${svgPath}\n${error.stderr?.toString().trim() || error.message}`, { cause: error });
   }
 }
 
@@ -1230,12 +1225,9 @@ async function build(args) {
 
         if (!fs.existsSync(pngPath)) {
           process.stdout.write(`\u{1f5bc}\ufe0f  Converting SVG: ${path.basename(svgPath)}... `);
-          if (convertSvgToPng(svgPath, pngPath)) {
-            publications.push({ source: pngPath, destination });
-            console.log('\u2713');
-          } else {
-            throw new Error(`SVG rendering failed; prior outputs preserved: ${svgPath}`);
-          }
+          convertSvgToPng(svgPath, pngPath);
+          publications.push({ source: pngPath, destination });
+          console.log('\u2713');
         }
 
         const svgSize = fs.existsSync(pngPath) ? calculateOptimalSize(pngPath, '') : `{width=${MAX_IMAGE_WIDTH.toFixed(1)}in}`;
@@ -1258,12 +1250,9 @@ async function build(args) {
 
         if (!fs.existsSync(pngPath)) {
           process.stdout.write(`\u{1f5bc}\ufe0f  Converting SVG (HTML img): ${path.basename(svgPath)}... `);
-          if (convertSvgToPng(svgPath, pngPath)) {
-            publications.push({ source: pngPath, destination });
-            console.log('\u2713');
-          } else {
-            throw new Error(`SVG rendering failed; prior outputs preserved: ${svgPath}`);
-          }
+          convertSvgToPng(svgPath, pngPath);
+          publications.push({ source: pngPath, destination });
+          console.log('\u2713');
         }
 
         // Extract alt text from tag if present

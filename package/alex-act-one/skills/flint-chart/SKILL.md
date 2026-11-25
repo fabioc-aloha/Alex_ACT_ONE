@@ -6,22 +6,38 @@ lastReviewed: 2026-11-05
 
 # Flint chart authoring and rendering
 
-Reviewed runtime: `flint-chart-mcp@1.0.1` with exact `flint-chart@1.0.1`.
+Source runtime: `flint-chart-mcp@1.1.1` with exact `flint-chart@1.1.1`.
 Flint owns its language; Alex owns analytical framing, evidence, consent, and
 render verification. Do not copy a static schema/type catalog into this skill.
 
-## Load the installed language first
+## Check for missing inputs
+
+If essential data is missing, ask only for the missing inputs. If an
+interactive form is unavailable, disallowed, or cannot reliably deliver its
+answer, ask one plain-text question in chat and wait for a reply. No Flint
+tool is needed to clarify. Do not validate, render, or display a chart until
+the required data is confirmed. A data reply does not expand the requested
+output or grant permission to write files.
+
+## Load the installed language before authoring
 
 Read `flint://agent-skill` or call `get_flint_skill({ "skill": "chart" })`.
 For reader behavior, chart-state updates, or linked views, load and follow
 [flint-interactions](../flint-interactions/SKILL.md) and its selected native
 `interaction` or `board` skill/resource. Use `list_chart_types`, `list_interaction_presets`, and
 `list_themes` to verify actual capabilities before promising them. Report an
-unavailable resource/tool instead of inventing grammar.
+unavailable resource/tool instead of inventing grammar. If the Flint runtime or
+its host connection blocks the requested chart, load [Setup Dependencies](../setup-dependencies/SKILL.md#when-another-skill-is-blocked).
+Installing a server does not make an unsupported App UI available.
 
-The [language and backend boundary](references/flint-language-reference.md)
-provides orientation, not a replacement for version-matched schemas. For
-selection, load only the relevant [question-to-chart guidance](references/chart-selection.md).
+Use the bundled [Flint Showcase](resources/flint-showcase.html) and
+[Interaction Lab](resources/flint-experimental.html) for runnable offline examples.
+For more examples by chart type and backend, including Map and Choropleth, use
+the [official Flint gallery](https://microsoft.github.io/flint-chart/#/gallery).
+The [language and backend reference](references/flint-language-reference.md)
+also links to the official documentation. Check borrowed patterns against the
+installed grammar before using them. For chart selection, load only the relevant
+[question-to-chart guidance](references/chart-selection.md).
 
 ## Step 0: Frame the analytical question
 
@@ -55,6 +71,9 @@ local JSON/CSV/TSV when the server permits file references, not remote URL fetch
 Use a real parser for quoted CSV. Do not manually reserialize a large dataset.
 Preserve the claim in `chart_spec.title`; use `subtitle` for population,
 period, measure, and units. Do not invent missing metadata.
+For a geographic comparison, choose appropriate boundary data and verify the
+identifier join and visible attribution; see the
+[runtime boundary](references/flint-language-reference.md#backend-and-data-boundary).
 
 ## Step 3: Theme, interaction, and presentation
 
@@ -74,10 +93,18 @@ interactions. Use `validate_board` before displaying a board.
 
 - For interactive Vega-Lite with App UI support: call `validate_chart` first,
   resolve errors/warnings, then `show({ "chart": input })` with the whole input.
+  In 1.1.1, read the primary JSON or `structuredContent`; do not parse the
+  optional prose report as JSON. A successful `show` call does not prove the
+  host displayed the card.
   The server retains no chart state between calls. A later update requires
   sending the revised complete input; earlier cards remain as they were.
-- For a board: validate, then `show({ "board": boardInput })`.
-- Use `render_chart` for requested static output or a host without App UI:
+- For a live board with App UI support: call `validate_board`, then
+  `show({ "board": boardInput })`. Verify linked behavior in the actual host.
+- Without App UI, report that requested interactivity or a live board is
+  unavailable. Offer static per-chart exports as an alternative; do not
+  silently substitute them or pass a board to `render_chart`.
+- Use `render_chart` for static charts, including ordinary chart requests
+  on a host without App UI when no interactive behavior was requested:
   Vega-Lite/ECharts support SVG and PNG; Chart.js supports PNG only.
   Inspect MCP content blocks separately: keep SVG as one complete XML root
   ending at `</svg>`, with summary/report text outside the artifact. Never
@@ -105,7 +132,12 @@ For publication-specific formatting, load the
 Use the plugin's direct Node launcher and reviewed exact pins. Never substitute
 an unpinned npx server, change npm registry/policy, or install dependencies
 silently. Missing state routes to [setup-dependencies](../setup-dependencies/SKILL.md).
-Only add `flint-chart@1.0.1` and approved renderer peers to a user's project
+For requested application code, load `flint://app-skill` or call
+`get_flint_skill({ "skill": "app" })` if the installed server advertises it.
+Use that guide for mounting, reading state, applying updates, or linking charts
+in application code. This is separate from an MCP `show` card. If neither
+surface is available, report the missing guidance rather than guessing APIs.
+Only add `flint-chart@1.1.1` and approved renderer peers to a user's project
 when project integration is explicitly requested and approved.
 
 Report the chosen analytical treatment, strongest rejected alternative, actual
