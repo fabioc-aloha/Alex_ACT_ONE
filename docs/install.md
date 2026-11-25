@@ -5,7 +5,7 @@ what your app supports and what an optional tool unlocks.
 
 ## Installation sources
 
-Release version: `0.9.7`.
+Published release: `0.9.7`. Release candidate: `0.10.0` (not published).
 
 | Source | What to use it for |
 | --- | --- |

@@ -434,14 +434,15 @@ Original author: Siqi Chen ([@blader](https://github.com/blader)). Source upstre
 
 The optional read-only audit and house-list precedence were adapted from [Alex ACT ONE Muse's AI-tell audit](https://github.com/fabioc-aloha/Alex_ACT_ONE_Muse/blob/main/skills/ai-tell-audit/SKILL.md) and humanizer; ONE does not import Muse's fixed pattern count, grading thresholds, or recast script. Final-output scaffolding is a cleanup check, separate from Wikipedia's authorship indicators.
 
-The source page changes over time. Its categories are editorial clues from Wikipedia, not a complete or validated detector for other genres. The current guide includes caveats about detection, signs of human writing, ineffective and historical indicators, and Wikipedia-specific markup and editorial artifacts. Before a humanizer release and at least once every 30 days, manually compare the current article's sections and guidance against this catalog: merge overlap, propose only portable and actionable updates through the applicable approval process, retain relevant false-positive and historical cautions, and keep source-specific structures scoped to their genre. On an invocation after the next due date, check the article before claiming this catalog is current; if the page cannot be reached, say the check is overdue rather than treating the old review as current. Record the date and next due date for every completed comparison, including a no-change result; do not reset `lastReviewed` without a semantic review. A skill cannot schedule unattended checks. Last source comparison: 2026-11-05. Next due: 2026-12-05.
+The source page changes over time. Its categories are editorial clues from Wikipedia, not a complete or validated detector for other genres. The current guide includes caveats about detection, signs of human writing, ineffective and historical indicators, and Wikipedia-specific markup and editorial artifacts. Before a humanizer release and at least once every 30 days, manually compare the current article's sections and guidance against this catalog: merge overlap, propose only portable and actionable updates through the applicable approval process, retain relevant false-positive and historical cautions, and keep source-specific structures scoped to their genre. On an invocation after the next due date, check the article before claiming this catalog is current; if the page cannot be reached, say the check is overdue rather than treating the old review as current. Record the date and next due date for every completed comparison, including a no-change result; do not reset `lastReviewed` without a semantic review. A skill cannot schedule unattended checks. Last source comparison: 2026-11-25. Next due: 2026-12-25.
 
-Source revision: https://en.wikipedia.org/w/index.php?oldid=1383697236
+Source revision: https://en.wikipedia.org/w/index.php?oldid=1387041075
 
-The release comparison checked the current section inventory and the detection,
-historical, and Wikipedia-specific caveats against the catalog. It clarified
-historical promotional language and kept primary/tertiary-source identification
-and list-title cues genre-scoped; no new general-purpose pattern number was added.
+The candidate comparison checked attribution, unsupported analysis, forced
+contrasts, and source-availability caveats against the catalog. No additional
+catalog change was needed. Keep historical punctuation and Wikipedia-specific
+markup scoped to their contexts; the Muse short-form pattern is a separate
+editorial cue, not an authorship indicator from Wikipedia.
 
 Key insight from Wikipedia: "LLMs use statistical algorithms to guess what should come next. The result tends toward the most statistically likely result that applies to the widest variety of cases."
 

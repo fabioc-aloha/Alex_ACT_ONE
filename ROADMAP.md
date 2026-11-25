@@ -9,7 +9,8 @@ observable host evidence as access permits.
 Runtime upgrade recovery requires a
 design decision before implementation.
 
-Release version: `v0.9.7`. Publication is verified, not native installation
+Published release: `v0.9.7`. Release candidate: `v0.10.0` (not published).
+Publication of `v0.9.7` is verified, not native installation
 or activation. This roadmap describes work beyond the published
 baseline's scoped verification, not an instruction to reopen completed repairs or automatically
 change existing installations. See

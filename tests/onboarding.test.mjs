@@ -48,7 +48,7 @@ test('one short guide covers install, consented activation, verification, and a 
     assert.match(read('docs/testing.md'), /receiptCurrent: true/);
     assert.match(text, /host.*(?:observ|load)|(?:observ|load).*host/i);
     assert.match(text, /no optional.*tools/i);
-    assert.ok(text.includes(`Release version: \`${JSON.parse(read('plugin.json')).version}\``));
+    assert.ok(text.includes(`Release candidate: \`${JSON.parse(read('plugin.json')).version}\` (not published)`));
     assert.match(text, /Flint demos.*without\s+installing an MCP server/is);
 });
 

@@ -137,6 +137,11 @@
 
 ## Next Action
 
+For release preparation, review the [0.10.0 candidate record](docs/verification/0.10.0-candidate.md).
+Local integration and the packaged demo checks passed before the candidate
+commit. Use the reviewed commit for fresh-clone and same-commit matrix
+verification. Published `0.9.7` is unchanged.
+
 For Copilot harness compatibility, run the [R8 text-only clarification probes](docs/verification/README.md#text-only-clarification-and-resume).
 Source now supports a normal chat reply for recovery and missing chart data;
 the two-turn behavior still needs live evidence for each target client.

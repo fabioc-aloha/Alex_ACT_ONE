@@ -31,8 +31,9 @@ requested output, the skill checks for a supported fallback. If none fits, Setup
 Dependencies checks what's missing and asks before installing anything. See
 [optional tools](docs/install.md#optional-extra-tools-for-a-few-skills).
 
-**Release version: `v0.9.7`.** This README also describes current source features
-where noted. See [installation sources](docs/install.md#installation-sources)
+**Published release: `v0.9.7`.** Release candidate: `v0.10.0` (not published).
+This README also describes candidate features where noted. See
+[installation sources](docs/install.md#installation-sources)
 and [host support](docs/install.md#where-alex-act-one-works) before switching apps.
 
 Try the [offline Flint chart gallery](skills/flint-chart/resources/flint-showcase.html) for semantic data, maps, themes, interactions, linked views, and static exports, or the [experimental interaction lab](skills/flint-chart/resources/flint-experimental.html) for polar brushing, direct reordering, distribution shapes, and reader-driven stories. Both ship with the Flint chart skill and open in a browser without a server or connection.

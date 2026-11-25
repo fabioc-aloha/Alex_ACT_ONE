@@ -1,6 +1,7 @@
 # Verification environments and release gates
 
-Release version: `0.9.7`. Use the
+Published release: `0.9.7`. Release candidate: `0.10.0` (not published).
+Use the
 [release record](../archive/verification/release-0.9.7/README.md)
 for the frozen commit's CI, clean-clone, artifact, and publication results.
 The dated baseline runs below do not substitute for same-commit release evidence.
