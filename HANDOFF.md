@@ -149,9 +149,10 @@ exact rebuilds with the current builder. The
 [Flint delivery gate](ROADMAP.md#verify-native-flint-111-delivery) still needs
 native App UI evidence. No active runtime or retirement decisions changed.
 
-Review [OPTIMIZATION-PLAN.md](OPTIMIZATION-PLAN.md) and resolve the
-[scope decision](ROADMAP.md#review-cross-domain-optimization-scope) before
-implementation. Preserve cross-domain completion and artifact safeguards.
+The standalone [creative-writing pilot](docs/verification/README.md#creative-writing-pilot)
+passed its two CLI cases. Review [OPTIMIZATION-PLAN.md](OPTIMIZATION-PLAN.md)
+and resolve the remaining [scope decision](ROADMAP.md#review-cross-domain-optimization-scope)
+before broader implementation. Preserve cross-domain completion and artifact safeguards.
 R8 and the other verification gaps remain open; do not treat the planning
 exercise as fresh host qualification.
 

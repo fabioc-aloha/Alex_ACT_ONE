@@ -1,3 +1,5 @@
+# Humanizer Pattern Catalog
+
 ## CONTENT PATTERNS
 
 ### 1. Undue Emphasis on Significance, Legacy, and Broader Trends
@@ -20,6 +22,11 @@
 
 **Problem:** LLMs hit readers over the head with claims of notability, often listing sources without context.
 
+Labels such as "independent coverage" or "trade publications" can make a
+list sound like an argument for significance without telling the reader what
+the coverage established. Keep those distinctions when source independence or
+type matters; otherwise name what a relevant source actually reported.
+
 **Before:**
 
 > Her views have been cited in The New York Times, BBC, Financial Times, and The Hindu. She maintains an active social media presence with over 500,000 followers.
@@ -32,7 +39,10 @@
 
 **Words to watch:** highlighting/underscoring/emphasizing..., ensuring..., reflecting/symbolizing..., contributing to..., cultivating/fostering..., encompassing..., showcasing...
 
-**Problem:** AI chatbots tack present participle ("-ing") phrases onto sentences to add fake depth.
+**Problem:** A trailing participial phrase can imply impact or intent without
+support. Check what the clause actually adds. Keep a clause that states a
+concrete action or consequence; attribute a supported interpretation or remove
+an unsupported one. A single `-ing` phrase is not a finding.
 
 **Before:**
 
@@ -167,6 +177,10 @@ rename a topic in general-purpose prose. Verify factual support separately.
 ### 9. Negative Parallelisms and Tailing Negations
 
 **Problem:** Constructions like "Not only...but..." or "It's not just about..., it's..." are overused. So are clipped tailing-negation fragments such as "no guessing" or "no wasted motion" tacked onto the end of a sentence instead of written as a real clause.
+
+The same contrast can span adjacent sentences or appear as "X rather than Y."
+Revise it when it manufactures a distinction or repeats the point. Keep it
+when the contrast rules out a plausible alternative the reader needs to know.
 
 **Before:**
 
@@ -334,6 +348,10 @@ rename a topic in general-purpose prose. Verify factual support separately.
 
 **Problem:** Stock knowledge-cutoff disclaimers are a historical cue. A current concern is an unsupported claim that information is unavailable, followed by speculation about what it "likely" means. A genuine limit in the evidence is not itself a tell; state it plainly and do not fill the gap with a guess.
 
+Phrases such as "based on publicly available sources" can hide what was
+actually checked. Name the source or search scope when it matters; never turn
+"I didn't find it in this source" into "it isn't documented anywhere."
+
 **Before:**
 
 > The supplied handbook does not give a publication date. It was probably released around 2002 because the formatting looks old.
@@ -454,5 +472,27 @@ When users hit a slow page, they leave.
 
 When users hit a slow page, they leave.
 ```
+
+### 30. Stacked Verdicts in Short-Form Writing
+
+**What to look for:** Several punchy conclusions in a row, or a setup such as
+"That sounds good until..." that exists mainly to set up another punchline.
+In a comment or social reply, flag the stack when it crowds out the concrete
+detail the writer is reacting to. Brevity, a deliberate tagline, or one strong
+closing sentence is not evidence of authorship.
+
+**Before:**
+
+> Restoring the old shortcut was the right call. Familiarity is the whole game. That is what makes the update worth using.
+
+**After:**
+
+> Bringing back the old shortcut is reason enough to use the update.
+
+**Fix:** Lead with the concrete detail and connect it to the writer's point.
+Keep a punchy line when it earns its place. Do not add firsthand experience,
+emotion, or an explanation that the original doesn't support.
+
+Adapted from the [Muse Humanizer refresh](https://github.com/fabioc-aloha/Alex_ACT_ONE_Muse/blob/9ac82e253fb4bbee08d1ddac35029497dbb47199/skills/humanizer/references/pattern-catalog.md#30-aphoristic-packaging-verdict-sentence-stacking).
 
 ---

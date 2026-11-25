@@ -57,6 +57,48 @@ substitute for results from those clients.
   question alone is not a pass. Mark an unavailable client **not run** and
   an unobservable second turn **unverified**.
 
+## Report-and-chart delivery pilot
+
+The [sample report](report-delivery-pilot.html) and [standalone SVG](report-delivery-pilot.svg)
+are synthetic fixtures. The chart is the unmodified `comparison` SVG export from
+the [Flint 1.1.1 Showcase](../../skills/flint-chart/resources/flint-showcase.html).
+
+On 2026-11-25, Chromium `151.0.7922.34` opened the repository report, resolved
+and decoded its local SVG, and opened the SVG directly. All four plotted counts
+matched the Showcase's source rows. West's 154 orders led North's 128 by 26, as
+stated in the report. The run made no HTTP requests.
+
+A disposable copy containing only the report opened but its required image
+failed to decode. Under the [draft-to-delivery rule](../../skills/proactive-awareness/references/project-artifact-storage.md#draft-to-delivery-handoff),
+that copy stays in draft. The complete repository set passed review checks;
+no external delivery, native host enforcement, or publication was attempted.
+
+## Creative-writing pilot
+
+On 2026-11-25, standalone Copilot CLI `1.0.109` ran the two fiction cases from
+suite `2026-11-25.1` against a disposable package built from the working source.
+Both runs loaded `creative-writing` via `skill`, completed with exit code zero,
+and left their temporary workspaces empty. No other tool call was observed.
+These results do not qualify VS Code, the Copilot app, or Scout.
+
+| Case | Review of the observed response |
+| --- | --- |
+| `fiction-scene-from-brief` | Returned only a scene. Ada arrived as the ferry left. The narration stayed in close third person and past tense. Her sister spoke once, with no explanation of where the voice came from. |
+| `fiction-line-edit-preserve-continuity` | Returned only the revised excerpt. Both dialogue lines were shorter without changing the speakers or their intent. Both protected sentences were verbatim and Mara still took the key. |
+
+The scene's voice cue was a single line: "Your sleeve's in the water."
+The observed line edit was:
+
+```text
+I watched Mara slip the key into her coat.
+"I only took it so nobody else could get it first," Mara said.
+"You could have asked me first," I said.
+The door stayed open.
+```
+
+The earlier six case prompts were not changed. Their recorded observations
+remain tied to the suite revisions they were run against.
+
 ## Running the CLI scenarios
 
 The [CLI runner](../../scripts/run-skill-scenarios.mjs) uses a single explicitly

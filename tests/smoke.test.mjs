@@ -140,6 +140,16 @@ describe('Humanizer voice fallback', () => {
         assert.doesNotMatch(humanizer, /I genuinely don't know how to feel about this/);
     });
 
+    test('covers stacked short-form verdicts without treating brevity as evidence of authorship', () => {
+        const catalog = read('skills', 'humanizer', 'references', 'pattern-catalog.md');
+        const pattern = catalog.split('### 30. Stacked Verdicts in Short-Form Writing')[1]?.split(/^###? /m)[0];
+        assert.ok(pattern, 'Missing the adapted short-form pattern');
+        assert.match(pattern, /concrete detail/i);
+        assert.match(pattern, /not evidence of authorship/i);
+        assert.match(pattern, /do not add/i);
+        assert.match(pattern, /9ac82e253fb4bbee08d1ddac35029497dbb47199/);
+    });
+
     test('routes default Copywriter rewrites through the practitioner-editor fallback', () => {
         assert.match(audienceReview, /practitioner-editor fallback/i);
     });

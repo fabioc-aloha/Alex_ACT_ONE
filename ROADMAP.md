@@ -40,10 +40,16 @@ The user requested a detailed proposal before changes and selected dedicated
 creative-writing support as the preferred direction. Plan creation does not
 approve implementation.
 
+The standalone [creative-writing pilot](skills/creative-writing/SKILL.md) was
+separately approved. Source registration and the
+[two CLI cases](docs/verification/README.md#creative-writing-pilot) passed.
+Humanizer remains the owner of audience review and AI-tell editing. The pilot
+did not retire skills, change the runtime, or qualify other hosts.
+
 **Next action:** obtain a decision on the proposed coding-only retirement set,
-retained cross-domain safeguards, completion ownership and creative-writing
-contract. If approved, use the plan's dependency sequence and representative
-noncoding acceptance cases, and record execution here.
+retained cross-domain safeguards, and completion ownership. If approved, use
+the plan's dependency sequence and representative noncoding acceptance cases,
+and record execution here.
 
 Native instruction delivery and browser-fallback changes retain separate
 approval and host-parity gates. Do not remove bootstrap or Playwright merely
@@ -246,6 +252,11 @@ download-button activation exposed neither a download event nor a saved file.
 That limitation is not replaced by headless download evidence. Synthetic
 checker metadata is not a natural host-stranding incident.
 
+The local [report-and-chart pilot](docs/verification/README.md#report-and-chart-delivery-pilot)
+verified the linked files and their data. A missing required SVG kept the
+control in draft. This is verification of a repository artifact set, not
+evidence of native delivery or host enforcement.
+
 **Next actions:**
 
 - Later canonical instruction updates still require separately approved
@@ -319,6 +330,10 @@ protects build reproducibility, not user-runtime upgrade recovery.
   supported platforms without silently switching a running host.
 - How retained runtimes are owned and eventually cleaned up without removing
   user or unrelated package state.
+- What a restore manifest records: exact versions, lock and required artifact
+  hashes, prerequisites, and exclusions. Keep credentials and user state out.
+  Use the manifest in a disposable rollback exercise; a matching inventory
+  alone is not proof that the prior runtime launches and renders.
 
 **Done when:** a failed stage leaves the previous runtime usable; versions,
 launches, and real rendering pass before an explicitly approved switch; rollback

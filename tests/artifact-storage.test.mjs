@@ -24,6 +24,15 @@ test('storage contract covers deliverables, internal plans, privacy, containment
     ]) assert.match(text, requirement);
 });
 
+test('composite deliverables stay draft until every required part is verified', () => {
+    const section = read(contract).split('## Draft-to-delivery handoff')[1]?.split(/^## /m)[0];
+    assert.ok(section, 'Missing the handoff for a linked deliverable set');
+    assert.match(section, /missing, stale, or unverified/i);
+    assert.match(section, /keep.*in draft/i);
+    assert.match(section, /ready for review/i);
+    assert.match(section, /does not authorize publication/i);
+});
+
 test('repository guidance and project bootstrap both retain project deliverables inside the repository', () => {
     for (const path of ['AGENTS.md', 'skills/bootstrap-project/resources/AGENTS.md']) {
         const text = read(path);

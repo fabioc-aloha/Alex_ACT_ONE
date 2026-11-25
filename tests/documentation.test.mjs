@@ -39,6 +39,19 @@ function section(label) {
     return text.split(start)[1].split(end)[0];
 }
 
+test('creative-writing is discoverable without taking over copy editing', () => {
+    const skill = manifest.assets.skills.find(entry => entry.name === 'creative-writing');
+    assert.equal(skill?.path, 'skills/creative-writing/SKILL.md');
+    assert.ok(!manifest.assets.prompts.some(entry => entry.name === 'creative-writing'));
+    const proseCatalog = section('SKILL TABLE').split('### Prose and documentation')[1]?.split('\n### ')[0];
+    assert.ok(proseCatalog?.includes('](skills/creative-writing/SKILL.md)'));
+    const text = read(skill.path);
+    assert.match(text, /point of view.*tense/is);
+    assert.match(text, /verbatim/);
+    assert.match(text, /\]\(\.\.\/humanizer\/SKILL\.md\)/);
+    assert.match(text, /does not authorize (?:publication|publishing)/i);
+});
+
 for (const kind of Object.keys(labels)) {
     test(`README ${kind} table lists every declared asset exactly once with its source link`, () => {
         const table = section(labels[kind]);

@@ -5,6 +5,21 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+- Add a standalone [creative-writing skill](skills/creative-writing/SKILL.md)
+  for original fiction and scoped revision. It preserves protected passages,
+  continuity, and narrative voice without replacing Humanizer or adding a
+  runtime dependency.
+
+- Refine [Humanizer's pattern catalog](skills/humanizer/references/pattern-catalog.md#30-stacked-verdicts-in-short-form-writing)
+  for stacked verdicts in short posts, vague sourcing, and forced contrasts.
+  Keep audit-only and Copywriter modes unchanged.
+- Bundle [scoped delegation](skills/plan/references/scoped-delegation.md) with
+  Plan. It helps brief authorized workers and verify their results without
+  granting dispatch or cleanup authority.
+- Keep [linked deliverables in draft](skills/proactive-awareness/references/project-artifact-storage.md#draft-to-delivery-handoff)
+  when a required file is missing, stale, or unverified. A passed review does
+  not authorize publication.
+
 - Migrate source Flint MCP and library pins together to `1.1.1`. Update the
   CI lock through the Microsoft npm proxy, migrate both demo annotations to
   `annotate-text`, and rebuild the editorial and experimental demos. Runtime

@@ -46,10 +46,23 @@ test('scenario instructions require fresh observed evidence rather than syntheti
 
 test('every scenario explicitly permits the required skill references without granting commands or writes', () => {
     const suite = JSON.parse(readFileSync(path, 'utf8'));
-    assert.equal(suite.version, '2026-11-05.2');
+    assert.equal(suite.version, '2026-11-25.1');
     for (const item of suite.cases) {
         assert.ok(item.prompt.includes('Loading guidance includes reading the skill and its required bundled references.'), item.id);
         assert.ok(item.prompt.includes('This does not permit commands, file writes, installation, or external actions.'), item.id);
+    }
+});
+
+test('creative-writing scenarios exercise both drafting and protected revision', () => {
+    const suite = JSON.parse(readFileSync(path, 'utf8'));
+    for (const [id, constraint] of [
+        ['fiction-scene-from-brief', /past tense.*through Ada only/],
+        ['fiction-line-edit-preserve-continuity', /narrative sentences verbatim/],
+    ]) {
+        const item = suite.cases.find(candidate => candidate.id === id);
+        assert.equal(item?.skill, 'creative-writing');
+        assert.ok(item.boundaries.includes('no-write'), id);
+        assert.match(item.prompt, constraint);
     }
 });
 

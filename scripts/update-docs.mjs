@@ -10,7 +10,7 @@ const GROUPS = [
     ['Engineering', 'Writing and changing code that survives review.',
         ['code-review', 'security-and-hardening', 'test-driven-development', 'systematic-debugging', 'git-workflow', 'plan', 'spike']],
     ['Prose and documentation', 'Writing people finish reading.',
-        ['big-idea', 'humanizer', 'communication-craft', 'doc-hygiene', 'lint-clean-markdown',
+        ['big-idea', 'creative-writing', 'humanizer', 'communication-craft', 'doc-hygiene', 'lint-clean-markdown',
             'status-reporting', 'markdown-sanitization-chain', 'corpus-qa-sweep']],
     ['Charts and figures', 'Deciding what to draw, drawing it, and checking it says what you meant.',
         ['render-chart', 'chart-big-idea', 'chart-vocabulary', 'chart-interpretation', 'flint-chart', 'flint-interactions',

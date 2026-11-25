@@ -49,7 +49,7 @@ the published release's historical inventory.
 
 | Source surface | Count | Delivery |
 | --- | --- | --- |
-| Skills | 63 | Loaded on demand from the plugin |
+| Skills | 64 | Loaded on demand from the plugin |
 | Prompts / command aliases | 15 | Thin user-invoked entrypoints; availability depends on host |
 | Resident instructions | 15 | Preview-first profile activation; execution detail stays in skills |
 | MCP servers | 2 | Registered from plugin metadata where supported |
@@ -68,15 +68,20 @@ committing to it.
 
 **Write code that survives review.** Test-first workflows, root-cause debugging,
 security hardening, adversarial code review from three opposing perspectives, and
-safe Git practice with recovery paths.
+safe Git practice with recovery paths. When you authorize delegation,
+[Plan's worker guidance](skills/plan/references/scoped-delegation.md) helps
+define what each worker may change and how to verify the result.
 
-**Produce prose people finish reading.** Strip AI writing patterns, find the one
-sentence a document is actually making, adapt a draft for a named audience, and
-write Markdown that passes lint on the first attempt.
+**Draft fiction or edit existing prose.** Use [Creative Writing](skills/creative-writing/SKILL.md)
+to develop a story, draft a scene, or revise without changing protected passages.
+Use [Humanizer](skills/humanizer/SKILL.md) for audience review or a read-only
+audit of an existing draft, including short posts and replies.
 
 **Turn drafts into deliverables.** Convert between Markdown, Word, HTML, plain
 text, and formatted email. Build charts, diagrams, print-quality figures, and
-banners, then check that what rendered says what you meant.
+banners, then check that what rendered says what you meant. In a linked bundle,
+such as a report and its chart, [every required file must pass review](skills/proactive-awareness/references/project-artifact-storage.md#draft-to-delivery-handoff)
+before the bundle is ready. Review does not authorize publication.
 
 **Improve the agent itself.** Audit which instructions earn their context cost,
 write project-specific skills from work you keep repeating, and consolidate what
@@ -137,6 +142,7 @@ Writing people finish reading.
 | Skill | Discovery summary | Needs |
 | --- | --- | --- |
 | [`big-idea`](skills/big-idea/SKILL.md) | Distill the central claim before authoring any summary-shaped output: hero copy, commit-message subject, PR title, ADR title, slide title, executive summary, skill description,... | Node only |
+| [`creative-writing`](skills/creative-writing/SKILL.md) | Draft or develop original fiction, or revise a story, scene, or dialogue for creative effect. Preserve the requested voice, point of view, tense, story continuity, and protected... | Node only |
 | [`humanizer`](skills/humanizer/SKILL.md) | Use when the user wants to humanize, de-AI, de-slop, or un-ChatGPT a piece of text — review AI-associated patterns and add real voice — or wants a copywriter pass that reviews... | Node only |
 | [`communication-craft`](skills/communication-craft/SKILL.md) | Communication patterns for feedback, cross-audience content, and eliciting needs. SBI feedback model (Situation → Behavior → Impact), stakes-calibrated review voice,... | Node only |
 | [`doc-hygiene`](skills/doc-hygiene/SKILL.md) | Documentation hygiene — anti-drift rules, code-documentation placement, count elimination, and living document maintenance. Use when auditing docs or comments for drift, fixing... | Node only |

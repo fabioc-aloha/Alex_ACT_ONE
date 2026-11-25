@@ -118,6 +118,20 @@ test('native planning has no compulsory project file or prewritten implementatio
     assert.doesNotMatch(text, /Each task = 2-5|Every plan MUST|complete code/i);
 });
 
+test('Plan bundles opt-in scoped delegation without granting execution or cleanup authority', t => {
+    const installed = join(fixture(t), 'plan');
+    cpSync(join(ROOT, 'skills', 'plan'), installed, { recursive: true });
+    const plan = readFileSync(join(installed, 'SKILL.md'), 'utf8');
+    const route = plan.match(/\]\((references\/scoped-delegation\.md)\)/)?.[1];
+    assert.ok(route, 'Missing the bundled delegation reference');
+    assert.match(plan, /delegation is\s+(?:explicitly|separately) authorized/i);
+    const reference = readFileSync(join(installed, route), 'utf8');
+    assert.match(reference, /read-only/i);
+    assert.match(reference, /verify.*against the brief/is);
+    assert.match(reference, /do not delete, revert, or publish/i);
+    assert.ok(!manifest.assets.skills.some(entry => entry.name === 'scoped-delegation'));
+});
+
 test('browser routing prefers native tools but retains an honest fallback', () => {
     const text = read('skills', 'browser-tools', 'SKILL.md');
     assert.match(text, /native/i);
