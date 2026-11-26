@@ -316,6 +316,28 @@ Keep unreleased work distinct from the version delivered through Mall.
 > Added 2026-10-16. The Wikipedia-derived catalog needed a source refresh;
 > a prior review date alone does not establish release-time freshness.
 
+## The Muse edition parity check passes
+
+The Muse edition (`fabioc-aloha/Alex_ACT_ONE_Muse`) mirrors this repo's
+skill set with a documented delta. Before release, hand this release's tree
+to that edition's checker, from a checkout of the Muse edition:
+
+```text
+node scripts/check-edition-parity.mjs <this-repo-tree.json>
+```
+
+Exit 0: every skill-set difference is documented in the Muse edition's
+`docs/edition-parity.json`. A nonzero exit names drift this release created
+(a skill added, renamed, or retired here); resolve it by recording the
+decision in the Muse edition's parity file and `PORT-NOTES.md`, or by
+deferring the skill change, never by leaving the Muse side to discover it
+after the fact.
+
+> Added 2026-11-26. Every delta change so far, including the upstream
+> retirement of `replicate-imagery`, was found from the Muse side, after
+> the flagship release, by accident. The check runs here so drift surfaces
+> where it is created.
+
 ## 9. The tree is clean and the push is a fast-forward
 
 ```text
