@@ -111,6 +111,10 @@ passed both adapted two-turn probes in standalone CLI and observed a read-only
 native Plan result. This does not qualify a native review replacement or
 establish parity with VS Code Copilot, the Copilot app, or Scout.
 
+The [2026-11-26 Copilot probe](docs/verification/README.md#2026-11-26-copilot-harness-probe)
+failed the plain-chat first turn for chart and recovery. Resume and automatic
+instruction inclusion were not verified, and the Local control was not run.
+
 Use the [versioned cases and run guide](docs/verification/README.md) to exercise
 reasoning, review, recovery, conversion, chart, and draft-only workflows.
 Preserve missing-input, denied-tool fixture, unsupported-output, read-only,
@@ -118,11 +122,12 @@ and approval-boundary cases rather than testing only successful requests.
 
 **Next actions:**
 
-- Run the [two-turn text-only probes](docs/verification/README.md#text-only-clarification-and-resume)
-  against the updated source. Start with VS Code Local as a control and a
-  fresh VS Code Copilot session, then run the same probes in the CLI, Copilot
-  app, and Scout where available. Record the follow-up reply and actions;
-  a visible question alone does not establish that the workflow resumed.
+- Retest just the [text-only chart case](docs/verification/README.md#text-only-clarification-and-resume)
+  in fresh top-level VS Code Local and Copilot chats. Match the loaded package,
+  model, effort, and permissions where possible. If a form opens, record the
+  first-turn failure and stop that probe; do not queue a reply. If it asks in
+  chat, record the reply and resulting actions. Check instruction inclusion in
+  the Debug Logs separately before attributing the failure to the plugin.
 - Repeat in Scout and the Copilot app as access permits. Expand VS Code coverage
   only with separately observed cases, not by inheriting the boundary-test result.
 - Record the loaded plugin root, source revision when available, host/version,
@@ -370,7 +375,10 @@ blocked or unverified; they must not be hidden behind a passing aggregate.
 
 - **Native instruction delivery:** retain preview-first bootstrap and receipts
   until supported-host probes establish real activation and safe removal.
-  Skill discovery alone is not the retirement gate.
+  The Copilot harness [supports modular user instructions](https://code.visualstudio.com/docs/agents/reference/custom-instructions-reference#_user-instructions)
+  in the folder bootstrap already uses. Before Local retires, verify discovery,
+  request inclusion for file and no-file tasks, and skill-owner routing in a
+  fresh Copilot session. File parity and skill discovery alone do not prove use.
 - **Scout command support:** use owning-skill invocation while plugin prompt
   commands remain unavailable in the recorded baseline. Recheck when the host
   changes; do not add another alias to compensate for a missing host surface.

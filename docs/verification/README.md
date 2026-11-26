@@ -57,6 +57,55 @@ substitute for results from those clients.
   question alone is not a pass. Mark an unavailable client **not run** and
   an unobservable second turn **unverified**.
 
+### 2026-11-26 Copilot harness probe
+
+Windows; installed Alex Mall package `0.10.0`; source revision `8982240` with
+working-tree changes. The parent chat showed Copilot Fusion at High effort.
+The native session tool created fresh nested chats using its default model,
+without explicitly supplied attachments; resolved child model IDs and inherited
+session context were not independently observed. The tested skill entrypoints
+and observed reference files matched the installed package and source by hash.
+No live installation, profile activation, or active runtime update was attempted.
+
+The no-file dashboard prompt from [HANDOFF](../../HANDOFF.md) produced this
+complete response; the session interface reported no tool calls:
+
+> **Neither yet.** Eight seconds is a symptom, not evidence that Rust or Redis is the right fix.
+>
+> Measure where the time goes: browser rendering, network requests, server processing, database queries, and external services. Then target the dominant delay:
+>
+> - **Slow queries:** optimize queries or indexes first.
+> - **Repeated expensive results:** consider Redis if the data can tolerate caching and you can manage freshness and access isolation.
+> - **CPU-bound server code:** optimize the hotspot first; consider Rust only if profiling shows it would materially help.
+>
+> Set a response-time target and compare before and after under representative load.
+
+The exact `review-falsy-value` case loaded `code-review` and its ordinary
+review reference. Its complete response was:
+
+> **[P2 · Blocking]** `items[index] || null` discards valid falsy values. For example, `lookup([0], 0)` returns `null`, not `0`; `false` and `""` are also affected. Callers cannot distinguish these values from absent ones.
+>
+> **Confidence:** High. Reviewed the supplied function only; no code was executed.
+
+The adapted recovery and chart prompts both called `ask_user` despite the
+explicit request for a normal-chat question. The recovery trace showed its
+bundled reference reads, but the form arguments were truncated. The chart
+form asked for both revenue values, currency, and period; its trace showed a
+chart-selection reference read. The documented normal-chat replies were
+queued, remained pending while the first turns waited for the forms, and were
+then cancelled. Neither second turn was observed. The policy denial was a
+synthetic fixture, not a real denied read. These probes therefore fail the
+text-only first-turn criterion; resume remains unverified.
+
+The Local control and attached-file probe were not run. Agent Debug Logs could
+not be inspected because active user input interrupted the UI operation.
+Automatic instruction inclusion, independent fresh-session context, and native
+form completion remain unverified; explicit skill loading is not a substitute.
+The installed-package static assessment reported no findings and preserved
+the target. Source scenario/routing checks passed 11 tests; the selected native
+activation and static-assessor controls passed two tests each. These checks do
+not establish live-host parity.
+
 ## Report-and-chart delivery pilot
 
 The [sample report](report-delivery-pilot.html) and [standalone SVG](report-delivery-pilot.svg)

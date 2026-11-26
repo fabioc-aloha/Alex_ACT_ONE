@@ -141,15 +141,42 @@
 
 ## Next Action
 
-For the `0.10.0` release, use the
-[verification record](docs/verification/0.10.0-candidate.md) and
-[release checklist](RELEASE-CHECKLIST.md). The tagged payload and Mall route
-are verified. Await the user's manual Windows setup and host observations.
+Start with the [R8 chart-only retest](ROADMAP.md#r8-run-fresh-live-host-scenarios)
+in fresh top-level VS Code Local and Copilot chats. The
+[November 26 probe](docs/verification/README.md#2026-11-26-copilot-harness-probe)
+opened forms despite the plain-chat request; resume and automatic instruction
+inclusion remain unverified. Do not queue a reply behind an open form or infer
+a plugin defect from that result alone.
 
-For Copilot harness compatibility, run the [R8 text-only clarification probes](docs/verification/README.md#text-only-clarification-and-resume).
-Source now supports a normal chat reply for recovery and missing chart data;
-the two-turn behavior still needs live evidence for each target client.
-Use Local as the control, then run the [native Copilot pilots](ROADMAP.md#pilot-native-copilot-capabilities).
+Check automatic instruction inclusion separately in fresh top-level Copilot
+chats without a handoff or explicit skill invocation.
+
+1. With no file attached, ask: "A dashboard takes eight seconds. Should we
+  rewrite it in Rust or add Redis? Do not use tools or change files."
+2. In a separate fresh Copilot chat, attach the root installer and ask:
+  "Review how this script selects a renderer browser. Do not edit or run it."
+3. Check [Agent Debug Logs](https://code.visualstudio.com/docs/agents/agent-troubleshooting/chat-debug-view#_instructions-or-a-prompt-file-are-not-applied)
+  for the `alex-act-*.instructions.md` files actually included in each
+  request. Record the harness, package version, included filenames, and any
+  missing or unobservable evidence. Discovery, inclusion, and following the
+  guidance are separate checks. Check installed skill-owner routing separately
+  so an explicit skill invocation cannot mask a missing instruction.
+
+The Copilot harness documents the user instruction folder already populated
+by bootstrap. The [installed Windows check](docs/verification/0.10.0-candidate.md#installed-windows-verification)
+verified `0.10.0` package and instruction parity on disk, not native harness
+inclusion. Keep bootstrap and the existing receipt; do not reinstall or
+reapply merely to run these probes. Native App UI display/export remains open.
+
+The [browser follow-up](docs/verification/0.10.0-candidate.md#browser-follow-up)
+distinguishes two paths: the shipped Playwright MCP Edge configuration reached
+localhost, but Edge failed in the installed helper's Mermaid renderer. The
+unreleased source helper automatically selected existing cached Chromium and
+passed both render checks in PowerShell 7 and 5.1. The published payload and
+live runtime are unchanged.
+
+Continue the [native Copilot pilots](ROADMAP.md#pilot-native-copilot-capabilities)
+only for the remaining evidence gaps.
 The [2026-11-25 pilot](docs/verification/2026-11-25-copilot-flint-pilot.md)
 passed both CLI follow-up probes and isolated Flint 1.1.1 contract tests.
 The later [offline browser run](docs/testing.md#flint-111-source-migration)

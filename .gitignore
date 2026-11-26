@@ -2,6 +2,9 @@ node_modules/
 *.log
 .DS_Store
 
+# Scratch directories left by interrupted test runs.
+/.test-*/
+
 # Snapshots and console logs the alex-playwright MCP server writes into the
 # working directory during render-verify. Produced on every host, so ignoring
 # them here keeps a verification run from staging its own scratch output.

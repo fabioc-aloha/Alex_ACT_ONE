@@ -5,6 +5,15 @@ An Unreleased entry does not imply publication, installation, or activation.
 
 ## Unreleased
 
+- 2026-11-26: Reuse existing Playwright Chromium for Windows renderer checks
+  when no browser was selected explicitly. The source helper can use a cached
+  revision when Playwright's expected revision is absent and retains Edge when
+  no cached Chromium is found. Both real renders passed in PowerShell 7 and
+  5.1. No browser was downloaded or configured globally. See the
+  [browser follow-up](docs/verification/0.10.0-candidate.md#browser-follow-up).
+- 2026-11-26: Exclude generated root `.test-*` directories from Git without
+  excluding source tests or curated verification evidence.
+
 ## 0.10.0 - 2026-11-25
 
 Release route: `v0.10.0:package/alex-act-one`. This release focuses on
