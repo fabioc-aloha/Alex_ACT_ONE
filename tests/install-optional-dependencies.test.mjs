@@ -110,6 +110,16 @@ if ($env:FAKE_DEPENDENCIES_ONLY) {
         mkdirSync(dirname(autoBrowser), { recursive: true });
         writeFileSync(autoBrowser, '');
     }
+    const browserCache = join(localAppData, 'cached Chromium');
+    const cachedBrowser = join(browserCache, 'chromium-1234', 'chrome-win64', 'chrome.exe');
+    if (options.cachedChromium) {
+        const playwright = join(runtime, 'node_modules', 'playwright');
+        mkdirSync(playwright, { recursive: true });
+        const expectedBrowser = join(browserCache, 'chromium-1252', 'chrome-win64', 'chrome.exe');
+        writeFileSync(join(playwright, 'index.js'), `exports.chromium = { executablePath: () => ${JSON.stringify(expectedBrowser)} };`);
+        mkdirSync(dirname(cachedBrowser), { recursive: true });
+        writeFileSync(cachedBrowser, '');
+    }
     if (options.browserPath === 'fixture') writeFileSync(browserPath, '');
     if (options.inheritedBrowserPath === 'fixture') writeFileSync(inheritedBrowser, '');
     const renderLog = join(root, 'renderers.log');
@@ -345,7 +355,7 @@ exit 1
         : [];
     assert.ok(systemCommands.every(args => !args.some(arg =>
         /--upgrade|--break-system-packages|--index-url|--trusted-host|accept-.*agreements/.test(arg))));
-    return { commands, output, runtime, globalPrefix, browserPath, inheritedBrowser, autoBrowser, renderers, systemCommands };
+    return { commands, output, runtime, globalPrefix, browserPath, inheritedBrowser, autoBrowser, cachedBrowser, renderers, systemCommands };
 }
 
 test('dependency-only setup applies and verifies pins from a packaged copy without Copilot', async t => {
@@ -670,6 +680,14 @@ for (const shell of process.platform === 'win32' ? ['pwsh', 'powershell'] : ['pw
     });
 
     if (process.platform === 'win32') {
+        test(`${shell}: existing Playwright Chromium takes precedence over the default Edge renderer`, t => {
+            const { cachedBrowser, output, renderers } = runInstaller(t, shell, {
+                apply: true, verifyAgain: true, installedEdge: 'user', cachedChromium: true,
+            });
+            assert.ok(output.includes(`Browser executable: ${cachedBrowser} (cached Playwright Chromium; renderer processes only)`));
+            assert.deepEqual(renderers, ['mmdc', 'svgexport', 'mmdc', 'svgexport'].map(bin => ({ bin, browser: cachedBrowser })));
+        });
+
         test(`${shell}: default reuses installed Edge for both renderers without changing npm environment`, t => {
             const { autoBrowser, output, renderers, commands } = runInstaller(t, shell, {
                 apply: true, verifyAgain: true, installedEdge: true, expectBrowser: 'installed',

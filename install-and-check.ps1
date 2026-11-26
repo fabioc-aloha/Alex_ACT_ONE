@@ -9,7 +9,7 @@ release, bootstraps its owned instructions, then sets up its reviewed npm tools
 and missing Pandoc/Pillow. Existing system tools are checked, not upgraded.
 Python must already exist; missing Pandoc installation requires Windows winget.
 Renderer checks use BrowserExecutablePath, then PUPPETEER_EXECUTABLE_PATH,
-then existing Windows Edge when available. Selection is reported and scoped
+then cached Playwright Chromium or existing Edge on Windows. Selection is reported and scoped
 to renderer children; no browser is downloaded or global environment changed.
 No uninstall, policy bypass, Python installation or forced activation occurs.
 Use -DependenciesOnly from an installed ONE package to use its exact pins
@@ -300,18 +300,6 @@ function Invoke-DependencySetup {
         'PUPPETEER_EXECUTABLE_PATH'
     }
     $effectiveBrowser = if ($browserSource -eq 'BrowserExecutablePath') { $BrowserExecutablePath } else { $env:PUPPETEER_EXECUTABLE_PATH }
-    if (-not $effectiveBrowser -and $env:OS -eq 'Windows_NT') {
-        foreach ($directory in @(${env:ProgramFiles(x86)}, $env:ProgramFiles, $env:LOCALAPPDATA)) {
-            if ([string]::IsNullOrWhiteSpace($directory) -or -not [IO.Path]::IsPathRooted($directory)) { continue }
-            $candidate = Join-Path $directory 'Microsoft\Edge\Application\msedge.exe'
-            if (Test-Path -LiteralPath $candidate -PathType Leaf) {
-                $effectiveBrowser = $candidate
-                $browserSource = 'installed Edge'
-                break
-            }
-        }
-    }
-    if ($effectiveBrowser) { $effectiveBrowser = [IO.Path]::GetFullPath($effectiveBrowser) }
 
     function Invoke-CheckedCommand {
         param([string]$Command, [string[]]$Arguments, [string]$InputText)
@@ -407,11 +395,58 @@ for (const key of ['jszip', 'mmdc', 'svgexport']) {
         scope: tool.kind === 'npm-global' ? 'global' : 'private', route: null });
 }
 const routingAvailable = typeof deps.registryTarballPrefix === 'function';
+let cachedChromium = null;
+if (process.argv[3]) {
+    const fs = require('node:fs'), path = require('node:path');
+    const owner = path.join(process.argv[3], 'node_modules', '@playwright', 'mcp');
+    try {
+        const entry = require.resolve('playwright', { paths: [owner] });
+        const relative = path.relative(path.join(process.argv[3], 'node_modules'), entry);
+        if (!relative.startsWith('..' + path.sep) && !path.isAbsolute(relative)) {
+            const executable = require(entry).chromium.executablePath();
+            const isFile = filename => fs.statSync(filename, { throwIfNoEntry: false })?.isFile();
+            if (path.isAbsolute(executable)) {
+                if (isFile(executable)) cachedChromium = executable;
+                else {
+                    const revision = path.dirname(path.dirname(executable));
+                    if (/^chromium-\d+$/.test(path.basename(revision))) {
+                        const cache = path.dirname(revision);
+                        const suffix = path.relative(revision, executable);
+                        const candidates = fs.readdirSync(cache, { withFileTypes: true })
+                            .filter(dir => dir.isDirectory() && /^chromium-\d+$/.test(dir.name))
+                            .sort((first, second) => Number(second.name.slice(9)) - Number(first.name.slice(9)));
+                        cachedChromium = candidates.map(dir => path.join(cache, dir.name, suffix)).find(isFile) || null;
+                    }
+                }
+            }
+        }
+    } catch {}
+}
 console.log(JSON.stringify({ packages, routingAvailable,
     detectedTarballPrefix: routingAvailable ? deps.registryTarballPrefix(process.argv[2]) : null,
-    pandocInstall: deps.TOOLS.pandoc.install, pillowPackage: deps.TOOLS.Pillow.package }));
+    pandocInstall: deps.TOOLS.pandoc.install, pillowPackage: deps.TOOLS.Pillow.package, cachedChromium }));
 '@
-    $configuration = ((Invoke-CheckedCommand -Command $NodeCommand -Arguments @('-e', $readPins, $dependencyRegistry, $registry)) -join "`n") | ConvertFrom-Json
+    $pinArguments = @('-e', $readPins, $dependencyRegistry, $registry)
+    if (-not $effectiveBrowser -and $env:OS -eq 'Windows_NT') { $pinArguments += $RuntimeRoot }
+    $configuration = ((Invoke-CheckedCommand -Command $NodeCommand -Arguments $pinArguments) -join "`n") | ConvertFrom-Json
+    if (-not $effectiveBrowser -and $env:OS -eq 'Windows_NT') {
+        if ($configuration.cachedChromium) {
+            $effectiveBrowser = $configuration.cachedChromium
+            $browserSource = 'cached Playwright Chromium'
+        }
+        else {
+            foreach ($directory in @(${env:ProgramFiles(x86)}, $env:ProgramFiles, $env:LOCALAPPDATA)) {
+                if ([string]::IsNullOrWhiteSpace($directory) -or -not [IO.Path]::IsPathRooted($directory)) { continue }
+                $candidate = Join-Path $directory 'Microsoft\Edge\Application\msedge.exe'
+                if (Test-Path -LiteralPath $candidate -PathType Leaf) {
+                    $effectiveBrowser = $candidate
+                    $browserSource = 'installed Edge'
+                    break
+                }
+            }
+        }
+    }
+    if ($effectiveBrowser) { $effectiveBrowser = [IO.Path]::GetFullPath($effectiveBrowser) }
     $packages = @($configuration.packages)
     $routingSource = 'explicit prefix'
     if (-not $RegistryTarballPrefix -and $configuration.detectedTarballPrefix) {
@@ -435,7 +470,7 @@ console.log(JSON.stringify({ packages, routingAvailable,
         Write-Output 'Automatic tarball routing is unavailable in this older plugin registry; use a confirmed explicit prefix if needed. No registry policy was changed.'
     }
     if ($effectiveBrowser) { Write-Output "Browser executable: $effectiveBrowser ($browserSource; renderer processes only)" }
-    else { Write-Output 'Browser executable: Puppeteer default; no installed Windows Edge found. Cached browser readiness is checked in -Apply/-VerifyOnly; select -BrowserExecutablePath if needed.' }
+    else { Write-Output 'Browser executable: Puppeteer default; no cached Playwright Chromium or installed Windows Edge selected. Renderer readiness is checked in -Apply/-VerifyOnly; select -BrowserExecutablePath if needed.' }
     if ($RegistryTarballPrefix) {
         Write-Output "Tarball routing: $RegistryTarballPrefix -> $registry ($routingSource; per-install URL-prefix replacement only)"
         if ($VerifyOnly) { Write-Output 'VerifyOnly does not fetch packages or apply tarball routing.' }

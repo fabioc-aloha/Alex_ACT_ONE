@@ -467,6 +467,8 @@ plan. This mode ships in `0.10.0`. For older packages or a single missing tool,
 follow the installed skill's guidance.
 For registry or MCP setup issues, see the
 [Setup Dependencies reference](skills/setup-dependencies/SKILL.md#mcp-servers).
+The current source helper checks for cached Playwright Chromium before using
+Edge on Windows. This change is not in the published `0.10.0` package.
 For a renderer that needs a compatible existing browser, rerun verification
 with `-BrowserExecutablePath` and the browser's absolute path.
 
